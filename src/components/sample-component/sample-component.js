@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './sample-style.css'
+import styles from './sample-style.css' //use like an object
 
 import SubComponent from './sample-subcomponent/sub-component'
 
@@ -10,7 +10,7 @@ class HelloWorld extends React.Component{
     render(){
         return(
             <div className={styles.helloWorld}>
-                Hello World!
+                <p>Hello World!</p>
                 <SubComponent/>
             </div>
         )

@@ -10,8 +10,6 @@ class AppThisLOL extends React.Component{
     render(){
         return (
             <div>
-
-
                 <HelloWorld />
             </div>
         )
