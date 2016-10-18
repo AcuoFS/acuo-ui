@@ -1,0 +1,9 @@
+.helloWorld {
+  background-color: #e6e6e6;
+  padding: 15px;
+}
+
+.subComponentStyle {
+  margin-top: 15px;
+  color: blue;
+}
