@@ -8,7 +8,13 @@ import HelloWorld from '../../src/components/sample-component/sample-component'
 import {expect} from 'chai'
 
 describe('Sample', () => {
-    it('tests if sample component renders', () => {
+    it('this should be true for sure', () => {
+        const flag = true
+
+        expect(flag).to.equal(true)
+    })
+
+    it('tests if sample component renders on react', () => {
         const component = renderIntoDocument(
             <HelloWorld />
         )
