@@ -4,7 +4,9 @@
   "description": "Acuo test bed",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --hot --inline"
+    "dev": "webpack-dev-server --hot --inline",
+    "test": "mocha --compilers js:babel-core/register --require mock-css-modules --harmony-proxies ./test/test_helper.js 'test/**/*.@(js)'",
+    "test:watch": "npm run test -- --watch"
   },
   "babel": {
     "presets": [
@@ -14,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akanta-palo/acuo.git"
+    "url": "https://github.com/AcuoFS/acuo-ui.git"
   },
   "keywords": [
     "acuo"
@@ -22,16 +24,21 @@
   "author": "ACUO",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/akanta-palo/acuo/issues"
+    "url": "https://github.com/AcuoFS/acuo-ui/issues"
   },
-  "homepage": "https://github.com/akanta-palo/acuo#readme",
+  "homepage": "https://github.com/AcuoFS/acuo-ui",
   "devDependencies": {
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-react": "^6.16.0",
+    "chai": "^3.5.0",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
+    "jsdom": "^9.8.0",
+    "mocha": "^3.1.2",
+    "mock-css-modules": "^1.0.0",
+    "react-addons-test-utils": "^15.3.2",
     "react-css-modules": "^3.7.10",
     "react-hot-loader": "^3.0.0-beta.5",
     "style-loader": "^0.13.1",
