@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'baseFont';
+    src: url('/dist/fonts/Montserrat-Regular.ttf'); /* Safari, Android, iOS */
+}
+
+@font-face {
+    font-family: 'baseFontBold';
+    src: url('/dist/fonts/Montserrat-Bold.ttf'); /* Safari, Android, iOS */
+}
+
+.globalStyles{
+    font-family: 'baseFont';
+    font-size: 15px;
+}

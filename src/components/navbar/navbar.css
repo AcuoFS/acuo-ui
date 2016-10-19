@@ -1,0 +1,6 @@
+.nav {
+    flex-wrap: nowrap;
+    background-color: #4e83b5;
+    padding: 15px 20px;
+    color: #fff;
+}
