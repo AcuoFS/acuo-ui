@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import HelloWorld from './components/sample-component/sample-component'
 import Table from './components/table/table'
 
-class AppThisLOL extends React.Component{
+class App extends React.Component{
     constructor(props){
         super(props)
     }
@@ -18,4 +18,5 @@ class AppThisLOL extends React.Component{
     }
 }
 
-ReactDOM.render(<AppThisLOL />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'))
+
