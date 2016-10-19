@@ -29,7 +29,11 @@ Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-* **Andrian Kanta**
+* **Andrian**
+* **Rui**
+* **Achal**
+* **Alex**
+* **Vikas**
 
 ## License
 
