@@ -1,15 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
-*::before {
-  box-sizing: border-box;
-}
-
-*::after{
-  box-sizing: border-box;
-}
-
 .main {
   position: absolute;
   background: $lightred;
@@ -83,13 +71,13 @@
 
 }
 
-.articlewrap {
+.sectionClose .articlewrap {
   height: 0;
   overflow: hidden;
   transition: all .2s ease-in;
 }
 
-.sectionhead {
+.sectionHead {
   width: 100%;
   overflow: hidden;
   background: white;
@@ -108,14 +96,16 @@
   line-height: 1.3;
 }
 
-.section.open button::before {
+.sectionOpen button::before {
       height: 14px;
       transform: translate(0%, -50%) rotate(-45deg);
   }
-.section.open button::after {
+.sectionOpen button::after {
     transform: translate(0%, -50%) rotate(45deg);
   }
 
-.section.open .articlewrap {
+
+.sectionOpen .articlewrap {
   height: 120px;
+  transition: all .2s ease;
 }
