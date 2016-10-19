@@ -1,6 +1,48 @@
+@value acuoBlue from './../../css-components/colors.css';
+
 .nav {
     flex-wrap: nowrap;
-    background-color: #4e83b5;
+    background-color: acuoBlue;
     padding: 15px 20px;
     color: #fff;
+    display: flex;
 }
+
+.flex1{
+    flex: 1;
+}
+
+.uppercase{
+    text-transform: uppercase;
+}
+
+.logoContainer{
+    compose: flex1;
+    flex-grow: 1;
+
+}
+
+.vertiCenter{
+    display: table;
+    height: 100%;
+    text-align: center;
+    width: 100%;
+}
+
+.centerThis{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.pageTitle{
+    composes: uppercase;
+    composes: vertiCenter;
+    font-family: baseFontBold;
+    padding: 0px 2%;
+}
+
+.menuItem {
+    composes: uppercase;
+    padding: 0px 2%;
+}
+
