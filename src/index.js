@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import HelloWorld from './components/sample-component/sample-component'
-import Table from './components/table/table'
+import Table from './components/table/table-component'
 
 class App extends React.Component{
     constructor(props){
