@@ -17,11 +17,10 @@ class App extends React.Component{
             <div className={styles.globalStyles}>
                 <Nav />
                 <HelloWorld />
-                <Table />
+                <Table title={"Margin"}/>
             </div>
         )
     }
 }
 
 ReactDOM.render(<App />, document.getElementById('app'))
-
