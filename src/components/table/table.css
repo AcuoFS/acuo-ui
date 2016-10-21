@@ -1,111 +1,135 @@
-.main {
-  position: absolute;
-  background: $lightred;
-  top: 50%;
-  left: 50%;
-  width: 40%;
-  max-width: 30em;
-  min-width: 15em;
-  transform: translate(-50%, -50%);
-  overflow: hidden
-}
+@value acuoAction from './../../css-components/colors.css';
 
-.main .title {
-  color: #fff;
-  background: $darkred;
+.table{
+  display:flex;
+  justify-content: space-between;
+  background-color: rgba(78,131,181,0.7);
+  padding: 10px 25px;
+  font-size: 15px;
+  color:#fff;
+  margin-bottom: 2px;
+}
+.vertiCenter{
+  display: table;
+  height: 100%;
   text-align: center;
-  font-weight: 700;
-  line-height: 1.2em;
-  padding: 1em;
 }
-.section {
+.tableItem{
+  width:7.5%;
+  padding: 0px 2%;
+}
+.derivItem{
+  width:12.5%
+}
+.cptyItem{
+  width:27.5%;
+}
+.innerItem{
+  width:17.5%
+}
+.marginItem{
+  width:25%
+}
+.marginRow{
+  width:23%
+}
+.listItem{
+  width:4%;
+}
+.outerItem{
+  flex-grow:1;
+}
+.vertiCenter{
+    display: table;
+    height: 100%;
+    text-align: center;
+}
+.centerThis{
+    display: table-cell;
+    vertical-align: middle;
+}
+.margin{
+  line-height: 25px;
+}
+.leftThis{
+  float:left;
+  position:relative;
+  font-family: baseFontBold
+}
+.actionVertiCenter{
+  float: right;
+  composes: vertiCenter;
+  width: 190px;
   position: relative;
-  width: 100%;
-  border-bottom: 5px solid $darkred;
-  border-left: 2px solid $darkred;
-  border-right: 2px solid $darkred;
 }
-
-.section button {
+.actions{
+  position: relative;
+  text-transform: uppercase;
+  font-size: 12.5px;
+  background-color: #1b558b;
+  padding:8px;
+  display: flex;
+}
+.actionItem{
+  width:18%;
+}
+.actionItem .text{
+  padding: 10px;
+  flex: 1;
+  flex-grow: 6;
+}
+.actionItem .arrow{
+  flex: 2;
+  border-left: 1px solid black;
+  position: relative;
+}
+.actionItem .arrow::before{
+  content: '';
+  border-top: 10px solid transparent;
+  border-left: 10px solid #fff;
+  border-bottom: 10px solid transparent;
   position: absolute;
-  right: 0;
-  margin: 0;
-  padding: 0;
-  height: 3em;
-  width: 3em;
-  outline: 0;
-  border: 0;
-  background: none;
-  text-indent: -9999%;
-  pointer-events: none;
+  top: 18%;
+  right: 15%;
 }
-
-.section button::before{
-  content: 'asdasda';
-  display: block;
+.actionItem .arrow::after{
+  content: '';
+  border-top: 10px solid transparent;
+  border-left: 10px solid #1b558b;
+  border-bottom: 10px solid transparent;
   position: absolute;
-  height: 12px;
-  width: 4px;
-  border-radius: .3em;
-  background: #ee0c4b;
-  transform-origin: 50%;
-  top: 50%;
-  left: 50%;
-  transition: all .25s ease-in-out;
-  transform: translate(75%, -50%) rotate(45deg);
+  top: 18%;
+  right: 24%;
 }
-
-.section button::after{
-  content: 'asdasd';
-  display: block;
-  position: absolute;
-  height: 12px;
-  width: 4px;
-  border-radius: .3em;
-  background: #ee0c4b;
-  transform-origin: 50%;
-  top: 50%;
-  left: 50%;
-  transition: all .25s ease-in-out;
-  transform: translate(-75%, -50%) rotate(-45deg);
-
+.tableBody{
+  display:flex;
+  background-color: #D1D6DC;
+  padding:2px 25px;
 }
-
-.sectionClose .articlewrap {
-  height: 0;
+.tableRow{
+  display:flex;
+  background-color:#fff;
+  padding:2px 25px;
+  border-bottom:1px solid #D1D6DC;
+}
+.bodyItem{
+  width:20%;
+  padding: 1% 0;
+}
+.divMid{
+  flex-grow:2;
+  display:flex;
+  flex-direction:row;
+}
+.sectionClose{
+  max-height: 0;
   overflow: hidden;
-  transition: all .2s ease-in;
+  transition: 0.7s ease-in;
+  opacity: 0;
 }
-
-.sectionHead {
-  width: 100%;
-  overflow: hidden;
-  background: white;
-  cursor: pointer;
-  font-weight: 700;
-  color: #888;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  padding: 1em;
-  padding-right: 2.1em;
-}
-
-.article {
-  padding: 1em;
-  color: #333;
-  line-height: 1.3;
-}
-
-.sectionOpen button::before {
-      height: 14px;
-      transform: translate(0%, -50%) rotate(-45deg);
-  }
-.sectionOpen button::after {
-    transform: translate(0%, -50%) rotate(45deg);
-  }
-
-
-.sectionOpen .articlewrap {
-  height: 120px;
-  transition: all .2s ease;
+.sectionOpen{
+  opacity: 1;
+  transition: 0.7s ease-out;
+  overflow:hidden;
+  max-height:1000px;
 }
