@@ -8,14 +8,45 @@ class TableRow extends React.Component{
   }
   render() {
     return (
-        <tr>
-          <td>ACUO SG</td>
-          <td>ABC Bank</td>
-          <td>Singapore</td>
-          <td>SGD</td>
-          <td>10,000,000</td>
-          <td colSpan="2">10,000,000</td>
-        </tr>
+      <div className={styles.tableRow}>
+
+          <div className={styles.bodyItem}>
+            <div className={styles.vertiCenter}>
+              <div className={styles.centerThis}>ACUO SG</div>
+            </div>
+          </div>
+
+          <div className={styles.divMid}>
+              <div className={styles.cptyItem}>
+                <div className={styles.vertiCenter}>
+                  <div className={styles.centerThis}>ABC Bank</div>
+                </div>
+              </div>
+
+              <div className={styles.innerItem}>
+                <div className={styles.vertiCenter}>
+                  <p className={styles.centerThis}>Singapore</p>
+                </div>
+              </div>
+
+              <div className={styles.marginRow}>
+                <div className={styles.vertiCenter}>
+                  <p className={styles.centerThis}>SGD</p>
+                </div>
+              </div>
+
+              <div className={styles.marginItem}>
+                <div className={styles.vertiCenter}>
+                  <p className={styles.centerThis}>1,500,000,000</p>
+                </div>
+              </div>
+          </div>
+          <div className={styles.outerItem}>
+            <div className={styles.vertiCenter}>
+              <p className={styles.centerThis}>1,500,000,000</p>
+            </div>
+          </div>
+      </div>
     )
   }
 };

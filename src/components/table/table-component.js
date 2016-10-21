@@ -1,5 +1,4 @@
 import React from 'react'
-import Toggle from './table-subcomponent/toggle-component'
 import TableHead from './table-subcomponent/tablehead-component'
 import styles from './table.css'
 
