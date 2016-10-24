@@ -1,6 +1,6 @@
 import jsdom from 'jsdom'
 import chai from 'chai'
-//import chaiImmutable from 'chai-immutable'
+import chaiImmutable from 'chai-immutable'
 
 const doc = jsdom.jsdom('<!doctype html><html><body></body></html>')
 const win = doc.defaultView
@@ -14,4 +14,4 @@ Object.keys(window).forEach((key) => {
     }
 })
 
-//chai.use(chaiImmutable) //not yet installed chaiMori?
+chai.use(chaiImmutable) //not yet installed chaiMori?
