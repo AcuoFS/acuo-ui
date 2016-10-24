@@ -14,19 +14,19 @@ class TableHead extends React.Component{
       dropdown: "./images/dashboard/table/Droplist(down).png"
     }
     this.handleClick = this.handleClick.bind(this);
+
+    console.log(this.props.deriv)
   }
   handleClick(){
     if(this.state.open) {
       this.setState({
         open: false,
-        nonopen:styles.sectionOpen,
         class: styles.sectionClose,
         dropdown: "./images/dashboard/table/Droplist(down).png"
       })
     }else{
       this.setState({
         open: true,
-        nonopen:styles.sectionClose,
         class: styles.sectionOpen,
         dropdown: "./images/dashboard/table/Droplist(up).png"
       });

@@ -69,6 +69,7 @@
   background-color: #1b558b;
   padding:8px;
   display: flex;
+  cursor: pointer;
 }
 .actionItem{
   width:18%;
@@ -124,7 +125,7 @@
 .sectionClose{
   max-height: 0;
   overflow: hidden;
-  transition: 0.4s ease-in;
+  transition: .2s ease-in;
   opacity: 0;
 }
 .sectionOpen{
@@ -132,4 +133,7 @@
   transition: 0.7s ease-out;
   overflow:hidden;
   max-height:1000px;
+}
+.toggleItem{
+  cursor: pointer;
 }
