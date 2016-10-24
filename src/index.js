@@ -23,8 +23,6 @@ class App extends React.Component{
             return response.json()
         }).then((obj) => {
             store.dispatch(initState(fromJS(obj)))
-
-            console.log('index',store.getState())
         })
     }
 

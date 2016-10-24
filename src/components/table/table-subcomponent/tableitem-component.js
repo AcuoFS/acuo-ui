@@ -14,7 +14,7 @@ class TableItem extends React.Component{
 
             <div className={styles.derivItem}>
               <div className={styles.vertiCenter}>
-                  <p className={styles.centerThis}>{this.props.status}</p>
+                  <p className={styles.centerThis}>{this.props.deriv.get('type')}</p>
               </div>
             </div>
 

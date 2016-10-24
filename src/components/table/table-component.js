@@ -8,25 +8,28 @@ import styles from './table.css'
 export class Table extends React.Component{
     constructor(props){
         super(props)
-
-        console.log(this.props)
+        this.getDeriv = this.getDeriv.bind(this)
     }
-  render() {
-    return (
-      <div>
-        <TableHead deriv={this.props} marginType={"ETD"}/>
-        <TableHead marginType={"OTC Cleared"}/>
-        <TableHead marginType={"OTC Bilateral Reg"}/>
-        <TableHead marginType={"OTC Bilateral Leg"}/>
-      </div>
-    );
-  }
+    renderTable(deriv){
+        return (<TableHead key={deriv.get('type')} deriv={deriv}/>)
+    }
+    getDeriv(){
+        return this.props.derivatives || []
+    }
+    render() {
+        console.log('update', this.props.derivatives)
+        return (
+          <div>
+              {this.getDeriv().map(this.renderTable)}
+          </div>
+        );
+    }
 }
 
 function mapStateToProps(state){
+    console.log('map state to props', state.getIn(['display', 'derivatives']))
     return{
-        derivatives : state
+        derivatives : state.getIn(['display', 'derivatives'])
     }
-
 }
 export const TableContainer = connect(mapStateToProps)(Table)

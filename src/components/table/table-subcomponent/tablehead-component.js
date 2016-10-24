@@ -15,7 +15,6 @@ class TableHead extends React.Component{
     }
     this.handleClick = this.handleClick.bind(this);
 
-    console.log(this.props.deriv)
   }
   handleClick(){
     if(this.state.open) {
@@ -38,31 +37,9 @@ class TableHead extends React.Component{
         <TableItem status={this.props.marginType}
                    clicked={this.handleClick}
                    toggle={this.state.class}
-                   arrow={this.state.dropdown}/>
+                   arrow={this.state.dropdown}
+                    deriv={this.props.deriv}/>
       </div>
-        // <table>
-        //   <thead>
-        //     <tr className={styles.head}>
-        //       <th>{this.props.marginType}</th>
-        //       <th>CPTY Margin</th>
-        //       <th>Region</th>
-        //       <th>CCY</th>
-        //       <th>EXP.Margin</th>
-        //       <th>
-        //         <div className={styles.actionHeader}>
-        //           <div className={styles.action}>
-        //             <div className={styles.items}>5 ACTION ITEMS</div>
-        //           </div>
-        //           <div className={styles.arrowRight}></div>
-        //         </div>
-        //       </th>
-        //       <th>
-        //         <button onClick={this.handleClick}>Toggle</button>
-        //       </th>
-        //     </tr>
-        //   </thead>
-        //   <TableBody status={this.state.class}/>
-        // </table>
     )
   }
 };
