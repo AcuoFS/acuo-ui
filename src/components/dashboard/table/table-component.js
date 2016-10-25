@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import * as actionCreators from "../../action_creators"
 import TableHead from './table-subcomponent/tablehead-component'
 import styles from './table.css'
 

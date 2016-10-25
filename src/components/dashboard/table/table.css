@@ -1,4 +1,4 @@
-@value acuoAction from './../../css-components/colors.css';
+@value acuoAction from './../../../css-components/colors.css';
 
 .table{
   display:flex;

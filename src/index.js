@@ -9,9 +9,9 @@ import {initState} from './action_creators'
 
 import styles from './global.css'
 
-import HelloWorld from './components/sample-component/sample-component'
-import {TableContainer} from './components/table/table-component'
-import Nav from './components/navbar/navbar'
+import HelloWorld from './components/dashboard/sample-component/sample-component'
+import {TableContainer} from './components/dashboard/table/table-component'
+import Nav from './components/dashboard/navbar/navbar'
 
 const store = createStore(reducer)
 
