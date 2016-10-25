@@ -16,9 +16,9 @@ class TableItem extends React.Component{
   compute(key){
        return this.numberWithCommas(this.getMarginStatus().reduce((sum, x) => {
           if(x.get('timeFrames'))
-          return sum + x.get('timeFrames').reduce((sum, y) => {
-              return sum + y.get(key)
-          }, 0)
+              return sum + x.get('timeFrames').reduce((sum, y) => {
+                  return sum + y.get(key)
+              }, 0)
            else
                return sum + 0
       }, 0))
@@ -80,7 +80,7 @@ class TableItem extends React.Component{
               </div>
             </div>
           </div>
-          <TableBody marginStatus={this.props.deriv.get('marginStatus')} open={this.props.toggle}/>
+          <TableBody numberWithCommas={this.numberWithCommas} marginStatus={this.getMarginStatus()} open={this.props.toggle}/>
       </div>
     )
   }

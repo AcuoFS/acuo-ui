@@ -6,9 +6,17 @@ import TableRow from './tablerow-component.js'
 class TableBody extends React.Component{
   constructor(props){
     super(props)
+      this.renderRow = this.renderRow.bind(this)
   }
-  renderRow(){
+  renderRow(status){
 
+      if(status.get('timeFrames'))
+    return status.get('timeFrames').map((x) => {
+          if(x.get('actionsList'))
+        return x.get('actionsList').map((y) => {
+            return (<TableRow numberWithCommas={this.props.numberWithCommas} rowItems={y}/>)
+        })
+    })
   }
   render() {
     return (
@@ -52,10 +60,7 @@ class TableBody extends React.Component{
               </div>
             </div>
         </div>
-        <TableRow />
-        <TableRow />
-        <TableRow />
-        <TableRow />
+          {this.props.marginStatus.map(this.renderRow)}
       </div>
     )
   }
