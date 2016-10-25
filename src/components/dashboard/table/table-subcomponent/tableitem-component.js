@@ -6,6 +6,25 @@ import TableBody from './tablebody-component'
 class TableItem extends React.Component{
   constructor(props){
     super(props)
+      this.compute = this.compute.bind(this)
+
+      this.getMarginStatus = this.getMarginStatus.bind(this)
+  }
+  numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  compute(key){
+       return this.numberWithCommas(this.getMarginStatus().reduce((sum, x) => {
+          if(x.get('timeFrames'))
+          return sum + x.get('timeFrames').reduce((sum, y) => {
+              return sum + y.get(key)
+          }, 0)
+           else
+               return sum + 0
+      }, 0))
+  }
+  getMarginStatus(){
+      return this.props.deriv.get('marginStatus') || []
   }
   render() {
     return (
@@ -14,14 +33,14 @@ class TableItem extends React.Component{
 
             <div className={styles.derivItem}>
               <div className={styles.vertiCenter}>
-                  <p className={styles.centerThis}>{this.props.status}</p>
+                  <p className={styles.centerThis}>{this.props.deriv.get('type')}</p>
               </div>
             </div>
 
             <div className={styles.tableItem}>
               <div className={styles.margin}>
                   <p className={styles.leftThis}>CPTY Margin</p>
-                  <p className={styles.fineFont}>1,500,000.000.00</p>
+                  <p className={styles.fineFont}>{this.compute('CPTYMargin')}</p>
               </div>
             </div>
 
@@ -40,14 +59,14 @@ class TableItem extends React.Component{
             <div className={styles.tableItem}>
               <div className={styles.margin}>
                   <p className={styles.leftThis}>EXP.Margin</p>
-                  <p className={styles.fineFont}>1,500,000.000.00</p>
+                  <p className={styles.fineFont}>{this.compute('EXPMargin')}</p>
               </div>
             </div>
 
             <div className={styles.actionItem}>
               <div className={styles.actionVertiCenter}>
                   <div className={styles.actions}>
-                    <div className={styles.text}>5 ACTION ITEMS</div>
+                    <div className={styles.text}>{this.compute('noOfActions')} ACTION ITEMS</div>
                     <div className={styles.arrow}></div>
                   </div>
               </div>
@@ -61,7 +80,7 @@ class TableItem extends React.Component{
               </div>
             </div>
           </div>
-          <TableBody open={this.props.toggle}/>
+          <TableBody marginStatus={this.props.deriv.get('marginStatus')} open={this.props.toggle}/>
       </div>
     )
   }

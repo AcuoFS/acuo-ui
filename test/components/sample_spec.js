@@ -4,7 +4,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {renderIntoDocument, scryRenderedDOMComponentsWithTag} from 'react-addons-test-utils'
 
-import HelloWorld from '../../src/components/sample-component/sample-component'
+import HelloWorld from '../../src/components/dashboard/sample-component/sample-component'
 import {expect} from 'chai'
 
 describe('Sample', () => {

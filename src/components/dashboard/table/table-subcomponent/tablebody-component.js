@@ -7,6 +7,9 @@ class TableBody extends React.Component{
   constructor(props){
     super(props)
   }
+  renderRow(){
+
+  }
   render() {
     return (
       <div className={this.props.open}>
