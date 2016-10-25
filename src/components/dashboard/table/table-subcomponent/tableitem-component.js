@@ -6,6 +6,25 @@ import TableBody from './tablebody-component'
 class TableItem extends React.Component{
   constructor(props){
     super(props)
+      this.computeCPTYMargin = this.computeCPTYMargin.bind(this)
+
+      this.getMarginStatus = this.getMarginStatus.bind(this)
+  }
+  numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  computeCPTYMargin(){
+       return this.numberWithCommas(this.getMarginStatus().reduce((sum, x) => {
+          if(x.get('timeFrames'))
+          return sum + x.get('timeFrames').reduce((sum, y) => {
+              return sum + y.get('CPTYMargin')
+          }, 0)
+           else
+               return sum + 0
+      }, 0))
+  }
+  getMarginStatus(){
+      return this.props.deriv.get('marginStatus') || []
   }
   render() {
     return (
@@ -21,7 +40,7 @@ class TableItem extends React.Component{
             <div className={styles.tableItem}>
               <div className={styles.margin}>
                   <p className={styles.leftThis}>CPTY Margin</p>
-                  <p className={styles.fineFont}>1,500,000.000.00</p>
+                  <p className={styles.fineFont}>{this.computeCPTYMargin()}</p>
               </div>
             </div>
 
