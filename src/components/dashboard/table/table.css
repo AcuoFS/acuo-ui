@@ -52,7 +52,7 @@
   line-height: 25px;
 }
 .leftThis{
-  float:left;
+  text-align: left;
   position:relative;
   font-family: baseFontBold
 }
