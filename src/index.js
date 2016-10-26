@@ -12,8 +12,9 @@ import styles from './global.css'
 import HelloWorld from './components/dashboard/sample-component/sample-component'
 import {TableContainer} from './components/dashboard/table/table-component'
 import Nav from './components/dashboard/navbar/navbar'
+import {FilterContainer} from './components/dashboard/filters/filter'
 
-const store = createStore(reducer)
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 class App extends React.Component{
     constructor(props){
@@ -31,6 +32,7 @@ class App extends React.Component{
             <Provider store={store}>
                 <div className={styles.globalStyles}>
                     <Nav />
+                    <FilterContainer  />
                     <HelloWorld />
                     <TableContainer />
                 </div>
