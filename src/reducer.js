@@ -11,10 +11,11 @@ function applyFilter(derivatives, type){
     })
 }
 
-export function updateState(state, type){
-    console.log('update', type)
-
-    return state.setIn(['inputs', 'filters', 'typeFilter'], type).setIn(['display', 'derivatives'], applyFilter(state.getIn(['data', 'derivatives']), type))
+export function updateState(state, type){console.log('update', type)
+    if(type=="All"){
+        return state.set('display',state.get('data'))
+    }else
+        return state.setIn(['inputs', 'filters', 'typeFilter'], type).setIn(['display', 'derivatives'], applyFilter(state.getIn(['data', 'derivatives']), type))
 }
 
 

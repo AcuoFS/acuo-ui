@@ -30,7 +30,7 @@ class Filter extends React.Component{
         return(
         <div>
             <select id = "filter-dropdown" onChange={this.handleChange}>
-                <option value="1">ALL</option>
+                <option value="All">ALL</option>
                 {this.getDeriv().map(this.renderFilter)}
             </select>
 
