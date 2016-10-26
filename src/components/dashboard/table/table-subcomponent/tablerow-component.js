@@ -12,38 +12,38 @@ class TableRow extends React.Component{
 
           <div className={styles.bodyItem}>
             <div className={styles.vertiCenter}>
-              <div className={styles.centerThis}>ACUO SG</div>
+              <div className={styles.centerThis}>{this.props.rowItems.get('legalEntity')}</div>
             </div>
           </div>
 
           <div className={styles.divMid}>
               <div className={styles.cptyItem}>
                 <div className={styles.vertiCenter}>
-                  <div className={styles.centerThis}>ABC Bank</div>
+                  <div className={styles.centerThis}>{this.props.rowItems.get('cpty')}</div>
                 </div>
               </div>
 
               <div className={styles.innerItem}>
                 <div className={styles.vertiCenter}>
-                  <p className={styles.centerThis}>Singapore</p>
+                  <p className={styles.centerThis}>{this.props.rowItems.get('venue')}</p>
                 </div>
               </div>
 
               <div className={styles.marginRow}>
                 <div className={styles.vertiCenter}>
-                  <p className={styles.centerThis}>SGD</p>
+                  <p className={styles.centerThis}>{this.props.rowItems.get('ccy')}</p>
                 </div>
               </div>
 
               <div className={styles.marginItem}>
                 <div className={styles.vertiCenter}>
-                  <p className={styles.centerThis}>1,500,000,000</p>
+                  <p className={styles.centerThis}>{this.props.numberWithCommas(this.props.rowItems.get('initialMargin'))}</p>
                 </div>
               </div>
           </div>
           <div className={styles.outerItem}>
             <div className={styles.vertiCenter}>
-              <p className={styles.centerThis}>1,500,000,000</p>
+              <p className={styles.centerThis}>{this.props.numberWithCommas(this.props.rowItems.get('variableMargin'))}</p>
             </div>
           </div>
       </div>
