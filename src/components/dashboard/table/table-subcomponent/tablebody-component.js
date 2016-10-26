@@ -29,7 +29,7 @@ class TableBody extends React.Component{
               </div>
             </div>
 
-            <div className={styles.divMid}>
+            {/*<div className={styles.divMid}>*/}
                 <div className={styles.cptyItem}>
                   <div className={styles.vertiCenter}>
                     <div className={styles.centerThis}>CPTY</div>
@@ -53,7 +53,7 @@ class TableBody extends React.Component{
                     <p className={styles.centerThis}>IM</p>
                   </div>
                 </div>
-            </div>
+            {/*</div>*/}
             <div className={styles.outerItem}>
               <div className={styles.vertiCenter}>
                 <p className={styles.centerThis}>VM</p>

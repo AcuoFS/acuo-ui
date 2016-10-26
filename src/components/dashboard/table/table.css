@@ -9,17 +9,18 @@
   color:#fff;
   margin-bottom: 2px;
 }
+
 .vertiCenter{
   display: table;
   height: 100%;
   text-align: center;
 }
 .tableItem{
-  width:7.5%;
-  padding: 0px 2%;
+  width:15%;
+  /*padding: 0px 2%;*/
 }
 .derivItem{
-  width:12.5%
+  width:12%
 }
 .cptyItem{
   width:27.5%;
@@ -34,7 +35,7 @@
   width:23%
 }
 .listItem{
-  width:4%;
+  width:8%;
 }
 .outerItem{
   flex-grow:1;
@@ -57,7 +58,7 @@
   font-family: baseFontBold
 }
 .actionVertiCenter{
-  float: right;
+  float: left;
   composes: vertiCenter;
   width: 190px;
   position: relative;
@@ -136,4 +137,66 @@
 }
 .toggleItem{
   cursor: pointer;
+}
+
+.table >div:nth-child(1){
+  width: 12%!important;
+}
+.table >div:nth-child(2){
+  width: 15%!important;
+}
+.table >div:nth-child(3){
+  width: 8%!important;
+}
+.table >div:nth-child(4){
+  width: 8%!important;
+}
+.table >div:nth-child(5){
+  width: 15%!important;
+}
+.table >div:nth-child(6){
+  width: 18%!important;
+}
+.table >div:nth-child(7){
+
+}
+
+
+.tableBody >div:nth-child(1){
+  width: 15.8%!important;
+}
+.tableBody >div:nth-child(2){
+  width: 18.7%!important;
+}
+.tableBody >div:nth-child(3){
+  width: 11.7%!important;
+}
+.tableBody >div:nth-child(4){
+  width: 11.7%!important;
+}
+.tableBody >div:nth-child(5){
+  width: 18.7%!important;
+}
+.tableBody >div:nth-child(6){
+
+}
+
+
+.tableRow >div:nth-child(1){
+  width: 15.8%!important;
+}
+.tableRow >div:nth-child(2){
+  width: 18.7%!important;
+}
+.tableRow >div:nth-child(3){
+  width: 11.7%!important;
+}
+.tableRow >div:nth-child(4){
+  width: 11.7%!important;
+}
+.tableRow >div:nth-child(5){
+  width: 18.7%!important;
+}
+.tableRow >div:nth-child(6){
+
 }
