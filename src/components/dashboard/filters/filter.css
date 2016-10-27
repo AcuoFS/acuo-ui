@@ -1,0 +1,29 @@
+@value acuoAction from './../../../css-components/colors.css';
+
+.filterContainer{
+    background-color: #d5dadf;
+    font-size: 13px;
+    display: block;
+    padding: 8px 8px;
+}
+
+.filterContainer .filterItem{
+    display: inline-block;
+    color: #333;
+    width: 15%;
+    margin:4px 8px;
+}
+.filterContainer .filterItem .filterLabel{
+    display: block;
+    margin: 0 0 4px 0;
+}
+
+.filterContainer .filterItem .filters{
+    font-size: 13px;
+    width: 100%;
+    min-height: 16px;
+    height: 30px;
+    border: none;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}

@@ -6,6 +6,8 @@ import {connect} from 'react-redux'
 
 import * as actionCreators from '../../../action_creators'
 
+import styles from './filter.css'
+
 class Filter extends React.Component{
     constructor(props){
         super(props)
@@ -28,12 +30,21 @@ class Filter extends React.Component{
     }
     render(){
         return(
-        <div>
-            <select id = "filter-dropdown" onChange={this.handleChange}>
-                <option value="All">ALL</option>
-                {this.getDeriv().map(this.renderFilter)}
-            </select>
-
+        <div className={styles.filterContainer}>
+            <div className={styles.filterItem}>
+                <label className={styles.filterLabel}>Deriv Type</label>
+                <select className={styles.filters} id = "filter-derivtype" onChange={this.handleChange}>
+                    <option value="All">ALL</option>
+                    {this.getDeriv().map(this.renderFilter)}
+                </select>
+            </div>
+            <div className={styles.filterItem}>
+                <label className={styles.filterLabel}>Deriv Type</label>
+                <select className={styles.filters} id = "filter-derivtype" onChange={this.handleChange}>
+                    <option value="All">ALL</option>
+                    {this.getDeriv().map(this.renderFilter)}
+                </select>
+            </div>
         </div>
         )
 
