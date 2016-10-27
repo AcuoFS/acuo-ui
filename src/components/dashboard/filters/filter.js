@@ -67,6 +67,7 @@ class Filter extends React.Component{
                     <option value="All">ALL</option>
                     {this.renderLegalEntity()}
                 </select>
+                <div className={styles.filterDropdownArrow}></div>
             </div>
             <div className={styles.filterItem}>
                 <label className={styles.filterLabel}>Deriv Type</label>
@@ -74,6 +75,7 @@ class Filter extends React.Component{
                     <option value="All">ALL</option>
                     {this.getDeriv().map(this.renderFilter)}
                 </select>
+                <div className={styles.filterDropdownArrow}></div>
             </div>
         </div>
         )
