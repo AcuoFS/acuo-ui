@@ -15,6 +15,7 @@ class Filter extends React.Component{
         this.getDeriv = this.getDeriv.bind(this)
         this.handleLegalEntityChange = this.handleLegalEntityChange.bind(this)
         this.handleDerivChange = this.handleDerivChange.bind(this)
+        this.handleStatusChange = this.handleStatusChange.bind(this)
 
     }
     getDeriv(){
@@ -27,6 +28,10 @@ class Filter extends React.Component{
 
     handleDerivChange(e){
         this.props.filterStateDeriv(e.target.value)
+    }
+
+    handleStatusChange(e){
+        this.props.filterStateStatus(e.target.value)
     }
 
     renderFilter(deriv, index){
@@ -43,6 +48,18 @@ class Filter extends React.Component{
                         return (!listSum.includes(x.get('legalEntity')) ? listSum.add(x.get('legalEntity')) : listSum)
                     }, Set()))
                 }, Set()))
+            }, Set()))
+        }, Set()).toList().map((x) => {
+            return (<option value={x}>{x} </option>)
+        })
+
+    }
+
+    renderStatus(){
+
+        return this.getDeriv().reduce((listSumZ, derivative)=>{
+            return listSumZ.union(derivative.get('marginStatus').reduce((listSum, marginStatus)=>{
+                return (!listSum.includes(marginStatus.get('status')) ? listSum.add(marginStatus.get('status')) : listSum)
             }, Set()))
         }, Set()).toList().map((x) => {
             return (<option value={x}>{x} </option>)
@@ -71,9 +88,9 @@ class Filter extends React.Component{
             </div>
             <div className={styles.filterItem}>
                 <label className={styles.filterLabel}>Status</label>
-                <select className={styles.filters} id = "filter-status">
+                <select className={styles.filters} id = "filter-status" onChange={this.handleStatusChange}>
                     <option value="All">ALL</option>
-
+                    {this.renderStatus()}
                 </select>
                 <div className={styles.filterDropdownArrow}></div>
             </div>

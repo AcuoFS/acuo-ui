@@ -20,13 +20,20 @@ function applyLegalEntityFilter(derivatives, legalEntity) {
                   let legalEntityList = timeFrames.get('actionsList').filter((actionsList) => {
                       return actionsList.get('legalEntity') == legalEntity
                   })
-                  return (legalEntityList.size > 0 ? listLegalEntity.push(timeFrames.set('actionsList', legalEntityList)) : listLegalEntity)
+                  return (!legalEntityList.isEmpty() ? listLegalEntity.push(timeFrames.set('actionsList', legalEntityList)) : listLegalEntity)
               }, List())
               return (legalEntityList.size > 0 ? listLegalEntity.push(marginStatus.set('timeFrames', legalEntityList)) : listLegalEntity)
           }, List())
           return (legalEntityList.size > 0 ? listLegalEntity.push(deriv.set('marginStatus', legalEntityList)) : listLegalEntity)
       }, List())
 
+}
+
+function applyStatusFilter(derivatives, status) {
+     return derivatives.reduce((list, x) => {
+         let listX = x.get('marginStatus').filter((y) => y.get('status') == status)
+         return (listX.size > 0 ? list.push(x.set('marginStatus', listX)) : list)
+    }, List())
 }
 
 export function updateStateDeriv(state, type){console.log('update', type)
@@ -45,6 +52,15 @@ export function updateStateLegal(state,legalEntityType){
         applyLegalEntityFilter(state.getIn(['data', 'derivatives']), legalEntityType))
 }
 
+export function updateStateStatus(state,statusType){
+    console.log('status :', statusType)
+    if(statusType=="All"){
+        return state.set('display', state.get('data'))
+    }else
+        return state.setIn(['inputs','filters','statusFilter'],statusType).setIn(['display','derivatives'],
+            applyStatusFilter(state.getIn(['data', 'derivatives']), statusType))
+}
+
 export default function reducer(state = Map(), action) {
 
     switch(action.type){
@@ -56,6 +72,9 @@ export default function reducer(state = Map(), action) {
 
         case 'FILTER_STATE_LEGAL':
             return updateStateLegal(state, action.filter)
+
+        case 'FILTER_STATE_STATUS':
+            return updateStateStatus(state, action.filter)
     }
 
   return state

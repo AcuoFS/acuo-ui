@@ -22,3 +22,11 @@ export function filterStateLegal(legalEntity) {
     }
 }
 
+export function filterStateStatus(status) {
+
+    return {
+        type: 'FILTER_STATE_STATUS',
+        filter: status
+    }
+}
+
