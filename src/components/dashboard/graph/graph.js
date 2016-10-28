@@ -53,6 +53,7 @@ export default class Graph extends React.Component {
           y={this.props.height * 0.5}
           length={this.props.width - 240}
           horizontal={true}
+          stroke="#9B9B9B"
           stroke="black" onClick={this.getDeriv().map(this.getType).map(this.getStatus)}
         />
         <Axis
