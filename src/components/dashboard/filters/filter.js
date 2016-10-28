@@ -21,9 +21,9 @@ class Filter extends React.Component{
        this.props.filterState(e.target.value)
     }
 
-    renderFilter(deriv){
+    renderFilter(deriv, index){
         return (
-            <option value={deriv.get('type')}>{deriv.get('type').toUpperCase()} </option>)
+            <option key={index} value={deriv.get('type')}>{deriv.get('type').toUpperCase()} </option>)
 
     }
     render(){
