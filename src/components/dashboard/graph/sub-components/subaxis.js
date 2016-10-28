@@ -18,7 +18,7 @@ export default class SubAxis extends React.Component {
 
     for(let i = 0; i<=24; i++){
       let coords = {
-        x1: this.props.x + 60 * i - 0.8333 * now.getMinutes()
+        x1: this.props.x + 60 * i - 1 * now.getMinutes()
       }
       coords.x2 = coords.x1
         if(Hours[i]%3 == 0){
