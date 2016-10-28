@@ -4,6 +4,7 @@ import Axis from './sub-components/axis'
 import SubAxis from './sub-components/subaxis'
 import Triangle from './sub-components/triangle'
 import GraphBody from './sub-components/graph_body'
+import Pointer from './sub-components/pointer'
 
 export default class Graph extends React.Component {
   constructor(props){
@@ -58,12 +59,28 @@ export default class Graph extends React.Component {
         />
         <Axis
           x={this.props.width * 0.5}
+<<<<<<< HEAD
           y={50}
           length={this.props.height - 100}
+=======
+          y={30}
+          length={this.props.height - 60}
+>>>>>>> d0a36a1756a5e7fd5b91de3383e11e2ca84f82d3
           horizontal={false}
           stroke="red"
-          text= {this.props.time}
         />
+          <Pointer
+              xrec={this.props.width * 0.5 -50} //670
+              yrec={30}
+              recwidth={(this.props.width-240) / 12} //100
+              recheight={20}
+              xtext={this.props.width * 0.5 -40} //680
+              ytext={45}
+              triangle1={"710,50 730,50 720,60"}
+              triangle2={"720,470 710,480 730,480"}
+              color="#F91233"
+              text= {this.props.time}
+          />
         <SubAxis
           x={120}
           y={this.props.height * 0.5 - 25}
