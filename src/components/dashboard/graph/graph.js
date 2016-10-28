@@ -67,7 +67,7 @@ export default class Graph extends React.Component {
           yrec={30}
           recwidth={(this.props.width-240) / 12} //100
           recheight={20}
-          xtext={this.props.width * 0.5 -40} //680
+          xtext={this.props.width * 0.5 - 20} //680
           ytext={45}
           triangle1={"710,50 730,50 720,60"}
           triangle2={"720,470 710,480 730,480"}
