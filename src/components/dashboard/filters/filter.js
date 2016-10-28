@@ -29,24 +29,10 @@ class Filter extends React.Component{
         this.props.filterStateDeriv(e.target.value)
     }
 
-    renderFilter(deriv){
+    renderFilter(deriv, index){
         return (
-            <option value={deriv.get('type')}>{deriv.get('type').toUpperCase()} </option>)
+            <option key={index} value={deriv.get('type')}>{deriv.get('type').toUpperCase()} </option>)
     }
-
-    // getLegalEntity(){
-    //     return this.getDeriv().map((derivative)=>{
-    //         return derivative.get('marginStatus').map((marginStatus)=>{
-    //             return marginStatus.get('timeFrames').map((timeFrames)=>{
-    //                 console.log('here', timeFrames.get('actionsList'))
-    //                 //return timeFrames.get('actionsList')
-    //                 return timeFrames.get('actionsList').map((actionList)=>{
-    //                     return actionList.get('legalEntity')
-    //                })
-    //             })
-    //         })
-    //     })
-    // }
 
     renderLegalEntity(){
 

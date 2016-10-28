@@ -9,7 +9,7 @@ import {initState} from './action_creators'
 
 import styles from './global.css'
 
-import Graph from './components/dashboard/graph/graph'
+import {GraphContainer} from './components/dashboard/graph/graph'
 import {TableContainer} from './components/dashboard/table/table-component'
 import Nav from './components/dashboard/navbar/navbar'
 import {FilterContainer} from './components/dashboard/filters/filter'
@@ -33,7 +33,7 @@ class App extends React.Component{
                 <div className={styles.globalStyles}>
                     <Nav />
                     <FilterContainer  />
-                    <Graph />
+                    <GraphContainer />
                     <TableContainer />
                 </div>
             </Provider>
