@@ -6,11 +6,19 @@ export function initState(state) {
     }
 }
 
-export function filterState(derivType) {
+export function filterStateDeriv(derivType) {
 
     return {
-        type: 'FILTER_STATE',
+        type: 'FILTER_STATE_DERIV',
         filter: derivType
+    }
+}
+
+export function filterStateLegal(legalEntity) {
+
+    return {
+        type: 'FILTER_STATE_LEGAL',
+        filter: legalEntity
     }
 }
 

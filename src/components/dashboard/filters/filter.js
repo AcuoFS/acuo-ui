@@ -13,15 +13,20 @@ class Filter extends React.Component{
     constructor(props){
         super(props)
         this.getDeriv = this.getDeriv.bind(this)
-        this.handleChange = this.handleChange.bind(this)
-        //this.getLegalEntity = this.getLegalEntity.bind(this)
+        this.handleLegalEntityChange = this.handleLegalEntityChange.bind(this)
+        this.handleDerivChange = this.handleDerivChange.bind(this)
+
     }
     getDeriv(){
         return this.props.derivatives || []
     }
 
-    handleChange(e){
-       this.props.filterState(e.target.value)
+    handleLegalEntityChange(e){
+       this.props.filterStateLegal(e.target.value)
+    }
+
+    handleDerivChange(e){
+        this.props.filterStateDeriv(e.target.value)
     }
 
     renderFilter(deriv){
@@ -58,12 +63,13 @@ class Filter extends React.Component{
         })
 
     }
+
     render(){
         return(
         <div className={styles.filterContainer}>
             <div className={styles.filterItem}>
                 <label className={styles.filterLabel}>Legal Entity</label>
-                <select className={styles.filters} id = "filter-legalEntity" onChange={this.handleChange}>
+                <select className={styles.filters} id = "filter-legalEntity" onChange={this.handleLegalEntityChange}>
                     <option value="All">ALL</option>
                     {this.renderLegalEntity()}
                 </select>
@@ -71,7 +77,7 @@ class Filter extends React.Component{
             </div>
             <div className={styles.filterItem}>
                 <label className={styles.filterLabel}>Deriv Type</label>
-                <select className={styles.filters} id = "filter-derivtype" onChange={this.handleChange}>
+                <select className={styles.filters} id = "filter-derivtype" onChange={this.handleDerivChange}>
                     <option value="All">ALL</option>
                     {this.getDeriv().map(this.renderFilter)}
                 </select>
