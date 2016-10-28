@@ -25,7 +25,7 @@ export default class SubAxis extends React.Component {
       coords.y2 = coords.y1 + 25
       let text
 
-      random.push(<line key={i} {...coords} stroke={ i == 0 ? 'white' : 'black'} strokeWidth={2}/>)
+      random.push(<line key={i} {...coords} stroke={ i == 0 ? 'white' : "#9B9B9B"} strokeWidth={2}/>)
       texts.push(<text x={coords.x1 - 5} y={coords.y1 + 40} key={i} fontFamily="Verdana" fontSize="8">
     { i == 0 ? ' ' : Hours[i]}
   </text>)

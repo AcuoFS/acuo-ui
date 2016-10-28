@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Axis from './sub-components/axis'
 import SubAxis from './sub-components/subaxis'
+import Triangle from './sub-components/triangle'
 import GraphBody from './sub-components/graph_body'
 
 export default class Graph extends React.Component {
@@ -52,12 +53,13 @@ export default class Graph extends React.Component {
           y={this.props.height * 0.5}
           length={this.props.width - 240}
           horizontal={true}
+          stroke="#9B9B9B"
           stroke="black" onClick={this.getDeriv().map(this.getType).map(this.getStatus)}
         />
         <Axis
           x={this.props.width * 0.5}
-          y={25}
-          length={this.props.height - 50}
+          y={50}
+          length={this.props.height - 100}
           horizontal={false}
           stroke="red"
           text= {this.props.time}
