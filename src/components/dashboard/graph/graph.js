@@ -5,14 +5,7 @@ import SubAxis from './sub-components/subaxis'
 import GraphBody from './sub-components/graph_body'
 import Pointer from './sub-components/pointer'
 
-export default class Graph extends React.Component {
-  constructor(props){
-    super(props)
-    this.getDeriv = this.getDeriv.bind(this)
-    this.getTimeFrames = this.getTimeFrames.bind(this)
-    this.getStatus = this.getStatus.bind(this)
-  }
-
+class Graph extends React.Component {
   static get defaultProps() {
     const now = new Date()
     const time = [now.getHours(), (now.getMinutes() <10 ? '0' : ' ')  + now.getMinutes()]
@@ -24,26 +17,25 @@ export default class Graph extends React.Component {
       time: currentTime
     }
   }
+  constructor(props){
+    super(props)
+    this.getDeriv = this.getDeriv.bind(this)
+  }
+  getCircle(){
+      this.getDeriv().map((x) => {
+        x.get('marginStatus').map((x) => {
+          x.get('timeFrames').map((x) => {
+            let timeStart = x.get('timeRangeStart')
+            let amount = x.get('amount')
+
+            return timeStart, amount
+          })
+        })
+      })
+  }
   getDeriv(){
-    // console.log(this.props.derivatives)
+    console.log(this.props.derivatives)
     return this.props.derivatives || []
-  }
-  getType(deriv){
-    // console.log("deriv", deriv)
-    // console.log(deriv.get('marginStatus'))
-    return deriv.get('marginStatus')
-  }
-  getTimeFrames(stat){
-    console.log(stat.get('status'))
-    console.log("i am stat", stat.get('timeFrames').map(this.getTime))
-  }
-  getStatus(status){
-    // console.log("status", status)
-    console.log("iam get status", status.map(this.getTimeFrames))
-  }
-  getTime(time){
-    console.log("iam time", time.get('timeRangeStart'))
-    console.log()
   }
   render() {
     return (
@@ -53,7 +45,7 @@ export default class Graph extends React.Component {
           y={this.props.height * 0.5}
           length={this.props.width}
           horizontal={true}
-          stroke="#9B9B9B" onClick={this.getDeriv().map(this.getType).map(this.getStatus)}
+          stroke={"#9B9B9B" }
           />
         <Axis
           x={this.props.width * 0.5}
@@ -80,8 +72,6 @@ export default class Graph extends React.Component {
           length={this.props.width }
           />
         <GraphBody
-          x={120}
-          y={47.5}
           data={this.props.data}
           />
       </svg>
