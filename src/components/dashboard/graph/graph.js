@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Axis from './sub-components/axis'
 import SubAxis from './sub-components/subaxis'
-import Triangle from './sub-components/triangle'
 import GraphBody from './sub-components/graph_body'
 import Pointer from './sub-components/pointer'
 
@@ -59,13 +58,8 @@ export default class Graph extends React.Component {
         />
         <Axis
           x={this.props.width * 0.5}
-<<<<<<< HEAD
-          y={50}
-          length={this.props.height - 100}
-=======
           y={30}
           length={this.props.height - 60}
->>>>>>> d0a36a1756a5e7fd5b91de3383e11e2ca84f82d3
           horizontal={false}
           stroke="red"
         />
