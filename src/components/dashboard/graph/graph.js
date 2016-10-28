@@ -1,15 +1,48 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import Axis from './sub-components/axis'
 import SubAxis from './sub-components/subaxis'
 import GraphBody from './sub-components/graph_body'
 
 export default class Graph extends React.Component {
+  constructor(props){
+    super(props)
+    this.getDeriv = this.getDeriv.bind(this)
+    this.getTimeFrames = this.getTimeFrames.bind(this)
+    this.getStatus = this.getStatus.bind(this)
+  }
 
   static get defaultProps() {
+    const now = new Date()
+    const time = [now.getHours(), (now.getMinutes() <10 ? '0' : ' ')  + now.getMinutes()]
+    const currentTime = time.join(":")
+
     return {
       width: 1440,
-      height: 500
+      height: 500,
+      time: currentTime
     }
+  }
+  getDeriv(){
+    // console.log(this.props.derivatives)
+    return this.props.derivatives || []
+  }
+  getType(deriv){
+    // console.log("deriv", deriv)
+    // console.log(deriv.get('marginStatus'))
+    return deriv.get('marginStatus')
+  }
+  getTimeFrames(stat){
+    console.log(stat.get('status'))
+    console.log("i am stat", stat.get('timeFrames').map(this.getTime))
+  }
+  getStatus(status){
+    // console.log("status", status)
+    console.log("iam get status", status.map(this.getTimeFrames))
+  }
+  getTime(time){
+    console.log("iam time", time.get('timeRangeStart'))
+    console.log()
   }
   render() {
     return (
@@ -19,12 +52,15 @@ export default class Graph extends React.Component {
           y={this.props.height * 0.5}
           length={this.props.width - 240}
           horizontal={true}
+          stroke="black" onClick={this.getDeriv().map(this.getType).map(this.getStatus)}
         />
         <Axis
           x={this.props.width * 0.5}
           y={25}
           length={this.props.height - 50}
           horizontal={false}
+          stroke="red"
+          text= {this.props.time}
         />
         <SubAxis
           x={120}
@@ -40,3 +76,11 @@ export default class Graph extends React.Component {
     )
   }
 }
+
+function mapStateToProps(state){
+    return{
+        derivatives : state.getIn(['display', 'derivatives'])
+    }
+}
+
+export const GraphContainer = connect(mapStateToProps)(Graph)

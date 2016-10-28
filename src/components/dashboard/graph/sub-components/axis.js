@@ -18,10 +18,13 @@ export default class Axis extends React.Component {
     return coords;
   }
 
-  render() {
+  render(i) {
     let coords = this.prepareCords();
     return (
-      <line {...coords} stroke="black" strokeWidth={1} />
+      <svg>
+        <line {...coords} stroke={this.props.stroke} strokeWidth={1} />
+        <text x={coords.x2} y={coords.y1 + 0.5 * this.props.length + 30} key={i} fontFamily="Verdana" fontSize="12">{this.props.text}</text>
+      </svg>
     )
   }
 }
