@@ -1,0 +1,78 @@
+@value acuoAction from './../../../css-components/colors.css';
+
+.filterContainer{
+    background-color: #fff;
+    font-size: 13px;
+    display: block;
+    padding: 8px 8px;
+}
+
+.filterContainer .filterItem{
+    display: inline-block;
+    color: #494949;
+    width: 15%;
+    height: 50px;
+    margin: 4px 8px;
+}
+.filterContainer .filterItem .filterLabel{
+    display: block;
+    margin: 0 0 4px 0;
+}
+
+.filterContainer .filterItem .filters{
+    font-size: 13px;
+    color: #494949;
+    background-color: #fff;
+    width: 100%;
+    min-height: 16px;
+    height: 34px;
+    border: none;
+    padding: 0 8px;
+    border: 1px solid #494949;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+    -moz-appearance:    none;
+    appearance:         none;
+}
+.filterContainer .filterItem .filters:focus{
+    outline: none;
+}
+.filterContainer .filterItem .filters:hover{
+    cursor: pointer;
+}
+
+.filterDropdownArrow{
+    display: block;
+    background-color: #fff;
+    width: 20px;
+    height: 20px;
+    float: right;
+    position: relative;
+    top: -26px;
+    right: 8px;
+    pointer-events: none;
+}
+
+.filterDropdownArrow::before{
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 8px 0 8px;
+    border-color: #494949 transparent transparent transparent;
+    position: absolute;
+    top: 30%;
+    left: 8%
+}
+.filterDropdownArrow::after{
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 5px 0 5px;
+    border-color: #fff transparent transparent transparent;
+    position: absolute;
+    top: 30%;
+    left: 23%;
+}
