@@ -49,42 +49,41 @@ export default class Graph extends React.Component {
     return (
       <svg viewBox="0 0 1440 500" preserveAspectRatio="xMaxYMax meet">
         <Axis
-          x={120}
+          x={0}
           y={this.props.height * 0.5}
-          length={this.props.width - 240}
+          length={this.props.width}
           horizontal={true}
-          stroke="#9B9B9B"
-          stroke="black" onClick={this.getDeriv().map(this.getType).map(this.getStatus)}
-        />
+          stroke="#9B9B9B" onClick={this.getDeriv().map(this.getType).map(this.getStatus)}
+          />
         <Axis
           x={this.props.width * 0.5}
           y={30}
           length={this.props.height - 60}
           horizontal={false}
-          stroke="red"
-        />
-          <Pointer
-              xrec={this.props.width * 0.5 -50} //670
-              yrec={30}
-              recwidth={(this.props.width-240) / 12} //100
-              recheight={20}
-              xtext={this.props.width * 0.5 -40} //680
-              ytext={45}
-              triangle1={"710,50 730,50 720,60"}
-              triangle2={"720,470 710,480 730,480"}
-              color="#F91233"
-              text= {this.props.time}
+          stroke="#F91233"
+          />
+        <Pointer
+          xrec={this.props.width * 0.5 -50} //670
+          yrec={30}
+          recwidth={(this.props.width-240) / 12} //100
+          recheight={20}
+          xtext={this.props.width * 0.5 -40} //680
+          ytext={45}
+          triangle1={"710,50 730,50 720,60"}
+          triangle2={"720,470 710,480 730,480"}
+          color="#F91233"
+          text= {this.props.time}
           />
         <SubAxis
-          x={120}
+          x={0}
           y={this.props.height * 0.5 - 10}
-          length={this.props.width - 240}
-        />
+          length={this.props.width }
+          />
         <GraphBody
           x={120}
           y={47.5}
           data={this.props.data}
-        />
+          />
       </svg>
     )
   }
