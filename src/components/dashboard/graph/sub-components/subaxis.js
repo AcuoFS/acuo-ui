@@ -18,15 +18,21 @@ export default class SubAxis extends React.Component {
 
     for(let i = 0; i<=24; i++){
       let coords = {
-        x1: this.props.x + 50 * i - 0.8333 * now.getMinutes(),
-        y1: this.props.y
+        x1: this.props.x + 50 * i - 0.8333 * now.getMinutes()
       }
       coords.x2 = coords.x1
-      coords.y2 = coords.y1 + 25
+        if(Hours[i]%3 == 0){
+        coords.y1 = this.props.y - 5
+        coords.y2 = coords.y1 + 15
+        } else {
+          coords.y1 = this.props.y + 2.5
+          coords.y2 = coords.y1 + 7.5
+        }
+
       let text
 
-      random.push(<line key={i} {...coords} stroke={ i == 0 ? 'white' : 'black'} strokeWidth={2}/>)
-      texts.push(<text x={coords.x1 - 5} y={coords.y1 + 40} key={i} fontFamily="Verdana" fontSize="8">
+      random.push(<line key={i} {...coords} stroke={ i == 0 ? 'white' : '#9B9B9B'} strokeWidth={ Hours[i]%3 == 0? 2:1}/>)
+      texts.push(<text x={coords.x1 - 5} y={coords.y1 + 30} key={i} fontFamily="helvetica" fontSize="13" stroke="#9B9B9B">
     { (i == 0 || Hours[i]%3 != 0) ? ' ' : Hours[i]}
   </text>)
 

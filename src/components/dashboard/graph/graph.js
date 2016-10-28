@@ -76,7 +76,7 @@ export default class Graph extends React.Component {
           />
         <SubAxis
           x={120}
-          y={this.props.height * 0.5 - 25}
+          y={this.props.height * 0.5 - 10}
           length={this.props.width - 240}
         />
         <GraphBody
