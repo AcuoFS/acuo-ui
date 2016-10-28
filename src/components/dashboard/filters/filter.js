@@ -69,6 +69,22 @@ class Filter extends React.Component{
                 </select>
                 <div className={styles.filterDropdownArrow}></div>
             </div>
+            <div className={styles.filterItem}>
+                <label className={styles.filterLabel}>Status</label>
+                <select className={styles.filters} id = "filter-status">
+                    <option value="All">ALL</option>
+
+                </select>
+                <div className={styles.filterDropdownArrow}></div>
+            </div>
+            <div className={styles.filterItem}>
+                <label className={styles.filterLabel}>Venue</label>
+                <select className={styles.filters} id = "filter-venue">
+                    <option value="All">ALL</option>
+
+                </select>
+                <div className={styles.filterDropdownArrow}></div>
+            </div>
         </div>
         )
 
