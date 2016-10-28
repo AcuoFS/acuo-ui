@@ -7,8 +7,9 @@ class TableItem extends React.Component{
   constructor(props){
     super(props)
       this.compute = this.compute.bind(this)
-
       this.getMarginStatus = this.getMarginStatus.bind(this)
+      this.getNumberOfActions = this.getNumberOfActions.bind(this)
+
   }
   numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -22,6 +23,17 @@ class TableItem extends React.Component{
            else
                return sum + 0
       }, 0))
+  }
+  getNumberOfActions(){
+
+    return this.numberWithCommas(this.getMarginStatus().reduce((sum, x) => {
+      if(x.get('timeFrames'))
+        return sum + x.get('timeFrames').reduce((sum, y) => {
+            return sum + y.get('actionsList').size
+          }, 0)
+      else
+        return sum + 0
+    }, 0))
   }
   getMarginStatus(){
       return this.props.deriv.get('marginStatus') || []
@@ -66,7 +78,7 @@ class TableItem extends React.Component{
             <div className={styles.actionItem}>
               <div className={styles.actionVertiCenter}>
                   <div className={styles.actions}>
-                    <div className={styles.text}>{this.compute('noOfActions')} ACTION ITEMS</div>
+                    <div className={styles.text}>{this.getNumberOfActions()} ACTION ITEMS</div>
                     <div className={styles.arrow}></div>
                   </div>
               </div>
