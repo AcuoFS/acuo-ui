@@ -18,7 +18,6 @@ class TableItem extends React.Component{
      return this.numberWithCommas(this.getMarginStatus().reduce((sum, x) => {
        if(x.get('timeFrames'))
          return sum + x.get('timeFrames').reduce((sum, y) => {
-          //return sum + y.get(key)
            return sum + y.get('actionsList').reduce((sum, z) => {
              return sum + z.get(key)
            }, 0)

@@ -12,24 +12,21 @@ function applyFilter(derivatives, type){
 }
 
 function applyLegalEntityFilter(derivatives, legalEntity) {
-
-      return derivatives.reduce((listLegalEntity, deriv) => {
-          console.log(deriv.get('marginStatus'))
-          let legalEntityList = deriv.get('marginStatus').reduce((listLegalEntity, marginStatus) => {
-              let legalEntityList = marginStatus.get('timeFrames').reduce((listLegalEntity, timeFrames) => {
-                  let legalEntityList = timeFrames.get('actionsList').filter((actionsList) => {
-                      return actionsList.get('legalEntity') == legalEntity
-                  })
-                  return (legalEntityList.size > 0 ? listLegalEntity.push(timeFrames.set('actionsList', legalEntityList)) : listLegalEntity)
-              }, List())
-              return (legalEntityList.size > 0 ? listLegalEntity.push(marginStatus.set('timeFrames', legalEntityList)) : listLegalEntity)
-          }, List())
-          return (legalEntityList.size > 0 ? listLegalEntity.push(deriv.set('marginStatus', legalEntityList)) : listLegalEntity)
+  return derivatives.reduce((listX, x) => {
+    let list = x.get('marginStatus').reduce((listY, y) => {
+      let list = y.get('timeFrames').reduce((listZ, z) => {
+        let list = z.get('actionsList').filter((a) => {
+          return a.get('legalEntity') == legalEntity
+        })
+        return (list.size > 0 ? listZ.push(z.set('actionsList', list)) : listZ)
       }, List())
-
+      return (list.size > 0 ? listY.push(y.set('timeFrames', list)) : listY)
+    }, List())
+    return (list.size > 0 ? listX.push(x.set('marginStatus', list)) : listX)
+  }, List())
 }
 
-export function updateStateDeriv(state, type){console.log('update', type)
+export function updateStateDeriv(state, type){
     if(type=="All"){
         return state.set('display',state.get('data'))
     }else
@@ -37,7 +34,6 @@ export function updateStateDeriv(state, type){console.log('update', type)
 }
 
 export function updateStateLegal(state,legalEntityType){
-    console.log('legalEntity :', legalEntityType)
     if(legalEntityType=="All"){
         return state.set('display', state.get('data'))
     }else
