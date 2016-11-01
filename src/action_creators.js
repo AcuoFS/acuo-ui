@@ -22,11 +22,21 @@ export function filterStateLegal(legalEntity) {
     }
 }
 
+
 export function filterStateStatus(status) {
 
     return {
         type: 'FILTER_STATE_STATUS',
         filter: status
+    }
+}
+
+
+export function filterVenue(venue) {
+
+    return {
+        type: 'FILTER_STATE_VENUE',
+        filter: venue
     }
 }
 

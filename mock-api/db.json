@@ -47,7 +47,7 @@
                       "time": "2016-10-23T18:25:43.511Z",
                       "legalEntity": "Acuo SG",
                       "cpty": "ABC bank",
-                      "venue": "Singapore",
+                      "venue": "Thailand",
                       "ccy": "SGD",
                       "initialMargin": 100000,
                       "variableMargin": 500000
@@ -65,7 +65,7 @@
                       "time": "2016-10-23T18:40:43.511Z",
                       "legalEntity": "Acuo SG",
                       "cpty": "ABC bank",
-                      "venue": "Singapore",
+                      "venue": "Thailand",
                       "ccy": "SGD",
                       "initialMargin": 100000,
                       "variableMargin": 500000
@@ -108,7 +108,7 @@
                       "time": "2016-10-23T18:25:43.511Z",
                       "legalEntity": "Acuo SG",
                       "cpty": "ABC bank",
-                      "venue": "Singapore",
+                      "venue": "Thailand",
                       "ccy": "SGD",
                       "initialMargin": 100000,
                       "variableMargin": 500000
