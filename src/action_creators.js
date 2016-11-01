@@ -40,3 +40,9 @@ export function filterVenue(venue) {
     }
 }
 
+export function filterCPTY(cpty){
+    return{
+        type: 'FILTER_STATE_CPTY',
+        filter : cpty
+    }
+}
