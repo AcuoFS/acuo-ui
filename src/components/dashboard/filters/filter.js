@@ -17,6 +17,7 @@ class Filter extends React.Component{
         this.handleDerivChange = this.handleDerivChange.bind(this)
         this.handleStatusChange = this.handleStatusChange.bind(this)
 
+        this.handleVenueChange = this.handleVenueChange.bind(this)
     }
     getDeriv(){
         return this.props.derivatives || []
@@ -31,7 +32,9 @@ class Filter extends React.Component{
     }
 
     handleStatusChange(e){
-        this.props.filterStateStatus(e.target.value)
+        this.props.filterStateStatus(e.target.value)}
+    handleVenueChange(e){
+        this.props.filterVenue(e.target.value)
     }
 
     renderFilter(deriv, index){
@@ -55,17 +58,33 @@ class Filter extends React.Component{
 
     }
 
+
     renderStatus(){
 
         return this.getDeriv().reduce((listSumZ, derivative)=>{
-            return listSumZ.union(derivative.get('marginStatus').reduce((listSum, marginStatus)=>{
-                return (!listSum.includes(marginStatus.get('status')) ? listSum.add(marginStatus.get('status')) : listSum)
-            }, Set()))
-        }, Set()).toList().map((x) => {
-            return (<option value={x}>{x} </option>)
-        })
-
+        return listSumZ.union(derivative.get('marginStatus').reduce((listSum, marginStatus)=>{
+        return (!listSum.includes(marginStatus.get('status')) ? listSum.add(marginStatus.get('status')) : listSum)
+    }, Set()))
+    }, Set()).toList().map((x) => {
+        return (<option value={x}>{x} </option>)
+    })
     }
+
+    renderVenue(){
+        return this.getDeriv().reduce((listSumZ, derivative)=>{
+            return listSumZ.union(derivative.get('marginStatus').reduce((listSumY, marginStatus)=> {
+                return listSumY.union(marginStatus.get('timeFrames').reduce((listSumX, timeFrames) => {
+                  return listSumX.union(timeFrames.get('actionsList').reduce((listSum, x) => {
+                    return (!listSum.includes(x.get('venue')) ? listSum.add(x.get('venue')) : listSum)
+                  }, Set()))
+                }, Set()))
+
+              }, Set()))
+        }, Set()).map((x) => {
+          return (<option value={x}>{x} </option>)
+        })
+    }
+
 
     render(){
         return(
@@ -78,6 +97,7 @@ class Filter extends React.Component{
                 </select>
                 <div className={styles.filterDropdownArrow}></div>
             </div>
+
             <div className={styles.filterItem}>
                 <label className={styles.filterLabel}>Deriv Type</label>
                 <select className={styles.filters} id = "filter-derivtype" onChange={this.handleDerivChange}>
@@ -86,6 +106,7 @@ class Filter extends React.Component{
                 </select>
                 <div className={styles.filterDropdownArrow}></div>
             </div>
+
             <div className={styles.filterItem}>
                 <label className={styles.filterLabel}>Status</label>
                 <select className={styles.filters} id = "filter-status" onChange={this.handleStatusChange}>
@@ -94,11 +115,12 @@ class Filter extends React.Component{
                 </select>
                 <div className={styles.filterDropdownArrow}></div>
             </div>
+
             <div className={styles.filterItem}>
                 <label className={styles.filterLabel}>Venue</label>
-                <select className={styles.filters} id = "filter-venue">
+                <select className={styles.filters} id = "filter-venue" onChange={this.handleVenueChange}>
                     <option value="All">ALL</option>
-
+                    {this.renderVenue()}
                 </select>
                 <div className={styles.filterDropdownArrow}></div>
             </div>
