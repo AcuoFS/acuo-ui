@@ -36,7 +36,9 @@
     "chai": "^3.5.0",
     "chai-immutable": "^1.6.0",
     "css-loader": "^0.25.0",
+    "exports-loader": "^0.6.3",
     "file-loader": "^0.9.0",
+    "imports-loader": "^0.6.5",
     "jsdom": "^9.8.0",
     "json-server": "^0.8.22",
     "mocha": "^3.1.2",
@@ -53,6 +55,7 @@
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "whatwg-fetch": "^1.0.0"
   }
 }
