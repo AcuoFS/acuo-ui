@@ -2,10 +2,13 @@
 
 .nav {
     flex-wrap: nowrap;
-    background-color: acuoBlue;
+    background-color: #fff;
     padding: 10px 20px;
-    color: #fff;
-    display: flex;
+    margin-bottom: 60px;
+    color: #5c5b5c;
+    /*display: flex;*/
+    position: relative;
+    border-bottom: 1px solid #d9d9d9;
 }
 
 .flex1{
@@ -18,8 +21,9 @@
 
 .logoContainer{
     compose: flex1;
-    flex-grow: 1;
-
+    /*flex-grow: 1;*/
+    display: inline-block;
+    border: 1px dotted #4a4a4a;
 }
 
 .vertiCenter{
@@ -47,11 +51,36 @@
 .menuIcon {
     composes: menuItem;
     padding: 0px 1%;
+
+}
+
+.nav .menuIcon#navSetting{
+    float: right;
+    border: 1px dotted #4a4a4a;
+}
+
+.nav .menuIcon#navLogout{
+    float: right;
+    border: 1px dotted #4a4a4a;
 }
 
 .uploadPortfolio{
     flex-grow: 2;
     text-align: right;
+}
+
+.nav .pageTitle,
+.nav .menuItem,
+.nav .menuIcon{
+    display: inline-block;
+}
+
+.nav .uploadPortfolio{
+    position: absolute;
+    top: 90px;
+    right: 10px;
+    cursor: pointer;
+    z-index: 20;
 }
 
 /*.uploadDropdown{*/
@@ -70,28 +99,30 @@
 .uploadButtonVertiCenter{
     float: right;
     composes: vertiCenter;
-    width: 190px;
+    /*width: 190px;*/
     position: relative;
 }
 
 .dropdown{
     position: relative;
-    font-family: baseFontBold;
+    /*font-family: baseFontBold;*/
     text-transform: uppercase;
-    font-size: 10px;
-    background-color: #1b558b;
+    font-size: 1.4em;
+    letter-spacing: 0.12em;
+    /*background-color: #1b558b;*/
     display: flex;
 }
 
 .dropdown .text{
-    padding: 15px;
-    flex: 1;
+    padding: 10px 6px;
+    /*flex: 1;*/
     flex-grow: 6;
+    margin-right: 24px;
 }
 
 .dropdown .arrow{
     flex: 2;
-    border-left: 1px solid black;
+    /*border-left: 1px solid black;*/
     position: relative;
 }
 
