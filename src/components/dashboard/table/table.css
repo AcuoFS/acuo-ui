@@ -61,7 +61,11 @@
   float: left;
   composes: vertiCenter;
   width: 190px;
-  position: relative;
+  position: absolute;
+  top: 50%;
+  height: 50px;
+  margin-top: -25px;
+
 }
 .actions{
   position: relative;
@@ -139,6 +143,10 @@
   cursor: pointer;
 }
 
+
+.table >div{
+  position: relative;
+}
 .table >div:nth-child(1){
   width: 12%!important;
 }
