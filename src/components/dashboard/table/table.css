@@ -1,0 +1,202 @@
+@value acuoAction from './../../../css-components/colors.css';
+
+.table{
+  display:flex;
+  justify-content: space-between;
+  background-color: rgba(78,131,181,0.7);
+  padding: 10px 25px;
+  font-size: 15px;
+  color:#fff;
+  margin-bottom: 2px;
+}
+
+.vertiCenter{
+  display: table;
+  height: 100%;
+  text-align: center;
+}
+.tableItem{
+  width:15%;
+  /*padding: 0px 2%;*/
+}
+.derivItem{
+  width:12%
+}
+.cptyItem{
+  width:27.5%;
+}
+.innerItem{
+  width:17.5%
+}
+.marginItem{
+  width:25%
+}
+.marginRow{
+  width:23%
+}
+.listItem{
+  width:8%;
+}
+.outerItem{
+  flex-grow:1;
+}
+.vertiCenter{
+    display: table;
+    height: 100%;
+    text-align: center;
+}
+.centerThis{
+    display: table-cell;
+    vertical-align: middle;
+}
+.margin{
+  line-height: 25px;
+}
+.leftThis{
+  text-align: left;
+  position:relative;
+  font-family: baseFontBold
+}
+.actionVertiCenter{
+  float: left;
+  composes: vertiCenter;
+  width: 190px;
+  position: relative;
+}
+.actions{
+  position: relative;
+  text-transform: uppercase;
+  font-size: 12.5px;
+  background-color: #1b558b;
+  padding:8px;
+  display: flex;
+  cursor: pointer;
+}
+.actionItem{
+  width:18%;
+}
+.actionItem .text{
+  padding: 10px;
+  flex: 1;
+  flex-grow: 6;
+}
+.actionItem .arrow{
+  flex: 2;
+  border-left: 1px solid black;
+  position: relative;
+}
+.actionItem .arrow::before{
+  content: '';
+  border-top: 10px solid transparent;
+  border-left: 10px solid #fff;
+  border-bottom: 10px solid transparent;
+  position: absolute;
+  top: 18%;
+  right: 15%;
+}
+.actionItem .arrow::after{
+  content: '';
+  border-top: 10px solid transparent;
+  border-left: 10px solid #1b558b;
+  border-bottom: 10px solid transparent;
+  position: absolute;
+  top: 18%;
+  right: 24%;
+}
+.tableBody{
+  display:flex;
+  background-color: #D1D6DC;
+  padding:2px 25px;
+}
+.tableRow{
+  display:flex;
+  background-color:#fff;
+  padding:2px 25px;
+  border-bottom:1px solid #D1D6DC;
+}
+.bodyItem{
+  width:20%;
+  padding: 1% 0;
+}
+.divMid{
+  flex-grow:2;
+  display:flex;
+  flex-direction:row;
+}
+.sectionClose{
+  max-height: 0;
+  overflow: hidden;
+  transition: .2s ease-in;
+  opacity: 0;
+}
+.sectionOpen{
+  opacity: 1;
+  transition: 0.7s ease-out;
+  overflow:hidden;
+  max-height:1000px;
+}
+.toggleItem{
+  cursor: pointer;
+}
+
+.table >div:nth-child(1){
+  width: 12%!important;
+}
+.table >div:nth-child(2){
+  width: 15%!important;
+}
+.table >div:nth-child(3){
+  width: 8%!important;
+}
+.table >div:nth-child(4){
+  width: 8%!important;
+}
+.table >div:nth-child(5){
+  width: 15%!important;
+}
+.table >div:nth-child(6){
+  width: 18%!important;
+}
+.table >div:nth-child(7){
+
+}
+
+
+.tableBody >div:nth-child(1){
+  width: 15.8%!important;
+}
+.tableBody >div:nth-child(2){
+  width: 18.7%!important;
+}
+.tableBody >div:nth-child(3){
+  width: 11.7%!important;
+}
+.tableBody >div:nth-child(4){
+  width: 11.7%!important;
+}
+.tableBody >div:nth-child(5){
+  width: 18.7%!important;
+}
+.tableBody >div:nth-child(6){
+
+}
+
+
+.tableRow >div:nth-child(1){
+  width: 15.8%!important;
+}
+.tableRow >div:nth-child(2){
+  width: 18.7%!important;
+}
+.tableRow >div:nth-child(3){
+  width: 11.7%!important;
+}
+.tableRow >div:nth-child(4){
+  width: 11.7%!important;
+}
+.tableRow >div:nth-child(5){
+  width: 18.7%!important;
+}
+.tableRow >div:nth-child(6){
+
+}
