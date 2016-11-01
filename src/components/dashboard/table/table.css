@@ -132,17 +132,22 @@
 .tableBody{
   display:flex;
   background-color: #D1D6DC;
-  padding:2px 25px;
+  padding:10px 25px;
+}
+.tableBody .centerThis{
+  display: table-cell;
 }
 .tableRow{
   display:flex;
   background-color:#fff;
-  padding:2px 25px;
+  padding:10px 25px;
   border-bottom:1px solid #D1D6DC;
+}
+.tableRow .centerThis{
+  display: table-cell;
 }
 .bodyItem{
   width:20%;
-  padding: 1% 0;
 }
 .divMid{
   flex-grow:2;
