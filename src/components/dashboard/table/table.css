@@ -28,23 +28,25 @@
   width:15%;
   /*padding: 0px 2%;*/
 }
-.derivItem{
-  width:12%
+.table .derivItem{
+  width:12%;
+  font-weight: bold;
 }
 .cptyItem{
   width:27.5%;
 }
 .innerItem{
-  width:17.5%
+  width:17.5%;
 }
 .marginItem{
-  width:25%
+  width:25%;
 }
 .marginRow{
-  width:23%
+  width:23%;
 }
-.listItem{
+.table .listItem{
   width:8%;
+  font-weight: bold;
 }
 .outerItem{
   flex-grow:1;
@@ -55,7 +57,7 @@
     text-align: center;
 }
 .centerThis{
-    display: table-cell;
+    /*display: table-cell;*/
     vertical-align: middle;
 }
 .table .margin{
@@ -64,6 +66,9 @@
 .table .margin p{
   margin-top: 0.5em;
   margin-bottom: 0.5em;
+}
+.table .margin p.leftThis{
+  font-weight: bold;
 }
 .leftThis{
   text-align: left;
@@ -95,7 +100,9 @@
   width:18%;
 }
 .actionItem .text{
-  padding: 10px;
+  font-size: 1.1em;
+  line-height: 1em;
+  padding: 10px 4px;
   flex: 1;
   flex-grow: 6;
 }
