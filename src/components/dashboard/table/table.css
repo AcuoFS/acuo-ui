@@ -1,13 +1,22 @@
 @value acuoAction from './../../../css-components/colors.css';
 
+.tableWrapper{
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #c9c9c9;
+  margin-bottom: 4px;
+  -webkit-box-shadow: 2px 2px 10px 0 #c9c9c9;
+  box-shadow: 2px 2px 10px 0 #c9c9c9;
+}
+
 .table{
   display:flex;
   justify-content: space-between;
-  background-color: rgba(78,131,181,0.7);
+  background-color: #2b3c4c;
   padding: 10px 25px;
   font-size: 15px;
   color:#fff;
-  margin-bottom: 2px;
 }
 
 .vertiCenter{
@@ -49,8 +58,12 @@
     display: table-cell;
     vertical-align: middle;
 }
-.margin{
-  line-height: 25px;
+.table .margin{
+  line-height: 1em;
+}
+.table .margin p{
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 .leftThis{
   text-align: left;
@@ -71,10 +84,12 @@
   position: relative;
   text-transform: uppercase;
   font-size: 12.5px;
-  background-color: #1b558b;
+  background-color: #2393f5;
   padding:8px;
   display: flex;
   cursor: pointer;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
 }
 .actionItem{
   width:18%;
@@ -85,8 +100,8 @@
   flex-grow: 6;
 }
 .actionItem .arrow{
-  flex: 2;
-  border-left: 1px solid black;
+  flex: 1;
+  /*border-left: 1px solid black;*/
   position: relative;
 }
 .actionItem .arrow::before{
@@ -101,7 +116,7 @@
 .actionItem .arrow::after{
   content: '';
   border-top: 10px solid transparent;
-  border-left: 10px solid #1b558b;
+  border-left: 10px solid #2393f5;
   border-bottom: 10px solid transparent;
   position: absolute;
   top: 18%;
