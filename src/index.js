@@ -9,11 +9,10 @@ import {initState} from './action_creators'
 
 import styles from './global.css'
 
-import {GraphContainer} from './components/dashboard/graph/graph'
-import {TableContainer} from './components/dashboard/table/table-component'
 import Nav from './components/shared/navbar/navbar'
 import {FilterContainer} from './components/dashboard/filters/filter'
-import  {Reconcile} from './components/reconcile/reconcile'
+import Dashboard from './components/dashboard/dashboard'
+import Reconcile from './components/reconcile/reconcile'
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
@@ -34,8 +33,10 @@ class App extends React.Component{
                 <div className={styles.globalStyles}>
                     <Nav />
                     <FilterContainer  />
-                    <GraphContainer />
-                    <TableContainer />
+                    <Router history={browserHistory}>
+                        <Route path="/" component={Dashboard} />
+                        <Route path="recon" component={Reconcile} />
+                    </Router>
                 </div>
             </Provider>
         )
@@ -43,8 +44,5 @@ class App extends React.Component{
 }
 
 ReactDOM.render((
-    <Router history={browserHistory}>
-        <Route path="/" component={App}/>
-        <Route path="recon" component={Reconcile} />
-    </Router>
+    <App />
   ),document.getElementById('app'))

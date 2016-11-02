@@ -4,13 +4,20 @@
 import React from 'react'
 import { render } from 'react-dom'
 
+import styles from '../../global.css'
+import stylesRecon from './reconcile.css'
 
-export class Reconcile extends React.Component{
+
+class Reconcile extends React.Component{
 
 
   render(){
-    return(<div>
-    <h1>Welcome to Reconcile Page</h1>
-    </div>)
+    return(
+      <div className={styles.globalStyles}>
+        recon page
+      </div>
+    )
   }
 }
+
+export default Reconcile
