@@ -51,18 +51,18 @@ class Nav extends React.Component{
                     {/*</div>*/}
                 {/*</div>*/}
 
-                <div className={styles.menuIcon} id={styles.navSetting}>
-                    <div className={styles.vertiCenter}>
-                        <p className={styles.centerThis}>
-                            <img src={'./images/dashboard/navbar/settings.png'} alt=""/>
-                        </p>
-                    </div>
-                </div>
-
                 <div className={styles.menuIcon} id={styles.navLogout}>
                     <div className={styles.vertiCenter}>
                         <p className={styles.centerThis}>
                             <img src={'./images/dashboard/navbar/logout.png'} alt=""/>
+                        </p>
+                    </div>
+                </div>
+
+                <div className={styles.menuIcon} id={styles.navSetting}>
+                    <div className={styles.vertiCenter}>
+                        <p className={styles.centerThis}>
+                            <img src={'./images/dashboard/navbar/settings.png'} alt=""/>
                         </p>
                     </div>
                 </div>

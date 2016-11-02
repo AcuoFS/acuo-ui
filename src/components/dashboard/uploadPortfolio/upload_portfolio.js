@@ -35,7 +35,9 @@ class UploadPortfolio extends React.Component{
                         <form className={styles.centerThis} action="" onSubmit="">
                             <div className={styles.dropdown} onClick={this.clickedDropdown}>
                                 <div className={styles.text}>upload portfolio</div>
-                                <div className={styles.arrow}></div>
+                                <div className={styles.arrow}>
+                                    <img src={'./images/dashboard/upload_portfolio/arrow_up.png'} alt=""/>
+                                </div>
 
                                 <ul className={styles.dropdownList + ' ' + this.state.uploadDropdown}>
                                     <li>item1</li>

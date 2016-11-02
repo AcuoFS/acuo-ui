@@ -96,6 +96,7 @@ class Filter extends React.Component{
     render(){
         return(
         <div className={styles.filterContainer}>
+            <div className={styles.filterBarName}>Filter</div>
             <div className={styles.filterItem}>
                 <label className={styles.filterLabel}>Legal Entity</label>
                 <select className={styles.filters} id = "filter-legalEntity" onChange={this.handleLegalEntityChange}>
