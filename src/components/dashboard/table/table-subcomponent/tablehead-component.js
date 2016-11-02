@@ -33,7 +33,7 @@ class TableHead extends React.Component{
   }
   render() {
     return (
-      <div>
+      <div className={styles.tableWrapper}>
         <TableItem status={this.props.marginType}
                    clicked={this.handleClick}
                    toggle={this.state.class}
