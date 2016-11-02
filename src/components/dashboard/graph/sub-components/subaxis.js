@@ -7,7 +7,7 @@ export default class SubAxis extends React.Component {
     const texts = []
     const Time = []
 
-    const then = new Date("2016-10-23T06:00:00.000Z")
+    const then = new Date("2016-10-23T08:00:00.000Z")
 
     for(let i = -12; i <= 12; i++) {
       Time.push(new Date(Date.parse(then) + 3.6e+6 * i))
