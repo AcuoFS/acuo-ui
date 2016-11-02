@@ -7,24 +7,10 @@ class Nav extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            clicked: false,
-            uploadDropdown: styles.close
-        }
-        this.clickedDropdown = this.clickedDropdown.bind(this)
-    }
-    clickedDropdown(){
-        if(!this.state.clicked){
-            this.setState({
-                clicked: !this.state.clicked,
-                uploadDropdown: styles.open
-            })
-        }else{
-            this.setState({
-                clicked: !this.state.clicked,
-                uploadDropdown: styles.close
-            })
+
         }
     }
+
     render(){
         return (
             <nav className={styles.nav}>
@@ -65,23 +51,6 @@ class Nav extends React.Component{
                     {/*</div>*/}
                 {/*</div>*/}
 
-                <div className={styles.uploadPortfolio}>
-                    <div className={styles.uploadButtonVertiCenter}>
-                        <form className={styles.centerThis} action="" onSubmit="">
-                            <div className={styles.dropdown} onClick={this.clickedDropdown}>
-                                <div className={styles.text}>upload portfolio</div>
-                                <div className={styles.arrow}></div>
-
-                                <ul className={styles.dropdownList + ' ' + this.state.uploadDropdown}>
-                                    <li>item1</li>
-                                    <li>item1</li>
-                                    <li>item1</li>
-                                </ul>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
                 <div className={styles.menuIcon} id={styles.navSetting}>
                     <div className={styles.vertiCenter}>
                         <p className={styles.centerThis}>
@@ -99,6 +68,8 @@ class Nav extends React.Component{
                 </div>
 
             </nav>
+
+
         )
     }
 }

@@ -1,0 +1,106 @@
+@value acuoBlue from './../../../css-components/colors.css';
+
+
+.titleBar{
+    display: block;
+    position: relative;
+    width: 100%;
+    min-height: 50px;
+    z-index: 20;
+}
+
+.titleBar .uploadPortfolio{
+    flex-grow: 2;
+    text-align: right;
+    float: right;
+    right: 10px;
+    cursor: pointer;
+}
+
+.vertiCenter{
+    display: table;
+    height: 100%;
+    text-align: center;
+}
+
+.centerThis{
+    /*display: table-cell;*/
+    vertical-align: middle;
+}
+
+.uploadButtonVertiCenter{
+    composes: vertiCenter;
+    position: relative;
+}
+
+.dropdown{
+    position: relative;
+    text-transform: uppercase;
+    font-size: 1.4em;
+    letter-spacing: 0.12em;
+    display: flex;
+}
+
+.dropdown .text{
+    padding: 10px 6px;
+    flex-grow: 6;
+    margin-right: 24px;
+}
+
+.dropdown .arrow{
+    flex: 2;
+    position: relative;
+}
+
+.dropdown .arrow::before{
+    content: '';
+    border-top: 10px solid #fff;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    position: absolute;
+    top: 38%;
+    right: 24%;
+}
+
+.dropdown .arrow::after{
+    content: '';
+    border-top: 10px solid #1b558b;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    position: absolute;
+    top: 30%;
+    right: 24%;
+}
+
+.dropdownList{
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    background-color: #fff;
+    -webkit-box-shadow: 5px 5px 14px -2px rgba(166,166,166,1);
+    -moz-box-shadow: 5px 5px 14px -2px rgba(166,166,166,1);
+    box-shadow: 5px 5px 14px -2px rgba(166,166,166,1);
+
+}
+
+.dropdownList li{
+    padding: 15px;
+    font-size: 12px;
+    color: #000;
+}
+
+.dropdownList li:hover{
+    background-color: #e6e6e6;
+}
+
+
+.close{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.open {
+    opacity: 1;
+    pointer-events: click;
+}
