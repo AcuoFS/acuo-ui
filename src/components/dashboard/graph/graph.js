@@ -7,35 +7,19 @@ import Pointer from './sub-components/pointer'
 
 class Graph extends React.Component {
   static get defaultProps() {
-    const now = new Date()
+    const now = new Date("2016-10-23T06:00:00.000Z")
     const time = [now.getHours(), (now.getMinutes() <10 ? '0' : ' ')  + now.getMinutes()]
     const currentTime = time.join(":")
 
     return {
       width: 1440,
       height: 500,
+      now: now,
       time: currentTime
     }
   }
   constructor(props){
     super(props)
-    this.getDeriv = this.getDeriv.bind(this)
-  }
-  getCircle(){
-      this.getDeriv().map((x) => {
-        x.get('marginStatus').map((x) => {
-          x.get('timeFrames').map((x) => {
-            let timeStart = x.get('timeRangeStart')
-            let amount = x.get('amount')
-
-            return timeStart, amount
-          })
-        })
-      })
-  }
-  getDeriv(){
-    console.log(this.props.derivatives)
-    return this.props.derivatives || []
   }
   render() {
     return (
@@ -72,7 +56,10 @@ class Graph extends React.Component {
           length={this.props.width }
           />
         <GraphBody
-          data={this.props.data}
+          x={this.props.width * 0.5}
+          y={this.props.height * 0.5}
+          time={this.props.now}
+          data={this.props.derivatives}
           />
       </svg>
     )
@@ -81,6 +68,7 @@ class Graph extends React.Component {
 
 function mapStateToProps(state){
     return{
+        currentTime : state.getIn(['display', 'timeUpdated']),
         derivatives : state.getIn(['display', 'derivatives'])
     }
 }

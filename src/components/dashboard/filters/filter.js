@@ -61,14 +61,14 @@ class Filter extends React.Component{
                 </select>
                 <div className={styles.filterDropdownArrow}></div>
             </div>
-            <div className={styles.filterItem}>
-                <label className={styles.filterLabel}>Deriv Type</label>
-                <select className={styles.filters} id = "filter-derivtype" onChange={this.handleDerivChange}>
-                    <option value="All">ALL</option>
-                    {this.getDeriv().map(this.renderFilter)}
-                </select>
-                <div className={styles.filterDropdownArrow}></div>
-            </div>
+            {/*<div className={styles.filterItem}>*/}
+                {/*<label className={styles.filterLabel}>Deriv Type</label>*/}
+                {/*<select className={styles.filters} id = "filter-derivtype" onChange={this.handleDerivChange}>*/}
+                    {/*<option value="All">ALL</option>*/}
+                    {/*{this.getDeriv().map(this.renderFilter)}*/}
+                {/*</select>*/}
+                {/*<div className={styles.filterDropdownArrow}></div>*/}
+            {/*</div>*/}
         </div>
         )
 
