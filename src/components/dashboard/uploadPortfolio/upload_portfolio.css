@@ -2,10 +2,12 @@
 
 
 .titleBar{
+    box-sizing: border-box;
     display: block;
     position: relative;
     width: 100%;
     min-height: 50px;
+    padding: 10px 20px;
     z-index: 20;
 }
 
