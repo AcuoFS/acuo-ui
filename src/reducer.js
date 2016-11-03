@@ -36,7 +36,6 @@ function applyStatusFilter(derivatives, status) {
 
 function applyVenueFilter(derivatives, venue) {
     return derivatives.reduce((listVenue, deriv) => {
-        console.log(deriv.get('marginStatus'))
         let venueList = deriv.get('marginStatus').reduce((listVenue, marginStatus) => {
             let venueList = marginStatus.get('timeFrames').reduce((listVenue, timeFrames) => {
                 let venueList = timeFrames.get('actionsList').filter((actionsList) => {
@@ -52,7 +51,6 @@ function applyVenueFilter(derivatives, venue) {
 }
 
 function applyCPTYFilter(derivatives, cpty) {
-  console.log("update status", cpty)
   return derivatives.reduce((listCPTY, deriv)=>{
     let cptyList = deriv.get('marginStatus').reduce((listCPTY, marginStatus)=>{
       let cptyList = marginStatus.get('timeFrames').reduce((listCPTY, timeFrames)=>{
@@ -84,7 +82,6 @@ export function updateStateLegal(state,legalEntityType){
 }
 
 export function updateStateStatus(state,statusType) {
-  console.log('status :', statusType)
   if (statusType == "All") {
     return state.set('display', state.get('data'))
   } else
@@ -93,7 +90,6 @@ export function updateStateStatus(state,statusType) {
 }
 
 export function updateStateVenue(state, venue){
-    console.log('venue :', venue)
     if(venue=="All"){
         return state.set('display', state.get('data'))
     }else
@@ -103,7 +99,6 @@ export function updateStateVenue(state, venue){
 }
 
 export function updateStateCPTY(state, cpty) {
-    console.log('CPTY is :',cpty)
     if(cpty=="All"){
       return state.set('display',state.get('data'))
     }else
@@ -112,7 +107,6 @@ export function updateStateCPTY(state, cpty) {
 }
 
 export default function reducer(state = Map(), action) {
-
     switch(action.type){
         case 'INIT_STATE':
             return initState(state, action.state)

@@ -29,9 +29,6 @@ class App extends React.Component{
         return (
             <Provider store={store}>
                 <div className={styles.globalStyles}>
-                    <Nav />
-                    <UploadPortfolio />
-                    <FilterContainer  />
                     <Router history={browserHistory}>
                         <Route path="/" component={Dashboard} />
                         <Route path="recon" component={Reconcile} />
