@@ -7,7 +7,6 @@ export default class GraphBody extends React.Component {
     this.getDeriv = this.getDeriv.bind(this)
   }
   getCircle(){
-    let circles = []
     let status = this.getDeriv().reduce((setX, x) => {
       return setX.union(x.get('marginStatus').map(y => y.get('status')))
     }, Set()).toList()
@@ -18,151 +17,83 @@ export default class GraphBody extends React.Component {
       }, Set()))
     }, Set()).toList()
 
-    let graphXY = status.map(x => Map({"status": x, "timeFrames": possibleTimes.map(y => Map({"timeFrame": y, "actionsList": []})), "colour": "yellow"}))
 
-    let plot = graphXY.map(X => {
-      return List(Map({"status": X.get('status'), "timeFrames":
+    let graphXY = status.map(x => Map({"status": x, "timeFrames": possibleTimes.map(y => Map({"timeFrame": y, "actionsLists": []}))}))
+
+    return graphXY.map(X => {
+      return Map({"status": X.get('status'), "timeFrames":
         X.get('timeFrames').map(Y => {
-          return List(Map({"timeFrame": Y.get('timeFrame'), "actionsList": this.getDeriv().reduce((setX, x) => {
-            return setX.union(x.get('marginStatus').reduce((setY, y) => {
-              // console.log("y", y)
-              // console.log("X", X)
+          return Map({"timeFrame": Y.get('timeFrame'), "actionsList": this.getDeriv().reduce((setX, x) => {
+            return setX.concat(x.get('marginStatus').reduce((setY, y) => {
               if(y.get('status') == X.get('status')){
-                console.log(y.get('status'))
-                return y.get('timeFrames').filter((z) => {
-                  if(z.get('timeRangeStart') == Y.get('timeFrame')){
-                    let total
-                    let timeDifference = ((Date.parse(this.props.time) - Date.parse(z.get('timeRangeStart')))/3600000)
-                    total = z.get('actionsList').reduce((sum, marginList) => {
-                      // console.log(sum + marginList.get('initialMargin'))
-                      return sum + marginList.get('initialMargin')
-                    }, 0)
-                    switch(y.get('status')){
-                      case 'expected':
-                      circles.push(<circle cx={this.props.x + timeDifference * 57.5} cy={75} r={total/10000} fill="#FFCD2D"></circle>)
-                      break
-                      case 'unrecon':
-                      circles.push(<circle cx={this.props.x + timeDifference * 57.5} cy={105} r={total/10000} fill="#FF7D26"></circle>)
-                      break
-                      case 'recon':
-                      circles.push(<circle cx={this.props.x + timeDifference * 57.5} cy={135} r={total/10000} fill="#26DA6E"></circle>)
-                      break
-                      case 'pledge':
-                      circles.push(<circle cx={this.props.x + timeDifference * 57.5} cy={165} r={total/10000} fill="#58B6FF"></circle>)
-                      break
-                      case 'dispute':
-                      circles.push(<circle cx={this.props.x + timeDifference * 57.5} cy={195} r={total/10000} fill="#FF1E25"></circle>)
-                    }
-                    return
-                  } else {
-                    return " "
-                  }
+                return y.get('timeFrames').filter(z => {
+                  // console.log(z.toJS())
+                  return z.get('timeRangeStart') == Y.get('timeFrame')
                 })
               }else
                 return setY
-              }, Set()))
-            }, Set()).toList()
-          }))
+            }, List()))
+          }, List())
         })
+        })
+      })
+    }).map(x => {
+      return x.set('timeFrames', x.get('timeFrames').map(y => {
+        //console.log(y.toJS())
+        return Map({'timeFrame': y.get('timeFrame'), "inAmount": y.get('actionsList').reduce((a, z) => {
+          return a + z.get('actionsList').reduce((a2, xx) => {
+            // console.log(xx.toJS())
+            return (xx.get('direction') == 'IN' ? a2 + xx.get('initialMargin') : a2)
+          }, 0)
+        }, 0)
+      , "outAmount": y.get('actionsList').reduce((a, z) => {
+        return a + z.get('actionsList').reduce((a2, xx) => {
+          // console.log(xx.toJS())
+          return (xx.get('direction') == 'OUT' ? a2 + xx.get('initialMargin') : a2)
+        }, 0)
+      }, 0)})
       }))
-    })
-    // return plot
-    console.log(circles)
+    }).map((status) => {
+      // console.log(status.toJS())
+      return status.get('timeFrames').map(timeFrame => {
 
-    return circles.map(x => {
-      return x
-    })
-    // console.log(plot)
+        let colour = this.getColour(status.get('status'))
+        let timeDifference = (Date.parse(new Date(timeFrame.get('timeFrame'))) - (Date.parse(this.props.time)))/3600000
 
-    // return <circle cx={this.props.x} cy={75} r={10} fill="#FFCD2D" />
+        return List().push(<circle key={status.get('status') + timeFrame.get('timeFrame') + 'in'} cx={this.props.x + (timeDifference + 0.5) * 60 } cy={colour[1]} r={(timeFrame.get('inAmount') === 0)? 0 :(Math.log(timeFrame.get('inAmount'))) } fill={colour[0]}></circle>).push(<circle key={status.get('status') + timeFrame.get('timeFrame') + 'out'} cx={this.props.x + (timeDifference + 0.5) * 60} cy={colour[2]} r={(timeFrame.get('outAmount') === 0)? 0 :(Math.log(timeFrame.get('outAmount'))) } fill={colour[0]}></circle>)
+      })
+    }).reduce((set, x) => {
+      return set.concat(x.reduce((setY, y) => {
+        return setY.concat(y.reduce((listZ, z) => {
+          return listZ.push(z)
+        }, List()))
+      }, List()))
+    }, List())
+
+  }
+
+  getColour(status){
+    switch(status){
+      case 'expected':
+        return ['#FFCD2D', 42, 418]
+      case 'unrecon':
+        return ["#FF7D26", 82, 378]
+      case 'recon':
+        return ["#26DA6E", 122, 338]
+      case 'pledge':
+        return ["#58B6FF", 162, 298]
+      case 'dispute':
+        return ["#FF1E25", 202, 258]
+    }
   }
   getDeriv(){
     return this.props.data || []
   }
   render() {
-    // console.log(this.getCircle())
     return(
       <svg>
-        {this.getCircle()}
+        {this.getCircle().map(x => x)}
       </svg>
     )
   }
 }
-
-
-// if(y.get('status') == 'expected'){
-//   return y.get('timeFrames').filter((z) => {
-//     if(z.get('timeRangeStart') == Y.get('timeFrame')){
-//       let total
-//       let timeDifference = ((Date.parse(this.props.time) - Date.parse(z.get('timeRangeStart')))/3600000)
-//       total = z.get('actionsList').reduce((sum, marginList) => {
-//         // console.log(sum + marginList.get('initialMargin'))
-//         return sum + marginList.get('initialMargin')
-//       }, 0)
-//       circles.push(<circle cx={this.props.x + timeDifference * 57.5} cy={75} r={total/10000} fill="#FFCD2D"></circle>)
-//       return
-//     }
-//   })
-// }
-// else if(y.get('status') == 'unrecon'){
-//   return y.get('timeFrames').filter((z) => {
-//     if(z.get('timeRangeStart') == Y.get('timeFrame')){
-//       let total
-//       let timeDifference = ((Date.parse(this.props.time) - Date.parse(z.get('timeRangeStart')))/3600000)
-//       total = z.get('actionsList').reduce((sum, marginList) => {
-//         // console.log(sum + marginList.get('initialMargin'))
-//         return sum + marginList.get('initialMargin')
-//       }, 0)
-//       circles.push(<circle cx={this.props.x + timeDifference * 57.5} cy={105} r={total/10000} fill="#FF7D26"></circle>)
-//       return
-//     }
-//   })
-// }
-// else if(y.get('status') == 'recon'){
-//   return y.get('timeFrames').filter((z) => {
-//     if(z.get('timeRangeStart') == Y.get('timeFrame')){
-//       let total
-//       let timeDifference = ((Date.parse(this.props.time) - Date.parse(z.get('timeRangeStart')))/3600000)
-//       total = z.get('actionsList').reduce((sum, marginList) => {
-//         // console.log(sum + marginList.get('initialMargin'))
-//         return sum + marginList.get('initialMargin')
-//       }, 0)
-//       circles.push(<circle cx={this.props.x + timeDifference * 57.5} cy={135} r={total/10000} fill="#26DA6E"></circle>)
-//       return
-//     }
-//   })
-// }
-// else if(y.get('status') == 'pledge'){
-//   return y.get('timeFrames').filter((z) => {
-//     if(z.get('timeRangeStart') == Y.get('timeFrame')){
-//       let total
-//       let timeDifference = ((Date.parse(this.props.time) - Date.parse(z.get('timeRangeStart')))/3600000)
-//       total = z.get('actionsList').reduce((sum, marginList) => {
-//         // console.log(sum + marginList.get('initialMargin'))
-//         return sum + marginList.get('initialMargin')
-//       }, 0)
-//       circles.push(<circle cx={this.props.x + timeDifference * 57.5} cy={165} r={total/10000} fill="#58B6FF"></circle>)
-//       return
-//     }
-//   })
-// }
-// else{
-//   return y.get('timeFrames').filter((z) => {
-//     if(z.get('timeRangeStart') == Y.get('timeFrame')){
-//       let total
-//       let timeDifference = ((Date.parse(this.props.time) - Date.parse(z.get('timeRangeStart')))/3600000)
-//       total = z.get('actionsList').reduce((sum, marginList) => {
-//         // console.log(sum + marginList.get('initialMargin'))
-//         return sum + marginList.get('initialMargin')
-//       }, 0)
-//       circles.push(<circle cx={this.props.x + timeDifference * 57.5} cy={195} r={total/10000} fill="#FF1E25"></circle>)
-//       return
-//     }
-//   })
-// }
-
-// <circle cx={this.props.x} cy={this.props.y} r="20" fill="#FFCD2D" transform='translate( 0)' />
-// <circle cx={this.props.x} cy={this.props.y} r="20" fill="#FF7D26" transform='translate(25 45)'/>
-// <circle cx={this.props.x} cy={this.props.y} r="20" fill="#26DA6E" transform='translate(25 90)'/>
-// <circle cx={this.props.x} cy={this.props.y} r="20" fill="#58B6FF" transform='translate(25 135)'/>
-// <circle cx={this.props.x} cy={this.props.y} r="20" fill="#FF1E25" transform='translate(25 180)'/>

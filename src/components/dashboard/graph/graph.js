@@ -13,7 +13,7 @@ class Graph extends React.Component {
 
     return {
       width: 1440,
-      height: 500,
+      height: 460,
       now: now,
       time: currentTime
     }
@@ -23,7 +23,7 @@ class Graph extends React.Component {
   }
   render() {
     return (
-      <svg viewBox="0 0 1440 500" preserveAspectRatio="xMaxYMax meet">
+      <svg viewBox="0 0 1440 460" preserveAspectRatio="xMaxYMax meet">
         <Axis
           x={0}
           y={this.props.height * 0.5}
@@ -33,20 +33,20 @@ class Graph extends React.Component {
           />
         <Axis
           x={this.props.width * 0.5}
-          y={30}
-          length={this.props.height - 60}
+          y={0}
+          length={this.props.height}
           horizontal={false}
           stroke="#F91233"
           />
         <Pointer
           xrec={this.props.width * 0.5 -50} //670
-          yrec={30}
+          yrec={0}
           recwidth={(this.props.width-240) / 12} //100
           recheight={20}
-          xtext={this.props.width * 0.5 - 20} //680
-          ytext={45}
-          triangle1={"710,50 730,50 720,60"}
-          triangle2={"720,470 710,480 730,480"}
+          xtext={this.props.width * 0.5 - 17.5} //680
+          ytext={15}
+          triangle1={"710,20 730,20 720,30"}
+          triangle2={"720,450 710,460 730,460"}
           color="#F91233"
           text= {this.props.time}
           />
