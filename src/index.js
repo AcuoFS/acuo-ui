@@ -9,9 +9,6 @@ import {initState} from './action_creators'
 
 import styles from './global.css'
 
-import Nav from './components/shared/navbar/navbar'
-import UploadPortfolio from './components/dashboard/uploadPortfolio/upload_portfolio'
-import {FilterContainer} from './components/dashboard/filters/filter'
 import Dashboard from './components/dashboard/dashboard'
 import Reconcile from './components/reconcile/reconcile'
 
@@ -32,9 +29,6 @@ class App extends React.Component{
         return (
             <Provider store={store}>
                 <div className={styles.globalStyles}>
-                    <Nav />
-                    <UploadPortfolio />
-                    <FilterContainer  />
                     <Router history={browserHistory}>
                         <Route path="/" component={Dashboard} />
                         <Route path="recon" component={Reconcile} />

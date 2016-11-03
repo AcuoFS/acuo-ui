@@ -3,10 +3,10 @@
  */
 import React from 'react'
 import { render } from 'react-dom'
-
+import {FilterContainer} from '../shared/filters/filter'
 import styles from '../../global.css'
 import stylesRecon from './reconcile.css'
-
+import Nav from '../../components/shared/navbar/navbar'
 
 class Reconcile extends React.Component{
 
@@ -14,7 +14,8 @@ class Reconcile extends React.Component{
   render(){
     return(
       <div className={styles.globalStyles}>
-        recon page
+        <Nav/>
+        <FilterContainer/>
       </div>
     )
   }

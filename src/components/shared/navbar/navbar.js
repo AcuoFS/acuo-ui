@@ -2,6 +2,8 @@ import React from 'react'
 
 import styles from './navbar.css'
 import NavItem from './sub-components/navbar-item'
+import { Link } from 'react-router'
+import Dashboard from '../../dashboard/dashboard'
 
 class Nav extends React.Component{
     constructor(props){
@@ -24,11 +26,14 @@ class Nav extends React.Component{
 
                 <div className={styles.pageTitle}>
                     <div className={styles.vertiCenter}>
-                        <p className={styles.centerThis}>Dashboard</p>
+                        <p className={styles.centerThis}>
+                          <Link to="/">Dashboard</Link></p>
                     </div>
                 </div>
 
-                <NavItem label='Reconcile' />
+              <Link to="recon">
+                <NavItem label='Reconcile'/>
+              </Link>
 
                 <NavItem label='Disputes' />
 
