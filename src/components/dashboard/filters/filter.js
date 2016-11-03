@@ -12,12 +12,18 @@ import styles from './filter.css'
 class Filter extends React.Component{
     constructor(props){
         super(props)
+        this.state = {
+            filterBarNameClicked: true,
+            filterBar: styles.open,
+            filterItems: styles.show
+        }
         this.getDeriv = this.getDeriv.bind(this)
         this.handleLegalEntityChange = this.handleLegalEntityChange.bind(this)
         this.handleDerivChange = this.handleDerivChange.bind(this)
         this.handleStatusChange = this.handleStatusChange.bind(this)
         this.handleVenueChange = this.handleVenueChange.bind(this)
         this.handleCPTYChange = this.handleCPTYChange.bind(this)
+        this.clickedDropdown = this.clickedDropdown.bind(this)
     }
     getDeriv(){
         return this.props.derivatives || []
@@ -92,54 +98,78 @@ class Filter extends React.Component{
       })
     }
 
+    clickedDropdown(){
+        if(!this.state.filterBarNameClicked){
+            this.setState({
+                filterBarNameClicked: !this.state.filterBarNameClicked,
+                filterBar: styles.open,
+                filterItems: styles.show
+            })
+        }else{
+            this.setState({
+                filterBarNameClicked: !this.state.filterBarNameClicked,
+                filterBar: styles.close,
+                filterItems: styles.hide
+            })
+        }
+    }
+
 
     render(){
         return(
         <div className={styles.filterContainer}>
-            <div className={styles.filterBarName}>Filter</div>
-            <div className={styles.filterItem}>
-                <label className={styles.filterLabel}>Legal Entity</label>
-                <select className={styles.filters} id = "filter-legalEntity" onChange={this.handleLegalEntityChange}>
-                    <option value="All">ALL</option>
-                    {this.renderLegalEntity()}
-                </select>
-                <div className={styles.filterDropdownArrow}></div>
+            <div className={styles.filterBarName + ' ' + this.state.filterBar} onClick={this.clickedDropdown}>
+                <span>Filter</span>
+                <div className={styles.switchArrow}>
+                    <div className={styles.arrowLine} id={styles.line1}></div>
+                    <div className={styles.arrowLine} id={styles.line2}></div>
+                </div>
             </div>
+            <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
+                <div className={styles.filterItem}>
+                    <label className={styles.filterLabel}>Legal Entity</label>
+                    <select className={styles.filters} id = "filter-legalEntity" onChange={this.handleLegalEntityChange}>
+                        <option value="All">ALL</option>
+                        {this.renderLegalEntity()}
+                    </select>
+                    <div className={styles.filterDropdownArrow}></div>
+                </div>
 
-            <div className={styles.filterItem}>
-                <label className={styles.filterLabel}>Deriv Type</label>
-                <select className={styles.filters} id = "filter-derivtype" onChange={this.handleDerivChange}>
-                    <option value="All">ALL</option>
-                    {this.getDeriv().map(this.renderFilter)}
-                </select>
-                <div className={styles.filterDropdownArrow}></div>
-            </div>
+                <div className={styles.filterItem}>
+                    <label className={styles.filterLabel}>Deriv Type</label>
+                    <select className={styles.filters} id = "filter-derivtype" onChange={this.handleDerivChange}>
+                        <option value="All">ALL</option>
+                        {this.getDeriv().map(this.renderFilter)}
+                    </select>
+                    <div className={styles.filterDropdownArrow}></div>
+                </div>
 
-            <div className={styles.filterItem}>
-                <label className={styles.filterLabel}>Status</label>
-                <select className={styles.filters} id = "filter-status" onChange={this.handleStatusChange}>
-                    <option value="All">ALL</option>
-                    {this.renderStatus()}
-                </select>
-                <div className={styles.filterDropdownArrow}></div>
-            </div>
+                <div className={styles.filterItem}>
+                    <label className={styles.filterLabel}>Status</label>
+                    <select className={styles.filters} id = "filter-status" onChange={this.handleStatusChange}>
+                        <option value="All">ALL</option>
+                        {this.renderStatus()}
+                    </select>
+                    <div className={styles.filterDropdownArrow}></div>
+                </div>
 
-            <div className={styles.filterItem}>
-                <label className={styles.filterLabel}>Venue</label>
-                <select className={styles.filters} id = "filter-venue" onChange={this.handleVenueChange}>
-                    <option value="All">ALL</option>
-                    {this.renderVenue()}
-                </select>
-                <div className={styles.filterDropdownArrow}></div>
-            </div>
+                <div className={styles.filterItem}>
+                    <label className={styles.filterLabel}>Venue</label>
+                    <select className={styles.filters} id = "filter-venue" onChange={this.handleVenueChange}>
+                        <option value="All">ALL</option>
+                        {this.renderVenue()}
+                    </select>
+                    <div className={styles.filterDropdownArrow}></div>
+                </div>
 
-            <div className={styles.filterItem}>
-                <label className={styles.filterLabel}>CPTY</label>
-                <select className={styles.filters} id = "filter-cpty" onChange={this.handleCPTYChange}>
-                    <option value="All">ALL</option>
-                  {this.renderCPTY()}
-                </select>
-                <div className={styles.filterDropdownArrow}></div>
+                <div className={styles.filterItem}>
+                    <label className={styles.filterLabel}>CPTY</label>
+                    <select className={styles.filters} id = "filter-cpty" onChange={this.handleCPTYChange}>
+                        <option value="All">ALL</option>
+                      {this.renderCPTY()}
+                    </select>
+                    <div className={styles.filterDropdownArrow}></div>
+                </div>
             </div>
         </div>
         )

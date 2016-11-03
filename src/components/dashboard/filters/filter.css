@@ -16,6 +16,80 @@
     margin-bottom: 10px;
     font-size: 1.4em;
     color: acuoGrey;
+    cursor: pointer;
+}
+
+.filterContainer .filterBarName span{
+    display: inline-block;
+    position: relative;
+    margin-right: 6px;
+}
+.filterContainer .filterBarName .switchArrow{
+    display: inline-block;
+    position: relative;
+    width: 16px;
+    height: 12px;
+    top: 0px;
+    /*-webkit-transition: all 0.5s ease;*/
+    /*-moz-transition: all 0.5s ease;*/
+    /*-ms-transition: all 0.5s ease;*/
+    /*-o-transition: all 0.5s ease;*/
+    /*transition: all 0.5s ease;*/
+}
+.filterContainer .filterBarName.open .switchArrow{
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    top: 0px;
+}
+.filterContainer .filterBarName.close .switchArrow{
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    top: -2px;
+}
+
+.filterContainer .filterBarName .switchArrow .arrowLine#line1,
+.filterContainer .filterBarName .switchArrow .arrowLine#line2{
+    display: inline-block;
+    position: absolute;
+    width:10px;
+    height: 2px;
+    background-color: acuoGrey;
+    top:4px;
+}
+.filterContainer .filterBarName .switchArrow .arrowLine#line1{
+    -moz-transform: rotate(-40deg);
+    -webkit-transform: rotate(-40deg);
+    -o-transform: rotate(-40deg);
+    -ms-transform: rotate(-40deg);
+    transform: rotate(-40deg);
+
+}
+.filterContainer .filterBarName .switchArrow .arrowLine#line2{
+    -moz-transform: rotate(40deg);
+    -webkit-transform: rotate(40deg);
+    -o-transform: rotate(40deg);
+    -ms-transform: rotate(40deg);
+    transform: rotate(40deg);
+    left: 6px;
+}
+
+.filterContainer .filterItemWrap{
+    height: auto;
+    overflow: hidden;
+}
+
+.filterContainer .filterItemWrap.show{
+    height: auto;
+}
+
+.filterContainer .filterItemWrap.hide{
+    height: 0px;
 }
 
 .filterContainer .filterItem{
