@@ -36,6 +36,103 @@ describe('reducer', () => {
     }))
   })
 
+  it('handles filter by derivative type', () => {
+    const initialState = fromJS(
+      {
+        "display": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected"
+                }
+              ]
+            },
+            {
+              "type": "OTC_bilateral",
+              "marginStatus": [
+                {
+                  "status": "expected"
+                }
+              ]
+            }
+          ]
+        },
+        "data": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected"
+                }
+              ]
+            },
+            {
+              "type": "OTC_bilateral",
+              "marginStatus": [
+                {
+                  "status": "expected"
+                }
+              ]
+            }
+          ]
+        }
+
+      }
+    )
+
+    const action = {
+      type: 'FILTER_STATE_DERIV',
+      filter: 'ETD'
+    }
+
+    const nextState = reducer(initialState, action)
+
+    expect(nextState).to.equal(fromJS(
+      {
+        "display": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected"
+                }
+              ]
+            }
+          ]
+        },
+        "data": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected"
+                }
+              ]
+            },
+            {
+              "type": "OTC_bilateral",
+              "marginStatus": [
+                {
+                  "status": "expected"
+                }
+              ]
+            }
+          ]
+        },
+        "inputs": {
+          "filters" :{
+            "typeFilter": "ETD"
+          }
+        }
+      }
+    ))
+  })
+
   it('handles filter legal entity', () => {
     const initialState = fromJS(
       {
@@ -148,6 +245,510 @@ describe('reducer', () => {
         "inputs": {
           "filters" :{
             "legalEntityFilter": "Acuo SG"
+          }
+        }
+      }
+    ))
+  })
+
+  it('handles filter status', () => {
+    const initialState = fromJS(
+      {
+        "display": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "legalEntity": "Acuo SG"
+                        },
+                        {
+                          "legalEntity": "Acuo ID"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "status": "pledge",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "legalEntity": "Acuo SG"
+                        },
+                        {
+                          "legalEntity": "Acuo ID"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "data": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "legalEntity": "Acuo SG"
+                        },
+                        {
+                          "legalEntity": "Acuo ID"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "status": "pledge",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "legalEntity": "Acuo SG"
+                        },
+                        {
+                          "legalEntity": "Acuo ID"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+
+      }
+    )
+
+    const action = {
+      type: 'FILTER_STATE_STATUS',
+      filter: 'expected'
+    }
+
+    const nextState = reducer(initialState, action)
+
+    expect(nextState).to.equal(fromJS(
+      {
+        "display": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "legalEntity": "Acuo SG"
+                        },
+                        {
+                          "legalEntity": "Acuo ID"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "data": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "legalEntity": "Acuo SG"
+                        },
+                        {
+                          "legalEntity": "Acuo ID"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "status": "pledge",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "legalEntity": "Acuo SG"
+                        },
+                        {
+                          "legalEntity": "Acuo ID"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "inputs": {
+          "filters" :{
+            "statusFilter": "expected"
+          }
+        }
+      }
+    ))
+  })
+
+  it('handles filter CPTY', () => {
+    const initialState = fromJS(
+      {
+        "display": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "cpty": "ABC bank"
+                        },
+                        {
+                          "cpty": "CDE bank"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "status": "pledge",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "cpty": "ABC bank"
+                        },
+                        {
+                          "cpty": "CDE bank"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "data": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "cpty": "ABC bank"
+                        },
+                        {
+                          "cpty": "CDE bank"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "status": "pledge",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "cpty": "ABC bank"
+                        },
+                        {
+                          "cpty": "CDE bank"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+
+      }
+    )
+
+    const action = {
+      type: 'FILTER_STATE_CPTY',
+      filter: 'ABC bank'
+    }
+
+    const nextState = reducer(initialState, action)
+
+    expect(nextState).to.equal(fromJS(
+      {
+        "display": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "cpty": "ABC bank"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "status": "pledge",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "cpty": "ABC bank"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "data": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "cpty": "ABC bank"
+                        },
+                        {
+                          "cpty": "CDE bank"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "status": "pledge",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "cpty": "ABC bank"
+                        },
+                        {
+                          "cpty": "CDE bank"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "inputs": {
+          "filters" :{
+            "cptyFilter": "ABC bank"
+          }
+        }
+      }
+    ))
+  })
+
+  it('handles filter venue', () => {
+    const initialState = fromJS(
+      {
+        "display": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "venue": "Thailand"
+                        },
+                        {
+                          "venue": "Singapore"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "status": "pledge",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "venue": "Singapore"
+                        },
+                        {
+                          "venue": "Singapore"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "data": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "venue": "Thailand"
+                        },
+                        {
+                          "venue": "Singapore"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "status": "pledge",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "venue": "Singapore"
+                        },
+                        {
+                          "venue": "Singapore"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+
+      }
+    )
+
+    const action = {
+      type: 'FILTER_STATE_VENUE',
+      filter: 'Thailand'
+    }
+
+    const nextState = reducer(initialState, action)
+
+    expect(nextState).to.equal(fromJS(
+      {
+        "display": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "venue": "Thailand"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "data": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "venue": "Thailand"
+                        },
+                        {
+                          "venue": "Singapore"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "status": "pledge",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "venue": "Singapore"
+                        },
+                        {
+                          "venue": "Singapore"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "inputs": {
+          "filters" :{
+            "venueFilter": "Thailand"
           }
         }
       }
