@@ -12,7 +12,7 @@ class Nav extends React.Component{
     }
 
     render(){
-        console.log('nav', this.props.curPage)
+        /*console.log('nav', this.props.curPage)*/
         return (
             <nav className={styles.nav}>
 
