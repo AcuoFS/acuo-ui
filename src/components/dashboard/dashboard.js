@@ -7,7 +7,7 @@ import UploadPortfolio from '../../components/dashboard/uploadPortfolio/upload_p
 class Dashboard extends React.Component{
     render(){
         return (<div>
-            <Nav />
+            <Nav curPage={this.props.location.pathname}/>
             <UploadPortfolio />
             <FilterContainer/>
             <GraphContainer />

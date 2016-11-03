@@ -1,4 +1,5 @@
 @value acuoBlue from './../../../css-components/colors.css';
+@value acuoGrey from './../../../css-components/colors.css';
 
 .nav {
     flex-wrap: nowrap;
@@ -22,6 +23,9 @@
     compose: flex1;
     /*flex-grow: 1;*/
     display: inline-block;
+    position: relative;
+    top: -5px;
+    margin-right: 2%;
 }
 
 .vertiCenter{
@@ -37,19 +41,23 @@
 
 .pageTitle{
     composes: uppercase;
-    font-family: baseFontBold;
-    padding: 0px 2%;
+    font-family: baseFont;
+    font-size: 0.9em;
+    padding: 0px 1.2%;
 }
 
 .menuItem {
     composes: uppercase;
-    padding: 0px 2%;
+    color: acuoGrey;
 }
 
 .menuIcon {
     composes: menuItem;
     padding: 0px 1%;
+}
 
+.menuIcon p{
+    margin: 24px 0;
 }
 
 .nav .menuIcon#navSetting{
@@ -80,3 +88,6 @@
 }
 
 
+.boldThis{
+    font-weight: bold;
+}

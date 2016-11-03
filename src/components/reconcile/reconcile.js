@@ -14,7 +14,7 @@ class Reconcile extends React.Component{
   render(){
     return(
       <div className={styles.globalStyles}>
-        <Nav/>
+        <Nav curPage={this.props.location.pathname}/>
         <FilterContainer/>
       </div>
     )

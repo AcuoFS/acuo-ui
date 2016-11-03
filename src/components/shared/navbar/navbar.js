@@ -3,17 +3,16 @@ import React from 'react'
 import styles from './navbar.css'
 import NavItem from './sub-components/navbar-item'
 import { Link } from 'react-router'
-import Dashboard from '../../dashboard/dashboard'
 
 class Nav extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-
         }
     }
 
     render(){
+        console.log('nav', this.props.curPage)
         return (
             <nav className={styles.nav}>
 
@@ -27,21 +26,55 @@ class Nav extends React.Component{
                 <div className={styles.pageTitle}>
                     <div className={styles.vertiCenter}>
                         <p className={styles.centerThis}>
-                          <Link to="/">Dashboard</Link></p>
+                          <Link to="/">
+                              <NavItem selected={(this.props.curPage == '/' ? true : false)} label='Dashboard'/>
+                          </Link>
+                        </p>
                     </div>
                 </div>
 
-              <Link to="recon">
-                <NavItem label='Reconcile'/>
-              </Link>
+                <div className={styles.pageTitle}>
+                    <div className={styles.vertiCenter}>
+                        <p className={styles.centerThis}>
+                            <Link to="/recon">
+                                <NavItem selected={(this.props.curPage == '/recon' ? true : false)} label='Reconcile'/>
+                            </Link>
+                        </p>
+                    </div>
+                </div>
 
-                <NavItem label='Disputes' />
+                <div className={styles.pageTitle}>
+                    <div className={styles.vertiCenter}>
+                        <p className={styles.centerThis}>
+                            <NavItem label='Disputes' />
+                        </p>
+                    </div>
+                </div>
 
-                <NavItem label='Pledge' />
+                <div className={styles.pageTitle}>
+                    <div className={styles.vertiCenter}>
+                        <p className={styles.centerThis}>
+                            <NavItem label='Pledge' />
+                        </p>
+                    </div>
+                </div>
 
-                <NavItem label='Deployed' />
+                <div className={styles.pageTitle}>
+                    <div className={styles.vertiCenter}>
+                        <p className={styles.centerThis}>
+                            <NavItem label='Deployed' />
+                        </p>
+                    </div>
+                </div>
 
-                <NavItem label='Analytics' />
+                <div className={styles.pageTitle}>
+                    <div className={styles.vertiCenter}>
+                        <p className={styles.centerThis}>
+                            <NavItem label='Analytics' />
+                        </p>
+                    </div>
+                </div>
+
 
                 {/*<div className={styles.uploadPortfolio}>*/}
                     {/*<div className={styles.vertiCenter}>*/}
