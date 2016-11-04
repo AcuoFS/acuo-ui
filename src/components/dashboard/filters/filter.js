@@ -36,11 +36,11 @@ class Filter extends React.Component{
     }
 
     handleVenueChange(e){
-        this.props.filterVenue(e.target.value)
+        this.props.filterCptyOrg(e.target.value)
     }
 
     handleCPTYChange(e){
-        this.props.filterCPTY(e.target.value)
+        this.props.filterCptyEntity(e.target.value)
     }
 
     fetchActionList(){
@@ -80,7 +80,6 @@ class Filter extends React.Component{
 
     renderCptyOrg(){
      return this.fetchActionList().reduce((listSum , x)=>{
-         console.log(x)
          return(!listSum.includes(x.get('cptyOrg')) ? listSum.add(x.get('cptyOrg')):listSum)},Set()).map((x)=>{
        return (<option key={x} value={x}>{x.toUpperCase()} </option>)
        })
