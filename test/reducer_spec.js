@@ -417,7 +417,7 @@ describe('reducer', () => {
     ))
   })
 
-  it('handles filter CPTY', () => {
+  it('handles filter cpty entity', () => {
     const initialState = fromJS(
       {
         "display": {
@@ -446,10 +446,10 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "cpty": "ABC bank"
+                          "cptyEntity": "ABC bank"
                         },
                         {
-                          "cpty": "CDE bank"
+                          "cptyEntity": "CDE bank"
                         }
                       ]
                     }
@@ -470,10 +470,10 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "cpty": "ABC bank"
+                          "cptyEntity": "ABC bank"
                         },
                         {
-                          "cpty": "CDE bank"
+                          "cptyEntity": "CDE bank"
                         }
                       ]
                     }
@@ -485,10 +485,10 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "cpty": "ABC bank"
+                          "cptyEntity": "ABC bank"
                         },
                         {
-                          "cpty": "CDE bank"
+                          "cptyEntity": "CDE bank"
                         }
                       ]
                     }
@@ -503,7 +503,7 @@ describe('reducer', () => {
     )
 
     const action = {
-      type: 'FILTER_STATE_CPTY',
+      type: 'FILTER_STATE_CPTYENTITY',
       filter: 'ABC bank'
     }
 
@@ -522,7 +522,7 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "cpty": "ABC bank"
+                          "cptyEntity": "ABC bank"
                         }
                       ]
                     }
@@ -534,7 +534,7 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "cpty": "ABC bank"
+                          "cptyEntity": "ABC bank"
                         }
                       ]
                     }
@@ -555,10 +555,10 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "cpty": "ABC bank"
+                          "cptyEntity": "ABC bank"
                         },
                         {
-                          "cpty": "CDE bank"
+                          "cptyEntity": "CDE bank"
                         }
                       ]
                     }
@@ -570,10 +570,10 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "cpty": "ABC bank"
+                          "cptyEntity": "ABC bank"
                         },
                         {
-                          "cpty": "CDE bank"
+                          "cptyEntity": "CDE bank"
                         }
                       ]
                     }

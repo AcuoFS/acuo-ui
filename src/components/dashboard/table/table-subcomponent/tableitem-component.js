@@ -15,7 +15,7 @@ class TableItem extends React.Component{
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   compute(key){
-     return this.numberWithCommas(this.getMarginStatus().reduce((sum, x) => {
+     return this.getMarginStatus().reduce((sum, x) => {
        if(x.get('timeFrames'))
          return sum + x.get('timeFrames').reduce((sum, y) => {
            return sum + y.get('actionsList').reduce((sum, z) => {
@@ -24,7 +24,7 @@ class TableItem extends React.Component{
          }, 0)
          else
            return sum + 0
-     }, 0))
+     }, 0)
   }
   getNumberOfActions(){
 
@@ -54,13 +54,13 @@ class TableItem extends React.Component{
             <div className={styles.tableItem}>
               <div className={styles.margin}>
                   <p className={styles.leftThis}>CPTY Margin</p>
-                  <p className={styles.fineFont}>{this.compute('variableMargin')}</p>
+                  <p className={styles.fineFont}>{this.numberWithCommas(this.compute('variableMargin') + this.compute('initialMargin'))}</p>
               </div>
             </div>
 
             <div className={styles.listItem}>
               <div className={styles.vertiCenter}>
-                  <p className={styles.centerThis}>Region</p>
+                  <p className={styles.centerThis}>CPTY Org</p>
               </div>
             </div>
 
@@ -73,7 +73,7 @@ class TableItem extends React.Component{
             <div className={styles.tableItem}>
               <div className={styles.margin}>
                   <p className={styles.leftThis}>EXP.Margin</p>
-                  <p className={styles.fineFont}>{this.compute('initialMargin')}</p>
+                  <p className={styles.fineFont}>TBC</p>
               </div>
             </div>
 
