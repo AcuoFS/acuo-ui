@@ -592,7 +592,7 @@ describe('reducer', () => {
     ))
   })
 
-  it('handles filter venue', () => {
+  it('handles filter cpty org', () => {
     const initialState = fromJS(
       {
         "display": {
@@ -606,10 +606,10 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "venue": "Thailand"
+                          "cptyOrg": "Thailand"
                         },
                         {
-                          "venue": "Singapore"
+                          "cptyOrg": "Singapore"
                         }
                       ]
                     }
@@ -621,10 +621,10 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "venue": "Singapore"
+                          "cptyOrg": "Singapore"
                         },
                         {
-                          "venue": "Singapore"
+                          "cptyOrg": "Singapore"
                         }
                       ]
                     }
@@ -645,10 +645,10 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "venue": "Thailand"
+                          "cptyOrg": "Thailand"
                         },
                         {
-                          "venue": "Singapore"
+                          "cptyOrg": "Singapore"
                         }
                       ]
                     }
@@ -660,10 +660,10 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "venue": "Singapore"
+                          "cptyOrg": "Singapore"
                         },
                         {
-                          "venue": "Singapore"
+                          "cptyOrg": "Singapore"
                         }
                       ]
                     }
@@ -678,7 +678,7 @@ describe('reducer', () => {
     )
 
     const action = {
-      type: 'FILTER_STATE_VENUE',
+      type: 'FILTER_STATE_CPTYORG',
       filter: 'Thailand'
     }
 
@@ -697,7 +697,7 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "venue": "Thailand"
+                          "cptyOrg": "Thailand"
                         }
                       ]
                     }
@@ -718,10 +718,10 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "venue": "Thailand"
+                          "cptyOrg": "Thailand"
                         },
                         {
-                          "venue": "Singapore"
+                          "cptyOrg": "Singapore"
                         }
                       ]
                     }
@@ -733,10 +733,10 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "venue": "Singapore"
+                          "cptyOrg": "Singapore"
                         },
                         {
-                          "venue": "Singapore"
+                          "cptyOrg": "Singapore"
                         }
                       ]
                     }
@@ -748,7 +748,7 @@ describe('reducer', () => {
         },
         "inputs": {
           "filters" :{
-            "venueFilter": "Thailand"
+            "cptyOrgFilter": "Thailand"
           }
         }
       }
