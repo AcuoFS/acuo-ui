@@ -78,16 +78,17 @@ class Filter extends React.Component{
             return (<option key={x} value={x}>{x.toUpperCase()} </option>)})
     }
 
-    renderVenue(){
+    renderCptyOrg(){
      return this.fetchActionList().reduce((listSum , x)=>{
-         return(!listSum.includes(x.get('venue')) ? listSum.add(x.get('venue')):listSum)},Set()).map((x)=>{
+         console.log(x)
+         return(!listSum.includes(x.get('cptyOrg')) ? listSum.add(x.get('cptyOrg')):listSum)},Set()).map((x)=>{
        return (<option key={x} value={x}>{x.toUpperCase()} </option>)
        })
     }
 
     renderCPTY(){
       return this.fetchActionList().reduce((listSum , x)=>{
-        return(!listSum.includes(x.get('cpty')) ? listSum.add(x.get('cpty')):listSum)},Set()).map((x)=>{
+        return(!listSum.includes(x.get('cptyEntity')) ? listSum.add(x.get('cptyEntity')):listSum)},Set()).map((x)=>{
         return (<option key={x} value={x}>{x.toUpperCase()} </option>)
       })
     }
@@ -124,16 +125,16 @@ class Filter extends React.Component{
             </div>
 
             <div className={styles.filterItem}>
-                <label className={styles.filterLabel}>Venue</label>
+                <label className={styles.filterLabel}>CPTY Org</label>
                 <select className={styles.filters} id = "filter-venue" onChange={this.handleVenueChange}>
                     <option value="All">ALL</option>
-                    {this.renderVenue()}
+                    {this.renderCptyOrg()}
                 </select>
                 <div className={styles.filterDropdownArrow}></div>
             </div>
 
             <div className={styles.filterItem}>
-                <label className={styles.filterLabel}>CPTY</label>
+                <label className={styles.filterLabel}>CPTY Entity</label>
                 <select className={styles.filters} id = "filter-cpty" onChange={this.handleCPTYChange}>
                     <option value="All">ALL</option>
                   {this.renderCPTY()}
