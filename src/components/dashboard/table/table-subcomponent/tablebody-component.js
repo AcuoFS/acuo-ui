@@ -32,13 +32,13 @@ class TableBody extends React.Component{
             {/*<div className={styles.divMid}>*/}
                 <div className={styles.cptyItem}>
                   <div className={styles.vertiCenter}>
-                    <div className={styles.centerThis}>CPTY</div>
+                    <div className={styles.centerThis}>CPTY Entity</div>
                   </div>
                 </div>
 
                 <div className={styles.innerItem}>
                   <div className={styles.vertiCenter}>
-                    <p className={styles.centerThis}>REGION</p>
+                    <p className={styles.centerThis}>CPTY Org</p>
                   </div>
                 </div>
 
