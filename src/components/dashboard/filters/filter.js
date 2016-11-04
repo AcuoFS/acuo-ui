@@ -80,14 +80,15 @@ class Filter extends React.Component{
 
     renderCptyOrg(){
      return this.fetchActionList().reduce((listSum , x)=>{
-         return(!listSum.includes(x.get('cptyOrg')) ? listSum.add(x.get('cptyOrg')):listSum)},Set()).map((x)=>{
+         return(!listSum.includes(x.get('cptyOrg')) ? listSum.add(x.get('cptyOrg')):listSum)},Set()).sort().map((x)=>{
+           console.log(x)
        return (<option key={x} value={x}>{x.toUpperCase()} </option>)
        })
     }
 
     renderCPTY(){
       return this.fetchActionList().reduce((listSum , x)=>{
-        return(!listSum.includes(x.get('cptyEntity')) ? listSum.add(x.get('cptyEntity')):listSum)},Set()).map((x)=>{
+        return(!listSum.includes(x.get('cptyEntity')) ? listSum.add(x.get('cptyEntity')):listSum)},Set()).sort().map((x)=>{
         return (<option key={x} value={x}>{x.toUpperCase()} </option>)
       })
     }
