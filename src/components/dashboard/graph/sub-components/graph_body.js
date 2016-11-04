@@ -18,7 +18,7 @@ export default class GraphBody extends React.Component {
     }, Set()).toList()
 
 
-    let graphXY = status.map(x => Map({"status": x, "timeFrames": possibleTimes.map(y => Map({"timeFrame": y, "actionsLists": []}))}))
+    let graphXY = status.map(x => Map({"status": x, "timeFrames": possibleTimes.map(y => Map({"timeFrame": y, "actionsLists": List()}))}))
 
     return graphXY.map(X => {
       return Map({"status": X.get('status'), "timeFrames":

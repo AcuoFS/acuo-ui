@@ -36,7 +36,7 @@ function applyStatusFilter(derivatives, status) {
 
 function applyCptyOrgFilter(derivatives, cptyOrg) {
     return derivatives.reduce((listVenue, deriv) => {
-        console.log(deriv.get('marginStatus'))
+
         let venueList = deriv.get('marginStatus').reduce((listVenue, marginStatus) => {
             let venueList = marginStatus.get('timeFrames').reduce((listVenue, timeFrames) => {
                 let venueList = timeFrames.get('actionsList').filter((actionsList) => {
@@ -51,13 +51,14 @@ function applyCptyOrgFilter(derivatives, cptyOrg) {
 
 }
 
-function applyCPTYFilter(derivatives, cpty) {
-  console.log("update status", cpty)
+function applyCPTYFilter(derivatives, cptyEntity) {
+
   return derivatives.reduce((listCPTY, deriv)=>{
     let cptyList = deriv.get('marginStatus').reduce((listCPTY, marginStatus)=>{
       let cptyList = marginStatus.get('timeFrames').reduce((listCPTY, timeFrames)=>{
         let cptyList = timeFrames.get('actionsList').filter((actionsList)=>{
-          return actionsList.get('cpty')==cpty
+
+          return actionsList.get('cptyEntity')==cptyEntity
           })
         return (cptyList.size >0 ? listCPTY.push(timeFrames.set('actionsList', cptyList)) : listCPTY)
         }, List())
@@ -92,6 +93,7 @@ export function updateStateStatus(state,statusType) {
 }
 
 export function updateStateCptyOrg(state, cptyOrg){
+
     if(cptyOrg=="All"){
         return state.set('display', state.get('data'))
     }else
@@ -100,8 +102,8 @@ export function updateStateCptyOrg(state, cptyOrg){
 
 }
 
-export function updateStateCPTY(state, cpty) {
-    console.log('CPTY is :',cpty)
+export function updateStateCptyEntity(state, cpty) {
+
     if(cpty=="All"){
       return state.set('display',state.get('data'))
     }else
@@ -127,8 +129,8 @@ export default function reducer(state = Map(), action) {
         case 'FILTER_STATE_CPTYORG':
             return updateStateCptyOrg(state, action.filter)
 
-      case 'FILTER_STATE_CPTY':
-            return updateStateCPTY(state, action.filter)
+      case 'FILTER_STATE_CPTYENTITY':
+            return updateStateCptyEntity(state, action.filter)
 
     }
 
