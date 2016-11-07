@@ -1,0 +1,93 @@
+@value acuoGrey from './../../../css-components/colors.css';
+@value acuoActionRed from './../../../css-components/colors.css';
+@value acuoActionOrange from './../../../css-components/colors.css';
+@value acuoActionGreen from './../../../css-components/colors.css';
+
+.vertiCenter{
+    display: table;
+    height: 100%;
+    text-align: center;
+}
+
+
+.actionContainer{
+    position: relative;
+    margin-top: 10px;
+    padding: 0 10px;
+    /*border: 1px dotted #c00;*/
+}
+
+.actionWrap{
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    width: 100%;
+    /*min-height: 100px;*/
+    clear: both;
+    /*border: 1px dotted #00f;*/
+}
+
+.actionWrap .actPanel{
+    display: inline-flex;
+    /*border: 1px dotted #2b3c4c;*/
+}
+
+.actionWrap .actPanel.act_C{
+    flex: 1;
+    align-items: stretch;
+    /*border: 1px dotted #2b3c4c;*/
+}
+.actionWrap .actPanel.act_C .btnWrap{
+    margin: 40% auto auto auto;
+    /*border: 1px dotted #c00;*/
+}
+.actionWrap .actPanel.act_C .btnWrap .actFig{
+    font-size: 24px;
+    color: acuoActionOrange;
+    display: block;
+    position: relative;
+    text-align: center;
+    clear: both;
+}
+.actionWrap .actPanel.act_C .btnWrap .actBtn{
+    display: block;
+    position: relative;
+    width: 50px;
+    min-height: 20px;
+    padding: 8px 12px;
+    margin: 10px auto auto auto;
+    color: #fff;
+    text-align: center;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.actBtnOrange{
+    background-color: acuoActionOrange;
+}
+
+.actionWrap .actPanel.act_L,
+.actionWrap .actPanel.act_R{
+    flex: 4;
+}
+
+.actionWrap .actPanel.act_L{
+    /*flex: 4;*/
+}
+
+.actionWrap .actPanel.act_R{
+    /*flex: 4;*/
+}
+
+
+.panel{
+    width: 100%;
+    min-height: 180px;
+    max-height: 400px;
+    overflow: auto;
+    border:1px solid #dedede;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 2px 2px 4px 0 #c9c9c9;
+    box-shadow: 2px 2px 4px 0 #c9c9c9;
+}

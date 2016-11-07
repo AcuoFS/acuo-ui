@@ -21,12 +21,13 @@ class Filter extends React.Component{
         this.handleLegalEntityChange = this.handleLegalEntityChange.bind(this)
         this.handleDerivChange = this.handleDerivChange.bind(this)
         this.handleStatusChange = this.handleStatusChange.bind(this)
-        this.handleVenueChange = this.handleVenueChange.bind(this)
+        this.handleCptyOrgChange = this.handleCptyOrgChange.bind(this)
         this.handleCPTYChange = this.handleCPTYChange.bind(this)
         this.clickedDropdown = this.clickedDropdown.bind(this)
+
     }
     getDeriv(){
-        return this.props.derivatives || []
+        return this.props.derivatives || List()
     }
 
     handleLegalEntityChange(e){
@@ -41,12 +42,12 @@ class Filter extends React.Component{
         this.props.filterStateStatus(e.target.value)
     }
 
-    handleVenueChange(e){
-        this.props.filterVenue(e.target.value)
+    handleCptyOrgChange(e){
+        this.props.filterCptyOrg(e.target.value)
     }
 
     handleCPTYChange(e){
-        this.props.filterCPTY(e.target.value)
+        this.props.filterCptyEntity(e.target.value)
     }
 
     fetchActionList(){
@@ -86,14 +87,14 @@ class Filter extends React.Component{
 
     renderVenue(){
      return this.fetchActionList().reduce((listSum , x)=>{
-         return(!listSum.includes(x.get('venue')) ? listSum.add(x.get('venue')):listSum)},Set()).map((x)=>{
+         return(!listSum.includes(x.get('cptyOrg')) ? listSum.add(x.get('cptyOrg')):listSum)},Set()).map((x)=>{
        return (<option key={x} value={x}>{x.toUpperCase()} </option>)
        })
     }
 
     renderCPTY(){
       return this.fetchActionList().reduce((listSum , x)=>{
-        return(!listSum.includes(x.get('cpty')) ? listSum.add(x.get('cpty')):listSum)},Set()).map((x)=>{
+        return(!listSum.includes(x.get('cptyEntity')) ? listSum.add(x.get('cptyEntity')):listSum)},Set()).map((x)=>{
         return (<option key={x} value={x}>{x.toUpperCase()} </option>)
       })
     }
@@ -154,8 +155,8 @@ class Filter extends React.Component{
                 </div>
 
                 <div className={styles.filterItem}>
-                    <label className={styles.filterLabel}>Venue</label>
-                    <select className={styles.filters} id = "filter-venue" onChange={this.handleVenueChange}>
+                    <label className={styles.filterLabel}>CPTY Org</label>
+                    <select className={styles.filters} id = "filter-venue" onChange={this.handleCptyOrgChange}>
                         <option value="All">ALL</option>
                         {this.renderVenue()}
                     </select>
@@ -163,7 +164,7 @@ class Filter extends React.Component{
                 </div>
 
                 <div className={styles.filterItem}>
-                    <label className={styles.filterLabel}>CPTY</label>
+                    <label className={styles.filterLabel}>CPTY Entity</label>
                     <select className={styles.filters} id = "filter-cpty" onChange={this.handleCPTYChange}>
                         <option value="All">ALL</option>
                       {this.renderCPTY()}

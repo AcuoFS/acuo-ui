@@ -67,14 +67,13 @@
   margin-top: 0.5em;
   margin-bottom: 0.5em;
 }
-.table .margin p.leftThis{
-  font-weight: bold;
-}
+
 .leftThis{
   text-align: left;
   position:relative;
-  font-family: baseFontBold
+  composes: baseFontBold from '../../../css-components/fonts.css';
 }
+
 .actionVertiCenter{
   float: left;
   composes: vertiCenter;
