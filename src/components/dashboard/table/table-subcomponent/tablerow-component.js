@@ -19,13 +19,13 @@ class TableRow extends React.Component{
           {/*<div className={styles.divMid}>*/}
               <div className={styles.cptyItem}>
                 <div className={styles.vertiCenter}>
-                  <div className={styles.centerThis}>{this.props.rowItems.get('cpty')}</div>
+                  <div className={styles.centerThis}>{this.props.rowItems.get('cptyEntity')}</div>
                 </div>
               </div>
 
               <div className={styles.innerItem}>
                 <div className={styles.vertiCenter}>
-                  <p className={styles.centerThis}>{this.props.rowItems.get('venue')}</p>
+                  <p className={styles.centerThis}>{this.props.rowItems.get('cptyOrg')}</p>
                 </div>
               </div>
 

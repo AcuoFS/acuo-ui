@@ -18,15 +18,9 @@ class Filter extends React.Component{
             filterItems: styles.show
         }
         this.getDeriv = this.getDeriv.bind(this)
-        this.handleLegalEntityChange = this.handleLegalEntityChange.bind(this)
-        this.handleDerivChange = this.handleDerivChange.bind(this)
-        this.handleStatusChange = this.handleStatusChange.bind(this)
-        this.handleVenueChange = this.handleVenueChange.bind(this)
-        this.handleCPTYChange = this.handleCPTYChange.bind(this)
-        this.clickedDropdown = this.clickedDropdown.bind(this)
     }
     getDeriv(){
-        return this.props.derivatives || []
+        return this.props.derivatives || List()
     }
 
     handleLegalEntityChange(e){
@@ -86,34 +80,17 @@ class Filter extends React.Component{
 
     renderVenue(){
      return this.fetchActionList().reduce((listSum , x)=>{
-         return(!listSum.includes(x.get('venue')) ? listSum.add(x.get('venue')):listSum)},Set()).map((x)=>{
+         return(!listSum.includes(x.get('cptyOrg')) ? listSum.add(x.get('cptyOrg')):listSum)},Set()).map((x)=>{
        return (<option key={x} value={x}>{x.toUpperCase()} </option>)
        })
     }
 
     renderCPTY(){
       return this.fetchActionList().reduce((listSum , x)=>{
-        return(!listSum.includes(x.get('cpty')) ? listSum.add(x.get('cpty')):listSum)},Set()).map((x)=>{
+        return(!listSum.includes(x.get('cptyEntity')) ? listSum.add(x.get('cptyEntity')):listSum)},Set()).map((x)=>{
         return (<option key={x} value={x}>{x.toUpperCase()} </option>)
       })
     }
-
-    clickedDropdown(){
-        if(!this.state.filterBarNameClicked){
-            this.setState({
-                filterBarNameClicked: !this.state.filterBarNameClicked,
-                filterBar: styles.open,
-                filterItems: styles.show
-            })
-        }else{
-            this.setState({
-                filterBarNameClicked: !this.state.filterBarNameClicked,
-                filterBar: styles.close,
-                filterItems: styles.hide
-            })
-        }
-    }
-
 
     render(){
         return(
