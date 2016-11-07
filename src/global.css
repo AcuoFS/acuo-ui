@@ -1,3 +1,7 @@
+body{
+    margin: 0;
+}
+
 .globalStyles{
     composes: baseFont from "./css-components/fonts.css";
     font-size: 15px;
