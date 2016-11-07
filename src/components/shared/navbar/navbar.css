@@ -1,4 +1,3 @@
-@value acuoBlue from './../../../css-components/colors.css';
 @value acuoGrey from './../../../css-components/colors.css';
 
 .nav {
@@ -41,7 +40,6 @@
 
 .pageTitle{
     composes: uppercase;
-    font-family: baseFont;
     font-size: 0.9em;
     padding: 0px 1.2%;
 }
