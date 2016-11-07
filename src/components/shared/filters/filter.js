@@ -18,6 +18,11 @@ class Filter extends React.Component{
             filterItems: styles.show
         }
         this.getDeriv = this.getDeriv.bind(this)
+        this.handleLegalEntityChange = this.handleLegalEntityChange.bind(this)
+        this.handleDerivChange = this.handleDerivChange.bind(this)
+        this.handleStatusChange = this.handleStatusChange.bind(this)
+        this.handleCptyOrgChange = this.handleCptyOrgChange.bind(this)
+        this.handleCPTYChange = this.handleCPTYChange.bind(this)
     }
     getDeriv(){
         return this.props.derivatives || List()
@@ -35,12 +40,12 @@ class Filter extends React.Component{
         this.props.filterStateStatus(e.target.value)
     }
 
-    handleVenueChange(e){
-        this.props.filterVenue(e.target.value)
+    handleCptyOrgChange(e){
+        this.props.filterCptyOrg(e.target.value)
     }
 
     handleCPTYChange(e){
-        this.props.filterCPTY(e.target.value)
+        this.props.filterCptyEntity(e.target.value)
     }
 
     fetchActionList(){
@@ -132,7 +137,7 @@ class Filter extends React.Component{
 
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>Venue</label>
-                    <select className={styles.filters} id = "filter-venue" onChange={this.handleVenueChange}>
+                    <select className={styles.filters} id = "filter-venue" onChange={this.handleCptyOrgChange}>
                         <option value="All">ALL</option>
                         {this.renderVenue()}
                     </select>
