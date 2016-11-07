@@ -34,12 +34,16 @@ function applyStatusFilter(derivatives, status) {
 }
 
 
-function applyVenueFilter(derivatives, venue) {
+function applyCptyOrgFilter(derivatives, cptyOrg) {
     return derivatives.reduce((listVenue, deriv) => {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 27702acf1f84a76e5fe0d2bff04c5529d8a8a87f
         let venueList = deriv.get('marginStatus').reduce((listVenue, marginStatus) => {
             let venueList = marginStatus.get('timeFrames').reduce((listVenue, timeFrames) => {
                 let venueList = timeFrames.get('actionsList').filter((actionsList) => {
-                    return actionsList.get('venue') == venue
+                    return actionsList.get('cptyOrg') == cptyOrg
                 })
                 return (venueList.size > 0 ? listVenue.push(timeFrames.set('actionsList', venueList)) : listVenue)
             }, List())
@@ -50,12 +54,18 @@ function applyVenueFilter(derivatives, venue) {
 
 }
 
+<<<<<<< HEAD
 function applyCPTYFilter(derivatives, cpty) {
+=======
+function applyCPTYFilter(derivatives, cptyEntity) {
+
+>>>>>>> 27702acf1f84a76e5fe0d2bff04c5529d8a8a87f
   return derivatives.reduce((listCPTY, deriv)=>{
     let cptyList = deriv.get('marginStatus').reduce((listCPTY, marginStatus)=>{
       let cptyList = marginStatus.get('timeFrames').reduce((listCPTY, timeFrames)=>{
         let cptyList = timeFrames.get('actionsList').filter((actionsList)=>{
-          return actionsList.get('cpty')==cpty
+
+          return actionsList.get('cptyEntity')==cptyEntity
           })
         return (cptyList.size >0 ? listCPTY.push(timeFrames.set('actionsList', cptyList)) : listCPTY)
         }, List())
@@ -89,16 +99,27 @@ export function updateStateStatus(state,statusType) {
       applyStatusFilter(state.getIn(['data', 'derivatives']), statusType))
 }
 
+<<<<<<< HEAD
 export function updateStateVenue(state, venue){
     if(venue=="All"){
+=======
+export function updateStateCptyOrg(state, cptyOrg){
+
+    if(cptyOrg=="All"){
+>>>>>>> 27702acf1f84a76e5fe0d2bff04c5529d8a8a87f
         return state.set('display', state.get('data'))
     }else
-        return state.setIn(['inputs','filters','venueFilter'],venue).setIn(['display','derivatives'],
-            applyVenueFilter(state.getIn(['data', 'derivatives']), venue))
+        return state.setIn(['inputs','filters','cptyOrgFilter'],cptyOrg).setIn(['display','derivatives'],
+            applyCptyOrgFilter(state.getIn(['data', 'derivatives']), cptyOrg))
 
 }
 
+<<<<<<< HEAD
 export function updateStateCPTY(state, cpty) {
+=======
+export function updateStateCptyEntity(state, cpty) {
+
+>>>>>>> 27702acf1f84a76e5fe0d2bff04c5529d8a8a87f
     if(cpty=="All"){
       return state.set('display',state.get('data'))
     }else
@@ -120,11 +141,11 @@ export default function reducer(state = Map(), action) {
         case 'FILTER_STATE_STATUS':
             return updateStateStatus(state, action.filter)
 
-        case 'FILTER_STATE_VENUE':
-            return updateStateVenue(state, action.filter)
+        case 'FILTER_STATE_CPTYORG':
+            return updateStateCptyOrg(state, action.filter)
 
-      case 'FILTER_STATE_CPTY':
-            return updateStateCPTY(state, action.filter)
+      case 'FILTER_STATE_CPTYENTITY':
+            return updateStateCptyEntity(state, action.filter)
 
     }
 
