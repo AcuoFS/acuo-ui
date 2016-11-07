@@ -23,7 +23,7 @@ export default class Axis extends React.Component {
     return (
       <svg>
         <line {...coords} stroke={this.props.stroke} strokeWidth={ this.props.stroke == "#F91233" ? 1 : 2} />
-        <text x={coords.x2} y={coords.y1 + 0.5 } key={i} fontFamily="Verdana" fontSize="12">{this.props.text}</text>
+        <text x={coords.x2} y={coords.y1} key={i} fontFamily="Verdana" fontSize="12">{this.props.text}</text>
       </svg>
     )
   }

@@ -32,17 +32,17 @@ export function filterStateStatus(status) {
 }
 
 
-export function filterVenue(venue) {
+export function filterCptyOrg(cptyOrg) {
 
     return {
-        type: 'FILTER_STATE_VENUE',
-        filter: venue
+        type: 'FILTER_STATE_CPTYORG',
+        filter: cptyOrg
     }
 }
 
-export function filterCPTY(cpty){
+export function filterCptyEntity(cptyEntity){
     return{
-        type: 'FILTER_STATE_CPTY',
-        filter : cpty
+        type: 'FILTER_STATE_CPTYENTITY',
+        filter : cptyEntity
     }
 }
