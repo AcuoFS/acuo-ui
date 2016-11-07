@@ -23,6 +23,8 @@ class Filter extends React.Component{
         this.handleStatusChange = this.handleStatusChange.bind(this)
         this.handleCptyOrgChange = this.handleCptyOrgChange.bind(this)
         this.handleCPTYChange = this.handleCPTYChange.bind(this)
+        this.clickedDropdown = this.clickedDropdown.bind(this)
+
     }
     getDeriv(){
         return this.props.derivatives || List()
@@ -96,6 +98,23 @@ class Filter extends React.Component{
         return (<option key={x} value={x}>{x.toUpperCase()} </option>)
       })
     }
+
+    clickedDropdown(){
+        if(!this.state.filterBarNameClicked){
+            this.setState({
+                filterBarNameClicked: !this.state.filterBarNameClicked,
+                filterBar: styles.open,
+                filterItems: styles.show
+            })
+        }else{
+            this.setState({
+                filterBarNameClicked: !this.state.filterBarNameClicked,
+                filterBar: styles.close,
+                filterItems: styles.hide
+            })
+        }
+    }
+
 
     render(){
         return(

@@ -23,7 +23,6 @@
     /*flex-grow: 1;*/
     display: inline-block;
     position: relative;
-    top: -5px;
     margin-right: 2%;
 }
 
@@ -41,6 +40,7 @@
 .pageTitle{
     composes: uppercase;
     font-size: 0.9em;
+    line-height: 1.4em;
     padding: 0px 1.2%;
 }
 
@@ -60,10 +60,12 @@
 
 .nav .menuIcon#navSetting{
     float: right;
+    margin-top: 20px;
 }
 
 .nav .menuIcon#navLogout{
     float: right;
+    margin-top: 20px;
 }
 
 
