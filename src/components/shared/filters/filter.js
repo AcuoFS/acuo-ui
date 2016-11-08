@@ -155,7 +155,7 @@ class Filter extends React.Component{
                 </div>
 
                 <div className={styles.filterItem}>
-                    <label className={styles.filterLabel}>Venue</label>
+                    <label className={styles.filterLabel}>CPTY Org</label>
                     <select className={styles.filters} id = "filter-venue" onChange={this.handleCptyOrgChange}>
                         <option value="All">ALL</option>
                         {this.renderVenue()}
@@ -164,7 +164,7 @@ class Filter extends React.Component{
                 </div>
 
                 <div className={styles.filterItem}>
-                    <label className={styles.filterLabel}>CPTY</label>
+                    <label className={styles.filterLabel}>CPTY Entity</label>
                     <select className={styles.filters} id = "filter-cpty" onChange={this.handleCPTYChange}>
                         <option value="All">ALL</option>
                       {this.renderCPTY()}
