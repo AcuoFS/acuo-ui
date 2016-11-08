@@ -5,6 +5,8 @@ import SubAxis from './sub-components/subaxis'
 import GraphBody from './sub-components/graph_body'
 import Pointer from './sub-components/pointer'
 
+import styles from './graph.css'
+
 class Graph extends React.Component {
   static get defaultProps() {
     const now = new Date("2016-10-23T08:00:00.000Z")
