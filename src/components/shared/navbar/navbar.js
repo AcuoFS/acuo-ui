@@ -1,17 +1,23 @@
 import React from 'react'
-
+import {connect} from 'react-redux'
 import styles from './navbar.css'
 import NavItem from './sub-components/navbar-item'
 import { Link } from 'react-router'
 
-class Nav extends React.Component{
+export class Nav extends React.Component{
     constructor(props){
         super(props)
-        this.state = {
-        }
+        // this.state = {
+        // }
     }
 
-    render(){
+  getLastUpdatedTime(){
+    let varTime = new Date(this.props.timeUpdated).toString().substring(16)||0
+    console.log("time is",varTime)
+    return varTime
+  }
+
+  render(){
         /*console.log('nav', this.props.curPage)*/
         return (
             <nav className={styles.nav}>
@@ -105,6 +111,11 @@ class Nav extends React.Component{
                     </div>
                 </div>
 
+              <div className={styles.userInfo}>
+                  <text id={styles.userId}>user@acuo.com</text><br/>
+                  <text>Last Updated at {this.getLastUpdatedTime()}</text>
+                </div>
+
             </nav>
 
 
@@ -112,4 +123,11 @@ class Nav extends React.Component{
     }
 }
 
-export default Nav
+function mapStateToProps(state){
+  //console.log('map state to props', state.getIn(['display', 'timeUpdated']))
+  return{
+    timeUpdated : state.getIn(['display', 'timeUpdated'])
+  }
+}
+
+export const NavContainer = connect(mapStateToProps)(Nav)
