@@ -1,6 +1,8 @@
 import React from 'react';
 import {List, Set, Map} from 'immutable'
 
+import styles from '../graph.css'
+
 export default class GraphBody extends React.Component {
   constructor(props){
     super(props)
@@ -16,7 +18,6 @@ export default class GraphBody extends React.Component {
         return setY.union(y.get('timeFrames').map(z => z.get('timeRangeStart')))
       }, Set()))
     }, Set()).toList()
-
 
     let graphXY = status.map(x => Map({"status": x, "timeFrames": possibleTimes.map(y => Map({"timeFrame": y, "actionsLists": List()}))}))
 
@@ -39,28 +40,61 @@ export default class GraphBody extends React.Component {
       })
     }).map(x => {
       return x.set('timeFrames', x.get('timeFrames').map(y => {
-        //console.log(y.toJS())
-        return Map({'timeFrame': y.get('timeFrame'), "inAmount": y.get('actionsList').reduce((a, z) => {
-          return a + z.get('actionsList').reduce((a2, xx) => {
-            // console.log(xx.toJS())
-            return (xx.get('direction') == 'IN' ? a2 + xx.get('initialMargin') : a2)
+        return Map({'timeFrame': y.get('timeFrame'),
+            "inAmount": y.get('actionsList').reduce((a, z) => {
+            return a + z.get('actionsList').reduce((a2, xx) => {
+              return (xx.get('direction') == 'IN' ? a2 + xx.get('initialMargin') : a2)
+            }, 0)
           }, 0)
-        }, 0)
-      , "outAmount": y.get('actionsList').reduce((a, z) => {
-        return a + z.get('actionsList').reduce((a2, xx) => {
-          // console.log(xx.toJS())
-          return (xx.get('direction') == 'OUT' ? a2 + xx.get('initialMargin') : a2)
-        }, 0)
-      }, 0)})
+          , "outAmount": y.get('actionsList').reduce((a, z) => {
+            return a + z.get('actionsList').reduce((a2, xx) => {
+              return (xx.get('direction') == 'OUT' ? a2 + xx.get('initialMargin') : a2)
+            }, 0)
+          }, 0)
+          , "inNo":  y.get('actionsList').reduce((a, z) => {
+            return a + z.get('actionsList').reduce((a2, xx) => {
+              return (xx.get('direction') == 'IN' ? a2+1 : a2)
+            }, 0)
+          }, 0)
+          , "outNo":  y.get('actionsList').reduce((a, z) => {
+            return a + z.get('actionsList').reduce((a2, xx) => {
+
+              return (xx.get('direction') == 'OUT' ? a2+1 : a2)
+            }, 0)
+          }, 0)
+        })
       }))
     }).map((status) => {
-      // console.log(status.toJS())
       return status.get('timeFrames').map(timeFrame => {
 
         let colour = this.getColour(status.get('status'))
         let timeDifference = (Date.parse(new Date(timeFrame.get('timeFrame'))) - (Date.parse(this.props.time)))/3600000
 
-        return List().push(<circle key={status.get('status') + timeFrame.get('timeFrame') + 'in'} cx={this.props.x + (timeDifference + 0.5) * 60 } cy={colour[1]} r={(timeFrame.get('inAmount') === 0)? 0 :(Math.log(timeFrame.get('inAmount'))) } fill={colour[0]}></circle>).push(<circle key={status.get('status') + timeFrame.get('timeFrame') + 'out'} cx={this.props.x + (timeDifference + 0.5) * 60} cy={colour[2]} r={(timeFrame.get('outAmount') === 0)? 0 :(Math.log(timeFrame.get('outAmount'))) } fill={colour[0]}></circle>)
+        function numberWithCommas(x) {
+          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        return List()
+        .push((timeFrame.get('inAmount') === 0)? 0 :
+          <g id={styles.componentId} key={status.get('status') + timeFrame.get('timeFrame') + 'in'}>
+            <circle cx={this.props.x + (timeDifference + 0.5) * 60} cy={colour[1]} r={(timeFrame.get('inAmount') === 0)? 0 :(Math.log(timeFrame.get('inAmount'))) } fill={colour[0]}>
+            </circle>
+            <g className={styles.toolTip} opacity="0.9">
+              <rect x={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? this.props.x - 110 + (timeDifference + 0.5) * 60 : this.props.x - 90 + (timeDifference + 0.5) * 60} y={colour[1] - 20} rx="4" width={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? 100 : 80} height="45" strokeWidth="1" stroke={colour[0]} fill="#FFFFFF"></rect>
+              <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[1] - 2.5} fontSize="13" fontFamily="helvetica" fontWeight="bold" fill="#010101" textAnchor="end">{timeFrame.get('inNo')} {status.get('status').toUpperCase()}</text>
+              <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[1] + 17.5} fontSize="13" fontFamily="helvetica" fill="#010101" textAnchor="end">{numberWithCommas(timeFrame.get('inAmount'))}</text>
+            </g>
+          </g>)
+          .push((timeFrame.get('outAmount') === 0)? 0 :
+            <g id={styles.componentId} key={status.get('status') + timeFrame.get('timeFrame') + 'out'}>
+              <circle cx={this.props.x + (timeDifference + 0.5) * 60} cy={colour[2]} r={(timeFrame.get('outAmount') === 0)? 0 :(Math.log(timeFrame.get('outAmount'))) } fill={colour[0]}>
+              </circle>
+              <g className={styles.toolTip} opacity="0.9">
+                <rect x={(timeFrame.get('outAmount') > 100000000 || status.get('status').length > 7) ? this.props.x - 110 + (timeDifference + 0.5) * 60 : this.props.x - 90 + (timeDifference + 0.5) * 60} y={colour[2] - 20} rx="4" width={(timeFrame.get('outAmount') > 100000000 || status.get('status').length > 7) ? 100 : 80} height="45" strokeWidth="1" stroke={colour[0]} fill="#FFFFFF"></rect>
+                <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] - 2.5} fontSize="13" fontFamily="helvetica" fontWeight="bold" fill="#010101" textAnchor="end">{timeFrame.get('outNo')} {status.get('status').toUpperCase()}</text>
+                <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] + 17.5} fontSize="13" fontFamily="helvetica" fill="#010101" textAnchor="end">{numberWithCommas(timeFrame.get('outAmount'))}</text>
+              </g>
+            </g>)
       })
     }).reduce((set, x) => {
       return set.concat(x.reduce((setY, y) => {
