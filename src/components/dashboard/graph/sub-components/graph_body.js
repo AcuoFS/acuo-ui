@@ -40,10 +40,6 @@ export default class GraphBody extends React.Component {
       })
     }).map(x => {
       return x.set('timeFrames', x.get('timeFrames').map(y => {
-        console.log(y.get('actionsList').map((x) => {
-          console.log(new Date(x.get('timeRangeStart')))
-          return x
-        }).toJS())
         return Map({'timeFrame': y.get('timeFrame'),
             "inAmount": y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
