@@ -12,7 +12,7 @@ export class Nav extends React.Component{
     }
 
   getLastUpdatedTime(){
-    let varTime = new Date(this.props.timeUpdated).toString().substring(16)||0
+    let varTime = new Date(this.props.timeUpdated).toString().substring(16, 33)||0
     console.log("time is",varTime)
     return varTime
   }
