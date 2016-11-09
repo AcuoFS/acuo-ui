@@ -7,7 +7,7 @@ import {FilterContainer} from '../shared/filters/filter'
 import Actions from './actions/actions'
 import stylesG from '../../global.css'
 import styles from './reconcile.css'
-import Nav from '../../components/shared/navbar/navbar'
+import {NavContainer} from '../../components/shared/navbar/navbar'
 
 class Reconcile extends React.Component{
 
@@ -15,7 +15,7 @@ class Reconcile extends React.Component{
   render(){
     return(
       <div className={stylesG.globalStyles}>
-        <Nav curPage={this.props.location.pathname}/>
+        <NavContainer curPage={this.props.location.pathname}/>
         <div className={styles.titleBar}>
 
             <div className={styles.title}>14 Actions to reconcile</div>

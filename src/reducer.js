@@ -6,9 +6,9 @@ export function initState(state, newJSON){
 }
 
 function applyFilter(derivatives, type){
-    return derivatives.filter((x) => {
-        return x.get('type') == type
-    })
+  return derivatives.filter((x) => {
+    return x.get('type') == type
+  })
 }
 
 function applyLegalEntityFilter(derivatives, legalEntity) {
@@ -27,26 +27,28 @@ function applyLegalEntityFilter(derivatives, legalEntity) {
 }
 
 function applyStatusFilter(derivatives, status) {
-     return derivatives.reduce((list, x) => {
-         let listX = x.get('marginStatus').filter((y) => y.get('status') == status)
-         return (listX.size > 0 ? list.push(x.set('marginStatus', listX)) : list)
-    }, List())
+  return derivatives.reduce((list, x) => {
+    let listX = x.get('marginStatus').filter((y) => {
+      return y.get('status') == status
+    })
+    return (listX.size > 0 ? list.push(x.set('marginStatus', listX)) : list)
+  }, List())
 }
 
 
 function applyCptyOrgFilter(derivatives, cptyOrg) {
-    return derivatives.reduce((listVenue, deriv) => {
-        let venueList = deriv.get('marginStatus').reduce((listVenue, marginStatus) => {
-            let venueList = marginStatus.get('timeFrames').reduce((listVenue, timeFrames) => {
-                let venueList = timeFrames.get('actionsList').filter((actionsList) => {
-                    return actionsList.get('cptyOrg') == cptyOrg
-                })
-                return (venueList.size > 0 ? listVenue.push(timeFrames.set('actionsList', venueList)) : listVenue)
-            }, List())
-            return (venueList.size > 0 ? listVenue.push(marginStatus.set('timeFrames', venueList)) : listVenue)
-        }, List())
-        return (venueList.size > 0 ? listVenue.push(deriv.set('marginStatus', venueList)) : listVenue)
+  return derivatives.reduce((listVenue, deriv) => {
+    let venueList = deriv.get('marginStatus').reduce((listVenue, marginStatus) => {
+      let venueList = marginStatus.get('timeFrames').reduce((listVenue, timeFrames) => {
+        let venueList = timeFrames.get('actionsList').filter((actionsList) => {
+          return actionsList.get('cptyOrg') == cptyOrg
+        })
+        return (venueList.size > 0 ? listVenue.push(timeFrames.set('actionsList', venueList)) : listVenue)
+      }, List())
+      return (venueList.size > 0 ? listVenue.push(marginStatus.set('timeFrames', venueList)) : listVenue)
     }, List())
+    return (venueList.size > 0 ? listVenue.push(deriv.set('marginStatus', venueList)) : listVenue)
+  }, List())
 
 }
 
@@ -67,69 +69,105 @@ function applyCPTYFilter(derivatives, cptyEntity) {
 }
 
 
-export function updateStateDeriv(state, type){
-    if(type=="All"){
-        return state.set('display',state.get('data'))
-    }else
-        return state.setIn(['inputs', 'filters', 'typeFilter'], type).setIn(['display', 'derivatives'], applyFilter(state.getIn(['data', 'derivatives']), type))
+//update state
+export function updateStateDeriv(state, action, store){
+  if(action.get('filter') == "All"){
+    return state.set('display',state.get(store))
+  }else
+    return state.setIn(['display', 'derivatives'], applyFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
-export function updateStateLegal(state,legalEntityType){
-    if(legalEntityType=="All"){
-        return state.set('display', state.get('data'))
-    }else
-        return state.setIn(['inputs','filters','legalEntityFilter'],legalEntityType).setIn(['display','derivatives'],
-        applyLegalEntityFilter(state.getIn(['data', 'derivatives']), legalEntityType))
+export function updateStateLegal(state, action, store){
+  if(action.get('filter') == "All"){
+    return state.set('display', state.get(store))
+  }else
+    return state.setIn(['display','derivatives'], applyLegalEntityFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
-export function updateStateStatus(state,statusType) {
-  if (statusType == "All") {
-    return state.set('display', state.get('data'))
+export function updateStateStatus(state, action, store) {
+  //console.log(state.toJS())
+  if (action.get('filter') == "All") {
+    return state.set('display', state.get(store))
   } else
-    return state.setIn(['inputs', 'filters', 'statusFilter'], statusType).setIn(['display', 'derivatives'],
-      applyStatusFilter(state.getIn(['data', 'derivatives']), statusType))
+    return state.setIn(['display', 'derivatives'], applyStatusFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
-export function updateStateCptyOrg(state, cptyOrg){
-
-    if(cptyOrg=="All"){
-        return state.set('display', state.get('data'))
-    }else
-        return state.setIn(['inputs','filters','cptyOrgFilter'],cptyOrg).setIn(['display','derivatives'],
-            applyCptyOrgFilter(state.getIn(['data', 'derivatives']), cptyOrg))
-
+export function updateStateCptyOrg(state, action, store){
+  if(action.get('filter') == "All"){
+    return state.set('display', state.get(store))
+  }else
+    return state.setIn(['display','derivatives'], applyCptyOrgFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
-export function updateStateCptyEntity(state, cptyEntity) {
-
-    if(cptyEntity=="All"){
-      return state.set('display',state.get('data'))
-    }else
-      return state.setIn(['inputs','filters','cptyFilter'],cptyEntity).setIn(['display','derivatives'],
-      applyCPTYFilter(state.getIn(['data', 'derivatives']),cptyEntity))
+export function updateStateCptyEntity(state, action, store) {
+  if(action.get('filter') == "All"){
+    return state.set('display', state.get(store))
+  }else
+    return state.setIn(['display','derivatives'], applyCPTYFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
-export default function reducer(state = Map(), action) {
-    switch(action.type){
-        case 'INIT_STATE':
-            return initState(state, action.state)
+export function multifilters(state, action){
+  //console.log(attachFilter(state, action).toJS())
+  return attachFilter(state, action).getIn(['inputs', 'filters']).reduce((newState, filter) => {
+    switch(filter.get('type')){
+      case 'FILTER_STATE_DERIV':
+        return updateStateDeriv(newState, filter, 'display')
 
-        case 'FILTER_STATE_DERIV':
-            return updateStateDeriv(state, action.filter)
+      case 'FILTER_STATE_LEGAL':
+        return updateStateLegal(newState, filter, 'display')
 
-        case 'FILTER_STATE_LEGAL':
-            return updateStateLegal(state, action.filter)
+      case 'FILTER_STATE_STATUS':
+        return updateStateStatus(newState, filter, 'display')
 
-        case 'FILTER_STATE_STATUS':
-            return updateStateStatus(state, action.filter)
-
-        case 'FILTER_STATE_CPTYORG':
-            return updateStateCptyOrg(state, action.filter)
+      case 'FILTER_STATE_CPTYORG':
+        return updateStateCptyOrg(newState, filter, 'display')
 
       case 'FILTER_STATE_CPTYENTITY':
-            return updateStateCptyEntity(state, action.filter)
-
+        return updateStateCptyEntity(newState, filter, 'display')
     }
+  }, attachFilter(initState(state, state.get('data')), action))
+
+}
+
+export function attachFilter(state, action){
+  switch(action.type){
+    case 'FILTER_STATE_DERIV':
+      return state.setIn(['inputs','filters','typeFilter'], fromJS(action))
+    case 'FILTER_STATE_LEGAL':
+      return state.setIn(['inputs','filters','legalEntityFilter'], fromJS(action))
+
+    case 'FILTER_STATE_STATUS':
+      return state.setIn(['inputs','filters','statusFilter'], fromJS(action))
+
+    case 'FILTER_STATE_CPTYORG':
+      return state.setIn(['inputs','filters','cptyOrgFilter'], fromJS(action))
+
+    case 'FILTER_STATE_CPTYENTITY':
+      return state.setIn(['inputs','filters','cptyEntityFilter'], fromJS(action))
+  }
+}
+
+export default function reducer(state = Map(), action, store = 'data') {
+  switch(action.type) {
+    case 'INIT_STATE':
+      return initState(state, action.state)
+
+    case 'FILTER_STATE_DERIV':
+      return multifilters(state, action, store)
+
+    case 'FILTER_STATE_LEGAL':
+      return multifilters(state, action, store)
+
+    case 'FILTER_STATE_STATUS':
+      return multifilters(state, action, store)
+
+    case 'FILTER_STATE_CPTYORG':
+      return multifilters(state, action, store)
+
+    case 'FILTER_STATE_CPTYENTITY':
+      return multifilters(state, action, store)
+
+  }
 
   return state
 }

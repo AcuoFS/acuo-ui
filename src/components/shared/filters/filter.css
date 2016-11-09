@@ -2,10 +2,12 @@
 @value acuoGrey from './../../../css-components/colors.css';
 
 .filterContainer{
+    position: relative;
     background-color: #fff;
     font-size: 13px;
     display: block;
     padding: 8px 18px;
+    z-index: 20;
 }
 
 .filterContainer .filterBarName{
@@ -76,15 +78,17 @@
 
 .filterContainer .filterItemWrap{
     height: auto;
-    overflow: hidden;
+    display: block;
 }
 
 .filterContainer .filterItemWrap.show{
     height: auto;
+    display: block;
 }
 
 .filterContainer .filterItemWrap.hide{
     height: 0px;
+    display: none;
 }
 
 .filterContainer .filterItem{
@@ -93,6 +97,8 @@
     width: 15%;
     height: 50px;
     margin: 4px 8px;
+    position: relative;
+    z-index: 20;
 }
 .filterContainer .filterItem .filterLabel{
     display: block;
@@ -105,9 +111,9 @@
     background-color: #fff;
     width: 100%;
     min-height: 16px;
-    height: 34px;
+    height: 30px;
     border: none;
-    padding: 0 8px;
+    padding: 0 0px;
     border: 1px solid #494949;
     -webkit-border-radius: 0;
     border-radius: 0;
@@ -155,4 +161,45 @@
     position: absolute;
     top: 30%;
     left: 23%;
+}
+
+.filtersList {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    background-color: #fff;
+    -webkit-box-shadow: 5px 5px 14px -2px rgba(166,166,166,1);
+    -moz-box-shadow: 5px 5px 14px -2px rgba(166,166,166,1);
+    box-shadow: 5px 5px 14px -2px rgba(166,166,166,1);
+    list-style-type: none;
+    padding: 0px;
+    margin: 0;
+    border: 1px solid acuoGrey;
+}
+
+.selectedText {
+    padding: 0px 8px;
+    line-height: 30px;
+}
+
+.filtersList li{
+    padding: 4px 8px;
+}
+
+.filtersList li:hover{
+    background-color: #eeeeee;
+}
+
+.openDropdown ul{
+  opacity: 1;
+  pointer-events: auto;
+  max-height: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.closeDropdown ul{
+  opacity: 0;
+  pointer-events: none;
 }
