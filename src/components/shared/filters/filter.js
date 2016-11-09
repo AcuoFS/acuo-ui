@@ -217,7 +217,7 @@ class Filter extends React.Component{
                 </div>
 
                 <div className={styles.filterItem}>
-                    <label className={styles.filterLabel}>CPTY Org</label>
+                    <label className={styles.filterLabel}>CPTY Organisation</label>
                     <div className={styles.filters + ' ' + this.checkActive('cpty-org')} onClick={this.toggleDropDown} id="cpty-org">
                       <div className={styles.selectedText}>{(this.getFilters().getIn(['cptyOrgFilter', 'filter']) || 'All').toUpperCase()}</div>
                       <ul className={styles.filtersList}>
