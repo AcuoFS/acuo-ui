@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import {connect} from 'react-redux'
-import {List, Set} from 'immutable'
+import {List, Set, Map} from 'immutable'
 
 import * as actionCreators from '../../../action_creators'
 
@@ -11,43 +11,69 @@ import styles from './filter.css'
 
 class Filter extends React.Component{
     constructor(props){
-        super(props)
-        this.state = {
-            filterBarNameClicked: true,
-            filterBar: styles.open,
-            filterItems: styles.show
-        }
-        this.getDeriv = this.getDeriv.bind(this)
-        this.handleLegalEntityChange = this.handleLegalEntityChange.bind(this)
-        this.handleDerivChange = this.handleDerivChange.bind(this)
-        this.handleStatusChange = this.handleStatusChange.bind(this)
-        this.handleCptyOrgChange = this.handleCptyOrgChange.bind(this)
-        this.handleCPTYChange = this.handleCPTYChange.bind(this)
-        this.clickedDropdown = this.clickedDropdown.bind(this)
-
+      super(props)
+      this.state = {
+        filterBarNameClicked: true,
+        filterBar: styles.open,
+        filterItems: styles.show,
+        activeDropdown: ''
+      }
+      this.getDeriv = this.getDeriv.bind(this)
+      this.getFilters = this.getFilters.bind(this)
+      this.handleLegalEntityChange = this.handleLegalEntityChange.bind(this)
+      this.handleDerivChange = this.handleDerivChange.bind(this)
+      this.handleStatusChange = this.handleStatusChange.bind(this)
+      this.handleCptyOrgChange = this.handleCptyOrgChange.bind(this)
+      this.handleCPTYEntityChange = this.handleCPTYEntityChange.bind(this)
+      this.toggleFilter = this.toggleFilter.bind(this)
+      this.toggleDropDown = this.toggleDropDown.bind(this)
+      this.checkActive = this.checkActive.bind(this)
+      this.resetActiveDropdown = this.resetActiveDropdown.bind(this)
+      this.renderFilter = this.renderFilter.bind(this)
     }
+
+    resetActiveDropdown(){
+      this.setState({
+        activeDropdown: ''
+      })
+      document.removeEventListener("click", this.toggleDropDown)
+    }
+
     getDeriv(){
-        return this.props.derivatives || List()
+      return this.props.derivatives || List()
+    }
+    getFilters(){
+      return this.props.filters || Map()
     }
 
     handleLegalEntityChange(e){
-       this.props.filterStateLegal(e.target.value)
+      this.props.filterStateLegal(e.currentTarget.dataset.ref)
+      this.resetActiveDropdown()
+      e.stopPropagation()
     }
 
     handleDerivChange(e){
-        this.props.filterStateDeriv(e.target.value)
+      this.props.filterStateDeriv(e.currentTarget.dataset.ref)
+      this.resetActiveDropdown()
+      e.stopPropagation()
     }
 
     handleStatusChange(e){
-        this.props.filterStateStatus(e.target.value)
+      this.props.filterStateStatus(e.currentTarget.dataset.ref)
+      this.resetActiveDropdown()
+      e.stopPropagation()
     }
 
     handleCptyOrgChange(e){
-        this.props.filterCptyOrg(e.target.value)
+      this.props.filterCptyOrg(e.currentTarget.dataset.ref)
+      this.resetActiveDropdown()
+      e.stopPropagation()
     }
 
-    handleCPTYChange(e){
-        this.props.filterCptyEntity(e.target.value)
+    handleCPTYEntityChange(e){
+      this.props.filterCptyEntity(e.currentTarget.dataset.ref)
+      this.resetActiveDropdown()
+      e.stopPropagation()
     }
 
     fetchActionList(){
@@ -64,13 +90,13 @@ class Filter extends React.Component{
 
     renderFilter(deriv, index){
         return (
-            <option key={index} value={deriv.get('type')}>{deriv.get('type').toUpperCase()} </option>)
+            <li key={index} onClick={this.handleDerivChange} data-ref={deriv.get('type')} >{deriv.get('type').toUpperCase()} </li>)
     }
 
     renderLegalEntity(){
       return this.fetchActionList().reduce((listSum , x)=>{
         return(!listSum.includes(x.get('legalEntity')) ? listSum.add(x.get('legalEntity')):listSum)},Set()).map((x)=>{
-        return (<option key={x} value={x}>{x.toUpperCase()} </option>)
+        return (<li key={x} onClick={this.handleLegalEntityChange} data-ref={x}>{x.toUpperCase()} </li>)
       })
 
     }
@@ -82,24 +108,24 @@ class Filter extends React.Component{
                 return (!listSum.includes(marginStatus.get('status')) ? listSum.add(marginStatus.get('status')) : listSum)
             }, Set()))
         }, Set()).toList().map((x) => {
-            return (<option key={x} value={x}>{x.toUpperCase()} </option>)})
+            return (<li key={x} data-ref={x} onClick={this.handleStatusChange}>{x.toUpperCase()} </li>)})
     }
 
-    renderVenue(){
+    renderCPTYOrg(){
      return this.fetchActionList().reduce((listSum , x)=>{
          return(!listSum.includes(x.get('cptyOrg')) ? listSum.add(x.get('cptyOrg')):listSum)},Set()).map((x)=>{
-       return (<option key={x} value={x}>{x.toUpperCase()} </option>)
+       return (<li key={x} data-ref={x} onClick={this.handleCptyOrgChange}>{x.toUpperCase()} </li>)
        })
     }
 
-    renderCPTY(){
+    renderCPTYEntity(){
       return this.fetchActionList().reduce((listSum , x)=>{
         return(!listSum.includes(x.get('cptyEntity')) ? listSum.add(x.get('cptyEntity')):listSum)},Set()).map((x)=>{
-        return (<option key={x} value={x}>{x.toUpperCase()} </option>)
+        return (<li key={x} data-ref={x} onClick={this.handleCPTYEntityChange}>{x.toUpperCase()} </li>)
       })
     }
 
-    clickedDropdown(){
+    toggleFilter(){
         if(!this.state.filterBarNameClicked){
             this.setState({
                 filterBarNameClicked: !this.state.filterBarNameClicked,
@@ -115,11 +141,35 @@ class Filter extends React.Component{
         }
     }
 
+    toggleDropDown(e){
+
+      if(!this.state.activeDropdown){
+        //console.log('active is blank, add to active, add listener')
+        this.setState({
+          activeDropdown: e.currentTarget.id
+        })
+        document.addEventListener("click", this.toggleDropDown)
+      }else{
+        //console.log('active to none, remove listener')
+        this.setState({
+          activeDropdown: ''
+        })
+        document.removeEventListener("click", this.toggleDropDown)
+      }
+    }
+
+    checkActive(test){
+      if(this.state.activeDropdown == test){
+        return styles.openDropdown
+      }else{
+        return styles.closeDropdown
+      }
+    }
 
     render(){
         return(
         <div className={styles.filterContainer}>
-            <div className={styles.filterBarName + ' ' + this.state.filterBar} onClick={this.clickedDropdown}>
+            <div className={styles.filterBarName + ' ' + this.state.filterBar} onClick={this.toggleFilter}>
                 <span>Filter</span>
                 <div className={styles.switchArrow}>
                     <div className={styles.arrowLine} id={styles.line1}></div>
@@ -129,46 +179,61 @@ class Filter extends React.Component{
             <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>Legal Entity</label>
-                    <select className={styles.filters} id = "filter-legalEntity" onChange={this.handleLegalEntityChange}>
-                        <option value="All">ALL</option>
-                        {this.renderLegalEntity()}
-                    </select>
+                    <div className={styles.filters + ' ' + this.checkActive('legal-entity')} onClick={this.toggleDropDown} id="legal-entity">
+                        <div className={styles.selectedText}>{this.getFilters().getIn(['legalEntityFilter', 'filter']) || 'All'}</div>
+                        <ul className={styles.filtersList}>
+                          <li onClick={this.handleLegalEntityChange} data-ref="All">ALL</li>
+                          {this.renderLegalEntity()}
+                        </ul>
+                    </div>
                     <div className={styles.filterDropdownArrow}></div>
                 </div>
 
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>Deriv Type</label>
-                    <select className={styles.filters} id = "filter-derivtype" onChange={this.handleDerivChange}>
-                        <option value="All">ALL</option>
+                    <div className={styles.filters + ' ' + this.checkActive('type')} onClick={this.toggleDropDown} id="type">
+                      <div className={styles.selectedText}>{this.getFilters().getIn(['typeFilter', 'filter']) || 'All'}</div>
+                      <ul className={styles.filtersList}>
+                        <li onClick={this.handleDerivChange} data-ref="All">ALL</li>
                         {this.getDeriv().map(this.renderFilter)}
-                    </select>
+                      </ul>
+                    </div>
                     <div className={styles.filterDropdownArrow}></div>
                 </div>
 
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>Status</label>
-                    <select className={styles.filters} id = "filter-status" onChange={this.handleStatusChange}>
-                        <option value="All">ALL</option>
+                    <div className={styles.filters + ' ' + this.checkActive('status')} onClick={this.toggleDropDown} id="status">
+                      <div className={styles.selectedText}>{this.getFilters().getIn(['statusFilter', 'filter']) || 'All'}</div>
+                      <ul className={styles.filtersList}>
+                        <li onClick={this.handleStatusChange} data-ref="All">ALL</li>
                         {this.renderStatus()}
-                    </select>
+                      </ul>
+                    </div>
                     <div className={styles.filterDropdownArrow}></div>
                 </div>
 
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>CPTY Org</label>
-                    <select className={styles.filters} id = "filter-venue" onChange={this.handleCptyOrgChange}>
-                        <option value="All">ALL</option>
-                        {this.renderVenue()}
-                    </select>
+                    <div className={styles.filters + ' ' + this.checkActive('cpty-org')} onClick={this.toggleDropDown} id="cpty-org">
+                      <div className={styles.selectedText}>{this.getFilters().getIn(['cptyOrgFilter', 'filter']) || 'All'}</div>
+                      <ul className={styles.filtersList}>
+                        <li onClick={this.handleCptyOrgChange} data-ref="All">ALL</li>
+                        {this.renderCPTYOrg()}
+                      </ul>
+                    </div>
                     <div className={styles.filterDropdownArrow}></div>
                 </div>
 
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>CPTY Entity</label>
-                    <select className={styles.filters} id = "filter-cpty" onChange={this.handleCPTYChange}>
-                        <option value="All">ALL</option>
-                      {this.renderCPTY()}
-                    </select>
+                    <div className={styles.filters + ' ' + this.checkActive('cpty-entity')} onClick={this.toggleDropDown} id="cpty-entity">
+                      <div className={styles.selectedText}>{this.getFilters().getIn(['cptyEntityFilter', 'filter']) || 'All'}</div>
+                      <ul className={styles.filtersList}>
+                        <li onClick={this.handleCPTYEntityChange} data-ref="All">ALL</li>
+                        {this.renderCPTYEntity()}
+                      </ul>
+                    </div>
                     <div className={styles.filterDropdownArrow}></div>
                 </div>
             </div>
@@ -180,7 +245,8 @@ class Filter extends React.Component{
 
 function mapStateToProps(state){
     return{
-        derivatives : state.getIn(['data', 'derivatives'])
+      derivatives : state.getIn(['data', 'derivatives']),
+      filters: state.getIn(['inputs', 'filters'])
     }
 }
 

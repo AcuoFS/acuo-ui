@@ -8,7 +8,7 @@
     width: 100%;
     min-height: 50px;
     padding: 10px 20px;
-    z-index: 20;
+    z-index: 25;
 }
 
 .titleBar .uploadPortfolio{
@@ -93,5 +93,5 @@
 
 .open {
     opacity: 1;
-    pointer-events: click;
+    pointer-events: auto;
 }
