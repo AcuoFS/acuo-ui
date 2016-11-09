@@ -91,3 +91,20 @@
 .boldThis{
     font-weight: bold;
 }
+
+.nav .userInfo{
+    float: right;
+    /*compose: flex1;*/
+    flex: 1;
+    text-transform: none;
+    width: 200px;
+    padding: 0 15px;
+    text-align: right;
+    margin-top: -6px;
+
+}
+
+.userInfo #userId{
+  /*display: block;*/
+  line-height: 1.8em;
+}

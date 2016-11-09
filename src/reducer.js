@@ -33,7 +33,6 @@ function applyStatusFilter(derivatives, status) {
     }, List())
 }
 
-
 function applyCptyOrgFilter(derivatives, cptyOrg) {
     return derivatives.reduce((listVenue, deriv) => {
         let venueList = deriv.get('marginStatus').reduce((listVenue, marginStatus) => {
@@ -90,6 +89,7 @@ export function updateStateStatus(state,statusType) {
       applyStatusFilter(state.getIn(['data', 'derivatives']), statusType))
 }
 
+
 export function updateStateCptyOrg(state, cptyOrg){
 
     if(cptyOrg=="All"){
@@ -101,7 +101,6 @@ export function updateStateCptyOrg(state, cptyOrg){
 }
 
 export function updateStateCptyEntity(state, cptyEntity) {
-
     if(cptyEntity=="All"){
       return state.set('display',state.get('data'))
     }else
