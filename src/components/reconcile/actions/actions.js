@@ -67,14 +67,14 @@ class Actions extends React.Component{
                                   <hr/>
                               </div>
                               <div className={styles.sectionText}> {/* two row div for bold*/}
-                                  <div className={styles.packageRow}> {/* one row div*/}
+                                  <div className={styles.sectionRow}> {/* one row div*/}
                                       <div className={styles.packageLeft}>
                                           <div>Total Amount Selected</div>
                                       </div>
                                       <div className={styles.packageRight}> 15,586,933</div>
                                   </div>
 
-                                  <div className={styles.packageRow}> {/* one row div*/}
+                                  <div className={styles.sectionRow}> {/* one row div*/}
                                       <div className={styles.packageLeft}>
                                           <div>Total Amount Selected</div>
                                       </div>
@@ -110,10 +110,10 @@ class Actions extends React.Component{
                       <div className={styles.panel}>
                           <div className={styles.section+' '+styles.left}>
                               <div className={styles.legalEntityContainer}>
-                                  <div className={styles.legalEntity}>ACUO SG</div>
+                                  <div className={styles.legalEntity}>{i.get('legalEntity')}</div>
                                   <div className={styles.legalEntityDetails}>
-                                      <div>ACUO SG - </div>
-                                      <div>Counterparty A </div>
+                                      <div>{i.get('legalEntity')} - </div>
+                                      <div>{i.get('cptyOrg')} </div>
                                       <div>Global Mutual Fund</div>
                                   </div>
                               </div>
@@ -138,14 +138,14 @@ class Actions extends React.Component{
                               </div>
 
                               <div className={styles.sectionText}> {/* two row div for bold*/}
-                                  <div className={styles.packageRow}> {/* one row div*/}
+                                  <div className={styles.sectionRow}> {/* one row div*/}
                                       <div className={styles.packageLeft}>
                                           <div>Total Amount Selected</div>
                                       </div>
                                       <div className={styles.packageRight}> 15,586,933</div>
                                   </div>
 
-                                  <div className={styles.packageRow}> {/* one row div*/}
+                                  <div className={styles.sectionRow}> {/* one row div*/}
                                       <div className={styles.packageLeft}>
                                           <div>Total Amount Selected</div>
                                       </div>
