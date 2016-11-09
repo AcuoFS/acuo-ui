@@ -35,6 +35,7 @@ function applyStatusFilter(derivatives, status) {
   }, List())
 }
 
+
 function applyCptyOrgFilter(derivatives, cptyOrg) {
   return derivatives.reduce((listVenue, deriv) => {
     let venueList = deriv.get('marginStatus').reduce((listVenue, marginStatus) => {
@@ -91,10 +92,6 @@ export function updateStateStatus(state, action, store) {
     return state.setIn(['display', 'derivatives'], applyStatusFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
-<<<<<<< HEAD
-
-export function updateStateCptyOrg(state, cptyOrg){
-=======
 export function updateStateCptyOrg(state, action, store){
   if(action.get('filter') == "All"){
     return state.set('display', state.get(store))
@@ -108,7 +105,6 @@ export function updateStateCptyEntity(state, action, store) {
   }else
     return state.setIn(['display','derivatives'], applyCPTYFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
->>>>>>> 9f05b313e585f0ef9fd62bf27b69702a16df7158
 
 export function multifilters(state, action){
   //console.log(attachFilter(state, action).toJS())
@@ -133,14 +129,6 @@ export function multifilters(state, action){
 
 }
 
-<<<<<<< HEAD
-export function updateStateCptyEntity(state, cptyEntity) {
-    if(cptyEntity=="All"){
-      return state.set('display',state.get('data'))
-    }else
-      return state.setIn(['inputs','filters','cptyFilter'],cptyEntity).setIn(['display','derivatives'],
-      applyCPTYFilter(state.getIn(['data', 'derivatives']),cptyEntity))
-=======
 export function attachFilter(state, action){
   switch(action.type){
     case 'FILTER_STATE_DERIV':
@@ -157,7 +145,6 @@ export function attachFilter(state, action){
     case 'FILTER_STATE_CPTYENTITY':
       return state.setIn(['inputs','filters','cptyEntityFilter'], fromJS(action))
   }
->>>>>>> 9f05b313e585f0ef9fd62bf27b69702a16df7158
 }
 
 export default function reducer(state = Map(), action, store = 'data') {

@@ -114,14 +114,14 @@ class Filter extends React.Component{
     renderCPTYOrg(){
      return this.fetchActionList().reduce((listSum , x)=>{
          return(!listSum.includes(x.get('cptyOrg')) ? listSum.add(x.get('cptyOrg')):listSum)},Set()).sort().map((x)=>{
-       return (<option key={x} value={x}>{x.toUpperCase()} </option>)
+       return (<li key={x} data-ref={x} onClick={this.handleCptyOrgChange}>{x.toUpperCase()} </li>)
        })
     }
 
     renderCPTYEntity(){
       return this.fetchActionList().reduce((listSum , x)=>{
         return(!listSum.includes(x.get('cptyEntity')) ? listSum.add(x.get('cptyEntity')):listSum)},Set()).sort().map((x)=>{
-        return (<option key={x} value={x}>{x.toUpperCase()} </option>)
+        return (<li key={x} data-ref={x} onClick={this.handleCPTYEntityChange}>{x.toUpperCase()} </li>)
       })
     }
 
@@ -180,7 +180,7 @@ class Filter extends React.Component{
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>Legal Entity</label>
                     <div className={styles.filters + ' ' + this.checkActive('legal-entity')} onClick={this.toggleDropDown} id="legal-entity">
-                        <div className={styles.selectedText}>{this.getFilters().getIn(['legalEntityFilter', 'filter']) || 'All'}</div>
+                        <div className={styles.selectedText}>{(this.getFilters().getIn(['legalEntityFilter', 'filter']) || 'All').toUpperCase()}</div>
                         <ul className={styles.filtersList}>
                           <li onClick={this.handleLegalEntityChange} data-ref="All">ALL</li>
                           {this.renderLegalEntity()}
@@ -192,7 +192,7 @@ class Filter extends React.Component{
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>Deriv Type</label>
                     <div className={styles.filters + ' ' + this.checkActive('type')} onClick={this.toggleDropDown} id="type">
-                      <div className={styles.selectedText}>{this.getFilters().getIn(['typeFilter', 'filter']) || 'All'}</div>
+                      <div className={styles.selectedText}>{(this.getFilters().getIn(['typeFilter', 'filter']) || 'All').toUpperCase()}</div>
                       <ul className={styles.filtersList}>
                         <li onClick={this.handleDerivChange} data-ref="All">ALL</li>
                         {this.getDeriv().map(this.renderFilter)}
@@ -204,7 +204,7 @@ class Filter extends React.Component{
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>Status</label>
                     <div className={styles.filters + ' ' + this.checkActive('status')} onClick={this.toggleDropDown} id="status">
-                      <div className={styles.selectedText}>{this.getFilters().getIn(['statusFilter', 'filter']) || 'All'}</div>
+                      <div className={styles.selectedText}>{(this.getFilters().getIn(['statusFilter', 'filter']) || 'All').toUpperCase()}</div>
                       <ul className={styles.filtersList}>
                         <li onClick={this.handleStatusChange} data-ref="All">ALL</li>
                         {this.renderStatus()}
@@ -216,7 +216,7 @@ class Filter extends React.Component{
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>CPTY Org</label>
                     <div className={styles.filters + ' ' + this.checkActive('cpty-org')} onClick={this.toggleDropDown} id="cpty-org">
-                      <div className={styles.selectedText}>{this.getFilters().getIn(['cptyOrgFilter', 'filter']) || 'All'}</div>
+                      <div className={styles.selectedText}>{(this.getFilters().getIn(['cptyOrgFilter', 'filter']) || 'All').toUpperCase()}</div>
                       <ul className={styles.filtersList}>
                         <li onClick={this.handleCptyOrgChange} data-ref="All">ALL</li>
                         {this.renderCPTYOrg()}
@@ -228,7 +228,7 @@ class Filter extends React.Component{
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>CPTY Entity</label>
                     <div className={styles.filters + ' ' + this.checkActive('cpty-entity')} onClick={this.toggleDropDown} id="cpty-entity">
-                      <div className={styles.selectedText}>{this.getFilters().getIn(['cptyEntityFilter', 'filter']) || 'All'}</div>
+                      <div className={styles.selectedText}>{(this.getFilters().getIn(['cptyEntityFilter', 'filter']) || 'All').toUpperCase()}</div>
                       <ul className={styles.filtersList}>
                         <li onClick={this.handleCPTYEntityChange} data-ref="All">ALL</li>
                         {this.renderCPTYEntity()}
