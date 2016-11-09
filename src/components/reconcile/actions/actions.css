@@ -91,3 +91,8 @@
     -webkit-box-shadow: 2px 2px 4px 0 #c9c9c9;
     box-shadow: 2px 2px 4px 0 #c9c9c9;
 }
+
+.panelTitle{
+  font-size: 1.2em;
+
+}
