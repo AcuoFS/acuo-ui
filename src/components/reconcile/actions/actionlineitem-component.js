@@ -1,0 +1,58 @@
+/**
+ * Created by achalkagwad on 9/11/16.
+ */
+import React from 'react'
+import styles from './actions.css'
+import ActionLineItemExpand from './actionlineitemexpand-component.js'
+
+export default class ActionLineItem extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            open: false,
+            checkbox: "./images/reconcile/checkbox.png"
+        }
+        this.handleClick = this.handleClick.bind(this)
+
+    }
+    handleClick(){
+        if(this.state.open){
+            this.setState({
+                open: false,
+                checkbox: "./images/reconcile/checkbox.png"
+            })
+        }else {
+            this.setState({
+                open: true,
+                checkbox: "./images/reconcile/checkboxwithtick.png"
+            });
+        }
+    }
+    render(){
+        return(
+        <div className={styles.packageRow}> {/* one row div*/}
+            <div className={styles.packageLeft}>
+                <div className={styles.packageCheckBox} onClick={this.handleClick}>
+                    <img src={this.state.checkbox} alt=""/>
+                </div>
+                <div className={styles.packageText}>Net Total IM</div>
+                <ActionLineItemExpand/>
+            </div>
+            <div className={styles.packageRight}> 15,586,933</div>
+        </div>
+        )
+    }
+}
+
+// <div className={styles.packageRow}> {/* one row div*/}
+//     <div className={styles.packageLeft}>
+//         <div className={styles.packageCheckBox} onClick={this.handleClick}>
+//             <img src={this.state.checkbox} alt=""/>
+//         </div>
+//         <div className={styles.packageText}>
+//             Net Total IM
+//         </div>
+//         <div className={styles.packageExpand}> + </div>
+//     </div>
+//     <div className={styles.packageRight}> 15,586,933</div>
+// </div>

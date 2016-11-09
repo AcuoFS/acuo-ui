@@ -82,7 +82,9 @@
 
 .panel{
     width: 100%;
-    min-height: 180px;
+    display: flex;
+    font: 13px bold helvetica;
+    min-height: 365px;
     max-height: 400px;
     overflow: auto;
     border:1px solid #dedede;
@@ -92,7 +94,101 @@
     box-shadow: 2px 2px 4px 0 #c9c9c9;
 }
 
-.panelTitle{
-  font-size: 1.2em;
+.section.left{
+    flex:4;
+}
 
+.sectionText{
+    font-weight: bold;
+}
+.legalEntityContainer{
+    color:#9b9b9b;
+    text-align: left;
+    font-size: 10px;
+    padding: 10px;
+}
+
+.legalEntity{
+    color:#759BBB;
+    font: bold 18px helvetica;
+}
+
+.legalEntityDetails{
+    /*display: flex;*/
+}
+.legalEntityDetails div{
+    display: inline-block;
+    padding-right: 5px;
+    font-weight:lighter;
+    color:#4a4a4a;
+}
+
+.package{
+    font:13px helvetica;
+    padding: 0 5px;
+}
+
+.packageRow{
+    display: flex;
+    padding: 3px 0;
+}
+
+.packageLeft{
+    display: flex;
+    align-content: flex-start;
+    flex:3;
+}
+
+.packageRight{
+    flex:1;
+}
+
+.packageLeft div{
+    padding-left: 10px;
+}
+
+/*----------css for section right starts here--------------------*/
+
+.section.right{
+    color: #4a4a4a;
+    flex:1;
+    border-left: 1px solid #9B9B9B;
+    display:flex;
+    flex-direction: column;
+    align-content: space-between;
+    font: 13px helvetica;
+}
+
+
+.currency{
+    color:#9b9b9b;
+    text-align: right;
+    padding: 10px;
+}
+
+.viewFxRate{
+    color:#4A90e2;
+    text-align: right;
+    font-size: 12px;
+}
+
+.totalMargin{
+    text-align: center;
+    margin: auto 0;
+    line-height: 30px;
+}
+
+.marginValue{
+    font: bold 36px helvetica;
+}
+
+.marginUnit{
+    font-weight: bold;
+
+}
+
+.tradeDetails{
+    color:#4A90e2;
+    text-align: center;
+    padding: 10px;
 }
