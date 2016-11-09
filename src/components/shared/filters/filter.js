@@ -42,6 +42,11 @@ class Filter extends React.Component{
     getDeriv(){
       return this.props.derivatives || List()
     }
+
+    getDisplayDeriv(){
+      return this.props.displayDerivatives || List()
+    }
+
     getFilters(){
       return this.props.filters || Map()
     }
@@ -76,15 +81,14 @@ class Filter extends React.Component{
       e.stopPropagation()
     }
 
-    fetchActionList(){
-        return this.getDeriv().reduce((listSumZ, derivative)=>{
-            return listSumZ.union(derivative.get('marginStatus').reduce((listSumY, marginStatus)=>{
-                return listSumY.union(marginStatus.get('timeFrames').reduce((listSumX, timeFrames)=>{
-                    return listSumX.union(timeFrames.get('actionsList'))
-                  },Set()))
-              }, Set()))
-          }, Set())
-
+    fetchActionList(deriv = this.getDeriv()){
+      return deriv.reduce((listSumZ, derivative)=>{
+        return listSumZ.union(derivative.get('marginStatus').reduce((listSumY, marginStatus)=>{
+          return listSumY.union(marginStatus.get('timeFrames').reduce((listSumX, timeFrames)=>{
+            return listSumX.union(timeFrames.get('actionsList'))
+          },Set()))
+        }, Set()))
+      }, Set())
     }
 
 
@@ -100,7 +104,6 @@ class Filter extends React.Component{
       })
 
     }
-
 
     renderStatus(){
         return this.getDeriv().reduce((listSumZ, derivative)=>{
@@ -119,7 +122,7 @@ class Filter extends React.Component{
     }
 
     renderCPTYEntity(){
-      return this.fetchActionList().reduce((listSum , x)=>{
+      return this.fetchActionList(this.getDisplayDeriv()).reduce((listSum , x)=>{
         return(!listSum.includes(x.get('cptyEntity')) ? listSum.add(x.get('cptyEntity')):listSum)},Set()).sort().map((x)=>{
         return (<li key={x} data-ref={x} onClick={this.handleCPTYEntityChange}>{x.toUpperCase()} </li>)
       })
@@ -246,7 +249,8 @@ class Filter extends React.Component{
 function mapStateToProps(state){
     return{
       derivatives : state.getIn(['data', 'derivatives']),
-      filters: state.getIn(['inputs', 'filters'])
+      filters: state.getIn(['inputs', 'filters']),
+      displayDerivatives: state.getIn(['display', 'derivatives'])
     }
 }
 
