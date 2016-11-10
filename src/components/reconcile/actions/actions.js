@@ -14,21 +14,12 @@ class Actions extends React.Component{
         super(props)
         this.getLegalEntity = this.getLegalEntity.bind(this)
         this.getDerivative = this.getDerivative.bind(this)
-        this.getActionList = this.getActionList.bind(this)
     }
   getDerivative(){
     return this.props.derivatives|| List()
   }
 
-  getActionList() {
-    return this.getDerivative().map((x) => {
-      return x.get('marginStatus').map((y) => {
-        return y.get('timeFrames').map((z) => {
-          return z.get('actionsList')
-        })
-      })
-    })
-  }
+
   getLegalEntity() {
     return( this.getDerivative().map((x) => {
       return x.get('marginStatus').map((y) => {
@@ -85,8 +76,11 @@ class Actions extends React.Component{
                           </div>
                           <div className={styles.section+' '+styles.right}>
                               <div className={styles.currency}>
-                                  <div>CCY:USD</div>
+                                  <div>CCY:{i.get('ccy')}</div>
                                   <div className={styles.viewFxRate}> View FX rate</div>
+                              </div>
+                            <div className={styles.viewFxRateImage}>
+                                <img src={'./images/reconcile/FXrate-tooltip.png'}/>
                               </div>
                               <div className={styles.totalMargin}>
                                   <div className={styles.marginTitle}>Total Margin</div>

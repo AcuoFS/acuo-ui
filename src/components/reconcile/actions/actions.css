@@ -176,8 +176,12 @@
     color:#4A90e2;
     text-align: right;
     font-size: 12px;
+    margin-top: 4px;
 }
 
+.viewFxRateImage{
+  padding-left: 8px;
+}
 .totalMargin{
     text-align: center;
     margin: auto 0;
