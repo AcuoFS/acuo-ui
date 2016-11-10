@@ -80,8 +80,8 @@ class Actions extends React.Component{
                                   <div className={styles.viewFxRate}> View FX rate</div>
                               </div>
                             <div className={styles.viewFxRateImage}>
-                                <img src={'./images/reconcile/FXrate-tooltip.png'}/>
-                              </div>
+
+                            </div>
                               <div className={styles.totalMargin}>
                                   <div className={styles.marginTitle}>Total Margin</div>
                                   <div className={styles.marginValue}>116.5</div>
