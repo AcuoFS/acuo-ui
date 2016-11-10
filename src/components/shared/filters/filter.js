@@ -43,10 +43,6 @@ class Filter extends React.Component{
       return this.props.derivatives || List()
     }
 
-    getDisplayDeriv(){
-      return this.props.displayDerivatives || List()
-    }
-
     getFilters(){
       return this.props.filters || Map()
     }
@@ -122,9 +118,15 @@ class Filter extends React.Component{
     }
 
     renderCPTYEntity(){
-      return this.fetchActionList(this.getDisplayDeriv()).reduce((listSum , x)=>{
-        return(!listSum.includes(x.get('cptyEntity')) ? listSum.add(x.get('cptyEntity')):listSum)},Set()).sort().map((x)=>{
-        return (<li key={x} data-ref={x} onClick={this.handleCPTYEntityChange}>{x.toUpperCase()} </li>)
+      return this.fetchActionList().reduce((listSum , x)=> {
+
+        if(this.getFilters().getIn(['cptyOrgFilter', 'filter']) && this.getFilters().getIn(['cptyOrgFilter', 'filter']) != 'All') {
+          return (!listSum.includes(x.get('cptyEntity')) && x.get('cptyOrg') == this.getFilters().getIn(['cptyOrgFilter', 'filter']) ? listSum.add(x.get('cptyEntity')) : listSum)
+        } else {
+          return (!listSum.includes(x.get('cptyEntity')) ? listSum.add(x.get('cptyEntity')) : listSum)
+        }
+      } ,Set()).sort().map((x)=> {
+        return(<li key={x} data-ref={x} onClick={this.handleCPTYEntityChange}>{x.toUpperCase()} </li>)
       })
     }
 
