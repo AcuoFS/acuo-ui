@@ -187,7 +187,8 @@ class Actions extends React.Component{
 function mapStateToProps(state){
   //console.log('map state to props', state.getIn(['display', 'derivatives']))
   return{
-    derivatives : state.getIn(['display', 'derivatives'])
+    derivatives : state.getIn(['display', 'derivatives']),
+    recon : state.getIn(['data', 'recon'])
   }
 }
 export const ActionsFilter = connect(mapStateToProps)(Actions)
