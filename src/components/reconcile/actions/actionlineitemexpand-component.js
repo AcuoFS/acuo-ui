@@ -14,7 +14,6 @@ export default class ActionLineItemExpand extends React.Component {
     }
 
     handleClick(){
-        console.log("hello bro");
         if(this.state.open){
             this.setState({
                 open: false,
