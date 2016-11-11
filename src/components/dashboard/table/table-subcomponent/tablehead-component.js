@@ -8,10 +8,9 @@ class TableHead extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      open: false,
-      nonopen:styles.sectionOpen,
-      class: styles.sectionClose,
-      dropdown: "./images/dashboard/table/Droplist(down).png"
+      open: true,
+      class: styles.sectionOpen,
+      dropdown: "./images/dashboard/table/Droplist(up).png"
     }
     this.handleClick = this.handleClick.bind(this);
 
@@ -28,9 +27,10 @@ class TableHead extends React.Component{
         open: true,
         class: styles.sectionOpen,
         dropdown: "./images/dashboard/table/Droplist(up).png"
-      });
+      })
     }
   }
+
   render() {
     return (
       <div className={styles.tableWrapper}>
@@ -42,6 +42,6 @@ class TableHead extends React.Component{
       </div>
     )
   }
-};
+}
 
 export default TableHead

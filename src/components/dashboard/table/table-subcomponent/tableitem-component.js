@@ -40,6 +40,7 @@ class TableItem extends React.Component{
   getMarginStatus(){
       return this.props.deriv.get('marginStatus') || []
   }
+
   render() {
     return (
       <div>
