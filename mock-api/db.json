@@ -2291,7 +2291,8 @@
       "variableMargin": 500000,
       "ClientAssets":[
         {
-          "group1": [
+          "groupName": "group 1",
+          "data":[
             {
               "firstLevel": "Net Total IM",
               "secondLevel": [
@@ -2323,7 +2324,8 @@
               ]
             }
           ],
-          "group2": [
+          "groupName": "group 2",
+          "data":[
             {
               "firstLevel": "Product Cash Flows",
               "secondLevel": [
@@ -2359,7 +2361,8 @@
       ],
       "counterpartyAssets":[
         {
-          "group1": [
+          "groupName": "group 1",
+          "data":[
             {
               "firstLevel": "Net Total IM",
               "secondLevel": [
@@ -2395,7 +2398,8 @@
               ]
             }
           ],
-          "group2": [
+          "groupName": "group 2",
+          "data":[
             {
               "firstLevel": "Product Cash Flows",
               "secondLevel": [
@@ -2432,11 +2436,15 @@
       "currencyInfo": [
         {
           "ccy": "USD",
-          "excahngeRate": 1
+          "exchangeRate": 1
         },
         {
           "ccy": "RMB",
-          "excahngeRate": 0.4123
+          "exchangeRate": 0.4123
+        },
+        {
+          "ccy": "AUD",
+          "exchangeRate": 0.712
         }
       ]
     }

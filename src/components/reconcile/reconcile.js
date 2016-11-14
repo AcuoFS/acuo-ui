@@ -4,7 +4,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import {FilterContainer} from '../shared/filters/filter'
-import Actions from './actions/actions'
+import {ActionsFilter} from './actions/actions'
 import stylesG from '../../global.css'
 import styles from './reconcile.css'
 import {NavContainer} from '../../components/shared/navbar/navbar'
@@ -22,7 +22,7 @@ class Reconcile extends React.Component{
             <div className={styles.titleTriangle}></div>
         </div>
         <FilterContainer/>
-        <Actions/>
+        <ActionsFilter/>
       </div>
     )
   }
