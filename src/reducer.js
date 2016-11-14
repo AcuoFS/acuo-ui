@@ -35,7 +35,6 @@ function applyStatusFilter(derivatives, status) {
   }, List())
 }
 
-
 function applyCptyOrgFilter(derivatives, cptyOrg) {
   return derivatives.reduce((listVenue, deriv) => {
     let venueList = deriv.get('marginStatus').reduce((listVenue, marginStatus) => {
@@ -67,7 +66,6 @@ function applyCPTYFilter(derivatives, cptyEntity) {
         return (cptyList.size >0 ? listCPTY.push(deriv.set('marginStatus', cptyList)) : listCPTY)
     }, List())
 }
-
 
 //update state
 export function updateStateDeriv(state, action, store){
@@ -147,6 +145,53 @@ export function attachFilter(state, action){
   }
 }
 
+//updating state when recon page info is retrieved
+export const appendList = (state, action) => {
+  if(!state.get('data').isEmpty()){
+    return state.setIn(['data', 'derivatives'], state.getIn(['data', 'derivatives']).map((x) =>{
+
+      return x.set('marginStatus', x.get('marginStatus').map((y) => {
+        return y.set('timeFrames', y.get('timeFrames').map((z) => {
+          return z.set('actionsList', z.get('actionsList').map((a) => {
+            let item = action.addition.filter((item) => {
+              return a.get('GUID') === item.get('GUID')
+            }).first()
+
+            if(item) {
+              return a.set('clientAssets', item.get('ClientAssets')).set('counterpartyAssets', item.get('counterpartyAssets')).set('currencyInfo', item.get('currencyInfo'))
+            }
+            else {
+              return a
+            }
+          }))
+        }))
+      }))
+    })).setIn(['display', 'derivatives'], state.getIn(['display', 'derivatives']).map((x) =>{
+      return x.set('marginStatus', x.get('marginStatus').map((y) => {
+        return y.set('timeFrames', y.get('timeFrames').map((z) => {
+          return z.set('actionsList', z.get('actionsList').map((a) => {
+            let item = action.addition.filter((item) => {
+              return a.get('GUID') === item.get('GUID')
+            }).first()
+
+            if(item) {
+              return a.set('clientAssets', item.get('ClientAssets')).set('counterpartyAssets', item.get('counterpartyAssets')).set('currencyInfo', item.get('currencyInfo'))
+            }
+            else {
+              return a
+            }
+          }))
+        }))
+      }))
+    }))
+  }
+  else{
+    return state
+  }
+
+}
+
+// main reducer function
 export default function reducer(state = Map(), action, store = 'data') {
   switch(action.type) {
     case 'INIT_STATE':
@@ -166,6 +211,9 @@ export default function reducer(state = Map(), action, store = 'data') {
 
     case 'FILTER_STATE_CPTYENTITY':
       return multifilters(state, action, store)
+
+    case 'LINE_ITEM_INSERTION':
+      return appendList(state, action)
 
   }
 

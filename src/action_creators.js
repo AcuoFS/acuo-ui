@@ -46,3 +46,10 @@ export function filterCptyEntity(cptyEntity){
         filter : cptyEntity
     }
 }
+
+export const lineItemInsertion = (lineItem) => (
+  {
+    type: 'LINE_ITEM_INSERTION',
+    addition : lineItem
+  }
+)

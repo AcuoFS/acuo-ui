@@ -28,6 +28,13 @@ export default class ActionLineItem extends React.Component {
             });
         }
     }
+    numberWithCommas(x) {
+      x = x.toString();
+      var pattern = /(-?\d+)(\d{3})/;
+      while (pattern.test(x))
+      x = x.replace(pattern, "$1,$2");
+      return x;
+    }
     render(){
         return(
         <div className={styles.packageRow}> {/* one row div*/}
@@ -35,24 +42,11 @@ export default class ActionLineItem extends React.Component {
                 <div className={styles.packageCheckBox} onClick={this.handleClick}>
                     <img src={this.state.checkbox} alt=""/>
                 </div>
-                <div className={styles.packageText}>Net Total IM</div>
+                <div className={styles.packageText}>{this.props.topLevel}</div>
                 <ActionLineItemExpand/>
             </div>
-            <div className={styles.packageRight}> 15,586,933</div>
+            <div className={styles.packageRight}>{this.numberWithCommas(this.props.totalAmount)}</div>
         </div>
         )
     }
 }
-
-// <div className={styles.packageRow}> {/* one row div*/}
-//     <div className={styles.packageLeft}>
-//         <div className={styles.packageCheckBox} onClick={this.handleClick}>
-//             <img src={this.state.checkbox} alt=""/>
-//         </div>
-//         <div className={styles.packageText}>
-//             Net Total IM
-//         </div>
-//         <div className={styles.packageExpand}> + </div>
-//     </div>
-//     <div className={styles.packageRight}> 15,586,933</div>
-// </div>
