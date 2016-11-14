@@ -184,7 +184,15 @@
 }
 
 .filtersList li{
-    padding: 4px 8px;
+   padding: 4px 8px;
+}
+
+.paddingless{
+  padding: 0 !important;
+}
+
+.all{
+  composes: baseFontBold from './../../../css-components/fonts.css';
 }
 
 .filtersList li:hover{
@@ -202,4 +210,10 @@
 .closeDropdown ul{
   opacity: 0;
   pointer-events: none;
+}
+
+.filtersList .filterSearchBox {
+  width: 96%;
+  text-indent: 4px;
+  font-size: 13px;
 }

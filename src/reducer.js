@@ -68,7 +68,6 @@ function applyCPTYFilter(derivatives, cptyEntity) {
     }, List())
 }
 
-
 //update state
 export function updateStateDeriv(state, action, store){
   if(action.get('filter') == "All"){
@@ -106,6 +105,13 @@ export function updateStateCptyEntity(state, action, store) {
     return state.setIn(['display','derivatives'], applyCPTYFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
+export const updateCptyEntityList = (state, action, store) => {
+  if(action.get('filter') == ""){
+    return state.set('display', state.get(store))
+  }else
+    return state.setIn(['display','derivatives'], applyCPTYListFilter(state.getIn([store, 'derivatives']), action.get('filter')))
+}
+
 export function multifilters(state, action){
   //console.log(attachFilter(state, action).toJS())
   return attachFilter(state, action).getIn(['inputs', 'filters']).reduce((newState, filter) => {
@@ -124,6 +130,9 @@ export function multifilters(state, action){
 
       case 'FILTER_STATE_CPTYENTITY':
         return updateStateCptyEntity(newState, filter, 'display')
+
+      case 'INPUT_FILTER_CPTYENTITY':
+        return updateCptyEntityList(newState, filter, 'display')
     }
   }, attachFilter(initState(state, state.get('data')), action))
 
