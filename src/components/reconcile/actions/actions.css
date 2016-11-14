@@ -88,7 +88,6 @@
     display: flex;
     font: 13px bold helvetica;
     min-height: 365px;
-    max-height: 400px;
     overflow: auto;
     border:1px solid #dedede;
     -webkit-border-radius: 10px;
