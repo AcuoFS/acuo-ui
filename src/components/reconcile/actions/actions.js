@@ -10,13 +10,15 @@ import ActionLineItem from './actionlineitem-component'
 
 
 class Actions extends React.Component{
-  constructor(props) {
-    super(props)
-    this.getLegalEntity = this.getLegalEntity.bind(this)
-    this.getDerivative = this.getDerivative.bind(this)
-    this.getRecon = this.getRecon.bind(this)
-    this.getCurrencyInfo = this.getCurrencyInfo.bind(this)
-  }
+    constructor(props) {
+        super(props)
+        this.getLegalEntity = this.getLegalEntity.bind(this)
+        this.getDerivative = this.getDerivative.bind(this)
+        this.getRecon = this.getRecon.bind(this)
+        this.getCurrencyInfo = this.getCurrencyInfo.bind(this)
+
+    }
+
   getDerivative(){
     return this.props.derivatives|| List()
   }
@@ -88,11 +90,9 @@ class Actions extends React.Component{
                             <div>
                               {this.getCurrencyInfo(i.get('ccy'))}
                             </div>
-                          </div>
-
                         </div>
                       </div>
-
+                      </div>
 
                       <div className={styles.totalMargin}>
                         <div className={styles.marginTitle}>Total Margin</div>
@@ -189,6 +189,7 @@ class Actions extends React.Component{
       return x.map((y)=>{
         return (
           y.get('ccy') + '/' + baseCCY + "=" + y.get('exchangeRate') + '\n'
+
         )
       })
     })

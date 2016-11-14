@@ -141,21 +141,6 @@
     display: flex;
     padding: 3px 0;
 }
-.packageRow .packageLeft,
-.packageRow .packageRight{
-    -webkit-transition: background 0.4s ease;
-    -moz-transition: background 0.4s ease;
-    -ms-transition: background 0.4s ease;
-    -o-transition: background 0.4s ease;
-    transition: background 0.4s ease;
-}
-.packageRow:hover .packageLeft,
-.packageRow:hover .packageRight{
-    background-color: #f9dbd5;
-}
-.packageRow:hover .packageLeft .packageCheckBox{
-    /*background-color: #fff;*/
-}
 
 .packageLeft{
     display: flex;
@@ -228,21 +213,21 @@
 }
 
 .viewFxRate .viewFxRateImage{
-  padding: 8px 10px;
-  display: none;
-  text-align: left;
-  color: #9b9b9b;
-  float: left;
-  position: absolute;
-  width: 100px;
-  -webkit-border-radius: 10px 0 10px 10px;
-  border-radius: 10px 0 10px 10px;
-  border:1px solid #c9c9c9;
-  background-color: #ffffff;
-  top: 80px;
+    padding: 8px 10px;
+    display: none;
+    text-align: left;
+    color: #9b9b9b ;
+    float: left;
+    position: absolute;
+    width: 100px;
+    -webkit-border-radius: 10px 0 10px 10px;
+    border-radius: 10px 0 10px 10px;
+    border:1px solid #c9c9c9 ;
+    background-color: #ffffff ;
+    top: 50px;
 }
 .viewFxRate:hover .viewFxRateImage{
-  display: block;
+    display: block;
 }
 
 
