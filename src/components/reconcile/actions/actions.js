@@ -110,7 +110,7 @@ class Actions extends React.Component{
                         <div className={styles.legalEntity}>{i.get('legalEntity')}</div>
                         <div className={styles.legalEntityDetails}>
                           <div>{i.get('legalEntity')} - </div>
-                          <div>{i.get('cptyOrg')}</div>
+
                           <div>Global Mutual Fund</div>
                         </div>
                       </div>
@@ -166,10 +166,9 @@ class Actions extends React.Component{
                   <div className={styles.panel}>
                     <div className={styles.section+' '+styles.left}>
                       <div className={styles.legalEntityContainer}>
-                        <div className={styles.legalEntity}>{i.get('legalEntity')}</div>
+                        <div className={styles.legalEntity}>{i.get('cptyOrg')}</div>
                         <div className={styles.legalEntityDetails}>
-                          <div>{i.get('legalEntity')} - </div>
-                          <div>{i.get('cptyOrg')} </div>
+                          <div>{i.get('cptyOrg')} - </div>
                           <div>Global Mutual Fund</div>
                         </div>
                       </div>
