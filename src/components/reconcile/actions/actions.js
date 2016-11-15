@@ -222,14 +222,14 @@ class Actions extends React.Component{
       }))
     }
 
-render(){
-  return(
-    <div className={styles.actionContainer}>
-      {this.displayLineItems()}
-    </div>
-  )
-}
-}
+    render(){
+      return(
+        <div className={styles.actionContainer}>
+          {this.displayLineItems()}
+        </div>
+      )
+    }
+  }
 function mapStateToProps(state){
   return{
     recon : state.getIn(['display', 'derivatives'])
