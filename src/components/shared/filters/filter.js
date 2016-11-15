@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import {connect} from 'react-redux'
-import {List, Set, Map} from 'immutable'
+import {List, Set, Map, OrderedSet} from 'immutable'
 
 import * as actionCreators from '../../../action_creators'
 
@@ -32,6 +32,8 @@ class Filter extends React.Component{
       this.resetActiveDropdown = this.resetActiveDropdown.bind(this)
       this.renderFilter = this.renderFilter.bind(this)
       this.filterEntities = this.filterEntities.bind(this)
+      this.selectFilteredEntities = this.selectFilteredEntities.bind(this)
+      this.renderEntitySelection = this.renderEntitySelection.bind(this)
 
     }
 
@@ -75,8 +77,12 @@ class Filter extends React.Component{
     }
 
     handleCPTYEntityChange(e){
-      this.props.filterCptyEntity(e.currentTarget.dataset.ref)
-      this.resetActiveDropdown()
+      if(!this.getFilters().getIn(['cptyEntityFilter', 'filter']) || e.currentTarget.dataset.ref == "All"){
+        this.props.filterCptyEntity(Set().add(e.currentTarget.dataset.ref))
+      }
+      else{
+        this.selectFilteredEntities(e)
+      }
       e.stopPropagation()
     }
 
@@ -121,8 +127,9 @@ class Filter extends React.Component{
     }
 
     renderCPTYEntity(){
-      return this.fetchActionList().reduce((listSum , x)=> {
+      let filterSet = this.getFilters().getIn(['cptyEntityFilter', 'filter']) || Set()
 
+      let cptyEntityList = this.fetchActionList().reduce((listSum , x)=> {
         if(this.getFilters().getIn(['cptyOrgFilter', 'filter']) && this.getFilters().getIn(['cptyOrgFilter', 'filter']) != 'All') {
           return (!listSum.includes(x.get('cptyEntity')) && x.get('cptyOrg') == this.getFilters().getIn(['cptyOrgFilter', 'filter']) ? listSum.add(x.get('cptyEntity')) : listSum)
         } else {
@@ -130,10 +137,21 @@ class Filter extends React.Component{
         }
       } ,Set()).sort().filter((x)=> {
         return x.toUpperCase().includes(this.state.filterEntity.toUpperCase())
-      }).map((x) =>
-        <li key={x} data-ref={x} onClick={this.handleCPTYEntityChange}>{x.toUpperCase()} </li>
-      )
+      })
+
+      if(filterSet.size > 0)
+        return cptyEntityList.filter(x =>
+          filterSet.includes(x)
+        ).toOrderedSet().sort().union(cptyEntityList.filter(x =>
+          !filterSet.includes(x)
+        ).toOrderedSet().sort()).map(x =>
+          <li key={x} className={filterSet.includes(x) ? styles.selectedList : ''} data-ref={x} onClick={this.handleCPTYEntityChange}>{x.toUpperCase()}</li>
+        )
+      else
+        return cptyEntityList.map(x => <li key={x} className={filterSet.includes(x) ? styles.selectedList : ''} data-ref={x} onClick={this.handleCPTYEntityChange}>{x.toUpperCase()}</li>)
     }
+     // map
+    //
 
     toggleFilter(){
         if(!this.state.filterBarNameClicked){
@@ -172,10 +190,36 @@ class Filter extends React.Component{
     }
 
     filterEntities(e){
-      //console.log(e.currentTarget.value)
       this.setState({
         filterEntity: e.currentTarget.value
       })
+    }
+
+    selectFilteredEntities(e){
+      //console.log(this.getFilters().getIn(['cptyEntityFilter', 'filter']))
+      let filterSet = this.getFilters().getIn(['cptyEntityFilter', 'filter'])
+
+      if(!filterSet.includes(e.currentTarget.dataset.ref))
+        this.props.filterCptyEntity(filterSet.add(e.currentTarget.dataset.ref).remove("All"))
+      else
+        if(filterSet.size == 1)
+          this.props.filterCptyEntity(filterSet.remove(e.currentTarget.dataset.ref).add("All"))
+        else
+          this.props.filterCptyEntity(filterSet.remove(e.currentTarget.dataset.ref).remove("All"))
+
+    }
+
+    renderEntitySelection(){
+
+      if(!this.getFilters().getIn(['cptyEntityFilter', 'filter']) || this.getFilters().getIn(['cptyEntityFilter', 'filter']).includes("All") || this.getFilters().getIn(['cptyEntityFilter', 'filter']).size == 0)
+        return "All"
+
+      if(this.getFilters().getIn(['cptyEntityFilter', 'filter']).size < 2)
+        return this.getFilters().getIn(['cptyEntityFilter', 'filter']).first()
+
+      if(this.getFilters().getIn(['cptyEntityFilter', 'filter']).size > 1)
+        return "Multiple"
+
     }
 
     render(){
@@ -240,7 +284,9 @@ class Filter extends React.Component{
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>CPTY Entity</label>
                     <div className={styles.filters + ' ' + this.checkActive('cpty-entity')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="cpty-entity">
-                      <div className={styles.selectedText}>{(this.getFilters().getIn(['cptyEntityFilter', 'filter']) || 'All').toUpperCase()}</div>
+                      <div className={styles.selectedText}>
+                        {this.renderEntitySelection().toUpperCase()}
+                      </div>
                       <ul className={styles.filtersList}>
                         <li className={styles.paddingless} onClick={(e) => e.stopPropagation()}><input type="text" className={styles.filterSearchBox} onChange={this.filterEntities} placeholder="Search..."/></li>
                         <li onClick={this.handleCPTYEntityChange} data-ref="All" className={styles.all}>ALL</li>

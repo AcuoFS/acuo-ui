@@ -217,3 +217,8 @@
   text-indent: 4px;
   font-size: 13px;
 }
+
+.selectedList {
+  background-color: #4A90e2;
+  color: #fff;
+}
