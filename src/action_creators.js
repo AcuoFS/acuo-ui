@@ -49,7 +49,15 @@ export function filterCptyEntity(cptyEntity){
 
 export const lineItemInsertion = (lineItem) => (
   {
-    type: 'LINE_ITEM_INSERTION',
-    addition : lineItem
+      type: 'LINE_ITEM_INSERTION',
+      addition : lineItem
+  }
+)
+
+export const selectedItems = (id, item) => (
+  {
+      type: 'SELECT_ITEM',
+      GUID: id,
+      name: item
   }
 )

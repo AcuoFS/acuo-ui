@@ -6,7 +6,7 @@ import { render } from 'react-dom'
 import styles from './actions.css'
 import {connect} from 'react-redux'
 import {List} from 'immutable'
-import ActionLineItem from './actionlineitem-component'
+import { ActionLineItemContainer } from './actionlineitem-component'
 import * as actionCreators from '../../../action_creators'
 
 
@@ -34,7 +34,8 @@ class Actions extends React.Component{
     return asset.get('clientAssets').map((x) => {
       if(x.get('data'))
       return (<div key={x.get('groupName')}>{x.get('data').map((y) => {
-        return <ActionLineItem
+        return <ActionLineItemContainer
+          GUID={asset.get('GUID')}
           topLevel={y.get('firstLevel')}
           key={y.get('firstLevel') + x.get('groupName')}
           totalAmount={y.get('secondLevel').reduce((amount, j)=> {
@@ -50,7 +51,8 @@ class Actions extends React.Component{
     return asset.get('counterpartyAssets').map((x) => {
       if(x.get('data'))
       return (<div key={x.get('groupName')}>{x.get('data').map((y) => {
-        return <ActionLineItem
+        return <ActionLineItemContainer
+          GUID={asset.get('GUID')}
           topLevel={y.get('firstLevel')}
           key={y.get('firstLevel') + x.get('groupName')}
           totalAmount={y.get('secondLevel').reduce((amount, j)=> {
@@ -96,7 +98,7 @@ class Actions extends React.Component{
       return
   }
   displayLineItems() {
-    console.log("display", this.getRecon().toJS())
+    // console.log("display", this.getRecon().toJS())
     return( this.getRecon().map((x) => {
       return x.get('marginStatus').map((y) => {
         return y.get('timeFrames').map((z) => {

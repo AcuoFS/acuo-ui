@@ -191,6 +191,50 @@ export const appendList = (state, action) => {
 
 }
 
+export const selectItem = (state, action) => {
+  console.log(state.toJS())
+  console.log(action)
+  return state.setIn(['display', 'derivatives'], state.getIn(['display', 'derivatives']).map((x) => {
+    return x.set('marginStatus', x.get('marginStatus').map((y) => {
+      return y.set('timeFrames', y.get('timeFrames').map((z) => {
+        return z.set('actionsList', z.get('actionsList').map((a) => {
+          if(a.get('GUID') == action.GUID) {
+            return a.set('clientAssets', a.get('clientAssets').map((b) => {
+              return b.set('data', b.get('data').map((c) => {
+                if(c.get('firstLevel') == action.name){
+                  if(!c.get('checked') || c.get('checked') == 'unchecked')
+                    return c.set('checked', 'checked')
+                  else {
+                    return c.set('checked', 'unchecked')
+                  }
+                }
+
+                else {
+                  return c
+                }
+              }))
+            })).set('counterpartyAssets', a.get('counterpartyAssets').map((b) => {
+              return b.set('data', b.get('data').map((c) => {
+                if(c.get('firstLevel') == action.name){
+                  if(!c.get('checked') || c.get('checked') == 'unchecked')
+                    return c.set('checked', 'checked')
+                  else {
+                    return c.set('checked', 'unchecked')
+                  }
+                }
+
+                else {
+                  return c
+                }
+              }))
+            }))
+          }
+          return a
+        }))
+      }))
+    }))
+  }))
+}
 // main reducer function
 export default function reducer(state = Map(), action, store = 'data') {
   switch(action.type) {
@@ -214,6 +258,9 @@ export default function reducer(state = Map(), action, store = 'data') {
 
     case 'LINE_ITEM_INSERTION':
       return appendList(state, action)
+
+    case 'SELECT_ITEM':
+      return selectItem(state, action)
 
   }
 

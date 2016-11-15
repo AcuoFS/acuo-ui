@@ -3,7 +3,9 @@
  */
 import React from 'react'
 import styles from './actions.css'
+import {connect} from 'react-redux'
 import ActionLineItemExpand from './actionlineitemexpand-component.js'
+import * as actionCreators from '../../../action_creators'
 
 export default class ActionLineItem extends React.Component {
     constructor(props) {
@@ -18,6 +20,12 @@ export default class ActionLineItem extends React.Component {
         }
         this.handleClick = this.handleClick.bind(this)
         this.handlePlusMinus = this.handlePlusMinus.bind(this)
+    }
+    sendAction(i, j){
+      this.props.selectedItems(i,j)
+      // console.log(i)
+      // console.log(j)
+      // console.log(e)
     }
     handleClick(){
         if(this.state.cbTicked){
@@ -75,12 +83,12 @@ export default class ActionLineItem extends React.Component {
       })
     }
     render(){
-      console.log(this.props.topLevel)
+      // console.log(this.props.topLevel)
         return(
         <div>
             <div className={styles.packageRow}> {/* one row div*/}
                 <div className={styles.packageLeft}>
-                    <div className={styles.packageCheckBox+' '+this.state.cbLvl1} onClick={this.handleClick}>
+                    <div className={styles.packageCheckBox+' '+this.state.cbLvl1} onClick={(e) => {this.handleClick(e);this.sendAction(this.props.GUID, this.props.topLevel)}}>
                         <img src={this.state.checkbox} alt=""/>
                     </div>
                     <div className={styles.packageText}>{this.props.topLevel}</div>
@@ -93,3 +101,9 @@ export default class ActionLineItem extends React.Component {
         )
     }
 }
+function mapStateToProps(state){
+  return{
+    recon : state.getIn(['display', 'derivatives'])
+  }
+}
+export const ActionLineItemContainer = connect(mapStateToProps, actionCreators)(ActionLineItem)
