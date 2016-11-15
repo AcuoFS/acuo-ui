@@ -75,6 +75,7 @@ export default class ActionLineItem extends React.Component {
       })
     }
     render(){
+      console.log(this.props.topLevel)
         return(
         <div>
             <div className={styles.packageRow}> {/* one row div*/}

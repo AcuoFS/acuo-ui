@@ -96,7 +96,7 @@ class Actions extends React.Component{
       return
   }
   displayLineItems() {
-    // console.log("display", this.getRecon().toJS())
+    console.log("display", this.getRecon().toJS())
     return( this.getRecon().map((x) => {
       return x.get('marginStatus').map((y) => {
         return y.get('timeFrames').map((z) => {
