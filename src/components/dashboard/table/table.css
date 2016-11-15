@@ -1,4 +1,4 @@
-@value acuoAction from './../../../css-components/colors.css';
+@value acuoAction from './../../../static/css-components/colors.css';
 
 .tableWrapper{
   -webkit-border-radius: 10px;
@@ -71,7 +71,7 @@
 .leftThis{
   text-align: left;
   position:relative;
-  composes: baseFontBold from '../../../css-components/fonts.css';
+  composes: baseFontBold from '../../../static/css-components/fonts.css';
 }
 
 .actionVertiCenter{

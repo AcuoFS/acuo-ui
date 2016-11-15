@@ -1,5 +1,5 @@
-@value acuoAction from './../../../css-components/colors.css';
-@value acuoGrey from './../../../css-components/colors.css';
+@value acuoAction from './../../../static/css-components/colors.css';
+@value acuoGrey from './../../../static/css-components/colors.css';
 
 .filterContainer{
     position: relative;

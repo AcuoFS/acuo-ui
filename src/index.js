@@ -4,13 +4,13 @@ import {createStore} from 'redux'
 import {fromJS} from 'immutable'
 import {Provider} from 'react-redux'
 import { browserHistory, Router, Route, Link } from 'react-router'
-import reducer from './reducer'
-import {initState} from './action_creators'
+import reducer from './reducers/reducer'
+import {initState} from './actions'
 
-import styles from './global.css'
+import styles from './static/global.css'
 
-import Dashboard from './components/dashboard/dashboard'
-import Reconcile from './components/reconcile/reconcile'
+
+import { Dashboard, Reconcile } from './pages'
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 

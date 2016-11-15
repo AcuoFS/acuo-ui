@@ -1,4 +1,4 @@
-@value acuoGrey from './../../../static/css-components/colors.css';
+@value acuoGrey from '../../static/css-components/colors.css';
 
 .nav {
     flex-wrap: nowrap;
