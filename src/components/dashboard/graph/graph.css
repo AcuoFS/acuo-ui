@@ -1,8 +1,0 @@
-@value acuoAction from './../../../static/css-components/colors.css';
-
-#componentId .toolTip{visibility: hidden}
-#componentId:hover .toolTip{visibility: visible;}
-
-.toolTip text{
-  text-anchor: right;
-}

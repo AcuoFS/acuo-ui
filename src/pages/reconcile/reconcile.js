@@ -1,12 +1,10 @@
 import React from 'react'
 import { render } from 'react-dom'
-
-import {FilterContainer} from '../../components/shared/filters/filter'
-import {ActionsFilter} from '../../components/reconcile/actions/actions'
+import { FilterContainer } from '../../components/filter/filter'
+import { MarginAgreements } from '../../components/margin-agreement/marginAgreementList'
+import { NavContainer } from '../../components/navigation/navigationBar'
 import stylesG from '../../static/global.css'
 import styles from './reconcile.css'
-import {NavContainer} from '../../components/shared/navbar/navbar'
-
 
 
 class Reconcile extends React.Component{
@@ -20,7 +18,7 @@ class Reconcile extends React.Component{
                     <div className={styles.titleTriangle}></div>
                 </div>
                 <FilterContainer/>
-                <ActionsFilter/>
+                <MarginAgreements/>
             </div>
         )
     }
