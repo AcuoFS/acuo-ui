@@ -20,7 +20,6 @@ class Reconcile extends React.Component{
     fetch('https://acuo.herokuapp.com/json').then((response) => {
         return response.json()
     }).then((obj) => {
-      console.log(obj.recon)
         this.props.lineItemInsertion(fromJS(obj.recon))
     })
   }

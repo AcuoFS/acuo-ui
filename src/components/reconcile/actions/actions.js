@@ -1,6 +1,6 @@
 /**
- * Created by panyong on 4/11/16.
- */
+* Created by panyong on 4/11/16.
+*/
 import React from 'react'
 import { render } from 'react-dom'
 import styles from './actions.css'
@@ -17,6 +17,7 @@ class Actions extends React.Component{
     if(!this.getRecon().isEmpty()){
       this.props.lineItemInsertion(this.getRecon())
     }
+    // this.getCurrencyInfo = this.getCurrencyInfo.bind(this)
   }
   getRecon(){
     return this.props.recon || List()
@@ -30,57 +31,69 @@ class Actions extends React.Component{
   }
   renderAssetItem(asset){
     if(asset.get('clientAssets'))
-      return asset.get('clientAssets').map((x) => {
-        if(x.get('data'))
-          return (<div key={x.get('groupName')}>{x.get('data').map((y) => {
-            return <ActionLineItem
-              topLevel={y.get('firstLevel')}
-              key={y.get('firstLevel') + x.get('groupName')}
-              totalAmount={y.get('secondLevel').reduce((amount, j)=> {
-                return amount + j.get('amount')
-              },0)}
-            />
-          })} <hr/></div>)
-      })
+    return asset.get('clientAssets').map((x) => {
+      if(x.get('data'))
+      return (<div key={x.get('groupName')}>{x.get('data').map((y) => {
+        return <ActionLineItem
+          topLevel={y.get('firstLevel')}
+          key={y.get('firstLevel') + x.get('groupName')}
+          totalAmount={y.get('secondLevel').reduce((amount, j)=> {
+            return amount + j.get('amount')
+          },0)}
+          secondLevel={y.get('secondLevel')}
+          />
+      })} <hr/></div>)
+    })
   }
   renderCptyItem(asset){
     if(asset.get('counterpartyAssets'))
-      return asset.get('counterpartyAssets').map((x) => {
-        if(x.get('data'))
-          return (<div key={x.get('groupName')}>{x.get('data').map((y) => {
-            return <ActionLineItem
-              topLevel={y.get('firstLevel')}
-              key={y.get('firstLevel') + x.get('groupName')}
-              totalAmount={y.get('secondLevel').reduce((amount, j)=> {
-                return amount + j.get('amount')
-              },0)}
-            />
-          })} <hr/></div>)
-      })
+    return asset.get('counterpartyAssets').map((x) => {
+      if(x.get('data'))
+      return (<div key={x.get('groupName')}>{x.get('data').map((y) => {
+        return <ActionLineItem
+          topLevel={y.get('firstLevel')}
+          key={y.get('firstLevel') + x.get('groupName')}
+          totalAmount={y.get('secondLevel').reduce((amount, j)=> {
+            return amount + j.get('amount')
+          },0)}
+          secondLevel={y.get('secondLevel')}
+          />
+      })} <hr/></div>)
+    })
   }
   displayTotalAssetMargin(i){
     //  console.log(i.toJS())
-     if(i.get('clientAssets')) {
-       return this.numberWithCommas((i.get('clientAssets').reduce((asset, x) => {
-         return asset + x.get('data').reduce((data, y) => {
-           return data + y.get('secondLevel').reduce((amount, z) => {
-             return amount + z.get('amount')
-           }, 0)
-         }, 0)
-       }, 0)/1000000).toFixed(2))
-     }
+    if(i.get('clientAssets')) {
+      return this.numberWithCommas((i.get('clientAssets').reduce((asset, x) => {
+        return asset + x.get('data').reduce((data, y) => {
+          return data + y.get('secondLevel').reduce((amount, z) => {
+            return amount + z.get('amount')
+          }, 0)
+        }, 0)
+      }, 0)/1000000).toFixed(2))
+    }
   }
   displayTotalCptyMargin(i){
     //  console.log(i.toJS())
-     if(i.get('counterpartyAssets')) {
-       return this.numberWithCommas((i.get('clientAssets').reduce((asset, x) => {
-         return asset + x.get('data').reduce((data, y) => {
-           return data + y.get('secondLevel').reduce((amount, z) => {
-             return amount + z.get('amount')
-           }, 0)
-         }, 0)
-       }, 0)/1000000).toFixed(2))
-     }
+    if(i.get('counterpartyAssets')) {
+      return this.numberWithCommas((i.get('counterpartyAssets').reduce((asset, x) => {
+        return asset + x.get('data').reduce((data, y) => {
+          return data + y.get('secondLevel').reduce((amount, z) => {
+            return amount + z.get('amount')
+          }, 0)
+        }, 0)
+      }, 0)/1000000).toFixed(2))
+    }
+  }
+  getCurrencyInfo(ccy, baseCCY){
+    if(ccy)
+      return ccy.map((x)=> {
+        return(
+          <div key={Math.random()}>{x.get('ccy') + '/' + baseCCY + "=" + x.get('exchangeRate')}</div>
+        )
+      })
+    else
+      return
   }
   displayLineItems() {
     // console.log("display", this.getRecon().toJS())
@@ -101,7 +114,6 @@ class Actions extends React.Component{
                           <div>Global Mutual Fund</div>
                         </div>
                       </div>
-
                       <div className={styles.package}> {/* table outer div*/}
                         {this.renderAssetItem(i)}
                       </div>
@@ -111,24 +123,26 @@ class Actions extends React.Component{
                           <div className={styles.packageLeft}>
                             <div>Total Amount Selected</div>
                           </div>
-                          <div className={styles.packageRight}> 15,586,933</div>
+                          <div className={styles.packageRight}>-</div>
                         </div>
-
                         <div className={styles.sectionRow}> {/* one row div*/}
                           <div className={styles.packageLeft}>
-                            <div>Total Amount Selected</div>
+                            <div>Total Reconciled</div>
                           </div>
-                          <div className={styles.packageRight}> 15,586,933</div>
+                          <div className={styles.packageRight}>-</div>
                         </div>
                       </div>
                     </div>
                     <div className={styles.section+' '+styles.right}>
                       <div className={styles.currency}>
                         <div>CCY:{i.get('ccy')}</div>
-                        <div className={styles.viewFxRate}> View FX rate</div>
-                      </div>
-                      <div className={styles.viewFxRateImage}>
-
+                        <div className={styles.viewFxRate}> View FX rate
+                          <div className={styles.viewFxRateImage}>
+                            <div>
+                              {this.getCurrencyInfo(i.get('currencyInfo'), i.get('ccy'))}
+                            </div>
+                          </div>
+                        </div>
                       </div>
                       <div className={styles.totalMargin}>
                         <div className={styles.marginTitle}>Total Margin</div>
@@ -159,31 +173,37 @@ class Actions extends React.Component{
                           <div>Global Mutual Fund</div>
                         </div>
                       </div>
-
                       <div className={styles.package}> {/* table outer div*/}
                         {this.renderCptyItem(i)}
                       </div>
-
                       <div className={styles.sectionText}> {/* two row div for bold*/}
                         <div className={styles.sectionRow}> {/* one row div*/}
                           <div className={styles.packageLeft}>
                             <div>Total Amount Selected</div>
                           </div>
-                          <div className={styles.packageRight}> 15,586,933</div>
+                          <div className={styles.packageRight}>-</div>
                         </div>
 
                         <div className={styles.sectionRow}> {/* one row div*/}
                           <div className={styles.packageLeft}>
-                            <div>Total Amount Selected</div>
+                            <div>Total Reconciled</div>
                           </div>
-                          <div className={styles.packageRight}> 15,586,933</div>
+                          <div className={styles.packageRight}>-</div>
                         </div>
                       </div>
                     </div>
+
                     <div className={styles.section+' '+styles.right}>
                       <div className={styles.currency}>
-                        <div>CCY:USD</div>
-                        <div className={styles.ViewFxRate}> View FX rate</div>
+                        <div>CCY:{i.get('ccy')}</div>
+                        <div className={styles.viewFxRate}> View FX rate
+
+                          <div className={styles.viewFxRateImage}>
+                            <div>
+                              {this.getCurrencyInfo(i.get('currencyInfo'), i.get('ccy'))}
+                            </div>
+                          </div>
+                        </div>
                       </div>
                       <div className={styles.totalMargin}>
                         <div className={styles.marginTitle}>Total Margin</div>
@@ -202,19 +222,17 @@ class Actions extends React.Component{
       }))
     }
 
-    render(){
-      return(
-        <div className={styles.actionContainer}>
-          {this.displayLineItems()}
-        </div>
-      )
-    }
+render(){
+  return(
+    <div className={styles.actionContainer}>
+      {this.displayLineItems()}
+    </div>
+  )
+}
+}
+function mapStateToProps(state){
+  return{
+    recon : state.getIn(['display', 'derivatives'])
   }
-
-  function mapStateToProps(state){
-    //console.log('map state to props', state.getIn(['display', 'derivatives']))
-    return{
-      recon : state.getIn(['display', 'derivatives'])
-    }
-  }
-  export const ActionsFilter = connect(mapStateToProps, actionCreators)(Actions)
+}
+export const ActionsFilter = connect(mapStateToProps, actionCreators)(Actions)
