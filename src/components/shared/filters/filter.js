@@ -16,7 +16,10 @@ class Filter extends React.Component{
         filterBarNameClicked: true,
         filterBar: styles.open,
         filterItems: styles.show,
-        activeDropdown: ''
+        activeDropdown: '',
+        timeWindowTitle: 'Today',
+        timeArrowLeft: styles.show,
+        timeArrowRight: styles.show
       }
       this.getDeriv = this.getDeriv.bind(this)
       this.getFilters = this.getFilters.bind(this)
@@ -26,6 +29,7 @@ class Filter extends React.Component{
       this.renderPrevDay = this.renderPrevDay.bind(this)
       this.renderNextDay = this.renderNextDay.bind(this)
       this.preventClose = this.preventClose.bind(this)
+      this.checkTimeDay = this.checkTimeDay.bind(this)
       this.handleStatusChange = this.handleStatusChange.bind(this)
       this.handleCptyOrgChange = this.handleCptyOrgChange.bind(this)
       this.handleCPTYEntityChange = this.handleCPTYEntityChange.bind(this)
@@ -66,6 +70,7 @@ class Filter extends React.Component{
     handleTimeWindowChange(e){
         console.log('here')
         this.props.filterTimeWindowStatus(e.currentTarget.dataset.ref)
+        this.resetActiveDropdown()
         e.stopPropagation()
     }
 
@@ -115,26 +120,53 @@ class Filter extends React.Component{
         // console.log("timeWindow")
     }
 
+    checkTimeDay(){
+        switch (this.state.timeWindowTitle) {
+        case 'Yesterday':
+            return (
+                this.setState({
+                    timeWindowTitle: 'Yesterday',
+                    timeArrowLeft: styles.hide,
+                    timeArrowRight: styles.show
+                })
+            )
+
+        case 'Tomorrow':
+            return (
+                this.setState({
+                    timeWindowTitle: 'Tomorrow',
+                    timeArrowLeft: styles.show,
+                    timeArrowRight: styles.hide
+                })
+            )
+
+        default:
+            return (
+                this.setState({
+                    timeWindowTitle: 'Today',
+                    timeArrowLeft: styles.show,
+                    timeArrowRight: styles.show
+                })
+            )
+        }
+    }
+
     renderPrevDay(){
-        // console.log('inside renderPrev')
-        // return (
-        //     <div>
-        //         <ul className={styles.filtersList+' '+styles.timeSlot}>
-        //             <li className={styles.timeTitle}>
-        //                 <div className={styles.timeArrowLeft} onClick={this.renderPrevDay}></div>
-        //                 <span>Yesterday</span>
-        //                 <div className={styles.timeArrowRight} onClick={this.renderNextDay}></div>
-        //             </li>
-        //
-        //             <li onClick={this.handleTimeWindowChange} data-ref="All">ALL</li>
-        //             {this.renderTimeWindow()}
-        //         </ul>
-        //     </div>
-        // )
+        if(this.state.timeWindowTitle == 'Today') {
+            this.state.timeWindowTitle = 'Yesterday'
+        } else {
+            this.state.timeWindowTitle = 'Today'
+        }
+        this.checkTimeDay()
     }
 
     renderNextDay(){
-
+        if(this.state.timeWindowTitle == 'Today') {
+            this.state.timeWindowTitle = 'Tomorrow'
+        } else {
+            this.state.timeWindowTitle = 'Today'
+        }
+        this.checkTimeDay()
     }
 
     preventClose(e){
@@ -251,9 +283,9 @@ class Filter extends React.Component{
                         <ul className={styles.filtersList+' '+styles.timeSlot}>
 
                             <li className={styles.timeTitle} onClick={this.preventClose}>
-                                <div className={styles.timeArrowLeft} onClick={this.renderPrevDay}></div>
-                                <span>Today</span>
-                                <div className={styles.timeArrowRight} onClick={this.renderNextDay}></div>
+                                <div className={styles.timeArrowLeft+' '+this.state.timeArrowLeft} onClick={this.renderPrevDay}></div>
+                                <span>{this.state.timeWindowTitle}</span>
+                                <div className={styles.timeArrowRight+' '+this.state.timeArrowRight} onClick={this.renderNextDay}></div>
                             </li>
 
                             <li onClick={this.handleTimeWindowChange} data-ref="All">ALL</li>

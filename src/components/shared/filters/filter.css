@@ -227,6 +227,14 @@
     cursor: pointer;
     /*background-color: #4A90e2;*/
 }
+.filtersList .timeTitle .timeArrowLeft.show,
+.filtersList .timeTitle .timeArrowRight.show{
+    display: inline-block;
+}
+.filtersList .timeTitle .timeArrowLeft.hide,
+.filtersList .timeTitle .timeArrowRight.hide{
+    display: none;
+}
 
 .timeSlot{
     text-align: center;
