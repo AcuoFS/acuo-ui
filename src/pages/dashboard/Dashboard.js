@@ -3,9 +3,9 @@ import {
     NavContainer,
     UploadPortfolio,
     GraphContainer,
-    TableContainer,
 } from '../../components'
 import FilterContainer from '../../containers/FilterContainer'
+import TableContainer from '../../containers/TableContainer'
 
 
 

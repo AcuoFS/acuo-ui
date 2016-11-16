@@ -1,9 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import TableHead from './sub-components/TableHead'
 
 
-export class Table extends React.Component{
+export default class Table extends React.Component{
     constructor(props){
         super(props)
         this.getDeriv = this.getDeriv.bind(this)
@@ -22,11 +21,3 @@ export class Table extends React.Component{
         );
     }
 }
-
-function mapStateToProps(state){
-    return{
-        derivatives : state.getIn(['display', 'derivatives'])
-    }
-}
-
-export const TableContainer = connect(mapStateToProps)(Table)
