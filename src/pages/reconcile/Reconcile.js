@@ -1,8 +1,10 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { FilterContainer } from '../../components/filter/Filter'
-import { MarginAgreements } from '../../components/margin-agreement/MarginAgreementList'
-import { NavContainer } from '../../components/navigation/NavigationBar'
+import {
+    FilterContainer,
+    MarginAgreements,
+    NavContainer
+} from '../../components'
 import stylesG from '../../static/global.css'
 import styles from './Reconcile.css'
 
