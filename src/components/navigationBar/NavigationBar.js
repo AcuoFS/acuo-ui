@@ -1,11 +1,10 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import NavItem from './NavigationItem'
 import { Link } from 'react-router'
 import styles from './NavigationBar.css'
 
 
-export class NavigationBar extends React.Component{
+export default class NavigationBar extends React.Component{
     constructor(props){
         super(props)
         // this.state = {
@@ -122,12 +121,3 @@ export class NavigationBar extends React.Component{
         )
     }
 }
-
-function mapStateToProps(state){
-  //console.log('map state to props', state.getIn(['display', 'timeUpdated']))
-  return{
-    timeUpdated : state.getIn(['display', 'timeUpdated'])
-  }
-}
-
-export const NavContainer = connect(mapStateToProps)(NavigationBar)

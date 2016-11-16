@@ -1,11 +1,9 @@
 import React from 'react'
-import {
-    NavContainer,
-    UploadPortfolio
-} from '../../components'
+import { UploadPortfolioComponent } from '../../components'
 import FilterContainer from '../../containers/FilterContainer'
 import TableContainer from '../../containers/TableContainer'
 import GraphContainer from '../../containers/GraphContainer'
+import NavigationBarContainer from '../../containers/NavigationBarContainer'
 
 
 class Dashboard extends React.Component{
@@ -13,8 +11,8 @@ class Dashboard extends React.Component{
     render(){
         return (
             <div>
-                <NavContainer curPage={this.props.location.pathname}/>
-                <UploadPortfolio />
+                <NavigationBarContainer curPage={this.props.location.pathname}/>
+                <UploadPortfolioComponent />
                 <FilterContainer/>
                 <GraphContainer />
                 <TableContainer />
