@@ -1,12 +1,11 @@
 import React from 'react'
-import {connect} from 'react-redux'
 import Axis from './sub-components/Axis'
 import SubAxis from './sub-components/SubAxis'
 import GraphBody from './sub-components/GraphBody'
 import Pointer from './sub-components/Pointer'
 
 
-class Graph extends React.Component {
+export default class Graph extends React.Component {
   static get defaultProps() {
     const now = new Date("2016-10-23T08:00:00.000Z")
     const time = [now.getHours(), (now.getMinutes() <10 ? '0' : ' ')  + now.getMinutes()]
@@ -66,12 +65,3 @@ class Graph extends React.Component {
     )
   }
 }
-
-function mapStateToProps(state){
-    return{
-        currentTime : state.getIn(['display', 'timeUpdated']),
-        derivatives : state.getIn(['display', 'derivatives'])
-    }
-}
-
-export const GraphContainer = connect(mapStateToProps)(Graph)
