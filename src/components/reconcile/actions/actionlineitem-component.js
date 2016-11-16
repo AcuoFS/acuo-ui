@@ -23,9 +23,6 @@ export default class ActionLineItem extends React.Component {
     }
     sendAction(i, j){
       this.props.selectedItems(i,j)
-      // console.log(i)
-      // console.log(j)
-      // console.log(e)
     }
     handleClick(){
         if(this.state.cbTicked){
@@ -71,8 +68,8 @@ export default class ActionLineItem extends React.Component {
             {/* have second level table rendering structure here */}
             <div className={styles.packageRow}>
               <div className={styles.packageLeft}>
-                <div className={styles.packageCheckBox} onClick={this.handleClick}>
-                  <img src={this.state.checkbox} alt=""/>
+                <div className={styles.packageCheckBox} onClick={(e) => {this.handleClick(e);this.sendAction(this.props.GUID, x.get('assetName'))}}>
+                  <img src={x.get('checked') ? "./images/reconcile/checkboxwithtick.png" : "./images/reconcile/checkbox.png"} alt=""/>
                 </div>
                 <div className={styles.packageText}>{ x.get('assetName') }</div>
               </div>
@@ -83,12 +80,11 @@ export default class ActionLineItem extends React.Component {
       })
     }
     render(){
-      // console.log(this.props.topLevel)
         return(
         <div>
             <div className={styles.packageRow}> {/* one row div*/}
                 <div className={styles.packageLeft}>
-                    <div className={styles.packageCheckBox+' '+this.state.cbLvl1} onClick={(e) => {this.handleClick(e);this.sendAction(this.props.GUID, this.props.topLevel)}}>
+                    <div className={styles.packageCheckBox+' '+this.state.cbLvl1} onClick={(e) => {this.handleClick(e)}}>
                         <img src={this.state.checkbox} alt=""/>
                     </div>
                     <div className={styles.packageText}>{this.props.topLevel}</div>

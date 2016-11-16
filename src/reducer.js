@@ -192,8 +192,6 @@ export const appendList = (state, action) => {
 }
 
 export const selectItem = (state, action) => {
-  console.log(state.toJS())
-  console.log(action)
   return state.setIn(['display', 'derivatives'], state.getIn(['display', 'derivatives']).map((x) => {
     return x.set('marginStatus', x.get('marginStatus').map((y) => {
       return y.set('timeFrames', y.get('timeFrames').map((z) => {
@@ -201,31 +199,33 @@ export const selectItem = (state, action) => {
           if(a.get('GUID') == action.GUID) {
             return a.set('clientAssets', a.get('clientAssets').map((b) => {
               return b.set('data', b.get('data').map((c) => {
-                if(c.get('firstLevel') == action.name){
-                  if(!c.get('checked') || c.get('checked') == 'unchecked')
-                    return c.set('checked', 'checked')
-                  else {
-                    return c.set('checked', 'unchecked')
+                return c.set('secondLevel', c.get('secondLevel').map(d => {
+                  if(d.get('assetName') == action.name){
+                    if(!d.get('checked'))
+                      return d.set('checked', true)
+                    else {
+                      return d.set('checked', false)
+                    }
                   }
-                }
-
-                else {
-                  return c
-                }
+                  else {
+                    return d
+                  }
+                }))
               }))
             })).set('counterpartyAssets', a.get('counterpartyAssets').map((b) => {
               return b.set('data', b.get('data').map((c) => {
-                if(c.get('firstLevel') == action.name){
-                  if(!c.get('checked') || c.get('checked') == 'unchecked')
-                    return c.set('checked', 'checked')
-                  else {
-                    return c.set('checked', 'unchecked')
+                return c.set('secondLevel', c.get('secondLevel').map(d => {
+                  if(d.get('assetName') == action.name){
+                    if(!d.get('checked'))
+                      return d.set('checked', true)
+                    else {
+                      return d.set('checked', false)
+                    }
                   }
-                }
-
-                else {
-                  return c
-                }
+                  else {
+                    return d
+                  }
+                }))
               }))
             }))
           }
