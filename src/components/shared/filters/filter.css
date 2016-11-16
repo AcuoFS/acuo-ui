@@ -99,6 +99,7 @@
     margin: 4px 8px;
     position: relative;
     z-index: 20;
+    vertical-align: top;
 }
 .filterContainer .filterItem .filterLabel{
     display: block;
@@ -202,4 +203,65 @@
 .closeDropdown ul{
   opacity: 0;
   pointer-events: none;
+}
+
+
+.timeDay{
+    width: 100%;
+    padding: 0px 8px;
+    line-height: 30px;
+    text-transform: uppercase;
+    /*border: 1px solid acuoGrey;*/
+}
+
+.filtersList .timeTitle{
+    padding: 10px 0px;
+}
+.filtersList .timeTitle:hover{
+    background-color: transparent;
+    cursor: default;
+}
+.filtersList .timeTitle .timeArrowLeft,
+.filtersList .timeTitle .timeArrowRight{
+    display: inline-block;
+    cursor: pointer;
+    /*background-color: #4A90e2;*/
+}
+
+.timeSlot{
+    text-align: center;
+}
+
+.timeTitle{
+    position: relative;
+    text-align: center;
+    padding: 6px;
+    text-transform: uppercase;
+}
+
+.timeTitle .timeArrowLeft{
+    right: 80%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    border-color: rgba(0, 0, 0, 0);
+    border-right-color: #000000;
+    border-width: 8px;
+    margin-top: -8px;
+}
+.timeTitle .timeArrowRight{
+    left: 80%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    border-color: rgba(0, 0, 0, 0);
+    border-left-color: #000000;
+    border-width: 8px;
+    margin-top: -8px;
 }

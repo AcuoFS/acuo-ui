@@ -22,6 +22,13 @@ export function filterStateLegal(legalEntity) {
     }
 }
 
+export function filterTimeWindowStatus(timewindow) {
+
+    return {
+        type: 'FILTER_STATE_TIMEWINDOW',
+        filter: timewindow
+    }
+}
 
 export function filterStateStatus(status) {
 

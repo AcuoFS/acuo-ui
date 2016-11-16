@@ -22,6 +22,10 @@ class Filter extends React.Component{
       this.getFilters = this.getFilters.bind(this)
       this.handleLegalEntityChange = this.handleLegalEntityChange.bind(this)
       this.handleDerivChange = this.handleDerivChange.bind(this)
+      this.handleTimeWindowChange = this.handleTimeWindowChange.bind(this)
+      this.renderPrevDay = this.renderPrevDay.bind(this)
+      this.renderNextDay = this.renderNextDay.bind(this)
+      this.preventClose = this.preventClose.bind(this)
       this.handleStatusChange = this.handleStatusChange.bind(this)
       this.handleCptyOrgChange = this.handleCptyOrgChange.bind(this)
       this.handleCPTYEntityChange = this.handleCPTYEntityChange.bind(this)
@@ -56,6 +60,13 @@ class Filter extends React.Component{
       this.props.filterStateDeriv(e.currentTarget.dataset.ref)
       this.resetActiveDropdown()
       e.stopPropagation()
+    }
+
+    handleTimeWindowChange(e){
+        console.log('here')
+        this.props.filterTimeWindowStatus(e.currentTarget.dataset.ref)
+        this.resetActiveDropdown()
+        e.stopPropagation()
     }
 
     handleStatusChange(e){
@@ -101,6 +112,35 @@ class Filter extends React.Component{
 
     }
 
+    renderTimeWindow(){
+        // console.log("timeWindow")
+    }
+
+    renderPrevDay(){
+        // console.log('inside renderPrev')
+        // return (
+        //     <div>
+        //         <ul className={styles.filtersList+' '+styles.timeSlot}>
+        //             <li className={styles.timeTitle}>
+        //                 <div className={styles.timeArrowLeft} onClick={this.renderPrevDay}></div>
+        //                 <span>Yesterday</span>
+        //                 <div className={styles.timeArrowRight} onClick={this.renderNextDay}></div>
+        //             </li>
+        //
+        //             <li onClick={this.handleTimeWindowChange} data-ref="All">ALL</li>
+        //             {this.renderTimeWindow()}
+        //         </ul>
+        //     </div>
+        // )
+    }
+
+    renderNextDay(){
+
+    }
+
+    preventClose(e){
+        return e.stopPropagation()
+    }
 
     renderStatus(){
         return this.getDeriv().reduce((listSumZ, derivative)=>{
@@ -142,7 +182,6 @@ class Filter extends React.Component{
     }
 
     toggleDropDown(e){
-
       if(!this.state.activeDropdown){
         //console.log('active is blank, add to active, add listener')
         this.setState({
@@ -200,6 +239,30 @@ class Filter extends React.Component{
                     </div>
                     <div className={styles.filterDropdownArrow}></div>
                 </div>
+
+
+                <div className={styles.filterItem}>
+                    <label className={styles.filterLabel}>Time Window</label>
+                    <div className={styles.filters + ' ' + this.checkActive('timewindow')} onClick={this.toggleDropDown} id="timewindow">
+
+                        <div className={styles.timeDay}>All</div>
+
+                        <ul className={styles.filtersList+' '+styles.timeSlot}>
+
+                            <li className={styles.timeTitle} onClick={this.preventClose}>
+                                <div className={styles.timeArrowLeft} onClick={this.renderPrevDay}></div>
+                                <span>Today</span>
+                                <div className={styles.timeArrowRight} onClick={this.renderNextDay}></div>
+                            </li>
+
+                            <li onClick={this.handleTimeWindowChange} data-ref="All">ALL</li>
+                            {this.renderTimeWindow()}
+                        </ul>
+
+                    </div>
+                    <div className={styles.filterDropdownArrow}></div>
+                </div>
+
 
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>Status</label>
