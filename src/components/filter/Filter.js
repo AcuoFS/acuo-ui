@@ -1,14 +1,12 @@
 /**
  * Created by vikassaryal on 26/10/16.
  */
-import React from 'react'
-import { connect } from 'react-redux'
+import React,  { PropTypes } from 'react'
 import {List, Set, Map} from 'immutable'
-import * as actionCreators from '../../actions'
 import styles from './Filter.css'
 
 
-class Filter extends React.Component{
+export default class Filter extends React.Component{
     constructor(props){
       super(props)
       this.state = {
@@ -17,6 +15,7 @@ class Filter extends React.Component{
         filterItems: styles.show,
         activeDropdown: ''
       }
+
       this.getDeriv = this.getDeriv.bind(this)
       this.getFilters = this.getFilters.bind(this)
       this.handleLegalEntityChange = this.handleLegalEntityChange.bind(this)
@@ -47,33 +46,28 @@ class Filter extends React.Component{
     }
 
     handleLegalEntityChange(e){
-      this.props.filterStateLegal(e.currentTarget.dataset.ref)
+      this.props.onLegalEntityChange(e)
       this.resetActiveDropdown()
-      e.stopPropagation()
     }
 
     handleDerivChange(e){
-      this.props.filterStateDeriv(e.currentTarget.dataset.ref)
+      this.props.onDerivChange(e)
       this.resetActiveDropdown()
-      e.stopPropagation()
     }
 
     handleStatusChange(e){
-      this.props.filterStateStatus(e.currentTarget.dataset.ref)
+      this.props.onStatusChange(e)
       this.resetActiveDropdown()
-      e.stopPropagation()
     }
 
     handleCptyOrgChange(e){
-      this.props.filterCptyOrg(e.currentTarget.dataset.ref)
+      this.props.onCptyOrgChange(e)
       this.resetActiveDropdown()
-      e.stopPropagation()
     }
 
     handleCPTYEntityChange(e){
-      this.props.filterCptyEntity(e.currentTarget.dataset.ref)
+      this.props.onCPTYEntityChange(e)
       this.resetActiveDropdown()
-      e.stopPropagation()
     }
 
     fetchActionList(deriv = this.getDeriv()){
@@ -242,11 +236,13 @@ class Filter extends React.Component{
     }
 }
 
-function mapStateToProps(state){
-    return{
-      derivatives : state.getIn(['data', 'derivatives']),
-      filters: state.getIn(['inputs', 'filters'])
-    }
-}
 
-export const FilterContainer = connect(mapStateToProps, actionCreators)(Filter)
+Filter.propTypes = {
+    onLegalEntityChange : PropTypes.func.isRequired,
+    onDerivChange : PropTypes.func.isRequired,
+    onStatusChange : PropTypes.func.isRequired,
+    onCptyOrgChange : PropTypes.func.isRequired,
+    onCPTYEntityChange : PropTypes.func.isRequired
+    //derivatives : PropTypes.arrayOf(PropTypes.object),
+    //filters : PropTypes.array
+}

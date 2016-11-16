@@ -1,11 +1,11 @@
 import React from 'react'
 import {
     NavContainer,
-    FilterContainer,
     UploadPortfolio,
     GraphContainer,
     TableContainer,
 } from '../../components'
+import FilterContainer from '../../containers/FilterContainer'
 
 
 

@@ -1,10 +1,10 @@
 import React from 'react'
 import { render } from 'react-dom'
 import {
-    FilterContainer,
     MarginAgreements,
     NavContainer
 } from '../../components'
+import FilterContainer from '../../containers/FilterContainer'
 import stylesG from '../../static/global.css'
 import styles from './Reconcile.css'
 
