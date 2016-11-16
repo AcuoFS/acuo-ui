@@ -11,95 +11,105 @@ import styles from './filter.css'
 
 class Filter extends React.Component{
     constructor(props){
-      super(props)
-      this.state = {
-        filterBarNameClicked: true,
-        filterBar: styles.open,
-        filterItems: styles.show,
-        activeDropdown: '',
-        timeWindowTitle: 'Today',
-        timeArrowLeft: styles.show,
-        timeArrowRight: styles.show
-      }
-      this.getDeriv = this.getDeriv.bind(this)
-      this.getFilters = this.getFilters.bind(this)
-      this.handleLegalEntityChange = this.handleLegalEntityChange.bind(this)
-      this.handleDerivChange = this.handleDerivChange.bind(this)
-      this.handleTimeWindowChange = this.handleTimeWindowChange.bind(this)
-      this.renderPrevDay = this.renderPrevDay.bind(this)
-      this.renderNextDay = this.renderNextDay.bind(this)
-      this.preventClose = this.preventClose.bind(this)
-      this.checkTimeDay = this.checkTimeDay.bind(this)
-      this.handleStatusChange = this.handleStatusChange.bind(this)
-      this.handleCptyOrgChange = this.handleCptyOrgChange.bind(this)
-      this.handleCPTYEntityChange = this.handleCPTYEntityChange.bind(this)
-      this.toggleFilter = this.toggleFilter.bind(this)
-      this.toggleDropDown = this.toggleDropDown.bind(this)
-      this.checkActive = this.checkActive.bind(this)
-      this.resetActiveDropdown = this.resetActiveDropdown.bind(this)
-      this.renderFilter = this.renderFilter.bind(this)
+        super(props)
+        this.state = {
+            filterBarNameClicked: true,
+            filterBar: styles.open,
+            filterItems: styles.show,
+            activeDropdown: '',
+            timeWindowTitle: 'Today',
+            timeArrowLeft: styles.show,
+            timeArrowRight: styles.show
+        }
+        this.getDeriv = this.getDeriv.bind(this)
+        this.getFilters = this.getFilters.bind(this)
+        this.handleLegalEntityChange = this.handleLegalEntityChange.bind(this)
+        this.handleDerivChange = this.handleDerivChange.bind(this)
+        this.handleTimeWindowChange = this.handleTimeWindowChange.bind(this)
+        this.renderPrevDay = this.renderPrevDay.bind(this)
+        this.renderNextDay = this.renderNextDay.bind(this)
+        this.preventClose = this.preventClose.bind(this)
+        this.checkTimeDay = this.checkTimeDay.bind(this)
+        this.getSelectedTime = this.getSelectedTime.bind(this)
+        this.handleStatusChange = this.handleStatusChange.bind(this)
+        this.handleCptyOrgChange = this.handleCptyOrgChange.bind(this)
+        this.handleCPTYEntityChange = this.handleCPTYEntityChange.bind(this)
+        this.toggleFilter = this.toggleFilter.bind(this)
+        this.toggleDropDown = this.toggleDropDown.bind(this)
+        this.checkActive = this.checkActive.bind(this)
+        this.resetActiveDropdown = this.resetActiveDropdown.bind(this)
+        this.renderFilter = this.renderFilter.bind(this)
     }
 
     resetActiveDropdown(){
-      this.setState({
-        activeDropdown: ''
-      })
-      document.removeEventListener("click", this.toggleDropDown)
+        this.setState({
+            activeDropdown: ''
+        })
+        document.removeEventListener("click", this.toggleDropDown)
     }
 
     getDeriv(){
-      return this.props.derivatives || List()
+        return this.props.derivatives || List()
     }
 
     getFilters(){
-      return this.props.filters || Map()
+        return this.props.filters || Map()
     }
 
     handleLegalEntityChange(e){
-      this.props.filterStateLegal(e.currentTarget.dataset.ref)
-      this.resetActiveDropdown()
-      e.stopPropagation()
+        this.props.filterStateLegal(e.currentTarget.dataset.ref)
+        this.resetActiveDropdown()
+        e.stopPropagation()
     }
 
     handleDerivChange(e){
-      this.props.filterStateDeriv(e.currentTarget.dataset.ref)
-      this.resetActiveDropdown()
-      e.stopPropagation()
+        this.props.filterStateDeriv(e.currentTarget.dataset.ref)
+        this.resetActiveDropdown()
+        e.stopPropagation()
     }
 
     handleTimeWindowChange(e){
-        console.log('here')
-        // this.props.filterTimeWindowStatus(e.currentTarget.dataset.ref)
-        this.resetActiveDropdown()
-        // e.stopPropagation()
+        console.log( this.getSelectedTime(e) )
+        this.props.filterTimeWindowStatus(this.getSelectedTime(e))
+        //this.resetActiveDropdown()
+    }
+
+    getSelectedTime(e){
+        let currTime = new Date()
+        let d = currTime.getDate()
+        if(this.state.timeWindowTitle =='Yesterday')d = d-1
+            else if(this.state.timeWindowTitle=='Tomorrow')d = d+1
+
+        let selectedTime = String(currTime.getFullYear()) + '-' + String(currTime.getMonth()+1) + '-' + String(d) + currTime.toISOString().substr(10, 1) +e.currentTarget.dataset.ref + currTime.toISOString().substr(19, 5)
+        return selectedTime
     }
 
     handleStatusChange(e){
-      this.props.filterStateStatus(e.currentTarget.dataset.ref)
-      this.resetActiveDropdown()
-      e.stopPropagation()
+        this.props.filterStateStatus(e.currentTarget.dataset.ref)
+        this.resetActiveDropdown()
+        e.stopPropagation()
     }
 
     handleCptyOrgChange(e){
-      this.props.filterCptyOrg(e.currentTarget.dataset.ref)
-      this.resetActiveDropdown()
-      e.stopPropagation()
+        this.props.filterCptyOrg(e.currentTarget.dataset.ref)
+        this.resetActiveDropdown()
+        e.stopPropagation()
     }
 
     handleCPTYEntityChange(e){
-      this.props.filterCptyEntity(e.currentTarget.dataset.ref)
-      this.resetActiveDropdown()
-      e.stopPropagation()
+        this.props.filterCptyEntity(e.currentTarget.dataset.ref)
+        this.resetActiveDropdown()
+        e.stopPropagation()
     }
 
     fetchActionList(deriv = this.getDeriv()){
-      return deriv.reduce((listSumZ, derivative)=>{
-        return listSumZ.union(derivative.get('marginStatus').reduce((listSumY, marginStatus)=>{
-          return listSumY.union(marginStatus.get('timeFrames').reduce((listSumX, timeFrames)=>{
-            return listSumX.union(timeFrames.get('actionsList'))
-          },Set()))
-        }, Set()))
-      }, Set())
+        return deriv.reduce((listSumZ, derivative)=>{
+            return listSumZ.union(derivative.get('marginStatus').reduce((listSumY, marginStatus)=>{
+                return listSumY.union(marginStatus.get('timeFrames').reduce((listSumX, timeFrames)=>{
+                    return listSumX.union(timeFrames.get('actionsList'))
+                },Set()))
+            }, Set()))
+        }, Set())
     }
 
 
@@ -109,10 +119,10 @@ class Filter extends React.Component{
     }
 
     renderLegalEntity(){
-      return this.fetchActionList().reduce((listSum , x)=>{
-        return(!listSum.includes(x.get('legalEntity')) ? listSum.add(x.get('legalEntity')):listSum)},Set()).map((x)=>{
-        return (<li key={x} onClick={this.handleLegalEntityChange} data-ref={x}>{x.toUpperCase()} </li>)
-      })
+        return this.fetchActionList().reduce((listSum , x)=>{
+            return(!listSum.includes(x.get('legalEntity')) ? listSum.add(x.get('legalEntity')):listSum)},Set()).map((x)=>{
+            return (<li key={x} onClick={this.handleLegalEntityChange} data-ref={x}>{x.toUpperCase()} </li>)
+        })
 
     }
 
@@ -128,46 +138,46 @@ class Filter extends React.Component{
                 </li>
 
                 <li onClick={this.handleTimeWindowChange} data-ref="All">ALL</li>
-                <li onClick={this.handleTimeWindowChange}>0H - 3H</li>
-                <li onClick={this.handleTimeWindowChange}>3H - 6H</li>
-                <li onClick={this.handleTimeWindowChange}>6H - 9H</li>
-                <li onClick={this.handleTimeWindowChange}>9H - 12H</li>
-                <li onClick={this.handleTimeWindowChange}>12H - 15H</li>
-                <li onClick={this.handleTimeWindowChange}>15H - 18H</li>
-                <li onClick={this.handleTimeWindowChange}>18H - 21H</li>
-                <li onClick={this.handleTimeWindowChange}>21H - 24H</li>
+                <li onClick={this.handleTimeWindowChange} data-ref="00:00:00">0H - 3H</li>
+                <li onClick={this.handleTimeWindowChange} data-ref="03:00:00">3H - 6H</li>
+                <li onClick={this.handleTimeWindowChange} data-ref="06:00:00">6H - 9H</li>
+                <li onClick={this.handleTimeWindowChange} data-ref="09:00:00">9H - 12H</li>
+                <li onClick={this.handleTimeWindowChange} data-ref="12:00:00">12H - 15H</li>
+                <li onClick={this.handleTimeWindowChange} data-ref="15:00:00">15H - 18H</li>
+                <li onClick={this.handleTimeWindowChange} data-ref="18:00:00">18H - 21H</li>
+                <li onClick={this.handleTimeWindowChange} data-ref="21:00:00">21H - 24H</li>
             </ul>
         )
     }
 
     checkTimeDay(){
         switch (this.state.timeWindowTitle) {
-        case 'Yesterday':
-            return (
-                this.setState({
-                    timeWindowTitle: 'Yesterday',
-                    timeArrowLeft: styles.hide,
-                    timeArrowRight: styles.show
-                })
-            )
+            case 'Yesterday':
+                return (
+                    this.setState({
+                        timeWindowTitle: 'Yesterday',
+                        timeArrowLeft: styles.hide,
+                        timeArrowRight: styles.show
+                    })
+                )
 
-        case 'Tomorrow':
-            return (
-                this.setState({
-                    timeWindowTitle: 'Tomorrow',
-                    timeArrowLeft: styles.show,
-                    timeArrowRight: styles.hide
-                })
-            )
+            case 'Tomorrow':
+                return (
+                    this.setState({
+                        timeWindowTitle: 'Tomorrow',
+                        timeArrowLeft: styles.show,
+                        timeArrowRight: styles.hide
+                    })
+                )
 
-        default:
-            return (
-                this.setState({
-                    timeWindowTitle: 'Today',
-                    timeArrowLeft: styles.show,
-                    timeArrowRight: styles.show
-                })
-            )
+            default:
+                return (
+                    this.setState({
+                        timeWindowTitle: 'Today',
+                        timeArrowLeft: styles.show,
+                        timeArrowRight: styles.show
+                    })
+                )
         }
     }
 
@@ -203,23 +213,23 @@ class Filter extends React.Component{
     }
 
     renderCPTYOrg(){
-     return this.fetchActionList().reduce((listSum , x)=>{
-         return(!listSum.includes(x.get('cptyOrg')) ? listSum.add(x.get('cptyOrg')):listSum)},Set()).sort().map((x)=>{
-       return (<li key={x} data-ref={x} onClick={this.handleCptyOrgChange}>{x.toUpperCase()} </li>)
-       })
+        return this.fetchActionList().reduce((listSum , x)=>{
+            return(!listSum.includes(x.get('cptyOrg')) ? listSum.add(x.get('cptyOrg')):listSum)},Set()).sort().map((x)=>{
+            return (<li key={x} data-ref={x} onClick={this.handleCptyOrgChange}>{x.toUpperCase()} </li>)
+        })
     }
 
     renderCPTYEntity(){
-      return this.fetchActionList().reduce((listSum , x)=> {
+        return this.fetchActionList().reduce((listSum , x)=> {
 
-        if(this.getFilters().getIn(['cptyOrgFilter', 'filter']) && this.getFilters().getIn(['cptyOrgFilter', 'filter']) != 'All') {
-          return (!listSum.includes(x.get('cptyEntity')) && x.get('cptyOrg') == this.getFilters().getIn(['cptyOrgFilter', 'filter']) ? listSum.add(x.get('cptyEntity')) : listSum)
-        } else {
-          return (!listSum.includes(x.get('cptyEntity')) ? listSum.add(x.get('cptyEntity')) : listSum)
-        }
-      } ,Set()).sort().map((x)=> {
-        return(<li key={x} data-ref={x} onClick={this.handleCPTYEntityChange}>{x.toUpperCase()} </li>)
-      })
+            if(this.getFilters().getIn(['cptyOrgFilter', 'filter']) && this.getFilters().getIn(['cptyOrgFilter', 'filter']) != 'All') {
+                return (!listSum.includes(x.get('cptyEntity')) && x.get('cptyOrg') == this.getFilters().getIn(['cptyOrgFilter', 'filter']) ? listSum.add(x.get('cptyEntity')) : listSum)
+            } else {
+                return (!listSum.includes(x.get('cptyEntity')) ? listSum.add(x.get('cptyEntity')) : listSum)
+            }
+        } ,Set()).sort().map((x)=> {
+            return(<li key={x} data-ref={x} onClick={this.handleCPTYEntityChange}>{x.toUpperCase()} </li>)
+        })
     }
 
     toggleFilter(){
@@ -239,111 +249,111 @@ class Filter extends React.Component{
     }
 
     toggleDropDown(e){
-      if(!this.state.activeDropdown){
-        this.setState({
-          activeDropdown: e.currentTarget.id
-        })
-      }else{
-        this.setState({
-          activeDropdown: ''
-        })
-      }
+        if(!this.state.activeDropdown){
+            this.setState({
+                activeDropdown: e.currentTarget.id
+            })
+        }else{
+            this.setState({
+                activeDropdown: ''
+            })
+        }
     }
 
     checkActive(id){
-      if(this.state.activeDropdown == id){
-        return styles.openDropdown
-      }else{
-        return styles.closeDropdown
-      }
+        if(this.state.activeDropdown == id){
+            return styles.openDropdown
+        }else{
+            return styles.closeDropdown
+        }
     }
 
     render(){
         return(
-        <div className={styles.filterContainer}>
-            <div className={styles.filterBarName + ' ' + this.state.filterBar} onClick={this.toggleFilter}>
-                <span>Filter</span>
-                <div className={styles.switchArrow}>
-                    <div className={styles.arrowLine} id={styles.line1}></div>
-                    <div className={styles.arrowLine} id={styles.line2}></div>
+            <div className={styles.filterContainer}>
+                <div className={styles.filterBarName + ' ' + this.state.filterBar} onClick={this.toggleFilter}>
+                    <span>Filter</span>
+                    <div className={styles.switchArrow}>
+                        <div className={styles.arrowLine} id={styles.line1}></div>
+                        <div className={styles.arrowLine} id={styles.line2}></div>
+                    </div>
+                </div>
+                <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
+                    <div className={styles.filterItem}>
+                        <label className={styles.filterLabel}>Legal Entity</label>
+                        <div className={styles.filters + ' ' + this.checkActive('legal-entity')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="legal-entity">
+                            <div className={styles.selectedText}>{(this.getFilters().getIn(['legalEntityFilter', 'filter']) || 'All').toUpperCase()}</div>
+                            <ul className={styles.filtersList}>
+                                <li onClick={this.handleLegalEntityChange} data-ref="All">ALL</li>
+                                {this.renderLegalEntity()}
+                            </ul>
+                        </div>
+                        <div className={styles.filterDropdownArrow}></div>
+                    </div>
+
+                    <div className={styles.filterItem}>
+                        <label className={styles.filterLabel}>Deriv Type</label>
+                        <div className={styles.filters + ' ' + this.checkActive('type')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="type">
+                            <div className={styles.selectedText}>{(this.getFilters().getIn(['typeFilter', 'filter']) || 'All').toUpperCase()}</div>
+                            <ul className={styles.filtersList}>
+                                <li onClick={this.handleDerivChange} data-ref="All">ALL</li>
+                                {this.getDeriv().map(this.renderFilter)}
+                            </ul>
+                        </div>
+                        <div className={styles.filterDropdownArrow}></div>
+                    </div>
+
+
+                    <div className={styles.filterItem}>
+                        <label className={styles.filterLabel}>Time Window</label>
+                        <div className={styles.filters + ' ' + this.checkActive('timewindow')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="timewindow">
+
+                            <div className={styles.timeDay}>All</div>
+
+                            {this.renderTimeWindow()}
+
+                        </div>
+                        <div className={styles.filterDropdownArrow}></div>
+                    </div>
+
+
+                    <div className={styles.filterItem}>
+                        <label className={styles.filterLabel}>Status</label>
+                        <div className={styles.filters + ' ' + this.checkActive('status')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="status">
+                            <div className={styles.selectedText}>{(this.getFilters().getIn(['statusFilter', 'filter']) || 'All').toUpperCase()}</div>
+                            <ul className={styles.filtersList}>
+                                <li onClick={this.handleStatusChange} data-ref="All">ALL</li>
+                                {this.renderStatus()}
+                            </ul>
+                        </div>
+                        <div className={styles.filterDropdownArrow}></div>
+                    </div>
+
+                    <div className={styles.filterItem}>
+                        <label className={styles.filterLabel}>CPTY Organisation</label>
+                        <div className={styles.filters + ' ' + this.checkActive('cpty-org')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="cpty-org">
+                            <div className={styles.selectedText}>{(this.getFilters().getIn(['cptyOrgFilter', 'filter']) || 'All').toUpperCase()}</div>
+                            <ul className={styles.filtersList}>
+                                <li onClick={this.handleCptyOrgChange} data-ref="All">ALL</li>
+                                {this.renderCPTYOrg()}
+                            </ul>
+                        </div>
+                        <div className={styles.filterDropdownArrow}></div>
+                    </div>
+
+                    <div className={styles.filterItem}>
+                        <label className={styles.filterLabel}>CPTY Entity</label>
+                        <div className={styles.filters + ' ' + this.checkActive('cpty-entity')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="cpty-entity">
+                            <div className={styles.selectedText}>{(this.getFilters().getIn(['cptyEntityFilter', 'filter']) || 'All').toUpperCase()}</div>
+                            <ul className={styles.filtersList}>
+                                <li onClick={this.handleCPTYEntityChange} data-ref="All">ALL</li>
+                                {this.renderCPTYEntity()}
+                            </ul>
+                        </div>
+                        <div className={styles.filterDropdownArrow}></div>
+                    </div>
                 </div>
             </div>
-            <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
-                <div className={styles.filterItem}>
-                    <label className={styles.filterLabel}>Legal Entity</label>
-                    <div className={styles.filters + ' ' + this.checkActive('legal-entity')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="legal-entity">
-                        <div className={styles.selectedText}>{(this.getFilters().getIn(['legalEntityFilter', 'filter']) || 'All').toUpperCase()}</div>
-                        <ul className={styles.filtersList}>
-                          <li onClick={this.handleLegalEntityChange} data-ref="All">ALL</li>
-                          {this.renderLegalEntity()}
-                        </ul>
-                    </div>
-                    <div className={styles.filterDropdownArrow}></div>
-                </div>
-
-                <div className={styles.filterItem}>
-                    <label className={styles.filterLabel}>Deriv Type</label>
-                    <div className={styles.filters + ' ' + this.checkActive('type')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="type">
-                      <div className={styles.selectedText}>{(this.getFilters().getIn(['typeFilter', 'filter']) || 'All').toUpperCase()}</div>
-                      <ul className={styles.filtersList}>
-                        <li onClick={this.handleDerivChange} data-ref="All">ALL</li>
-                        {this.getDeriv().map(this.renderFilter)}
-                      </ul>
-                    </div>
-                    <div className={styles.filterDropdownArrow}></div>
-                </div>
-
-
-                <div className={styles.filterItem}>
-                    <label className={styles.filterLabel}>Time Window</label>
-                    <div className={styles.filters + ' ' + this.checkActive('timewindow')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="timewindow">
-
-                        <div className={styles.timeDay}>All</div>
-
-                        {this.renderTimeWindow()}
-
-                    </div>
-                    <div className={styles.filterDropdownArrow}></div>
-                </div>
-
-
-                <div className={styles.filterItem}>
-                    <label className={styles.filterLabel}>Status</label>
-                    <div className={styles.filters + ' ' + this.checkActive('status')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="status">
-                      <div className={styles.selectedText}>{(this.getFilters().getIn(['statusFilter', 'filter']) || 'All').toUpperCase()}</div>
-                      <ul className={styles.filtersList}>
-                        <li onClick={this.handleStatusChange} data-ref="All">ALL</li>
-                        {this.renderStatus()}
-                      </ul>
-                    </div>
-                    <div className={styles.filterDropdownArrow}></div>
-                </div>
-
-                <div className={styles.filterItem}>
-                    <label className={styles.filterLabel}>CPTY Organisation</label>
-                    <div className={styles.filters + ' ' + this.checkActive('cpty-org')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="cpty-org">
-                      <div className={styles.selectedText}>{(this.getFilters().getIn(['cptyOrgFilter', 'filter']) || 'All').toUpperCase()}</div>
-                      <ul className={styles.filtersList}>
-                        <li onClick={this.handleCptyOrgChange} data-ref="All">ALL</li>
-                        {this.renderCPTYOrg()}
-                      </ul>
-                    </div>
-                    <div className={styles.filterDropdownArrow}></div>
-                </div>
-
-                <div className={styles.filterItem}>
-                    <label className={styles.filterLabel}>CPTY Entity</label>
-                    <div className={styles.filters + ' ' + this.checkActive('cpty-entity')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="cpty-entity">
-                      <div className={styles.selectedText}>{(this.getFilters().getIn(['cptyEntityFilter', 'filter']) || 'All').toUpperCase()}</div>
-                      <ul className={styles.filtersList}>
-                        <li onClick={this.handleCPTYEntityChange} data-ref="All">ALL</li>
-                        {this.renderCPTYEntity()}
-                      </ul>
-                    </div>
-                    <div className={styles.filterDropdownArrow}></div>
-                </div>
-            </div>
-        </div>
         )
 
     }
@@ -351,8 +361,8 @@ class Filter extends React.Component{
 
 function mapStateToProps(state){
     return{
-      derivatives : state.getIn(['data', 'derivatives']),
-      filters: state.getIn(['inputs', 'filters'])
+        derivatives : state.getIn(['data', 'derivatives']),
+        filters: state.getIn(['inputs', 'filters'])
     }
 }
 

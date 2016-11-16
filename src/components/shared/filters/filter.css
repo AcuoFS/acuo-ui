@@ -191,6 +191,10 @@
 .filtersList li:hover{
     background-color: #eeeeee;
 }
+.filtersList li:active{
+    background-color: #55a3ff;
+    color: #fff;
+}
 
 .openDropdown ul{
   opacity: 1;
@@ -219,6 +223,9 @@
 .filtersList .timeTitle:hover{
     background-color: transparent;
     cursor: default;
+}
+.filtersList .timeTitle:active{
+    color: inherit;
 }
 .filtersList .timeTitle .timeArrowLeft,
 .filtersList .timeTitle .timeArrowRight{
