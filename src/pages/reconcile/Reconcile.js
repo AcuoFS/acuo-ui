@@ -1,10 +1,8 @@
 import React from 'react'
 import { render } from 'react-dom'
-import {
-    MarginAgreements,
-    NavContainer
-} from '../../components'
+import { NavContainer } from '../../components'
 import FilterContainer from '../../containers/FilterContainer'
+import MarginAgreementListContainer from '../../containers/MarginAgreementListContainer'
 import stylesG from '../../static/global.css'
 import styles from './Reconcile.css'
 
@@ -20,7 +18,7 @@ class Reconcile extends React.Component{
                     <div className={styles.titleTriangle}></div>
                 </div>
                 <FilterContainer/>
-                <MarginAgreements/>
+                <MarginAgreementListContainer/>
             </div>
         )
     }

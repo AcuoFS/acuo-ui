@@ -3,13 +3,12 @@
  */
 import React from 'react'
 import { render } from 'react-dom'
-import { connect } from 'react-redux'
 import {List} from 'immutable'
 import ActionLineItem from './ActionLineItem'
 import styles from './MarginAgreementList.css'
 
 
-class MarginAgreementList extends React.Component{
+export default class MarginAgreementList extends React.Component{
   constructor(props) {
     super(props)
     this.getLegalEntity = this.getLegalEntity.bind(this)
@@ -201,13 +200,3 @@ class MarginAgreementList extends React.Component{
     )
   }
 }
-
-function mapStateToProps(state){
-  //console.log('map state to props', state.getIn(['display', 'derivatives']))
-  return{
-    derivatives : state.getIn(['display', 'derivatives']),
-    recon : state.getIn(['data', 'recon'])
-  }
-}
-
-export const MarginAgreements = connect(mapStateToProps)(MarginAgreementList)
