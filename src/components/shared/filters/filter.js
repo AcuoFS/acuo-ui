@@ -46,6 +46,7 @@ class Filter extends React.Component{
     getDeriv(){
       return this.props.derivatives || List()
     }
+
     getFilters(){
       return this.props.filters || Map()
     }
@@ -65,7 +66,6 @@ class Filter extends React.Component{
     handleTimeWindowChange(e){
         console.log('here')
         this.props.filterTimeWindowStatus(e.currentTarget.dataset.ref)
-        this.resetActiveDropdown()
         e.stopPropagation()
     }
 
@@ -87,15 +87,14 @@ class Filter extends React.Component{
       e.stopPropagation()
     }
 
-    fetchActionList(){
-        return this.getDeriv().reduce((listSumZ, derivative)=>{
-            return listSumZ.union(derivative.get('marginStatus').reduce((listSumY, marginStatus)=>{
-                return listSumY.union(marginStatus.get('timeFrames').reduce((listSumX, timeFrames)=>{
-                    return listSumX.union(timeFrames.get('actionsList'))
-                  },Set()))
-              }, Set()))
-          }, Set())
-
+    fetchActionList(deriv = this.getDeriv()){
+      return deriv.reduce((listSumZ, derivative)=>{
+        return listSumZ.union(derivative.get('marginStatus').reduce((listSumY, marginStatus)=>{
+          return listSumY.union(marginStatus.get('timeFrames').reduce((listSumX, timeFrames)=>{
+            return listSumX.union(timeFrames.get('actionsList'))
+          },Set()))
+        }, Set()))
+      }, Set())
     }
 
 
@@ -159,9 +158,15 @@ class Filter extends React.Component{
     }
 
     renderCPTYEntity(){
-      return this.fetchActionList().reduce((listSum , x)=>{
-        return(!listSum.includes(x.get('cptyEntity')) ? listSum.add(x.get('cptyEntity')):listSum)},Set()).sort().map((x)=>{
-        return (<li key={x} data-ref={x} onClick={this.handleCPTYEntityChange}>{x.toUpperCase()} </li>)
+      return this.fetchActionList().reduce((listSum , x)=> {
+
+        if(this.getFilters().getIn(['cptyOrgFilter', 'filter']) && this.getFilters().getIn(['cptyOrgFilter', 'filter']) != 'All') {
+          return (!listSum.includes(x.get('cptyEntity')) && x.get('cptyOrg') == this.getFilters().getIn(['cptyOrgFilter', 'filter']) ? listSum.add(x.get('cptyEntity')) : listSum)
+        } else {
+          return (!listSum.includes(x.get('cptyEntity')) ? listSum.add(x.get('cptyEntity')) : listSum)
+        }
+      } ,Set()).sort().map((x)=> {
+        return(<li key={x} data-ref={x} onClick={this.handleCPTYEntityChange}>{x.toUpperCase()} </li>)
       })
     }
 
@@ -183,22 +188,18 @@ class Filter extends React.Component{
 
     toggleDropDown(e){
       if(!this.state.activeDropdown){
-        //console.log('active is blank, add to active, add listener')
         this.setState({
           activeDropdown: e.currentTarget.id
         })
-        document.addEventListener("click", this.toggleDropDown)
       }else{
-        //console.log('active to none, remove listener')
         this.setState({
           activeDropdown: ''
         })
-        document.removeEventListener("click", this.toggleDropDown)
       }
     }
 
-    checkActive(test){
-      if(this.state.activeDropdown == test){
+    checkActive(id){
+      if(this.state.activeDropdown == id){
         return styles.openDropdown
       }else{
         return styles.closeDropdown
@@ -218,7 +219,7 @@ class Filter extends React.Component{
             <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>Legal Entity</label>
-                    <div className={styles.filters + ' ' + this.checkActive('legal-entity')} onClick={this.toggleDropDown} id="legal-entity">
+                    <div className={styles.filters + ' ' + this.checkActive('legal-entity')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="legal-entity">
                         <div className={styles.selectedText}>{(this.getFilters().getIn(['legalEntityFilter', 'filter']) || 'All').toUpperCase()}</div>
                         <ul className={styles.filtersList}>
                           <li onClick={this.handleLegalEntityChange} data-ref="All">ALL</li>
@@ -230,7 +231,7 @@ class Filter extends React.Component{
 
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>Deriv Type</label>
-                    <div className={styles.filters + ' ' + this.checkActive('type')} onClick={this.toggleDropDown} id="type">
+                    <div className={styles.filters + ' ' + this.checkActive('type')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="type">
                       <div className={styles.selectedText}>{(this.getFilters().getIn(['typeFilter', 'filter']) || 'All').toUpperCase()}</div>
                       <ul className={styles.filtersList}>
                         <li onClick={this.handleDerivChange} data-ref="All">ALL</li>
@@ -243,7 +244,7 @@ class Filter extends React.Component{
 
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>Time Window</label>
-                    <div className={styles.filters + ' ' + this.checkActive('timewindow')} onClick={this.toggleDropDown} id="timewindow">
+                    <div className={styles.filters + ' ' + this.checkActive('timewindow')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="timewindow">
 
                         <div className={styles.timeDay}>All</div>
 
@@ -266,7 +267,7 @@ class Filter extends React.Component{
 
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>Status</label>
-                    <div className={styles.filters + ' ' + this.checkActive('status')} onClick={this.toggleDropDown} id="status">
+                    <div className={styles.filters + ' ' + this.checkActive('status')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="status">
                       <div className={styles.selectedText}>{(this.getFilters().getIn(['statusFilter', 'filter']) || 'All').toUpperCase()}</div>
                       <ul className={styles.filtersList}>
                         <li onClick={this.handleStatusChange} data-ref="All">ALL</li>
@@ -277,8 +278,8 @@ class Filter extends React.Component{
                 </div>
 
                 <div className={styles.filterItem}>
-                    <label className={styles.filterLabel}>CPTY Org</label>
-                    <div className={styles.filters + ' ' + this.checkActive('cpty-org')} onClick={this.toggleDropDown} id="cpty-org">
+                    <label className={styles.filterLabel}>CPTY Organisation</label>
+                    <div className={styles.filters + ' ' + this.checkActive('cpty-org')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="cpty-org">
                       <div className={styles.selectedText}>{(this.getFilters().getIn(['cptyOrgFilter', 'filter']) || 'All').toUpperCase()}</div>
                       <ul className={styles.filtersList}>
                         <li onClick={this.handleCptyOrgChange} data-ref="All">ALL</li>
@@ -290,7 +291,7 @@ class Filter extends React.Component{
 
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>CPTY Entity</label>
-                    <div className={styles.filters + ' ' + this.checkActive('cpty-entity')} onClick={this.toggleDropDown} id="cpty-entity">
+                    <div className={styles.filters + ' ' + this.checkActive('cpty-entity')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="cpty-entity">
                       <div className={styles.selectedText}>{(this.getFilters().getIn(['cptyEntityFilter', 'filter']) || 'All').toUpperCase()}</div>
                       <ul className={styles.filtersList}>
                         <li onClick={this.handleCPTYEntityChange} data-ref="All">ALL</li>

@@ -16,7 +16,6 @@ export class Table extends React.Component{
         return this.props.derivatives || []
     }
     render() {
-        //console.log('update', this.props.derivatives)
         return (
           <div>
               {this.getDeriv().map(this.renderTable)}
@@ -26,9 +25,9 @@ export class Table extends React.Component{
 }
 
 function mapStateToProps(state){
-    //console.log('map state to props', state.getIn(['display', 'derivatives']))
     return{
         derivatives : state.getIn(['display', 'derivatives'])
     }
 }
+
 export const TableContainer = connect(mapStateToProps)(Table)
