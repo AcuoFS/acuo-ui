@@ -1,8 +1,9 @@
 import React from 'react'
-import { render } from 'react-dom'
-import FilterContainer from '../../containers/FilterContainer'
-import MarginAgreementListContainer from '../../containers/MarginAgreementListContainer'
-import NavigationBarContainer from '../../containers/NavigationBarContainer'
+import {
+    FilterContainer,
+    MarginAgreementListContainer,
+    NavigationBarContainer
+} from '../../containers'
 import stylesG from '../../static/global.css'
 import styles from './Reconcile.css'
 

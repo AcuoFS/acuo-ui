@@ -1,9 +1,11 @@
 import React from 'react'
 import { UploadPortfolioComponent } from '../../components'
-import FilterContainer from '../../containers/FilterContainer'
-import TableContainer from '../../containers/TableContainer'
-import GraphContainer from '../../containers/GraphContainer'
-import NavigationBarContainer from '../../containers/NavigationBarContainer'
+import {
+    FilterContainer,
+    TableContainer,
+    GraphContainer,
+    NavigationBarContainer
+} from '../../containers'
 
 
 class Dashboard extends React.Component{
