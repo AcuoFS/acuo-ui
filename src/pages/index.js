@@ -1,2 +1,2 @@
-export * from './dashboard/dashboard'
-export * from './reconcile/reconcile'
+export * from './dashboard/Dashboard'
+export * from './reconcile/Reconcile'

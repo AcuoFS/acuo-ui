@@ -2,7 +2,7 @@
  * Created by panyong on 2/11/16.
  */
 import React from 'react'
-import styles from './uploadPortfolio.css'
+import styles from './UploadPortfolio.css'
 
 
 class UploadPortfolio extends React.Component{

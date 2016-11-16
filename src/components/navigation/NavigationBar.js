@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import NavItem from './navigationItem'
+import NavItem from './NavigationItem'
 import { Link } from 'react-router'
-import styles from './navigationBar.css'
+import styles from './NavigationBar.css'
 
 
 export class NavigationBar extends React.Component{

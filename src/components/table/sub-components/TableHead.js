@@ -1,6 +1,6 @@
 import React from 'react'
-import TableItem from './tableItem'
-import styles from '../table.css'
+import TableItem from './TableItem'
+import styles from '../Table.css'
 
 
 class TableHead extends React.Component{

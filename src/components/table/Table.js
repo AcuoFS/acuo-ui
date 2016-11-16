@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import TableHead from './sub-components/tableHead'
-import styles from './table.css'
+import TableHead from './sub-components/TableHead'
 
 
 export class Table extends React.Component{

@@ -2,8 +2,8 @@
  * Created by achalkagwad on 9/11/16.
  */
 import React from 'react'
-import styles from './marginAgreementList.css'
-import ActionLineItemExpand from './actionLineItemExpand'
+import styles from './MarginAgreementList.css'
+import ActionLineItemExpand from './ActionLineItemExpand'
 
 
 export default class ActionLineItem extends React.Component {

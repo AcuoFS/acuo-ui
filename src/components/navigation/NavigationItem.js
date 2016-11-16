@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './navigationBar.css'
+import styles from './NavigationBar.css'
 
 
 class NavItem extends React.Component{

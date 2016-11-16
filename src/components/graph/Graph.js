@@ -1,10 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import Axis from './sub-components/axis'
-import SubAxis from './sub-components/subaxis'
-import GraphBody from './sub-components/graphBody'
-import Pointer from './sub-components/pointer'
-import styles from './graph.css'
+import Axis from './sub-components/Axis'
+import SubAxis from './sub-components/SubAxis'
+import GraphBody from './sub-components/GraphBody'
+import Pointer from './sub-components/Pointer'
 
 
 class Graph extends React.Component {

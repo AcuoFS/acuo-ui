@@ -1,6 +1,6 @@
 import React from 'react';
 import {List, Set, Map} from 'immutable'
-import styles from '../graph.css'
+import styles from '../Graph.css'
 
 
 export default class GraphBody extends React.Component {

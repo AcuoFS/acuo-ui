@@ -1,6 +1,6 @@
 import React from 'react'
-import TableRow from './tableRow'
-import styles from '../table.css'
+import TableRow from './TableRow'
+import styles from '../Table.css'
 
 
 class TableBody extends React.Component{

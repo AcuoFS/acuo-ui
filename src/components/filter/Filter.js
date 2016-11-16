@@ -5,7 +5,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {List, Set, Map} from 'immutable'
 import * as actionCreators from '../../actions'
-import styles from './filter.css'
+import styles from './Filter.css'
 
 
 class Filter extends React.Component{

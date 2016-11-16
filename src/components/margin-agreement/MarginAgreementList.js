@@ -5,8 +5,8 @@ import React from 'react'
 import { render } from 'react-dom'
 import { connect } from 'react-redux'
 import {List} from 'immutable'
-import ActionLineItem from './actionLineItem'
-import styles from './marginAgreementList.css'
+import ActionLineItem from './ActionLineItem'
+import styles from './MarginAgreementList.css'
 
 
 class MarginAgreementList extends React.Component{

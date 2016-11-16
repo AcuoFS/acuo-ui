@@ -1,10 +1,10 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { FilterContainer } from '../../components/filter/filter'
-import { MarginAgreements } from '../../components/margin-agreement/marginAgreementList'
-import { NavContainer } from '../../components/navigation/navigationBar'
+import { FilterContainer } from '../../components/filter/Filter'
+import { MarginAgreements } from '../../components/margin-agreement/MarginAgreementList'
+import { NavContainer } from '../../components/navigation/NavigationBar'
 import stylesG from '../../static/global.css'
-import styles from './reconcile.css'
+import styles from './Reconcile.css'
 
 
 class Reconcile extends React.Component{
