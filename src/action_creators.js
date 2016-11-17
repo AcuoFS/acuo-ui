@@ -22,11 +22,12 @@ export function filterStateLegal(legalEntity) {
     }
 }
 
-export function filterTimeWindowStatus(timewindow) {
+export function filterTimeWindowStatus(timeWindowMin, timeWindowMax) {
 
     return {
         type: 'FILTER_STATE_TIMEWINDOW',
-        filter: timewindow
+        minTime: timeWindowMin,
+        maxTime : timeWindowMax
     }
 }
 

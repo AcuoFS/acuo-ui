@@ -35,6 +35,24 @@ function applyStatusFilter(derivatives, status) {
   }, List())
 }
 
+function applyTimeWindowFilter(derivatives, minTime, maxTime){
+  return derivatives.reduce((listX, x)=>{
+    let list = x.get('marginStatus').reduce((listY, y) => {
+      let list = y.get('timeFrames').filter((z)=>{
+        let timeFrame = z.get('timeRangeStart')
+        let timeFrameInMill = new Date(timeFrame).getTime()
+        console.log('timeFrame is' ,timeFrame)
+        // console.log('min time is',minTime + 'max time is',maxTime)
+            if((timeFrameInMill >= minTime.getTime()) && (timeFrameInMill < maxTime.getTime()))
+               return true
+      })
+      return (list.size > 0 ? listY.push(y.set('timeFrames', list)) : listY)
+    },List())
+    return (list.size >0 ? listX.push(x.set('marginStatus', list)) : listX)
+  }, List())
+
+}
+
 function applyCptyOrgFilter(derivatives, cptyOrg) {
   return derivatives.reduce((listVenue, deriv) => {
     let venueList = deriv.get('marginStatus').reduce((listVenue, marginStatus) => {
@@ -90,6 +108,17 @@ export function updateStateStatus(state, action, store) {
     return state.setIn(['display', 'derivatives'], applyStatusFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
+export function updateTimeWindow(state, actionMin, actionMax , store){
+  console.log('Min action is',actionMin)
+  console.log('Max action is',actionMax)
+  if(actionMin =='All'){
+    return state.set('display', state.get(store))
+  }
+  else{
+    return state.setIn(['display', 'derivatives'], applyTimeWindowFilter(state.getIn([store, 'derivatives']), actionMin, actionMax))
+  }
+}
+
 export function updateStateCptyOrg(state, action, store){
   if(action.get('filter') == "All"){
     return state.set('display', state.get(store))
@@ -117,11 +146,15 @@ export function multifilters(state, action){
       case 'FILTER_STATE_STATUS':
         return updateStateStatus(newState, filter, 'display')
 
+      case 'FILTER_STATE_TIMEWINDOW':
+        return updateTimeWindow(newState, filter.get('minTime'), filter.get('maxTime'), 'display')
+
       case 'FILTER_STATE_CPTYORG':
         return updateStateCptyOrg(newState, filter, 'display')
 
       case 'FILTER_STATE_CPTYENTITY':
         return updateStateCptyEntity(newState, filter, 'display')
+
     }
   }, attachFilter(initState(state, state.get('data')), action))
 
@@ -142,6 +175,9 @@ export function attachFilter(state, action){
 
     case 'FILTER_STATE_CPTYENTITY':
       return state.setIn(['inputs','filters','cptyEntityFilter'], fromJS(action))
+
+    case 'FILTER_STATE_TIMEWINDOW':
+      return state.setIn(['inputs','filters','timeWindowFilter'], fromJS(action))
   }
 }
 
@@ -280,6 +316,9 @@ export default function reducer(state = Map(), action, store = 'data') {
       return multifilters(state, action, store)
 
     case 'FILTER_STATE_LEGAL':
+      return multifilters(state, action, store)
+
+    case 'FILTER_STATE_TIMEWINDOW':
       return multifilters(state, action, store)
 
     case 'FILTER_STATE_STATUS':
