@@ -30,7 +30,6 @@ class Filter extends React.Component{
         this.renderNextDay = this.renderNextDay.bind(this)
         this.preventClose = this.preventClose.bind(this)
         this.checkTimeDay = this.checkTimeDay.bind(this)
-        this.getSelectedTime = this.getSelectedTime.bind(this)
         this.handleStatusChange = this.handleStatusChange.bind(this)
         this.handleCptyOrgChange = this.handleCptyOrgChange.bind(this)
         this.handleCPTYEntityChange = this.handleCPTYEntityChange.bind(this)
@@ -69,19 +68,22 @@ class Filter extends React.Component{
     }
 
     handleTimeWindowChange(e){
-        console.log( this.getSelectedTime(e) )
-        this.props.filterTimeWindowStatus(this.getSelectedTime(e))
-        //this.resetActiveDropdown()
-    }
+      //  let currTime = new Date()
+        let currTime =new Date('Sun Oct 23 2016 13:58:04 GMT+0800 (SGT)')
+      console.log("current time is : " + currTime)
+      if(e.currentTarget.dataset.min =='All'){
+        this.props.filterTimeWindowStatus(e.currentTarget.dataset.min, null)
+      }
+      else {
+        if (this.state.timeWindowTitle == 'Yesterday') currTime.setDate(currTime.getDate() - 1)
+        else if (this.state.timeWindowTitle == 'Tomorrow') currTime.setDate(currTime.getDate() + 1)
 
-    getSelectedTime(e){
-        let currTime = new Date()
-        let d = currTime.getDate()
-        if(this.state.timeWindowTitle =='Yesterday')d = d-1
-            else if(this.state.timeWindowTitle=='Tomorrow')d = d+1
+        let minTimeRange = new Date(currTime.setHours(e.currentTarget.dataset.min, 0, 0))
+        let maxTimeRange = new Date(currTime.setHours(e.currentTarget.dataset.max, 0, 0))
+        this.props.filterTimeWindowStatus(minTimeRange, maxTimeRange)
 
-        let selectedTime = String(currTime.getFullYear()) + '-' + String(currTime.getMonth()+1) + '-' + String(d) + currTime.toISOString().substr(10, 1) +e.currentTarget.dataset.ref + currTime.toISOString().substr(19, 5)
-        return selectedTime
+      }
+
     }
 
     handleStatusChange(e){
@@ -127,7 +129,6 @@ class Filter extends React.Component{
     }
 
     renderTimeWindow(){
-        // console.log("timeWindow")
         return(
             <ul className={styles.filtersList+' '+styles.timeSlot}>
 
@@ -137,15 +138,15 @@ class Filter extends React.Component{
                     <div className={styles.timeArrowRight+' '+this.state.timeArrowRight} onClick={this.renderNextDay}></div>
                 </li>
 
-                <li onClick={this.handleTimeWindowChange} data-ref="All">ALL</li>
-                <li onClick={this.handleTimeWindowChange} data-ref="00:00:00">0H - 3H</li>
-                <li onClick={this.handleTimeWindowChange} data-ref="03:00:00">3H - 6H</li>
-                <li onClick={this.handleTimeWindowChange} data-ref="06:00:00">6H - 9H</li>
-                <li onClick={this.handleTimeWindowChange} data-ref="09:00:00">9H - 12H</li>
-                <li onClick={this.handleTimeWindowChange} data-ref="12:00:00">12H - 15H</li>
-                <li onClick={this.handleTimeWindowChange} data-ref="15:00:00">15H - 18H</li>
-                <li onClick={this.handleTimeWindowChange} data-ref="18:00:00">18H - 21H</li>
-                <li onClick={this.handleTimeWindowChange} data-ref="21:00:00">21H - 24H</li>
+                <li onClick={this.handleTimeWindowChange} data-min="All">ALL</li>
+                <li onClick={this.handleTimeWindowChange} data-min="0" data-max="3">0H - 3H</li>
+                <li onClick={this.handleTimeWindowChange} data-min="03" data-max="6">3H - 6H</li>
+                <li onClick={this.handleTimeWindowChange} data-min="06" data-max="9">6H - 9H</li>
+                <li onClick={this.handleTimeWindowChange} data-min="09" data-max="12">9H - 12H</li>
+                <li onClick={this.handleTimeWindowChange} data-min="12" data-max="15">12H - 15H</li>
+                <li onClick={this.handleTimeWindowChange} data-min="15" data-max="18">15H - 18H</li>
+                <li onClick={this.handleTimeWindowChange} data-min="18" data-max="21">18H - 21H</li>
+                <li onClick={this.handleTimeWindowChange} data-min="21"data-max="0">21H - 24H</li>
             </ul>
         )
     }
