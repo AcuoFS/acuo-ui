@@ -3,10 +3,10 @@
  */
 import React from 'react'
 import styles from './MarginAgreementList.css'
-import ActionLineItemExpand from './ActionLineItemExpand'
+import MarginAgreementDetailExpand from './MarginAgreementDetailExpand'
 
 
-export default class ActionLineItem extends React.Component {
+export default class MarginAgreementDetail extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -59,7 +59,7 @@ export default class ActionLineItem extends React.Component {
                         <img src={this.state.checkbox} alt=""/>
                     </div>
                     <div className={styles.packageText}>Net Total IM</div>
-                    <ActionLineItemExpand doClick={this.handlePlusMinus} image={this.state.expand}/>
+                    <MarginAgreementDetailExpand doClick={this.handlePlusMinus} image={this.state.expand}/>
                 </div>
                 <div className={styles.packageRight}> 15,586,933</div>
             </div>

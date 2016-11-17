@@ -4,7 +4,7 @@
 import React from 'react'
 
 
-export default class ActionLineItemExpand extends React.Component {
+export default class MarginAgreementDetailExpand extends React.Component {
     constructor(props) {
         super(props)
         this.state = {

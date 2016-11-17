@@ -4,7 +4,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import {List} from 'immutable'
-import ActionLineItem from './ActionLineItem'
+import MarginAgreementDetail from './MarginAgreementDetail'
 import styles from './MarginAgreementList.css'
 
 
@@ -44,20 +44,20 @@ export default class MarginAgreementList extends React.Component{
                       </div>
                       <div className={styles.package}> {/* table outer div*/}
                         <div> {/* 2 row div */}
-                          <ActionLineItem />
-                          <ActionLineItem />
+                          <MarginAgreementDetail />
+                          <MarginAgreementDetail />
                         </div>
                         <hr/>
                         <div> {/* 4 row div */}
-                          <ActionLineItem />
-                          <ActionLineItem />
-                          <ActionLineItem />
-                          <ActionLineItem />
+                          <MarginAgreementDetail />
+                          <MarginAgreementDetail />
+                          <MarginAgreementDetail />
+                          <MarginAgreementDetail />
                         </div>
                         <hr/>
                         <div> {/* 2 row div */}
-                          <ActionLineItem />
-                          <ActionLineItem />
+                          <MarginAgreementDetail />
+                          <MarginAgreementDetail />
                         </div>
                         <hr/>
                       </div>
@@ -124,20 +124,20 @@ export default class MarginAgreementList extends React.Component{
                       </div>
                       <div className={styles.package}> {/* table outer div*/}
                         <div > {/* 2 row div */}
-                          <ActionLineItem />
-                          <ActionLineItem />
+                          <MarginAgreementDetail />
+                          <MarginAgreementDetail />
                         </div>
                         <hr/>
                         <div> {/* 4 row div */}
-                          <ActionLineItem />
-                          <ActionLineItem />
-                          <ActionLineItem />
-                          <ActionLineItem />
+                          <MarginAgreementDetail />
+                          <MarginAgreementDetail />
+                          <MarginAgreementDetail />
+                          <MarginAgreementDetail />
                         </div>
                         <hr/>
                         <div> {/* 2 row div */}
-                          <ActionLineItem />
-                          <ActionLineItem />
+                          <MarginAgreementDetail />
+                          <MarginAgreementDetail />
                         </div>
                         <hr/>
                       </div>
