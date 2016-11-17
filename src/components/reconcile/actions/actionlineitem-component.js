@@ -20,8 +20,8 @@ export default class ActionLineItem extends React.Component {
         }
         this.handleClick = this.handleClick.bind(this)
         this.handlePlusMinus = this.handlePlusMinus.bind(this)
-      this.firstLevelSelect = this.firstLevelSelect.bind(this)
-      this.checkSecondLevelSelections = this.checkSecondLevelSelections.bind(this)
+        this.firstLevelSelect = this.firstLevelSelect.bind(this)
+        this.checkSecondLevelSelections = this.checkSecondLevelSelections.bind(this)
     }
 
     sendAction(i, j){
@@ -76,7 +76,7 @@ export default class ActionLineItem extends React.Component {
             <div className={styles.packageRow}>
               <div className={styles.packageLeft}>
                 <div className={styles.packageCheckBox} onClick={(e) => {this.handleClick(e);this.sendAction(this.props.GUID, x.get('assetName'))}}>
-                  <img src={x.get('checked') ? "./images/reconcile/checkboxwithtick.png" : "./images/reconcile/checkbox.png"} alt=""/>
+                  {x.get('recon') ? '' : <img src={x.get('checked') ? "./images/reconcile/checkboxwithtick.png" : "./images/reconcile/checkbox.png"} alt=""/>}
                 </div>
                 <div className={styles.packageText}>{ x.get('assetName') }</div>
               </div>
@@ -100,6 +100,15 @@ export default class ActionLineItem extends React.Component {
       return "./images/reconcile/checkbox.png"
     }
   }
+  reconSecondLevelSelections(){
+    if(this.props.secondLevel.size <= this.props.secondLevel.reduce((count, x) => {
+      return count + (x.get('recon') ? 1 : 0)}, 0))
+      {
+        return false
+      }else{
+        return true
+      }
+    }
 
     render(){
         return(
@@ -107,7 +116,7 @@ export default class ActionLineItem extends React.Component {
             <div className={styles.packageRow}> {/* one row div*/}
                 <div className={styles.packageLeft}>
                     <div className={styles.packageCheckBox+' '+this.state.cbLvl1} onClick={this.firstLevelSelect}>
-                        <img src={this.checkSecondLevelSelections()} alt=""/>
+                        {!this.reconSecondLevelSelections() ? '' : <img src={this.checkSecondLevelSelections()} />}
                     </div>
                     <div className={styles.packageText}>{this.props.topLevel}</div>
                     <ActionLineItemExpand doClick={this.handlePlusMinus} image={this.state.expand}/>

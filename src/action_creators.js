@@ -68,3 +68,9 @@ export const selectedItems = (id, item) => (
       name: item
   }
 )
+
+export const reconItem = () => (
+  {
+    type: 'RECON_ITEM'
+  }
+)

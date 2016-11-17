@@ -201,7 +201,7 @@ export const selectItem = (state, action) => {
               return b.set('data', b.get('data').map((c) => {
                 return c.set('secondLevel', c.get('secondLevel').map(d => {
                   if(d.get('assetName') == action.name){
-                    if(!d.get('checked'))
+                    if(!d.get('checked') && !d.get('recon'))
                       return d.set('checked', true)
                     else {
                       return d.set('checked', false)
@@ -216,7 +216,7 @@ export const selectItem = (state, action) => {
               return b.set('data', b.get('data').map((c) => {
                 return c.set('secondLevel', c.get('secondLevel').map(d => {
                   if(d.get('assetName') == action.name){
-                    if(!d.get('checked'))
+                    if(!d.get('checked') && !d.get('recon'))
                       return d.set('checked', true)
                     else {
                       return d.set('checked', false)
@@ -230,6 +230,41 @@ export const selectItem = (state, action) => {
             }))
           }
           return a
+        }))
+      }))
+    }))
+  }))
+}
+export const reconItem = (state, action) => {
+  return state.setIn(['display', 'derivatives'], state.getIn(['display', 'derivatives']).map((x) => {
+    return x.set('marginStatus', x.get('marginStatus').map((y) => {
+      return y.set('timeFrames', y.get('timeFrames').map((z) => {
+        return z.set('actionsList', z.get('actionsList').map((a) =>{
+          if(a.get('GUID'))
+            return a.set('clientAssets', a.get('clientAssets').map((b) => {
+              return b.set('data', b.get('data').map((c) => {
+                return c.set('secondLevel', c.get('secondLevel').map(d => {
+                  if(d.get('checked'))
+                    return d.set('checked', false).set('recon', true)
+                  else{
+                    return d.set('checked', d.get('checked'))
+                  }
+                }))
+              }))
+            })).set('counterpartyAssets', a.get('counterpartyAssets').map((b) => {
+              return b.set('data', b.get('data').map((c) => {
+                return c.set('secondLevel', c.get('secondLevel').map(d => {
+                  if(d.get('checked'))
+                    return d.set('checked', false).set('recon', true)
+                  else{
+                    return d.set('checked', d.get('checked'))
+                  }
+                }))
+              }))
+            }))
+          else{
+            return a
+          }
         }))
       }))
     }))
@@ -262,6 +297,8 @@ export default function reducer(state = Map(), action, store = 'data') {
     case 'SELECT_ITEM':
       return selectItem(state, action)
 
+    case 'RECON_ITEM':
+      return reconItem(state, action)
   }
 
   return state

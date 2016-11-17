@@ -21,6 +21,7 @@ class Actions extends React.Component{
     this.getTotalAmount = this.getTotalAmount.bind(this)
     this.getPercentage = this.getPercentage.bind(this)
     this.getBtnColour = this.getBtnColour.bind(this)
+    this.reconData = this.reconData.bind(this)
   }
   getRecon(){
     return this.props.recon || List()
@@ -69,25 +70,25 @@ class Actions extends React.Component{
   displayTotalAssetMargin(i){
     //  console.log(i.toJS())
     if(i.get('clientAssets')) {
-      return this.numberWithCommas((i.get('clientAssets').reduce((asset, x) => {
+      return i.get('clientAssets').reduce((asset, x) => {
         return asset + x.get('data').reduce((data, y) => {
           return data + y.get('secondLevel').reduce((amount, z) => {
             return amount + z.get('amount')
           }, 0)
         }, 0)
-      }, 0)/1000000).toFixed(2))
+      }, 0)
     }
   }
   displayTotalCptyMargin(i){
     //  console.log(i.toJS())
     if(i.get('counterpartyAssets')) {
-      return this.numberWithCommas((i.get('counterpartyAssets').reduce((asset, x) => {
+      return i.get('counterpartyAssets').reduce((asset, x) => {
         return asset + x.get('data').reduce((data, y) => {
           return data + y.get('secondLevel').reduce((amount, z) => {
             return amount + z.get('amount')
           }, 0)
         }, 0)
-      }, 0)/1000000).toFixed(2))
+      }, 0)
     }
   }
   getCurrencyInfo(ccy, baseCCY){
@@ -115,14 +116,35 @@ class Actions extends React.Component{
     }
   }
 
+  getTotalReconAmount(asset){
+    if(asset){
+      return asset.reduce((sum, x) => {
+        return sum + x.get('data').reduce((sum, y) => {
+          return sum + y.get('secondLevel').reduce((sum,z) => {
+            return sum + (z.get('recon')? z.get('amount'): 0)
+          }, 0)
+        }, 0)
+      }, 0)
+    }else{
+      return 0
+    }
+  }
+
   getPercentage(actionItem){
     if(actionItem.get('clientAssets') && actionItem.get('counterpartyAssets')){
-      if(this.getTotalAmount(actionItem.get('clientAssets')))
+      if(this.getTotalReconAmount(actionItem.get('clientAssets'))){
+        // console.log(actionItem.get('clientAssets').toJS())
+        // console.log(this.displayTotalAssetMargin(actionItem) * 1000000)
+        // console.log(this.getTotalReconAmount(actionItem.get('clientAssets')))
+
+        return ((this.displayTotalAssetMargin(actionItem) - (this.getTotalReconAmount(actionItem.get('clientAssets')))) / (this.displayTotalCptyMargin(actionItem) - (this.getTotalReconAmount(actionItem.get('counterpartyAssets')))) * 100).toFixed(0)
+      }
+      else if(this.getTotalAmount(actionItem.get('clientAssets'))) {
         return (this.getTotalAmount(actionItem.get('clientAssets')) / this.getTotalAmount(actionItem.get('counterpartyAssets')) * 100).toFixed(0)
+      }
       else{
         return (this.displayTotalAssetMargin(actionItem) / this.displayTotalCptyMargin(actionItem) * 100).toFixed(0)
       }
-
     }else{
       return 0.00
     }
@@ -149,7 +171,9 @@ class Actions extends React.Component{
         return styles.actTextGreen
     }
   }
-
+  reconData(){
+    this.props.reconItem()
+  }
   displayLineItems() {
     // console.log("display", this.getRecon().toJS())
     return( this.getRecon().map((x) => {
@@ -184,7 +208,7 @@ class Actions extends React.Component{
                           <div className={styles.packageLeft}>
                             <div>Total Reconciled</div>
                           </div>
-                          <div className={styles.packageRight}>-</div>
+                          <div className={styles.packageRight}>{this.numberWithCommas(this.getTotalReconAmount(i.get('clientAssets')))}</div>
                         </div>
                       </div>
                     </div>
@@ -201,7 +225,7 @@ class Actions extends React.Component{
                       </div>
                       <div className={styles.totalMargin}>
                         <div className={styles.marginTitle}>Total Margin</div>
-                        <div className={styles.marginValue}>{this.displayTotalAssetMargin(i)} </div>
+                        <div className={styles.marginValue}>{((this.displayTotalAssetMargin(i) - this.getTotalReconAmount(i.get('clientAssets')))/1000000).toFixed(2)} </div>
                         <div className={styles.marginUnit}>Millions</div>
                       </div>
                       <div className={styles.tradeDetails}> View Trade Details</div>
@@ -213,7 +237,7 @@ class Actions extends React.Component{
                   {/*Action button goes here*/}
                   <div className={styles.btnWrap}>
                     <div className={styles.actFig + ' ' + this.getTextColour(this.getPercentage(i))}>{this.getPercentage(i)}%</div>
-                    <div className={styles.actBtn + ' ' + this.getBtnColour(this.getPercentage(i))}>OK</div>
+                    <div className={styles.actBtn + ' ' + this.getBtnColour(this.getPercentage(i))} onClick={this.reconData}>OK</div>
                   </div>
                 </div>
 
@@ -242,7 +266,7 @@ class Actions extends React.Component{
                           <div className={styles.packageLeft}>
                             <div>Total Reconciled</div>
                           </div>
-                          <div className={styles.packageRight}>-</div>
+                          <div className={styles.packageRight}>{this.numberWithCommas(this.getTotalReconAmount(i.get('counterpartyAssets')))}</div>
                         </div>
                       </div>
                     </div>
@@ -261,7 +285,7 @@ class Actions extends React.Component{
                       </div>
                       <div className={styles.totalMargin}>
                         <div className={styles.marginTitle}>Total Margin</div>
-                        <div className={styles.marginValue}>{this.displayTotalCptyMargin(i)}</div>
+                        <div className={styles.marginValue}>{((this.displayTotalCptyMargin(i) - this.getTotalReconAmount(i.get('counterpartyAssets')))/1000000).toFixed(2)}</div>
                         <div className={styles.marginUnit}>Millions</div>
                       </div>
                       <div className={styles.tradeDetails}> View Trade Details</div>
