@@ -19,7 +19,7 @@ class App extends React.Component{
         super(props)
         //http://localhost:3000/data
         //https://acuo.herokuapp.com/json
-        fetch('http://localhost:3000/data').then((response) => {
+        fetch('https://acuo.herokuapp.com/json').then((response) => {
             return response.json()
         }).then((obj) => {
             store.dispatch(initState(fromJS(obj)))
