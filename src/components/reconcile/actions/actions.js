@@ -18,6 +18,9 @@ class Actions extends React.Component{
       this.props.lineItemInsertion(this.getRecon())
     }
     // this.getCurrencyInfo = this.getCurrencyInfo.bind(this)
+    this.getTotalAmount = this.getTotalAmount.bind(this)
+    this.getPercentage = this.getPercentage.bind(this)
+    this.getBtnColour = this.getBtnColour.bind(this)
   }
   getRecon(){
     return this.props.recon || List()
@@ -97,6 +100,56 @@ class Actions extends React.Component{
     else
       return
   }
+
+  getTotalAmount(asset){
+    if(asset){
+      return asset.reduce((sum, x) => {
+        return sum + x.get('data').reduce((sum, y) => {
+          return sum + y.get('secondLevel').reduce((sum, z) => {
+              return sum + (z.get('checked')? z.get('amount') : 0)
+            }, 0)
+          }, 0)
+      }, 0)
+    }else{
+      return 0
+    }
+  }
+
+  getPercentage(actionItem){
+    if(actionItem.get('clientAssets') && actionItem.get('counterpartyAssets')){
+      if(this.getTotalAmount(actionItem.get('clientAssets')))
+        return (this.getTotalAmount(actionItem.get('clientAssets')) / this.getTotalAmount(actionItem.get('counterpartyAssets')) * 100).toFixed(0)
+      else{
+        return (this.displayTotalAssetMargin(actionItem) / this.displayTotalCptyMargin(actionItem) * 100).toFixed(0)
+      }
+
+    }else{
+      return 0.00
+    }
+  }
+
+  getBtnColour(percentage){
+    switch(true){
+      case (percentage < 90.00 || percentage > 110):
+        return styles.actBtnRed
+      case (percentage < 95.00 || percentage > 105):
+        return styles.actBtnOrange
+      default:
+        return styles.actBtnGreen
+    }
+  }
+
+  getTextColour(percentage){
+    switch(true){
+      case (percentage < 90.00 || percentage > 110):
+        return styles.actTextRed
+      case (percentage < 95.00 || percentage > 105):
+        return styles.actTextOrange
+      default:
+        return styles.actTextGreen
+    }
+  }
+
   displayLineItems() {
     // console.log("display", this.getRecon().toJS())
     return( this.getRecon().map((x) => {
@@ -125,7 +178,7 @@ class Actions extends React.Component{
                           <div className={styles.packageLeft}>
                             <div>Total Amount Selected</div>
                           </div>
-                          <div className={styles.packageRight}>-</div>
+                          <div className={styles.packageRight}>{this.numberWithCommas(this.getTotalAmount(i.get('clientAssets')))}</div>
                         </div>
                         <div className={styles.sectionRow}> {/* one row div*/}
                           <div className={styles.packageLeft}>
@@ -159,8 +212,8 @@ class Actions extends React.Component{
                 <div className={styles.actPanel + ' ' + styles.act_C}>
                   {/*Action button goes here*/}
                   <div className={styles.btnWrap}>
-                    <div className={styles.actFig}>95%</div>
-                    <div className={styles.actBtn + ' ' + styles.actBtnOrange}>OK</div>
+                    <div className={styles.actFig + ' ' + this.getTextColour(this.getPercentage(i))}>{this.getPercentage(i)}%</div>
+                    <div className={styles.actBtn + ' ' + this.getBtnColour(this.getPercentage(i))}>OK</div>
                   </div>
                 </div>
 
@@ -182,7 +235,7 @@ class Actions extends React.Component{
                           <div className={styles.packageLeft}>
                             <div>Total Amount Selected</div>
                           </div>
-                          <div className={styles.packageRight}>-</div>
+                          <div className={styles.packageRight}>{this.numberWithCommas(this.getTotalAmount(i.get('counterpartyAssets')))}</div>
                         </div>
 
                         <div className={styles.sectionRow}> {/* one row div*/}

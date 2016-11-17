@@ -46,12 +46,24 @@
 }
 .actionWrap .actPanel.act_C .btnWrap .actFig{
     font-size: 24px;
-    color: acuoActionOrange;
     display: block;
     position: relative;
     text-align: center;
     clear: both;
 }
+
+.actTextOrange{
+    color: acuoActionOrange;
+}
+
+.actTextGreen{
+    color: acuoActionGreen;
+}
+
+.actTextRed{
+    color: acuoActionRed;
+}
+
 .actionWrap .actPanel.act_C .btnWrap .actBtn{
     display: block;
     position: relative;
@@ -67,6 +79,14 @@
 
 .actBtnOrange{
     background-color: acuoActionOrange;
+}
+
+.actBtnGreen{
+    background-color: acuoActionGreen;
+}
+
+.actBtnRed{
+    background-color: acuoActionRed;
 }
 
 .actionWrap .actPanel.act_L,
