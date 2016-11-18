@@ -78,7 +78,7 @@ export default class ActionLineItem extends React.Component {
                 <div className={styles.packageCheckBox} onClick={(e) => {this.handleClick(e);this.sendAction(this.props.GUID, x.get('assetName'))}}>
                   {x.get('recon') ? '' : <img src={x.get('checked') ? "./images/reconcile/checkboxwithtick.png" : "./images/reconcile/checkbox.png"} alt=""/>}
                 </div>
-                <div className={styles.packageText}>{ x.get('assetName') }</div>
+                <div className={styles.secondLevelText}>{ x.get('assetName') }</div>
               </div>
               <div className={styles.packageRight}>{ this.numberWithCommas(x.get('amount')) }</div>
             </div>

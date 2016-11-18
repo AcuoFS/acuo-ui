@@ -155,7 +155,9 @@
     font:13px Helvetica;
     padding: 0 5px;
 }
-
+.package{
+    font-weight:bold;
+}
 .packageRowGrey{
     color:#BCBCBC;
 }
@@ -208,6 +210,9 @@
     cursor:pointer;
 }
 
+.secondLevelText{
+  font-weight:normal;
+}
 /*----------css for section right starts here--------------------*/
 
 .section.right{
