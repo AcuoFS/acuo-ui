@@ -75,6 +75,7 @@
     text-align: center;
     -webkit-border-radius: 10px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .actBtnOrange{
@@ -155,10 +156,15 @@
     padding: 0 5px;
 }
 
+.packageRowGrey{
+    color:#BCBCBC;
+}
+
 .packageRow{
     display: flex;
     padding: 3px 0;
 }
+
 .packageLeft{
     display: flex;
     align-content: flex-start;
@@ -198,7 +204,9 @@
 .packageLvl2.show{
     display: block;
 }
-
+.expandPackage{
+    cursor:pointer;
+}
 
 /*----------css for section right starts here--------------------*/
 
@@ -227,6 +235,7 @@
     text-align: right;
     font-size: 12px;
     margin-top: 4px;
+    cursor: pointer;
 }
 
 .viewFxRate .viewFxRateImage{
@@ -267,4 +276,5 @@
     color:#4A90e2;
     text-align: center;
     padding: 10px;
+    cursor: pointer;
 }

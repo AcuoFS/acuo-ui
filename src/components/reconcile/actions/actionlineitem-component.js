@@ -104,19 +104,18 @@ export default class ActionLineItem extends React.Component {
     if(this.props.secondLevel.size <= this.props.secondLevel.reduce((count, x) => {
       return count + (x.get('recon') ? 1 : 0)}, 0))
       {
-        return false
-      }else{
         return true
+      }else{
+        return false
       }
     }
-
     render(){
         return(
-        <div>
-            <div className={styles.packageRow}> {/* one row div*/}
+        <div className={ this.reconSecondLevelSelections() ? styles.packageRowGrey : ''}>
+            <div className={ styles.packageRow }> {/* one row div*/}
                 <div className={styles.packageLeft}>
                     <div className={styles.packageCheckBox+' '+this.state.cbLvl1} onClick={this.firstLevelSelect}>
-                        {!this.reconSecondLevelSelections() ? '' : <img src={this.checkSecondLevelSelections()} />}
+                        { this.reconSecondLevelSelections() ? '' : <img src={this.checkSecondLevelSelections()} />}
                     </div>
                     <div className={styles.packageText}>{this.props.topLevel}</div>
                     <ActionLineItemExpand doClick={this.handlePlusMinus} image={this.state.expand}/>
