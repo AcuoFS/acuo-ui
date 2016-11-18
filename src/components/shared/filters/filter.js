@@ -324,94 +324,95 @@ class Filter extends React.Component{
 
     render(){
         return(
-
         <div className={styles.filterContainer}>
-            <div className={styles.filterBarName + ' ' + this.state.filterBar} onClick={this.toggleFilter}>
-                <span>Filter</span>
-                <div className={styles.switchArrow}>
-                    <div className={styles.arrowLine} id={styles.line1}></div>
-                    <div className={styles.arrowLine} id={styles.line2}></div>
+          <div className={styles.filterBarName + ' ' + this.state.filterBar} onClick={this.toggleFilter}>
+            <span>Filter</span>
+            <div className={styles.switchArrow}>
+              <div className={styles.arrowLine} id={styles.line1}></div>
+              <div className={styles.arrowLine} id={styles.line2}></div>
+            </div>
+          </div>
+          <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
+
+            <div className={styles.filterItem}>
+              <label className={styles.filterLabel}>Legal Entity</label>
+              <div className={styles.filters + ' ' + this.checkActive('legal-entity')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="legal-entity">
+                  <div className={styles.selectedText}>{(this.getFilters().getIn(['legalEntityFilter', 'filter']) || 'All').toUpperCase()}</div>
+                  <ul className={styles.filtersList}>
+                    <li onClick={this.handleLegalEntityChange} data-ref="All" className={styles.all}>ALL</li>
+                    {this.renderLegalEntity()}
+                  </ul>
+              </div>
+              <div className={styles.filterDropdownArrow}></div>
+            </div>
+
+
+            <div className={styles.filterItem}>
+              <label className={styles.filterLabel}>Deriv Type</label>
+              <div className={styles.filters + ' ' + this.checkActive('type')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="type">
+                <div className={styles.selectedText}>{(this.getFilters().getIn(['typeFilter', 'filter']) || 'All').toUpperCase()}</div>
+                <ul className={styles.filtersList}>
+                  <li onClick={this.handleDerivChange} data-ref="All" className={styles.all}>ALL</li>
+                  {this.getDeriv().map(this.renderFilter)}
+                </ul>
+
+              </div>
+              <div className={styles.filterDropdownArrow}></div>
+            </div>
+
+
+            <div className={styles.filterItem}>
+              <label className={styles.filterLabel}>Time Window</label>
+              <div className={styles.filters + ' ' + this.checkActive('timewindow')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="timewindow">
+
+                  <div className={styles.timeDay}>All</div>
+
+                  {this.renderTimeWindow()}
+
+              </div>
+              <div className={styles.filterDropdownArrow}></div>
+            </div>
+
+
+            <div className={styles.filterItem}>
+              <label className={styles.filterLabel}>Status</label>
+              <div className={styles.filters + ' ' + this.checkActive('status')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="status">
+                  <div className={styles.selectedText}>{(this.getFilters().getIn(['statusFilter', 'filter']) || 'All').toUpperCase()}</div>
+                  <ul className={styles.filtersList}>
+                      <li onClick={this.handleStatusChange} data-ref="All">ALL</li>
+                      {this.renderStatus()}
+                  </ul>
+              </div>
+              <div className={styles.filterDropdownArrow}></div>
+            </div>
+
+            <div className={styles.filterItem}>
+              <label className={styles.filterLabel}>CPTY Organisation</label>
+              <div className={styles.filters + ' ' + this.checkActive('cpty-org')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="cpty-org">
+                <div className={styles.selectedText}>{(this.getFilters().getIn(['cptyOrgFilter', 'filter']) || 'All').toUpperCase()}</div>
+                <ul className={styles.filtersList}>
+                  <li onClick={this.handleCptyOrgChange} data-ref="All" className={styles.all}>ALL</li>
+                  {this.renderCPTYOrg()}
+                </ul>
+              </div>
+              <div className={styles.filterDropdownArrow}></div>
+            </div>
+
+            <div className={styles.filterItem}>
+              <label className={styles.filterLabel}>CPTY Entity</label>
+              <div className={styles.filters + ' ' + this.checkActive('cpty-entity')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="cpty-entity">
+                <div className={styles.selectedText}>
+                  {this.renderEntitySelection().toUpperCase()}
                 </div>
+                <ul className={styles.filtersList}>
+                  <li className={styles.paddingless} onClick={(e) => e.stopPropagation()}><input type="text" className={styles.filterSearchBox} onChange={this.filterEntities} placeholder="Search..."/></li>
+                  <li onClick={this.handleCPTYEntityChange} data-ref="All" className={styles.all}>ALL</li>
+                  {this.renderCPTYEntity()}
+                </ul>
+              </div>
+              <div className={styles.filterDropdownArrow}></div>
             </div>
-            <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
-
-              <div className={styles.filterItem}>
-                  <label className={styles.filterLabel}>Legal Entity</label>
-                  <div className={styles.filters + ' ' + this.checkActive('legal-entity')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="legal-entity">
-                      <div className={styles.selectedText}>{(this.getFilters().getIn(['legalEntityFilter', 'filter']) || 'All').toUpperCase()}</div>
-                      <ul className={styles.filtersList}>
-                        <li onClick={this.handleLegalEntityChange} data-ref="All" className={styles.all}>ALL</li>
-                        {this.renderLegalEntity()}
-                      </ul>
-                  </div>
-                <div className={styles.filterDropdownArrow}></div>
-              </div>
-
-
-              <div className={styles.filterItem}>
-                  <label className={styles.filterLabel}>Deriv Type</label>
-                  <div className={styles.filters + ' ' + this.checkActive('type')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="type">
-                    <div className={styles.selectedText}>{(this.getFilters().getIn(['typeFilter', 'filter']) || 'All').toUpperCase()}</div>
-                    <ul className={styles.filtersList}>
-                      <li onClick={this.handleDerivChange} data-ref="All" className={styles.all}>ALL</li>
-                      {this.getDeriv().map(this.renderFilter)}
-                    </ul>
-
-                  </div>
-                <div className={styles.filterDropdownArrow}></div>
-              </div>
-
-
-              <div className={styles.filterItem}>
-                  <label className={styles.filterLabel}>Time Window</label>
-                  <div className={styles.filters + ' ' + this.checkActive('timewindow')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="timewindow">
-
-                      <div className={styles.timeDay}>All</div>
-
-                      {this.renderTimeWindow()}
-
-                  </div>
-                  <div className={styles.filterDropdownArrow}></div>
-              </div>
-
-
-              <div className={styles.filterItem}>
-                  <label className={styles.filterLabel}>Status</label>
-                  <div className={styles.filters + ' ' + this.checkActive('status')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="status">
-                      <div className={styles.selectedText}>{(this.getFilters().getIn(['statusFilter', 'filter']) || 'All').toUpperCase()}</div>
-                      <ul className={styles.filtersList}>
-                          <li onClick={this.handleStatusChange} data-ref="All">ALL</li>
-                          {this.renderStatus()}
-                      </ul>
-                  </div>
-                  <div className={styles.filterDropdownArrow}></div>
-              </div>
-
-              <div className={styles.filterItem}>
-                  <label className={styles.filterLabel}>CPTY Organisation</label>
-                  <div className={styles.filters + ' ' + this.checkActive('cpty-org')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="cpty-org">
-                    <div className={styles.selectedText}>{(this.getFilters().getIn(['cptyOrgFilter', 'filter']) || 'All').toUpperCase()}</div>
-                    <ul className={styles.filtersList}>
-                      <li onClick={this.handleCptyOrgChange} data-ref="All" className={styles.all}>ALL</li>
-                      {this.renderCPTYOrg()}
-                    </ul>
-                  </div>
-              </div>
-
-              <div className={styles.filterItem}>
-                  <label className={styles.filterLabel}>CPTY Entity</label>
-                  <div className={styles.filters + ' ' + this.checkActive('cpty-entity')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="cpty-entity">
-                    <div className={styles.selectedText}>
-                      {this.renderEntitySelection().toUpperCase()}
-                    </div>
-                    <ul className={styles.filtersList}>
-                      <li className={styles.paddingless} onClick={(e) => e.stopPropagation()}><input type="text" className={styles.filterSearchBox} onChange={this.filterEntities} placeholder="Search..."/></li>
-                      <li onClick={this.handleCPTYEntityChange} data-ref="All" className={styles.all}>ALL</li>
-                      {this.renderCPTYEntity()}
-                    </ul>
-                  </div>
-              </div>
-            </div>
+          </div>
         </div>
         )
 
