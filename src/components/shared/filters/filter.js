@@ -17,8 +17,12 @@ class Filter extends React.Component{
         filterBar: styles.open,
         filterItems: styles.show,
         activeDropdown: '',
-        filterEntity: ''
+        filterEntity: '',
+        timeWindowTitle: 'Today',
+        timeArrowLeft: styles.show,
+        timeArrowRight: styles.show
       }
+
       this.getDeriv = this.getDeriv.bind(this)
       this.getFilters = this.getFilters.bind(this)
       this.handleLegalEntityChange = this.handleLegalEntityChange.bind(this)
