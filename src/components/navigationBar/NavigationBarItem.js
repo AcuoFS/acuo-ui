@@ -27,12 +27,13 @@ class NavigationBarItem extends React.Component{
 }
 
 NavigationBarItem.propTypes = {
-    toUrl : PropTypes.func.isRequired,
-    label : PropTypes.func.isRequired
+    toUrl : React.PropTypes.string.isRequired,
+    label : React.PropTypes.string.isRequired,
+    selected : React.PropTypes.bool
 }
 
 NavigationBarItem.defaultProps = {
     selected : false
-};
+}
 
 export default NavigationBarItem
