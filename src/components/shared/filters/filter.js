@@ -19,6 +19,7 @@ class Filter extends React.Component{
         activeDropdown: '',
         filterEntity: '',
         timeWindowTitle: 'Today',
+        timeWindowSlot: 'Today: ALL',
         timeArrowLeft: styles.show,
         timeArrowRight: styles.show
       }
@@ -78,6 +79,9 @@ class Filter extends React.Component{
         let currTime =new Date('Sun Oct 23 2016 13:58:04 GMT+0800 (SGT)')
       console.log("current time is : " + currTime)
       if(e.currentTarget.dataset.min =='All'){
+        this.setState({
+            timeWindowSlot: this.state.timeWindowTitle + ': All'
+        })
         this.props.filterTimeWindowStatus(e.currentTarget.dataset.min, null)
       }
       else {
@@ -87,7 +91,9 @@ class Filter extends React.Component{
         let minTimeRange = new Date(currTime.setHours(e.currentTarget.dataset.min, 0, 0))
         let maxTimeRange = new Date(currTime.setHours(e.currentTarget.dataset.max, 0, 0))
         this.props.filterTimeWindowStatus(minTimeRange, maxTimeRange)
-
+        this.setState({
+            timeWindowSlot: this.state.timeWindowTitle + ': ' + e.currentTarget.innerHTML
+        })
       }
 
     }
@@ -365,17 +371,17 @@ class Filter extends React.Component{
             </div>
 
 
-            <div className={styles.filterItem}>
-              <label className={styles.filterLabel}>Time Window</label>
-              <div className={styles.filters + ' ' + this.checkActive('timewindow')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="timewindow">
+              <div className={styles.filterItem}>
+                  <label className={styles.filterLabel}>Time Window</label>
+                  <div className={styles.filters + ' ' + this.checkActive('timewindow')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="timewindow">
 
-                  <div className={styles.timeDay}>All</div>
+                      <div className={styles.timeDay}>{this.state.timeWindowSlot}</div>
 
-                  {this.renderTimeWindow()}
+                      {this.renderTimeWindow()}
 
+                  </div>
+                  <div className={styles.filterDropdownArrow}></div>
               </div>
-              <div className={styles.filterDropdownArrow}></div>
-            </div>
 
 
             <div className={styles.filterItem}>
