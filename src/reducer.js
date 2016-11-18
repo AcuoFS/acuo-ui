@@ -41,8 +41,6 @@ function applyTimeWindowFilter(derivatives, minTime, maxTime){
       let list = y.get('timeFrames').filter((z)=>{
         let timeFrame = z.get('timeRangeStart')
         let timeFrameInMill = new Date(timeFrame).getTime()
-        console.log('timeFrame is' ,timeFrame)
-        // console.log('min time is',minTime + 'max time is',maxTime)
             if((timeFrameInMill >= minTime.getTime()) && (timeFrameInMill < maxTime.getTime()))
                return true
       })
@@ -101,7 +99,6 @@ export function updateStateLegal(state, action, store){
 }
 
 export function updateStateStatus(state, action, store) {
-  //console.log(state.toJS())
   if (action.get('filter') == "All") {
     return state.set('display', state.get(store))
   } else
@@ -109,10 +106,14 @@ export function updateStateStatus(state, action, store) {
 }
 
 export function updateTimeWindow(state, actionMin, actionMax , store){
-  console.log('Min action is',actionMin)
-  console.log('Max action is',actionMax)
-  if(actionMin =='All'){
+  if(actionMin =='Today:All'){
     return state.set('display', state.get(store))
+  }
+  else if(actionMin =='Yesterday:All'){
+
+  }
+  else if(actionMin =='Tomorrow:All'){
+
   }
   else{
     return state.setIn(['display', 'derivatives'], applyTimeWindowFilter(state.getIn([store, 'derivatives']), actionMin, actionMax))
@@ -134,7 +135,6 @@ export function updateStateCptyEntity(state, action, store) {
 }
 
 export function multifilters(state, action){
-  //console.log(attachFilter(state, action).toJS())
   return attachFilter(state, action).getIn(['inputs', 'filters']).reduce((newState, filter) => {
     switch(filter.get('type')){
       case 'FILTER_STATE_DERIV':
