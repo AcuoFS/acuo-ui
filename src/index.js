@@ -3,16 +3,14 @@ import ReactDOM from 'react-dom'
 import {createStore} from 'redux'
 import {fromJS} from 'immutable'
 import {Provider} from 'react-redux'
-
+import { browserHistory, Router, Route, Link } from 'react-router'
 import reducer from './reducer'
 import {initState} from './action_creators'
 
 import styles from './global.css'
 
-import {GraphContainer} from './components/dashboard/graph/graph'
-import {TableContainer} from './components/dashboard/table/table-component'
-import Nav from './components/dashboard/navbar/navbar'
-import {FilterContainer} from './components/dashboard/filters/filter'
+import Dashboard from './components/dashboard/dashboard'
+import { ReconcileContainer } from './components/reconcile/reconcile'
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
@@ -32,14 +30,16 @@ class App extends React.Component{
         return (
             <Provider store={store}>
                 <div className={styles.globalStyles}>
-                    <Nav />
-                    <FilterContainer  />
-                    <GraphContainer />
-                    <TableContainer />
+                    <Router history={browserHistory}>
+                        <Route path="/" component={Dashboard} />
+                        <Route path="recon" component={ReconcileContainer} />
+                    </Router>
                 </div>
             </Provider>
         )
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render((
+    <App />
+  ),document.getElementById('app'))

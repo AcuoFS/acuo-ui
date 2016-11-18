@@ -1,0 +1,110 @@
+@value acuoGrey from './../../../css-components/colors.css';
+
+.nav {
+    flex-wrap: nowrap;
+    background-color: #fff;
+    padding: 10px 20px;
+    color: #5c5b5c;
+    /*display: flex;*/
+    position: relative;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.flex1{
+    flex: 1;
+}
+
+.uppercase{
+    text-transform: uppercase;
+}
+
+.logoContainer{
+    compose: flex1;
+    /*flex-grow: 1;*/
+    display: inline-block;
+    position: relative;
+    margin-right: 2%;
+}
+
+.vertiCenter{
+    display: table;
+    height: 100%;
+    text-align: center;
+}
+
+.centerThis{
+    /*display: table-cell;*/
+    vertical-align: middle;
+}
+
+.pageTitle{
+    composes: uppercase;
+    font-size: 0.9em;
+    line-height: 1.4em;
+    padding: 0px 1.2%;
+}
+
+.menuItem {
+    composes: uppercase;
+    color: acuoGrey;
+}
+
+.menuIcon {
+    composes: menuItem;
+    padding: 0px 1%;
+}
+
+.menuIcon p{
+    margin: 24px 0;
+}
+
+.nav .menuIcon#navSetting{
+    float: right;
+    margin-top: 20px;
+}
+
+.nav .menuIcon#navLogout{
+    float: right;
+    margin-top: 20px;
+}
+
+
+.nav .pageTitle,
+.nav .menuItem,
+.nav .menuIcon{
+    display: inline-block;
+}
+
+
+
+.close{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.open {
+    opacity: 1;
+    pointer-events: click;
+}
+
+
+.boldThis{
+    font-weight: bold;
+}
+
+.nav .userInfo{
+    float: right;
+    /*compose: flex1;*/
+    flex: 1;
+    text-transform: none;
+    width: 200px;
+    padding: 0 15px;
+    text-align: right;
+    margin-top: -6px;
+
+}
+
+.userInfo #userId{
+  /*display: block;*/
+  line-height: 1.8em;
+}

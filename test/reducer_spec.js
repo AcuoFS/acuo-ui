@@ -126,7 +126,10 @@ describe('reducer', () => {
         },
         "inputs": {
           "filters" :{
-            "typeFilter": "ETD"
+            "typeFilter": {
+              "type": "FILTER_STATE_DERIV",
+              "filter": "ETD"
+            }
           }
         }
       }
@@ -244,7 +247,10 @@ describe('reducer', () => {
         },
         "inputs": {
           "filters" :{
-            "legalEntityFilter": "Acuo SG"
+            "legalEntityFilter": {
+              type: 'FILTER_STATE_LEGAL',
+              filter: 'Acuo SG'
+            }
           }
         }
       }
@@ -410,14 +416,17 @@ describe('reducer', () => {
         },
         "inputs": {
           "filters" :{
-            "statusFilter": "expected"
+            "statusFilter": {
+              type: 'FILTER_STATE_STATUS',
+              filter: 'expected'
+            }
           }
         }
       }
     ))
   })
 
-  it('handles filter CPTY', () => {
+  it('handles filter cpty entity', () => {
     const initialState = fromJS(
       {
         "display": {
@@ -446,10 +455,10 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "cpty": "ABC bank"
+                          "cptyEntity": "ABC bank"
                         },
                         {
-                          "cpty": "CDE bank"
+                          "cptyEntity": "CDE bank"
                         }
                       ]
                     }
@@ -470,10 +479,10 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "cpty": "ABC bank"
+                          "cptyEntity": "ABC bank"
                         },
                         {
-                          "cpty": "CDE bank"
+                          "cptyEntity": "CDE bank"
                         }
                       ]
                     }
@@ -485,10 +494,10 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "cpty": "ABC bank"
+                          "cptyEntity": "ABC bank"
                         },
                         {
-                          "cpty": "CDE bank"
+                          "cptyEntity": "CDE bank"
                         }
                       ]
                     }
@@ -503,7 +512,7 @@ describe('reducer', () => {
     )
 
     const action = {
-      type: 'FILTER_STATE_CPTY',
+      type: 'FILTER_STATE_CPTYENTITY',
       filter: 'ABC bank'
     }
 
@@ -522,7 +531,7 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "cpty": "ABC bank"
+                          "cptyEntity": "ABC bank"
                         }
                       ]
                     }
@@ -534,7 +543,7 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "cpty": "ABC bank"
+                          "cptyEntity": "ABC bank"
                         }
                       ]
                     }
@@ -555,10 +564,10 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "cpty": "ABC bank"
+                          "cptyEntity": "ABC bank"
                         },
                         {
-                          "cpty": "CDE bank"
+                          "cptyEntity": "CDE bank"
                         }
                       ]
                     }
@@ -570,10 +579,10 @@ describe('reducer', () => {
                     {
                       "actionsList": [
                         {
-                          "cpty": "ABC bank"
+                          "cptyEntity": "ABC bank"
                         },
                         {
-                          "cpty": "CDE bank"
+                          "cptyEntity": "CDE bank"
                         }
                       ]
                     }
@@ -585,7 +594,10 @@ describe('reducer', () => {
         },
         "inputs": {
           "filters" :{
-            "cptyFilter": "ABC bank"
+            "cptyEntityFilter": {
+              type: 'FILTER_STATE_CPTYENTITY',
+              filter: 'ABC bank'
+            }
           }
         }
       }
@@ -748,10 +760,186 @@ describe('reducer', () => {
         },
         "inputs": {
           "filters" :{
-            "cptyOrgFilter": "Thailand"
+            "cptyOrgFilter": {
+              type: 'FILTER_STATE_CPTYORG',
+              filter: 'Thailand'
+            }
           }
         }
       }
     ))
   })
+
+  it('handles multiple filters at once', () => {
+    const initialState = fromJS(
+      {
+        "display": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "cptyOrg": "Thailand"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "status": "pledge",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "cptyOrg": "Thailand"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "data": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "cptyOrg": "Thailand"
+                        },
+                        {
+                          "cptyOrg": "Singapore"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "status": "pledge",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "cptyOrg": "Thailand"
+                        },
+                        {
+                          "cptyOrg": "Singapore"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "inputs": {
+          "filters" :{
+            "cptyOrgFilter": {
+              type: 'FILTER_STATE_CPTYORG',
+              filter: 'Thailand'
+            }
+          }
+        }
+      }
+    )
+
+    const action = {
+      type: 'FILTER_STATE_STATUS',
+      filter: 'pledge'
+    }
+
+    const nextState = reducer(initialState, action)
+
+    expect(nextState).to.equal(fromJS(
+      {
+        "display": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "pledge",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "cptyOrg": "Thailand"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "data": {
+          "derivatives": [
+            {
+              "type": "ETD",
+              "marginStatus": [
+                {
+                  "status": "expected",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "cptyOrg": "Thailand"
+                        },
+                        {
+                          "cptyOrg": "Singapore"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "status": "pledge",
+                  "timeFrames": [
+                    {
+                      "actionsList": [
+                        {
+                          "cptyOrg": "Thailand"
+                        },
+                        {
+                          "cptyOrg": "Singapore"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "inputs": {
+          "filters" :{
+            "cptyOrgFilter": {
+              type: 'FILTER_STATE_CPTYORG',
+              filter: 'Thailand'
+            },
+            "statusFilter": {
+              type: 'FILTER_STATE_STATUS',
+              filter: 'pledge'
+            }
+          }
+        }
+      }
+    ))
+
+  })
+
 })

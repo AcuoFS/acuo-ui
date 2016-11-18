@@ -67,14 +67,13 @@
   margin-top: 0.5em;
   margin-bottom: 0.5em;
 }
-.table .margin p.leftThis{
-  font-weight: bold;
-}
+
 .leftThis{
   text-align: left;
   position:relative;
-  font-family: baseFontBold
+  composes: baseFontBold from '../../../css-components/fonts.css';
 }
+
 .actionVertiCenter{
   float: left;
   composes: vertiCenter;
@@ -178,13 +177,13 @@
   width: 12%!important;
 }
 .table >div:nth-child(2){
-  width: 15%!important;
+  width: 12%!important;
 }
 .table >div:nth-child(3){
-  width: 8%!important;
+  width: 13%!important;
 }
 .table >div:nth-child(4){
-  width: 8%!important;
+  width: 6%!important;
 }
 .table >div:nth-child(5){
   width: 15%!important;
@@ -198,16 +197,16 @@
 
 
 .tableBody >div:nth-child(1){
-  width: 15.8%!important;
+  width: 15.5%!important;
 }
 .tableBody >div:nth-child(2){
-  width: 18.7%!important;
+  width: 15.7%!important;
 }
 .tableBody >div:nth-child(3){
-  width: 11.7%!important;
+  width: 16.7%!important;
 }
 .tableBody >div:nth-child(4){
-  width: 11.7%!important;
+  width: 9.7%!important;
 }
 .tableBody >div:nth-child(5){
   width: 18.7%!important;
@@ -218,16 +217,16 @@
 
 
 .tableRow >div:nth-child(1){
-  width: 15.8%!important;
+  width: 15.5%!important;
 }
 .tableRow >div:nth-child(2){
-  width: 18.7%!important;
+  width: 15.7%!important;
 }
 .tableRow >div:nth-child(3){
-  width: 11.7%!important;
+  width: 16.7%!important;
 }
 .tableRow >div:nth-child(4){
-  width: 11.7%!important;
+  width: 9.7%!important;
 }
 .tableRow >div:nth-child(5){
   width: 18.7%!important;
