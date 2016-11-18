@@ -1,6 +1,5 @@
 import React from 'react'
-import NavItem from './NavigationItem'
-import { Link } from 'react-router'
+import NavigationBarItem from './NavigationBarItem'
 import styles from './NavigationBar.css'
 
 
@@ -28,58 +27,16 @@ export default class NavigationBar extends React.Component{
 
                 </div>
 
-                <div className={styles.pageTitle}>
-                    <div className={styles.vertiCenter}>
-                        <div className={styles.centerThis}>
-                          <Link to="/">
-                              <NavItem selected={(this.props.curPage == '/' ? true : false)} label='Dashboard'/>
-                          </Link>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={styles.pageTitle}>
-                    <div className={styles.vertiCenter}>
-                        <div className={styles.centerThis}>
-                            <Link to="/recon">
-                                <NavItem selected={(this.props.curPage == '/recon' ? true : false)} label='Reconcile'/>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={styles.pageTitle}>
-                    <div className={styles.vertiCenter}>
-                        <div className={styles.centerThis}>
-                            <NavItem label='Disputes' />
-                        </div>
-                    </div>
-                </div>
-
-                <div className={styles.pageTitle}>
-                    <div className={styles.vertiCenter}>
-                        <div className={styles.centerThis}>
-                            <NavItem label='Pledge' />
-                        </div>
-                    </div>
-                </div>
-
-                <div className={styles.pageTitle}>
-                    <div className={styles.vertiCenter}>
-                        <div className={styles.centerThis}>
-                            <NavItem label='Deployed' />
-                        </div>
-                    </div>
-                </div>
-
-                <div className={styles.pageTitle}>
-                    <div className={styles.vertiCenter}>
-                        <div className={styles.centerThis}>
-                            <NavItem label='Analytics' />
-                        </div>
-                    </div>
-                </div>
-
+                <NavigationBarItem selected={(this.props.curPage == '/' ? true : false)}
+                                   label={'Dashboard'}
+                                   toUrl={'/'}/>
+                <NavigationBarItem selected={(this.props.curPage == '/recon' ? true : false)}
+                                   label={'Reconcile'}
+                                   toUrl={'/recon'}/>
+                <NavigationBarItem label={'Disputes'} toUrl={'/disputes'}/>
+                <NavigationBarItem label={'Pledge'} toUrl={'/pledge'}/>
+                <NavigationBarItem label={'Deployed'} toUrl={'/deployed'}/>
+                <NavigationBarItem label={'Analytics'} toUrl={'/analytics'}/>
 
                 {/*<div className={styles.uploadPortfolio}>*/}
                     {/*<div className={styles.vertiCenter}>*/}
