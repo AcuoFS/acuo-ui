@@ -55,6 +55,7 @@ export function filterCptyEntity(cptyEntity){
     }
 }
 
+
 export const lineItemInsertion = (lineItem) => (
   {
       type: 'LINE_ITEM_INSERTION',

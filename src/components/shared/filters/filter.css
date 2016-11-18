@@ -185,7 +185,15 @@
 }
 
 .filtersList li{
-    padding: 4px 8px;
+   padding: 4px 8px;
+}
+
+.paddingless{
+  padding: 0 !important;
+}
+
+.all{
+  composes: baseFontBold from './../../../css-components/fonts.css';
 }
 
 .filtersList li:hover{
@@ -207,7 +215,6 @@
   opacity: 0;
   pointer-events: none;
 }
-
 
 .timeDay{
     width: 100%;
@@ -278,4 +285,15 @@
     border-left-color: #000000;
     border-width: 8px;
     margin-top: -8px;
+}
+
+.filtersList .filterSearchBox {
+  width: 96%;
+  text-indent: 4px;
+  font-size: 13px;
+}
+
+.selectedList {
+  background-color: #4A90e2;
+  color: #fff;
 }
