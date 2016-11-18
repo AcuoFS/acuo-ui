@@ -3,14 +3,26 @@
  */
 import React from 'react'
 import { render } from 'react-dom'
+import { connect } from 'react-redux'
+import { fromJS } from 'immutable'
+
 import {FilterContainer} from '../shared/filters/filter'
 import {ActionsFilter} from './actions/actions'
 import stylesG from '../../global.css'
 import styles from './reconcile.css'
 import {NavContainer} from '../../components/shared/navbar/navbar'
+import * as actionCreators from '../../action_creators'
 
 class Reconcile extends React.Component{
+  constructor(props){
+    super(props)
 
+    fetch('https://acuo.herokuapp.com/json').then((response) => {
+        return response.json()
+    }).then((obj) => {
+        this.props.lineItemInsertion(fromJS(obj.recon))
+    })
+  }
 
   render(){
     return(
@@ -28,4 +40,11 @@ class Reconcile extends React.Component{
   }
 }
 
-export default Reconcile
+function mapStateToProps(state){
+  //console.log('map state to props', state.getIn(['display', 'derivatives']))
+  return{
+    recon : state.getIn(['data', 'recon'])
+  }
+}
+
+export const ReconcileContainer = connect(mapStateToProps, actionCreators)(Reconcile)

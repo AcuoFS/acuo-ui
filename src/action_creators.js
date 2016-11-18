@@ -22,6 +22,14 @@ export function filterStateLegal(legalEntity) {
     }
 }
 
+export function filterTimeWindowStatus(timeWindowMin, timeWindowMax) {
+
+    return {
+        type: 'FILTER_STATE_TIMEWINDOW',
+        minTime: timeWindowMin,
+        maxTime : timeWindowMax
+    }
+}
 
 export function filterStateStatus(status) {
 
@@ -48,3 +56,23 @@ export function filterCptyEntity(cptyEntity){
 }
 
 
+export const lineItemInsertion = (lineItem) => (
+  {
+      type: 'LINE_ITEM_INSERTION',
+      addition : lineItem
+  }
+)
+
+export const selectedItems = (id, item) => (
+  {
+      type: 'SELECT_ITEM',
+      GUID: id,
+      name: item
+  }
+)
+
+export const reconItem = () => (
+  {
+    type: 'RECON_ITEM'
+  }
+)

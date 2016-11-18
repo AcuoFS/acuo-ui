@@ -10,7 +10,7 @@ import {initState} from './action_creators'
 import styles from './global.css'
 
 import Dashboard from './components/dashboard/dashboard'
-import Reconcile from './components/reconcile/reconcile'
+import { ReconcileContainer } from './components/reconcile/reconcile'
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
@@ -32,7 +32,7 @@ class App extends React.Component{
                 <div className={styles.globalStyles}>
                     <Router history={browserHistory}>
                         <Route path="/" component={Dashboard} />
-                        <Route path="recon" component={Reconcile} />
+                        <Route path="recon" component={ReconcileContainer} />
                     </Router>
                 </div>
             </Provider>

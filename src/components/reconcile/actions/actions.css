@@ -24,7 +24,8 @@
     width: 100%;
     /*min-height: 100px;*/
     clear: both;
-    padding: 30px 0;
+    margin-top: 25px;
+    margin-bottom: 50px;
     /*border: 1px dotted #00f;*/
 }
 
@@ -45,12 +46,24 @@
 }
 .actionWrap .actPanel.act_C .btnWrap .actFig{
     font-size: 24px;
-    color: acuoActionOrange;
     display: block;
     position: relative;
     text-align: center;
     clear: both;
 }
+
+.actTextOrange{
+    color: acuoActionOrange;
+}
+
+.actTextGreen{
+    color: acuoActionGreen;
+}
+
+.actTextRed{
+    color: acuoActionRed;
+}
+
 .actionWrap .actPanel.act_C .btnWrap .actBtn{
     display: block;
     position: relative;
@@ -62,10 +75,19 @@
     text-align: center;
     -webkit-border-radius: 10px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .actBtnOrange{
     background-color: acuoActionOrange;
+}
+
+.actBtnGreen{
+    background-color: acuoActionGreen;
+}
+
+.actBtnRed{
+    background-color: acuoActionRed;
 }
 
 .actionWrap .actPanel.act_L,
@@ -85,9 +107,7 @@
 .panel{
     width: 100%;
     display: flex;
-    font: 13px bold helvetica;
     min-height: 365px;
-    max-height: 400px;
     overflow: auto;
     border:1px solid #dedede;
     -webkit-border-radius: 10px;
@@ -118,7 +138,7 @@
 
 .legalEntity{
     color:#759BBB;
-    font: bold 18px helvetica;
+    font: bold 18px Helvetica;
 }
 
 .legalEntityDetails{
@@ -132,8 +152,12 @@
 }
 
 .package{
-    font:13px helvetica;
+    font:13px Helvetica;
     padding: 0 5px;
+}
+
+.packageRowGrey{
+    color:#BCBCBC;
 }
 
 .packageRow{
@@ -145,14 +169,43 @@
     display: flex;
     align-content: flex-start;
     flex:3;
+    padding: 3px 0;
+}
+.packageLeft .packageCheckBox{
+    /*padding: 3px 4px 3px 10px;*/
+}
+.packageLeft .packageCheckBox.hide{
+    opacity: 0;
+    pointer-events: none; /** when the checkbox is hidden, set it unclickable. **/
+}
+.packageLeft .packageCheckBox.show{
+    opacity: 1;
 }
 
 .packageRight{
     flex:1;
+    padding: 3px 0;
 }
 
 .packageLeft div{
     padding-left: 10px;
+}
+
+
+/*--------- 2nd level packageRow -------------*/
+.packageLvl2{
+    /*display: flex;*/
+    padding: 4px 4px 4px 18px;
+    /*border: 1px dotted #ccc;*/
+}
+.packageLvl2.hide{
+    display: none;
+}
+.packageLvl2.show{
+    display: block;
+}
+.expandPackage{
+    cursor:pointer;
 }
 
 /*----------css for section right starts here--------------------*/
@@ -164,7 +217,7 @@
     display:flex;
     flex-direction: column;
     align-content: space-between;
-    font: 13px helvetica;
+    font: 13px Helvetica;
 }
 
 
@@ -182,6 +235,7 @@
     text-align: right;
     font-size: 12px;
     margin-top: 4px;
+    cursor: pointer;
 }
 
 .viewFxRate .viewFxRateImage{
@@ -196,10 +250,10 @@
   border-radius: 10px 0 10px 10px;
   border:1px solid #c9c9c9;
   background-color: #ffffff;
-  top: 80px;
+  top: 50px;
 }
 .viewFxRate:hover .viewFxRateImage{
-  display: block;
+    display: block;
 }
 
 
@@ -210,7 +264,7 @@
 }
 
 .marginValue{
-    font: bold 36px helvetica;
+    font: bold 36px Helvetica;
 }
 
 .marginUnit{
@@ -222,4 +276,5 @@
     color:#4A90e2;
     text-align: center;
     padding: 10px;
+    cursor: pointer;
 }
