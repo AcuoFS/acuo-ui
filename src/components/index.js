@@ -1,13 +1,13 @@
 import GraphComponent from './graph/Graph'
-import FilterComponent from './filter/FilterBar'
+import FilterBarComponent from './filter-bar/FilterBar'
 import MarginAgreementsComponent from './margin-agreement/MarginAgreementList'
-import NavigationBarComponent from './navigationBar/NavigationBar'
+import NavigationBarComponent from './navigation-bar/NavigationBar'
 import TableComponent from './table/Table'
 import UploadPortfolioComponent from './upload-portfolio/UploadPortfolio'
 
 export {
     GraphComponent,
-    FilterComponent,
+    FilterBarComponent,
     MarginAgreementsComponent,
     NavigationBarComponent,
     TableComponent,

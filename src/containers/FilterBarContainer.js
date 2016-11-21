@@ -7,7 +7,7 @@ import {
     filterCptyOrg,
     filterCptyEntity
 } from '../actions'
-import { FilterComponent } from '../components'
+import { FilterBarComponent } from '../components'
 import { Set } from 'immutable'
 
 
@@ -24,11 +24,11 @@ const mapStateToProps = state => ({
 
 
 const computeLegalEntityList = (derivatives) => {
+    //Have to refactor after code merge - map -> set -> list
     let derivativeList = derivatives ? jsonObjectToFlatArray(derivatives.toJSON()) : []
     let legalEntityList = derivativeList.map(entry => entry.legalEntity)
     let  legalEntitySet = Set(legalEntityList)
     return legalEntitySet.toArray()
-    //map -> set -> list
 }
 
 const computeDerivativeType = () => ([])
@@ -73,6 +73,6 @@ const mapDispatchToProps = dispatch => ({
 const FilterContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(FilterComponent)
+)(FilterBarComponent)
 
 export default FilterContainer

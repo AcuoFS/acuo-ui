@@ -7,7 +7,7 @@ import styles from './FilterBar.css'
 import FilterDropdown from './FilterBarDropdown'
 
 
-export default class Filter extends React.Component{
+export default class FilterBar extends React.Component{
     constructor(props){
       super(props)
       this.state = {
@@ -171,7 +171,7 @@ export default class Filter extends React.Component{
                     handlerOnClick={this.toggleDropDown}
                     handlerResetActiveDropdown={this.resetActiveDropdown}
                     handleOnSelectedItemChange={this.handleLegalEntityChange}
-                    options={['Legal Entity 1', 'Legal Entity 2', 'Legal Entity 3']} />
+                    options={this.props.legalEntityList} />
 
                 <div className={styles.filterItem}>
                     <label className={styles.filterLabel}>Deriv Type</label>
@@ -228,17 +228,18 @@ export default class Filter extends React.Component{
 }
 
 
-Filter.propTypes = {
+FilterBar.propTypes = {
     onLegalEntityChange : PropTypes.func.isRequired,
     onDerivChange : PropTypes.func.isRequired,
     onStatusChange : PropTypes.func.isRequired,
     onCptyOrgChange : PropTypes.func.isRequired,
-    onCPTYEntityChange : PropTypes.func.isRequired
+    onCPTYEntityChange : PropTypes.func.isRequired,
+    legalEntityList : PropTypes.arrayOf(PropTypes.string)
     //derivatives : PropTypes.arrayOf(PropTypes.object),
     //filters : PropTypes.array
 }
 
-Filter.defaultProps = {
+FilterBar.defaultProps = {
     derivatives : List(),
     filters : Map()
 }
