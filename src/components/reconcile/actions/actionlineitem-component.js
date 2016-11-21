@@ -71,18 +71,20 @@ export default class ActionLineItem extends React.Component {
     renderHidden(){
       return this.props.secondLevel.map((x) => {
         return (
-          <div className={styles.packageLvl2+' '+this.state.pkgLvl2} key={Date.now() * Math.random()}>
-            {/* have second level table rendering structure here */}
-            <div className={styles.packageRow}>
-              <div className={styles.packageLeft}>
-                <div className={styles.packageCheckBox} onClick={(e) => {this.handleClick(e);this.sendAction(this.props.GUID, x.get('assetName'))}}>
-                  {x.get('recon') ? '' : <img src={x.get('checked') ? "./images/reconcile/checkboxwithtick.png" : "./images/reconcile/checkbox.png"} alt=""/>}
+            <div className={ x.get('recon') ? styles.packageRowGrey : ''}>
+              <div className={styles.packageLvl2+' '+this.state.pkgLvl2} key={Date.now() * Math.random()}>
+                {/* have second level table rendering structure here */}
+                <div className={styles.packageRow}>
+                  <div className={styles.packageLeft}>
+                    <div className={styles.packageCheckBox} onClick={(e) => {this.handleClick(e);this.sendAction(this.props.GUID, x.get('assetName'))}}>
+                      {x.get('recon') ? '' : <img src={x.get('checked') ? "./images/reconcile/checkboxwithtick.png" : "./images/reconcile/checkbox.png"} alt=""/>}
+                    </div>
+                    <div className={styles.secondLevelText}>{ x.get('assetName') }</div>
+                  </div>
+                  <div className={styles.packageRight}>{ this.numberWithCommas(x.get('amount')) }</div>
                 </div>
-                <div className={styles.secondLevelText}>{ x.get('assetName') }</div>
               </div>
-              <div className={styles.packageRight}>{ this.numberWithCommas(x.get('amount')) }</div>
             </div>
-          </div>
         )
       })
     }
