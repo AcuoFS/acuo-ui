@@ -96,7 +96,7 @@ export default class ActionLineItem extends React.Component {
 
   checkSecondLevelSelections(){
     if(this.props.secondLevel.size <= this.props.secondLevel.reduce((count, x) => {
-      return count + (x.get('checked') ? 1 : 0)}, 0)){
+      return count + (x.get('checked') || x.get('recon') ? 1 : 0)}, 0)){
       return "./images/reconcile/checkboxwithtick.png"
     }else{
       return "./images/reconcile/checkbox.png"
@@ -105,12 +105,12 @@ export default class ActionLineItem extends React.Component {
   reconSecondLevelSelections(){
     if(this.props.secondLevel.size <= this.props.secondLevel.reduce((count, x) => {
       return count + (x.get('recon') ? 1 : 0)}, 0))
-      {
-        return true
-      }else{
-        return false
-      }
+    {
+      return true
+    }else{
+      return false
     }
+  }
     render(){
         return(
         <div className={ this.reconSecondLevelSelections() ? styles.packageRowGrey : ''}>
