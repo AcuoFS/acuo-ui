@@ -1,5 +1,5 @@
 import GraphComponent from './graph/Graph'
-import FilterComponent from './filter/Filter'
+import FilterComponent from './filter/FilterBar'
 import MarginAgreementsComponent from './margin-agreement/MarginAgreementList'
 import NavigationBarComponent from './navigationBar/NavigationBar'
 import TableComponent from './table/Table'

@@ -1,4 +1,4 @@
-import FilterContainer from './FilterContainer'
+import FilterContainer from './FilterBarContainer'
 import GraphContainer from './GraphContainer'
 import MarginAgreementListContainer from './MarginAgreementListContainer'
 import NavigationBarContainer from './NavigationBarContainer'

@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import jsonObjectToFlatArray from '../utils/jsonObjectToFlatArray'
 import {
     filterStateLegal,
     filterStateDeriv,
@@ -7,12 +8,38 @@ import {
     filterCptyEntity
 } from '../actions'
 import { FilterComponent } from '../components'
+import { Set } from 'immutable'
 
 
 const mapStateToProps = state => ({
     derivatives : state.getIn(['data', 'derivatives']),
-    filters: state.getIn(['inputs', 'filters'])
+    filters: state.getIn(['inputs', 'filters']),
+    legalEntityList : computeLegalEntityList(state.getIn(['data', 'derivatives'])),
+    derivativeType : computeDerivativeType(),
+    statusList : computeStatusList(),
+    cptyOrganisation : computeCptyOrganisation(),
+    cptyEntity : computecptyEntity()
 })
+
+
+
+const computeLegalEntityList = (derivatives) => {
+    let derivativeList = derivatives ? jsonObjectToFlatArray(derivatives.toJSON()) : []
+    let legalEntityList = derivativeList.map(entry => entry.legalEntity)
+    let  legalEntitySet = Set(legalEntityList)
+    return legalEntitySet.toArray()
+    //map -> set -> list
+}
+
+const computeDerivativeType = () => ([])
+
+const computeStatusList = () => ([])
+
+const computeCptyOrganisation = () => ([])
+
+const computecptyEntity = () => ([])
+
+
 
 const mapDispatchToProps = dispatch => ({
 
