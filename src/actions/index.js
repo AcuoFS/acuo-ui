@@ -16,6 +16,12 @@ export const filterStateLegal = (legalEntity) => ({
     filter: legalEntity
 })
 
+export const filterTimeWindowStatus = (timeWindowMin, timeWindowMax) =>({
+    type: ActionTypes.FILTER_STATE_TIMEWINDOW,
+    minTime: timeWindowMin,
+    maxTime : timeWindowMax
+})
+
 export const filterStateStatus = (status) => ({
     type: ActionTypes.FILTER_STATE_STATUS,
     filter: status
@@ -29,4 +35,19 @@ export const filterCptyOrg = (cptyOrg) =>({
 export const filterCptyEntity = (cptyEntity) => ({
     type: ActionTypes.FILTER_STATE_CPTYENTITY,
     filter: cptyEntity
+})
+
+export const lineItemInsertion = (lineItem) => ({
+    type: ActionTypes.LINE_ITEM_INSERTION,
+    addition : lineItem
+})
+
+export const selectedItems = (id, item) => ({
+    type: ActionTypes.SELECT_ITEM,
+    GUID: id,
+    name: item
+})
+
+export const reconItem = () => ({
+    type: ActionTypes.RECON_ITEM
 })

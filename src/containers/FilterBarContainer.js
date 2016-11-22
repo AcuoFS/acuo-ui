@@ -5,7 +5,8 @@ import {
     filterStateDeriv,
     filterStateStatus,
     filterCptyOrg,
-    filterCptyEntity
+    filterCptyEntity,
+    filterTimeWindowStatus
 } from '../actions'
 import { FilterBarComponent } from '../components'
 import { Set } from 'immutable'
@@ -63,9 +64,13 @@ const mapDispatchToProps = dispatch => ({
         dispatch(filterCptyOrg(e.currentTarget.dataset.ref))
     },
 
-    onCPTYEntityChange: (e) => {
-        e.stopPropagation()
-        dispatch(filterCptyEntity(e.currentTarget.dataset.ref))
+    onCPTYEntityChange: ( entityList ,e ) => {
+        //e.stopPropagation()
+        dispatch(filterCptyEntity(entityList))
+    },
+
+    onFilterTimeWindowStatus : (timeWindowMin, timeWindowMax, e) => {
+        dispatch(filterTimeWindowStatus(timeWindowMin, timeWindowMax))
     }
 })
 

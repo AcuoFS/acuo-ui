@@ -35,6 +35,21 @@ function applyStatusFilter(derivatives, status) {
   }, List())
 }
 
+function applyTimeWindowFilter(derivatives, minTime, maxTime){
+  return derivatives.reduce((listX, x)=>{
+    let list = x.get('marginStatus').reduce((listY, y) => {
+      let list = y.get('timeFrames').filter((z)=>{
+        let timeFrame = z.get('timeRangeStart')
+        let timeFrameInMill = new Date(timeFrame).getTime()
+            if((timeFrameInMill >= minTime.getTime()) && (timeFrameInMill < maxTime.getTime()))
+               return true
+      })
+      return (list.size > 0 ? listY.push(y.set('timeFrames', list)) : listY)
+    },List())
+    return (list.size >0 ? listX.push(x.set('marginStatus', list)) : listX)
+  }, List())
+
+}
 
 function applyCptyOrgFilter(derivatives, cptyOrg) {
   return derivatives.reduce((listVenue, deriv) => {
@@ -52,13 +67,13 @@ function applyCptyOrgFilter(derivatives, cptyOrg) {
 
 }
 
-function applyCPTYFilter(derivatives, cptyEntity) {
+function applyCPTYFilter(derivatives, cptyEntityList) {
   return derivatives.reduce((listCPTY, deriv)=>{
     let cptyList = deriv.get('marginStatus').reduce((listCPTY, marginStatus)=>{
       let cptyList = marginStatus.get('timeFrames').reduce((listCPTY, timeFrames)=>{
         let cptyList = timeFrames.get('actionsList').filter((actionsList)=>{
 
-          return actionsList.get('cptyEntity')==cptyEntity
+          return fromJS(cptyEntityList).includes(actionsList.get('cptyEntity'))
           })
         return (cptyList.size >0 ? listCPTY.push(timeFrames.set('actionsList', cptyList)) : listCPTY)
         }, List())
@@ -67,7 +82,6 @@ function applyCPTYFilter(derivatives, cptyEntity) {
         return (cptyList.size >0 ? listCPTY.push(deriv.set('marginStatus', cptyList)) : listCPTY)
     }, List())
 }
-
 
 //update state
 export function updateStateDeriv(state, action, store){
@@ -85,11 +99,25 @@ export function updateStateLegal(state, action, store){
 }
 
 export function updateStateStatus(state, action, store) {
-  //console.log(state.toJS())
   if (action.get('filter') == "All") {
     return state.set('display', state.get(store))
   } else
     return state.setIn(['display', 'derivatives'], applyStatusFilter(state.getIn([store, 'derivatives']), action.get('filter')))
+}
+
+export function updateTimeWindow(state, actionMin, actionMax , store){
+  if(actionMin =='Today:All'){
+    return state.set('display', state.get(store))
+  }
+  else if(actionMin =='Yesterday:All'){
+
+  }
+  else if(actionMin =='Tomorrow:All'){
+
+  }
+  else{
+    return state.setIn(['display', 'derivatives'], applyTimeWindowFilter(state.getIn([store, 'derivatives']), actionMin, actionMax))
+  }
 }
 
 export function updateStateCptyOrg(state, action, store){
@@ -100,14 +128,13 @@ export function updateStateCptyOrg(state, action, store){
 }
 
 export function updateStateCptyEntity(state, action, store) {
-  if(action.get('filter') == "All"){
+  if(action.get('filter').includes("All")){
     return state.set('display', state.get(store))
   }else
     return state.setIn(['display','derivatives'], applyCPTYFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
 export function multifilters(state, action){
-  //console.log(attachFilter(state, action).toJS())
   return attachFilter(state, action).getIn(['inputs', 'filters']).reduce((newState, filter) => {
     switch(filter.get('type')){
       case 'FILTER_STATE_DERIV':
@@ -119,11 +146,15 @@ export function multifilters(state, action){
       case 'FILTER_STATE_STATUS':
         return updateStateStatus(newState, filter, 'display')
 
+      case 'FILTER_STATE_TIMEWINDOW':
+        return updateTimeWindow(newState, filter.get('minTime'), filter.get('maxTime'), 'display')
+
       case 'FILTER_STATE_CPTYORG':
         return updateStateCptyOrg(newState, filter, 'display')
 
       case 'FILTER_STATE_CPTYENTITY':
         return updateStateCptyEntity(newState, filter, 'display')
+
     }
   }, attachFilter(initState(state, state.get('data')), action))
 
@@ -144,9 +175,138 @@ export function attachFilter(state, action){
 
     case 'FILTER_STATE_CPTYENTITY':
       return state.setIn(['inputs','filters','cptyEntityFilter'], fromJS(action))
+
+    case 'FILTER_STATE_TIMEWINDOW':
+      return state.setIn(['inputs','filters','timeWindowFilter'], fromJS(action))
   }
 }
 
+//updating state when recon page info is retrieved
+export const appendList = (state, action) => {
+  if(!state.get('data').isEmpty()){
+    return state.setIn(['data', 'derivatives'], state.getIn(['data', 'derivatives']).map((x) =>{
+
+      return x.set('marginStatus', x.get('marginStatus').map((y) => {
+        return y.set('timeFrames', y.get('timeFrames').map((z) => {
+          return z.set('actionsList', z.get('actionsList').map((a) => {
+            let item = action.addition.filter((item) => {
+              return a.get('GUID') === item.get('GUID')
+            }).first()
+
+            if(item) {
+              return a.set('clientAssets', item.get('ClientAssets')).set('counterpartyAssets', item.get('counterpartyAssets')).set('currencyInfo', item.get('currencyInfo'))
+            }
+            else {
+              return a
+            }
+          }))
+        }))
+      }))
+    })).setIn(['display', 'derivatives'], state.getIn(['display', 'derivatives']).map((x) =>{
+      return x.set('marginStatus', x.get('marginStatus').map((y) => {
+        return y.set('timeFrames', y.get('timeFrames').map((z) => {
+          return z.set('actionsList', z.get('actionsList').map((a) => {
+            let item = action.addition.filter((item) => {
+              return a.get('GUID') === item.get('GUID')
+            }).first()
+
+            if(item) {
+              return a.set('clientAssets', item.get('ClientAssets')).set('counterpartyAssets', item.get('counterpartyAssets')).set('currencyInfo', item.get('currencyInfo'))
+            }
+            else {
+              return a
+            }
+          }))
+        }))
+      }))
+    }))
+  }
+  else{
+    return state
+  }
+
+}
+
+export const selectItem = (state, action) => {
+  return state.setIn(['display', 'derivatives'], state.getIn(['display', 'derivatives']).map((x) => {
+    return x.set('marginStatus', x.get('marginStatus').map((y) => {
+      return y.set('timeFrames', y.get('timeFrames').map((z) => {
+        return z.set('actionsList', z.get('actionsList').map((a) => {
+          if(a.get('GUID') == action.GUID) {
+            return a.set('clientAssets', a.get('clientAssets').map((b) => {
+              return b.set('data', b.get('data').map((c) => {
+                return c.set('secondLevel', c.get('secondLevel').map(d => {
+                  if(d.get('assetName') == action.name){
+                    if(!d.get('checked') && !d.get('recon'))
+                      return d.set('checked', true)
+                    else {
+                      return d.set('checked', false)
+                    }
+                  }
+                  else {
+                    return d
+                  }
+                }))
+              }))
+            })).set('counterpartyAssets', a.get('counterpartyAssets').map((b) => {
+              return b.set('data', b.get('data').map((c) => {
+                return c.set('secondLevel', c.get('secondLevel').map(d => {
+                  if(d.get('assetName') == action.name){
+                    if(!d.get('checked') && !d.get('recon'))
+                      return d.set('checked', true)
+                    else {
+                      return d.set('checked', false)
+                    }
+                  }
+                  else {
+                    return d
+                  }
+                }))
+              }))
+            }))
+          }
+          return a
+        }))
+      }))
+    }))
+  }))
+}
+export const reconItem = (state, action) => {
+  return state.setIn(['display', 'derivatives'], state.getIn(['display', 'derivatives']).map((x) => {
+    return x.set('marginStatus', x.get('marginStatus').map((y) => {
+      return y.set('timeFrames', y.get('timeFrames').map((z) => {
+        return z.set('actionsList', z.get('actionsList').map((a) =>{
+          if(a.get('GUID'))
+            return a.set('clientAssets', a.get('clientAssets').map((b) => {
+              return b.set('data', b.get('data').map((c) => {
+                return c.set('secondLevel', c.get('secondLevel').map(d => {
+                  if(d.get('checked'))
+                    return d.set('checked', false).set('recon', true)
+                  else{
+                    return d.set('checked', d.get('checked'))
+                  }
+                }))
+              }))
+            })).set('counterpartyAssets', a.get('counterpartyAssets').map((b) => {
+              return b.set('data', b.get('data').map((c) => {
+                return c.set('secondLevel', c.get('secondLevel').map(d => {
+                  if(d.get('checked'))
+                    return d.set('checked', false).set('recon', true)
+                  else{
+                    return d.set('checked', d.get('checked'))
+                  }
+                }))
+              }))
+            }))
+          else{
+            return a
+          }
+        }))
+      }))
+    }))
+  }))
+}
+// main reducer function
 export default function reducer(state = Map(), action, store = 'data') {
   switch(action.type) {
     case 'INIT_STATE':
@@ -158,6 +318,9 @@ export default function reducer(state = Map(), action, store = 'data') {
     case 'FILTER_STATE_LEGAL':
       return multifilters(state, action, store)
 
+    case 'FILTER_STATE_TIMEWINDOW':
+      return multifilters(state, action, store)
+
     case 'FILTER_STATE_STATUS':
       return multifilters(state, action, store)
 
@@ -167,6 +330,14 @@ export default function reducer(state = Map(), action, store = 'data') {
     case 'FILTER_STATE_CPTYENTITY':
       return multifilters(state, action, store)
 
+    case 'LINE_ITEM_INSERTION':
+      return appendList(state, action)
+
+    case 'SELECT_ITEM':
+      return selectItem(state, action)
+
+    case 'RECON_ITEM':
+      return reconItem(state, action)
   }
 
   return state

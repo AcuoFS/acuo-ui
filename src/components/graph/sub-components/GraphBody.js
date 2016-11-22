@@ -28,7 +28,6 @@ export default class GraphBody extends React.Component {
             return setX.concat(x.get('marginStatus').reduce((setY, y) => {
               if(y.get('status') == X.get('status')){
                 return y.get('timeFrames').filter(z => {
-                  // console.log(z.toJS())
                   return z.get('timeRangeStart') == Y.get('timeFrame')
                 })
               }else
