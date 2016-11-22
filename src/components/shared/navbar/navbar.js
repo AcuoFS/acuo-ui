@@ -51,7 +51,9 @@ export class Nav extends React.Component{
                 <div className={styles.pageTitle}>
                     <div className={styles.vertiCenter}>
                         <div className={styles.centerThis}>
-                            <NavItem label='Disputes' />
+                            <Link to="/pledge">
+                                <NavItem selected={(this.props.curPage == '/pledge' ? true : false)}  label='Pledge' />
+                            </Link>
                         </div>
                     </div>
                 </div>

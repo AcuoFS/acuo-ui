@@ -11,6 +11,7 @@ import styles from './global.css'
 
 import Dashboard from './components/dashboard/dashboard'
 import { ReconcileContainer } from './components/reconcile/reconcile'
+import Pledge from './components/pledge/pledge'
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
@@ -33,6 +34,7 @@ class App extends React.Component{
                     <Router history={browserHistory}>
                         <Route path="/" component={Dashboard} />
                         <Route path="recon" component={ReconcileContainer} />
+                        <Route path="pledge" component={Pledge} />
                     </Router>
                 </div>
             </Provider>
