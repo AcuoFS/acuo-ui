@@ -79,6 +79,7 @@ export default class ActionLineItem extends React.Component {
                   {x.get('recon') ? '' : <img src={x.get('checked') ? "./images/reconcile/checkboxwithtick.png" : "./images/reconcile/checkbox.png"} alt=""/>}
                 </div>
                 <div className={styles.packageText}>{ x.get('assetName') }</div>
+                {/*{console.log('AssetName is :',x.get('assetName'))}*/}
               </div>
               <div className={styles.packageRight}>{ this.numberWithCommas(x.get('amount')) }</div>
             </div>
@@ -111,7 +112,7 @@ export default class ActionLineItem extends React.Component {
     }
     render(){
         return(
-        <div className={ this.reconSecondLevelSelections() ? styles.packageRowGrey : ''}>
+        <div className={ this.reconSecondLevelSelections() ? styles.packageRowGrey : (this.props.discrepancy==true ? styles.packageRowHighLight : '')}>
             <div className={ styles.packageRow }> {/* one row div*/}
                 <div className={styles.packageLeft}>
                     <div className={styles.packageCheckBox+' '+this.state.cbLvl1} onClick={this.firstLevelSelect}>
@@ -121,6 +122,7 @@ export default class ActionLineItem extends React.Component {
                     <ActionLineItemExpand doClick={this.handlePlusMinus} image={this.state.expand}/>
                 </div>
                 <div className={styles.packageRight}>{this.numberWithCommas(this.props.totalAmount)}</div>
+
             </div>
             {this.renderHidden()}
         </div>

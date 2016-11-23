@@ -160,6 +160,12 @@
     color:#BCBCBC;
 }
 
+.packageRowHighLight{
+  color: #000;
+  background-color:#D0021B;
+  opacity: .3;
+}
+
 .packageRow{
     display: flex;
     padding: 3px 0;

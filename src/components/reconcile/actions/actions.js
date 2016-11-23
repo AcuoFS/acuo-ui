@@ -5,7 +5,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import styles from './actions.css'
 import {connect} from 'react-redux'
-import {List} from 'immutable'
+import {List, Map} from 'immutable'
 import { ActionLineItemContainer } from './actionlineitem-component'
 import * as actionCreators from '../../../action_creators'
 
@@ -46,10 +46,13 @@ class Actions extends React.Component{
             return amount + j.get('amount')
           },0)}
           secondLevel={y.get('secondLevel')}
+          assetType='clientAssets'
+          discrepancy={this.checkDescrepency(asset.get('clientAssets'), asset.get('counterpartyAssets')).includes(y.get('firstLevel'))}
           />
       })} <hr/></div>)
     })
   }
+
   renderCptyItem(asset){
     if(asset.get('counterpartyAssets'))
     return asset.get('counterpartyAssets').map((x) => {
@@ -63,10 +66,13 @@ class Actions extends React.Component{
             return amount + j.get('amount')
           },0)}
           secondLevel={y.get('secondLevel')}
+          assetType='counterpartyAssets'
+          discrepancy={this.checkDescrepency(asset.get('clientAssets'), asset.get('counterpartyAssets')).includes(y.get('firstLevel'))}
           />
       })} <hr/></div>)
     })
   }
+
   displayTotalAssetMargin(i){
     //  console.log(i.toJS())
     if(i.get('clientAssets')) {
@@ -103,6 +109,7 @@ class Actions extends React.Component{
   }
 
   getTotalAmount(asset){
+    // console.log('asset is :',asset)
     if(asset){
       return asset.reduce((sum, x) => {
         return sum + x.get('data').reduce((sum, y) => {
@@ -128,6 +135,41 @@ class Actions extends React.Component{
     }else{
       return 0
     }
+  }
+
+  getFirstLevelTotal(asset) {
+    if(asset) {
+    return asset.reduce((listX, x) => {
+       let list = x.get('data').reduce((listY, y) => {
+
+         let list = Map({'key': y.get('firstLevel'), 'amount': y.get('secondLevel').reduce((sum, z) => {
+               return sum + z.get('amount')
+              }, 0)})
+         //return (list > 0 ? listY.push(y.set('secondLevel', list)) : listY)
+        return (list.size > 0 ? listY.push(list) : listY)
+          },List())
+       return (list.size > 0 ? listX.concat(list) : listX)
+      },List())
+    }
+    else return List()
+  }
+
+
+
+  checkDescrepency(clientAsset, counterpartyAsset){
+
+    let totalClientAsset = this.getFirstLevelTotal(clientAsset)
+    let totalcounterAsset = this.getFirstLevelTotal(counterpartyAsset)
+      //console.log("client asset is ",totalClientAsset.toJS() )
+
+    let highestDifference = totalClientAsset.reduce((highest, x) => {
+      let difference = Math.abs(x.get('amount') - totalcounterAsset.filter(y => y.get('key') == x.get('key')).first().get('amount'))
+      return (highest.get('difference') > difference ? highest : Map({'key': x.get('key'), 'difference': difference}))
+    }, Map())
+
+    console.log('highestDifferenceMap:',highestDifference.toJS())
+
+    return highestDifference
   }
 
   getPercentage(actionItem){
@@ -210,6 +252,7 @@ class Actions extends React.Component{
                           </div>
                           <div className={styles.packageRight}>{this.numberWithCommas(this.getTotalReconAmount(i.get('clientAssets')))}</div>
                         </div>
+                        <div>{this.checkDescrepency(i.get('clientAssets'),i.get('counterpartyAssets'))}</div>
                       </div>
                     </div>
                     <div className={styles.section+' '+styles.right}>
