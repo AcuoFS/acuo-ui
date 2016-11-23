@@ -71,9 +71,7 @@ export default class FilterDropdown extends React.Component{
 FilterDropdown.propTypes = {
     title : PropTypes.string,
     selectedOption : PropTypes.string,
-    divId : PropTypes.string.isRequired,
     options : PropTypes.arrayOf(PropTypes.string),
-    handlerOnCheckActive : PropTypes.func.isRequired,
     handlerOnClick : PropTypes.func.isRequired,
     handlerResetActiveDropdown : PropTypes.func.isRequired,
     handleOnSelectedItemChange : PropTypes.func.isRequired,

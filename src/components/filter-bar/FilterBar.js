@@ -22,8 +22,6 @@ export default class FilterBar extends React.Component{
         timeArrowRight: styles.show
       }
 
-      this.getDeriv = this.getDeriv.bind(this)
-      this.getFilters = this.getFilters.bind(this)
       this.handleLegalEntityChange = this.handleLegalEntityChange.bind(this)
       this.handleDerivChange = this.handleDerivChange.bind(this)
       this.handleStatusChange = this.handleStatusChange.bind(this)
@@ -33,7 +31,6 @@ export default class FilterBar extends React.Component{
       this.toggleDropDown = this.toggleDropDown.bind(this)
       this.checkActive = this.checkActive.bind(this)
       this.resetActiveDropdown = this.resetActiveDropdown.bind(this)
-      this.renderFilter = this.renderFilter.bind(this)
       this.filterEntities = this.filterEntities.bind(this)
       this.selectFilteredEntities = this.selectFilteredEntities.bind(this)
       this.renderEntitySelection = this.renderEntitySelection.bind(this)
@@ -50,14 +47,6 @@ export default class FilterBar extends React.Component{
             activeDropdown: ''
         })
         document.removeEventListener("click", this.toggleDropDown)
-    }
-
-    getDeriv(){
-        return this.props.derivatives || List()
-    }
-
-    getFilters(){
-        return this.props.filters || Map()
     }
 
     handleLegalEntityChange(e){
@@ -89,9 +78,7 @@ export default class FilterBar extends React.Component{
                 timeWindowSlot: this.state.timeWindowTitle + ': ' + e.currentTarget.innerHTML
             })
         }
-
     }
-
 
     handleStatusChange(e){
       this.props.onStatusChange(e)
@@ -104,7 +91,7 @@ export default class FilterBar extends React.Component{
     }
 
     handleCPTYEntityChange(e){
-        if(!this.getFilters().getIn(['cptyEntityFilter', 'filter']) || e.currentTarget.dataset.ref == "All"){
+        if(!this.props.filters.getIn(['cptyEntityFilter', 'filter']) || e.currentTarget.dataset.ref == "All"){
             this.props.onCPTYEntityChange(Set().add(e.currentTarget.dataset.ref), e)
         }
         else{
@@ -123,19 +110,6 @@ export default class FilterBar extends React.Component{
         }, Set())
     }
 
-
-    renderFilter(deriv, index){
-        return (
-            <li key={index} onClick={this.handleDerivChange} data-ref={deriv.get('type')} >{deriv.get('type').toUpperCase()} </li>)
-    }
-
-    renderLegalEntity(){
-        return this.fetchActionList().reduce((listSum , x)=>{
-            return(!listSum.includes(x.get('legalEntity')) ? listSum.add(x.get('legalEntity')):listSum)},Set()).map((x)=>{
-            return (<li key={x} onClick={this.handleLegalEntityChange} data-ref={x}>{x.toUpperCase()} </li>)
-        })
-
-    }
 
     renderTimeWindow(){
         return(
@@ -213,28 +187,12 @@ export default class FilterBar extends React.Component{
         return e.stopPropagation()
     }
 
-    renderStatus(){
-        return this.props.derivatives.reduce((listSumZ, derivative)=>{
-            return listSumZ.union(derivative.get('marginStatus').reduce((listSum, marginStatus)=>{
-                return (!listSum.includes(marginStatus.get('status')) ? listSum.add(marginStatus.get('status')) : listSum)
-            }, Set()))
-        }, Set()).toList().map((x) => {
-            return (<li key={x} data-ref={x} onClick={this.handleStatusChange}>{x.toUpperCase()} </li>)})
-    }
-
-    renderCPTYOrg(){
-        return this.fetchActionList().reduce((listSum , x)=>{
-            return(!listSum.includes(x.get('cptyOrg')) ? listSum.add(x.get('cptyOrg')):listSum)},Set()).sort().map((x)=>{
-            return (<li key={x} data-ref={x} onClick={this.handleCptyOrgChange}>{x.toUpperCase()} </li>)
-        })
-    }
-
     renderCPTYEntity(){
-      let filterSet = this.getFilters().getIn(['cptyEntityFilter', 'filter']) || Set()
+      let filterSet = this.props.filters.getIn(['cptyEntityFilter', 'filter']) || Set()
 
       let cptyEntityList = this.fetchActionList().reduce((listSum , x)=> {
-        if(this.getFilters().getIn(['cptyOrgFilter', 'filter']) && this.getFilters().getIn(['cptyOrgFilter', 'filter']) != 'All') {
-          return (!listSum.includes(x.get('cptyEntity')) && x.get('cptyOrg') == this.getFilters().getIn(['cptyOrgFilter', 'filter']) ? listSum.add(x.get('cptyEntity')) : listSum)
+        if(this.props.filters.getIn(['cptyOrgFilter', 'filter']) && this.props.filters.getIn(['cptyOrgFilter', 'filter']) != 'All') {
+          return (!listSum.includes(x.get('cptyEntity')) && x.get('cptyOrg') == this.props.filters.getIn(['cptyOrgFilter', 'filter']) ? listSum.add(x.get('cptyEntity')) : listSum)
         } else {
           return (!listSum.includes(x.get('cptyEntity')) ? listSum.add(x.get('cptyEntity')) : listSum)
         }
@@ -298,7 +256,7 @@ export default class FilterBar extends React.Component{
     }
 
     selectFilteredEntities(e){
-      let filterSet = this.getFilters().getIn(['cptyEntityFilter', 'filter'])
+      let filterSet = this.props.filters.getIn(['cptyEntityFilter', 'filter'])
 
       if(!filterSet.includes(e.currentTarget.dataset.ref)){
           this.props.onCPTYEntityChange(filterSet.add(e.currentTarget.dataset.ref).remove("All"), e)
@@ -313,13 +271,13 @@ export default class FilterBar extends React.Component{
 
     renderEntitySelection(){
 
-      if(!this.getFilters().getIn(['cptyEntityFilter', 'filter']) || this.getFilters().getIn(['cptyEntityFilter', 'filter']).includes("All") || this.getFilters().getIn(['cptyEntityFilter', 'filter']).size == 0)
+      if(!this.props.filters.getIn(['cptyEntityFilter', 'filter']) || this.props.filters.getIn(['cptyEntityFilter', 'filter']).includes("All") || this.props.filters.getIn(['cptyEntityFilter', 'filter']).size == 0)
         return "All"
 
-      if(this.getFilters().getIn(['cptyEntityFilter', 'filter']).size < 2)
-        return this.getFilters().getIn(['cptyEntityFilter', 'filter']).first()
+      if(this.props.filters.getIn(['cptyEntityFilter', 'filter']).size < 2)
+        return this.props.filters.getIn(['cptyEntityFilter', 'filter']).first()
 
-      if(this.getFilters().getIn(['cptyEntityFilter', 'filter']).size > 1)
+      if(this.props.filters.getIn(['cptyEntityFilter', 'filter']).size > 1)
         return "Multiple"
 
     }
@@ -336,32 +294,20 @@ export default class FilterBar extends React.Component{
           </div>
           <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
 
-            <div className={styles.filterItem}>
-              <label className={styles.filterLabel}>Legal Entity</label>
-              <div className={styles.filters + ' ' + this.checkActive('legal-entity')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="legal-entity">
-                  <div className={styles.selectedText}>{(this.getFilters().getIn(['legalEntityFilter', 'filter']) || 'All').toUpperCase()}</div>
-                  <ul className={styles.filtersList}>
-                    <li onClick={this.handleLegalEntityChange} data-ref="All" className={styles.all}>ALL</li>
-                    {this.renderLegalEntity()}
-                  </ul>
-              </div>
-              <div className={styles.filterDropdownArrow}></div>
-            </div>
 
+              <FilterDropdown
+                  title={'Legal Entity'}
+                  handlerOnClick={this.toggleDropDown}
+                  handlerResetActiveDropdown={this.resetActiveDropdown}
+                  handleOnSelectedItemChange={this.handleLegalEntityChange}
+                  options={this.props.legalEntityList} />
 
-            <div className={styles.filterItem}>
-              <label className={styles.filterLabel}>Deriv Type</label>
-              <div className={styles.filters + ' ' + this.checkActive('type')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="type">
-                <div className={styles.selectedText}>{(this.getFilters().getIn(['typeFilter', 'filter']) || 'All').toUpperCase()}</div>
-                <ul className={styles.filtersList}>
-                  <li onClick={this.handleDerivChange} data-ref="All" className={styles.all}>ALL</li>
-                  {this.getDeriv().map(this.renderFilter)}
-                </ul>
-
-              </div>
-              <div className={styles.filterDropdownArrow}></div>
-            </div>
-
+              <FilterDropdown
+                  title={'Deriv Type'}
+                  handlerOnClick={this.toggleDropDown}
+                  handlerResetActiveDropdown={this.resetActiveDropdown}
+                  handleOnSelectedItemChange={this.handleDerivChange}
+                  options={this.props.derivativeType} />
 
               <div className={styles.filterItem}>
                   <label className={styles.filterLabel}>Time Window</label>
@@ -376,29 +322,19 @@ export default class FilterBar extends React.Component{
               </div>
 
 
-            <div className={styles.filterItem}>
-              <label className={styles.filterLabel}>Status</label>
-              <div className={styles.filters + ' ' + this.checkActive('status')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="status">
-                  <div className={styles.selectedText}>{(this.getFilters().getIn(['statusFilter', 'filter']) || 'All').toUpperCase()}</div>
-                  <ul className={styles.filtersList}>
-                      <li onClick={this.handleStatusChange} data-ref="All">ALL</li>
-                      {this.renderStatus()}
-                  </ul>
-              </div>
-              <div className={styles.filterDropdownArrow}></div>
-            </div>
+              <FilterDropdown
+                  title={'Status'}
+                  handlerOnClick={this.toggleDropDown}
+                  handlerResetActiveDropdown={this.resetActiveDropdown}
+                  handleOnSelectedItemChange={this.handleStatusChange}
+                  options={this.props.statusList} />
 
-            <div className={styles.filterItem}>
-              <label className={styles.filterLabel}>CPTY Organisation</label>
-              <div className={styles.filters + ' ' + this.checkActive('cpty-org')} onClick={this.toggleDropDown} onMouseLeave={this.resetActiveDropdown} id="cpty-org">
-                <div className={styles.selectedText}>{(this.getFilters().getIn(['cptyOrgFilter', 'filter']) || 'All').toUpperCase()}</div>
-                <ul className={styles.filtersList}>
-                  <li onClick={this.handleCptyOrgChange} data-ref="All" className={styles.all}>ALL</li>
-                  {this.renderCPTYOrg()}
-                </ul>
-              </div>
-              <div className={styles.filterDropdownArrow}></div>
-            </div>
+              <FilterDropdown
+                  title={'CPTY Organisation'}
+                  handlerOnClick={this.toggleDropDown}
+                  handlerResetActiveDropdown={this.resetActiveDropdown}
+                  handleOnSelectedItemChange={this.handleCptyOrgChange}
+                  options={this.props.cptyOrganisation} />
 
             <div className={styles.filterItem}>
               <label className={styles.filterLabel}>CPTY Entity</label>

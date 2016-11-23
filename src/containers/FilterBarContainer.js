@@ -15,28 +15,51 @@ import { Set } from 'immutable'
 const mapStateToProps = state => ({
     derivatives : state.getIn(['data', 'derivatives']),
     filters: state.getIn(['inputs', 'filters']),
-    legalEntityList : computeLegalEntityList(state.getIn(['data', 'derivatives'])),
-    derivativeType : computeDerivativeType(),
-    statusList : computeStatusList(),
-    cptyOrganisation : computeCptyOrganisation(),
+    legalEntityList : computeLegalEntityList(state),
+    derivativeType : computeDerivativeType(state),
+    statusList : computeStatusList(state),
+    cptyOrganisation : computeCptyOrganisation(state),
     cptyEntity : computecptyEntity()
 })
 
 
 
-const computeLegalEntityList = (derivatives) => {
-    //Have to refactor after code merge - map -> set -> list
+const computeLegalEntityList = (state) => {
+    let derivatives = state.getIn(['data', 'derivatives'])
     let derivativeList = derivatives ? jsonObjectToFlatArray(derivatives.toJSON()) : []
-    let legalEntityList = derivativeList.map(entry => entry.legalEntity)
-    let  legalEntitySet = Set(legalEntityList)
+    let legalEntitySet = derivativeList.reduce((entitySet, derivative) => (
+        entitySet.add(derivative.legalEntity)
+    ), Set())
     return legalEntitySet.toArray()
 }
 
-const computeDerivativeType = () => ([])
+const computeDerivativeType = (state) => {
+    let derivatives = state.getIn(['data', 'derivatives']) || []
+    let derivativeTypeSet = derivatives.reduce((typeSet, derivative) => (
+        typeSet.add(derivative.get('type'))
+    ), Set())
+    return derivativeTypeSet.toArray()
+}
 
-const computeStatusList = () => ([])
+const computeStatusList = (state) => {
+    let derivatives = state.getIn(['data', 'derivatives'])
+    let derivativeList = derivatives ? jsonObjectToFlatArray(derivatives.toJSON()) : []
+    let marginStatusSet = derivativeList.reduce((marginStatus, derivative) => (
+        marginStatus.add(derivative.status)
+    ), Set())
+    return marginStatusSet.toArray()
+}
 
-const computeCptyOrganisation = () => ([])
+const computeCptyOrganisation = (state) => {
+    let derivatives = state.getIn(['data', 'derivatives'])
+    let derivativeList = derivatives ? jsonObjectToFlatArray(derivatives.toJSON()) : []
+    let cptyOrganisationSet = derivativeList.reduce((cptyOrganisation, derivative) => (
+        cptyOrganisation.add(derivative.cptyOrg)
+    ), Set())
+    return cptyOrganisationSet.toArray()
+}
+
+
 
 const computecptyEntity = () => ([])
 

@@ -12,7 +12,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(lineItemInsertion(lineItem))
   },
   onReconItem : () => {
-    dispatch(reconItem(lineItem))
+    dispatch(reconItem())
   },
   onSelectedItem : (guid, assetName) => {
     dispatch(selectedItems(guid, assetName))
