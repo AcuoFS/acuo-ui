@@ -1,0 +1,186 @@
+@value acuoGrey from './../../static/css-components/colors.css';
+
+
+.pledgeContainer{
+    position: relative;
+    padding: 20px;
+}
+
+.secDivider{
+    display: block;
+    width: 100%;
+    clear: both;
+}
+
+.panel{
+    position: relative;
+    margin: 10px 0 25px 0;
+    padding: 10px;
+    background-color: #fff;
+    border:1px solid #dedede;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 2px 2px 4px 0 #c9c9c9;
+    box-shadow: 2px 2px 4px 0 #c9c9c9;
+}
+
+.panelTitle{
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: #6389ad;
+}
+
+#optSetting{
+    display: inline-block;
+    width: 600px;
+    height: 345px;
+    margin: 20px 20px 30px 20px;
+}
+#optSetting .panelTitle{
+    font-size: 24px;
+    line-height: 29px;
+}
+#optSetting .optPnlWrap{
+
+}
+#optSetting .optPnlWrap .optItem{
+    display: block;
+    position: relative;
+    min-width: 500px;
+    width: 100%;
+    height: 40px;
+    margin: 20px 0;
+}
+#optSetting .optPnlWrap .optItem .optItemName{
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    text-align: right;
+    margin-right: 10px;
+    font-size: 13px;
+    line-height: 16px;
+    color: #4A4A4A;
+}
+#optSetting .optPnlWrap .optItem .optItemSlider{
+    display: inline-block;
+    position: relative;
+    width: 450px;
+    top: -1px;
+}
+.optItemSlider .sliderUnit{
+    position: absolute;
+    width: 100%;
+    min-height: 24px;
+    float: left;
+    top: 6px;
+    z-index: 1;
+    border: 1px dotted #9b9b9b;
+}
+.optItemSlider .sliderLine{
+    height: 6px;
+    background-color: #9b9b9b;
+    overflow: hidden;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    z-index: 2;
+}
+.optItemSlider .sliderLine .sliderLineFill{
+    width: 30%;
+    height: 6px;
+    background-color: #000;
+}
+.optItemSlider .sliderHandle{
+    display: block;
+    position: absolute;
+    top: -8px;
+    width: 7px;
+    height: 22px;
+    background-color: #2B3C4C;
+    z-index: 3;
+}
+.optItemSlider .sliderHandle:hover{
+    cursor: pointer;
+}
+
+
+.chsCalls{
+    display: inline-block;
+    font-size: 14px;
+    line-height: 17px;
+    color: #4A4A4A;
+    margin: 10px 30px auto 20px;
+}
+.chsCalls .tick{
+    display: inline-block;
+    position: relative;
+    vertical-align: text-bottom;
+    margin: auto 4px;
+}
+.chsCalls .tick:hover{
+    cursor: pointer;
+}
+
+.optButton,
+.optButton.btnEnabled{
+    display: inline-block;
+    position: relative;
+    width: 146px;
+    /*height: 32px;*/
+    color: #4A4A4A;
+    background-color: #FAFAFA;
+    border: 1px solid #979797;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 32px;
+    text-align: center;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    margin: 0 20px;
+}
+.optButton:hover{
+    cursor: pointer;
+}
+.optButton.btnDisabled{
+    color: #d7dce0;
+    background-color: #FAFAFA;
+    border: 1px solid #d7dce0;
+    pointer-events: none;
+}
+.optButton#optBtnAllocate{
+
+}
+.optButton#optBtnPledge.btnEnabled{
+    color: #fff;
+    background-color: #00B9CC;
+    border-color: #00B9CC;
+}
+
+#pleStatus{
+    display: inline-block;
+    width: 480px;
+    height: 345px;
+    margin: 20px 20px 30px 20px;
+    float: right;
+}
+#pleStatus .panelTitle{
+    font-size: 24px;
+    line-height: 29px;
+}
+
+
+.col_L,
+.col_R{
+    display: inline-block;
+    position: relative;
+}
+
+.col_L{
+    width: 39%;
+}
+
+.col_R{
+    width: 59%;
+    float: right;
+}

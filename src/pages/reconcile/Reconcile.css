@@ -1,0 +1,29 @@
+@value acuoGrey from './../../static/css-components/colors.css';
+
+.titleBar{
+    display: flex;
+    position: relative;
+    min-height: 40px;
+}
+
+.titleBar .title{
+    display: inline-block;
+    position: relative;
+    background-color: #001f2d;
+    color: #ffffff;
+    padding: 7px 8px 0px 30px;
+    font-size: 20px;
+    vertical-align: middle;
+    -webkit-box-shadow: 0px 2px 0px 0 #c9c9c9;
+    box-shadow: 0px 2px 0px 0 #c9c9c9;
+}
+
+.titleBar .titleTriangle{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 40px 40px 0 0;
+    border-color: #001f2d transparent transparent transparent;
+
+}
