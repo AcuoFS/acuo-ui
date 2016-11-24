@@ -32,10 +32,11 @@
 }
 
 #optSetting {
-  display: inline-block;
+  /*display: inline-block;*/
   /*width: 600px;*/
   /*height: 345px;*/
   margin: 20px 20px 30px 20px;
+  flex: 1;
 }
 
 #optSetting .panelTitle {
@@ -231,7 +232,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .chsCalls {
-  display: inline-block;
+  flex: 1;
   font-size: 14px;
   line-height: 17px;
   color: #4A4A4A;
@@ -251,8 +252,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 .optButton,
 .optButton.btnEnabled {
-  display: inline-block;
-  position: relative;
+  flex: 1;
   width: 146px;
   /*height: 32px;*/
   color: #4A4A4A;
@@ -265,6 +265,7 @@ input[type=range]:focus::-ms-fill-upper {
   -webkit-border-radius: 20px;
   border-radius: 20px;
   margin: 0 20px;
+  align-self: center;
 }
 
 .optButton:hover {
@@ -282,6 +283,10 @@ input[type=range]:focus::-ms-fill-upper {
 
 }
 
+.sliderAndStatus{
+  display: flex;
+}
+
 .optButton#optBtnPledge.btnEnabled {
   color: #fff;
   background-color: #00B9CC;
@@ -289,11 +294,8 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 #pleStatus {
-  display: inline-block;
-  width: 480px;
-  height: 345px;
   margin: 20px 20px 30px 20px;
-  float: right;
+  flex: 1;
 }
 
 #pleStatus .panelTitle {
@@ -352,4 +354,9 @@ input[type=range]:focus::-ms-fill-upper {
   font-size: 17px;
   font-family: "Arial Black";
   color: #9b9b9b;
+}
+
+.buttonHolder{
+  display: flex;
+  padding: 15px 0;
 }
