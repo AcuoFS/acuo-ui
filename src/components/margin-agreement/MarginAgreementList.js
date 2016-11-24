@@ -3,7 +3,7 @@
  */
 import React, {PropTypes} from 'react'
 import {List} from 'immutable'
-import MarginAgreementPortfolio from './MarginAgreementPortfolio'
+import MarginAgreementPortfolio from './sub-components/MarginAgreementPortfolio'
 import styles from './MarginAgreementList.css'
 
 

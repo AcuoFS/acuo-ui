@@ -2,7 +2,7 @@
  * Created by achalkagwad on 9/11/16.
  */
 import React from 'react'
-import styles from './MarginAgreementList.css'
+import styles from '../MarginAgreementList.css'
 
 
 export default class MarginAgreementDetailExpand extends React.Component {

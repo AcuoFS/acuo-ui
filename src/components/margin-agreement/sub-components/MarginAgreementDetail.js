@@ -4,7 +4,7 @@
 import React, {PropTypes} from 'react'
 import MarginAgreementDetailExpand from './MarginAgreementDetailExpand'
 import {List} from 'immutable'
-import styles from './MarginAgreementList.css'
+import styles from '../MarginAgreementList.css'
 
 
 export default class MarginAgreementDetail extends React.Component {

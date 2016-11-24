@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import {Map} from 'immutable'
 import MarginAgreementDetail from './MarginAgreementDetail'
-import styles from './MarginAgreementList.css'
+import styles from '../MarginAgreementList.css'
 
 
 export default class MarginAgreementPortfolio extends React.Component {
