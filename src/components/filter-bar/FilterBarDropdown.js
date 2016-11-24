@@ -55,7 +55,7 @@ export default class FilterDropdown extends React.Component{
         return(
             <div className={styles.filterItem}>
                 <label className={styles.filterLabel}>{this.props.title}</label>
-                <div className={styles.filters} onClick={this.handleToggleDropdown}>
+                <div className={styles.filters} onClick={this.handleToggleDropdown} onMouseLeave={this.handleOnMouseLeave}>
                     <div className={styles.selectedText}>
                         {( this.state.selectedOption ).toUpperCase()}
                     </div>
