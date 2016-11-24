@@ -69,9 +69,10 @@ export default class MarginAgreementDetail extends React.Component {
   }
 
   renderHidden() {
-    return this.props.secondLevel.map((x) => {
+    return this.props.secondLevel.map((x, index) => {
+      console.log(x.toJS())
       return (
-        <div className={ x.get('recon') ? styles.packageRowGrey : ''}>
+        <div className={ x.get('recon') ? styles.packageRowGrey : ''} key={index}>
           <div className={styles.packageLvl2 + ' ' + this.state.pkgLvl2} key={Date.now() * Math.random()}>
             {/* have second level table rendering structure here */}
             <div className={styles.packageRow}>
