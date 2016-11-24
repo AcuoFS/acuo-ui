@@ -1,7 +1,7 @@
 /**
  * Created by panyong on 4/11/16.
  */
-import React from 'react'
+import React, {PropTypes} from 'react'
 import {List} from 'immutable'
 import MarginAgreementPortfolio from './MarginAgreementPortfolio'
 import styles from './MarginAgreementList.css'
@@ -10,22 +10,14 @@ import styles from './MarginAgreementList.css'
 export default class MarginAgreementList extends React.Component {
   constructor(props) {
     super(props)
+    const {recon, onLineItemInsertion} = this.props
     this.displayLineItems = this.displayLineItems.bind(this)
-    if (!this.getRecon().isEmpty()) {
-      this.props.onLineItemInsertion(this.getRecon())
+    if (!recon.isEmpty()) {
+      onLineItemInsertion(recon)
     }
     this.getTotalAmount = this.getTotalAmount.bind(this)
     this.getPercentage = this.getPercentage.bind(this)
     this.getBtnColour = this.getBtnColour.bind(this)
-    this.onSelectedItem = this.onSelectedItem.bind(this)
-  }
-
-  getRecon() {
-    return this.props.recon || List()
-  }
-
-  onSelectedItem(guid, assetName) {
-    this.props.onSelectedItem(guid, assetName)
   }
 
   displayTotalMargin(i, assetType) {
@@ -94,8 +86,8 @@ export default class MarginAgreementList extends React.Component {
     }
   }
 
-  displayLineItems() {
-    return ( this.getRecon().map((x) => {
+  displayLineItems(recon, onReconItem, onSelectedItem) {
+    return ( recon.map((x) => {
       return x.get('marginStatus').map((y) => {
         return y.get('timeFrames').map((z) => {
           return z.get('actionsList').map((i) => {
@@ -107,7 +99,7 @@ export default class MarginAgreementList extends React.Component {
                                           orgName={'legalEntity'}
                                           assetsName={'clientAssets'}
                                           handlerTotalMargin={this.displayTotalMargin}
-                                          handlerSelectedItem={this.onSelectedItem}/>
+                                          handlerSelectedItem={onSelectedItem}/>
 
                 <div className={styles.actPanel + ' ' + styles.act_C}>
                   {/*Action button goes here*/}
@@ -116,7 +108,7 @@ export default class MarginAgreementList extends React.Component {
                       className={styles.actFig + ' ' + this.getTextColour(this.getPercentage(i))}>{this.getPercentage(i)}%
                     </div>
                     <div className={styles.actBtn + ' ' + this.getBtnColour(this.getPercentage(i))}
-                         onClick={this.props.onReconItem}>OK
+                         onClick={onReconItem}>OK
                     </div>
                   </div>
                 </div>
@@ -126,7 +118,7 @@ export default class MarginAgreementList extends React.Component {
                                           orgName={'cptyOrg'}
                                           assetsName={'counterpartyAssets'}
                                           handlerTotalMargin={this.displayTotalMargin}
-                                          handlerSelectedItem={this.onSelectedItem}/>
+                                          handlerSelectedItem={onSelectedItem}/>
               </div>
             )
           })
@@ -136,10 +128,22 @@ export default class MarginAgreementList extends React.Component {
   }
 
   render() {
+    const {recon, onReconItem, onSelectedItem} = this.props
     return (
       <div className={styles.actionContainer}>
-        {this.displayLineItems()}
+        {this.displayLineItems(recon, onReconItem, onSelectedItem)}
       </div>
     )
   }
+}
+
+MarginAgreementList.PropTypes = {
+  recon: PropTypes.instanceOf(List).isRequired,
+  onLineItemInsertion: PropTypes.func.isRequired,
+  onReconItem: PropTypes.func.isRequired,
+  onSelectedItem: PropTypes.func.isRequired
+}
+
+MarginAgreementList.defaultProps = {
+  recon: List()
 }
