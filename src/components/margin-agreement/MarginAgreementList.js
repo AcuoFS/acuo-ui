@@ -2,7 +2,7 @@
  * Created by panyong on 4/11/16.
  */
 import React, {PropTypes} from 'react'
-import {List} from 'immutable'
+import {List, Map} from 'immutable'
 import MarginAgreementPortfolio from './sub-components/MarginAgreementPortfolio'
 import styles from './MarginAgreementList.css'
 

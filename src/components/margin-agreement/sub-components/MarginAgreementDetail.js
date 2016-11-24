@@ -124,7 +124,7 @@ export default class MarginAgreementDetail extends React.Component {
 
   render() {
     return (
-      <div className={ this.reconSecondLevelSelections() ? styles.packageRowGrey : ''}>
+      <div className={ this.reconSecondLevelSelections() ? styles.packageRowGrey : (this.props.discrepancy ? styles.packageRowHighLight : '')}>
         <div className={ styles.packageRow }> {/* one row div*/}
           <div className={styles.packageLeft}>
             <div className={styles.packageCheckBox + ' ' + this.state.cbLvl1} onClick={this.firstLevelSelect}>
