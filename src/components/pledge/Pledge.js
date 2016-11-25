@@ -6,6 +6,7 @@ import {render} from 'react-dom'
 import styles from './Pledge.css'
 import OptItem from './sub-components/OptItem'
 import ChooseCalls from './sub-components/ChooseCalls'
+import Selection from '../pledge-selection/Seleection'
 
 class Pledge extends React.Component {
   constructor(props) {
@@ -19,10 +20,10 @@ class Pledge extends React.Component {
           <div className={styles.panel} id={styles.optSetting}>
             <div className={styles.panelTitle}>Optimization Setting</div>
             <div className={styles.optPnlWrap}>
-              <OptItem sldName="Operations"/>
-              <OptItem sldName="Liquidity"/>
-              <OptItem sldName="Cost"/>
-              <OptItem sldName="Haircut"/>
+              <OptItem sldName="Operations" allocation="72"/>
+              <OptItem sldName="Liquidity" allocation="36"/>
+              <OptItem sldName="Cost" allocation="18"/>
+              <OptItem sldName="Haircut" allocation="44"/>
             </div>
             <div className={styles.buttonHolder}>
               <ChooseCalls />
@@ -40,17 +41,9 @@ class Pledge extends React.Component {
 
         <div className={styles.secDivider}></div>
 
-        <div>
+        <div className={styles.flexContainer}>
           <div className={styles.col_L}>
-            <div className={styles.panel}>
-              <div className={styles.panelTitle}>Abc Securities FCM</div>
-            </div>
-            <div className={styles.panel}>
-              <div className={styles.panelTitle}>Abc Securities FCM</div>
-            </div>
-            <div className={styles.panel}>
-              <div className={styles.panelTitle}>Abc Securities FCM</div>
-            </div>
+            <Selection/>
           </div>
 
           <div className={styles.col_R}>

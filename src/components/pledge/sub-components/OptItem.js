@@ -14,12 +14,12 @@ class OptItem extends React.Component {
 
   componentWillMount() {
     this.setState({
-      drag: (5).toFixed(1)
+      allocation: (this.props.allocation / 10).toFixed(1)
     })
   }
 
   dragg(e) {
-    this.setState({drag: (e.currentTarget.value / 10).toFixed(1)})
+    this.setState({allocation: (e.currentTarget.value / 10).toFixed(1)})
   }
 
   render() {
@@ -29,7 +29,7 @@ class OptItem extends React.Component {
         <div className={styles.flexContainer}>
           <div className={styles.optItemName}>{this.props.sldName}</div>
           <div className={styles.optItemSlider}>
-            <input type="range" step="1" max="100" min="0" onChange={this.dragg}/>
+            <input type="range" step="1" max="100" min="0" onChange={this.dragg} value={this.state.allocation * 10}/>
             <div className={styles.markings}>
               <div className={styles.marking}>|</div>
               <div className={styles.miniMarking}>|</div>
@@ -58,7 +58,7 @@ class OptItem extends React.Component {
 
         <div className={styles.dragValue}>
           <div className={styles.valueBox}>
-            {this.state.drag}
+            {this.state.allocation}
           </div>
 
         </div>

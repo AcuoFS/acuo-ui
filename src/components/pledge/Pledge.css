@@ -24,7 +24,7 @@
 }
 
 .panelTitle {
-  font-weight: bold;
+  font-family: baseFontBold from './../../static';
   font-size: 20px;
   line-height: 24px;
   text-transform: uppercase;
@@ -303,19 +303,22 @@ input[type=range]:focus::-ms-fill-upper {
   line-height: 29px;
 }
 
+.flexContainer{
+  display: flex;
+}
+
 .col_L,
 .col_R {
-  display: inline-block;
-  position: relative;
+  flex: 1;
+  margin: 15px;
 }
 
 .col_L {
-  width: 39%;
+  flex-grow: 5;
 }
 
 .col_R {
-  width: 59%;
-  float: right;
+  flex-grow: 3;
 }
 
 .markings {
@@ -360,3 +363,4 @@ input[type=range]:focus::-ms-fill-upper {
   display: flex;
   padding: 15px 0;
 }
+

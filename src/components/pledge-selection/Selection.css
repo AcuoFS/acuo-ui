@@ -1,0 +1,33 @@
+.panel {
+  position: relative;
+  margin: 10px 0 25px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #dedede;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 2px 4px 0 #c9c9c9;
+  box-shadow: 2px 2px 4px 0 #c9c9c9;
+}
+
+.panelTitle {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: #6389ad;
+}
+
+.columnContainer{
+  display: flex;
+}
+
+.leftColumn {
+  flex: 1;
+  flex-grow: 1;
+  border-right: 1px solid black;
+}
+.rightColumn {
+  flex: 1;
+  flex-grow: 2;
+}
