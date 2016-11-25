@@ -53,23 +53,43 @@ export default class MarginAgreementPortfolio extends React.Component {
   }
 
   getFirstLevelTotal(asset) {
-    if(asset) {
+    if (asset) {
       return asset.reduce((listX, x) => {
         let list = x.get('data').reduce((listY, y) => {
 
-          let list = Map({'key': y.get('firstLevel'), 'amount': y.get('secondLevel').reduce((sum, z) => {
-            return sum + z.get('amount')
-          }, 0)})
+          let list = Map({
+            'key': y.get('firstLevel'), 'amount': y.get('secondLevel').reduce((sum, z) => {
+              return sum + z.get('amount')
+            }, 0)
+          })
           //return (list > 0 ? listY.push(y.set('secondLevel', list)) : listY)
           return (list.size > 0 ? listY.push(list) : listY)
-        },List())
+        }, List())
         return (list.size > 0 ? listX.concat(list) : listX)
-      },List())
+      }, List())
     }
     else return List()
   }
 
-  checkDescrepency(clientAsset, counterpartyAsset){
+  getSecondLevel(asset) {
+    if (asset) {
+      return asset.reduce((listX, x) => {
+        let list = x.get('data').reduce((listY, y) => {
+
+          let list = Map({
+            'key': y.get('firstLevel'), 'amount': y.get('secondLevel').map((z) => {
+              return z.get('amount')
+            })
+          })
+          return (list.size > 0 ? listY.push(list) : listY)
+        }, List())
+        return (list.size > 0 ? listX.concat(list) : listX)
+      }, List())
+    }
+    else return List()
+  }
+
+  checkDescrepency(clientAsset, counterpartyAsset) {
 
     let totalClientAsset = this.getFirstLevelTotal(clientAsset)
     let totalcounterAsset = this.getFirstLevelTotal(counterpartyAsset)
@@ -81,6 +101,33 @@ export default class MarginAgreementPortfolio extends React.Component {
 
     return highestDifference
   }
+
+  checkDescrepency1(clientAsset, counterpartyAsset) {
+    let clientAssetItem = this.getSecondLevel(clientAsset)
+    let counterpartyAssetItem = this.getSecondLevel(counterpartyAsset)
+    console.log('Abc is ', clientAssetItem.toJS())
+    console.log('def is', counterpartyAssetItem.toJS())
+    this.getHighestDifference(clientAssetItem, counterpartyAssetItem)
+  }
+
+  // getHighestDifference(clientAssetItem, counterpartyAssetItem) {
+  //   let clientAssetKey = clientAssetItem.map((x) => {
+  //     return x.get('key')
+  //   })
+  //   let counterpartyKey = counterpartyAssetItem.map((y) => {
+  //     return y.get('key')
+  //   })
+  //   if (clientAssetKey.equals(counterpartyKey)) {
+  //     let highestClient = clientAssetItem.map((x) => {
+  //        return x.get('amount')
+  //     })
+  //     let highestCounter = counterpartyAssetItem.map((y) => {
+  //       return y.get('amount')
+  //     })
+  //     console.log("duiff is",highestClient - highestCounter)
+  //  }
+  //   return ({})
+  // }
 
   renderItem(marginData, assetsName, handlerSelectedItem) {
     if (marginData.get(assetsName))
@@ -98,8 +145,8 @@ export default class MarginAgreementPortfolio extends React.Component {
               handlerSelectedItem={handlerSelectedItem}
               assetType={assetsName}
               discrepancy={this.checkDescrepency(
-                  marginData.get('clientAssets'),
-                  marginData.get('counterpartyAssets')).includes(y.get('firstLevel'))}
+                marginData.get('clientAssets'),
+                marginData.get('counterpartyAssets')).includes(y.get('firstLevel'))}
             />
           })}
             <hr/>

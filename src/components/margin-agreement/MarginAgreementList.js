@@ -4,6 +4,7 @@
 import React, {PropTypes} from 'react'
 import {List, Map} from 'immutable'
 import MarginAgreementPortfolio from './sub-components/MarginAgreementPortfolio'
+import CounterPartyAssets from './sub-components/CounterPartyAssets'
 import styles from './MarginAgreementList.css'
 
 
@@ -87,7 +88,7 @@ export default class MarginAgreementList extends React.Component {
   }
 
   displayLineItems(recon, onReconItem, onSelectedItem) {
-    return ( recon.map((x) => {
+    return (recon.map((x) => {
       return x.get('marginStatus').map((y) => {
         return y.get('timeFrames').map((z) => {
           return z.get('actionsList').map((i) => {
@@ -113,12 +114,12 @@ export default class MarginAgreementList extends React.Component {
                   </div>
                 </div>
 
-                <MarginAgreementPortfolio marginData={i}
-                                          actStyle={'act_R'}
-                                          orgName={'cptyOrg'}
-                                          assetsName={'counterpartyAssets'}
-                                          handlerTotalMargin={this.displayTotalMargin}
-                                          handlerSelectedItem={onSelectedItem}/>
+                <CounterPartyAssets marginData={i}
+                                    actStyle={'act_R'}
+                                    orgName={'cptyOrg'}
+                                    assetsName={'counterpartyAssets'}
+                                    handlerTotalMargin={this.displayTotalMargin}
+                                    handlerSelectedItem={onSelectedItem}/>
               </div>
             )
           })
