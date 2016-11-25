@@ -2,6 +2,8 @@
   "collateral": {
     "earmarked": [
       {
+        "assetId": "EUR",
+        "assetIdType": "CASH",
         "assetName": "Cash",
         "price": 300000,
         "ccy": "EUR",
@@ -17,6 +19,8 @@
         "acctId": "AB123456789"
       },
       {
+        "assetId": "AB123456789",
+        "assetIdType": "ISIN",
         "assetName": "Japan (2 Year Issue)",
         "price": 200000,
         "ccy": "SGD",
@@ -32,6 +36,8 @@
         "acctId": "AB123456789"
       },
       {
+        "assetId": "AB123456789",
+        "assetIdType": "ISIN",
         "assetName": "Buoni Ordinari Del Tes",
         "price": 300000,
         "ccy": "GBP",
@@ -47,6 +53,8 @@
         "acctId": "AB123456789"
       },
       {
+        "assetId": "AB123456789",
+        "assetIdType": "ISIN",
         "assetName": "Singapore T-Bills",
         "price": 10000000,
         "ccy": "JPY",
@@ -64,6 +72,8 @@
     ],
     "cash": [
       {
+        "assetId": "USD",
+        "assetIdType": "CASH",
         "assetName": "Cash",
         "price": 250000,
         "ccy": "USD",
@@ -79,6 +89,8 @@
         "acctId": "AB123456789"
       },
       {
+        "assetId": "EUR",
+        "assetIdType": "CASH",
         "assetName": "Cash",
         "price": 300000,
         "ccy": "EUR",
@@ -94,6 +106,8 @@
         "acctId": "AB123456789"
       },
       {
+        "assetId": "SGD",
+        "assetIdType": "CASH",
         "assetName": "Cash",
         "price": 200000,
         "ccy": "SGD",
@@ -109,6 +123,8 @@
         "acctId": "AB123456789"
       },
       {
+        "assetId": "GBP",
+        "assetIdType": "CASH",
         "assetName": "Cash",
         "price": 300000,
         "ccy": "GBP",
@@ -124,6 +140,8 @@
         "acctId": "AB123456789"
       },
       {
+        "assetId": "JPY",
+        "assetIdType": "CASH",
         "assetName": "Cash",
         "price": 10000000,
         "ccy": "JPY",
@@ -141,6 +159,8 @@
     ],
     "mmInstruments": [
       {
+        "assetId": "AB123456789",
+        "assetIdType": "ISIN",
         "assetName": "Treasury Bill",
         "price": 250000,
         "ccy": "USD",
@@ -156,6 +176,8 @@
         "acctId": "AB123456789"
       },
       {
+        "assetId": "AB123456789",
+        "assetIdType": "ISIN",
         "assetName": "Bundesschatzanwe",
         "price": 300000,
         "ccy": "EUR",
@@ -171,6 +193,8 @@
         "acctId": "AB123456789"
       },
       {
+        "assetId": "AB123456789",
+        "assetIdType": "ISIN",
         "assetName": "Japan (2 Year Issue)",
         "price": 200000,
         "ccy": "SGD",
@@ -186,6 +210,8 @@
         "acctId": "AB123456789"
       },
       {
+        "assetId": "AB123456789",
+        "assetIdType": "ISIN",
         "assetName": "Buoni Ordinari Del T",
         "price": 300000,
         "ccy": "GBP",
@@ -201,6 +227,8 @@
         "acctId": "AB123456789"
       },
       {
+        "assetId": "AB123456789",
+        "assetIdType": "ISIN",
         "assetName": "Singapore T-Bills",
         "price": 10000000,
         "ccy": "JPY",
