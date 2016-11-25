@@ -22,3 +22,57 @@ export function filterStateLegal(legalEntity) {
     }
 }
 
+export function filterTimeWindowStatus(timeWindowMin, timeWindowMax) {
+
+    return {
+        type: 'FILTER_STATE_TIMEWINDOW',
+        minTime: timeWindowMin,
+        maxTime : timeWindowMax
+    }
+}
+
+export function filterStateStatus(status) {
+
+    return {
+        type: 'FILTER_STATE_STATUS',
+        filter: status
+    }
+}
+
+
+export function filterCptyOrg(cptyOrg) {
+
+    return {
+        type: 'FILTER_STATE_CPTYORG',
+        filter: cptyOrg
+    }
+}
+
+export function filterCptyEntity(cptyEntity){
+    return{
+        type: 'FILTER_STATE_CPTYENTITY',
+        filter : cptyEntity
+    }
+}
+
+
+export const lineItemInsertion = (lineItem) => (
+  {
+      type: 'LINE_ITEM_INSERTION',
+      addition : lineItem
+  }
+)
+
+export const selectedItems = (id, item) => (
+  {
+      type: 'SELECT_ITEM',
+      GUID: id,
+      name: item
+  }
+)
+
+export const reconItem = () => (
+  {
+    type: 'RECON_ITEM'
+  }
+)
