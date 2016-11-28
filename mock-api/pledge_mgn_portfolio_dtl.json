@@ -133,7 +133,85 @@
               }
             ]
           }
-        ]
+        ],
+        "allocated": {
+          "initialMargin": [
+            {
+              "assetName": "Treasury Bill",
+              "priceNetHaircut": 10000,
+              "priceNetHaircutCcy": "USD",
+              "haircutPct": 0.00,
+              "venue": "SG",
+              "price": 10000,
+              "priceCcy": "USD"
+            },
+            {
+              "assetName": "Japan (2 Year Issue)",
+              "priceNetHaircut": 10000,
+              "priceNetHaircutCcy": "EUR",
+              "haircutPct": 0.00,
+              "venue": "HK",
+              "price": 10000,
+              "priceCcy": "EUR"
+            },
+            {
+              "assetName": "Buoni Ordinari Del Tes",
+              "priceNetHaircut": 10000,
+              "priceNetHaircutCcy": "YEN",
+              "haircutPct": 0.00,
+              "venue": "SG",
+              "price": 10000,
+              "priceCcy": "YEN"
+            },
+            {
+              "assetName": "Hong Kong T-Bills",
+              "priceNetHaircut": 10000,
+              "priceNetHaircutCcy": "EUR",
+              "haircutPct": 0.00,
+              "venue": "SG",
+              "price": 10000,
+              "priceCcy": "EUR"
+            }
+          ],
+          "variationMargin": [
+            {
+              "assetName": "Cash",
+              "priceNetHaircut": 10000,
+              "priceNetHaircutCcy": "USD",
+              "haircutPct": 0.00,
+              "venue": "SG",
+              "price": 10000,
+              "priceCcy": "USD"
+            },
+            {
+              "assetName": "Cash",
+              "priceNetHaircut": 10000,
+              "priceNetHaircutCcy": "EUR",
+              "haircutPct": 0.00,
+              "venue": "HK",
+              "price": 10000,
+              "priceCcy": "EUR"
+            },
+            {
+              "assetName": "Cash",
+              "priceNetHaircut": 10000,
+              "priceNetHaircutCcy": "YEN",
+              "haircutPct": 0.00,
+              "venue": "SG",
+              "price": 10000,
+              "priceCcy": "YEN"
+            },
+            {
+              "assetName": "Cash",
+              "priceNetHaircut": 10000,
+              "priceNetHaircutCcy": "EUR",
+              "haircutPct": 0.00,
+              "venue": "SG",
+              "price": 10000,
+              "priceCcy": "EUR"
+            }
+          ]
+        }
       },
       {
         "time": "2016-10-23T10:30:43.511Z",
@@ -267,7 +345,85 @@
               }
             ]
           }
-        ]
+        ],
+        "allocated": {
+          "initialMargin": [
+            {
+              "assetName": "Treasury Bill",
+              "priceNetHaircut": 10000,
+              "priceNetHaircutCcy": "USD",
+              "haircutPct": 0.00,
+              "venue": "SG",
+              "price": 10000,
+              "priceCcy": "USD"
+            },
+            {
+              "assetName": "Japan (2 Year Issue)",
+              "priceNetHaircut": 10000,
+              "priceNetHaircutCcy": "EUR",
+              "haircutPct": 0.00,
+              "venue": "HK",
+              "price": 10000,
+              "priceCcy": "EUR"
+            },
+            {
+              "assetName": "Buoni Ordinari Del Tes",
+              "priceNetHaircut": 10000,
+              "priceNetHaircutCcy": "YEN",
+              "haircutPct": 0.00,
+              "venue": "SG",
+              "price": 10000,
+              "priceCcy": "YEN"
+            },
+            {
+              "assetName": "Hong Kong T-Bills",
+              "priceNetHaircut": 10000,
+              "priceNetHaircutCcy": "EUR",
+              "haircutPct": 0.00,
+              "venue": "SG",
+              "price": 10000,
+              "priceCcy": "EUR"
+            }
+          ],
+          "variationMargin": [
+            {
+              "assetName": "Cash",
+              "priceNetHaircut": 10000,
+              "priceNetHaircutCcy": "USD",
+              "haircutPct": 0.00,
+              "venue": "SG",
+              "price": 10000,
+              "priceCcy": "USD"
+            },
+            {
+              "assetName": "Cash",
+              "priceNetHaircut": 10000,
+              "priceNetHaircutCcy": "EUR",
+              "haircutPct": 0.00,
+              "venue": "HK",
+              "price": 10000,
+              "priceCcy": "EUR"
+            },
+            {
+              "assetName": "Cash",
+              "priceNetHaircut": 10000,
+              "priceNetHaircutCcy": "YEN",
+              "haircutPct": 0.00,
+              "venue": "SG",
+              "price": 10000,
+              "priceCcy": "YEN"
+            },
+            {
+              "assetName": "Cash",
+              "priceNetHaircut": 10000,
+              "priceNetHaircutCcy": "EUR",
+              "haircutPct": 0.00,
+              "venue": "SG",
+              "price": 10000,
+              "priceCcy": "EUR"
+            }
+          ]
+        }
       },
       {
         "time": "2016-10-23T10:30:43.511Z",
@@ -401,7 +557,11 @@
               }
             ]
           }
-        ]
+        ],
+        "allocated": {
+          "initialMargin": [],
+          "variationMargin": []
+        }
       },
       {
         "time": "2016-10-23T10:30:43.511Z",
@@ -535,7 +695,11 @@
               }
             ]
           }
-        ]
+        ],
+        "allocated": {
+          "initialMargin": [],
+          "variationMargin": []
+        }
       },
       {
         "time": "2016-10-23T10:30:43.511Z",
@@ -669,7 +833,11 @@
               }
             ]
           }
-        ]
+        ],
+        "allocated": {
+          "initialMargin": [],
+          "variationMargin": []
+        }
       },
       {
         "time": "2016-10-23T10:30:43.511Z",
@@ -803,87 +971,13 @@
               }
             ]
           }
-        ]
+        ],
+        "allocated": {
+          "initialMargin": [],
+          "variationMargin": []
+        }
       }
-    ],
-    "allocated": {
-      "initialMargin": [
-        {
-          "assetName": "Treasury Bill",
-          "priceNetHaircut": 10000,
-          "priceNetHaircutCcy": "USD",
-          "haircutPct": 0.00,
-          "venue": "SG",
-          "price": 10000,
-          "priceCcy": "USD"
-        },
-        {
-          "assetName": "Japan (2 Year Issue)",
-          "priceNetHaircut": 10000,
-          "priceNetHaircutCcy": "EUR",
-          "haircutPct": 0.00,
-          "venue": "HK",
-          "price": 10000,
-          "priceCcy": "EUR"
-        },
-        {
-          "assetName": "Buoni Ordinari Del Tes",
-          "priceNetHaircut": 10000,
-          "priceNetHaircutCcy": "YEN",
-          "haircutPct": 0.00,
-          "venue": "SG",
-          "price": 10000,
-          "priceCcy": "YEN"
-        },
-        {
-          "assetName": "Hong Kong T-Bills",
-          "priceNetHaircut": 10000,
-          "priceNetHaircutCcy": "EUR",
-          "haircutPct": 0.00,
-          "venue": "SG",
-          "price": 10000,
-          "priceCcy": "EUR"
-        }
-      ],
-      "variationMargin": [
-        {
-          "assetName": "Cash",
-          "priceNetHaircut": 10000,
-          "priceNetHaircutCcy": "USD",
-          "haircutPct": 0.00,
-          "venue": "SG",
-          "price": 10000,
-          "priceCcy": "USD"
-        },
-        {
-          "assetName": "Cash",
-          "priceNetHaircut": 10000,
-          "priceNetHaircutCcy": "EUR",
-          "haircutPct": 0.00,
-          "venue": "HK",
-          "price": 10000,
-          "priceCcy": "EUR"
-        },
-        {
-          "assetName": "Cash",
-          "priceNetHaircut": 10000,
-          "priceNetHaircutCcy": "YEN",
-          "haircutPct": 0.00,
-          "venue": "SG",
-          "price": 10000,
-          "priceCcy": "YEN"
-        },
-        {
-          "assetName": "Cash",
-          "priceNetHaircut": 10000,
-          "priceNetHaircutCcy": "EUR",
-          "haircutPct": 0.00,
-          "venue": "SG",
-          "price": 10000,
-          "priceCcy": "EUR"
-        }
-      ]
-    }
+    ]
   }
 }
 

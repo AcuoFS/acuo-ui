@@ -133,7 +133,11 @@
               }
             ]
           }
-        ]
+        ],
+        "allocated": {
+          "initialMargin": [],
+          "variationMargin": []
+        }
       },
       {
         "time": "2016-10-23T10:30:43.511Z",
@@ -267,7 +271,11 @@
               }
             ]
           }
-        ]
+        ],
+        "allocated": {
+          "initialMargin": [],
+          "variationMargin": []
+        }
       },
       {
         "time": "2016-10-23T10:30:43.511Z",
@@ -401,7 +409,11 @@
               }
             ]
           }
-        ]
+        ],
+        "allocated": {
+          "initialMargin": [],
+          "variationMargin": []
+        }
       },
       {
         "time": "2016-10-23T10:30:43.511Z",
@@ -535,7 +547,11 @@
               }
             ]
           }
-        ]
+        ],
+        "allocated": {
+          "initialMargin": [],
+          "variationMargin": []
+        }
       },
       {
         "time": "2016-10-23T10:30:43.511Z",
@@ -669,7 +685,11 @@
               }
             ]
           }
-        ]
+        ],
+        "allocated": {
+          "initialMargin": [],
+          "variationMargin": []
+        }
       },
       {
         "time": "2016-10-23T10:30:43.511Z",
@@ -803,13 +823,13 @@
               }
             ]
           }
-        ]
+        ],
+        "allocated": {
+          "initialMargin": [],
+          "variationMargin": []
+        }
       }
-    ],
-    "allocated": {
-      "initialMargin": [],
-      "variationMargin": []
-    }
+    ]
   }
 }
 
