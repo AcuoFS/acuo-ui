@@ -54,3 +54,8 @@
 .group{
   border-bottom: 1px solid acuoGrey;
 }
+
+.imageRight{
+  position: absolute;
+  right: 10px;
+}

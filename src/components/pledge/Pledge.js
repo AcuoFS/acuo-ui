@@ -90,13 +90,15 @@ class Pledge extends React.Component {
         <div className={styles.flexContainer}>
           <div className={styles.col_L + ' ' + this.state.toggleColwidthL}>
 
-            <Selection/>
+            <Selection sideways={this.state.sideways}
+                       clicked={this.changeSideways}
+                       />
           </div>
 
           <div className={styles.col_R + ' ' + this.state.toggleColwidthR}>
             <div className={styles.panel}>
               <div className={styles.panelTitle}>Collateral
-                <img src={this.state.sideways} className={styles.imageRight } onClick={this.changeSideways}/>
+                <img src={this.state.sideways} className={styles.imageRight} onClick={this.changeSideways}/>
               </div>
               <div className={styles.collateral_LabelBar}>
                 <div>Asset</div>

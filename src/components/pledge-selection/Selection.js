@@ -34,6 +34,7 @@ export default class Selection extends React.Component{
 
           </div>
           <div className={styles.rightColumn}>
+            <img src={this.props.sideways} className={styles.imageRight} onClick={this.props.clicked} alt=""/>
             something
           </div>
         </div>
