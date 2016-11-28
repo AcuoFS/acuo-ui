@@ -6,7 +6,7 @@ import {render} from 'react-dom'
 import styles from './Pledge.css'
 import OptItem from './sub-components/OptItem'
 import ChooseCalls from './sub-components/ChooseCalls'
-import Selection from '../pledge-selection/Seleection'
+import Selection from '../pledge-selection/Selection'
 
 class Pledge extends React.Component {
   constructor(props) {
