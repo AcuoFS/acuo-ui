@@ -338,24 +338,28 @@ input[type=range]:focus::-ms-fill-upper {
 .marking {
   flex: 1;
   flex-grow: 1;
-  font-size: 17px;
-  font-family: "Arial Black";
+  font-size: 20px;
+  /*font-family: "Arial Black";*/
   color: #9b9b9b;
+  position: relative;
+  left: 1px;
 }
 
 .miniMarking {
-  margin-top: 7px;
+  margin-top: 3px;
   flex: 1;
   flex-grow: 1;
-  font-size: 10px;
+  font-size: 8px;
   font-family: "Arial Black";
   color: #9b9b9b;
+  position: relative;
+  left: 1px;
 }
 
 .markingLast {
   flex-grow: 0;
-  font-size: 17px;
-  font-family: "Arial Black";
+  font-size: 20px;
+  /*font-family: "Arial Black";*/
   color: #9b9b9b;
 }
 
