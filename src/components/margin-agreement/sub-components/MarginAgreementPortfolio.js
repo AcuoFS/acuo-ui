@@ -1,16 +1,31 @@
 import React, {PropTypes} from 'react'
 import {Map} from 'immutable'
 import MarginAgreementDetail from './MarginAgreementDetail'
+import {numberWithCommas} from '../../../utils/utils'
 import styles from '../MarginAgreementList.css'
 
 
 export default class MarginAgreementPortfolio extends React.Component {
-  numberWithCommas(x) {
-    x = x.toString();
-    var pattern = /(-?\d+)(\d{3})/;
-    while (pattern.test(x))
-      x = x.replace(pattern, "$1,$2");
-    return x;
+
+  checkSecondLevel(secondLevel) {
+    if (secondLevel.size <= secondLevel.reduce((count, x) => {
+        return count + (x.get('recon') ? 1 : 0)
+      }, 0)) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  getCheckboxImageUrl(secondLevel) {
+    const temp = secondLevel.reduce((count, x) => {
+      return count + (x.get('checked') || x.get('recon') ? 1 : 0)
+    }, 0)
+    if (secondLevel.size <= temp) {
+      return "./images/reconcile/checkboxwithtick.png"
+    } else {
+      return "./images/reconcile/checkbox.png"
+    }
   }
 
   getTotalAmount(asset) {
@@ -55,21 +70,26 @@ export default class MarginAgreementPortfolio extends React.Component {
   renderItem(marginData, assetsName, handlerSelectedItem) {
     if (marginData.get(assetsName))
       return marginData.get(assetsName).map((x) => {
-        if (x.get('data'))
+        if (x.get('data')) {
           return (<div key={x.get('groupName')}>{x.get('data').map((y) => {
+            const secondLevel = y.get('secondLevel')
+
             return <MarginAgreementDetail
               GUID={marginData.get('GUID')}
               topLevel={y.get('firstLevel')}
               key={y.get('firstLevel') + x.get('groupName')}
-              totalAmount={y.get('secondLevel').reduce((amount, j) => {
+              totalAmount={secondLevel.reduce((amount, j) => {
                 return amount + j.get('amount')
               }, 0)}
-              secondLevel={y.get('secondLevel')}
+              secondLevel={secondLevel}
               handlerSelectedItem={handlerSelectedItem}
+              isSecondLevel={this.checkSecondLevel(secondLevel)}
+              checkboxImageUrl={this.getCheckboxImageUrl(secondLevel)}
             />
           })}
             <hr/>
           </div>)
+        }
       })
   }
 
@@ -99,7 +119,7 @@ export default class MarginAgreementPortfolio extends React.Component {
                   <div>Total Amount Selected</div>
                 </div>
                 <div className={styles.packageRight}>
-                  {this.numberWithCommas(this.getTotalAmount(
+                  {numberWithCommas(this.getTotalAmount(
                     marginData.get(assetsName)))}
                 </div>
               </div>
@@ -108,11 +128,12 @@ export default class MarginAgreementPortfolio extends React.Component {
                   <div>Total Reconciled</div>
                 </div>
                 <div className={styles.packageRight}>
-                  {this.numberWithCommas(this.getTotalReconAmount(marginData.get(assetsName)))}
+                  {numberWithCommas(this.getTotalReconAmount(marginData.get(assetsName)))}
                 </div>
               </div>
             </div>
           </div>
+
           <div className={styles.section + ' ' + styles.right}>
             <div className={styles.currency}>
               <div>CCY:{marginData.get('ccy')}</div>
@@ -148,5 +169,4 @@ MarginAgreementPortfolio.PropTypes = {
   assetsName: PropTypes.string.isRequired,
   handlerTotalMargin: PropTypes.func.isRequired,
   handlerSelectedItem: PropTypes.func.isRequired,
-
 }
