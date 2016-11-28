@@ -4,13 +4,13 @@ import styles from './FilterBar.css'
 export default class DropdownMenu extends React.Component{
 
   render(){
-    const {handleOnOptionChange, option} = this.props
+    const {handleOnOptionChange, options} = this.props
     // merge option 'ALL', with actual options
-    const options = [[], 'All', ...option]
+    const optionList = [[], 'All', ...options]
 
     return(
       <ul className={styles.filtersList}>
-        {options.map(option => (
+        {optionList.map(option => (
           <li key={option}
               data-ref={option}
               onClick={ e => handleOnOptionChange(e, option)}>

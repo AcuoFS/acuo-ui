@@ -58,13 +58,13 @@ export default class DropdownMultiSelectMenu extends React.Component{
   }
 
   render(){
-    const {handleOnOptionChange, option} = this.props
-    let options = option
+    const {handleOnOptionChange, options} = this.props
+    let optionList = options
     if(this.state.filterEntity){
-      options = option.filter(option => option.includes(this.state.filterEntity.toUpperCase()))
+      optionList = options.filter(option => option.includes(this.state.filterEntity.toUpperCase()))
     }
     // merge option 'ALL', with actual options
-    options = [[], 'All', ...options]
+    optionList = [[], 'All', ...optionList]
 
     return(
       <ul className={styles.filtersList}>
@@ -73,7 +73,7 @@ export default class DropdownMultiSelectMenu extends React.Component{
                                                                                        onChange={this.filterEntities}
                                                                                        placeholder="Search..."/>
         </li>
-        {options.map(option => (
+        {optionList.map(option => (
           <li key={option}
               data-ref={option}
               className={this.isSelectedOption(option)}

@@ -23,6 +23,7 @@ export default class FilterDropdown extends React.Component{
         this.handleOnMouseLeave = this.handleOnMouseLeave.bind(this)
         this.handleOnOptionChange = this.handleOnOptionChange.bind(this)
         this.handleOnOptionChangeMultiSelect = this.handleOnOptionChangeMultiSelect.bind(this)
+        this.handleOnOptionChangeTimeSelect = this.handleOnOptionChangeTimeSelect.bind(this)
     }
 
     handleToggleDropdown(e){
@@ -45,6 +46,14 @@ export default class FilterDropdown extends React.Component{
         this.props.handleOnSelectedItemChange(e)
     }
 
+    handleOnOptionChangeTimeSelect(e, selectedOption, timeWindowMin, timeWindowMax){
+        this.setState({
+            selectedOption : selectedOption,
+            isOpen : false
+        })
+        this.props.handleOnSelectedItemChange(timeWindowMin, timeWindowMax, e)
+    }
+
     handleOnOptionChangeMultiSelect(e, displayOptionText, selectedOptionList){
         this.setState({
             selectedOption : displayOptionText,
@@ -61,7 +70,7 @@ export default class FilterDropdown extends React.Component{
                 case DROPDOWN_TYPE_MULTI_SELECT:
                     menu = (
                       <DropdownMultiSelectMenu
-                        option={this.props.options}
+                        options={this.props.options}
                         handleOnOptionChange={this.handleOnOptionChangeMultiSelect}
                         selectedOptionList={this.props.selectedOptionList}/>
                     )
@@ -69,14 +78,14 @@ export default class FilterDropdown extends React.Component{
                 case DROPDOWN_TYPE_TIME_SELECT:
                     menu = (
                       <DropdownTimeMenu
-                        option={this.props.optionList}
-                        handleOnOptionChange={this.handleOnOptionChange}/>
+                        options={this.props.optionList}
+                        handleOnOptionChange={this.handleOnOptionChangeTimeSelect}/>
                     )
                     break;
                 default:
                     menu = (
                       <DropdownMenu
-                        option={this.props.options}
+                        options={this.props.options}
                         handleOnOptionChange={this.handleOnOptionChange}/>
                     )
                     break;
@@ -110,8 +119,6 @@ FilterDropdown.propTypes = {
     optionList : PropTypes.arrayOf(PropTypes.object),
     selectedOptionList : PropTypes.arrayOf(PropTypes.string),
     dropdownType : PropTypes.string,
-    handlerOnClick : PropTypes.func.isRequired,
-    handlerResetActiveDropdown : PropTypes.func.isRequired,
     handleOnSelectedItemChange : PropTypes.func.isRequired,
 }
 

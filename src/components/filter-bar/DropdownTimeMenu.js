@@ -73,20 +73,25 @@ export default class DropdownTimeMenu extends React.Component{
 
     let currTime = new Date('Sun Oct 23 2016 13:58:04 GMT+0800 (SGT)')
     if (e.currentTarget.dataset.min == 'All') {
-      handleOnOptionChange(e, this.state.timeWindowTitle + ": " + e.currentTarget.dataset.min)
+      handleOnOptionChange(e,
+        this.state.timeWindowTitle + ": " + e.currentTarget.dataset.min,
+        this.state.timeWindowTitle + ":" + e.currentTarget.dataset.min,
+        null)
     }
     else {
       if (this.state.timeWindowTitle == 'Yesterday') currTime.setDate(currTime.getDate() - 1)
       else if (this.state.timeWindowTitle == 'Tomorrow') currTime.setDate(currTime.getDate() + 1)
+      let minTimeRange = new Date(currTime.setHours(e.currentTarget.dataset.min, 0, 0))
+      let maxTimeRange = new Date(currTime.setHours(e.currentTarget.dataset.max, 0, 0))
 
-      handleOnOptionChange(e, this.state.timeWindowTitle + ": " + e.currentTarget.dataset.ref)
+      handleOnOptionChange(e, this.state.timeWindowTitle + ": " + e.currentTarget.dataset.ref, minTimeRange, maxTimeRange)
     }
   }
 
   render(){
-    const {handleOnOptionChange, option} = this.props
+    const {handleOnOptionChange, options} = this.props
     // merge option 'ALL', with actual options
-    const options = option
+    const optionList = options
 
     return(
       <ul className={styles.filtersList + ' ' + styles.timeSlot}>
@@ -97,7 +102,7 @@ export default class DropdownTimeMenu extends React.Component{
           <div className={styles.timeArrowRight + ' ' + this.state.timeArrowRight} onClick={this.renderNextDay}></div>
         </li>
 
-        {options.map(option => (
+        {optionList.map(option => (
           <li key={option.text}
               data-ref={option.text}
               data-min={option.min}
