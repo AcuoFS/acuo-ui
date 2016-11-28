@@ -22,9 +22,7 @@ class Pledge extends React.Component {
     this.changeSideways = this.changeSideways.bind(this)
   }
 
-  changeSideways(e) {
-    console.log("id is", e.currentTarget.dataset.id)
-    let id = e.currentTarget.dataset.id
+  changeSideways() {
     if (this.state.open) {
       this.setState({
         open: false,
@@ -44,9 +42,7 @@ class Pledge extends React.Component {
     }
   }
 
-  handlePlusMinus(e) {
-    console.log("e is", e.currentTarget.dataset.id)
-    let test = e.currentTarget.dataset.id
+  handlePlusMinus() {
     if (this.state.open) {
       this.setState({
         open: false,
@@ -100,8 +96,7 @@ class Pledge extends React.Component {
           <div className={styles.col_R + ' ' + this.state.toggleColwidthR}>
             <div className={styles.panel}>
               <div className={styles.panelTitle}>Collateral
-                <img src={this.state.sideways} className={styles.imageRight } data-id="image"
-                     onClick={this.changeSideways}/>
+                <img src={this.state.sideways} className={styles.imageRight } onClick={this.changeSideways}/>
               </div>
               <div className={styles.collateral_LabelBar}>
                 <div>Asset</div>
@@ -121,7 +116,7 @@ class Pledge extends React.Component {
 
               <div>
                 <div className={styles.collateral_Header }>Earmarked
-                  <p className={styles.centerThis} onClick={this.handlePlusMinus} data-id="embarked">
+                  <p className={styles.centerThis} onClick={this.handlePlusMinus}>
                     <img src={this.state.dropdown} alt=""/>
                   </p>
                 </div>
@@ -152,7 +147,7 @@ class Pledge extends React.Component {
 
               <div>
                 <div className={styles.collateral_Header}>Cash
-                  <p className={styles.centerThis } onClick={this.handlePlusMinus} data-id="cash">
+                  <p className={styles.centerThis } onClick={this.handlePlusMinus} >
                     <img src={this.state.dropdown} alt=""/>
                   </p>
                 </div>
@@ -163,7 +158,7 @@ class Pledge extends React.Component {
               </div>
               <div>
                 <div className={styles.collateral_Header}>MM Instruments
-                  <p className={styles.centerThis} onClick={this.handlePlusMinus} data-id="instruments">
+                  <p className={styles.centerThis} onClick={this.handlePlusMinus} >
                     <img src={this.state.dropdown} alt=""/>
                   </p>
                 </div>
@@ -176,7 +171,7 @@ class Pledge extends React.Component {
 
               <div>
                 <div className={styles.collateral_Header}>Soverign Bonds
-                  <p className={styles.centerThis} onClick={this.handlePlusMinus} data-id="bonds">
+                  <p className={styles.centerThis} onClick={this.handlePlusMinus}>
                     <img src={this.state.dropdown} alt=""/>
                   </p>
                 </div>
@@ -186,7 +181,7 @@ class Pledge extends React.Component {
 
               <div>
                 <div className={styles.collateral_Header}>Govt Agencies
-                  <p className={styles.centerThis} onClick={this.handlePlusMinus} data-id="agencies">
+                  <p className={styles.centerThis} onClick={this.handlePlusMinus}>
                     <img src={this.state.dropdown} alt=""/>
                   </p>
                 </div>
@@ -195,7 +190,7 @@ class Pledge extends React.Component {
               </div>
               <div>
                 <div className={styles.collateral_Header}>Corporate Debt
-                  <p className={styles.centerThis} onClick={this.handlePlusMinus} data-id="debt">
+                  <p className={styles.centerThis} onClick={this.handlePlusMinus}>
                     <img src={this.state.dropdown} alt=""/>
                   </p>
                 </div>
@@ -205,7 +200,7 @@ class Pledge extends React.Component {
 
               <div>
                 <div className={styles.collateral_Header}>Corporate Equity
-                  <p className={styles.centerThis} onClick={this.handlePlusMinus} data-id="equity">
+                  <p className={styles.centerThis} onClick={this.handlePlusMinus}>
                     <img src={this.state.dropdown} alt=""/>
                   </p>
                 </div>
