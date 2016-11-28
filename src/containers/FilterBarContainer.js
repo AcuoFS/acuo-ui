@@ -17,12 +17,11 @@ const mapStateToProps = state => ({
     filters: state.getIn(['inputs', 'filters']),
     legalEntityList : computeLegalEntityList(state),
     derivativeType : computeDerivativeType(state),
+    timeWindowList : computeTimeWindowList(state),
     statusList : computeStatusList(state),
     cptyOrganisation : computeCptyOrganisation(state),
-    cptyEntity : computecptyEntity()
+    cptyEntity : computeCptyEntity(state)
 })
-
-
 
 const computeLegalEntityList = (state) => {
     let derivatives = state.getIn(['data', 'derivatives'])
@@ -59,9 +58,45 @@ const computeCptyOrganisation = (state) => {
     return cptyOrganisationSet.toArray()
 }
 
+const computeTimeWindowList = (state) => {
 
+    return [
+        {min: 'All', text: 'ALL'},
+        {min: '0', max: '3', text: '0H - 3H'},
+        {min: '03', max: '6', text: '3H - 6H'},
+        {min: '06', max: '9', text: '6H - 9H'},
+        {min: '09', max: '12', text: '9H - 12H'},
+        {min: '12', max: '15', text: '12H - 15H'},
+        {min: '15', max: '18', text: '15H - 18H'},
+        {min: '18', max: '21', text: '18H - 21H'},
+        {min: '21', max: '0', text: '21H - 24H'},
+    ]
+}
 
-const computecptyEntity = () => ([])
+const computeCptyEntity = (state) => {
+
+    let cptyEntityFilter = state.getIn(['inputs', 'filters', 'cptyEntityFilter', 'filter']) || Set()
+    let cptyOrgFilter = state.getIn(['inputs', 'filters', 'cptyOrgFilter', 'filter'])
+
+    let derivatives = state.getIn(['data', 'derivatives'])
+    let derivativeList = derivatives ? jsonObjectToFlatArray(derivatives.toJSON()) : []
+    let cptyEntityList = derivativeList.reduce((listSum, x)=> {
+        if (cptyOrgFilter && cptyOrgFilter != 'All') {
+            return (!listSum.includes(x.cptyEntity) && x.cptyOrg == cptyOrgFilter ? listSum.add(x.cptyEntity) : listSum)
+        } else {
+            return (!listSum.includes(x.cptyEntity) ? listSum.add(x.cptyEntity) : listSum)
+        }
+    }, Set()).sort()
+
+    if (cptyEntityFilter.size > 0)
+        return cptyEntityList.filter(x =>
+          cptyEntityFilter.includes(x)
+        ).toOrderedSet().sort().union(cptyEntityList.filter(x =>
+          !cptyEntityFilter.includes(x)
+        ).toOrderedSet().sort()).toArray()
+    else
+      return cptyEntityList.toArray()
+}
 
 
 
