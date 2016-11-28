@@ -368,3 +368,180 @@ input[type=range]:focus::-ms-fill-upper {
   padding: 15px 0;
 }
 
+
+
+.collateral_LabelBar{
+  display: flex;
+  position: relative;
+  background-color: #001f2d;
+  color: #ffffff;
+  padding: 7px 8px 0px 30px;
+  /*font-size: 20px;*/
+  vertical-align: middle;
+  /*-webkit-box-shadow: 0px 2px 0px 0 #c9c9c9;*/
+  /*box-shadow: 0px 2px 0px 0 #c9c9c9;*/
+}
+
+.collateral_LabelBar > div{
+  flex: 1;
+  flex-grow: 1;
+  padding: 2px 5px 5px 2px;
+
+}
+.collateral_Header{
+  display: flex;
+  position: relative;
+  padding: 7px 8px 0px 5px;
+  margin-top: 3px;
+  background-color: #7F8A93;
+  color: #ffffff;
+}
+
+.centerThis{
+  /*display: table-cell;*/
+  vertical-align: middle;
+  padding-left: 5px;
+}
+
+.sectionClose{
+  max-height: 0;
+  overflow: hidden;
+  transition: .2s ease-in;
+  opacity: 0;
+}
+.sectionOpen{
+  opacity: 1;
+  transition: 0.7s ease-out;
+  overflow:hidden;
+  max-height:1000px;
+}
+.sectionOpen .tableRow >div{
+  display: inline-block;
+}
+
+.imageRight{
+  /*display: block;*/
+  position: absolute;
+  right: 10px;
+  /*padding-left: 50px;*/
+
+}
+
+.expandDivL{
+  /*width:150%;*/
+  flex: 3;
+}
+
+.minDivL{
+  /*width: 70%;*/
+  flex: 1;
+}
+
+.expandDivR{
+  /*width:150%;*/
+  flex: 3;
+}
+
+.minDivR{
+  /*width: 70%;*/
+  flex: 1;
+}
+
+.hideCol{
+  display: none;
+}
+
+.showCol{
+  display: block;
+}
+
+
+
+/*** table bar ***/
+.collateral_LabelBar >div{
+  position: relative;
+}
+.collateral_LabelBar >div:nth-child(1){
+  width: 50%!important;
+}
+.collateral_LabelBar >div:nth-child(2){
+  /*width: 12%!important;*/
+}
+.collateral_LabelBar >div:nth-child(3){
+  /*width: 13%!important;*/
+}
+.collateral_LabelBar >div:nth-child(4){
+  /*width: 6%!important;*/
+}
+.collateral_LabelBar >div:nth-child(5){
+  /*width: 15%!important;*/
+}
+.collateral_LabelBar >div:nth-child(6){
+  /*width: 18%!important;*/
+}
+.collateral_LabelBar >div:nth-child(7){
+
+}
+.collateral_LabelBar >div:nth-child(8){
+
+}
+.collateral_LabelBar >div:nth-child(9){
+
+}
+.collateral_LabelBar >div:nth-child(10){
+
+}
+.collateral_LabelBar >div:nth-child(11){
+
+}
+.collateral_LabelBar >div:nth-child(12){
+
+}
+.collateral_LabelBar >div:nth-child(13){
+
+}
+
+
+/*** section open ***/
+.sectionOpen >div{
+  position: relative;
+}
+.sectionOpen >div:nth-child(1){
+  width: 50%!important;
+}
+.sectionOpen >div:nth-child(2){
+  /*width: 12%!important;*/
+}
+.sectionOpen >div:nth-child(3){
+  /*width: 13%!important;*/
+}
+.sectionOpen >div:nth-child(4){
+  /*width: 6%!important;*/
+}
+.sectionOpen >div:nth-child(5){
+  /*width: 15%!important;*/
+}
+.sectionOpen >div:nth-child(6){
+  /*width: 18%!important;*/
+}
+.sectionOpen >div:nth-child(7){
+
+}
+.sectionOpen >div:nth-child(8){
+
+}
+.sectionOpen >div:nth-child(9){
+
+}
+.sectionOpen >div:nth-child(10){
+
+}
+.sectionOpen >div:nth-child(11){
+
+}
+.sectionOpen >div:nth-child(12){
+
+}
+.sectionOpen >div:nth-child(13){
+
+}
