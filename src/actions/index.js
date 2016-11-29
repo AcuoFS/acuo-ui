@@ -42,9 +42,9 @@ export const lineItemInsertion = (lineItem) => ({
     addition : lineItem
 })
 
-export const updateCollateral = (lineItem) => ({
-  type: ActionTypes.LINE_ITEM_INSERTION,
-  addition : lineItem
+export const updateCollateral = (collateralData) => ({
+  type: ActionTypes.UPDATE_COLLATERAL,
+  collateralData : collateralData
 })
 
 

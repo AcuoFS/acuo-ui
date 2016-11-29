@@ -68,6 +68,87 @@ class Pledge extends React.Component {
     }
   }
 
+  renderEarmarkedItems() {
+    // console.log("Earmarked is ",this.props.collateral.get('earmarked'))
+    let varI = this.props.collateral
+    console.log("varIis",this.props)
+    if (varI) {
+      let x = varI.get('earmarked')
+
+      return this.renderItems(x)
+    }
+  }
+
+  renderCashItems() {
+    let varI = this.props.collateral
+    if (varI) {
+      let x = (varI.get('cash'))
+      return this.renderItems(x)
+    }
+  }
+
+  renderInstruments() {
+    let varI = this.props.collateral
+    if (varI) {
+      let x = varI.get('mmInstruments')
+      return this.renderItems(x)
+    }
+  }
+
+  renderBonds() {
+    let varI = this.props.collateral
+    if (varI) {
+      let x = varI.get('sovereignBonds')
+      return this.renderItems(x)
+    }
+  }
+
+  renderAgencies() {
+    let varI = this.props.collateral
+    if (varI) {
+      let x = varI.get('govtAgencies')
+      return this.renderItems(x)
+    }
+  }
+
+  renderDebt() {
+    let varI = this.props.collateral
+    if (varI) {
+      let x = varI.get('corporateDebt')
+      return this.renderItems(x)
+    }
+  }
+
+  renderEquity() {
+    let varI = this.props.collateral
+    if (varI) {
+      let x = varI.get('corporateEquity')
+      return this.renderItems(x)
+    }
+  }
+
+
+  renderItems(value) {
+    return value.map((x) => {
+      return (
+        <div className={this.state.class}>
+          <div> {x.get('assetName')} </div>
+          <div>{x.get('price')}</div>
+          <div>{x.get('ccy')}</div>
+          <div>{x.get('deliveryTime')}</div>
+          <div>{x.get('status')}</div>
+          <div>{x.get('rating')}</div>
+          <div>{x.get('maturityDate')}</div>
+          <div>{x.get('internalCostPct')}</div>
+          <div>{x.get('externalCostPct')}</div>
+          <div>{x.get('OppCostPct')}</div>
+          <div>{x.get('isin')}</div>
+          <div>{x.get('venue')}</div>
+          <div>{x.get('acctId')}</div>
+        </div>
+      )
+    })
+  }
 
   changeTickState() {
     if (this.state.chsCallsTickState === 'None') {
@@ -104,29 +185,6 @@ class Pledge extends React.Component {
   }
 
 
-
-  renderEarmarkedItems(){ 
-    let varI = this.props.collateral
-         if(varI){ 
-      return(varI.get('earmarked').map((x)=>{ 
-        return ( 
-          <div className={this.class}> 
-            {x.get('assetName')} 
-            {x.get('price')} 
-            {x.get('ccy')} 
-            {x.get('deliveryTime')} 
-            {x.get('status')} 
-            {x.get('rating')} 
-            {x.get('maturityDate')} 
-            {x.get('internalCostPct')} 
-            {x.get('externalCostPct')} 
-            {x.get('OppCostPct')} 
-            {x.get('isin')} 
-            {x.get('venue')} 
-            {x.get('acctId')} 
-            </div>
-                 ) 
-      }))     }    }
 
   render() {
     return (
@@ -198,15 +256,11 @@ class Pledge extends React.Component {
                       <img src={this.state.dropdown} alt=""/>
                     </p>
                   </div>
-                  <div className={this.state.class}>
+                  {/*<div className={this.state.class}>*/}
                     <div className={styles.tableRow}>
-                      {this.renderEarmarkedItems()}
-
-
+                      <div> {this.renderEarmarkedItems()}</div>
                     </div>
-
-
-                  </div>
+                  {/*</div>*/}
                 </div>
 
                 <div>
@@ -216,8 +270,7 @@ class Pledge extends React.Component {
                     </p>
                   </div>
                   <div className={this.state.class}>
-                    <div>Cash</div>
-                    <div>Cash</div>
+                    <div>{this.renderCashItems()}</div>
                   </div>
                 </div>
                 <div>
@@ -227,9 +280,7 @@ class Pledge extends React.Component {
                     </p>
                   </div>
                   <div className={this.state.class}>
-                    <div>Treasury Bill</div>
-                    <div>Singapore T-Bills</div>
-                    <div>Japan (2 Years Issue)</div>
+                    <div>{this.renderInstruments()}</div>
                   </div>
                 </div>
 
@@ -240,6 +291,7 @@ class Pledge extends React.Component {
                     </p>
                   </div>
                   <div className={this.state.class}>
+                    <div>{this.renderBonds()}</div>
                   </div>
                 </div>
 
@@ -250,6 +302,7 @@ class Pledge extends React.Component {
                     </p>
                   </div>
                   <div className={this.state.class}>
+                    <div>{this.renderAgencies()}</div>
                   </div>
                 </div>
                 <div>
@@ -259,6 +312,7 @@ class Pledge extends React.Component {
                     </p>
                   </div>
                   <div className={this.state.class}>
+                    <div>{this.renderDebt()}</div>
                   </div>
                 </div>
 
@@ -269,6 +323,7 @@ class Pledge extends React.Component {
                     </p>
                   </div>
                   <div className={this.state.class}>
+                    <div>{this.renderEquity()}</div>
                   </div>
                 </div>
               </div>

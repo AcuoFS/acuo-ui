@@ -312,7 +312,7 @@ export const reconItem = (state, action) => {
 export const updateCollateral = (state, action) => {
 
   if(!state.get('data').isEmpty()){
-    return state.setIn(['display', 'collateral'], action.collateralData)
+    return state.setIn(['data', 'collateral'], action.collateralData)
   }
   else{
     return state

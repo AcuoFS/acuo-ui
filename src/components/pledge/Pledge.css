@@ -461,88 +461,109 @@ input[type=range]:focus::-ms-fill-upper {
 /*** table bar ***/
 .collateral_LabelBar >div{
   position: relative;
+  display: inline-block;
 }
 .collateral_LabelBar >div:nth-child(1){
-  width: 50%!important;
+  width: 35%!important;
+  /*margin-right: 35px;*/
 }
 .collateral_LabelBar >div:nth-child(2){
-  /*width: 12%!important;*/
+  width: 5%!important;
 }
 .collateral_LabelBar >div:nth-child(3){
-  /*width: 13%!important;*/
+  width: 3%!important;
 }
 .collateral_LabelBar >div:nth-child(4){
-  /*width: 6%!important;*/
+  width: 10%!important;
 }
 .collateral_LabelBar >div:nth-child(5){
-  /*width: 15%!important;*/
+  width: 5%!important;
 }
 .collateral_LabelBar >div:nth-child(6){
-  /*width: 18%!important;*/
+  width: 5%!important;
 }
 .collateral_LabelBar >div:nth-child(7){
-
+  width: 10%!important;
 }
 .collateral_LabelBar >div:nth-child(8){
-
+  width: 4%!important;
 }
 .collateral_LabelBar >div:nth-child(9){
-
+  width: 4%!important;
 }
 .collateral_LabelBar >div:nth-child(10){
-
+  width: 4%!important;
 }
 .collateral_LabelBar >div:nth-child(11){
-
+  width: 10%!important;
 }
 .collateral_LabelBar >div:nth-child(12){
-
+  width: 4%!important;
 }
 .collateral_LabelBar >div:nth-child(13){
-
+  width: 10%!important;
 }
 
 
 /*** section open ***/
 .sectionOpen >div{
   position: relative;
+  display: inline-block;
 }
 .sectionOpen >div:nth-child(1){
-  width: 50%!important;
+  width: 18%!important;
+  /*margin-right: 35px;*/
 }
 .sectionOpen >div:nth-child(2){
-  /*width: 12%!important;*/
+  width: 5%!important;
 }
 .sectionOpen >div:nth-child(3){
-  /*width: 13%!important;*/
+  width: 3%!important;
 }
 .sectionOpen >div:nth-child(4){
-  /*width: 6%!important;*/
+  width: 10%!important;
 }
 .sectionOpen >div:nth-child(5){
-  /*width: 15%!important;*/
+  width: 5%!important;
 }
 .sectionOpen >div:nth-child(6){
-  /*width: 18%!important;*/
+  width: 5%!important;
 }
 .sectionOpen >div:nth-child(7){
-
+  width: 10%!important;
 }
 .sectionOpen >div:nth-child(8){
-
+  width: 4%!important;
 }
 .sectionOpen >div:nth-child(9){
-
+  width: 4%!important;
 }
 .sectionOpen >div:nth-child(10){
-
+  width: 4%!important;
 }
 .sectionOpen >div:nth-child(11){
-
+  width: 10%!important;
 }
 .sectionOpen >div:nth-child(12){
-
+  width: 4%!important;
 }
 .sectionOpen >div:nth-child(13){
+  width: 10%!important;
+}
 
+
+.showL{
+  display: inherit;
+}
+
+.hideL{
+  display: none;
+}
+
+.showR{
+  display: inherit;
+}
+
+.hideR{
+  display: none;
 }
