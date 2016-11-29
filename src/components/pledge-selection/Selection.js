@@ -2,15 +2,23 @@ import React from 'react'
 import styles from './Selection.css'
 
 export default class Selection extends React.Component{
-  render(){
+    constructor(props) {
+        super(props)
+        this.state = {
+            selTickState: 'None',
+            selCheckbox: "./images/pledge/checkbox.png"
+        }
+    }
+
+    render(){
     return(
       <div className={styles.panel}>
 
         <div className={styles.columnContainer}>
           <div className={styles.leftColumn}>
             <div className={styles.titleHolder}>
-              <span><img src="./images/pledge/checkbox.png" /></span>
-              <span className={styles.panelTitle}>Abc Securities FCM</span>
+                <img src={this.state.selCheckbox} className={styles.selTick} onClick={this.props.chkTick}/>
+                <span className={styles.panelTitle}>Abc Securities FCM</span>
               <div className={styles.subtitle}>
                 ACUO SG - ABC Securities FCM Global Fund
               </div>

@@ -69,6 +69,7 @@
   vertical-align: middle;
   flex: 1;
   flex-grow: 2;
+  margin-top: 6px;
 }
 
 #optSetting .optPnlWrap .optItem .optItemSlider {
@@ -86,7 +87,7 @@
 .flexContainer{
   display: flex;
   flex-grow: 5;
-  align-items: center;
+  /*align-items: center;*/
   justify-content: center;
 }
 
