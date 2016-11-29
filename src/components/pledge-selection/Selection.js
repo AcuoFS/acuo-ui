@@ -21,21 +21,76 @@ export default class Selection extends React.Component{
 
             <div>
               <div className={styles.group}>
+
                 <div className={styles.firstLevel}>
                   <div className={styles.assetName}>
-                    Net Total
+                    Net Total IM Call
                   </div>
                   <div className={styles.amount}>
                     400,000
                   </div>
+                </div>
+
+                <div className={styles.firstLevel}>
+                  <div className={styles.assetName}>
+                    Net Total IM Call
+                  </div>
+                  <div className={styles.amount}>
+                    400,000
+                  </div>
+                </div>
+
+              </div>
+
+              <div className={styles.group}>
+
+                <div className={styles.firstLevel}>
+                  <div className={styles.assetName}>
+                    Net Total IM Call
+                  </div>
+                  <div className={styles.amount}>
+                    400,000
+                  </div>
+                </div>
+
+                <div className={styles.firstLevel}>
+                  <div className={styles.assetName}>
+                    Net Total IM Call
+                  </div>
+                  <div className={styles.amount}>
+                    400,000
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div className={styles.total}>
+              <div className={styles.firstLevel}>
+                <div className={styles.assetName}>
+                  Total
+                </div>
+                <div className={styles.amount}>
+                  400,000
                 </div>
               </div>
             </div>
 
           </div>
           <div className={styles.rightColumn}>
-            <img src={this.props.sideways} className={styles.imageRight} onClick={this.props.clicked} alt=""/>
-            something
+            <div className={styles.rightColHeading}>
+              <div className={styles.rightColumnTitle}>
+                Selection
+              </div>
+              <div className={styles.imageRight}>
+                <img src={this.props.sideways} onClick={this.props.clicked} alt=""/>
+              </div>
+            </div>
+
+            <div className={styles.rightColSubSection}>
+
+            </div>
+
           </div>
         </div>
 

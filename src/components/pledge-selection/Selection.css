@@ -45,7 +45,7 @@
 .callTitle{
   font-size: 20px;
   composes: baseFontBold from '../../static/css-components/fonts.css';
-  padding: 15px 0;
+  padding: 15px 0 0;
   color: newAcuoBlue;
   text-transform: uppercase;
 }
@@ -53,9 +53,47 @@
 /* group component */
 .group{
   border-bottom: 1px solid acuoGrey;
+  padding: 15px 0 0;
+}
+
+.firstLevel{
+  display: flex;
+  padding-bottom: 15px;
+}
+
+.assetName {
+  flex: 2;
+}
+
+.amount{
+  flex: 1;
+}
+
+.total{
+  composes: baseFontBold from '../../static/css-components/fonts.css';
+  padding-top: 15px;
+}
+
+/* selection column */
+
+.rightColHeading{
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.rightColumnTitle{
+  color: newAcuoBlue;
+  text-transform: uppercase;
+  composes: baseFontBold from '../../static/css-components/fonts.css';
+  font-size: 20px;
+  flex: 3;
 }
 
 .imageRight{
-  position: absolute;
-  right: 10px;
+  flex: 1;
+  text-align: right;
+}
+
+.rightColSubSection{
+
 }
