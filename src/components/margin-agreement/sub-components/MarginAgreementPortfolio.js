@@ -160,9 +160,9 @@ export default class MarginAgreementPortfolio extends React.Component {
       assetsName, handlerTotalMargin, handlerSelectedItem
     } = this.props
     return (
-      <div className={styles.actPanel + ' ' + styles[actStyle]}>
         <div className={styles.panel}>
           <div className={styles.section + ' ' + styles.left}>
+
             <div className={styles.legalEntityContainer}>
               <div className={styles.legalEntity}>{ marginData.get(orgName) }</div>
               <div className={styles.legalEntityDetails}>
@@ -194,6 +194,7 @@ export default class MarginAgreementPortfolio extends React.Component {
               </div>
             </div>
           </div>
+
           <div className={styles.section + ' ' + styles.right}>
             <div className={styles.currency}>
               <div>CCY:{marginData.get('ccy')}</div>
@@ -216,7 +217,6 @@ export default class MarginAgreementPortfolio extends React.Component {
             <div className={styles.tradeDetails}> View Trade Details</div>
           </div>
         </div>
-      </div>
     )
 
   }

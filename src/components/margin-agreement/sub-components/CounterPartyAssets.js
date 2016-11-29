@@ -40,7 +40,6 @@ export default class CounterPartyAssets extends React.Component{
     let activeTabComponent = null
     if(this.state.selectedTab == TAB_MARGIN_AGREEMENT_PORTFOLIO){
       activeTabComponent = <MarginAgreementPortfolio marginData={marginData}
-                                                     actStyle={actStyle}
                                                      orgName={orgName}
                                                      assetsName={assetsName}
                                                      handlerTotalMargin={handlerTotalMargin}
@@ -56,10 +55,14 @@ export default class CounterPartyAssets extends React.Component{
     }
 
     return (
-      <div>
+      <div className={styles.actPanel + ' ' + styles[actStyle]}>
         <ul className={styles.tabs14}>
-          <li onClick={this.handleOnTabSelect} data-value={TAB_MARGIN_AGREEMENT_PORTFOLIO}>RECONCILE </li>
-          <li onClick={this.handleOnTabSelect} data-value={TAB_MARGIN_AGREEMENT_DISPUTE}>DISPUTE</li>
+          <li onClick={this.handleOnTabSelect} data-value={TAB_MARGIN_AGREEMENT_PORTFOLIO}>
+            <img src="./images/reconcile/reconcile_tab_hidden.png"/>
+          </li>
+          <li onClick={this.handleOnTabSelect} data-value={TAB_MARGIN_AGREEMENT_DISPUTE}>
+            <img src="./images/reconcile/dispute_tab_shown.png"/>
+          </li>
         </ul>
         {activeTabComponent}
       </div>

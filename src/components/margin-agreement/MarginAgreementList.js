@@ -5,6 +5,7 @@ import React, {PropTypes} from 'react'
 import {List, Map} from 'immutable'
 import MarginAgreementPortfolio from './sub-components/MarginAgreementPortfolio'
 import CounterPartyAssets from './sub-components/CounterPartyAssets'
+import ClientAsset from './sub-components/ClientAsset'
 import styles from './MarginAgreementList.css'
 
 
@@ -95,7 +96,7 @@ export default class MarginAgreementList extends React.Component {
             return (
               <div className={styles.actionWrap}>
 
-                <MarginAgreementPortfolio marginData={i}
+                <ClientAsset marginData={i}
                                           actStyle={'act_L'}
                                           orgName={'legalEntity'}
                                           assetsName={'clientAssets'}
