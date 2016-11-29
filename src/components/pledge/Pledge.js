@@ -29,6 +29,7 @@ class Pledge extends React.Component {
     this.changeSideways = this.changeSideways.bind(this)
     this.changeTickState = this.changeTickState.bind(this)
     this.chkTick = this.chkTick.bind(this)
+    // this.renderCollateralItems = this.renderCollateralItems.bind(this)
 
   }
 
@@ -72,65 +73,13 @@ class Pledge extends React.Component {
     }
   }
 
-  renderEarmarkedItems() {
-    // console.log("Earmarked is ",this.props.collateral.get('earmarked'))
-    let varI = this.props.collateral
-    console.log("varIis",this.props)
-    if (varI) {
-      let x = varI.get('earmarked')
-
+  renderCollateralItems(collateralItem) {
+    let collaterals = this.props.collateral
+    if (collaterals) {
+      let x = collaterals.get(collateralItem)
       return this.renderItems(x)
     }
   }
-
-  renderCashItems() {
-    let varI = this.props.collateral
-    if (varI) {
-      let x = (varI.get('cash'))
-      return this.renderItems(x)
-    }
-  }
-
-  renderInstruments() {
-    let varI = this.props.collateral
-    if (varI) {
-      let x = varI.get('mmInstruments')
-      return this.renderItems(x)
-    }
-  }
-
-  renderBonds() {
-    let varI = this.props.collateral
-    if (varI) {
-      let x = varI.get('sovereignBonds')
-      return this.renderItems(x)
-    }
-  }
-
-  renderAgencies() {
-    let varI = this.props.collateral
-    if (varI) {
-      let x = varI.get('govtAgencies')
-      return this.renderItems(x)
-    }
-  }
-
-  renderDebt() {
-    let varI = this.props.collateral
-    if (varI) {
-      let x = varI.get('corporateDebt')
-      return this.renderItems(x)
-    }
-  }
-
-  renderEquity() {
-    let varI = this.props.collateral
-    if (varI) {
-      let x = varI.get('corporateEquity')
-      return this.renderItems(x)
-    }
-  }
-
 
   renderItems(value) {
     return value.map((x) => {
@@ -259,7 +208,7 @@ class Pledge extends React.Component {
                   </div>
                   {/*<div className={this.state.class}>*/}
                     <div className={styles.tableRow}>
-                      <div> {this.renderEarmarkedItems()}</div>
+                      <div> {this.renderCollateralItems('earmarked')}</div>
                     </div>
                   {/*</div>*/}
                 </div>
@@ -271,7 +220,7 @@ class Pledge extends React.Component {
                     </p>
                   </div>
                   <div className={this.state.class}>
-                    <div>{this.renderCashItems()}</div>
+                    <div> {this.renderCollateralItems('cash')}</div>
                   </div>
                 </div>
                 <div>
@@ -281,7 +230,7 @@ class Pledge extends React.Component {
                     </p>
                   </div>
                   <div className={this.state.class}>
-                    <div>{this.renderInstruments()}</div>
+                    <div> {this.renderCollateralItems('mmInstruments')}</div>
                   </div>
                 </div>
 
@@ -292,7 +241,7 @@ class Pledge extends React.Component {
                     </p>
                   </div>
                   <div className={this.state.class}>
-                    <div>{this.renderBonds()}</div>
+                    {this.renderCollateralItems('sovereignBonds')}
                   </div>
                 </div>
 
@@ -303,7 +252,7 @@ class Pledge extends React.Component {
                     </p>
                   </div>
                   <div className={this.state.class}>
-                    <div>{this.renderAgencies()}</div>
+                    {this.renderCollateralItems('govtAgencies')}
                   </div>
                 </div>
                 <div>
@@ -313,7 +262,7 @@ class Pledge extends React.Component {
                     </p>
                   </div>
                   <div className={this.state.class}>
-                    <div>{this.renderDebt()}</div>
+                    {this.renderCollateralItems('corporateDebt')}
                   </div>
                 </div>
 
@@ -324,7 +273,7 @@ class Pledge extends React.Component {
                     </p>
                   </div>
                   <div className={this.state.class}>
-                    <div>{this.renderEquity()}</div>
+                    {this.renderCollateralItems('corporateEquity')}
                   </div>
                 </div>
               </div>
