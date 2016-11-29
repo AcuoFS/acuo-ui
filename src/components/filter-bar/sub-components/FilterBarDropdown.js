@@ -2,12 +2,12 @@ import React, {PropTypes} from 'react'
 import DropdownMenu from './DropdownMenu'
 import DropdownTimeMenu from './DropdownTimeMenu'
 import DropdownMultiSelectMenu from './DropdownMultiSelectMenu'
-import styles from './FilterBar.css'
+import styles from '../FilterBar.css'
 import {
     DROPDOWN_TYPE_NORMAL,
     DROPDOWN_TYPE_MULTI_SELECT,
     DROPDOWN_TYPE_TIME_SELECT
-}from '../../constants/ComponentConstants'
+}from '../../../constants/ComponentConstants'
 
 
 export default class FilterDropdown extends React.Component{

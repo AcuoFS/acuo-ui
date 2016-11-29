@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './FilterBar.css'
+import styles from '../FilterBar.css'
 
 export default class DropdownMenu extends React.Component{
 

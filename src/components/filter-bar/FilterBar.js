@@ -4,7 +4,7 @@
 import React, {PropTypes} from 'react'
 import {Set, Map} from 'immutable'
 import styles from './FilterBar.css'
-import FilterDropdown from './FilterBarDropdown'
+import FilterDropdown from './sub-components/FilterBarDropdown'
 import {
   DROPDOWN_TYPE_MULTI_SELECT,
   DROPDOWN_TYPE_TIME_SELECT
