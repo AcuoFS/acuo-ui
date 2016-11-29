@@ -88,7 +88,33 @@ export default class Selection extends React.Component{
             </div>
 
             <div className={styles.rightColSubSection}>
-
+              <div className={styles.subSectionHeader}>Initial Margin</div>
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Price(Net <br/>of Haircut)</th>
+                    <th>CCY</th>
+                    <th>Haircut</th>
+                    <th>Venue</th>
+                    <th>Price</th>
+                    <th>CCY</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Treasury Bill</td>
+                    <td>10,000</td>
+                    <td>USD</td>
+                    <td>0.00%</td>
+                    <td>SG</td>
+                    <td>10,000</td>
+                    <td>USD</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
           </div>

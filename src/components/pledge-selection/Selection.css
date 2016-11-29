@@ -95,5 +95,14 @@
 }
 
 .rightColSubSection{
+}
 
+.subSectionHeader{
+  composes: baseFontBold from '../../static/css-components/fonts.css';
+  color: newAcuoBlue;
+  text-transform: uppercase;
+}
+
+.rightColSubSection table{
+  font-size: 14px;
 }
