@@ -3,7 +3,7 @@ import { PledgeComponent } from '../components'
 
 const mapStateToProps = state => ({
 
-  collateral : state.getIn(['data', 'collateral'])
+  collateral : state.getIn(['pledgeData', 'collateral'])
 })
 
 const mapDispatchToProps = dispatch => ({
