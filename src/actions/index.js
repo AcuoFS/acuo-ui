@@ -42,6 +42,12 @@ export const lineItemInsertion = (lineItem) => ({
     addition : lineItem
 })
 
+export const updateCollateral = (lineItem) => ({
+  type: ActionTypes.LINE_ITEM_INSERTION,
+  addition : lineItem
+})
+
+
 export const selectedItems = (id, item) => ({
     type: ActionTypes.SELECT_ITEM,
     GUID: id,

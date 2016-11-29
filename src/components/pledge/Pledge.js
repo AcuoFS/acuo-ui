@@ -15,7 +15,11 @@ class Pledge extends React.Component {
       open: true,
       class: styles.sectionOpen,
       dropdown: "./../../../images/pledge/minusbox.png",
-      // sidewaysMin :"./../../../images/pledge/sideways-min.png",
+      toggleColwidthL: styles.minDivL, 
+      toggleColwidthR: styles.expandDivR,
+      toggleHideCol: styles.showCol,
+      toggleShowHideL : styles.hideL, 
+      toggleShowHideR : styles.showR,
       sideways: "./../../../images/pledge/sideways-max.png",
       chsCallsTickState: 'None',
       checkbox: "./images/pledge/checkbox.png",
@@ -100,6 +104,30 @@ class Pledge extends React.Component {
   }
 
 
+
+  renderEarmarkedItems(){ 
+    let varI = this.props.collateral
+         if(varI){ 
+      return(varI.get('earmarked').map((x)=>{ 
+        return ( 
+          <div className={this.class}> 
+            {x.get('assetName')} 
+            {x.get('price')} 
+            {x.get('ccy')} 
+            {x.get('deliveryTime')} 
+            {x.get('status')} 
+            {x.get('rating')} 
+            {x.get('maturityDate')} 
+            {x.get('internalCostPct')} 
+            {x.get('externalCostPct')} 
+            {x.get('OppCostPct')} 
+            {x.get('isin')} 
+            {x.get('venue')} 
+            {x.get('acctId')} 
+            </div>
+                 ) 
+      }))     }    }
+
   render() {
     return (
         <div className={styles.pledgeContainer}>
@@ -171,26 +199,12 @@ class Pledge extends React.Component {
                     </p>
                   </div>
                   <div className={this.state.class}>
-
                     <div className={styles.tableRow}>
-                      <div>Cash</div>
-                      <div>12,000</div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
+                      {this.renderEarmarkedItems()}
+
+
                     </div>
 
-                    <div>
-                      <div>Japan (2 Years Issue)</div>
-                    </div>
 
                   </div>
                 </div>

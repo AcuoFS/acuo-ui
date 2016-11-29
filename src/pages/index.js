@@ -1,3 +1,3 @@
 export * from './dashboard/Dashboard'
 export * from './reconcile/Reconcile'
-export * from './pledge/Pledge'
+export * from './pledge/PledgePage'
