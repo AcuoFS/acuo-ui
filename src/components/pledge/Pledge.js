@@ -36,6 +36,8 @@ class Pledge extends React.Component {
     if (this.state.open) {
       this.setState({
         open: false,
+        toggleShowHideL : styles.showL,
+        toggleShowHideR : styles.hideR,
         toggleColwidthL: styles.expandDivL,
         toggleColwidthR: styles.minDivR,
         toggleHideCol: styles.hideCol,
@@ -47,6 +49,8 @@ class Pledge extends React.Component {
         toggleColwidthL: styles.minDivL,
         toggleColwidthR: styles.expandDivR,
         toggleHideCol: styles.showCol,
+        toggleShowHideL : styles.hideL,
+        toggleShowHideR : styles.showR,
         sideways: "./../../../images/pledge/sideways-min.png"
       })
     }
@@ -221,12 +225,9 @@ class Pledge extends React.Component {
               <Selection sideways={this.state.sideways}
                          clicked={this.changeSideways}
                          chkTick={this.chkTick}
+                         toggleL={this.state.toggleShowHideL} 
+                         toggleR={this.state.toggleShowHideR}
               />
-              <Selection sideways={this.state.sideways}
-                         clicked={this.changeSideways}
-                         chkTick={this.chkTick}
-              />
-
             </div>
 
             <div className={styles.col_R + ' ' + this.state.toggleColwidthR}>

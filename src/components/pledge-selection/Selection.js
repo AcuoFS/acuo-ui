@@ -97,6 +97,8 @@ export default class Selection extends React.Component{
 
             <div className={styles.rightColSubSection}>
               <div className={styles.subSectionHeader}>Initial Margin</div>
+              <div className={this.props.toggleR}> abcbcb</div> 
+              <div className={this.props.toggleL}>something</div>
               <table>
                 <thead>
                   <tr>
