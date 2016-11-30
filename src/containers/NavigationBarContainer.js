@@ -1,17 +1,17 @@
-import { connect } from 'react-redux'
-import { NavigationBarComponent } from '../components'
+import {connect} from 'react-redux'
+import {NavigationBarComponent} from '../components'
 
-const mapStateToProp = state =>({
-    timeUpdated : state.getIn(['display', 'timeUpdated'])
-})
+const mapStateToProp = state => {
+  return {
+    timeUpdated: state.mainReducer.getIn(['display', 'timeUpdated'])
+  }
+}
 
-const mapDispatchToProps = dispatch =>({
-
-})
+const mapDispatchToProps = dispatch => ({})
 
 const NavigationBarContainer = connect(
-    mapStateToProp,
-    mapDispatchToProps
+  mapStateToProp,
+  mapDispatchToProps
 )(NavigationBarComponent)
 
 export default NavigationBarContainer

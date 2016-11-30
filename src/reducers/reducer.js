@@ -1,7 +1,7 @@
 import {Map, List, fromJS} from 'immutable'
 import * as ActionTypes from '../constants/ActionTypes'
 
-export function initState(state, newJSON){
+export function initState(state = Map(), newJSON){
   return state.set('data', fromJS(newJSON)).set('display', fromJS(newJSON)).set('pledgeData', fromJS(newJSON))
   //pushed into two separate nodes, data(for retention of persistent data), display(for rendering the UI)
 }
@@ -311,7 +311,7 @@ export const reconItem = (state, action) => {
 
 export const updateCollateral = (state, action) => {
 
-  if(!state.get('pledgeData').isEmpty()){
+  if(!state.get('pledgeData')){
     return state.setIn(['pledgeData', 'collateral'], action.collateralData)
   }
   else{
@@ -319,10 +319,9 @@ export const updateCollateral = (state, action) => {
   }
 }
 
-
-
 // main reducer function
-export default function reducer(state = Map(), action, store = 'data') {
+export default function mainReducer(state = Map(), action, store = 'data') {
+
   switch(action.type) {
     case 'INIT_STATE':
       return initState(state, action.state)

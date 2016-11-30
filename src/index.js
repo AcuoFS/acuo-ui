@@ -5,7 +5,7 @@ import {fromJS} from 'immutable'
 import {Provider} from 'react-redux'
 import { browserHistory, Router, Route, Link } from 'react-router'
 
-import reducer from './reducers/reducer'
+import reducer from './reducers'
 import {initState} from './actions'
 import styles from './static/global.css'
 import { Dashboard, ReconcileContainer, PledgePageContainer } from './pages'
@@ -18,7 +18,7 @@ class App extends React.Component{
         super(props)
         //http://localhost:3000/data
         //https://acuo.herokuapp.com/json
-        fetch('http://localhost:3000/data').then((response) => {
+        fetch('https://acuo.herokuapp.com/json').then((response) => {
             return response.json()
         }).then((obj) => {
             store.dispatch(initState(fromJS(obj)))

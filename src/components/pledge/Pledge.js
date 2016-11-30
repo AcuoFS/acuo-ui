@@ -31,6 +31,13 @@ class Pledge extends React.Component {
     this.chkTick = this.chkTick.bind(this)
     // this.renderCollateralItems = this.renderCollateralItems.bind(this)
 
+    fetch('http://52.74.186.112:8081/optimisation').then(response => {
+      return response.json()
+    }).then(obj => {
+      console.log(obj)
+      this.props.onInitOptimisationSettings(obj)
+    })
+
   }
 
   changeSideways() {
@@ -137,19 +144,22 @@ class Pledge extends React.Component {
     }
   }
 
-
+  renderOptItems(optimisation){
+    if(optimisation)
+      return optimisation.map(x => {
+        <OptItem sldName={x.name} allocation={x.rating}/>
+      })
+  }
 
   render() {
+    const { optimisation } = this.props
     return (
         <div className={styles.pledgeContainer}>
           <div className={styles.sliderAndStatus}>
             <div className={styles.panel} id={styles.optSetting}>
               <div className={styles.panelTitle}>Optimization Setting</div>
               <div className={styles.optPnlWrap}>
-                <OptItem sldName="Operations" allocation="72"/>
-                <OptItem sldName="Liquidity" allocation="36"/>
-                <OptItem sldName="Cost" allocation="18"/>
-                <OptItem sldName="Haircut" allocation="44"/>
+                {this.renderOptItems(optimisation)}
               </div>
               <div className={styles.buttonHolder}>
                 <ChooseCalls tickImg={this.state.checkbox} tickState={this.state.chsCallsTickState}

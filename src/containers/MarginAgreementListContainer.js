@@ -4,7 +4,7 @@ import { lineItemInsertion, reconItem, selectedItems } from '../actions'
 
 
 const mapStateToProps = state => ({
-  recon : state.getIn(['display', 'derivatives'])
+  recon : state.mainReducer.getIn(['display', 'derivatives'])
 })
 
 const mapDispatchToProps = dispatch => ({
