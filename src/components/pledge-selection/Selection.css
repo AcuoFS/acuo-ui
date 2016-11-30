@@ -111,6 +111,7 @@
 }
 
 .rightColSubSection{
+  margin: 4px 0 10px 0;
 }
 
 .subSectionHeader{
@@ -121,4 +122,37 @@
 
 .rightColSubSection table{
   font-size: 14px;
+}
+
+.selTable{
+  width: 100%;
+  margin: 4px auto;
+  border-bottom: 1px solid rgba(74,74,74,0.4);
+}
+
+.selTable tr{
+  border-bottom: 1px solid rgba(151,151,151,0.35);
+}
+
+.selTable thead{
+  color: newAcuoBlue;
+}
+
+.selTable thead th{
+  padding: 6px 4px;
+  line-height: 16px;
+  text-align: left;
+}
+
+.selTable tbody tr:last-child{
+  border-bottom: none;
+}
+
+.selTable tbody td{
+  padding: 6px 4px;
+  line-height: 16px;
+}
+
+.bold{
+  composes: baseFontBold from '../../static/css-components/fonts.css';
 }
