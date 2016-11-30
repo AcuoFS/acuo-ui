@@ -8,6 +8,8 @@ import OptItem from './sub-components/OptItem'
 import ChooseCalls from './sub-components/ChooseCalls'
 import Selection from '../pledge-selection/Selection'
 
+import { List } from 'immutable'
+
 class Pledge extends React.Component {
   constructor(props) {
     super(props)
@@ -36,6 +38,12 @@ class Pledge extends React.Component {
       return response.json()
     }).then(obj => {
       this.props.onInitOptimisationSettings(obj)
+    })
+
+    fetch('http://52.74.186.112:8081/init-selection').then(response => {
+      return response.json()
+    }).then(obj => {
+      this.props.initSelection(obj)
     })
   }
 
@@ -154,8 +162,23 @@ class Pledge extends React.Component {
     }
   }
 
+  renderSelection(x){
+    return (<Selection  sideways={this.state.selectionSideway}
+                        clicked={this.changeSideways}
+                        chkTick={this.chkTick}
+                        toggleL={this.state.toggleShowHideL}
+                        toggleR={this.state.toggleShowHideR}
+                        marginCall={x}
+                        key={x.get('GUID')} />)
+  }
+
+  //generic checker
+  checkIfExist(something){
+    return something || List()
+  }
+
   render() {
-    const { optimisation, onUpdateOptimisationSettings } = this.props
+    const { optimisation, selection, onUpdateOptimisationSettings } = this.props
     return (
         <div className={styles.pledgeContainer}>
           <div className={styles.sliderAndStatus}>
@@ -184,12 +207,8 @@ class Pledge extends React.Component {
           <div className={styles.flexContainer}>
             <div className={styles.col_L + ' ' + this.state.toggleColwidthL}>
 
-              <Selection sideways={this.state.selectionSideway}
-                         clicked={this.changeSideways}
-                         chkTick={this.chkTick}
-                         toggleL={this.state.toggleShowHideL} 
-                         toggleR={this.state.toggleShowHideR}
-              />
+              {this.checkIfExist(selection).map(x => this.renderSelection(x))}
+
             </div>
 
             <div className={styles.col_R + ' ' + this.state.toggleColwidthR}>

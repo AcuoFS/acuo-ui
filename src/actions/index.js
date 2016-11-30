@@ -69,3 +69,8 @@ export const updateOptimisationSettings = (newSettings) => ({
   type: ActionTypes.UPDATE_OPTIMISATION_SETTINGS,
   newSettings: newSettings
 })
+
+export const initSelection = (selection) => ({
+  type: ActionTypes.INIT_SELECTION,
+  selection: selection
+})

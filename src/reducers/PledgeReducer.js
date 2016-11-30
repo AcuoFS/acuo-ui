@@ -1,5 +1,13 @@
 import * as ActionTypes from '../constants/ActionTypes'
-import { Map, fromJS } from 'immutable'
+import { Map, fromJS, List } from 'immutable'
+
+const INITIAL_STATE = Map({
+  'pledgeData': Map({
+    'optimisation': List(),
+    'selection': List(),
+    'collateral': List()
+  })
+})
 
 const initOptimisationSettings = (state, settings) => {
   return state.setIn(['pledgeData', 'optimisation'], fromJS(settings.data))
@@ -18,6 +26,13 @@ export const updateCollateral = (state, action) => {
   }
 }
 
+export const initSelection = (state, selection) => {
+  if(selection.data.inMarginCall)
+    return state.setIn(['pledgeData', 'selection'], fromJS(selection.data.inMarginCall))
+  else
+    return state
+}
+
 const PledgeReducer = (state = Map(), action) => {
   switch (action.type) {
     case ActionTypes.INIT_OPTIMISATION_SETTINGS:
@@ -28,6 +43,9 @@ const PledgeReducer = (state = Map(), action) => {
 
     case ActionTypes.UPDATE_COLLATERAL:
       return updateCollateral(state, action)
+
+    case ActionTypes.INIT_SELECTION:
+      return initSelection(state, action.selection)
   }
 
   return state

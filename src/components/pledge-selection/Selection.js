@@ -1,26 +1,70 @@
 import React from 'react'
 import styles from './Selection.css'
+import { numberWithCommas } from '../../utils/numbersWithCommas'
 
-export default class Selection extends React.Component{
-    constructor(props) {
-        super(props)
-        this.state = {
-            selTickState: 'None',
-            selCheckbox: "./images/pledge/checkbox.png"
-        }
+import { List } from 'immutable'
+
+export default class Selection extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      selTickState: 'None',
+      selCheckbox: "./images/pledge/checkbox.png"
     }
+  }
 
-    render(){
-    return(
-      <div className={styles.panel}>
+  renderGroup(x, GUID) {
+    return (
+      <div className={styles.group} key={x.get('groupName')+GUID}>
+        {this.checkIfExist(x.get('data')).map(y => {
+          return (
+            <div className={styles.firstLevel} key={y.get('assetName')}>
+              <div className={styles.assetName}>
+                {y.get('firstLevel')}
+              </div>
+              <div className={styles.amount}>
+                {numberWithCommas(y.get('secondLevel').reduce((sum, z) => {
+                  return sum + z.get('amount')
+                }, 0))}
+              </div>
+            </div>)
+        })}
+      </div>
+    )
+  }
+
+  renderMargin(x){
+    return (
+      <tr key={x.get('assetName')}>
+        <td>{x.get('assetName')}</td>
+        <td>{numberWithCommas(x.get('priceNetHaircut'))}</td>
+        <td>{x.get('priceNetHaircutCcy')}</td>
+        <td>{x.get('haircutPct')}%</td>
+        <td>{x.get('venue')}</td>
+        <td>{numberWithCommas(x.get('price'))}</td>
+        <td>{x.get('priceCcy')}</td>
+        <td></td>
+      </tr>
+    )
+  }
+
+  //generic checker
+  checkIfExist(something){
+    return something || List()
+  }
+
+  render() {
+    const { marginCall } = this.props
+    return (
+      <div className={styles.panel} key={marginCall.get('GUID')}>
 
         <div className={styles.columnContainer}>
           <div className={styles.leftColumn}>
             <div className={styles.titleHolder}>
-                <img src={this.state.selCheckbox} className={styles.selTick} onClick={this.props.chkTick}/>
-                <span className={styles.panelTitle}>Abc Securities FCM</span>
+              <img src={this.state.selCheckbox} className={styles.selTick} onClick={this.props.chkTick}/>
+              <span className={styles.panelTitle}>{marginCall.get('marginCallName')}</span>
               <div className={styles.subtitle}>
-                ACUO SG - ABC Securities FCM Global Fund
+                {marginCall.get('legalEntity')} - {marginCall.get('marginCallName')}
               </div>
             </div>
             <div className={styles.callTitle}>
@@ -28,49 +72,9 @@ export default class Selection extends React.Component{
             </div>
 
             <div>
-              <div className={styles.group}>
 
-                <div className={styles.firstLevel}>
-                  <div className={styles.assetName}>
-                    Net Total IM Call
-                  </div>
-                  <div className={styles.amount}>
-                    400,000
-                  </div>
-                </div>
+              {this.checkIfExist(marginCall.get('ClientAssets')).map(x => this.renderGroup(x, marginCall.get('GUID')))}
 
-                <div className={styles.firstLevel}>
-                  <div className={styles.assetName}>
-                    Net Total IM Call
-                  </div>
-                  <div className={styles.amount}>
-                    400,000
-                  </div>
-                </div>
-
-              </div>
-
-              <div className={styles.group}>
-
-                <div className={styles.firstLevel}>
-                  <div className={styles.assetName}>
-                    Net Total IM Call
-                  </div>
-                  <div className={styles.amount}>
-                    400,000
-                  </div>
-                </div>
-
-                <div className={styles.firstLevel}>
-                  <div className={styles.assetName}>
-                    Net Total IM Call
-                  </div>
-                  <div className={styles.amount}>
-                    400,000
-                  </div>
-                </div>
-
-              </div>
             </div>
 
             <div className={styles.total}>
@@ -79,7 +83,13 @@ export default class Selection extends React.Component{
                   Total
                 </div>
                 <div className={styles.amount}>
-                  400,000
+                  {numberWithCommas(this.checkIfExist(marginCall.get('ClientAssets')).reduce((sum, x) => {
+                    return sum + x.get('data').reduce((sum, y) => {
+                      return sum + y.get('secondLevel').reduce((sum, z) => {
+                        return sum + z.get('amount')
+                        }, 0)
+                    }, 0)
+                  }, 0))}
                 </div>
               </div>
             </div>
@@ -94,6 +104,7 @@ export default class Selection extends React.Component{
                 <img src={this.props.sideways} onClick={this.props.clicked} alt=""/>
               </div>
             </div>
+
 
             <div className={styles.ttlMarginWrap + ' ' + (this.props.toggleR ? styles.showR : styles.hideR)}>
               <div className={styles.ttlMargin}>
@@ -121,16 +132,7 @@ export default class Selection extends React.Component{
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Treasury Bill</td>
-                      <td>10,000</td>
-                      <td>USD</td>
-                      <td>0.00%</td>
-                      <td>SG</td>
-                      <td>10,000</td>
-                      <td>USD</td>
-                      <td></td>
-                    </tr>
+                    {this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).map(x => this.renderMargin(x))}
                     <tr className={styles.bold}>
                       <td>Sub-Total</td>
                       <td>40,000</td>
@@ -161,16 +163,7 @@ export default class Selection extends React.Component{
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>Cash</td>
-                    <td>10,000</td>
-                    <td>USD</td>
-                    <td>0.00%</td>
-                    <td>SG</td>
-                    <td>10,000</td>
-                    <td>USD</td>
-                    <td></td>
-                  </tr>
+                  {this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).map(x => this.renderMargin(x))}
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
                     <td>40,000</td>
