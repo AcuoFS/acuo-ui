@@ -7,10 +7,8 @@ import { List } from 'immutable'
 export default class Selection extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      selTickState: 'None',
-      selCheckbox: "./images/pledge/checkbox.png"
-    }
+
+    this.togglePendingAllocation = this.togglePendingAllocation.bind(this)
   }
 
   renderGroup(x, GUID) {
@@ -48,20 +46,25 @@ export default class Selection extends React.Component {
     )
   }
 
+  togglePendingAllocation(e){
+    this.props.onTogglePendingAllocation(e.currentTarget.dataset.ref)
+  }
+
   //generic checker
   checkIfExist(something){
     return something || List()
   }
 
   render() {
-    const { marginCall } = this.props
+    const { marginCall, pendingAllocationStore } = this.props
+
     return (
       <div className={styles.panel} key={marginCall.get('GUID')}>
 
         <div className={styles.columnContainer}>
           <div className={styles.leftColumn}>
             <div className={styles.titleHolder}>
-              <img src={this.state.selCheckbox} className={styles.selTick} onClick={this.props.chkTick}/>
+              <img src={(this.checkIfExist(pendingAllocationStore).includes(marginCall.get('GUID').toString()) ? "./images/pledge/checkboxwithtick.png" : "./images/pledge/checkbox.png")} className={styles.selTick} onClick={this.togglePendingAllocation} data-ref={marginCall.get('GUID')}/>
               <span className={styles.panelTitle}>{marginCall.get('marginCallName')}</span>
               <div className={styles.subtitle}>
                 {marginCall.get('legalEntity')} - {marginCall.get('marginCallName')}
@@ -105,12 +108,17 @@ export default class Selection extends React.Component {
               </div>
             </div>
 
-
             <div className={styles.ttlMarginWrap + ' ' + (this.props.toggleR ? styles.showR : styles.hideR)}>
               <div className={styles.ttlMargin}>
                 <div>Total Margin</div>
-                <div className={styles.bigFig + ' ' +styles.bold}>116.5</div>
-                <div className={styles.bold}>Millions</div>
+                <div className={styles.bigFig + ' ' +styles.bold}>{numberWithCommas((this.checkIfExist(marginCall.get('ClientAssets')).reduce((sum, x) => {
+                  return sum + x.get('data').reduce((sum, y) => {
+                      return sum + y.get('secondLevel').reduce((sum, z) => {
+                          return sum + z.get('amount')
+                        }, 0)
+                    }, 0)
+                }, 0) / 1000000).toFixed(1))}</div>
+                <div className={styles.bold}>Million</div>
               </div>
             </div>
 

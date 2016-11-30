@@ -74,3 +74,8 @@ export const initSelection = (selection) => ({
   type: ActionTypes.INIT_SELECTION,
   selection: selection
 })
+
+export const togglePendingAllocation = (GUID) => ({
+  type: ActionTypes.TOGGLE_PENDING_ALLOCATION,
+  GUID: GUID
+})

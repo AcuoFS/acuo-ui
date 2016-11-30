@@ -1,11 +1,12 @@
 import { connect } from 'react-redux'
 import { PledgeComponent } from '../components'
-import { initOptimisationSettings, updateOptimisationSettings, initSelection } from '../actions'
+import { initOptimisationSettings, updateOptimisationSettings, initSelection, togglePendingAllocation } from '../actions'
 
 const mapStateToProps = state => ({
   collateral : state.PledgeReducer.getIn(['pledgeData', 'collateral']),
   optimisation: state.PledgeReducer.getIn(['pledgeData', 'optimisation']),
-  selection: state.PledgeReducer.getIn(['pledgeData', 'selection'])
+  selection: state.PledgeReducer.getIn(['pledgeData', 'selection']),
+  pendingAllocation: state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation'])
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -17,6 +18,9 @@ const mapDispatchToProps = dispatch => ({
   },
   initSelection: (selection) => {
     dispatch(initSelection(selection))
+  },
+  onTogglePendingAllocation: (GUID) => {
+    dispatch(togglePendingAllocation(GUID))
   }
 })
 

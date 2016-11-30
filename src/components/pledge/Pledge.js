@@ -162,14 +162,16 @@ class Pledge extends React.Component {
     }
   }
 
-  renderSelection(x){
+  renderSelection(x, onTogglePendingAllocation, pendingAllocation){
     return (<Selection  sideways={this.state.selectionSideway}
                         clicked={this.changeSideways}
                         chkTick={this.chkTick}
                         toggleL={this.state.toggleShowHideL}
                         toggleR={this.state.toggleShowHideR}
                         marginCall={x}
-                        key={x.get('GUID')} />)
+                        key={x.get('GUID')}
+                        onTogglePendingAllocation={onTogglePendingAllocation}
+                        pendingAllocationStore={pendingAllocation}/>)
   }
 
   //generic checker
@@ -178,7 +180,7 @@ class Pledge extends React.Component {
   }
 
   render() {
-    const { optimisation, selection, onUpdateOptimisationSettings } = this.props
+    const { optimisation, selection, onUpdateOptimisationSettings, onTogglePendingAllocation, pendingAllocation } = this.props
     return (
         <div className={styles.pledgeContainer}>
           <div className={styles.sliderAndStatus}>
@@ -207,7 +209,7 @@ class Pledge extends React.Component {
           <div className={styles.flexContainer}>
             <div className={styles.col_L + ' ' + this.state.toggleColwidthL}>
 
-              {this.checkIfExist(selection).map(x => this.renderSelection(x))}
+              {this.checkIfExist(selection).map(x => this.renderSelection(x, onTogglePendingAllocation, pendingAllocation))}
 
             </div>
 

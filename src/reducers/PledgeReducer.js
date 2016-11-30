@@ -33,6 +33,15 @@ export const initSelection = (state, selection) => {
     return state
 }
 
+export const togglePendingAllocation = (state, GUID) => {
+  if(!state.getIn(['pledgeData', 'pendingAllocation']) || state.getIn(['pledgeData', 'pendingAllocation']).isEmpty())
+    return state.setIn(['pledgeData', 'pendingAllocation'], List().push(GUID))
+  else if(state.getIn(['pledgeData', 'pendingAllocation']).includes(GUID))
+    return state.setIn(['pledgeData', 'pendingAllocation'], state.getIn(['pledgeData', 'pendingAllocation']).filter(x => x != GUID))
+  else
+    return state.setIn(['pledgeData', 'pendingAllocation'], state.getIn(['pledgeData', 'pendingAllocation']).push(GUID))
+}
+
 const PledgeReducer = (state = Map(), action) => {
   switch (action.type) {
     case ActionTypes.INIT_OPTIMISATION_SETTINGS:
@@ -46,6 +55,9 @@ const PledgeReducer = (state = Map(), action) => {
 
     case ActionTypes.INIT_SELECTION:
       return initSelection(state, action.selection)
+
+    case ActionTypes.TOGGLE_PENDING_ALLOCATION:
+      return togglePendingAllocation(state, action.GUID)
   }
 
   return state
