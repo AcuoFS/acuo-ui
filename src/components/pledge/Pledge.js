@@ -18,8 +18,8 @@ class Pledge extends React.Component {
       toggleColwidthL: styles.minDivL, 
       toggleColwidthR: styles.expandDivR,
       toggleHideCol: styles.showCol,
-      toggleShowHideL : styles.hideL, 
-      toggleShowHideR : styles.showR,
+      toggleShowHideL : false, 
+      toggleShowHideR : true,
       sideways: "./../../../images/pledge/sideways-min.png",
       selectionSideway: "./../../../images/pledge/sideways-max.png",
       chsCallsTickState: 'None',
@@ -43,8 +43,8 @@ class Pledge extends React.Component {
     if (this.state.open) {
       this.setState({
         open: false,
-        toggleShowHideL : styles.showL,
-        toggleShowHideR : styles.hideR,
+        toggleShowHideL : true,
+        toggleShowHideR : false,
         toggleColwidthL: styles.expandDivL,
         toggleColwidthR: styles.minDivR,
         toggleHideCol: styles.hideCol,
@@ -57,8 +57,8 @@ class Pledge extends React.Component {
         toggleColwidthL: styles.minDivL,
         toggleColwidthR: styles.expandDivR,
         toggleHideCol: styles.showCol,
-        toggleShowHideL : styles.hideL,
-        toggleShowHideR : styles.showR,
+        toggleShowHideL : false,
+        toggleShowHideR : true,
         sideways: "./../../../images/pledge/sideways-min.png",
         selectionSideway: "./../../../images/pledge/sideways-max.png",
       })

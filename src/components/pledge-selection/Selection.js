@@ -87,7 +87,7 @@ export default class Selection extends React.Component{
           </div>
           <div className={styles.rightColumn}>
             <div className={styles.rightColHeading}>
-              <div className={styles.rightColumnTitle + ' ' + this.props.toggleL}>
+              <div className={styles.rightColumnTitle + ' ' + (this.props.toggleL ? styles.showL : styles.hideL)}>
                 Selection
               </div>
               <div className={styles.imageRight}>
@@ -95,10 +95,60 @@ export default class Selection extends React.Component{
               </div>
             </div>
 
-            <div className={styles.rightColSubSection + ' ' + this.props.toggleL}>
-              <div className={styles.subSectionHeader + ' ' + this.props.toggleL}>Initial Margin</div>
-              <table className={styles.selTable}>
-                <thead>
+            <div className={styles.ttlMarginWrap + ' ' + (this.props.toggleR ? styles.showR : styles.hideR)}>
+              <div className={styles.ttlMargin}>
+                <div>Total Margin</div>
+                <div className={styles.bigFig + ' ' +styles.bold}>116.5</div>
+                <div className={styles.bold}>Millions</div>
+              </div>
+            </div>
+
+            <div className={this.props.toggleL ? styles.showL : styles.hideL}>
+
+              <div className={styles.rightColSubSection}>
+                <div className={styles.subSectionHeader}>Initial Margin</div>
+                <table className={styles.selTable}>
+                  <thead>
+                    <tr className={styles.bold}>
+                      <th></th>
+                      <th>Price(Net <br/>of Haircut)</th>
+                      <th>CCY</th>
+                      <th>Haircut</th>
+                      <th>Venue</th>
+                      <th>Price</th>
+                      <th>CCY</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Treasury Bill</td>
+                      <td>10,000</td>
+                      <td>USD</td>
+                      <td>0.00%</td>
+                      <td>SG</td>
+                      <td>10,000</td>
+                      <td>USD</td>
+                      <td></td>
+                    </tr>
+                    <tr className={styles.bold}>
+                      <td>Sub-Total</td>
+                      <td>40,000</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className={styles.rightColSubSection}>
+                <div className={styles.subSectionHeader}>Variation Margin</div>
+                <table className={styles.selTable}>
+                  <thead>
                   <tr className={styles.bold}>
                     <th></th>
                     <th>Price(Net <br/>of Haircut)</th>
@@ -109,10 +159,10 @@ export default class Selection extends React.Component{
                     <th>CCY</th>
                     <th></th>
                   </tr>
-                </thead>
-                <tbody>
+                  </thead>
+                  <tbody>
                   <tr>
-                    <td>Treasury Bill</td>
+                    <td>Cash</td>
                     <td>10,000</td>
                     <td>USD</td>
                     <td>0.00%</td>
@@ -131,48 +181,10 @@ export default class Selection extends React.Component{
                     <td></td>
                     <td></td>
                   </tr>
-                </tbody>
-              </table>
-            </div>
+                  </tbody>
+                </table>
+              </div>
 
-            <div className={styles.rightColSubSection + ' ' + this.props.toggleL}>
-              <div className={styles.subSectionHeader + ' ' + this.props.toggleL}>Variation Margin</div>
-              <table className={styles.selTable}>
-                <thead>
-                <tr className={styles.bold}>
-                  <th></th>
-                  <th>Price(Net <br/>of Haircut)</th>
-                  <th>CCY</th>
-                  <th>Haircut</th>
-                  <th>Venue</th>
-                  <th>Price</th>
-                  <th>CCY</th>
-                  <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>Cash</td>
-                  <td>10,000</td>
-                  <td>USD</td>
-                  <td>0.00%</td>
-                  <td>SG</td>
-                  <td>10,000</td>
-                  <td>USD</td>
-                  <td></td>
-                </tr>
-                <tr className={styles.bold}>
-                  <td>Sub-Total</td>
-                  <td>40,000</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                </tbody>
-              </table>
             </div>
 
           </div>

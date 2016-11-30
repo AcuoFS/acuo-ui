@@ -110,6 +110,42 @@
   text-align: right;
 }
 
+.ttlMarginWrap{
+  position: relative;
+  display: flex;
+  height: 90%;
+}
+
+.showL{
+  display: inherit;
+}
+
+.hideL{
+  display: none;
+}
+
+.showR{
+  display: flex;
+}
+
+.hideR{
+  display: none;
+}
+
+
+.ttlMarginWrap .ttlMargin{
+  flex: 1;
+  align-self: center;
+  color: newAcuoBlue;
+  text-align: center;
+}
+.ttlMarginWrap .ttlMargin >div{
+  margin: 10px 0px;
+}
+.ttlMarginWrap .ttlMargin .bigFig{
+  font-size: 36px;
+}
+
 .rightColSubSection{
   margin: 4px 0 10px 0;
 }
