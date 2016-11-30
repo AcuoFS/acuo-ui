@@ -56,7 +56,11 @@ export default class Selection extends React.Component {
   }
 
   render() {
+
     const { marginCall, pendingAllocationStore } = this.props
+
+    let evlEmptyForIntMargin = this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).isEmpty()
+    let evlEmptyForVariMargin = this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).isEmpty()
 
     return (
       <div className={styles.panel} key={marginCall.get('GUID')}>
@@ -126,7 +130,7 @@ export default class Selection extends React.Component {
 
               <div className={styles.rightColSubSection}>
                 <div className={styles.subSectionHeader}>Initial Margin</div>
-                <table className={styles.selTable}>
+                <table className={styles.selTable + ( evlEmptyForIntMargin ? ' ' + styles.notAllocated : '')}>
                   <thead>
                     <tr className={styles.bold}>
                       <th></th>
@@ -140,7 +144,12 @@ export default class Selection extends React.Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).map(x => this.renderMargin(x))}
+                  { evlEmptyForIntMargin ?
+                      <tr>
+                        <td colSpan="8" className={styles.notAlcText}>Collateral has not been allocated</td>
+                      </tr> :
+                      this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).map(x => this.renderMargin(x))
+                  }
                     <tr className={styles.bold}>
                       <td>Sub-Total</td>
                       <td>40,000</td>
@@ -157,7 +166,7 @@ export default class Selection extends React.Component {
 
               <div className={styles.rightColSubSection}>
                 <div className={styles.subSectionHeader}>Variation Margin</div>
-                <table className={styles.selTable}>
+                <table className={styles.selTable + ( evlEmptyForVariMargin ? ' ' + styles.notAllocated : '')}>
                   <thead>
                   <tr className={styles.bold}>
                     <th></th>
@@ -171,10 +180,18 @@ export default class Selection extends React.Component {
                   </tr>
                   </thead>
                   <tbody>
-                  {this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).map(x => this.renderMargin(x))}
+
+                  { evlEmptyForVariMargin ?
+                        <tr>
+                          <td colSpan="8" className={styles.notAlcText}>Collateral has not been allocated</td>
+                        </tr> :
+                      this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).map(x => this.renderMargin(x))
+                  }
+
+
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
-                    <td>40,000</td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

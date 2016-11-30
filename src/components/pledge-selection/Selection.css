@@ -184,11 +184,26 @@
   border-bottom: none;
 }
 
-.selTable tbody td{
+td{
   padding: 6px 4px;
   line-height: 16px;
+}
+
+.notAllocated{
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 14px;
+  composes: baseFontBold from '../../static/css-components/fonts.css';
+  color: #4A4A4A;
+}
+.notAllocated tr{
+  border-bottom: none;
+}
+.notAllocated .notAlcText{
+  padding: 30px 20px;
 }
 
 .bold{
   composes: baseFontBold from '../../static/css-components/fonts.css';
 }
+
