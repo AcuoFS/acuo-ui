@@ -196,20 +196,20 @@
             {
               "assetName": "Cash",
               "priceNetHaircut": 10000,
-              "priceNetHaircutCcy": "YEN",
+              "priceNetHaircutCcy": "GBP",
               "haircutPct": 0.00,
               "venue": "SG",
               "price": 10000,
-              "priceCcy": "YEN"
+              "priceCcy": "GBP"
             },
             {
               "assetName": "Cash",
               "priceNetHaircut": 10000,
-              "priceNetHaircutCcy": "EUR",
+              "priceNetHaircutCcy": "JPY",
               "haircutPct": 0.00,
               "venue": "SG",
               "price": 10000,
-              "priceCcy": "EUR"
+              "priceCcy": "JPY"
             }
           ]
         }
@@ -409,20 +409,20 @@
             {
               "assetName": "Cash",
               "priceNetHaircut": 10000,
-              "priceNetHaircutCcy": "YEN",
+              "priceNetHaircutCcy": "GBP",
               "haircutPct": 0.00,
               "venue": "SG",
               "price": 10000,
-              "priceCcy": "YEN"
+              "priceCcy": "GBP"
             },
             {
               "assetName": "Cash",
               "priceNetHaircut": 10000,
-              "priceNetHaircutCcy": "EUR",
+              "priceNetHaircutCcy": "JPY",
               "haircutPct": 0.00,
               "venue": "SG",
               "price": 10000,
-              "priceCcy": "EUR"
+              "priceCcy": "JPY"
             }
           ]
         }
