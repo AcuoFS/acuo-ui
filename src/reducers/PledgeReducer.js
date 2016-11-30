@@ -2,8 +2,7 @@ import * as ActionTypes from '../constants/ActionTypes'
 import { Map, fromJS } from 'immutable'
 
 const initOptimisationSettings = (state, settings) => {
-  console.log(settings)
-  return state.set('optimisation', fromJS(settings))
+  return state.setIn(['pledgeData', 'optimisation'], fromJS(settings.data))
 }
 
 const PledgeReducer = (state = Map(), action) => {

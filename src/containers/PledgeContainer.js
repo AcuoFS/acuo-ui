@@ -4,12 +4,12 @@ import { initOptimisationSettings } from '../actions'
 
 const mapStateToProps = state => ({
   collateral : state.mainReducer.getIn(['pledgeData', 'collateral']),
-  optimisation: state.PledgeReducer.getIn(['pledge-data', 'optimisation'])
+  optimisation: state.PledgeReducer.getIn(['pledgeData', 'optimisation'])
 })
 
 const mapDispatchToProps = dispatch => ({
   onInitOptimisationSettings: (settings) => {
-    initOptimisationSettings(settings)
+    dispatch(initOptimisationSettings(settings))
   }
 })
 

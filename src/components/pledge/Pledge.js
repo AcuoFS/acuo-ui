@@ -34,10 +34,8 @@ class Pledge extends React.Component {
     fetch('http://52.74.186.112:8081/optimisation').then(response => {
       return response.json()
     }).then(obj => {
-      console.log(obj)
       this.props.onInitOptimisationSettings(obj)
     })
-
   }
 
   changeSideways() {
@@ -82,6 +80,7 @@ class Pledge extends React.Component {
 
   renderCollateralItems(collateralItem) {
     let collaterals = this.props.collateral
+
     if (collaterals) {
       let x = collaterals.get(collateralItem)
       return this.renderItems(x)
@@ -92,7 +91,7 @@ class Pledge extends React.Component {
     return value.map((x) => {
       return (
         <div className={this.state.class}>
-          <div> {x.get('assetName')} </div>
+          <div>{x.get('assetName')}</div>
           <div>{x.get('price')}</div>
           <div>{x.get('ccy')}</div>
           <div>{x.get('deliveryTime')}</div>
@@ -145,10 +144,10 @@ class Pledge extends React.Component {
   }
 
   renderOptItems(optimisation){
-    if(optimisation)
-      return optimisation.map(x => {
-        <OptItem sldName={x.name} allocation={x.rating}/>
-      })
+    // if(optimisation)
+    //   optimisation.map(x => {
+    //     return (<OptItem sldName={x.name} allocation={x.rating}/>)
+    //   })
   }
 
   render() {

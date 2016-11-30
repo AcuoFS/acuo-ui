@@ -2,7 +2,7 @@ import {Map, List, fromJS} from 'immutable'
 import * as ActionTypes from '../constants/ActionTypes'
 
 export function initState(state = Map(), newJSON){
-  return state.set('data', fromJS(newJSON)).set('display', fromJS(newJSON)).set('pledgeData', fromJS(newJSON))
+  return state.set('data', fromJS(newJSON)).set('display', fromJS(newJSON))
   //pushed into two separate nodes, data(for retention of persistent data), display(for rendering the UI)
 }
 
@@ -310,8 +310,7 @@ export const reconItem = (state, action) => {
 
 
 export const updateCollateral = (state, action) => {
-
-  if(!state.get('pledgeData')){
+  if(action.collateralData){
     return state.setIn(['pledgeData', 'collateral'], action.collateralData)
   }
   else{
