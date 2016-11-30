@@ -146,22 +146,23 @@ class Pledge extends React.Component {
     }
   }
 
-  renderOptItems(optimisation){
-    // if(optimisation)
-    //   optimisation.map(x => {
-    //     return (<OptItem sldName={x.name} allocation={x.rating}/>)
-    //   })
+  renderOptItems(optimisation, onUpdateOptimisationSettings){
+    if(optimisation) {
+      return optimisation.map(x => {
+        return (<OptItem sldName={x.get('name')} allocation={x.get('rating')} onUpdate={onUpdateOptimisationSettings}/>)
+      })
+    }
   }
 
   render() {
-    const { optimisation } = this.props
+    const { optimisation, onUpdateOptimisationSettings } = this.props
     return (
         <div className={styles.pledgeContainer}>
           <div className={styles.sliderAndStatus}>
             <div className={styles.panel} id={styles.optSetting}>
               <div className={styles.panelTitle}>Optimization Setting</div>
               <div className={styles.optPnlWrap}>
-                {this.renderOptItems(optimisation)}
+                {this.renderOptItems(optimisation, onUpdateOptimisationSettings)}
               </div>
               <div className={styles.buttonHolder}>
                 <ChooseCalls tickImg={this.state.checkbox} tickState={this.state.chsCallsTickState}

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { PledgeComponent } from '../components'
-import { initOptimisationSettings } from '../actions'
+import { initOptimisationSettings, updateOptimisationSettings } from '../actions'
 
 const mapStateToProps = state => ({
   collateral : state.mainReducer.getIn(['pledgeData', 'collateral']),
@@ -10,6 +10,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onInitOptimisationSettings: (settings) => {
     dispatch(initOptimisationSettings(settings))
+  },
+  onUpdateOptimisationSettings: (newSettings) => {
+    dispatch(updateOptimisationSettings(newSettings))
   }
 })
 
