@@ -20,7 +20,8 @@ class Pledge extends React.Component {
       toggleHideCol: styles.showCol,
       toggleShowHideL : styles.hideL, 
       toggleShowHideR : styles.showR,
-      sideways: "./../../../images/pledge/sideways-max.png",
+      sideways: "./../../../images/pledge/sideways-min.png",
+      selectionSideway: "./../../../images/pledge/sideways-max.png",
       chsCallsTickState: 'None',
       checkbox: "./images/pledge/checkbox.png",
       selTickBox: 'none'
@@ -47,7 +48,8 @@ class Pledge extends React.Component {
         toggleColwidthL: styles.expandDivL,
         toggleColwidthR: styles.minDivR,
         toggleHideCol: styles.hideCol,
-        sideways: "./../../../images/pledge/sideways-max.png"
+        sideways: "./../../../images/pledge/sideways-max.png",
+        selectionSideway: "./../../../images/pledge/sideways-min.png",
       })
     } else {
       this.setState({
@@ -57,7 +59,8 @@ class Pledge extends React.Component {
         toggleHideCol: styles.showCol,
         toggleShowHideL : styles.hideL,
         toggleShowHideR : styles.showR,
-        sideways: "./../../../images/pledge/sideways-min.png"
+        sideways: "./../../../images/pledge/sideways-min.png",
+        selectionSideway: "./../../../images/pledge/sideways-max.png",
       })
     }
   }
@@ -180,7 +183,7 @@ class Pledge extends React.Component {
           <div className={styles.flexContainer}>
             <div className={styles.col_L + ' ' + this.state.toggleColwidthL}>
 
-              <Selection sideways={this.state.sideways}
+              <Selection sideways={this.state.selectionSideway}
                          clicked={this.changeSideways}
                          chkTick={this.chkTick}
                          toggleL={this.state.toggleShowHideL} 
