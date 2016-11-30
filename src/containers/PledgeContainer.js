@@ -3,7 +3,7 @@ import { PledgeComponent } from '../components'
 import { initOptimisationSettings, updateOptimisationSettings } from '../actions'
 
 const mapStateToProps = state => ({
-  collateral : state.mainReducer.getIn(['pledgeData', 'collateral']),
+  collateral : state.PledgeReducer.getIn(['pledgeData', 'collateral']),
   optimisation: state.PledgeReducer.getIn(['pledgeData', 'optimisation'])
 })
 

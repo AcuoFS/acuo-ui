@@ -309,15 +309,6 @@ export const reconItem = (state, action) => {
 }
 
 
-export const updateCollateral = (state, action) => {
-  if(action.collateralData){
-    return state.setIn(['pledgeData', 'collateral'], action.collateralData)
-  }
-  else{
-    return state
-  }
-}
-
 // main reducer function
 export default function mainReducer(state = Map(), action, store = 'data') {
 
@@ -345,9 +336,6 @@ export default function mainReducer(state = Map(), action, store = 'data') {
 
     case 'LINE_ITEM_INSERTION':
       return appendList(state, action)
-
-    case ActionTypes.UPDATE_COLLATERAL:
-      return updateCollateral(state, action)
 
     case 'SELECT_ITEM':
       return selectItem(state, action)

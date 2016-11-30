@@ -9,6 +9,15 @@ const updateOptimisationSettings = (state, newSettings) => {
   return state.setIn(['pledgeData', 'optimisation'], state.getIn(['pledgeData', 'optimisation']).map(x => (x.get('name') == newSettings.name ? fromJS(newSettings) : x)))
 }
 
+export const updateCollateral = (state, action) => {
+  if(action.collateralData){
+    return state.setIn(['pledgeData', 'collateral'], action.collateralData)
+  }
+  else{
+    return state
+  }
+}
+
 const PledgeReducer = (state = Map(), action) => {
   switch (action.type) {
     case ActionTypes.INIT_OPTIMISATION_SETTINGS:
@@ -16,6 +25,9 @@ const PledgeReducer = (state = Map(), action) => {
 
     case ActionTypes.UPDATE_OPTIMISATION_SETTINGS:
       return updateOptimisationSettings(state, action.newSettings)
+
+    case ActionTypes.UPDATE_COLLATERAL:
+      return updateCollateral(state, action)
   }
 
   return state
