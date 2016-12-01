@@ -13,7 +13,7 @@ class CollateralAsset extends React.Component {
     }
   }
 
-  toggleDropDown(e){
+  toggleDropDown(e) {
   }
 
   amendCollateral(e) {
@@ -105,10 +105,15 @@ class CollateralAsset extends React.Component {
                           handlerOnClick={this.toggleDropDown}
                           handleOnSelectedItemChange={e => e.stopPropagation()}
                           selectedOption='Select One'
-                          options={['Portfolio Discrepancy', 'Initial Margin/ Independent Amount Discrepancy', 'Collateral Discrepancy'
-                            ,'Agreement Discrepancy', 'Notification Time','Call Amount Discrepancy','MTM Discrepancy','Below Threshold Limit'
-                            ,'Two Way Call','UnKnown Business Error','Other']}
-                          />
+                          options={['Acuo SG - ABC Securities FCM Global Fund',
+                            'Acuo SG - ABC Securities FCM Global Fund',
+                            'Acuo SG - ABC Securities FCM Global Fund 2',
+                            'Acuo SG - ABC Securities FCM Global Fund 3',
+                            'Acuo SG - ABC Securities FCM Global Fund 4',
+                            'Acuo SG - ABC Securities FCM Global Fund 5',
+                            'Acuo SG - ABC Securities FCM Global Fund 6',
+                            'Acuo SG - ABC Securities FCM Global Fund 7' ]}
+                        />
                       </div>
                       {/*<input type="text" className={styles.popupInputBox}/>*/}
                     </div>
@@ -129,7 +134,7 @@ class CollateralAsset extends React.Component {
 
                   </div>
                 </div>
-              </div> 
+              </div>
             </div>
           </div>
 
@@ -150,12 +155,10 @@ class CollateralAsset extends React.Component {
           <div className={styles.collateralCell}>{propPrice}</div>
           <div className={styles.collateralCell}>{propCcy}</div>
           <div className={styles.collateralCell}>{propDeliveryTime}</div>
-
           {/*<div className={styles.collateralCell}>{propStatus}</div>*/}
           <div className={styles.relative} onClick={this.amendCollateral}
                data-ref={propCollateralType + propAssetId + propAssetIdType}>
             <span className={statusClass}>{propStatus}</span>
-
             <div
               className={styles.boxed + ' ' + (this.state.toggle == propCollateralType + propAssetId + propAssetIdType ? styles.showBox : '')}>
               <div>Available</div>
@@ -170,14 +173,30 @@ class CollateralAsset extends React.Component {
                     <div className={styles.popupRow}> {/* one row div*/}
                       <div className={styles.popupText}> Margin Agreement
                       </div>
-                      <input type="text" className={styles.popupInputBox}/>
+                      <div className={styles.popupInputBox}>
+                        <Dropdown
+                          handlerOnClick={this.toggleDropDown}
+                          handleOnSelectedItemChange={e => e.stopPropagation()}
+                          selectedOption='Select One'
+                          options={['Acuo SG - ABC Securities FCM Global Fund',
+                            'Acuo SG - ABC Securities FCM Global Fund',
+                            'Acuo SG - ABC Securities FCM Global Fund 2',
+                            'Acuo SG - ABC Securities FCM Global Fund 3',
+                            'Acuo SG - ABC Securities FCM Global Fund 4',
+                            'Acuo SG - ABC Securities FCM Global Fund 5',
+                            'Acuo SG - ABC Securities FCM Global Fund 6',
+                            'Acuo SG - ABC Securities FCM Global Fund 7' ]}
+                        />
+                      </div>
                     </div>
 
 
                     <div className={styles.popupRow}> {/* one row div*/}
                       <div className={styles.popupText}> Amount
                       </div>
-                      <input type="text" className={styles.popupInputBox}/>
+                      <div className={styles.popupInputBox}>
+                        <input type="text" className={styles.popupInputBox}/>
+                      </div>
                     </div>
 
                     <div className={styles.buttonContainer}>
