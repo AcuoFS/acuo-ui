@@ -55,6 +55,13 @@ export default class Selection extends React.Component {
     return something || List()
   }
 
+  calSubTotal(a, s){
+    return (a.getIn(['allocated', s]).reduce((SumX , x)=>{return SumX + x.get('price')},0))
+  }
+  calTotal(a, i, j){
+    return this.calSubTotal(a, i) + this.calSubTotal(a, j)
+  }
+
   render() {
 
     const { marginCall, pendingAllocationStore } = this.props
@@ -152,7 +159,7 @@ export default class Selection extends React.Component {
                   }
                     <tr className={styles.bold}>
                       <td>Sub-Total</td>
-                      <td>40,000</td>
+                      <td>{evlEmptyForIntMargin ? '' : numberWithCommas(this.calSubTotal(marginCall, 'initialMargin'))}</td>
                       <td></td>
                       <td></td>
                       <td></td>
@@ -191,7 +198,7 @@ export default class Selection extends React.Component {
 
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
-                    <td></td>
+                    <td>{evlEmptyForVariMargin ? '' : numberWithCommas(this.calSubTotal(marginCall, 'variationMargin'))}</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -199,6 +206,15 @@ export default class Selection extends React.Component {
                     <td></td>
                     <td></td>
                   </tr>
+                  </tbody>
+                </table>
+
+                <table className={styles.ttlAmount + ' ' + styles.bold}>
+                  <tbody>
+                    <tr>
+                      <td>Total</td>
+                      <td colSpan="7">{numberWithCommas(this.calTotal(marginCall, 'initialMargin', 'variationMargin'))}</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>

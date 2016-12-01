@@ -211,9 +211,24 @@ td{
   composes: baseFontBold from '../../static/css-components/fonts.css';
 }
 
-.earmarkAssetButton{
+
+.earmarkAssetButton {
   padding: 2px 5px;
   border: 1px solid acuoGrey;
   border-radius: 5px;
   display: inline-block;
+}
+
+.ttlAmount{
+  width: 100%;
+}
+
+.selTable tr th:nth-child(1),
+.selTable tr td:nth-child(1),
+.ttlAmount tr td:nth-child(1){
+  text-align: left;
+  width: 26%;
+}
+.selTable tr td.notAlcText{
+  text-align: center;
 }
