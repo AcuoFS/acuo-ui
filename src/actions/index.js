@@ -79,3 +79,7 @@ export const togglePendingAllocation = (GUID) => ({
   type: ActionTypes.TOGGLE_PENDING_ALLOCATION,
   GUID: GUID
 })
+
+export const toggleCheckall = () => ({
+  type: ActionTypes.TOGGLE_CHECKALL
+})

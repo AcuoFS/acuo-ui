@@ -30,8 +30,6 @@ class Pledge extends React.Component {
     }
     this.handlePlusMinus = this.handlePlusMinus.bind(this)
     this.changeSideways = this.changeSideways.bind(this)
-    this.changeTickState = this.changeTickState.bind(this)
-    this.chkTick = this.chkTick.bind(this)
     // this.renderCollateralItems = this.renderCollateralItems.bind(this)
 
     fetch('http://52.74.186.112:8081/optimisation').then(response => {
@@ -120,40 +118,6 @@ class Pledge extends React.Component {
     })
   }
 
-  changeTickState() {
-    if (this.state.chsCallsTickState === 'None') {
-      // when state is 'None'
-      this.setState({
-        chsCallsTickState: 'All',
-        checkbox: "./images/pledge/checkboxwithtick.png"
-      })
-    } else if (this.state.chsCallsTickState === 'All') {
-      // when state is 'All'
-      this.setState({
-        chsCallsTickState: 'Selected',
-        checkbox: "./images/pledge/checkbox.png"
-      })
-    } else {
-      // when state is 'Selected'
-      this.setState({
-        chsCallsTickState: 'None',
-        checkbox: "./images/pledge/checkbox.png"
-      })
-    }
-  }
-
-  chkTick() {
-    if (this.state.selTickBox === 'none') {
-      this.setState({
-        selTickBox: 'ticked'
-      })
-    } else {
-      this.setState({
-        selTickBox: 'none'
-      })
-    }
-  }
-
   renderOptItems(optimisation, onUpdateOptimisationSettings){
     if(optimisation) {
       return optimisation.map(x => {
@@ -180,7 +144,7 @@ class Pledge extends React.Component {
   }
 
   render() {
-    const { optimisation, selection, onUpdateOptimisationSettings, onTogglePendingAllocation, pendingAllocation } = this.props
+    const { optimisation, selection, onUpdateOptimisationSettings, onTogglePendingAllocation, pendingAllocation, sliderCheckbox, onToggleCheckall } = this.props
     return (
         <div className={styles.pledgeContainer}>
           <div className={styles.sliderAndStatus}>
@@ -190,8 +154,8 @@ class Pledge extends React.Component {
                 {this.renderOptItems(optimisation, onUpdateOptimisationSettings)}
               </div>
               <div className={styles.buttonHolder}>
-                <ChooseCalls tickImg={this.state.checkbox} tickState={this.state.chsCallsTickState}
-                             tickClick={this.changeTickState}/>
+                <ChooseCalls tickImg={sliderCheckbox[0]} tickState={sliderCheckbox[1]}
+                             tickClick={onToggleCheckall}/>
                 <div className={styles.optButton} id={styles.optBtnAllocate}>Allocate</div>
                 <div className={styles.optButton + ' ' + styles.btnEnabled} id={styles.optBtnPledge}>Pledge</div>
               </div>

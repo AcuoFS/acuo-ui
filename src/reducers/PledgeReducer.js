@@ -35,11 +35,18 @@ export const initSelection = (state, selection) => {
 
 export const togglePendingAllocation = (state, GUID) => {
   if(!state.getIn(['pledgeData', 'pendingAllocation']) || state.getIn(['pledgeData', 'pendingAllocation']).isEmpty())
-    return state.setIn(['pledgeData', 'pendingAllocation'], List().push(GUID))
-  else if(state.getIn(['pledgeData', 'pendingAllocation']).includes(GUID))
+    return state.setIn(['pledgeData', 'pendingAllocation'], List().push(parseInt(GUID)))
+  else if(state.getIn(['pledgeData', 'pendingAllocation']).includes(parseInt(GUID)))
     return state.setIn(['pledgeData', 'pendingAllocation'], state.getIn(['pledgeData', 'pendingAllocation']).filter(x => x != GUID))
   else
-    return state.setIn(['pledgeData', 'pendingAllocation'], state.getIn(['pledgeData', 'pendingAllocation']).push(GUID))
+    return state.setIn(['pledgeData', 'pendingAllocation'], state.getIn(['pledgeData', 'pendingAllocation']).push(parseInt(GUID)))
+}
+
+export const toggleCheckall = (state) => {
+  if(state.getIn(['pledgeData', 'pendingAllocation']) && !state.getIn(['pledgeData', 'pendingAllocation']).isEmpty())
+    return state.setIn(['pledgeData', 'pendingAllocation'], List())
+  else
+    return state.setIn(['pledgeData', 'pendingAllocation'], state.getIn(['pledgeData', 'selection']).map(x => x.get('GUID')))
 }
 
 const PledgeReducer = (state = Map(), action) => {
@@ -58,6 +65,9 @@ const PledgeReducer = (state = Map(), action) => {
 
     case ActionTypes.TOGGLE_PENDING_ALLOCATION:
       return togglePendingAllocation(state, action.GUID)
+
+    case ActionTypes.TOGGLE_CHECKALL:
+      return toggleCheckall(state)
   }
 
   return state
