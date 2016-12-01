@@ -58,7 +58,10 @@ export default class CollateralAssetGroup extends React.Component {
           propIsin={asset.isin}
           propVenue={asset.venue}
           propAcctId={asset.acctId}
-          propIsDisplayAll={propIsDisplayAll}/>
+          propIsDisplayAll={propIsDisplayAll}
+          propCollateralType={propCollateralType}
+          propAssetId={asset.assetId}
+          propAssetIdType={asset.assetIdType}/>
 
       ))
     }
