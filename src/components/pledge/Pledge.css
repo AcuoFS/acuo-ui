@@ -435,7 +435,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 .minDivL{
   /*width: 70%;*/
-  flex: 1;
+  flex: 2;
 }
 
 .expandDivR{
@@ -445,7 +445,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 .minDivR{
   /*width: 70%;*/
-  flex: 1;
+  flex: 2;
 }
 
 .hideCol{
@@ -567,3 +567,143 @@ input[type=range]:focus::-ms-fill-upper {
 .hideR{
   display: none;
 }
+
+
+/*** Collateral Table ***/
+
+.collateralTable {
+  /*margin: 0 0 40px 0;*/
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: table;
+  width: 100%;
+}
+
+.collateralRow {
+  display: table-row;
+  background: #f6f6f6;
+  text-overflow: ellipsis;
+  overflow:hidden;
+  font-size: 75%;
+}
+
+.collateralRowGroup{
+  display: table-row-group;
+}
+
+.collateralHeader {
+  color: #ffffff;
+  background: #2B3C4C;
+  padding: 7px 8px 7px 8px;
+  height: 38px;
+  vertical-align: middle;
+  border-top:5px solid green
+}
+
+.collateralExpandRow{
+  background: #7F8A93;
+  line-height: 12px;
+  color: #ffffff;
+}
+
+.collateralCell {
+  padding: 2px 2px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.collateralExpandRow > .collateralCell{
+  border-top-style: solid;
+  border-top-width:3px;
+  border-top-color:#FFFFFF;
+}
+
+.collateralExpandRow > .collateralCell > div{
+  display: inline-block;
+  padding-right: 2px;
+  vertical-align: middle;
+}
+
+/*Asset*/
+div.collateralTableCollapse div:nth-child(1){
+  width: 25%;
+}
+/*Price*/
+div.collateralTableCollapse div:nth-child(2){
+  width: 17%;
+}
+/*CCY*/
+div.collateralTableCollapse div:nth-child(3){
+  width: 10%;
+}
+/*Delivery Time*/
+div.collateralTableCollapse div:nth-child(4){
+  width: 10%;
+}
+/*Status*/
+div.collateralTableCollapse div:nth-child(5){
+  width: 10%;
+}
+/*Rating*/
+div.collateralTableCollapse div:nth-child(6){
+  width: 10%;
+}
+/*Maturity Date*/
+div.collateralTableCollapse div:nth-child(7){
+  width: 18%;
+}
+
+
+/*Asset*/
+div.collateralTableExpanded div:nth-child(1){
+  width: 16%;
+}
+/*Price*/
+div.collateralTableExpanded div:nth-child(2){
+  width: 10%;
+}
+/*CCY*/
+div.collateralTableExpanded div:nth-child(3){
+  width: 6%;
+}
+/*Delivery Time*/
+div.collateralTableExpanded div:nth-child(4){
+  width: 6%;
+}
+/*Status*/
+div.collateralTableExpanded div:nth-child(5){
+  width: 6%;
+}
+/*Rating*/
+div.collateralTableExpanded div:nth-child(6){
+  width: 6%;
+}
+/*Maturity Date*/
+div.collateralTableExpanded div:nth-child(7){
+  width: 12%;
+}
+/*Internal Cost*/
+div.collateralTableExpanded div:nth-child(8){
+  width: 4%;
+}
+/*External Cost*/
+div.collateralTableExpanded div:nth-child(9){
+  width: 4%;
+}
+/*Opp. Cost*/
+div.collateralTableExpanded div:nth-child(10){
+  width: 4%;
+}
+/*ISIN*/
+div.collateralTableExpanded div:nth-child(11){
+  width: 11%;
+}
+/*Venue*/
+div.collateralTableExpanded div:nth-child(12){
+  width: 4%;
+}
+/*Acc ID*/
+div.collateralTableExpanded div:nth-child(13){
+  width: 11%;
+}
+
+/*** END ***/

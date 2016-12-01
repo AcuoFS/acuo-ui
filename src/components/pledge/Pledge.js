@@ -7,6 +7,7 @@ import styles from './Pledge.css'
 import OptItem from './sub-components/OptItem'
 import ChooseCalls from './sub-components/ChooseCalls'
 import Selection from '../pledge-selection/Selection'
+import CollateralAssetGroup from './sub-components/CollateralAssetGroup'
 
 import { List } from 'immutable'
 
@@ -17,8 +18,10 @@ class Pledge extends React.Component {
       open: true,
       class: styles.sectionOpen,
       dropdown: "./../../../images/pledge/minusbox.png",
-      toggleColwidthL: styles.minDivL, 
-      toggleColwidthR: styles.expandDivR,
+
+      toggleColwidthL: styles.expandDivL, 
+      toggleColwidthR: styles.minDivR,
+
       toggleHideCol: styles.showCol,
       toggleShowHideL : false, 
       toggleShowHideR : true,
@@ -144,8 +147,43 @@ class Pledge extends React.Component {
   }
 
   render() {
+
     const { optimisation, selection, onUpdateOptimisationSettings, onTogglePendingAllocation, pendingAllocation, sliderCheckbox, onToggleCheckall } = this.props
+
+    let collateralHeader = (
+      <div className={styles.collateralRow + ' ' + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
+        <div className={styles.collateralCell}>Asset</div>
+        <div className={styles.collateralCell}>Price</div>
+        <div className={styles.collateralCell}>CCY</div>
+        <div className={styles.collateralCell}>Delivery Time</div>
+        <div className={styles.collateralCell}>Status</div>
+        <div className={styles.collateralCell}>Rating</div>
+        <div className={styles.collateralCell}>Maturity Date</div>
+      </div>
+    )
+
+    if(this.state.open){
+      collateralHeader = (
+        <div className={styles.collateralRow + ' ' + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
+          <div className={styles.collateralCell}>Asset</div>
+          <div className={styles.collateralCell}>Price</div>
+          <div className={styles.collateralCell}>CCY</div>
+          <div className={styles.collateralCell}>Del. Time</div>
+          <div className={styles.collateralCell}>Status</div>
+          <div className={styles.collateralCell}>Rating</div>
+          <div className={styles.collateralCell}>Maturi. Date</div>
+          <div className={styles.collateralCell}>Int. Cost</div>
+          <div className={styles.collateralCell}>Ext. Cost</div>
+          <div className={styles.collateralCell}>Opp. Cost</div>
+          <div className={styles.collateralCell}>ISIN</div>
+          <div className={styles.collateralCell}>Venue</div>
+          <div className={styles.collateralCell}>Acc ID</div>
+        </div>
+      )
+    }
+
     return (
+
         <div className={styles.pledgeContainer}>
           <div className={styles.sliderAndStatus}>
             <div className={styles.panel} id={styles.optSetting}>
@@ -182,98 +220,56 @@ class Pledge extends React.Component {
                 <div className={styles.panelTitle}>Collateral
                   <img src={this.state.sideways} className={styles.imageRight} onClick={this.changeSideways}/>
                 </div>
-                <div className={styles.collateral_LabelBar}>
-                  <div>Asset</div>
-                  <div>Price</div>
-                  <div>CCY</div>
-                  <div>Delivery Time</div>
-                  <div>Status</div>
-                  <div>Rating</div>
-                  <div>Maturity Date</div>
-                  <div>Internal Cost</div>
-                  <div>External Cost</div>
-                  <div>Opp. Cost</div>
-                  <div>ISIN</div>
-                  <div>Venue</div>
-                  <div>Acc ID</div>
+
+                <div className={styles.collateralTable}>
+
+
+
+                  {collateralHeader}
+
+                  <CollateralAssetGroup propCollateralType={"Earmarked"}
+                                        propCollateralAssetList={
+                                          this.props.collateral ? this.props.collateral.get('earmarked').toJS() : [] }
+                                        propIsExpanded={true}
+                                        propIsDisplayAll={this.state.open}/>
+
+                  <CollateralAssetGroup propCollateralType={"Cash"}
+                                        propCollateralAssetList={
+                                          this.props.collateral ? this.props.collateral.get('cash').toJS() : [] }
+                                        propIsExpanded={true}
+                                        propIsDisplayAll={this.state.open}/>
+
+                  <CollateralAssetGroup propCollateralType={"MM Instruments"}
+                                        propCollateralAssetList={
+                                          this.props.collateral ? this.props.collateral.get('mmInstruments').toJS() : [] }
+                                        propIsExpanded={true}
+                                        propIsDisplayAll={this.state.open}/>
+
+                  <CollateralAssetGroup propCollateralType={"Soverign Bonds"}
+                                        propCollateralAssetList={
+                                          this.props.collateral ? this.props.collateral.get('sovereignBonds').toJS() : [] }
+                                        propIsExpanded={false}
+                                        propIsDisplayAll={this.state.open}/>
+
+                  <CollateralAssetGroup propCollateralType={"Govt Agencies"}
+                                        propCollateralAssetList={
+                                          this.props.collateral ? this.props.collateral.get('govtAgencies').toJS() : [] }
+                                        propIsExpanded={false}
+                                        propIsDisplayAll={this.state.open}/>
+
+                  <CollateralAssetGroup propCollateralType={"Corporate Debt"}
+                                        propCollateralAssetList={
+                                          this.props.collateral ? this.props.collateral.get('corporateDebt').toJS() : [] }
+                                        propIsExpanded={false}
+                                        propIsDisplayAll={this.state.open}/>
+
+                  <CollateralAssetGroup propCollateralType={"Corporate Equity"}
+                                        propCollateralAssetList={
+                                          this.props.collateral ? this.props.collateral.get('corporateEquity').toJS() : [] }
+                                        propIsExpanded={false}
+                                        propIsDisplayAll={this.state.open}/>
                 </div>
 
-                <div>
-                  <div className={styles.collateral_Header }>Earmarked
-                    <p className={styles.centerThis} onClick={this.handlePlusMinus}>
-                      <img src={this.state.dropdown} alt=""/>
-                    </p>
-                  </div>
-                  {/*<div className={this.state.class}>*/}
-                    <div className={styles.tableRow}>
-                      <div> {this.renderCollateralItems('earmarked')}</div>
-                    </div>
-                  {/*</div>*/}
-                </div>
-
-                <div>
-                  <div className={styles.collateral_Header}>Cash
-                    <p className={styles.centerThis } onClick={this.handlePlusMinus}>
-                      <img src={this.state.dropdown} alt=""/>
-                    </p>
-                  </div>
-                  <div className={this.state.class}>
-                    <div> {this.renderCollateralItems('cash')}</div>
-                  </div>
-                </div>
-                <div>
-                  <div className={styles.collateral_Header}>MM Instruments
-                    <p className={styles.centerThis} onClick={this.handlePlusMinus}>
-                      <img src={this.state.dropdown} alt=""/>
-                    </p>
-                  </div>
-                  <div className={this.state.class}>
-                    <div> {this.renderCollateralItems('mmInstruments')}</div>
-                  </div>
-                </div>
-
-                <div>
-                  <div className={styles.collateral_Header}>Soverign Bonds
-                    <p className={styles.centerThis} onClick={this.handlePlusMinus}>
-                      <img src={this.state.dropdown} alt=""/>
-                    </p>
-                  </div>
-                  <div className={this.state.class}>
-                    {this.renderCollateralItems('sovereignBonds')}
-                  </div>
-                </div>
-
-                <div>
-                  <div className={styles.collateral_Header}>Govt Agencies
-                    <p className={styles.centerThis} onClick={this.handlePlusMinus}>
-                      <img src={this.state.dropdown} alt=""/>
-                    </p>
-                  </div>
-                  <div className={this.state.class}>
-                    {this.renderCollateralItems('govtAgencies')}
-                  </div>
-                </div>
-                <div>
-                  <div className={styles.collateral_Header}>Corporate Debt
-                    <p className={styles.centerThis} onClick={this.handlePlusMinus}>
-                      <img src={this.state.dropdown} alt=""/>
-                    </p>
-                  </div>
-                  <div className={this.state.class}>
-                    {this.renderCollateralItems('corporateDebt')}
-                  </div>
-                </div>
-
-                <div>
-                  <div className={styles.collateral_Header}>Corporate Equity
-                    <p className={styles.centerThis} onClick={this.handlePlusMinus}>
-                      <img src={this.state.dropdown} alt=""/>
-                    </p>
-                  </div>
-                  <div className={this.state.class}>
-                    {this.renderCollateralItems('corporateEquity')}
-                  </div>
-                </div>
               </div>
             </div>
 
