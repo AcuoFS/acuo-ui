@@ -1,3 +1,3 @@
-/**
- * Created by junjieng on 1/12/16.
- */
+export const formatPercentageOneDecimal = (value) => (
+  value.toFixed(1) + "%"
+)

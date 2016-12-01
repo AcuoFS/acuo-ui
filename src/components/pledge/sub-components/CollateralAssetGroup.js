@@ -1,6 +1,8 @@
 import React, {PropTypes} from 'react'
 import CollateralAsset from './CollateralAsset'
-import {List} from 'immutable'
+import {formatDate} from '../../../utils/formatDate'
+import {numberWithCommas} from '../../../utils/numbersWithCommas'
+import {formatPercentageOneDecimal} from '../../../utils/formatPercentageOneDecimal'
 import styles from '../Pledge.css'
 
 export default class CollateralAssetGroup extends React.Component {
@@ -28,21 +30,6 @@ export default class CollateralAssetGroup extends React.Component {
     })
   }
 
-  // DD-MM-YY
-  formatDate(dateStr) {
-    let myDate = new Date(dateStr)
-    let dd = myDate.getDate()
-    let mm = myDate.getMonth() + 1
-    let yyyy = myDate.getFullYear()
-    if (dd < 10) {
-      dd = '0' + dd
-    }
-    if (mm < 10) {
-      mm = '0' + mm
-    }
-    return (dd + '-' + mm + '-' + yyyy.toString().substring(2, 5))
-  }
-
   render() {
     const {
       propCollateralType,
@@ -59,15 +46,15 @@ export default class CollateralAssetGroup extends React.Component {
           key={index}
           rowStyle={"tableRow"}
           propAsset={asset.assetName}
-          propPrice={asset.price}
+          propPrice={numberWithCommas(asset.price)}
           propCcy={asset.ccy}
           propDeliveryTime={asset.deliveryTime}
           propStatus={asset.status}
           propRating={asset.rating}
-          propMaturityDate={this.formatDate(asset.maturityDate)}
-          propInternalCost={asset.internalCostPct}
-          propExternalCost={asset.externalCostPct}
-          propOppCost={asset.OppCostPct}
+          propMaturityDate={formatDate(asset.maturityDate)}
+          propInternalCost={formatPercentageOneDecimal(asset.internalCostPct)}
+          propExternalCost={formatPercentageOneDecimal(asset.externalCostPct)}
+          propOppCost={formatPercentageOneDecimal(asset.OppCostPct)}
           propIsin={asset.isin}
           propVenue={asset.venue}
           propAcctId={asset.acctId}
@@ -135,10 +122,8 @@ export default class CollateralAssetGroup extends React.Component {
 
     }
 
-
   }
 }
-
 
 CollateralAssetGroup.PropTypes = {
   propCollateralType: PropTypes.string.isRequired,

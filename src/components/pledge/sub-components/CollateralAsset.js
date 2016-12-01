@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react'
 import styles from '../Pledge.css'
 
 const CollateralAsset = ({
-  rowStyle,
   propAsset,
   propPrice,
   propCcy,
@@ -18,10 +17,8 @@ const CollateralAsset = ({
   propAcctId,
   propIsDisplayAll
 }) => {
-  let additionalInfo = null
-
   if (propIsDisplayAll) {
-    return(
+    return (
       <div className={styles.collateralRow}>
         <div className={styles.collateralCell}>{propAsset}</div>
         <div className={styles.collateralCell}>{propPrice}</div>
@@ -38,7 +35,7 @@ const CollateralAsset = ({
         <div className={styles.collateralCell}>{propAcctId}</div>
       </div>
     )
-  }else{
+  } else {
     return (
       <div className={styles.collateralRow}>
         <div className={styles.collateralCell}>{propAsset}</div>
@@ -53,16 +50,8 @@ const CollateralAsset = ({
   }
 
 
-
 }
 
-{/*<div>{propInternalCost}</div>
- <div>{propExternalCost}</div>
- <div>{propOppCost}</div>
- <div>{propIsin}</div>
- <div>{propVenue}</div>
- <div>{propAcctId}</div>*/
-}
 export default CollateralAsset
 
 
