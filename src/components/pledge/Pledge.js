@@ -155,8 +155,8 @@ class Pledge extends React.Component {
               </div>
               <div className={styles.buttonHolder}>
                 <ChooseCalls tickImg={sliderCheckbox[0]} tickState={sliderCheckbox[1]}
-                             tickClick={onToggleCheckall}/>
-                <div className={styles.optButton} id={styles.optBtnAllocate}>Allocate</div>
+                             tickClick={onToggleCheckall} />
+                <div className={styles.optButton + (this.checkIfExist(pendingAllocation).size > 0 ? ' '+styles.btnEnabled : ' '+styles.btnDisabled )} id={styles.optBtnAllocate}>Allocate</div>
                 <div className={styles.optButton + ' ' + styles.btnEnabled} id={styles.optBtnPledge}>Pledge</div>
               </div>
               {/* change btnEnabled to btnDisabled to disable the button*/}
