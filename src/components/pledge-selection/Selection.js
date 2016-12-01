@@ -14,9 +14,9 @@ export default class Selection extends React.Component {
   renderGroup(x, GUID) {
     return (
       <div className={styles.group} key={x.get('groupName')+GUID}>
-        {this.checkIfExist(x.get('data')).map(y => {
+        {this.checkIfExist(x.get('data')).map((y, index) => {
           return (
-            <div className={styles.firstLevel} key={y.get('assetName')}>
+            <div className={styles.firstLevel} key={index}>
               <div className={styles.assetName}>
                 {y.get('firstLevel')}
               </div>
