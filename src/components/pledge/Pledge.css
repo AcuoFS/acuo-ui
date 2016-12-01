@@ -100,41 +100,6 @@
   text-align: center;
 }
 
-/*.optItemSlider .sliderUnit{*/
-/*position: absolute;*/
-/*width: 100%;*/
-/*min-height: 24px;*/
-/*float: left;*/
-/*top: 6px;*/
-/*z-index: 1;*/
-/*border: 1px dotted #9b9b9b;*/
-/*}*/
-/*.optItemSlider .sliderLine{*/
-/*height: 6px;*/
-/*background-color: #9b9b9b;*/
-/*overflow: hidden;*/
-/*-webkit-border-radius: 5px;*/
-/*border-radius: 5px;*/
-/*z-index: 2;*/
-/*}*/
-/*.optItemSlider .sliderLine .sliderLineFill{*/
-/*width: 30%;*/
-/*height: 6px;*/
-/*background-color: #000;*/
-/*}*/
-/*.optItemSlider .sliderHandle{*/
-/*display: block;*/
-/*position: absolute;*/
-/*top: -8px;*/
-/*width: 7px;*/
-/*height: 22px;*/
-/*background-color: #2B3C4C;*/
-/*z-index: 3;*/
-/*}*/
-/*.optItemSlider .sliderHandle:hover{*/
-/*cursor: pointer;*/
-/*}*/
-
 input[type=range] {
   width: 100%;
   -webkit-appearance: none;
@@ -310,16 +275,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 .col_L,
 .col_R {
-  flex: 1;
   margin: 15px;
-}
-
-.col_L {
-  flex-grow: 5;
-}
-
-.col_R {
-  flex-grow: 3;
 }
 
 .markings {
@@ -429,23 +385,19 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .expandDivL{
-  /*width:150%;*/
-  flex: 3;
+  flex: 6;
 }
 
 .minDivL{
-  /*width: 70%;*/
-  flex: 2;
-}
-
-.expandDivR{
-  /*width:150%;*/
   flex: 3;
 }
 
+.expandDivR{
+  flex: 7;
+}
+
 .minDivR{
-  /*width: 70%;*/
-  flex: 2;
+  flex: 4;
 }
 
 .hideCol{
@@ -459,50 +411,6 @@ input[type=range]:focus::-ms-fill-upper {
 
 
 /*** table bar ***/
-.collateral_LabelBar >div{
-  position: relative;
-  display: inline-block;
-}
-.collateral_LabelBar >div:nth-child(1){
-  width: 35%!important;
-  /*margin-right: 35px;*/
-}
-.collateral_LabelBar >div:nth-child(2){
-  width: 5%!important;
-}
-.collateral_LabelBar >div:nth-child(3){
-  width: 3%!important;
-}
-.collateral_LabelBar >div:nth-child(4){
-  width: 10%!important;
-}
-.collateral_LabelBar >div:nth-child(5){
-  width: 5%!important;
-}
-.collateral_LabelBar >div:nth-child(6){
-  width: 5%!important;
-}
-.collateral_LabelBar >div:nth-child(7){
-  width: 10%!important;
-}
-.collateral_LabelBar >div:nth-child(8){
-  width: 4%!important;
-}
-.collateral_LabelBar >div:nth-child(9){
-  width: 4%!important;
-}
-.collateral_LabelBar >div:nth-child(10){
-  width: 4%!important;
-}
-.collateral_LabelBar >div:nth-child(11){
-  width: 10%!important;
-}
-.collateral_LabelBar >div:nth-child(12){
-  width: 4%!important;
-}
-.collateral_LabelBar >div:nth-child(13){
-  width: 10%!important;
-}
 
 
 /*** section open ***/
@@ -567,7 +475,6 @@ input[type=range]:focus::-ms-fill-upper {
 .hideR{
   display: none;
 }
-
 
 /*** Collateral Table ***/
 

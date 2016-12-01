@@ -19,8 +19,8 @@ class Pledge extends React.Component {
       class: styles.sectionOpen,
       dropdown: "./../../../images/pledge/minusbox.png",
 
-      toggleColwidthL: styles.expandDivL, 
-      toggleColwidthR: styles.minDivR,
+      toggleColwidthL: styles.minDivL, 
+      toggleColwidthR: styles.expandDivR,
 
       toggleHideCol: styles.showCol,
       toggleShowHideL : false, 
@@ -31,7 +31,6 @@ class Pledge extends React.Component {
       checkbox: "./images/pledge/checkbox.png",
       selTickBox: 'none'
     }
-    this.handlePlusMinus = this.handlePlusMinus.bind(this)
     this.changeSideways = this.changeSideways.bind(this)
     // this.renderCollateralItems = this.renderCollateralItems.bind(this)
 
@@ -72,53 +71,6 @@ class Pledge extends React.Component {
         selectionSideway: "./../../../images/pledge/sideways-max.png",
       })
     }
-  }
-
-  handlePlusMinus() {
-    if (this.state.open) {
-      this.setState({
-        open: false,
-        class: styles.sectionClose,
-        dropdown: "./../../../images/pledge/plusbox.png"
-      })
-    } else {
-      this.setState({
-        open: true,
-        class: styles.sectionOpen,
-        dropdown: "./../../../images/pledge/minusbox.png"
-      })
-    }
-  }
-
-  renderCollateralItems(collateralItem) {
-    let collaterals = this.props.collateral
-
-    if (collaterals) {
-      let x = collaterals.get(collateralItem)
-      return this.renderItems(x)
-    }
-  }
-
-  renderItems(value) {
-    return value.map((x) => {
-      return (
-        <div className={this.state.class}>
-          <div>{x.get('assetName')}</div>
-          <div>{x.get('price')}</div>
-          <div>{x.get('ccy')}</div>
-          <div>{x.get('deliveryTime')}</div>
-          <div>{x.get('status')}</div>
-          <div>{x.get('rating')}</div>
-          <div>{x.get('maturityDate')}</div>
-          <div>{x.get('internalCostPct')}</div>
-          <div>{x.get('externalCostPct')}</div>
-          <div>{x.get('OppCostPct')}</div>
-          <div>{x.get('isin')}</div>
-          <div>{x.get('venue')}</div>
-          <div>{x.get('acctId')}</div>
-        </div>
-      )
-    })
   }
 
   renderOptItems(optimisation, onUpdateOptimisationSettings){
@@ -174,7 +126,7 @@ class Pledge extends React.Component {
           <div className={styles.collateralCell}>Del. Time</div>
           <div className={styles.collateralCell}>Status</div>
           <div className={styles.collateralCell}>Rating</div>
-          <div className={styles.collateralCell}>Maturi. Date</div>
+          <div className={styles.collateralCell}>Maturity Date</div>
           <div className={styles.collateralCell}>Int. Cost</div>
           <div className={styles.collateralCell}>Ext. Cost</div>
           <div className={styles.collateralCell}>Opp. Cost</div>
@@ -212,6 +164,7 @@ class Pledge extends React.Component {
           <div className={styles.secDivider}></div>
 
           <div className={styles.flexContainer}>
+
             <div className={styles.col_L + ' ' + this.state.toggleColwidthL}>
 
               {this.checkIfExist(selection).map(x => this.renderSelection(x, onTogglePendingAllocation, pendingAllocation))}
