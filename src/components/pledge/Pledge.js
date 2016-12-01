@@ -123,8 +123,11 @@ class Pledge extends React.Component {
 
   renderOptItems(optimisation, onUpdateOptimisationSettings){
     if(optimisation) {
-      return optimisation.map(x => {
-        return (<OptItem sldName={x.get('name')} allocation={x.get('rating')} onUpdate={onUpdateOptimisationSettings}/>)
+      return optimisation.map((x,index) => {
+        return (<OptItem sldName={x.get('name')}
+                         allocation={x.get('rating')}
+                         onUpdate={onUpdateOptimisationSettings}
+                         key={index}/>)
       })
     }
   }
