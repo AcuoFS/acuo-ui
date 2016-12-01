@@ -30,6 +30,26 @@ class CollateralAsset extends React.Component {
     })
   }
 
+  getStatusColor(status){
+
+    let statusClass
+    switch (status) {
+      case 'AR':
+        statusClass = styles.statusAR;
+        break;
+      case 'AV':
+        statusClass = styles.statusAV;
+        break;
+      case 'DP':
+        statusClass = styles.statusDP;
+        break;
+      case 'D':
+        statusClass = styles.statusD;
+        break;
+    }
+    return statusClass
+  }
+
   render() {
     const {
       propAsset,
@@ -50,6 +70,9 @@ class CollateralAsset extends React.Component {
       propAssetId,
       propAssetIdType
     } = this.props
+
+    let statusClass = this.getStatusColor(propStatus)
+
     if (propIsDisplayAll) {
       return (
         <div className={styles.collateralRow}>
@@ -61,8 +84,8 @@ class CollateralAsset extends React.Component {
 
           <div className={styles.relative} onClick={this.amendCollateral}
                data-ref={propCollateralType + propAssetId + propAssetIdType}>
-            {propStatus}
-            {console.log("composite key value is", this.state.toggle)}
+            <span className={statusClass}>{propStatus}</span>
+
             <div
               className={styles.boxed + ' ' + (this.state.toggle == propCollateralType + propAssetId + propAssetIdType ? styles.showBox : '')}>
               <div>Available</div>
@@ -70,7 +93,6 @@ class CollateralAsset extends React.Component {
               <div>Amend amount</div>
               <div className={styles.relative} onClick={this.allocateCollateral}
                    data-ref={"allocate" + propCollateralType + propAssetId + propAssetIdType}>Allocate to Call
-                {console.log("composite key for allocate value is", this.state.allocateCollateral)}
                 <div
                   className={styles.boxAllocate + ' ' + (this.state.allocateCollateral == "allocate" + propCollateralType + propAssetId + propAssetIdType ? styles.showBox : '')}>
                   <div className={styles.popupAllocateRoot}>
@@ -128,7 +150,46 @@ class CollateralAsset extends React.Component {
           <div className={styles.collateralCell}>{propPrice}</div>
           <div className={styles.collateralCell}>{propCcy}</div>
           <div className={styles.collateralCell}>{propDeliveryTime}</div>
-          <div className={styles.collateralCell}>{propStatus}</div>
+
+          {/*<div className={styles.collateralCell}>{propStatus}</div>*/}
+          <div className={styles.relative} onClick={this.amendCollateral}
+               data-ref={propCollateralType + propAssetId + propAssetIdType}>
+            <span className={statusClass}>{propStatus}</span>
+
+            <div
+              className={styles.boxed + ' ' + (this.state.toggle == propCollateralType + propAssetId + propAssetIdType ? styles.showBox : '')}>
+              <div>Available</div>
+              <div>Remove</div>
+              <div>Amend amount</div>
+              <div className={styles.relative} onClick={this.allocateCollateral}
+                   data-ref={"allocate" + propCollateralType + propAssetId + propAssetIdType}>Allocate to Call
+                <div
+                  className={styles.boxAllocate + ' ' + (this.state.allocateCollateral == "allocate" + propCollateralType + propAssetId + propAssetIdType ? styles.showBox : '')}>
+                  <div className={styles.popupAllocateRoot}>
+
+                    <div className={styles.popupRow}> {/* one row div*/}
+                      <div className={styles.popupText}> Margin Agreement
+                      </div>
+                      <input type="text" className={styles.popupInputBox}/>
+                    </div>
+
+
+                    <div className={styles.popupRow}> {/* one row div*/}
+                      <div className={styles.popupText}> Amount
+                      </div>
+                      <input type="text" className={styles.popupInputBox}/>
+                    </div>
+
+                    <div className={styles.buttonContainer}>
+                      <button type="submit">Allocate</button>
+                      <button type="submit">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className={styles.collateralCell}>{propRating}</div>
           <div className={styles.collateralCell}>{propMaturityDate}</div>
         </div>

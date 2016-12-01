@@ -491,6 +491,7 @@ input[type=range]:focus::-ms-fill-upper {
   text-overflow: ellipsis;
   overflow:hidden;
   font-size: 75%;
+  padding-top: 2px;
 }
 
 .collateralRowGroup{
@@ -516,6 +517,7 @@ input[type=range]:focus::-ms-fill-upper {
   padding: 2px 2px;
   display: table-cell;
   vertical-align: middle;
+  height: 16px;
 }
 
 .collateralExpandRow > .collateralCell{
@@ -752,8 +754,53 @@ div.collateralTableExpanded div:nth-child(13){
   align-self: center;
 }
 
-
-.filterItem{
-  flex: 3;
-  width: 100% !important;
+/*** Status Color classes****/
+.statusAR{
+  background: #FDC36D;
+  color: #FFFFFF;
+  width: 20px;
+  height: 14px;
+  display: block;
+  border-radius: 2px;
+  padding-top: 2px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  text-align: center;
 }
+.statusAV{
+  background: #2CBF9F;
+  color: #FFFFFF;
+  width: 20px;
+  height: 14px;
+  display: block;
+  border-radius: 2px;
+  padding-top: 2px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  text-align: center;
+}
+.statusDP{
+  background: #4A4A4A;
+  color: #FFFFFF;
+  width: 20px;
+  height: 14px;
+  display: block;
+  border-radius: 2px;
+  padding-top: 2px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  text-align: center;
+}
+.statusD{
+  background: #4E83B4;
+  color: #FFFFFF;
+  width: 20px;
+  height: 14px;
+  display: block;
+  border-radius: 2px;
+  padding-top: 2px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  text-align: center;
+}
+/*** End ***/
