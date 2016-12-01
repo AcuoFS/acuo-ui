@@ -58,7 +58,6 @@ export const reconItem = () => ({
   type: ActionTypes.RECON_ITEM
 })
 
-
 //pledgeReducer stuffs, to be split later
 export const initOptimisationSettings = (settings) => ({
   type: ActionTypes.INIT_OPTIMISATION_SETTINGS,

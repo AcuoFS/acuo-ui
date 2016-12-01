@@ -1,7 +1,9 @@
 import { connect } from 'react-redux'
 import { PledgeComponent } from '../components'
-import { initOptimisationSettings, updateOptimisationSettings, initSelection, togglePendingAllocation, toggleCheckall } from '../actions'
-import { List } from 'immutable'
+import { initOptimisationSettings, updateOptimisationSettings, initSelection, togglePendingAllocation, toggleCheckall, updateCollateral } from '../actions'
+import { List, fromJS } from 'immutable'
+
+import { allocateCollateralsURL } from '../constants/APIcalls'
 
 const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
   if(pendingAllocationSize >= selectionSize)
@@ -13,7 +15,6 @@ const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
 }
 
 const checkIfExist = (something) => something || List()
-
 
 const mapStateToProps = state => ({
   collateral : state.PledgeReducer.getIn(['pledgeData', 'collateral']),
@@ -31,13 +32,27 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateOptimisationSettings(newSettings))
   },
   initSelection: (selection) => {
-    dispatch(initSelection(selection))
+    dispatch(initSelection(selection.data.inMarginCall))
   },
   onTogglePendingAllocation: (GUID) => {
     dispatch(togglePendingAllocation(GUID))
   },
   onToggleCheckall: () => {
     dispatch(toggleCheckall())
+  },
+  onAllocate: (e) => {
+    fetch(allocateCollateralsURL, {
+      method: 'POST',
+      data: {
+        optimisationSettings: e.currentTarget.dataset.optimisation,
+        toBeAllocated: e.currentTarget.dataset.pendingAllocation
+      }
+    }).then(response => {
+      return response.json()
+    }).then(obj => {
+      dispatch(updateCollateral(fromJS(obj.data.collateral)))
+      dispatch(initSelection(fromJS(obj.data.inMarginCall)))
+    })
   }
 })
 

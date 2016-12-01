@@ -31,9 +31,9 @@ export default class Selection extends React.Component {
     )
   }
 
-  renderMargin(x){
+  renderMargin(x, index){
     return (
-      <tr key={x.get('assetName')}>
+      <tr key={index}>
         <td>{x.get('assetName')}</td>
         <td>{numberWithCommas(x.get('priceNetHaircut'))}</td>
         <td>{x.get('priceNetHaircutCcy')}</td>
@@ -66,7 +66,7 @@ export default class Selection extends React.Component {
       <div className={styles.panel} key={marginCall.get('GUID')}>
 
         <div className={styles.columnContainer}>
-          <div className={styles.leftColumn}>
+          <div className={styles.leftColumn + ' ' + (!this.props.toggleL ? styles.bigger : '')}>
             <div className={styles.titleHolder}>
               <img src={(this.checkIfExist(pendingAllocationStore).includes(marginCall.get('GUID')) ? "./images/pledge/checkboxwithtick.png" : "./images/pledge/checkbox.png")} className={styles.selTick} onClick={this.togglePendingAllocation} data-ref={marginCall.get('GUID')}/>
               <span className={styles.panelTitle}>{marginCall.get('marginCallName')}</span>

@@ -1,13 +1,6 @@
 import * as ActionTypes from '../constants/ActionTypes'
 import { Map, fromJS, List } from 'immutable'
 
-const INITIAL_STATE = Map({
-  'pledgeData': Map({
-    'optimisation': List(),
-    'selection': List(),
-    'collateral': List()
-  })
-})
 
 const initOptimisationSettings = (state, settings) => {
   return state.setIn(['pledgeData', 'optimisation'], fromJS(settings.data))
@@ -17,9 +10,9 @@ const updateOptimisationSettings = (state, newSettings) => {
   return state.setIn(['pledgeData', 'optimisation'], state.getIn(['pledgeData', 'optimisation']).map(x => (x.get('name') == newSettings.name ? fromJS(newSettings) : x)))
 }
 
-export const updateCollateral = (state, action) => {
-  if(action.collateralData){
-    return state.setIn(['pledgeData', 'collateral'], action.collateralData)
+export const updateCollateral = (state, collateralData) => {
+  if(collateralData){
+    return state.setIn(['pledgeData', 'collateral'], collateralData)
   }
   else{
     return state
@@ -27,8 +20,8 @@ export const updateCollateral = (state, action) => {
 }
 
 export const initSelection = (state, selection) => {
-  if(selection.data.inMarginCall)
-    return state.setIn(['pledgeData', 'selection'], fromJS(selection.data.inMarginCall))
+  if(selection)
+    return state.setIn(['pledgeData', 'selection'], fromJS(selection))
   else
     return state
 }
@@ -58,7 +51,7 @@ const PledgeReducer = (state = Map(), action) => {
       return updateOptimisationSettings(state, action.newSettings)
 
     case ActionTypes.UPDATE_COLLATERAL:
-      return updateCollateral(state, action)
+      return updateCollateral(state, action.collateralData)
 
     case ActionTypes.INIT_SELECTION:
       return initSelection(state, action.selection)
@@ -68,6 +61,7 @@ const PledgeReducer = (state = Map(), action) => {
 
     case ActionTypes.TOGGLE_CHECKALL:
       return toggleCheckall(state)
+
   }
 
   return state

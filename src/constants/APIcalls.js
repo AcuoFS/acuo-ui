@@ -1,0 +1,1 @@
+export const allocateCollateralsURL = 'http://52.74.186.112:8081/allocate-selection'

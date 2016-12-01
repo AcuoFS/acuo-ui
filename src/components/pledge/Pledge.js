@@ -84,14 +84,14 @@ class Pledge extends React.Component {
     }
   }
 
-  renderSelection(x, onTogglePendingAllocation, pendingAllocation){
+  renderSelection(x, onTogglePendingAllocation, pendingAllocation, index){
     return (<Selection  sideways={this.state.selectionSideway}
                         clicked={this.changeSideways}
                         chkTick={this.chkTick}
                         toggleL={this.state.toggleShowHideL}
                         toggleR={this.state.toggleShowHideR}
                         marginCall={x}
-                        key={x.get('GUID')}
+                        key={index}
                         onTogglePendingAllocation={onTogglePendingAllocation}
                         pendingAllocationStore={pendingAllocation}/>)
   }
@@ -102,8 +102,7 @@ class Pledge extends React.Component {
   }
 
   render() {
-
-    const { optimisation, selection, onUpdateOptimisationSettings, onTogglePendingAllocation, pendingAllocation, sliderCheckbox, onToggleCheckall } = this.props
+    const { optimisation, selection, onUpdateOptimisationSettings, onTogglePendingAllocation, pendingAllocation, sliderCheckbox, onToggleCheckall, onAllocate } = this.props
 
     let collateralHeader = (
       <div className={styles.collateralRow + ' ' + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
@@ -149,7 +148,8 @@ class Pledge extends React.Component {
               <div className={styles.buttonHolder}>
                 <ChooseCalls tickImg={sliderCheckbox[0]} tickState={sliderCheckbox[1]}
                              tickClick={onToggleCheckall} />
-                <div className={styles.optButton + (this.checkIfExist(pendingAllocation).size > 0 ? ' '+styles.btnEnabled : ' '+styles.btnDisabled )} id={styles.optBtnAllocate}>Allocate</div>
+                <div className={styles.optButton + (this.checkIfExist(pendingAllocation).size > 0 ? ' '+styles.btnEnabled : ' '+styles.btnDisabled )} id={styles.optBtnAllocate} onClick={onAllocate} data-optimisation={this.checkIfExist(optimisation).toJS()} data-pendingAllocation={this.checkIfExist(pendingAllocation).toJS()}>Allocate</div>
+
                 <div className={styles.optButton + ' ' + styles.btnEnabled} id={styles.optBtnPledge}>Pledge</div>
               </div>
               {/* change btnEnabled to btnDisabled to disable the button*/}

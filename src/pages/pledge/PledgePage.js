@@ -13,7 +13,6 @@ class PledgePage extends React.Component{
   constructor(props){
     super(props)
 
-    // fetch('http://localhost:3000/collateral').then((response) => {
       fetch('http://52.74.186.112:8081/init-collateral').then((response) => {
       return response.json()
     }).then((obj) => {
