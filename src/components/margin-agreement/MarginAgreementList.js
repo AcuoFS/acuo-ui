@@ -2,8 +2,10 @@
  * Created by panyong on 4/11/16.
  */
 import React, {PropTypes} from 'react'
-import {List} from 'immutable'
+import {List, Map} from 'immutable'
 import MarginAgreementPortfolio from './sub-components/MarginAgreementPortfolio'
+import CounterPartyAssets from './sub-components/CounterPartyAssets'
+import ClientAsset from './sub-components/ClientAsset'
 import styles from './MarginAgreementList.css'
 
 
@@ -87,14 +89,14 @@ export default class MarginAgreementList extends React.Component {
   }
 
   displayLineItems(recon, onReconItem, onSelectedItem) {
-    return ( recon.map((x) => {
+    return (recon.map((x) => {
       return x.get('marginStatus').map((y) => {
         return y.get('timeFrames').map((z) => {
           return z.get('actionsList').map((i) => {
             return (
               <div className={styles.actionWrap}>
 
-                <MarginAgreementPortfolio marginData={i}
+                <ClientAsset marginData={i}
                                           actStyle={'act_L'}
                                           orgName={'legalEntity'}
                                           assetsName={'clientAssets'}
@@ -113,12 +115,12 @@ export default class MarginAgreementList extends React.Component {
                   </div>
                 </div>
 
-                <MarginAgreementPortfolio marginData={i}
-                                          actStyle={'act_R'}
-                                          orgName={'cptyOrg'}
-                                          assetsName={'counterpartyAssets'}
-                                          handlerTotalMargin={this.displayTotalMargin}
-                                          handlerSelectedItem={onSelectedItem}/>
+                <CounterPartyAssets marginData={i}
+                                    actStyle={'act_R'}
+                                    orgName={'cptyOrg'}
+                                    assetsName={'counterpartyAssets'}
+                                    handlerTotalMargin={this.displayTotalMargin}
+                                    handlerSelectedItem={onSelectedItem}/>
               </div>
             )
           })
