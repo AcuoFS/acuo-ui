@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react'
 import styles from '../Pledge.css'
+import Dropdown from '../../Dropdown/Dropdown'
 
 class CollateralAsset extends React.Component {
   constructor(props) {
@@ -12,6 +13,8 @@ class CollateralAsset extends React.Component {
     }
   }
 
+  toggleDropDown(e){
+  }
 
   amendCollateral(e) {
     console.log('e is', e.currentTarget.dataset.ref)
@@ -75,14 +78,26 @@ class CollateralAsset extends React.Component {
                     <div className={styles.popupRow}> {/* one row div*/}
                       <div className={styles.popupText}> Margin Agreement
                       </div>
-                      <input type="text" className={styles.popupInputBox}/>
+                      <div className={styles.popupInputBox}>
+                        <Dropdown
+                          handlerOnClick={this.toggleDropDown}
+                          handleOnSelectedItemChange={e => e.stopPropagation()}
+                          selectedOption='Select One'
+                          options={['Portfolio Discrepancy', 'Initial Margin/ Independent Amount Discrepancy', 'Collateral Discrepancy'
+                            ,'Agreement Discrepancy', 'Notification Time','Call Amount Discrepancy','MTM Discrepancy','Below Threshold Limit'
+                            ,'Two Way Call','UnKnown Business Error','Other']}
+                          />
+                      </div>
+                      {/*<input type="text" className={styles.popupInputBox}/>*/}
                     </div>
 
 
                     <div className={styles.popupRow}> {/* one row div*/}
                       <div className={styles.popupText}> Amount
                       </div>
-                      <input type="text" className={styles.popupInputBox}/>
+                      <div className={styles.popupInputBox}>
+                        <input type="text" className={styles.popupInputBox}/>
+                      </div>
                     </div>
 
                     <div className={styles.buttonContainer}>

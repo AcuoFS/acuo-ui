@@ -74,16 +74,15 @@ export default class Dispute extends React.Component {
           <div className={styles.sectionRowDispute}> {/* one row div*/}
             <div className={styles.columnleft}> Reason Code
             </div>
-
-            <Dropdown
-              handlerOnClick={this.toggleDropDown}
-              handleOnSelectedItemChange={e => e.stopPropagation()}
-              selectedOption='Select One'
-              options={['Portfolio Discrepancy', 'Initial Margin/ Independent Amount Discrepancy', 'Collateral Discrepancy'
-                ,'Agreement Discrepancy', 'Notification Time','Call Amount Discrepancy','MTM Discrepancy','Below Threshold Limit'
-                ,'Two Way Call','UnKnown Business Error','Other']} />
-
-
+            <div className={styles.inputBox}>
+              <Dropdown
+                handlerOnClick={this.toggleDropDown}
+                handleOnSelectedItemChange={e => e.stopPropagation()}
+                selectedOption='Select One'
+                options={['Portfolio Discrepancy', 'Initial Margin/ Independent Amount Discrepancy', 'Collateral Discrepancy'
+                  ,'Agreement Discrepancy', 'Notification Time','Call Amount Discrepancy','MTM Discrepancy','Below Threshold Limit'
+                  ,'Two Way Call','UnKnown Business Error','Other']} />
+            </div>
           </div>
           <div className={styles.sectionRowDispute}> {/* one row div*/}
             <div className={styles.columnleft}> Comments

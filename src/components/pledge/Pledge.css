@@ -707,10 +707,10 @@ div.collateralTableExpanded div:nth-child(13){
 }
 
 .popupInputBox{
-  /*width: 245px;*/
   display: inline-block;
   flex:3;
   min-height: 40px;
+  width: 100%;
 }
 
 .buttonContainer{
@@ -750,4 +750,10 @@ div.collateralTableExpanded div:nth-child(13){
   border-radius: 20px;
   margin: 0 20px;
   align-self: center;
+}
+
+
+.filterItem{
+  flex: 3;
+  width: 100% !important;
 }
