@@ -211,3 +211,8 @@ td{
   composes: baseFontBold from '../../static/css-components/fonts.css';
 }
 
+.earmarkAssetButton{
+  padding: 2px 5px;
+  border: 1px solid acuoGrey;
+  border-radius: 5px;
+}

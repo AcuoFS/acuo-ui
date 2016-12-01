@@ -41,7 +41,7 @@ export default class Selection extends React.Component {
         <td>{x.get('venue')}</td>
         <td>{numberWithCommas(x.get('price'))}</td>
         <td>{x.get('priceCcy')}</td>
-        <td></td>
+        <td><div className={styles.earmarkAssetButton}>E</div></td>
       </tr>
     )
   }
