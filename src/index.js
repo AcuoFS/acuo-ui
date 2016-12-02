@@ -4,13 +4,12 @@ import {createStore} from 'redux'
 import {fromJS} from 'immutable'
 import {Provider} from 'react-redux'
 import { browserHistory, Router, Route, Link } from 'react-router'
-import reducer from './reducer'
-import {initState} from './action_creators'
 
-import styles from './global.css'
+import reducer from './reducers'
+import {initState} from './actions'
+import styles from './static/global.css'
+import { Dashboard, ReconcileContainer, PledgePageContainer } from './pages'
 
-import Dashboard from './components/dashboard/dashboard'
-import { ReconcileContainer } from './components/reconcile/reconcile'
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
@@ -33,6 +32,7 @@ class App extends React.Component{
                     <Router history={browserHistory}>
                         <Route path="/" component={Dashboard} />
                         <Route path="recon" component={ReconcileContainer} />
+                        <Route path="pledge" component={PledgePageContainer} />
                     </Router>
                 </div>
             </Provider>

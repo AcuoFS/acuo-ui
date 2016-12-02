@@ -1,0 +1,273 @@
+@value newAcuoBlue from '../../static/css-components/colors.css';
+@value acuoGrey from '../../static/css-components/colors.css';
+
+.panel {
+  position: relative;
+  margin: 10px 0 25px 0;
+  padding: 15px 0;
+  background-color: #fff;
+  border: 1px solid #dedede;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 2px 4px 0 #c9c9c9;
+  box-shadow: 2px 2px 4px 0 #c9c9c9;
+}
+
+.panelTitle {
+  composes: baseFontBold from '../../static/css-components/fonts.css';
+  font-size: 18px;
+  line-height: 20px;
+  text-transform: uppercase;
+  color: newAcuoBlue;
+  margin-left: 10px;
+}
+
+.subtitle{
+  color: #4A4A4A;
+  font-size: 10px;
+}
+
+.columnContainer{
+  display: flex;
+}
+
+
+.leftColumn {
+  flex: 1;
+  border-right: 1px solid rgba(74,74,74,0.4);
+  padding: 0 15px;
+  color: #4A4A4A;
+  font-size: 13px;
+}
+.rightColumn {
+  flex: 2;
+  padding: 0 15px;
+
+}
+
+.bigger{
+  flex: 5;
+}
+
+.leftColumn.small{
+  flex: 1;
+}
+.leftColumn.big{
+  flex: 2;
+}
+
+.callTitle{
+  font-size: 18px;
+  composes: baseFontBold from '../../static/css-components/fonts.css';
+  padding: 15px 0 0;
+  color: newAcuoBlue;
+  text-transform: uppercase;
+  line-height: 22px;
+}
+
+/* group component */
+.group{
+  border-bottom: 1px solid rgba(74,74,74,0.4);
+  padding: 10px 0px;
+}
+
+
+.selTick:hover{
+  cursor: pointer;
+}
+
+.firstLevel{
+  display: flex;
+  padding: 8px 0px;
+}
+
+.assetName {
+  flex: 2;
+}
+
+.amount{
+  flex: 1;
+}
+
+.total{
+  composes: baseFontBold from '../../static/css-components/fonts.css';
+  padding-top: 15px;
+}
+
+/* selection column */
+
+.rightColHeading{
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.rightColumnTitle{
+  color: newAcuoBlue;
+  text-transform: uppercase;
+  composes: baseFontBold from '../../static/css-components/fonts.css';
+  font-size: 20px;
+  flex: 3;
+}
+
+.imageRight{
+  flex: 1;
+  text-align: right;
+}
+
+.ttlMarginWrap{
+  position: relative;
+  display: flex;
+  height: 90%;
+}
+
+.showL{
+  display: inherit;
+}
+
+.hideL{
+  display: none;
+}
+
+.showR{
+  display: flex;
+}
+
+.hideR{
+  display: none;
+}
+
+
+.ttlMarginWrap .ttlMargin{
+  flex: 1;
+  align-self: center;
+  color: newAcuoBlue;
+  text-align: center;
+}
+.ttlMarginWrap .ttlMargin >div{
+  margin: 10px 0px;
+}
+.ttlMarginWrap .ttlMargin .bigFig{
+  font-size: 36px;
+}
+
+.rightColSubSection{
+  margin: 4px 0 10px 0;
+}
+
+.subSectionHeader{
+  composes: baseFontBold from '../../static/css-components/fonts.css';
+  color: newAcuoBlue;
+  text-transform: uppercase;
+}
+
+.rightColSubSection table{
+  font-size: 14px;
+}
+
+.selTable{
+  width: 100%;
+  margin: 4px auto;
+  border-bottom: 1px solid rgba(74,74,74,0.4);
+}
+
+.selTable tr{
+  border-bottom: 1px solid rgba(151,151,151,0.35);
+}
+
+.selTable thead{
+  color: newAcuoBlue;
+}
+
+.selTable thead th{
+  padding: 6px 4px;
+  line-height: 16px;
+  text-align: left;
+}
+
+.selTable tbody tr:last-child{
+  border-bottom: none;
+}
+
+td{
+  padding: 6px 4px;
+  line-height: 16px;
+}
+
+.notAllocated{
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 14px;
+  composes: baseFontBold from '../../static/css-components/fonts.css';
+  color: #4A4A4A;
+}
+.notAllocated tr{
+  border-bottom: none;
+}
+.notAllocated .notAlcText{
+  padding: 30px 20px;
+}
+
+.bold{
+  composes: baseFontBold from '../../static/css-components/fonts.css';
+}
+
+
+.earmarkAssetButton {
+  padding: 2px 5px;
+  border: 1px solid acuoGrey;
+  border-radius: 5px;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+}
+
+.earmarkAssetButton .tooltip{
+  padding: 8px;
+  position: absolute;
+  left: 150%;
+  border: 1px solid acuoGrey;
+  top: -45%;
+  background: #fff;
+  width: 124px;
+  z-index: 50;
+  display: none;
+  pointer-events: none;
+}
+
+.earmarkAssetButton:hover .tooltip {
+  display: block;
+}
+
+.earmarkAssetButton .tooltip::before{
+  content: '';
+  border-right: 12px solid acuoGrey;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  position: absolute;
+  left: -12px;
+  top: 8px;
+}
+
+.earmarkAssetButton .tooltip::after{
+  content: '';
+  border-right: 12px solid #fff;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  position: absolute;
+  left: -10.5px;
+  top: 8px;
+}
+
+.ttlAmount{
+  width: 100%;
+}
+
+.selTable tr th:nth-child(1),
+.selTable tr td:nth-child(1),
+.ttlAmount tr td:nth-child(1){
+  text-align: left;
+  width: 26%;
+}
+.selTable tr td.notAlcText{
+  text-align: center;
+}
