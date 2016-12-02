@@ -9,6 +9,7 @@ class CollateralAsset extends React.Component {
     this.allocateCollateral = this.allocateCollateral.bind(this)
     this.cancelCollateral = this.cancelCollateral.bind(this)
     this.onRemoveFromEarmarked = this.onRemoveFromEarmarked.bind(this)
+    this.removeCollateralBox = this.removeCollateralBox.bind(this)
 
     this.state = {
       toggle: ""
@@ -34,16 +35,19 @@ class CollateralAsset extends React.Component {
     this.setState({
       allocateCollateral: e.currentTarget.dataset.ref
     })
-    console.log("allocate collateral called")
+  }
+
+  removeCollateralBox(e) {
+    this.setState({
+      toggle: "",
+      allocateCollateral: ""
+    })
   }
 
   cancelCollateral(e) {
     this.setState({
-      //cancelCollateral: e.currentTarget.dataset.ref
       allocateCollateral: ""
     })
-
-    console.log("end of cancel: "+this.state.allocateCollateral)
   }
 
   getStatusColor(status) {
