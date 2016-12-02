@@ -10,7 +10,10 @@ export default class CounterPartyAssets extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      selectedTab : TAB_MARGIN_AGREEMENT_DISPUTE
+      selectedTab : TAB_MARGIN_AGREEMENT_PORTFOLIO,
+      tabReconStyle : styles.tabActive,
+      tabDisputeStyle : styles.tabInactive
+
     }
     this.handleOnTabSelect = this.handleOnTabSelect.bind(this)
   }
@@ -22,11 +25,15 @@ export default class CounterPartyAssets extends React.Component{
     if(e.currentTarget.dataset.value == TAB_MARGIN_AGREEMENT_PORTFOLIO){
 
       this.setState((prevState) => ({
-        selectedTab: TAB_MARGIN_AGREEMENT_PORTFOLIO
+        selectedTab: TAB_MARGIN_AGREEMENT_PORTFOLIO,
+        tabReconStyle : styles.tabActive,
+        tabDisputeStyle : styles.tabInactive
       }));
     }else {
       this.setState((prevState) => ({
-        selectedTab: TAB_MARGIN_AGREEMENT_DISPUTE
+        selectedTab: TAB_MARGIN_AGREEMENT_DISPUTE,
+        tabReconStyle : styles.tabInactive,
+        tabDisputeStyle : styles.tabActive
       }));
     }
   }
@@ -57,11 +64,11 @@ export default class CounterPartyAssets extends React.Component{
     return (
       <div className={styles.actPanel + ' ' + styles[actStyle]}>
         <ul className={styles.tabs14}>
-          <li onClick={this.handleOnTabSelect} data-value={TAB_MARGIN_AGREEMENT_PORTFOLIO}>
-            <img src="./images/reconcile/reconcile_tab_hidden.png"/>
+          <li onClick={this.handleOnTabSelect} data-value={TAB_MARGIN_AGREEMENT_PORTFOLIO} className={styles.tabButton+ ' '+this.state.tabReconStyle}>
+            Reconcile
           </li>
-          <li onClick={this.handleOnTabSelect} data-value={TAB_MARGIN_AGREEMENT_DISPUTE}>
-            <img src="./images/reconcile/dispute_tab_shown.png"/>
+          <li onClick={this.handleOnTabSelect} data-value={TAB_MARGIN_AGREEMENT_DISPUTE} className={styles.tabButton+ ' '+this.state.tabDisputeStyle}>
+            Dispute
           </li>
         </ul>
         {activeTabComponent}

@@ -159,7 +159,14 @@ class Pledge extends React.Component {
 
                 <div className={styles.optButton + (this.checkIfExist(pendingAllocation).size > 0 ? ' '+styles.btnEnabled : ' '+styles.btnDisabled )} id={styles.optBtnAllocate} onClick={onAllocate} data-optimisation={this.checkIfExist(optimisation).toJS()} data-pendingAllocation={this.checkIfExist(pendingAllocation).toJS()}>Allocate</div>
 
-                <div className={styles.optButton + ' ' + styles.btnEnabled} id={styles.optBtnPledge} onClick={this.onPledgeButtonClick}>Pledge</div>
+                <div className={styles.optButton  + (
+
+                    this.checkIfExist(selection).reduce((sumSelX, x) => {
+                      //console.log("+++ " + x.getIn(['allocated', 'initialMargin']))
+                      return sumSelX + x.getIn(['allocated', 'initialMargin']).size + x.getIn(['allocated', 'variationMargin']).size
+                    }, 0) > 0
+
+                  ? ' '+styles.btnEnabled : ' '+styles.btnDisabled )} id={styles.optBtnPledge}>Pledge</div>
 
               </div>
               {/* change btnEnabled to btnDisabled to disable the button*/}

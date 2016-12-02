@@ -93,6 +93,11 @@
 .actionWrap .actPanel.act_L,
 .actionWrap .actPanel.act_R{
     flex: 4;
+    border:1px solid #dedede;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 2px 2px 4px 0 #c9c9c9;
+    box-shadow: 2px 2px 4px 0 #c9c9c9;
 }
 
 .actionWrap .actPanel.act_L{
@@ -101,6 +106,8 @@
 
 .actionWrap .actPanel.act_R{
     /*flex: 4;*/
+    -webkit-border-radius: 0 10px 10px 10px;
+    border-radius: 0 10px 10px 10px;
 }
 
 
@@ -109,11 +116,6 @@
     display: flex;
     min-height: 365px;
     overflow: auto;
-    border:1px solid #dedede;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    -webkit-box-shadow: 2px 2px 4px 0 #c9c9c9;
-    box-shadow: 2px 2px 4px 0 #c9c9c9;
 }
 
 .section.left{
@@ -292,16 +294,18 @@
 
 /*- Menu Tabs 14--------------------------- */
 .tabs14 {
-    font: bold 11px/1.5em Verdana;
     display: inline-flex;
     float:left;
     width:100%;
-    background:#EDEDED;
     font-size:93%;
     line-height:normal;
-    background:url("/images/reconcile/ReconTab_Shown.png") no-repeat right top;
     position: absolute;
-    top: -10px;
+    top: 18px;
+}
+@-moz-document url-prefix() {
+    .tabs14 {
+        top: 20px;
+    }
 }
 .tabs14 ul {
     margin:0;
@@ -352,13 +356,14 @@
 .panelDispute{
     width: 100%;
     /*display: flex;*/
-    min-height: 437px;
-    overflow: auto;
-    border:1px solid #dedede;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    -webkit-box-shadow: 2px 2px 4px 0 #c9c9c9;
-    box-shadow: 2px 2px 4px 0 #c9c9c9;
+    /*min-height: 437px;*/
+    /*overflow: auto;*/
+    /*border:1px solid #dedede;*/
+    /*-webkit-border-radius: 10px;*/
+    /*border-radius: 10px;*/
+    /*-webkit-box-shadow: 2px 2px 4px 0 #c9c9c9;*/
+    /*box-shadow: 2px 2px 4px 0 #c9c9c9;*/
+    padding-bottom: 20px;
 }
 
 .sectionRowDispute{
@@ -367,7 +372,7 @@
 }
 
 .columnleft{
-    width: 200px;
+    width: 28%;
     align-content: flex-start;
     /*flex: 1;*/
     padding: 3px 0;
@@ -376,6 +381,7 @@
 
 .inputBox{
     width: 300px;
+    height: 28px;
     display: inline-block;
     /*flex:2;*/
 }
@@ -387,6 +393,7 @@
 
 .buttonContainer{
     width: 100%;
+    margin-top: 10px;
 }
 .buttonContainer button {
     float: right;
@@ -423,24 +430,38 @@
     align-self: center;
 }
 
-.tabButton{
+.tabs14 .tabButton{
     display: inline-block;
     position: relative;
     padding: 8px 18px;
     border: 1px solid #dedede;
-    border-bottom: none;
+    border-bottom: #FFFFFF;
     -webkit-border-radius: 10px 10px 0 0;
     border-radius: 10px 10px 0 0;
-    -webkit-box-shadow: 2px 0 4px 0 #c9c9c9;
-    box-shadow: 2px -2px 4px 0 #c9c9c9;
-}
-
-.tabActive{
-    color: #6389AD;
-    background-color: #fff;
-}
-
-.tabInactive{
+    /*-webkit-box-shadow: 2px 2px 4px 0 #c9c9c9;*/
+    /*box-shadow: 2px 2px 4px 0 #c9c9c9;*/
+    margin: 0 4px 0 0;
     color: #9b9b9b;
     background-color: #dedede;
+    left: -1px;
+    text-transform: uppercase;
+}
+
+.tabs14 .tabButton:hover{
+    cursor: pointer;
+}
+
+.tabs14 .tabActive{
+    padding: 8px 18px;
+    color: #6389AD;
+    background-color: #fff;
+    border-bottom: #fff;
+    font-weight: bold;
+}
+
+.tabs14 .tabInactive{
+    padding: 7px 18px;
+    color: #9b9b9b;
+    background-color: #dedede;
+    border-bottom: none;
 }
