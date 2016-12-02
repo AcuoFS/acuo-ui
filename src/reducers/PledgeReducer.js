@@ -42,6 +42,21 @@ export const toggleCheckall = (state) => {
     return state.setIn(['pledgeData', 'pendingAllocation'], state.getIn(['pledgeData', 'selection']).map(x => x.get('GUID')))
 }
 
+export const removeAssetFromEarmark = (state, removingAsset) => {
+
+  let collateralAssetGroup = state.getIn(['pledgeData', 'collateral', removingAsset.assetType])
+  let movingAssetIndex = collateralAssetGroup.findIndex(asset => ((asset.get('assetId') == removingAsset.assetId) && (asset.get('assetIdType') == removingAsset.assetIdType) ) )
+  if(movingAssetIndex >= 0){
+    let movingAsset = collateralAssetGroup.get(movingAssetIndex)
+    let assetCategory = movingAsset.get('assetCategory')
+    let stateAfterRemove = state.setIn(['pledgeData', 'collateral', removingAsset.assetType], collateralAssetGroup.remove(movingAssetIndex))
+    return stateAfterRemove.setIn(['pledgeData', 'collateral', assetCategory], stateAfterRemove.getIn(['pledgeData', 'collateral', assetCategory]).push(movingAsset))
+  }
+  else {
+    return state;
+  }
+}
+
 const PledgeReducer = (state = Map(), action) => {
   switch (action.type) {
     case ActionTypes.INIT_OPTIMISATION_SETTINGS:
@@ -61,6 +76,9 @@ const PledgeReducer = (state = Map(), action) => {
 
     case ActionTypes.TOGGLE_CHECKALL:
       return toggleCheckall(state)
+
+    case ActionTypes.REMOVE_ASSET_FROM_EARMARK:
+      return removeAssetFromEarmark(state, action.asset)
 
   }
 

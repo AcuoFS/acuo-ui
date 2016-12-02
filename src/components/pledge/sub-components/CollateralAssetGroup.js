@@ -34,7 +34,8 @@ export default class CollateralAssetGroup extends React.Component {
     const {
       propCollateralType,
       propCollateralAssetList,
-      propIsDisplayAll
+      propIsDisplayAll,
+      propHandleOnRemoveFromEarmarked
     } = this.props
 
     // []list of CollateralAsset components
@@ -61,7 +62,9 @@ export default class CollateralAssetGroup extends React.Component {
           propIsDisplayAll={propIsDisplayAll}
           propCollateralType={propCollateralType}
           propAssetId={asset.assetId}
-          propAssetIdType={asset.assetIdType}/>
+          propAssetIdType={asset.assetIdType}
+          propHandleOnRemoveFromEarmarked={propHandleOnRemoveFromEarmarked}
+        />
 
       ))
     }

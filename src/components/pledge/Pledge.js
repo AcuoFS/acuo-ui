@@ -189,7 +189,8 @@ class Pledge extends React.Component {
                                         propCollateralAssetList={
                                           this.props.collateral ? this.props.collateral.get('earmarked').toJS() : [] }
                                         propIsExpanded={true}
-                                        propIsDisplayAll={this.state.open}/>
+                                        propIsDisplayAll={this.state.open}
+                                        propHandleOnRemoveFromEarmarked={this.props.onRemoveFromEarmarked}/>
 
                   <CollateralAssetGroup propCollateralType={"Cash"}
                                         propCollateralAssetList={

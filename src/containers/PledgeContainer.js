@@ -1,6 +1,13 @@
 import { connect } from 'react-redux'
 import { PledgeComponent } from '../components'
-import { initOptimisationSettings, updateOptimisationSettings, initSelection, togglePendingAllocation, toggleCheckall, updateCollateral } from '../actions'
+import {
+  initOptimisationSettings,
+  updateOptimisationSettings,
+  initSelection,
+  togglePendingAllocation,
+  toggleCheckall,
+  updateCollateral,
+  removeAssetFromEarmark } from '../actions'
 import { List, fromJS } from 'immutable'
 
 import { allocateCollateralsURL } from '../constants/APIcalls'
@@ -53,6 +60,11 @@ const mapDispatchToProps = dispatch => ({
       dispatch(updateCollateral(fromJS(obj.data.collateral)))
       dispatch(initSelection(fromJS(obj.data.inMarginCall)))
     })
+  },
+
+  onRemoveFromEarmarked: (e, assetType, propAssetId, propAssetIdType) => {
+
+    dispatch(removeAssetFromEarmark(e, assetType, propAssetId, propAssetIdType))
   }
 })
 
