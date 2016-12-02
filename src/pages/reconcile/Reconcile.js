@@ -40,7 +40,6 @@ class Reconcile extends React.Component{
 }
 
 const mapStateToProps = state => ({
-    recon : state.getIn(['data', 'recon'])
 })
 
 const mapDispatchToProps = dispatch => ({

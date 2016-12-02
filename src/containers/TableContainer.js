@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { TableComponent } from '../components'
 
 const mapStateToProps = state => ({
-    derivatives : state.getIn(['display', 'derivatives'])
+    derivatives : state.mainReducer.getIn(['display', 'derivatives'])
 })
 
 const mapDispatchToProps = dispatch => ({

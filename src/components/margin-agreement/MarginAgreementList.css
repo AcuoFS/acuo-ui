@@ -27,6 +27,7 @@
     margin-top: 25px;
     margin-bottom: 50px;
     /*border: 1px dotted #00f;*/
+    padding-top: 50px;
 }
 
 .actionWrap .actPanel{
@@ -92,6 +93,11 @@
 .actionWrap .actPanel.act_L,
 .actionWrap .actPanel.act_R{
     flex: 4;
+    border:1px solid #dedede;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 2px 2px 4px 0 #c9c9c9;
+    box-shadow: 2px 2px 4px 0 #c9c9c9;
 }
 
 .actionWrap .actPanel.act_L{
@@ -100,6 +106,8 @@
 
 .actionWrap .actPanel.act_R{
     /*flex: 4;*/
+    -webkit-border-radius: 0 10px 10px 10px;
+    border-radius: 0 10px 10px 10px;
 }
 
 
@@ -108,11 +116,6 @@
     display: flex;
     min-height: 365px;
     overflow: auto;
-    border:1px solid #dedede;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    -webkit-box-shadow: 2px 2px 4px 0 #c9c9c9;
-    box-shadow: 2px 2px 4px 0 #c9c9c9;
 }
 
 .section.left{
@@ -159,6 +162,11 @@
 }
 .packageRowGrey{
     color:#BCBCBC;
+}
+
+.packageRowHighLight{
+  color: #000;
+  background-color:#ffb7b7;
 }
 
 .packageRow{
@@ -247,7 +255,7 @@
   display: none;
   text-align: left;
   color: #9b9b9b;
-  float: left;
+  float: right;
   position: absolute;
   width: 100px;
   -webkit-border-radius: 10px 0 10px 10px;
@@ -281,4 +289,179 @@
     text-align: center;
     padding: 10px;
     cursor: pointer;
+}
+
+
+/*- Menu Tabs 14--------------------------- */
+.tabs14 {
+    display: inline-flex;
+    float:left;
+    width:100%;
+    font-size:93%;
+    line-height:normal;
+    position: absolute;
+    top: 18px;
+}
+@-moz-document url-prefix() {
+    .tabs14 {
+        top: 20px;
+    }
+}
+.tabs14 ul {
+    margin:0;
+    padding:0px 0px 0 0px;
+    list-style:none;
+}
+.tabs14 li {
+    display:inline;
+    margin:0;
+    padding:0;
+}
+
+.tabItem{
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+/* styles needed for dispute.js file------------------------------- */
+
+.firstRow{
+    display: flex;
+    width:100%;
+    /*align-content: flex-start;*/
+    clear: both;
+}
+
+.legalEntityContainerDispute{
+    flex:1;
+    flex-grow: 3;
+    /*color:#9b9b9b;*/
+    /*text-align: left;*/
+    /*font-size: 10px;*/
+    /*padding: 10px;*/
+}
+
+.currencyDispute{
+    flex:1;
+    flex-grow: 1;
+    /*section*/
+}
+
+.secondRow{
+    font:13px Helvetica;
+    padding: 0 5px;
+    margin-top: 12px;
+}
+
+.panelDispute{
+    width: 100%;
+    /*display: flex;*/
+    /*min-height: 437px;*/
+    /*overflow: auto;*/
+    /*border:1px solid #dedede;*/
+    /*-webkit-border-radius: 10px;*/
+    /*border-radius: 10px;*/
+    /*-webkit-box-shadow: 2px 2px 4px 0 #c9c9c9;*/
+    /*box-shadow: 2px 2px 4px 0 #c9c9c9;*/
+    padding-bottom: 20px;
+}
+
+.sectionRowDispute{
+    /*display:flex;*/
+    padding:7px 14px;
+}
+
+.columnleft{
+    width: 28%;
+    align-content: flex-start;
+    /*flex: 1;*/
+    padding: 3px 0;
+    display: inline-block;
+}
+
+.inputBox{
+    width: 300px;
+    height: 28px;
+    display: inline-block;
+    /*flex:2;*/
+}
+
+.usd{
+    display: inline-block;
+    padding-left: 5px;
+}
+
+.buttonContainer{
+    width: 100%;
+    margin-top: 10px;
+}
+.buttonContainer button {
+    float: right;
+    margin: 16px 24px;
+    width: 146px;
+    /*height: 32px;*/
+    color: #4A4A4A ;
+    background-color: #FAFAFA ;
+    border: 1px solid #979797 ;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 32px;
+    text-align: center;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    margin: 0 20px;
+    align-self: center;
+}
+
+.optButton.btnEnabled {
+    flex: 1;
+    width: 146px;
+    /*height: 32px;*/
+    color: #4A4A4A ;
+    background-color: #FAFAFA ;
+    border: 1px solid #979797 ;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 32px;
+    text-align: center;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    margin: 0 20px;
+    align-self: center;
+}
+
+.tabs14 .tabButton{
+    display: inline-block;
+    position: relative;
+    padding: 8px 18px;
+    border: 1px solid #dedede;
+    border-bottom: #FFFFFF;
+    -webkit-border-radius: 10px 10px 0 0;
+    border-radius: 10px 10px 0 0;
+    /*-webkit-box-shadow: 2px 2px 4px 0 #c9c9c9;*/
+    /*box-shadow: 2px 2px 4px 0 #c9c9c9;*/
+    margin: 0 4px 0 0;
+    color: #9b9b9b;
+    background-color: #dedede;
+    left: -1px;
+    text-transform: uppercase;
+}
+
+.tabs14 .tabButton:hover{
+    cursor: pointer;
+}
+
+.tabs14 .tabActive{
+    padding: 8px 18px;
+    color: #6389AD;
+    background-color: #fff;
+    border-bottom: #fff;
+    font-weight: bold;
+}
+
+.tabs14 .tabInactive{
+    padding: 7px 18px;
+    color: #9b9b9b;
+    background-color: #dedede;
+    border-bottom: none;
 }
