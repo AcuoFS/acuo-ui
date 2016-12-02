@@ -32,6 +32,7 @@ class Pledge extends React.Component {
       selTickBox: 'none'
     }
     this.changeSideways = this.changeSideways.bind(this)
+    this.onPledgeButtonClick = this.onPledgeButtonClick.bind(this)
     // this.renderCollateralItems = this.renderCollateralItems.bind(this)
 
     fetch('http://52.74.186.112:8081/optimisation').then(response => {
@@ -101,6 +102,13 @@ class Pledge extends React.Component {
     return something || List()
   }
 
+
+  onPledgeButtonClick(e){
+
+
+    alert('Pledge Button Click')
+  }
+
   render() {
     const { optimisation, selection, onUpdateOptimisationSettings, onTogglePendingAllocation, pendingAllocation, sliderCheckbox, onToggleCheckall, onAllocate } = this.props
 
@@ -151,7 +159,7 @@ class Pledge extends React.Component {
 
                 <div className={styles.optButton + (this.checkIfExist(pendingAllocation).size > 0 ? ' '+styles.btnEnabled : ' '+styles.btnDisabled )} id={styles.optBtnAllocate} onClick={onAllocate} data-optimisation={this.checkIfExist(optimisation).toJS()} data-pendingAllocation={this.checkIfExist(pendingAllocation).toJS()}>Allocate</div>
 
-                <div className={styles.optButton + ' ' + styles.btnEnabled} id={styles.optBtnPledge}>Pledge</div>
+                <div className={styles.optButton + ' ' + styles.btnEnabled} id={styles.optBtnPledge} onClick={this.onPledgeButtonClick}>Pledge</div>
 
               </div>
               {/* change btnEnabled to btnDisabled to disable the button*/}
