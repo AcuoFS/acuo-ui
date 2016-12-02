@@ -64,9 +64,6 @@ export default class MarginAgreementDetail extends React.Component {
 
     return secondLevel.map((x, index) => {
 
-      console.log(x.get('assetName') + ' vs ' + secondLevelDiscrepancy)
-      console.log(x.get('assetName') == secondLevelDiscrepancy)
-
       let highlightThis = (x.get('assetName') == secondLevelDiscrepancy)
 
       return (
@@ -107,8 +104,6 @@ export default class MarginAgreementDetail extends React.Component {
       topLevel, secondLevel, GUID,
       totalAmount, isSecondLevel, checkboxImageUrl, discrepancy, secondLevelDiscrepancy
     } = this.props
-
-    console.log(secondLevelDiscrepancy)
 
     return (
       <div className={ isSecondLevel ?
