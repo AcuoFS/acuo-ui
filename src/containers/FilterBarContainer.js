@@ -13,13 +13,13 @@ import { Set } from 'immutable'
 
 
 const mapStateToProps = state => ({
-    filters: state.getIn(['inputs', 'filters']),
-    legalEntityList : computeLegalEntityList(state),
-    derivativeType : computeDerivativeType(state),
-    timeWindowList : computeTimeWindowList(state),
-    statusList : computeStatusList(state),
-    cptyOrganisation : computeCptyOrganisation(state),
-    cptyEntity : computeCptyEntity(state)
+    filters: state.mainReducer.getIn(['inputs', 'filters']),
+    legalEntityList : computeLegalEntityList(state.mainReducer),
+    derivativeType : computeDerivativeType(state.mainReducer),
+    timeWindowList : computeTimeWindowList(state.mainReducer),
+    statusList : computeStatusList(state.mainReducer),
+    cptyOrganisation : computeCptyOrganisation(state.mainReducer),
+    cptyEntity : computeCptyEntity(state.mainReducer)
 })
 
 const computeLegalEntityList = (state) => {

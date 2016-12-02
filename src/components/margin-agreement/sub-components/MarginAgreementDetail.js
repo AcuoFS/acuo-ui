@@ -4,7 +4,7 @@
 import React, {PropTypes} from 'react'
 import MarginAgreementDetailExpand from './MarginAgreementDetailExpand'
 import {List} from 'immutable'
-import {numberWithCommas} from '../../../utils/utils'
+import {numberWithCommas} from '../../../utils/numbersWithCommas'
 import styles from '../MarginAgreementList.css'
 
 
@@ -97,10 +97,11 @@ export default class MarginAgreementDetail extends React.Component {
   render() {
     const {
       topLevel, secondLevel, GUID,
-      totalAmount, isSecondLevel, checkboxImageUrl
+      totalAmount, isSecondLevel, checkboxImageUrl, discrepancy
     } = this.props
     return (
-      <div className={ isSecondLevel ? styles.packageRowGrey : ''}>
+      <div className={ isSecondLevel ?
+        styles.packageRowGrey : (discrepancy ? styles.packageRowHighLight : '')}>
         <div className={ styles.packageRow }> {/* one row div*/}
           <div className={styles.packageLeft}>
             <div className={styles.packageCheckBox + ' ' + this.state.cbLvl1}
@@ -129,4 +130,5 @@ MarginAgreementDetail.PropTypes = {
   handlerSelectedItem: PropTypes.func.isRequired,
   isSecondLevel: PropTypes.bool.isRequired,
   checkboxImageUrl: PropTypes.string.isRequired
+  // discrepancy:
 }

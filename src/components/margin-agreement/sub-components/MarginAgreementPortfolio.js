@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
-import {Map} from 'immutable'
+import {Map, List} from 'immutable'
 import MarginAgreementDetail from './MarginAgreementDetail'
-import {numberWithCommas} from '../../../utils/utils'
+import {numberWithCommas} from '../../../utils/numbersWithCommas'
 import styles from '../MarginAgreementList.css'
 
 
@@ -67,6 +67,38 @@ export default class MarginAgreementPortfolio extends React.Component {
       return
   }
 
+  getFirstLevelTotal(asset) {
+    if (asset) {
+      return asset.reduce((listX, x) => {
+        let list = x.get('data').reduce((listY, y) => {
+
+          let list = Map({
+            'key': y.get('firstLevel'), 'amount': y.get('secondLevel').reduce((sum, z) => {
+              return sum + z.get('amount')
+            }, 0)
+          })
+          //return (list > 0 ? listY.push(y.set('secondLevel', list)) : listY)
+          return (list.size > 0 ? listY.push(list) : listY)
+        }, List())
+        return (list.size > 0 ? listX.concat(list) : listX)
+      }, List())
+    }
+    else return List()
+  }
+
+  checkDescrepency(clientAsset, counterpartyAsset) {
+
+    let totalClientAsset = this.getFirstLevelTotal(clientAsset)
+    let totalcounterAsset = this.getFirstLevelTotal(counterpartyAsset)
+
+    let highestDifference = totalClientAsset.reduce((highest, x) => {
+      let difference = Math.abs(x.get('amount') - totalcounterAsset.filter(y => y.get('key') == x.get('key')).first().get('amount'))
+      return (highest.get('difference') > difference ? highest : Map({'key': x.get('key'), 'difference': difference}))
+    }, Map())
+
+    return highestDifference
+  }
+
   renderItem(marginData, assetsName, handlerSelectedItem) {
     if (marginData.get(assetsName))
       return marginData.get(assetsName).map((x) => {
@@ -85,6 +117,10 @@ export default class MarginAgreementPortfolio extends React.Component {
               handlerSelectedItem={handlerSelectedItem}
               isSecondLevel={this.checkSecondLevel(secondLevel)}
               checkboxImageUrl={this.getCheckboxImageUrl(secondLevel)}
+              discrepancy={this.checkDescrepency(
+                marginData.get('clientAssets'),
+                marginData.get('counterpartyAssets')).includes(y.get('firstLevel'))}
+
             />
           })}
             <hr/>
@@ -95,66 +131,65 @@ export default class MarginAgreementPortfolio extends React.Component {
 
   render() {
     const {
-      marginData, actStyle, orgName,
-      assetsName, handlerTotalMargin, handlerSelectedItem
+      marginData, orgName, assetsName,
+      handlerTotalMargin, handlerSelectedItem
     } = this.props
     return (
-      <div className={styles.actPanel + ' ' + styles[actStyle]}>
-        <div className={styles.panel}>
-          <div className={styles.section + ' ' + styles.left}>
-            <div className={styles.legalEntityContainer}>
-              <div className={styles.legalEntity}>{ marginData.get(orgName) }</div>
-              <div className={styles.legalEntityDetails}>
-                <div>{ orgName } -</div>
-                <div>Global Mutual Fund</div>
-              </div>
-            </div>
-            <div className={styles.package}> {/* table outer div*/}
-              { this.renderItem(marginData, assetsName, handlerSelectedItem) }
-            </div>
+      <div className={styles.panel}>
+        <div className={styles.section + ' ' + styles.left}>
 
-            <div className={styles.sectionText}> {/* two row div for bold*/}
-              <div className={styles.sectionRow}> {/* one row div*/}
-                <div className={styles.packageLeft}>
-                  <div>Total Amount Selected</div>
-                </div>
-                <div className={styles.packageRight}>
-                  {numberWithCommas(this.getTotalAmount(
-                    marginData.get(assetsName)))}
-                </div>
+          <div className={styles.legalEntityContainer}>
+            <div className={styles.legalEntity}>{ marginData.get(orgName) }</div>
+            <div className={styles.legalEntityDetails}>
+              <div>{ orgName } -</div>
+              <div>Global Mutual Fund</div>
+            </div>
+          </div>
+          <div className={styles.package}> {/* table outer div*/}
+            { this.renderItem(marginData, assetsName, handlerSelectedItem) }
+          </div>
+
+          <div className={styles.sectionText}> {/* two row div for bold*/}
+            <div className={styles.sectionRow}> {/* one row div*/}
+              <div className={styles.packageLeft}>
+                <div>Total Amount Selected</div>
               </div>
-              <div className={styles.sectionRow}> {/* one row div*/}
-                <div className={styles.packageLeft}>
-                  <div>Total Reconciled</div>
-                </div>
-                <div className={styles.packageRight}>
-                  {numberWithCommas(this.getTotalReconAmount(marginData.get(assetsName)))}
+              <div className={styles.packageRight}>
+                {numberWithCommas(this.getTotalAmount(
+                  marginData.get(assetsName)))}
+              </div>
+            </div>
+            <div className={styles.sectionRow}> {/* one row div*/}
+              <div className={styles.packageLeft}>
+                <div>Total Reconciled</div>
+              </div>
+              <div className={styles.packageRight}>
+                {numberWithCommas(this.getTotalReconAmount(marginData.get(assetsName)))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.section + ' ' + styles.right}>
+          <div className={styles.currency}>
+            <div>CCY:{marginData.get('ccy')}</div>
+            <div className={styles.viewFxRate}> View FX rate
+              <div className={styles.viewFxRateImage}>
+                <div>
+                  {this.getCurrencyInfo(marginData.get('currencyInfo'), marginData.get('ccy'))}
                 </div>
               </div>
             </div>
           </div>
-
-          <div className={styles.section + ' ' + styles.right}>
-            <div className={styles.currency}>
-              <div>CCY:{marginData.get('ccy')}</div>
-              <div className={styles.viewFxRate}> View FX rate
-                <div className={styles.viewFxRateImage}>
-                  <div>
-                    {this.getCurrencyInfo(marginData.get('currencyInfo'), marginData.get('ccy'))}
-                  </div>
-                </div>
-              </div>
+          <div className={styles.totalMargin}>
+            <div className={styles.marginTitle}>Total Margin</div>
+            <div className={styles.marginValue}>
+              {((handlerTotalMargin(marginData, assetsName) -
+              this.getTotalReconAmount(marginData.get(assetsName))) / 1000000).toFixed(2)}
             </div>
-            <div className={styles.totalMargin}>
-              <div className={styles.marginTitle}>Total Margin</div>
-              <div className={styles.marginValue}>
-                {((handlerTotalMargin(marginData, assetsName) -
-                this.getTotalReconAmount(marginData.get(assetsName))) / 1000000).toFixed(2)}
-              </div>
-              <div className={styles.marginUnit}>Millions</div>
-            </div>
-            <div className={styles.tradeDetails}> View Trade Details</div>
+            <div className={styles.marginUnit}>Millions</div>
           </div>
+          <div className={styles.tradeDetails}> View Trade Details</div>
         </div>
       </div>
     )

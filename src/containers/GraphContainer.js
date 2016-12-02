@@ -3,8 +3,8 @@ import { GraphComponent } from '../components'
 
 
 const mapStateToProps = state => ({
-    currentTime : state.getIn(['display', 'timeUpdated']),
-    derivatives : state.getIn(['display', 'derivatives'])
+    currentTime : state.mainReducer.getIn(['display', 'timeUpdated']),
+    derivatives : state.mainReducer.getIn(['display', 'derivatives'])
 })
 
 const mapDispatchToProps = dispatch => ({
