@@ -217,6 +217,45 @@ td{
   border: 1px solid acuoGrey;
   border-radius: 5px;
   display: inline-block;
+  cursor: pointer;
+  position: relative;
+}
+
+.earmarkAssetButton .tooltip{
+  padding: 8px;
+  position: absolute;
+  left: 150%;
+  border: 1px solid acuoGrey;
+  top: -45%;
+  background: #fff;
+  width: 124px;
+  z-index: 50;
+  display: none;
+  pointer-events: none;
+}
+
+.earmarkAssetButton:hover .tooltip {
+  display: block;
+}
+
+.earmarkAssetButton .tooltip::before{
+  content: '';
+  border-right: 12px solid acuoGrey;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  position: absolute;
+  left: -12px;
+  top: 8px;
+}
+
+.earmarkAssetButton .tooltip::after{
+  content: '';
+  border-right: 12px solid #fff;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  position: absolute;
+  left: -10.5px;
+  top: 8px;
 }
 
 .ttlAmount{
