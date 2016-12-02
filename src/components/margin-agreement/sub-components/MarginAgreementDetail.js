@@ -60,10 +60,17 @@ export default class MarginAgreementDetail extends React.Component {
     }
   }
 
-  renderHidden(secondLevel, GUID) {
+  renderHidden(secondLevel, GUID, discrepancy, secondLevelDiscrepancy) {
+
     return secondLevel.map((x, index) => {
+
+      console.log(x.get('assetName') + ' vs ' + secondLevelDiscrepancy)
+      console.log(x.get('assetName') == secondLevelDiscrepancy)
+
+      let highlightThis = (x.get('assetName') == secondLevelDiscrepancy)
+
       return (
-        <div className={ x.get('recon') ? styles.packageRowGrey : ''} key={index}>
+        <div className={ x.get('recon') ? styles.packageRowGrey : (discrepancy && highlightThis ? styles.packageRowHighLight : '')} key={index}>
           <div className={styles.packageLvl2 + ' ' + this.state.pkgLvl2} key={Date.now() * Math.random()}>
             {/* have second level table rendering structure here */}
             <div className={styles.packageRow}>
@@ -95,14 +102,19 @@ export default class MarginAgreementDetail extends React.Component {
   }
 
   render() {
+
     const {
       topLevel, secondLevel, GUID,
-      totalAmount, isSecondLevel, checkboxImageUrl, discrepancy
+      totalAmount, isSecondLevel, checkboxImageUrl, discrepancy, secondLevelDiscrepancy
     } = this.props
+
+    console.log(secondLevelDiscrepancy)
+
     return (
       <div className={ isSecondLevel ?
-        styles.packageRowGrey : (discrepancy ? styles.packageRowHighLight : '')}>
-        <div className={ styles.packageRow }> {/* one row div*/}
+        styles.packageRowGrey : ''}>
+
+        <div className={ styles.packageRow + ' ' + (discrepancy ? styles.packageRowHighLight : '')}> {/* one row div*/}
           <div className={styles.packageLeft}>
             <div className={styles.packageCheckBox + ' ' + this.state.cbLvl1}
                  onClick={this.firstLevelSelect}>
@@ -116,7 +128,8 @@ export default class MarginAgreementDetail extends React.Component {
           </div>
           <div className={styles.packageRight}>{numberWithCommas(totalAmount)}</div>
         </div>
-        {this.renderHidden(secondLevel, GUID)}
+
+        {this.renderHidden(secondLevel, GUID, discrepancy, secondLevelDiscrepancy)}
       </div>
     )
   }

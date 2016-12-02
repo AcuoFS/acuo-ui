@@ -99,12 +99,50 @@ export default class MarginAgreementPortfolio extends React.Component {
     return highestDifference
   }
 
+  secondLevelHighestDiscrepancy(firstLevelName, marginData, discrepancy){
+
+    if(discrepancy){
+      let clientFirstLevel = marginData.get('clientAssets').reduce((highestValue, x) => {
+        let current = x.get('data').filter(x => {
+          return x.get('firstLevel') == firstLevelName
+        })
+        return (current.size > 0 ? current : highestValue)
+      }, '').first()
+
+      let cptyFirstLevel = marginData.get('counterpartyAssets').reduce((highestValue, x) => {
+        let current = x.get('data').filter(x => {
+          return x.get('firstLevel') == firstLevelName
+        })
+        return (current.size > 0 ? current : highestValue)
+      }, '').first()
+
+
+      if(clientFirstLevel && cptyFirstLevel){
+
+        let highestDiscrepancy = clientFirstLevel.get('secondLevel').reduce((highest, x) => {
+          let difference = Math.abs(x.get('amount') - cptyFirstLevel.get('secondLevel').filter(y => y.get('assetName') == x.get('assetName')).first().get('amount'))
+
+          return (highest.get('difference') > difference ? highest : Map({'assetName': x.get('assetName'), 'difference': difference}))
+        }, Map())
+
+        return (highestDiscrepancy.get('assetName'))
+      }
+      else{
+        return null
+      }
+
+    }
+  }
+
   renderItem(marginData, assetsName, handlerSelectedItem) {
     if (marginData.get(assetsName))
       return marginData.get(assetsName).map((x) => {
         if (x.get('data')) {
           return (<div key={x.get('groupName')}>{x.get('data').map((y) => {
             const secondLevel = y.get('secondLevel')
+            const discrepancy = this.checkDescrepency(marginData.get('clientAssets'), marginData.get('counterpartyAssets')).includes(y.get('firstLevel'))
+
+            let secondLevelDiscrepancy = this.secondLevelHighestDiscrepancy(y.get('firstLevel'), marginData, discrepancy)
 
             return <MarginAgreementDetail
               GUID={marginData.get('GUID')}
@@ -117,10 +155,8 @@ export default class MarginAgreementPortfolio extends React.Component {
               handlerSelectedItem={handlerSelectedItem}
               isSecondLevel={this.checkSecondLevel(secondLevel)}
               checkboxImageUrl={this.getCheckboxImageUrl(secondLevel)}
-              discrepancy={this.checkDescrepency(
-                marginData.get('clientAssets'),
-                marginData.get('counterpartyAssets')).includes(y.get('firstLevel'))}
-
+              discrepancy={discrepancy}
+              secondLevelDiscrepancy={secondLevelDiscrepancy}
             />
           })}
             <hr/>
