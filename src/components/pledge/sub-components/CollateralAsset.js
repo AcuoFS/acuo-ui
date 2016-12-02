@@ -17,14 +17,12 @@ class CollateralAsset extends React.Component {
   }
 
   amendCollateral(e) {
-    console.log('e is', e.currentTarget.dataset.ref)
     this.setState({
       toggle: e.currentTarget.dataset.ref
     })
   }
 
   allocateCollateral(e) {
-    console.log('data ref for allocateCollateral', e.currentTarget.dataset.ref)
     this.setState({
       allocateCollateral: e.currentTarget.dataset.ref
     })

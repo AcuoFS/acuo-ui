@@ -671,8 +671,12 @@ div.collateralTableExpanded div:nth-child(13){
   z-index: 2;
   top:-80px; /* set top value */
   left:-6px; /* set left value */
-  min-width:500px;
-  min-height:170px;
+  /*min-width:500px;
+  min-height:170px;*/
+
+  min-width:350px;
+  min-height:113px;
+
   border: 1px solid #1c2124;
   display: none;
   position: absolute;
@@ -722,14 +726,14 @@ div.collateralTableExpanded div:nth-child(13){
 .buttonContainer button {
   float: right;
   margin: 16px 24px;
-  width: 146px;
+  width: 100px;
   /*height: 32px;*/
   color: #4A4A4A ;
   background-color: #FAFAFA ;
   border: 1px solid #979797 ;
   font-size: 13px;
   font-weight: bold;
-  line-height: 32px;
+  /*line-height: 32px;*/
   text-align: center;
   -webkit-border-radius: 20px;
   border-radius: 20px;
