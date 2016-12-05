@@ -17,7 +17,7 @@ class Pledge extends React.Component {
     this.state = {
       open: true,
       class: styles.sectionOpen,
-      dropdown: "./../../../images/pledge/minusbox.png",
+      dropdown: "./images/pledge/minusbox.png",
 
       toggleColwidthL: styles.minDivL, 
       toggleColwidthR: styles.expandDivR,
@@ -25,8 +25,8 @@ class Pledge extends React.Component {
       toggleHideCol: styles.showCol,
       toggleShowHideL : false, 
       toggleShowHideR : true,
-      sideways: "./../../../images/pledge/sideways-min.png",
-      selectionSideway: "./../../../images/pledge/sideways-max.png",
+      sideways: "./images/pledge/sideways-min.png",
+      selectionSideway: "./images/pledge/sideways-max.png",
       chsCallsTickState: 'None',
       checkbox: "./images/pledge/checkbox.png",
       selTickBox: 'none'
@@ -57,8 +57,8 @@ class Pledge extends React.Component {
         toggleColwidthL: styles.expandDivL,
         toggleColwidthR: styles.minDivR,
         toggleHideCol: styles.hideCol,
-        sideways: "./../../../images/pledge/sideways-max.png",
-        selectionSideway: "./../../../images/pledge/sideways-min.png",
+        sideways: "./images/pledge/sideways-max.png",
+        selectionSideway: "./images/pledge/sideways-min.png",
       })
     } else {
       this.setState({
@@ -68,8 +68,8 @@ class Pledge extends React.Component {
         toggleHideCol: styles.showCol,
         toggleShowHideL : false,
         toggleShowHideR : true,
-        sideways: "./../../../images/pledge/sideways-min.png",
-        selectionSideway: "./../../../images/pledge/sideways-max.png",
+        sideways: "./images/pledge/sideways-min.png",
+        selectionSideway: "./images/pledge/sideways-max.png",
       })
     }
   }
@@ -174,7 +174,7 @@ class Pledge extends React.Component {
 
             <div className={styles.panel} id={styles.pleStatus}>
               {/*<div className={styles.panelTitle}>Pledge Status</div>*/}
-              <img src="./../../../images/pledge/Pledge-status-widget.png"/>
+              <img src="./images/pledge/Pledge-status-widget.png"/>
             </div>
           </div>
 
