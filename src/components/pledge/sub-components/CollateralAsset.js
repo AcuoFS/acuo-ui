@@ -134,7 +134,23 @@ class CollateralAsset extends React.Component {
                   </div>
                   {/*<input type="text" className={styles.popupInputBox}/>*/}
                 </div>
-
+                <div className={styles.popupRow}> {/* one row div*/}
+                  <div className={styles.popupText}> Call Type
+                  </div>
+                  <div id="marginOption"className={styles.popupInputBox}>
+                    <Dropdown
+                      handlerOnClick={this.toggleDropDown}
+                      handleOnSelectedItemChange={e => e.stopPropagation()}
+                      selectedOption='Select One'
+                      options={['Consolidated',
+                        'Credit',
+                        'Initial',
+                        'Netted',
+                        'Variation']}
+                    />
+                  </div>
+                  {/*<input type="text" className={styles.popupInputBox}/>*/}
+                </div>
 
                 <div className={styles.popupRow}> {/* one row div*/}
                   <div className={styles.popupText}> Amount
