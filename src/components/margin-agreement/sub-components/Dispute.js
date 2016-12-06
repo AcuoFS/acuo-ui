@@ -105,7 +105,7 @@ export default class Dispute extends React.Component {
 
 
 
-        <div className={styles.buttonContainer}>
+        <div className={styles.buttonContainerDisabled}>
           <button type="submit">Dispute</button>
         </div>
 
