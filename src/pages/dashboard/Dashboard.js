@@ -1,5 +1,5 @@
 import React from 'react'
-import { UploadPortfolioComponent } from '../../components'
+import { UploadPortfolioButton, UploadPortfolioComponent } from '../../components'
 import {
     FilterContainer,
     TableContainer,
@@ -14,7 +14,7 @@ class Dashboard extends React.Component{
         return (
             <div>
                 <NavigationBarContainer curPage={this.props.location.pathname}/>
-                <UploadPortfolioComponent />
+                <UploadPortfolioButton />
                 <FilterContainer/>
                 <GraphContainer />
                 <TableContainer />
