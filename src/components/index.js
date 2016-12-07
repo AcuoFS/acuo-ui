@@ -5,6 +5,7 @@ import NavigationBarComponent from './navigation-bar/NavigationBar'
 import TableComponent from './table/Table'
 import UploadPortfolioComponent from './upload-portfolio/UploadPortfolio'
 import UploadPortfolioButton from './upload-portfolio/UploadPortfolioButton'
+import UploadWidgetComponent from './upload-portfolio/UploadWidget'
 import PledgeComponent from './pledge/Pledge'
 
 
@@ -16,5 +17,6 @@ export {
   TableComponent,
   UploadPortfolioComponent,
   PledgeComponent,
-  UploadPortfolioButton
+  UploadPortfolioButton,
+  UploadWidgetComponent
 }
