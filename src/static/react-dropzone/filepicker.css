@@ -6,10 +6,14 @@
 div.filepicker {
     text-align: center;
     padding: 5px;
-    background-color: #E1E1E1;
+    background-color: #FFFFFF;
     border-radius: 5px;
-    min-height: 60px;
+    min-height: 300px;
     border: 2px dashed #C7C7C7;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('../../../images/upload-portfolio/cloud_icon.png');
+    box-shadow: 5px 5px 5px #B6B6B6;
 }
 
 /* Icon */
