@@ -1,5 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 module.exports = {
   entry: {
@@ -40,7 +42,10 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-    })
+    }),
+    new CopyWebpackPlugin([
+      { from: './src/static/react-dropzone', to: './css/react-dropzone' }
+    ])
   ],
   devServer: {
     colors: true,
