@@ -13,7 +13,9 @@ div.filepicker {
     background-repeat: no-repeat;
     background-position: center;
     background-image: url('../../../images/upload-portfolio/cloud_icon.png');
-    box-shadow: 5px 5px 5px #B6B6B6;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 /* Icon */
