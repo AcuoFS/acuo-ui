@@ -18,7 +18,7 @@ export default class UploadWidget extends React.Component {
       , maxFiles: 5
       , parallelUploads: 5
       // Accept only XLSX files
-      , acceptedFiles: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      , acceptedFiles: ".xlsx"
       // Overriding the default HTML tags by DZ
       , previewTemplate: ReactDOMServer.renderToStaticMarkup(
         <div className={"dz-preview dz-file-preview " + styles.alignFileIconLeft}>
@@ -44,14 +44,13 @@ export default class UploadWidget extends React.Component {
     }
 
     this.dropzone = null
-    this.generateBtn = null
     this.onGenerate = this.onGenerate.bind(this)
   }
 
   handleFileAdded(file) {
     console.log("handling file add " + file)
 
-    const isGoodForSubmission =  this.dropzone.files.length > 0
+    const isGoodForSubmission = this.dropzone.files.length > 0
 
     this.setState({
       isWidgetValidForSubmission: isGoodForSubmission
@@ -81,13 +80,15 @@ export default class UploadWidget extends React.Component {
 
   handleError(file) {
     if (!file.accepted) {
-      console.log("file not accepted")
-
-      this.setState({
-        isWidgetValidForSubmission: false
-      })
-      this.generateBtn.disabled = true
+      // Remove the accepted file
+      this.dropzone.removeFile(file)
     }
+  }
+
+  handleRemove() {
+    this.setState({
+      isWidgetValidForSubmission: !(this.dropzone.files.length == 0)
+    })
   }
 
   render() {
@@ -98,7 +99,8 @@ export default class UploadWidget extends React.Component {
       init: dz => this.dropzone = dz,
       addedfile: this.handleFileAdded.bind(this),
       success: this.success.bind(this),
-      error: this.handleError.bind(this)
+      error: this.handleError.bind(this),
+      removedfile: this.handleRemove.bind(this)
     }
 
     return (
