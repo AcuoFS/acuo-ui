@@ -1,0 +1,74 @@
+div.componentStyle {
+    margin-top: 1%;
+    margin-left: 8%;
+    margin-right: 8%;
+    /*width: 1260px;*/
+    /*height: 380px;*/
+    background-color: #FFFFFF;
+    box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
+    border-radius: 8px;
+    min-height: 410px;
+}
+
+.alignFileIconLeft {
+    float: left;
+}
+
+.buttonContainerDisabled{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.buttonContainerEnabled{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.buttonContainerDisabled button {
+    float: right;
+    margin: 16px 24px;
+    /*width: 146px;*/
+    /*height: 32px;*/
+    color: #d7dce0 ;
+    background-color: #FAFAFA ;
+    border: 1px solid #d7dce0 ;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 32px;
+    text-align: center;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    margin: 0 20px;
+    align-self: center;
+}
+
+.buttonContainerEnabled button {
+    float: right;
+    margin: 16px 24px;
+    /*width: 146px;*/
+    /*height: 32px;*/
+    color: #fff ;
+    background-color: #00B9CC ;
+    border: 1px solid #00B9CC ;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 32px;
+    text-align: center;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    margin: 0 20px;
+    align-self: center;
+}
+
+.widgetHeader{
+    width: 187px;
+    height: 29px;
+    font-family: Helvetica;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 29px;
+    color: #6389AD;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
