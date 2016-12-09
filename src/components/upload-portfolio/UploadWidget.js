@@ -25,7 +25,7 @@ export default class UploadWidget extends React.Component {
           <div className="dz-details">
             <div className="dz-filename"><span data-dz-name="true"></span></div>
             <img data-dz-thumbnail="true" src="./images/upload-portfolio/file_icon.png"/>
-            <img src="./images/upload-portfolio/cross_cancel.png" alt="Click me to remove the file." data-dz-remove/>
+            <img data-dz-remove src="./images/upload-portfolio/cross_cancel.png" alt="Click me to remove the file." />
           </div>
           <div className="dz-progress"><span className="dz-upload" data-dz-uploadprogress="true"></span></div>
           <div className="dz-success-mark"><span>✔</span></div>
@@ -40,6 +40,7 @@ export default class UploadWidget extends React.Component {
     this.componentConfig = {
       iconFiletypes: ['.xlsx'],
       showFiletypeIcon: false,
+      // Change this param to the server's URL
       postUrl: 'http://127.0.0.1:3000/uploadHandler'
     }
 
@@ -50,19 +51,15 @@ export default class UploadWidget extends React.Component {
   handleFileAdded(file) {
     console.log("handling file add " + file)
 
-    const isGoodForSubmission = this.dropzone.files.length > 0
-
     this.setState({
-      isWidgetValidForSubmission: isGoodForSubmission
+      isWidgetValidForSubmission: this.dropzone.files.length > 0
     })
-    this.generateBtn.disabled = !isGoodForSubmission
 
-    // console.log("accepted: "+file.accepted)
-    console.log("accepted files: " + this.dropzone.getAcceptedFiles().length)
-    console.log("rejected files: " + this.dropzone.getRejectedFiles().length)
-    console.log("queued files: " + this.dropzone.getQueuedFiles().length)
-    console.log("uploading files: " + this.dropzone.getUploadingFiles().length)
-    console.log("all files: " + this.dropzone.files.length)
+    // console.log("accepted files: " + this.dropzone.getAcceptedFiles().length)
+    // console.log("rejected files: " + this.dropzone.getRejectedFiles().length)
+    // console.log("queued files: " + this.dropzone.getQueuedFiles().length)
+    // console.log("uploading files: " + this.dropzone.getUploadingFiles().length)
+    // console.log("all files: " + this.dropzone.files.length)
   }
 
   success(file) {
@@ -120,7 +117,8 @@ export default class UploadWidget extends React.Component {
         <div
           className={this.state.isWidgetValidForSubmission ?
             styles.buttonContainerEnabled : styles.buttonContainerDisabled}>
-          <button type="button" onClick={this.onGenerate} ref={dom => this.generateBtn = dom}>
+          <button type="button" onClick={this.onGenerate}
+                  disabled={!(this.state.isWidgetValidForSubmission)}>
             Generate Margin Call Data
           </button>
         </div>
