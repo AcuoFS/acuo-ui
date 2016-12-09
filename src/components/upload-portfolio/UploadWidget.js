@@ -9,12 +9,13 @@ export default class UploadWidget extends React.Component {
     super(props)
 
     this.djsConfig = {
-      addRemoveLinks: true,
-      acceptedFiles: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-      autoProcessQueue: false,
-      maxFiles: 5,
-      parallelUploads: 5
-      , dictDefaultMessage: "Drag and drop portfolio files, or click anywhere here"
+      addRemoveLinks: true
+      , autoProcessQueue: false
+      , maxFiles: 5
+      , parallelUploads: 5
+      // Accept only XLSX files
+      , acceptedFiles: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      // Overriding the default HTML tags by DZ
       , previewTemplate: ReactDOMServer.renderToStaticMarkup(
           <div className={"dz-preview dz-file-preview " + styles.alignFileIconLeft}>
             <div className="dz-details">
@@ -28,7 +29,8 @@ export default class UploadWidget extends React.Component {
             <div className="dz-error-message"><span data-dz-errormessage="true"></span></div>
           </div>
       )
-      , clickable: false
+      // Using css selector to define clickable element
+      , clickable: ".triggerFileSelection"
     }
 
     this.componentConfig = {
@@ -47,7 +49,7 @@ export default class UploadWidget extends React.Component {
 
   success(file) {
     console.log('uploaded', file)
-    setTimeout(function (){this.dropzone.removeFile(file)}.bind(this), 2000)
+    // Wait for anmation to complete before removing file from the widget
     setTimeout((() => {this.dropzone.removeFile(file)}).bind(this), 1500)
   }
 
@@ -73,7 +75,7 @@ export default class UploadWidget extends React.Component {
     </form>*/
       <div className={styles.componentStyle}>
         <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig}>
-          <div className="dz-message">Drag and drop portfolio files, or <a href="#">browse</a> .</div>
+          <div className="dz-message">Drag and drop portfolio files, or <a href="#" className="triggerFileSelection">browse</a>.</div>
         </DropzoneComponent>
         <button type="button" onClick={this.onGenerate}>Generate Margin Call Data</button>
         <div className={styles.cloudImage}></div>
