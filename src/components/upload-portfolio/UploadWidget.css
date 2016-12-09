@@ -7,3 +7,49 @@ div.componentStyle {
 .alignFileIconLeft {
     float: left;
 }
+
+.buttonContainerDisabled{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.buttonContainerEnabled{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.buttonContainerDisabled button {
+    float: right;
+    margin: 16px 24px;
+    /*width: 146px;*/
+    /*height: 32px;*/
+    color: #d7dce0 ;
+    background-color: #FAFAFA ;
+    border: 1px solid #d7dce0 ;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 32px;
+    text-align: center;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    margin: 0 20px;
+    align-self: center;
+}
+
+.buttonContainerEnabled button {
+    float: right;
+    margin: 16px 24px;
+    /*width: 146px;*/
+    /*height: 32px;*/
+    color: #fff ;
+    background-color: #00B9CC ;
+    border: 1px solid #00B9CC ;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 32px;
+    text-align: center;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    margin: 0 20px;
+    align-self: center;
+}

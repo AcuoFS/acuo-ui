@@ -77,7 +77,9 @@ export default class UploadWidget extends React.Component {
         <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig}>
           <div className="dz-message">Drag and drop portfolio files, or <a href="#" className="triggerFileSelection">browse</a>.</div>
         </DropzoneComponent>
+        <div className={styles.buttonContainerDisabled}>
         <button type="button" onClick={this.onGenerate}>Generate Margin Call Data</button>
+        </div>
         <div className={styles.cloudImage}></div>
       </div>
     )
