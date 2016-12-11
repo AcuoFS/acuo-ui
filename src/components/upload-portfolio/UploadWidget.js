@@ -13,8 +13,8 @@ export default class UploadWidget extends React.Component {
     }
 
     this.djsConfig = {
-      addRemoveLinks: true
-      , autoProcessQueue: false
+      // addRemoveLinks: true,
+      autoProcessQueue: false
       , maxFiles: 5
       , parallelUploads: 5
       // Accept only XLSX files
@@ -23,11 +23,14 @@ export default class UploadWidget extends React.Component {
       , previewTemplate: ReactDOMServer.renderToStaticMarkup(
         <div className={"dz-preview dz-file-preview " + styles.alignFileIconLeft}>
           <div className="dz-details">
-            <div className="dz-filename"><span data-dz-name="true"></span></div>
             <img data-dz-thumbnail="true" src="./images/upload-portfolio/file_icon.png"/>
-            <img data-dz-remove src="./images/upload-portfolio/cross_cancel.png" alt="Click me to remove the file." />
+            <div className={"dz-filename " + styles.fileName}>
+              <span data-dz-name="true" className={styles.fileNameText}></span>
+            </div>
+            <a href="#" data-dz-remove>
+              <img src="./images/upload-portfolio/cross_cancel.png" alt="Click me to remove the file."/>
+            </a>
           </div>
-          <div className="dz-progress"><span className="dz-upload" data-dz-uploadprogress="true"></span></div>
           <div className="dz-success-mark"><span>✔</span></div>
           <div className="dz-error-mark"><span>✘</span></div>
           <div className="dz-error-message"><span data-dz-errormessage="true"></span></div>

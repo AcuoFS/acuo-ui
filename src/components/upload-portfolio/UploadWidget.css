@@ -72,3 +72,18 @@ div.componentStyle {
     padding-bottom: 10px;
     padding-left: 10px;
 }
+
+
+.fileName {
+    /*width: 255px;*/
+    /*height: 28px;*/
+    background-color: #FAFAFA;
+    border: 1px solid #979797;
+    border-radius: 8px;
+}
+
+.fileNameText{
+    font-family: Helvetica;
+    font-size: 14px;
+    color: #4A4A4A;
+}
