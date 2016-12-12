@@ -144,7 +144,7 @@ class CollateralAsset extends React.Component {
                   </div>
                 </div>
 
-                <div className={styles.buttonContainer}>
+                <div className={styles.buttonContainerDisabled}>
                   <button type="submit">Allocate</button>
                   <button type="submit" onClick={this.cancelCollateral}>Cancel
                   </button>
