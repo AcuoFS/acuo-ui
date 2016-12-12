@@ -10,11 +10,17 @@ class CollateralAsset extends React.Component {
     this.cancelCollateral = this.cancelCollateral.bind(this)
     this.onRemoveFromEarmarked = this.onRemoveFromEarmarked.bind(this)
     this.removeCollateralBox = this.removeCollateralBox.bind(this)
+    this.validateAllocateForm = this.validateAllocateForm.bind(this)
+    this.onAgreementDropdownItemChange = this.onAgreementDropdownItemChange.bind(this)
 
     this.state = {
       toggle: ""
-      // , cancelCollateral: false
+      , isAssetValidToAllocate: false
+      , isDropDownSelected: false
     }
+
+
+    this.amountInput = null
   }
 
   toggleDropDown(e) {
@@ -26,7 +32,7 @@ class CollateralAsset extends React.Component {
     })
   }
 
-  onRemoveFromEarmarked(e, assetType, propAssetId, propAssetIdType,  propHandleOnRemoveFromEarmarked){
+  onRemoveFromEarmarked(e, assetType, propAssetId, propAssetIdType, propHandleOnRemoveFromEarmarked) {
 
     propHandleOnRemoveFromEarmarked(e, assetType, propAssetId, propAssetIdType)
   }
@@ -70,6 +76,26 @@ class CollateralAsset extends React.Component {
     return statusClass
   }
 
+  validateAllocateForm() {
+    const isAllInputFilled =
+      !(this.amountInput.value.trim() == "") &&
+      this.state.isDropDownSelected
+
+    this.setState({
+      isAssetValidToAllocate: isAllInputFilled
+    })
+
+    console.log(isAllInputFilled)
+  }
+
+  onAgreementDropdownItemChange(e) {
+    this.setState({
+      isDropDownSelected: true
+    }, this.validateAllocateForm)
+
+    e.stopPropagation();
+  }
+
   render() {
     const {
       propAsset,
@@ -96,7 +122,8 @@ class CollateralAsset extends React.Component {
     let statusDisplay = (
       <div className={styles.collateralCell}><span className={statusClass}>{propStatus}</span></div>
     )
-    if(propCollateralType == 'Earmarked'){
+    if (propCollateralType == 'Earmarked') {
+
       statusDisplay = (
         <div className={styles.relative} onClick={this.amendCollateral} onMouseLeave={this.removeCollateralBox}
              data-ref={propCollateralType + propAssetId + propAssetIdType}>
@@ -104,14 +131,17 @@ class CollateralAsset extends React.Component {
           <div
             className={styles.boxed + ' ' + ((this.state.toggle == propCollateralType + propAssetId + propAssetIdType) ? styles.showBox : '')}>
             <div>Available</div>
-            <div onClick={(e) => this.onRemoveFromEarmarked(e, 'earmarked', propAssetId, propAssetIdType,  propHandleOnRemoveFromEarmarked)}>Remove</div>
+            <div
+              onClick={(e) => this.onRemoveFromEarmarked(e, 'earmarked', propAssetId, propAssetIdType, propHandleOnRemoveFromEarmarked)}>
+              Remove
+            </div>
             <div>Amend amount</div>
             <div className={styles.relative} onClick={this.allocateCollateral}
                  data-ref={"allocate" + propCollateralType + propAssetId + propAssetIdType}>Allocate to Call
             </div>
             <div
               className={styles.boxAllocate + ' ' + (this.state.allocateCollateral == "allocate" + propCollateralType + propAssetId +
-              propAssetIdType ? styles.showBox :'')}>
+              propAssetIdType ? styles.showBox : '')}>
               <div className={styles.popupAllocateRoot}>
 
                 <div className={styles.popupRow}> {/* one row div*/}
@@ -120,7 +150,7 @@ class CollateralAsset extends React.Component {
                   <div className={styles.popupInputBox}>
                     <Dropdown
                       handlerOnClick={this.toggleDropDown}
-                      handleOnSelectedItemChange={e => e.stopPropagation()}
+                      handleOnSelectedItemChange={this.onAgreementDropdownItemChange}
                       selectedOption='Select One'
                       options={['Acuo SG - ABC Securities FCM Global Fund',
                         'Acuo SG - ABC Securities FCM Global Fund',
@@ -132,24 +162,28 @@ class CollateralAsset extends React.Component {
                         'Acuo SG - ABC Securities FCM Global Fund 7']}
                     />
                   </div>
-                  {/*<input type="text" className={styles.popupInputBox}/>*/}
                 </div>
 
 
                 <div className={styles.popupRow}> {/* one row div*/}
                   <div className={styles.popupText}> Amount
                   </div>
+
                   <div className={styles.popupInputBox}>
-                    <input type="text" className={styles.popupInputBox}/>
+                    <input type="text" className={styles.popupInputBox}
+                           ref={dom => this.amountInput = dom} onChange={this.validateAllocateForm}/>
                   </div>
                 </div>
 
-                <div className={styles.buttonContainerDisabled}>
-                  <button type="submit">Allocate</button>
-                  <button type="submit" onClick={this.cancelCollateral}>Cancel
+                <div className={styles.buttonContainer}>
+                  <button type="submit" disabled={!this.state.isAssetValidToAllocate}
+                          className={this.state.isAssetValidToAllocate ?
+                            styles.btnEnabled : styles.btnDisabled}>
+                    Allocate
+                  </button>
+                  <button type="submit" onClick={this.cancelCollateral} className={styles.btnEnabled}>Cancel
                   </button>
                 </div>
-
               </div>
             </div>
 
@@ -157,7 +191,6 @@ class CollateralAsset extends React.Component {
         </div>
       )
     }
-
     if (propIsDisplayAll) {
       return (
         <div className={styles.collateralRow}>
@@ -177,7 +210,7 @@ class CollateralAsset extends React.Component {
         </div>
       )
     }
-    else{
+    else {
       return (
         <div className={styles.collateralRow}>
           <div className={styles.collateralCell}>{propAsset}</div>
@@ -190,7 +223,7 @@ class CollateralAsset extends React.Component {
         </div>
       )
     }
- }
+  }
 }
 
 

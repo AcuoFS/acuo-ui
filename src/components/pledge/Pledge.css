@@ -719,17 +719,17 @@ div.collateralTableExpanded div:nth-child(13){
   width: 100%;
 }
 
-.buttonContainerDisabled{
-  width: 100%;
-  padding-top: 10px;
-}
-
-.buttonContainerEnabled{
+.buttonContainer{
   width: 100%;
   margin-top: 10px;
 }
 
-.buttonContainerDisabled button {
+/*.buttonContainerEnabled{*/
+  /*width: 100%;*/
+  /*margin-top: 10px;*/
+/*}*/
+
+.buttonContainer .btnDisabled {
   float: right;
   margin: 16px 24px;
   width: 100px;
@@ -747,7 +747,7 @@ div.collateralTableExpanded div:nth-child(13){
   align-self: center;
 }
 
-.buttonContainerEnabled button {
+.buttonContainer .btnEnabled {
   float: right;
   margin: 16px 24px;
   width: 100px;
