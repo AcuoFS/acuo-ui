@@ -12,11 +12,13 @@ class CollateralAsset extends React.Component {
     this.removeCollateralBox = this.removeCollateralBox.bind(this)
     this.validateAllocateForm = this.validateAllocateForm.bind(this)
     this.onAgreementDropdownItemChange = this.onAgreementDropdownItemChange.bind(this)
+    this.onCallTypeDropdownItemChange = this.onCallTypeDropdownItemChange.bind(this)
 
     this.state = {
       toggle: ""
       , isAssetValidToAllocate: false
-      , isDropDownSelected: false
+      , isMgnAgreementDropDownSelected: false
+      , isCallTypeDropDownSelected: false
     }
 
 
@@ -79,18 +81,25 @@ class CollateralAsset extends React.Component {
   validateAllocateForm() {
     const isAllInputFilled =
       !(this.amountInput.value.trim() == "") &&
-      this.state.isDropDownSelected
+      this.state.isMgnAgreementDropDownSelected &&
+      this.state.isCallTypeDropDownSelected
 
     this.setState({
       isAssetValidToAllocate: isAllInputFilled
     })
-
-    console.log(isAllInputFilled)
   }
 
   onAgreementDropdownItemChange(e) {
     this.setState({
-      isDropDownSelected: true
+      isMgnAgreementDropDownSelected: true
+    }, this.validateAllocateForm)
+
+    e.stopPropagation();
+  }
+
+  onCallTypeDropdownItemChange(e) {
+    this.setState({
+      isCallTypeDropDownSelected: true
     }, this.validateAllocateForm)
 
     e.stopPropagation();
@@ -153,22 +162,24 @@ class CollateralAsset extends React.Component {
                       handleOnSelectedItemChange={this.onAgreementDropdownItemChange}
                       selectedOption='Select One'
                       options={this.props.listOfMarginCallName}
+                      activateMouseLeaveEvent
                     />
                   </div>
                 </div>
                 <div className={styles.popupRow}> {/* one row div*/}
                   <div className={styles.popupText}> Call Type
                   </div>
-                  <div id="marginOption"className={styles.popupInputBox}>
+                  <div id="marginOption" className={styles.popupInputBox}>
                     <Dropdown
                       handlerOnClick={this.toggleDropDown}
-                      handleOnSelectedItemChange={e => e.stopPropagation()}
+                      handleOnSelectedItemChange={this.onCallTypeDropdownItemChange}
                       selectedOption='Select One'
                       options={['Consolidated',
                         'Credit',
                         'Initial',
                         'Netted',
                         'Variation']}
+                      activateMouseLeaveEvent
                     />
                   </div>
                   {/*<input type="text" className={styles.popupInputBox}/>*/}

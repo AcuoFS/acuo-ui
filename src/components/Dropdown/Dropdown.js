@@ -37,7 +37,7 @@ export default class Dropdown extends React.Component{
 
   render(){
     // merge option 'ALL', with actual options
-    const options = this.props.options
+    const {options, activateMouseLeaveEvent} = this.props
     let menu = null
     if(this.state.isOpen){
       menu = (
@@ -54,7 +54,8 @@ export default class Dropdown extends React.Component{
 
     return(
       <div className={styles.filterItem + ' ' + (this.state.isOpen ? styles.increaseZindex : '')}>
-        <div className={styles.filters} onClick={this.handleToggleDropdown} >
+        <div className={styles.filters} onClick={this.handleToggleDropdown}
+             onMouseLeave={activateMouseLeaveEvent ? this.handleOnMouseLeave : null}>
           <div className={styles.selectedText}>
             {( this.state.selectedOption ).toUpperCase()}
           </div>
@@ -72,10 +73,12 @@ Dropdown.propTypes = {
   options : PropTypes.arrayOf(PropTypes.string),
   handlerOnClick : PropTypes.func.isRequired,
   handleOnSelectedItemChange : PropTypes.func.isRequired,
+  activateMouseLeaveEvent: PropTypes.bool
 }
 
 Dropdown.defaultProps = {
   title : '',
   selectedOption : '',
-  options : []
+  options : [],
+  activateMouseLeaveEvent: false
 }
