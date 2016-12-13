@@ -675,7 +675,7 @@ div.collateralTableExpanded div:nth-child(13){
   min-height:170px;*/
 
   min-width:350px;
-  min-height:113px;
+  min-height:130px;
 
   border: 1px solid #1c2124;
   display: none;
@@ -715,7 +715,7 @@ div.collateralTableExpanded div:nth-child(13){
 .popupInputBox{
   display: inline-block;
   flex:3;
-  min-height: 40px;
+  min-height: 26px;
   width: 100%;
 }
 
