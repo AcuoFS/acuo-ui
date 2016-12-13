@@ -179,7 +179,7 @@ class CollateralAsset extends React.Component {
                   </div>
 
                   <div className={styles.popupInputBox}>
-                    <input type="text" className={styles.popupInputBox}
+                    <input type="number" className={styles.popupInputBox}
                            ref={dom => this.amountInput = dom} onChange={this.validateAllocateForm}/>
                   </div>
                 </div>

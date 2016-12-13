@@ -12,6 +12,10 @@
   vertical-align: top;
 }
 
+.increaseZindex{
+  z-index: 30;
+}
+
 .filterItem .filters {
   font-size: 13px;
   color: #494949;

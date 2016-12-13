@@ -53,7 +53,7 @@ export default class Dropdown extends React.Component{
     }
 
     return(
-      <div className={styles.filterItem}>
+      <div className={styles.filterItem + ' ' + (this.state.isOpen ? styles.increaseZindex : '')}>
         <div className={styles.filters} onClick={this.handleToggleDropdown} >
           <div className={styles.selectedText}>
             {( this.state.selectedOption ).toUpperCase()}
