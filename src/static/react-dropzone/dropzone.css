@@ -249,7 +249,8 @@
 /*}*/
 
 .dropzone.dz-drag-hover {
-    border-style: solid;
+    border: 4px dashed rgba(0, 0, 0, 0.3);
+    background-color: #FAFAFA;
 }
 
 .dropzone.dz-drag-hover .dz-message {
