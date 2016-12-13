@@ -4,6 +4,7 @@ import MarginAgreementListContainer from './MarginAgreementListContainer'
 import NavigationBarContainer from './NavigationBarContainer'
 import TableContainer from './TableContainer'
 import PledgeContainer from './PledgeContainer'
+import CollateralAssetContainer from './CollateralAssetContainer'
 
 
 export {
@@ -12,5 +13,6 @@ export {
   MarginAgreementListContainer,
   NavigationBarContainer,
   TableContainer,
-  PledgeContainer
+  PledgeContainer,
+  CollateralAssetContainer
 }

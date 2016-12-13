@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import CollateralAsset from './CollateralAsset'
+import CollateralAssetContainer from '../../../containers/CollateralAssetContainer'
 import {formatDate} from '../../../utils/formatDate'
 import {numberWithCommas} from '../../../utils/numbersWithCommas'
 import {formatPercentageOneDecimal} from '../../../utils/formatPercentageOneDecimal'
@@ -43,7 +43,7 @@ export default class CollateralAssetGroup extends React.Component {
 
     if (propCollateralAssetList && this.state.isGroupExpanded) {
       componentList = propCollateralAssetList.map((asset, index) => (
-        <CollateralAsset
+        <CollateralAssetContainer
           key={index}
           rowStyle={"tableRow"}
           propAsset={asset.assetName}

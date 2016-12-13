@@ -152,14 +152,7 @@ class CollateralAsset extends React.Component {
                       handlerOnClick={this.toggleDropDown}
                       handleOnSelectedItemChange={this.onAgreementDropdownItemChange}
                       selectedOption='Select One'
-                      options={['Acuo SG - ABC Securities FCM Global Fund',
-                        'Acuo SG - ABC Securities FCM Global Fund',
-                        'Acuo SG - ABC Securities FCM Global Fund 2',
-                        'Acuo SG - ABC Securities FCM Global Fund 3',
-                        'Acuo SG - ABC Securities FCM Global Fund 4',
-                        'Acuo SG - ABC Securities FCM Global Fund 5',
-                        'Acuo SG - ABC Securities FCM Global Fund 6',
-                        'Acuo SG - ABC Securities FCM Global Fund 7']}
+                      options={this.props.listOfMarginCallName}
                     />
                   </div>
                 </div>
@@ -229,6 +222,22 @@ class CollateralAsset extends React.Component {
 
 export default CollateralAsset
 
+CollateralAsset.PropTypes = {
+  propAsset: PropTypes.string,
+  propPrice: PropTypes.string,
+  propCcy: PropTypes.string,
+  propDeliveryTime: PropTypes.string,
+  propStatus: PropTypes.string,
+  propRating: PropTypes.string,
+  propMaturityDate: PropTypes.string,
+  propInternalCost: PropTypes.string,
+  propExternalCost: PropTypes.string,
+  propOppCost: PropTypes.string,
+  propIsin: PropTypes.string,
+  propVenue: PropTypes.string,
+  propAcctId: PropTypes.string,
+  listOfMarginCallName: PropTypes.arrayOf(PropTypes.string).isRequired
+}
 
 CollateralAsset.defaultProps = {
   propAsset: "",
