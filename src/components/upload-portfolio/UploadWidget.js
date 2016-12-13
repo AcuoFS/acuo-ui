@@ -25,11 +25,12 @@ export default class UploadWidget extends React.Component {
           <div className="dz-details">
             <img data-dz-thumbnail="true" src="./images/upload-portfolio/file_icon.png"/>
             <div className={"dz-filename " + styles.fileName}>
+              <a href="#" data-dz-remove>
+                <img src="./images/upload-portfolio/cross_cancel.png" alt="Click me to remove the file."/>
+              </a>
+
               <span data-dz-name="true" className={styles.fileNameText}></span>
             </div>
-            <a href="#" data-dz-remove>
-              <img src="./images/upload-portfolio/cross_cancel.png" alt="Click me to remove the file."/>
-            </a>
           </div>
           <div className="dz-success-mark"><span>✔</span></div>
           <div className="dz-error-mark"><span>✘</span></div>
@@ -44,7 +45,7 @@ export default class UploadWidget extends React.Component {
       iconFiletypes: ['.xlsx'],
       showFiletypeIcon: false,
       // Change this param to the server's URL
-      postUrl: 'http://127.0.0.1:3000/uploadHandler'
+      postUrl: 'http://valuation.acuo.com/acuo/api/upload'
     }
 
     this.dropzone = null
@@ -105,8 +106,8 @@ export default class UploadWidget extends React.Component {
 
     return (
       /*<form id="uploadbanner" enctype="multipart/form-data" method="post" action="http://localhost:3000/">
-       <input type="file" id="myFile"/>
-       <input type="submit" value="Submit"/>
+          <input type="file" id="myFile"/>
+          <input type="submit" value="Submit"/>
        </form>*/
       <div className={styles.componentStyle}>
         <div className={styles.widgetHeader}>Upload Portfolio</div>
@@ -115,7 +116,7 @@ export default class UploadWidget extends React.Component {
             <span>
               Drag and drop portfolio files, or <a href="#" className="triggerFileSelection">browse</a>.
             </span>
-          </div>
+      </div>
         </DropzoneComponent>
         <div
           className={this.state.isWidgetValidForSubmission ?
