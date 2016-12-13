@@ -58,6 +58,7 @@ div.componentStyle {
     border-radius: 20px;
     margin: 0 20px;
     align-self: center;
+    cursor: pointer;
 }
 
 .widgetHeader{
