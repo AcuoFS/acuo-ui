@@ -184,7 +184,8 @@ class Pledge extends React.Component {
 
             <div className={styles.col_L + ' ' + this.state.toggleColwidthL}>
 
-              {this.checkIfExist(selection).map(x => this.renderSelection(x, onTogglePendingAllocation, pendingAllocation))}
+              {this.checkIfExist(selection)
+                .map((x, index) => this.renderSelection(x, onTogglePendingAllocation, pendingAllocation, index))}
 
             </div>
 
