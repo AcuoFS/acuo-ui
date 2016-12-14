@@ -45,6 +45,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       { from: './src/static/react-dropzone', to: './css/react-dropzone' },
+      { from: './src/static/reset.css', to: './css/reset.css'},
       { from: './images', to: './images'}
     ])
   ],
