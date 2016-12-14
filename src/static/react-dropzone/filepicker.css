@@ -10,6 +10,8 @@ div.filepicker {
     border-radius: 5px;
     min-height: 300px;
     border: 2px dashed #C7C7C7;
+    display: inline-block;
+    width: 97%;
 }
 
 /* Icon */
