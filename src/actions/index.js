@@ -16,10 +16,11 @@ export const filterStateLegal = (legalEntity) => ({
   filter: legalEntity
 })
 
-export const filterTimeWindowStatus = (timeWindowMin, timeWindowMax) => ({
+export const filterTimeWindowStatus = (timeWindowMin, timeWindowMax, timeRangeText) => ({
   type: ActionTypes.FILTER_STATE_TIMEWINDOW,
   minTime: timeWindowMin,
-  maxTime: timeWindowMax
+  maxTime: timeWindowMax,
+  timeRangeText: timeRangeText
 })
 
 export const filterStateStatus = (status) => ({

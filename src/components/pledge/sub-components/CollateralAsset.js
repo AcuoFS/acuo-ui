@@ -124,7 +124,8 @@ class CollateralAsset extends React.Component {
       propCollateralType,
       propAssetId,
       propAssetIdType,
-      propHandleOnRemoveFromEarmarked
+      propHandleOnRemoveFromEarmarked,
+      listOfMarginCallName
     } = this.props
 
     let statusClass = this.getStatusColor(propStatus)
@@ -161,7 +162,7 @@ class CollateralAsset extends React.Component {
                       handlerOnClick={this.toggleDropDown}
                       handleOnSelectedItemChange={this.onAgreementDropdownItemChange}
                       selectedOption='Select One'
-                      options={this.props.listOfMarginCallName}
+                      options={listOfMarginCallName}
                       activateMouseLeaveEvent
                     />
                   </div>

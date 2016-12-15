@@ -98,7 +98,9 @@ export default class FilterBar extends React.Component {
             handleOnSelectedItemChange={this.props.onFilterTimeWindowStatus}
             optionList={this.props.timeWindowList}
             dropdownType={DROPDOWN_TYPE_TIME_SELECT}
-            selectedOption='Today: ALL'/>
+            selectedOption={
+              this.props.filters.getIn(['timeWindowFilter', 'timeRangeText']) ?
+                this.props.filters.getIn(['timeWindowFilter', 'timeRangeText']) : 'Today: ALL'}/>
 
           <FilterDropdown
             title={'Status'}

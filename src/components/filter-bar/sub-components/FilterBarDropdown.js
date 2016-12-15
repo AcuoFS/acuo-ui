@@ -52,7 +52,7 @@ export default class FilterDropdown extends React.Component {
       selectedOption: selectedOption,
       isOpen: false
     })
-    this.props.handleOnSelectedItemChange(timeWindowMin, timeWindowMax, e)
+    this.props.handleOnSelectedItemChange(timeWindowMin, timeWindowMax, selectedOption)
   }
 
   handleOnOptionChangeMultiSelect(e, displayOptionText, selectedOptionList) {
