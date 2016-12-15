@@ -82,12 +82,16 @@ export default class FilterBar extends React.Component {
           <FilterDropdown
             title={'Legal Entity'}
             handleOnSelectedItemChange={this.props.onLegalEntityChange}
-            options={this.props.legalEntityList}/>
+            options={this.props.legalEntityList}
+            selectedOption={
+              this.props.filters.getIn(['legalEntityFilter', 'filter'])}/>
 
           <FilterDropdown
             title={'Deriv Type'}
             handleOnSelectedItemChange={this.props.onDerivChange}
-            options={this.props.derivativeType}/>
+            options={this.props.derivativeType}
+            selectedOption={
+              this.props.filters.getIn(['typeFilter', 'filter'])}/>
 
           <FilterDropdown
             title={'Time Window'}
@@ -99,12 +103,16 @@ export default class FilterBar extends React.Component {
           <FilterDropdown
             title={'Status'}
             handleOnSelectedItemChange={this.props.onStatusChange}
-            options={this.props.statusList}/>
+            options={this.props.statusList}
+            selectedOption={
+              this.props.filters.getIn(['statusFilter', 'filter'])}/>
 
           <FilterDropdown
             title={'CPTY Organisation'}
             handleOnSelectedItemChange={this.props.onCptyOrgChange}
-            options={this.props.cptyOrganisation}/>
+            options={this.props.cptyOrganisation}
+            selectedOption={
+              this.props.filters.getIn(['cptyOrgFilter', 'filter'])}/>
 
           <FilterDropdown
             title={'CPTY Entity'}
