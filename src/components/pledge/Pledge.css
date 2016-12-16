@@ -120,7 +120,7 @@ input[type=range]::-webkit-slider-runnable-track {
 
 input[type=range]::-webkit-slider-thumb {
   height: 22px;
-  width: 7px;
+  width: 5.5px;
   background: #2B3C4C;
   cursor: pointer;
   -webkit-appearance: none;
@@ -150,7 +150,7 @@ input[type=range]::-moz-range-progress {
 
 input[type=range]::-moz-range-thumb {
   height: 22px;
-  width: 7px;
+  width: 5.5px;
   background: #2B3C4C;
   cursor: pointer;
   -moz-appearance: none;
@@ -170,7 +170,7 @@ input[type=range]::-ms-track {
 
 input[type=range]::-ms-thumb {
   height: 22px;
-  width: 7px;
+  width: 5.5px;
   background: #2B3C4C;
   cursor: pointer;
   -webkit-appearance: none;
@@ -251,6 +251,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 .sliderAndStatus{
   display: flex;
+  align-items: flex-start;
 }
 
 .optButton#optBtnPledge.btnEnabled {
@@ -282,7 +283,7 @@ input[type=range]:focus::-ms-fill-upper {
   width: 99.8%;
   display: flex;
   margin-left: 0.5%;
-  margin-top: -2.3%;
+  margin-top: -5.5px;
 }
 
 @-moz-document url-prefix() {
@@ -322,7 +323,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 .buttonHolder{
   display: flex;
-  padding: 15px 0;
+  padding: 40px 0 20px;
 }
 
 
