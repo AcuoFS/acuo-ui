@@ -139,7 +139,7 @@ class CollateralAsset extends React.Component {
              data-ref={propCollateralType + propAssetId + propAssetIdType}>
           <span className={statusClass}>{propStatus}</span>
           <div
-            className={styles.boxed + ' ' + ((this.state.toggle == propCollateralType + propAssetId + propAssetIdType) ? styles.showBox : '')}>
+            className={(propIsDisplayAll ? styles.boxed : styles.leftBoxed ) + ' ' + ((this.state.toggle == propCollateralType + propAssetId + propAssetIdType) ? styles.showBox : '')}>
             <div>Available</div>
             <div
               onClick={(e) => this.onRemoveFromEarmarked(e, 'earmarked', propAssetId, propAssetIdType, propHandleOnRemoveFromEarmarked)}>
@@ -150,7 +150,7 @@ class CollateralAsset extends React.Component {
                  data-ref={"allocate" + propCollateralType + propAssetId + propAssetIdType}>Allocate to Call
             </div>
             <div
-              className={styles.boxAllocate + ' ' + (this.state.allocateCollateral == "allocate" + propCollateralType + propAssetId +
+              className={(propIsDisplayAll ? styles.boxAllocate : styles.leftBoxAllocate) + ' ' + (this.state.allocateCollateral == "allocate" + propCollateralType + propAssetId +
               propAssetIdType ? styles.showBox : '')}>
               <div className={styles.popupAllocateRoot}>
 
