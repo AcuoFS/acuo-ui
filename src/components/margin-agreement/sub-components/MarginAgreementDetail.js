@@ -106,10 +106,10 @@ export default class MarginAgreementDetail extends React.Component {
     } = this.props
 
     return (
-      <div className={ isSecondLevel ?
-        styles.packageRowGrey : ''}>
+      <div className={ isSecondLevel ? styles.packageRowGrey : ''}>
 
-        <div className={ styles.packageRow + ' ' + (discrepancy ? styles.packageRowHighLight : '')}> {/* one row div*/}
+        <div className={ styles.packageRow + ' '
+        + (discrepancy && !this.state.open && !isSecondLevel ? styles.packageRowHighLight : '')}> {/* one row div*/}
           <div className={styles.packageLeft}>
             <div className={styles.packageCheckBox + ' ' + this.state.cbLvl1}
                  onClick={this.firstLevelSelect}>

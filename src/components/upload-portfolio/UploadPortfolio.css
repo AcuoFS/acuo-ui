@@ -95,3 +95,7 @@
     opacity: 1;
     pointer-events: auto;
 }
+
+.removeUnderLine{
+    text-decoration: none;
+}

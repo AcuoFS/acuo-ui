@@ -1,6 +1,6 @@
 {
   "name": "acuo",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "Acuo test bed",
   "main": "index.js",
   "scripts": {
@@ -36,9 +36,11 @@
     "babel-preset-react": "^6.16.0",
     "chai": "^3.5.0",
     "chai-immutable": "^1.6.0",
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.25.0",
     "exports-loader": "^0.6.3",
     "file-loader": "^0.9.0",
+    "image-webpack-loader": "^3.0.0",
     "imports-loader": "^0.6.5",
     "jsdom": "^9.8.0",
     "json-server": "^0.8.22",
@@ -57,6 +59,7 @@
     "lodash": "^4.17.2",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
+    "react-dropzone-component": "^1.2.1",
     "react-redux": "^4.4.5",
     "react-router": "^3.0.0",
     "redux": "^3.6.0",
