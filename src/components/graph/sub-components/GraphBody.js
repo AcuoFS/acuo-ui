@@ -1,13 +1,30 @@
 import React from 'react';
-import {List, Set, Map} from 'immutable'
+import { List, Set, Map } from 'immutable'
 import styles from '../Graph.css'
-
+import { browserHistory } from 'react-router'
 
 export default class GraphBody extends React.Component {
+
   constructor(props){
     super(props)
     this.getDeriv = this.getDeriv.bind(this)
   }
+
+  whichClickFuncToRun(status){
+    switch(status){
+      case 'expected':
+        return () => 0
+      case 'unrecon':
+        return () => browserHistory.push('/recon')
+      case 'recon':
+        return () => browserHistory.push('/pledge')
+      case 'pledge':
+        return () => browserHistory.push('/deploy')
+      case 'dispute':
+        return () => browserHistory.push('/dispute')
+    }
+  }
+
   getCircle(){
     let status = this.getDeriv().reduce((setX, x) => {
       return setX.union(x.get('marginStatus').map(y => y.get('status')))
@@ -73,25 +90,27 @@ export default class GraphBody extends React.Component {
           return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
+        const onClickFunc = this.whichClickFuncToRun(status.get('status'))
+
         return List()
         .push((timeFrame.get('inAmount') === 0)? 0 :
           <g id={styles.componentId} key={status.get('status') + timeFrame.get('timeFrame') + 'in'}>
-            <circle cx={this.props.x + (timeDifference + 0.5) * 60} cy={colour[1]} r={(timeFrame.get('inAmount') === 0)? 0 :(Math.log(timeFrame.get('inAmount'))) } fill={colour[0]}>
+            <circle cx={this.props.x + (timeDifference + 0.5) * 60} cy={colour[2]} r={(timeFrame.get('inAmount') === 0)? 0 :(Math.log(timeFrame.get('inAmount'))) } fill={colour[0]}>
             </circle>
             <g className={styles.toolTip} opacity="0.9">
-              <rect x={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? this.props.x - 110 + (timeDifference + 0.5) * 60 : this.props.x - 90 + (timeDifference + 0.5) * 60} y={colour[1] - 20} rx="4" width={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? 100 : 80} height="45" strokeWidth="1" stroke={colour[0]} fill="#FFFFFF"></rect>
-              <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[1] - 2.5} fontSize="13" fontFamily="helvetica" fontWeight="bold" fill="#010101" textAnchor="end">{timeFrame.get('inNo')} {status.get('status').toUpperCase()}</text>
-              <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[1] + 17.5} fontSize="13" fontFamily="helvetica" fill="#010101" textAnchor="end">{numberWithCommas(timeFrame.get('inAmount'))}</text>
+              <rect x={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? this.props.x - 110 + (timeDifference + 0.5) * 60 : this.props.x - 90 + (timeDifference + 0.5) * 60} y={colour[2] - 20} rx="4" width={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? 100 : 80} height="45" strokeWidth="1" stroke={colour[0]} fill="#FFFFFF"></rect>
+              <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] - 2.5} fontSize="13" fontFamily="helvetica" fontWeight="bold" fill="#010101" textAnchor="end">{timeFrame.get('inNo')} {status.get('status').toUpperCase()}</text>
+              <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] + 17.5} fontSize="13" fontFamily="helvetica" fill="#010101" textAnchor="end">{numberWithCommas(timeFrame.get('inAmount'))}</text>
             </g>
           </g>)
           .push((timeFrame.get('outAmount') === 0)? 0 :
-            <g id={styles.componentId} key={status.get('status') + timeFrame.get('timeFrame') + 'out'}>
-              <circle cx={this.props.x + (timeDifference + 0.5) * 60} cy={colour[2]} r={(timeFrame.get('outAmount') === 0)? 0 :(Math.log(timeFrame.get('outAmount'))) } fill={colour[0]}>
+            <g id={styles.componentId} key={status.get('status') + timeFrame.get('timeFrame') + 'out'} onClick={onClickFunc}>
+              <circle cx={this.props.x + (timeDifference + 0.5) * 60} cy={colour[1]} r={(timeFrame.get('outAmount') === 0)? 0 :(Math.log(timeFrame.get('outAmount'))) } fill={colour[0]}>
               </circle>
               <g className={styles.toolTip} opacity="0.9">
-                <rect x={(timeFrame.get('outAmount') > 100000000 || status.get('status').length > 7) ? this.props.x - 110 + (timeDifference + 0.5) * 60 : this.props.x - 90 + (timeDifference + 0.5) * 60} y={colour[2] - 20} rx="4" width={(timeFrame.get('outAmount') > 100000000 || status.get('status').length > 7) ? 100 : 80} height="45" strokeWidth="1" stroke={colour[0]} fill="#FFFFFF"></rect>
-                <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] - 2.5} fontSize="13" fontFamily="helvetica" fontWeight="bold" fill="#010101" textAnchor="end">{timeFrame.get('outNo')} {status.get('status').toUpperCase()}</text>
-                <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] + 17.5} fontSize="13" fontFamily="helvetica" fill="#010101" textAnchor="end">{numberWithCommas(timeFrame.get('outAmount'))}</text>
+                <rect x={(timeFrame.get('outAmount') > 100000000 || status.get('status').length > 7) ? this.props.x - 110 + (timeDifference + 0.5) * 60 : this.props.x - 90 + (timeDifference + 0.5) * 60} y={colour[1] - 20} rx="4" width={(timeFrame.get('outAmount') > 100000000 || status.get('status').length > 7) ? 100 : 80} height="45" strokeWidth="1" stroke={colour[0]} fill="#FFFFFF"></rect>
+                <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[1] - 2.5} fontSize="13" fontFamily="helvetica" fontWeight="bold" fill="#010101" textAnchor="end">{timeFrame.get('outNo')} {status.get('status').toUpperCase()}</text>
+                <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[1] + 17.5} fontSize="13" fontFamily="helvetica" fill="#010101" textAnchor="end">{numberWithCommas(timeFrame.get('outAmount'))}</text>
               </g>
             </g>)
       })
