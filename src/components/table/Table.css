@@ -57,7 +57,7 @@
     text-align: center;
 }
 .centerThis{
-    /*display: table-cell;*/
+    display: table-cell;
     vertical-align: middle;
 }
 .table .margin{
