@@ -8,7 +8,13 @@ import { browserHistory, Router, Route } from 'react-router'
 import reducer from './reducers'
 import {initState} from './actions'
 import styles from './static/global.css'
-import { Dashboard, ReconcileContainer, PledgePageContainer, UploadPortfolioPage } from './pages'
+import {
+  Dashboard,
+  ReconcileContainer,
+  PledgePageContainer,
+  UploadPortfolioPage,
+  DeployedPage
+} from './pages'
 
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
@@ -34,6 +40,7 @@ class App extends React.Component{
                         <Route path="recon" component={ReconcileContainer} />
                         <Route path="pledge" component={PledgePageContainer} />
                         <Route path="upload_portfolio" component={UploadPortfolioPage} />
+                        <Route path="deployed" component={DeployedPage} />
                     </Router>
                 </div>
             </Provider>

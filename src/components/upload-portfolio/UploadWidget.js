@@ -58,12 +58,6 @@ export default class UploadWidget extends React.Component {
     this.setState({
       isWidgetValidForSubmission: this.dropzone.files.length > 0
     })
-
-    // console.log("accepted files: " + this.dropzone.getAcceptedFiles().length)
-    // console.log("rejected files: " + this.dropzone.getRejectedFiles().length)
-    // console.log("queued files: " + this.dropzone.getQueuedFiles().length)
-    // console.log("uploading files: " + this.dropzone.getUploadingFiles().length)
-    // console.log("all files: " + this.dropzone.files.length)
   }
 
   success(file) {
