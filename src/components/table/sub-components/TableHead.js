@@ -37,7 +37,8 @@ class TableHead extends React.Component{
                    clicked={this.handleClick}
                    toggle={this.state.class}
                    arrow={this.state.dropdown}
-                    deriv={this.props.deriv}/>
+                    deriv={this.props.deriv}
+                    redirect={this.props.redirect}/>
       </div>
     )
   }

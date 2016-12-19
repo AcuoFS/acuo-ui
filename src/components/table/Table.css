@@ -234,3 +234,8 @@
 .tableRow >div:nth-child(6){
 
 }
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
