@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import styles from './FlightItemTable.css'
 
 export default class FlightDetailRow extends React.Component {
   render() {
     const {
       propIsGroupHeader,
+      propIsGroupExpanded,
       propTime,
       propAgreement,
       propFrom,
@@ -15,12 +16,19 @@ export default class FlightDetailRow extends React.Component {
       propRowStyle
     } = this.props
 
+    let rowStyle, imgDom
+
     // Use style from props if there is, else check if row is a group header
-    let rowStyle
-    if(propRowStyle){
+    if (propRowStyle) {
       rowStyle = propRowStyle
-    }else{
+    } else {
       rowStyle = propIsGroupHeader ? styles.flightItemTableExpandRow : styles.flightItemTableRow
+    }
+
+    if (propIsGroupHeader && propIsGroupExpanded) {
+      imgDom = <img src="./images/common/minusbox.png"/>
+    } else if (propIsGroupHeader && !propIsGroupExpanded) {
+      imgDom = <img src="./images/common/plusbox.png"/>
     }
     return (
       <div className={rowStyle}>
@@ -31,10 +39,27 @@ export default class FlightDetailRow extends React.Component {
         <div className={styles.flightItemTableCell}>{propValue}</div>
         <div className={styles.flightItemTableCell}>{propCcy}</div>
         <div className={styles.flightItemTableCell}>{propStatus}</div>
-        <div className={styles.flightItemTableCell}>
-          {propIsGroupHeader ? <img src="./images/common/plusbox.png"/> : null}
-        </div>
+        <div className={styles.flightItemTableCell}>{imgDom}</div>
       </div>
     )
   }
+}
+
+FlightDetailRow.propTypes = {
+  propTime: PropTypes.string.isRequired,
+  propAgreement: PropTypes.string.isRequired,
+  propFrom: PropTypes.string.isRequired,
+  propTo: PropTypes.string.isRequired,
+  propValue: PropTypes.string.isRequired,
+  propCcy: PropTypes.string.isRequired,
+  propStatus: PropTypes.string.isRequired,
+  propIsGroupHeader: PropTypes.bool,
+  propIsGroupExpanded: PropTypes.bool,
+  propRowStyle: PropTypes.string
+}
+
+FlightDetailRow.defaultTypes = {
+  propIsGroupHeader: false,
+  propIsGroupExpanded: false,
+  propRowStyle: null
 }

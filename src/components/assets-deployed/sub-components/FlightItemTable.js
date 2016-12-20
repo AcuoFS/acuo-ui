@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react'
 import FlightDetailGroup from './FlightDetailGroup'
 import FlightDetailRow from './FlightDetailRow'
 import * as FLIGHT_COL from '../../../constants/FlightDetailColumns'
+import flightGroup from '../mockFlights'
 import styles from './FlightItemTable.css'
 
 
@@ -20,10 +21,13 @@ export default class FlightItemTable extends React.Component {
             propStatus={FLIGHT_COL.FLIGHT_STATUS}
             propRowStyle={styles.flightItemTableHeader}/>
 
-          <FlightDetailGroup/>
-          <FlightDetailGroup/>
-          <FlightDetailGroup/>
-          <FlightDetailGroup/>
+          <FlightDetailGroup propsIsExpanded
+                             propListOfFlightDetail={flightGroup.flightDetailList}
+                             propHeaderDetail={flightGroup.header}/>
+          <FlightDetailGroup propHeaderDetail={flightGroup.header}/>
+          <FlightDetailGroup propsIsExpanded
+                             propListOfFlightDetail={flightGroup.flightDetailList}
+                             propHeaderDetail={flightGroup.header}/>
 
         </div>
       </div>
