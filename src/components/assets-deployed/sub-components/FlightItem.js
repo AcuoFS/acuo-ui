@@ -1,5 +1,5 @@
 import React, {Proptypes} from 'react'
-import {ARRIVALS} from '../../../constants/FlightType'
+import {ARRIVALS} from '../../../constants/FlightTypes'
 import FlightItemTable from './FlightItemTable'
 import styles from './FlightItem.css'
 
@@ -18,7 +18,7 @@ export default class FlightItem extends React.Component {
     }
 
     return (
-      <div className={styles.component}>
+      <div className={styles.flightItemComponent}>
         <div className={styles.flightTitle}>
           <span className={styles.flightTitleText + " " +
           (this.isArrival(this.props.name) ? styles.flightTitleText_arr : "")}>

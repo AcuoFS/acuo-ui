@@ -1,30 +1,57 @@
 .flightItemTable {
     display: table;
-    border: 2px;
     width: 100%;
+    margin-top: 5px;
+    /*border-collapse: collapse;*/
+}
+
+.flightItemTableHeader {
+    display: table-row;
+    background-color: #2B3C4C;
+    color: #FFFFFF;
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: bold;
+}
+
+.flightItemTableRowGroup{
+    display: table-row-group;
+    /*vertical-align: middle;*/
+}
+
+.flightItemTableExpandRow {
+    display: table-row;
+    font-size: 13px;
+    line-height: 16px;
+    background-color: #7F8A93;
+    color: #FFFFFF;
 }
 
 .flightItemTableRow {
     display: table-row;
-    font-family: Helvetica;
     font-size: 13px;
     line-height: 16px;
 }
 
-.flightItemTableCell {
-    display: table-cell;
-    padding: 2px 2px;
+.flightItemTableRow:nth-child(odd) {
+    background-color: #EBF5FF;
 }
 
-.flightItemTableHeader {
-    background: #2B3C4C;
-    color: #FFFFFF;
-    padding: 7px 8px 7px 8px;
-    vertical-align: middle;
-    border-top:5px solid green;
-    /*padding: 7px 8px 7px 8px;*/
+.flightItemTableRow:nth-child(even) {
+    background-color: #FAFAFA;
+}
 
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 17px;
+.flightItemTableCell {
+    display: table-cell;
+    padding: 4px 4px;
+    border-top: 1px solid #FFFFFF;
+}
+
+.flightItemTableRow:last-child .flightItemTableCell{
+    border-bottom: 1px solid #FFFFFF;
+}
+
+/* border for cells on the expand row*/
+.flightItemTableExpandRow .flightItemTableCell{
+    border-top: 2px solid #FFFFFF;
 }

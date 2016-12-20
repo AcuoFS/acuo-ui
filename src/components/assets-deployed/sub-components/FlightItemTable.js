@@ -1,32 +1,30 @@
-import React,{PropTypes} from 'react'
+import React, {PropTypes} from 'react'
+import FlightDetailGroup from './FlightDetailGroup'
+import FlightDetailRow from './FlightDetailRow'
+import * as FLIGHT_COL from '../../../constants/FlightDetailColumns'
 import styles from './FlightItemTable.css'
 
 
-export default class FlightItemTable extends React.Component{
-  render(){
+export default class FlightItemTable extends React.Component {
+  render() {
     return (
       <div>
         <div className={styles.flightItemTable}>
+          <FlightDetailRow
+            propTime={FLIGHT_COL.FLIGHT_TIME}
+            propAgreement={FLIGHT_COL.FLIGHT_AGREEMENT}
+            propFrom={FLIGHT_COL.FLIGHT_FROM}
+            propTo={FLIGHT_COL.FLIGHT_TO}
+            propValue={FLIGHT_COL.FLIGHT_VALUE}
+            propCcy={FLIGHT_COL.FLIGHT_CCY}
+            propStatus={FLIGHT_COL.FLIGHT_STATUS}
+            propRowStyle={styles.flightItemTableHeader}/>
 
-          <div className={styles.flightItemTableHeader + " " + styles.flightItemTableRow}>
-            <div className={styles.flightItemTableCell}>Time</div>
-            <div className={styles.flightItemTableCell}>Agreement</div>
-            <div className={styles.flightItemTableCell}>From</div>
-            <div className={styles.flightItemTableCell}>To</div>
-            <div className={styles.flightItemTableCell}>Value</div>
-            <div className={styles.flightItemTableCell}>Ccy</div>
-            <div className={styles.flightItemTableCell}>Status</div>
-          </div>
+          <FlightDetailGroup/>
+          <FlightDetailGroup/>
+          <FlightDetailGroup/>
+          <FlightDetailGroup/>
 
-          <div className={styles.flightItemTableRow}>
-            <div className={styles.flightItemTableCell}>cell 1</div>
-            <div className={styles.flightItemTableCell}>cell 2</div>
-            <div className={styles.flightItemTableCell}>cell 3</div>
-            <div className={styles.flightItemTableCell}>cell 4</div>
-            <div className={styles.flightItemTableCell}>cell 5</div>
-            <div className={styles.flightItemTableCell}>cell 6</div>
-            <div className={styles.flightItemTableCell}>cell 7</div>
-          </div>
         </div>
       </div>
     )
