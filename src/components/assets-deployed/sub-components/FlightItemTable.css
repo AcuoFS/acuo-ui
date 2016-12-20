@@ -1,0 +1,30 @@
+.flightItemTable {
+    display: table;
+    border: 2px;
+    width: 100%;
+}
+
+.flightItemTableRow {
+    display: table-row;
+    font-family: Helvetica;
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.flightItemTableCell {
+    display: table-cell;
+    padding: 2px 2px;
+}
+
+.flightItemTableHeader {
+    background: #2B3C4C;
+    color: #FFFFFF;
+    padding: 7px 8px 7px 8px;
+    vertical-align: middle;
+    border-top:5px solid green;
+    /*padding: 7px 8px 7px 8px;*/
+
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 17px;
+}

@@ -5,6 +5,7 @@ import NavigationBarContainer from './NavigationBarContainer'
 import TableContainer from './TableContainer'
 import PledgeContainer from './PledgeContainer'
 import CollateralAssetContainer from './CollateralAssetContainer'
+import FlightContainer from './FlightContainer'
 
 
 export {
@@ -14,5 +15,6 @@ export {
   NavigationBarContainer,
   TableContainer,
   PledgeContainer,
-  CollateralAssetContainer
+  CollateralAssetContainer,
+  FlightContainer
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import {
-  NavigationBarContainer
+  NavigationBarContainer,
+  FlightContainer
 } from '../../containers'
 
 
@@ -9,8 +10,7 @@ class DeployedPage extends React.Component {
     return (
       <div>
         <NavigationBarContainer curPage={this.props.location.pathname}/>
-        <div>Departures</div>
-        <div>Arrivals</div>
+        <FlightContainer/>
         <div>Deployed</div>
       </div>
     )

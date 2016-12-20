@@ -1,0 +1,8 @@
+.page{
+    display: flex;
+    padding: 2% 1%;
+}
+
+.flight{
+    flex: 1;
+}
