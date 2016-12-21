@@ -22,15 +22,15 @@ export default class FlightItemTable extends React.Component {
             propRowStyle={styles.flightItemTableHeader}/>
 
           <FlightDetailGroup propsIsExpanded
-                             propListOfFlightDetail={flightGroup.flightDetailList}
-                             propHeaderDetail={flightGroup.header}/>
+                             propListOfFlightDetail={flightGroup[0].flightDetailList}
+                             propHeaderDetail={flightGroup[0].header}/>
 
-          <FlightDetailGroup propListOfFlightDetail={flightGroup.flightDetailList}
-                             propHeaderDetail={flightGroup.header}/>
+          <FlightDetailGroup propListOfFlightDetail={flightGroup[1].flightDetailList}
+                             propHeaderDetail={flightGroup[1].header}/>
 
           <FlightDetailGroup propsIsExpanded
-                             propListOfFlightDetail={flightGroup.flightDetailList}
-                             propHeaderDetail={flightGroup.header}/>
+                             propListOfFlightDetail={flightGroup[0].flightDetailList}
+                             propHeaderDetail={flightGroup[0].header}/>
 
         </div>
       </div>

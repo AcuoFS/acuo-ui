@@ -1,7 +1,37 @@
 import React, {PropTypes} from 'react'
+import * as FLIGHT_STATUS from '../../../constants/FlightStatuses'
 import styles from './FlightItemTable.css'
 
 export default class FlightDetailRow extends React.Component {
+  // Additional styling for status on header row
+  getDomForStatus(propIsGroupHeader, propStatus, statusCell) {
+    if (propIsGroupHeader) {
+      switch (propStatus) {
+        case FLIGHT_STATUS.IN_FLIGHT:
+          statusCell =
+            <div className={styles.flightStatus + " " + styles.flightStatusBlue}>
+              {propStatus}
+            </div>
+          break
+        case FLIGHT_STATUS.DELAYED:
+          statusCell =
+            <div className={styles.flightStatus + " " + styles.flightStatusRed}>
+              {propStatus}
+            </div>
+          break
+        case FLIGHT_STATUS.CANCELLED:
+          statusCell =
+            <div className={styles.flightStatus + " " + styles.flightStatusGrey}>
+              {propStatus}
+            </div>
+          break
+        default:
+          statusCell = propStatus
+      }
+    }
+    return statusCell;
+  }
+
   render() {
     const {
       propIsGroupHeader,
@@ -17,7 +47,7 @@ export default class FlightDetailRow extends React.Component {
       propHandlerExpand
     } = this.props
 
-    let rowStyle, imgDom
+    let rowStyle, imgDom, statusCell
 
     // Use style from props if there is, else check if row is a group header
     if (propRowStyle) {
@@ -27,10 +57,18 @@ export default class FlightDetailRow extends React.Component {
     }
 
     if (propIsGroupHeader && propIsGroupExpanded) {
-      imgDom = <img src="./images/common/minusbox.png" onClick={propHandlerExpand}/>
+      imgDom = <img className={styles.imageCursor}
+                    src="./images/common/minusbox.png"
+                    onClick={propHandlerExpand}/>
     } else if (propIsGroupHeader && !propIsGroupExpanded) {
-      imgDom = <img src="./images/common/plusbox.png"  onClick={propHandlerExpand}/>
+      imgDom = <img className={styles.imageCursor}
+                    src="./images/common/plusbox.png"
+                    onClick={propHandlerExpand}/>
     }
+
+    statusCell = propStatus
+    statusCell = this.getDomForStatus(propIsGroupHeader, propStatus, statusCell);
+
     return (
       <div className={rowStyle}>
         <div className={styles.flightItemTableCell}>{propTime}</div>
@@ -39,7 +77,7 @@ export default class FlightDetailRow extends React.Component {
         <div className={styles.flightItemTableCell}>{propTo}</div>
         <div className={styles.flightItemTableCell}>{propValue}</div>
         <div className={styles.flightItemTableCell}>{propCcy}</div>
-        <div className={styles.flightItemTableCell}>{propStatus}</div>
+        <div className={styles.flightItemTableCell}>{statusCell}</div>
         <div className={styles.flightItemTableCell}>{imgDom}</div>
       </div>
     )

@@ -16,7 +16,6 @@
 
 .flightItemTableRowGroup{
     display: table-row-group;
-    /*vertical-align: middle;*/
 }
 
 .flightItemTableExpandRow {
@@ -54,4 +53,30 @@
 /* border for cells on the expand row*/
 .flightItemTableExpandRow .flightItemTableCell{
     border-top: 2px solid #FFFFFF;
+}
+
+.flightStatus {
+    width: 70px;
+    text-align: center;
+    line-height: 20px;
+    color: #FFFFFF;
+    border-radius: 5px
+}
+
+.flightStatusBlue {
+    background-color: #0170B0;
+
+}
+
+.flightStatusRed {
+    background-color: #B00118;
+}
+
+
+.flightStatusGrey {
+    background-color: #4E4E4E;
+}
+
+.imageCursor {
+    cursor: pointer;
 }
