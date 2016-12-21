@@ -13,7 +13,8 @@ export default class FlightDetailRow extends React.Component {
       propValue,
       propCcy,
       propStatus,
-      propRowStyle
+      propRowStyle,
+      propHandlerExpand
     } = this.props
 
     let rowStyle, imgDom
@@ -26,9 +27,9 @@ export default class FlightDetailRow extends React.Component {
     }
 
     if (propIsGroupHeader && propIsGroupExpanded) {
-      imgDom = <img src="./images/common/minusbox.png"/>
+      imgDom = <img src="./images/common/minusbox.png" onClick={propHandlerExpand}/>
     } else if (propIsGroupHeader && !propIsGroupExpanded) {
-      imgDom = <img src="./images/common/plusbox.png"/>
+      imgDom = <img src="./images/common/plusbox.png"  onClick={propHandlerExpand}/>
     }
     return (
       <div className={rowStyle}>

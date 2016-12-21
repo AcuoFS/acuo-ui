@@ -11,7 +11,7 @@
     color: #FFFFFF;
     font-size: 14px;
     line-height: 17px;
-    font-weight: bold;
+    composes: baseFontBold from '../../../static/css-components/fonts.css';
 }
 
 .flightItemTableRowGroup{

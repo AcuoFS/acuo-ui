@@ -12,9 +12,8 @@
 }
 
 .flightTitleText{
-    font-family: Helvetica;
     font-size: 24px;
-    font-weight: bold;
+    composes: baseFontBold from '../../../static/css-components/fonts.css';
     line-height: 29px;
     color: #4EB5B4;
     align-self: center;

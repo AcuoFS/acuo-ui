@@ -24,7 +24,10 @@ export default class FlightItemTable extends React.Component {
           <FlightDetailGroup propsIsExpanded
                              propListOfFlightDetail={flightGroup.flightDetailList}
                              propHeaderDetail={flightGroup.header}/>
-          <FlightDetailGroup propHeaderDetail={flightGroup.header}/>
+
+          <FlightDetailGroup propListOfFlightDetail={flightGroup.flightDetailList}
+                             propHeaderDetail={flightGroup.header}/>
+
           <FlightDetailGroup propsIsExpanded
                              propListOfFlightDetail={flightGroup.flightDetailList}
                              propHeaderDetail={flightGroup.header}/>
