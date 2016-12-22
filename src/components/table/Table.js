@@ -1,5 +1,6 @@
 import React from 'react'
 import TableHead from './sub-components/TableHead'
+import styles from './Table.css'
 
 
 export default class Table extends React.Component{
@@ -15,7 +16,7 @@ export default class Table extends React.Component{
     }
     render() {
         return (
-          <div>
+          <div className={styles.tableComponent}>
               {this.getDeriv().map(this.renderTable)}
           </div>
         );
