@@ -5,7 +5,7 @@ import NavigationBarContainer from './NavigationBarContainer'
 import TableContainer from './TableContainer'
 import PledgeContainer from './PledgeContainer'
 import CollateralAssetContainer from './CollateralAssetContainer'
-
+import MarginCallContainer from './MarginCallContainer'
 
 export {
   FilterContainer,
@@ -14,5 +14,6 @@ export {
   NavigationBarContainer,
   TableContainer,
   PledgeContainer,
-  CollateralAssetContainer
+  CollateralAssetContainer,
+  MarginCallContainer
 }

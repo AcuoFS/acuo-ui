@@ -1,0 +1,115 @@
+@value newAcuoBlue from '../../static/css-components/colors.css';
+
+.container{
+  margin-top: 2%;
+  margin-left: 1%;
+  margin-right: 1%;
+  background-color: #FFFFFF;
+  box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
+  border-radius: 8px;
+  min-height: 410px;
+  display: inline-block;
+  width: 98%;
+  padding: 10px;
+}
+
+.header{
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.title{
+  flex: 3;
+  composes: baseFontBold from '../../static/css-components/fonts.css';
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 29px;
+  color: newAcuoBlue;
+  align-self: center;
+}
+
+.button{
+  color: #fff ;
+  background-color: #00B9CC ;
+  border: 1px solid #00B9CC ;
+  font-size: 18px;
+  composes: baseFontBold from '../../static/css-components/fonts.css';
+  text-align: center;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  align-self: center;
+  cursor: pointer;
+  padding: 10px 24px;
+}
+
+/*table stylings*/
+.content{
+  border: 1px solid #2C3B4A;
+}
+
+.masterRow{
+  display: flex;
+  background-color: #2C3B4A;
+  color: #fff;
+}
+
+.cell{
+  flex: 0 0 6.6%;
+  align-self: center;
+  padding: 5px;
+}
+
+.cell:first-child, .cell:last-child{
+  flex: 0 0 1.5%;
+  text-align: center;
+}
+
+/* overriding css*/
+.ccyCell{
+  flex: 0 0 3%;
+}
+
+.largeCell{
+  flex: 0 0 8.5%;
+}
+
+.dateCell{
+  flex: 0 0 6%;
+}
+
+.callTypeCell{
+  flex: 0 0 5%;
+}
+
+/*content*/
+.flexContainer{
+  color: #2C3B4A;
+  display: flex;
+}
+
+.contentRow:nth-child(odd){
+  background-color: #DCEEFF;
+}
+
+.contentRow:nth-child(even){
+  background-color: #EEEEEE;
+}
+
+.headerRow{
+  background-color: #4E83B5;
+  color: #fff;
+  composes: baseFontBold from '../../static/css-components/fonts.css';
+  display: flex;
+  width: 100%;
+}
+
+.subrowContent{
+  display: flex;
+  background-color: #FFFFFF;
+}
+
+.subrowCell{
+  flex: 0 0 16.5%;
+  padding: 10px;
+  align-self: center;
+}
