@@ -7,6 +7,8 @@ import styles from './MarginCall.css'
 
 export default class MarginCallRow extends React.Component{
   render(){
+    const {isOpen, spillContents, id} = this.props
+
     return(
       <div className={styles.contentRow}>
         <div className={styles.flexContainer}>
@@ -24,9 +26,9 @@ export default class MarginCallRow extends React.Component{
           <div className={styles.cell + ' ' + styles.largeCell}>123,456,789,012</div>
           <div className={styles.cell + ' ' + styles.largeCell}>123,456,789,012</div>
           <div className={styles.cell + ' ' + styles.largeCell}>123,456,789,012</div>
-          <div className={styles.cell}>v</div>
+          <div className={styles.cell} onClick={spillContents} data-ref={id}></div>
         </div>
-        <div className={styles.subrow}>
+        <div className={styles.subrow + ' ' + (isOpen ? styles.showSubrow : '')}>
           <div className={styles.headerRow}>
             <div className={styles.subrowCell}>Threshold</div>
             <div className={styles.subrowCell}>Min Transfer</div>

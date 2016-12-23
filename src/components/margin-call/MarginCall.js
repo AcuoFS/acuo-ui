@@ -3,6 +3,33 @@ import styles from './MarginCall.css'
 import ContentRow from './MarginCallRow'
 
 export default class MarginCall extends React.Component {
+  constructor(props){
+    super(props)
+    this.openRow = this.openRow.bind(this)
+    this.state = {
+      openedRows: []
+    }
+  }
+
+  openRow(e){
+    //console.log(this.toggleRow(this.state.openedRows, e.currentTarget.dataset.ref))
+    this.setState({
+      openedRows: this.toggleRow(this.state.openedRows, e.currentTarget.dataset.ref)
+    })
+  }
+
+  toggleRow(arr, index){
+    console.log(arr.length)
+    if(arr.length){
+      if(arr.indexOf(index) > -1)
+        console.log(arr.splice(arr.indexOf(index), 1))
+      else
+        console.log(arr.push(index))
+    }else{
+      console.log(arr.push(index))
+    }
+  }
+
   render() {
     return(
       <div className={styles.container}>
@@ -29,8 +56,8 @@ export default class MarginCall extends React.Component {
             <div className={styles.cell}></div>
           </div>
 
-          <ContentRow />
-          <ContentRow />
+          <ContentRow id={1} key={1} spillContents={this.openRow} isOpen={this.state.openedRows.indexOf(1) > -1}/>
+          <ContentRow id={2} key={2} spillContents={this.openRow} isOpen={this.state.openedRows.indexOf(2) > -1}/>
 
         </div>
       </div>

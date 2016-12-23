@@ -103,6 +103,14 @@
   width: 100%;
 }
 
+.subrow{
+  display: none;
+}
+
+.showSubrow{
+  display: block;
+}
+
 .subrowContent{
   display: flex;
   background-color: #FFFFFF;
@@ -112,4 +120,37 @@
   flex: 0 0 16.5%;
   padding: 10px;
   align-self: center;
+}
+
+/* arrow */
+.contentRow .cell:last-child{
+  position: relative;
+}
+
+.contentRow .cell:last-child::before{
+  content: '';
+  position: absolute;
+  border-top: 12px solid #2C3B4A;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  top: 0px;
+  left: 7px;
+}
+
+.contentRow .cell:last-child::after{
+  content: '';
+  position: absolute;
+  border-top: 12px solid #2C3B4A;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  top: -3px;
+  left: 7px;
+}
+
+.contentRow:nth-child(odd) .cell:last-child::after{
+  border-top: 12px solid #DCEEFF;
+}
+
+.contentRow:nth-child(even) .cell:last-child::after{
+  border-top: 12px solid #EEEEEE;
 }

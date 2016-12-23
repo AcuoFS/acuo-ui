@@ -19,7 +19,7 @@ export default class GraphBody extends React.Component {
       case 'recon':
         return () => browserHistory.push('/pledge')
       case 'pledge':
-        return () => browserHistory.push('/deploy')
+        return () => browserHistory.push('/deployed')
       case 'dispute':
         return () => browserHistory.push('/dispute')
     }
