@@ -62,27 +62,36 @@ class TableItem extends React.Component {
 
           <div className={styles.tableItem}>
             <div className={styles.margin}>
-              <p className={styles.leftThis}>CPTY Margin</p>
+              <p className={styles.leftThis}>Initial Margin</p>
               <p
                 className={styles.fineFont}>{this.numberWithCommas(this.compute('variableMargin') + this.compute('initialMargin'))}</p>
             </div>
           </div>
 
-          <div className={styles.listItem}>
-            <div className={styles.vertiCenter}>
-              <p className={styles.centerThis}>CPTY Org</p>
-            </div>
-          </div>
-
-          <div className={styles.listItem}>
-            <div className={styles.vertiCenter}>
-              <p className={styles.centerThis}>CCY</p>
+          <div className={styles.tableItem}>
+            <div className={styles.margin}>
+              <p className={styles.leftThis}>Variation Margin</p>
+              <p className={styles.fineFont}>TBC</p>
             </div>
           </div>
 
           <div className={styles.tableItem}>
             <div className={styles.margin}>
-              <p className={styles.leftThis}>EXP.Margin</p>
+              <p className={styles.leftThis}>Excess</p>
+              <p className={styles.fineFont}>TBC</p>
+            </div>
+          </div>
+
+          <div className={styles.tableItem}>
+            <div className={styles.margin}>
+              <p className={styles.leftThis}>Collateral Balance</p>
+              <p className={styles.fineFont}>TBC</p>
+            </div>
+          </div>
+
+          <div className={styles.tableItem}>
+            <div className={styles.margin}>
+              <p className={styles.leftThis}>Pending Collateral</p>
               <p className={styles.fineFont}>TBC</p>
             </div>
           </div>
