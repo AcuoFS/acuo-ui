@@ -17,6 +17,8 @@ class TableRow extends React.Component {
         <TableCell bodyItemClass={'marginRow'} cellValue={this.props.rowItems.get('ccy')}/>
         <TableCell bodyItemClass={'marginItem'} cellValue={
           this.props.numberWithCommas(this.props.rowItems.get('initialMargin'))}/>
+        <TableCell bodyItemClass={'marginItem'} cellValue={
+          this.props.numberWithCommas(this.props.rowItems.get('variableMargin'))}/>
         <TableCell bodyItemClass={'outerItem'} cellValue={
           this.props.numberWithCommas(this.props.rowItems.get('variableMargin'))}/>
       </div>

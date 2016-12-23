@@ -202,42 +202,48 @@
 
 
 .tableBody >div:nth-child(1){
-  width: 15.5%!important;
+  width: 12.5%!important;
 }
 .tableBody >div:nth-child(2){
-  width: 15.7%!important;
+  width: 13.7%!important;
 }
 .tableBody >div:nth-child(3){
-  width: 16.7%!important;
+  width: 14.7%!important;
 }
 .tableBody >div:nth-child(4){
   width: 9.7%!important;
 }
 .tableBody >div:nth-child(5){
-  width: 18.7%!important;
+  width: 16.7%!important;
 }
 .tableBody >div:nth-child(6){
-
+  width: 16.7%!important;
+}
+.tableBody >div:nth-child(7){
+  width: 16.7%!important;
 }
 
 
 .tableRow >div:nth-child(1){
-  width: 15.5%!important;
+  width: 12.5%!important;
 }
 .tableRow >div:nth-child(2){
-  width: 15.7%!important;
+  width: 12.7%!important;
 }
 .tableRow >div:nth-child(3){
-  width: 16.7%!important;
+  width: 14.7%!important;
 }
 .tableRow >div:nth-child(4){
   width: 9.7%!important;
 }
 .tableRow >div:nth-child(5){
-  width: 18.7%!important;
+  width: 16.7%!important;
 }
 .tableRow >div:nth-child(6){
-
+  width: 16.7%!important;
+}
+.tableRow >div:nth-child(7){
+  width: 16.7%!important;
 }
 
 .actionItem a {

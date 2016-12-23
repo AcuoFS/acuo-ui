@@ -30,7 +30,8 @@ class TableBody extends React.Component {
           <TableCell bodyItemClass={'cptyItem'} cellValue={'CPTY Entity'}/>
           <TableCell bodyItemClass={'marginItem'} cellValue={'CCY'}/>
           <TableCell bodyItemClass={'marginItem'} cellValue={'IM'}/>
-          <TableCell bodyItemClass={'outerItem'} cellValue={'VM'}/>
+          <TableCell bodyItemClass={'marginItem'} cellValue={'VM'}/>
+          <TableCell bodyItemClass={'outerItem'} cellValue={'Excess'}/>
         </div>
         {this.props.marginStatus.map(this.renderRow)}
       </div>
