@@ -1,0 +1,123 @@
+.flightItemTable {
+    display: table;
+    width: 100%;
+    margin-top: 5px;
+    table-layout: fixed;
+}
+
+.flightItemTableHeader {
+    display: table-row;
+    background-color: #2B3C4C;
+    color: #FFFFFF;
+    font-size: 14px;
+    line-height: 25px;
+    composes: baseFontBold from '../../../static/css-components/fonts.css';
+    width: 100%;
+}
+
+/* Time */
+.flightItemTableHeader div:nth-child(1){
+    width: 6%;
+}
+
+/* Agreement */
+.flightItemTableHeader div:nth-child(2){
+    width: 26%;
+}
+
+/* From */
+.flightItemTableHeader div:nth-child(3){
+    width: 10%;
+}
+
+/* To */
+.flightItemTableHeader div:nth-child(4){
+    width: 15%;
+}
+
+/* Value */
+.flightItemTableHeader div:nth-child(5){
+    width: 20%;
+}
+
+/* CCY */
+.flightItemTableHeader div:nth-child(6){
+    width: 6%
+}
+
+/* Status */
+.flightItemTableHeader div:nth-child(7){
+    width: 13%;
+}
+
+/* PlusMinus */
+.flightItemTableHeader div:nth-child(8){
+    width: 4%;
+}
+
+.flightItemTableRowGroup{
+    display: table-row-group;
+}
+
+.flightItemTableExpandRow {
+    display: table-row;
+    font-size: 13px;
+    line-height: 16px;
+    background-color: #7F8A93;
+    color: #FFFFFF;
+}
+
+.flightItemTableRow {
+    display: table-row;
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.flightItemTableRow:nth-child(odd) {
+    background-color: #FAFAFA;
+}
+
+.flightItemTableRow:nth-child(even) {
+    background-color: #EBF5FF;
+}
+
+.flightItemTableCell {
+    display: table-cell;
+    padding: 4px 4px;
+    border-top: 1px solid #FFFFFF;
+}
+
+.flightItemTableRow:last-child .flightItemTableCell{
+    border-bottom: 1px solid #FFFFFF;
+}
+
+/* border for cells on the expand row*/
+.flightItemTableExpandRow .flightItemTableCell{
+    border-top: 2px solid #FFFFFF;
+}
+
+.flightStatus {
+    width: 70px;
+    text-align: center;
+    line-height: 20px;
+    color: #FFFFFF;
+    border-radius: 5px
+}
+
+.flightStatusBlue {
+    background-color: #0170B0;
+
+}
+
+.flightStatusRed {
+    background-color: #B00118;
+}
+
+
+.flightStatusGrey {
+    background-color: #4E4E4E;
+}
+
+.imageCursor {
+    cursor: pointer;
+}

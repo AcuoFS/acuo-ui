@@ -1,5 +1,9 @@
 @value acuoAction from '../../static/css-components/colors.css';
 
+.tableComponent {
+  padding: 20px;
+}
+
 .tableWrapper{
   -webkit-border-radius: 10px;
   border-radius: 10px;
