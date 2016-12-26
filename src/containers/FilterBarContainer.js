@@ -126,8 +126,8 @@ const mapDispatchToProps = dispatch => ({
         dispatch(filterCptyEntity(entityList))
     },
 
-    onFilterTimeWindowStatus : (timeWindowMin, timeWindowMax, e) => {
-        dispatch(filterTimeWindowStatus(timeWindowMin, timeWindowMax))
+    onFilterTimeWindowStatus : (timeWindowMin, timeWindowMax, timeRangeText) => {
+        dispatch(filterTimeWindowStatus(timeWindowMin, timeWindowMax, timeRangeText))
     }
 })
 

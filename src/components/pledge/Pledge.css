@@ -629,7 +629,7 @@ div.collateralTableExpanded div:nth-child(13){
 
   z-index: 1;
   top:-5px; /* set top value */
-  left:30px; /* set left value */
+  left:25px; /* set left value */
   width:120px;
   border: 1px solid #1c2124;
   display: none;
@@ -644,7 +644,7 @@ div.collateralTableExpanded div:nth-child(13){
   top: 20%;
   margin-top: -10px;
   border-top: 8px solid transparent;
-  border-right: 17px solid #000;
+  border-right: 12px solid #000;
   border-bottom: 8px solid transparent;
   border-left: 11px solid transparent;
 }
@@ -652,13 +652,54 @@ div.collateralTableExpanded div:nth-child(13){
   content: '';
   display: block;
   position: absolute;
-  right: 100%;
-  top: 20%;
+  right: 99%;
+  top: 24%;
   margin-top: -10px;
   border-top: 7px solid transparent;
-  border-right: 15px solid #ffffff;
+  border-right: 12px solid #ffffff;
   border-bottom: 8px solid transparent;
   border-left: 6px solid transparent;
+}
+
+.leftBoxed {
+  border-radius: 80px;
+  -moz-border-radius: 80px;
+  -webkit-border-radius: 5px;
+  padding: 5px 6px 5px 5px;
+  /*padding-top: 5px;*/
+
+  z-index: 1;
+  top:-5px; /* set top value */
+  left:-134px; /* set left value */
+  width:120px;
+  border: 1px solid #1c2124;
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+}
+.leftBoxed:before{
+  content: '';
+  display: block;
+  position: absolute;
+  right: -16%;
+  top: 20%;
+  margin-top: -10px;
+  border-top: 8px solid transparent;
+  border-left: 12px solid #000;
+  border-bottom: 8px solid transparent;
+  border-right: 11px solid transparent;
+}
+.leftBoxed:after{
+  content: '';
+  display: block;
+  position: absolute;
+  right: -11%;
+  top: 24%;
+  margin-top: -10px;
+  border-top: 7px solid transparent;
+  border-left: 12px solid #ffffff;
+  border-bottom: 8px solid transparent;
+  border-right: 6px solid transparent;
 }
 
 
@@ -672,11 +713,29 @@ div.collateralTableExpanded div:nth-child(13){
   z-index: 2;
   top:-80px; /* set top value */
   left:-6px; /* set left value */
-  /*min-width:500px;
-  min-height:170px;*/
 
   min-width:350px;
-  min-height:113px;
+  min-height:130px;
+
+  border: 1px solid #1c2124;
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+}
+
+.leftBoxAllocate {
+  border-radius: 80px;
+  -moz-border-radius: 80px;
+  -webkit-border-radius: 5px;
+  padding: 5px 5px 5px 5px;
+  /*padding-top: 5px;*/
+
+  z-index: 2;
+  top:-80px; /* set top value */
+  left:-226px; /* set left value */
+
+  min-width:350px;
+  min-height:130px;
 
   border: 1px solid #1c2124;
   display: none;
@@ -716,22 +775,46 @@ div.collateralTableExpanded div:nth-child(13){
 .popupInputBox{
   display: inline-block;
   flex:3;
-  min-height: 40px;
+  min-height: 26px;
   width: 100%;
 }
 
 .buttonContainer{
   width: 100%;
-  padding-top: 10px;
+  margin-top: 10px;
 }
-.buttonContainer button {
+
+/*.buttonContainerEnabled{*/
+  /*width: 100%;*/
+  /*margin-top: 10px;*/
+/*}*/
+
+.buttonContainer .btnDisabled {
   float: right;
   margin: 16px 24px;
   width: 100px;
   /*height: 32px;*/
-  color: #4A4A4A ;
+  color: #d7dce0 ;
   background-color: #FAFAFA ;
-  border: 1px solid #979797 ;
+  border: 1px solid #d7dce0 ;
+  font-size: 13px;
+  font-weight: bold;
+  /*line-height: 32px;*/
+  text-align: center;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  margin: 0 20px;
+  align-self: center;
+}
+
+.buttonContainer .btnEnabled {
+  float: right;
+  margin: 16px 24px;
+  width: 100px;
+  /*height: 32px;*/
+  color: #fff ;
+  background-color: #00B9CC ;
+  border: 1px solid #00B9CC ;
   font-size: 13px;
   font-weight: bold;
   /*line-height: 32px;*/

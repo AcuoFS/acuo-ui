@@ -13,8 +13,8 @@ export default class UploadWidget extends React.Component {
     }
 
     this.djsConfig = {
-      addRemoveLinks: true
-      , autoProcessQueue: false
+      // addRemoveLinks: true,
+      autoProcessQueue: false
       , maxFiles: 5
       , parallelUploads: 5
       // Accept only XLSX files
@@ -23,11 +23,15 @@ export default class UploadWidget extends React.Component {
       , previewTemplate: ReactDOMServer.renderToStaticMarkup(
         <div className={"dz-preview dz-file-preview " + styles.alignFileIconLeft}>
           <div className="dz-details">
-            <div className="dz-filename"><span data-dz-name="true"></span></div>
             <img data-dz-thumbnail="true" src="./images/upload-portfolio/file_icon.png"/>
-            <img src="./images/upload-portfolio/cross_cancel.png" alt="Click me to remove the file." data-dz-remove/>
+            <div className={"dz-filename " + styles.fileName}>
+              <a href="#" data-dz-remove>
+                <img src="./images/upload-portfolio/cross_cancel.png" alt="Click me to remove the file."/>
+              </a>
+
+              <span data-dz-name="true" className={styles.fileNameText}></span>
+            </div>
           </div>
-          <div className="dz-progress"><span className="dz-upload" data-dz-uploadprogress="true"></span></div>
           <div className="dz-success-mark"><span>✔</span></div>
           <div className="dz-error-mark"><span>✘</span></div>
           <div className="dz-error-message"><span data-dz-errormessage="true"></span></div>
@@ -40,7 +44,8 @@ export default class UploadWidget extends React.Component {
     this.componentConfig = {
       iconFiletypes: ['.xlsx'],
       showFiletypeIcon: false,
-      postUrl: 'http://127.0.0.1:3000/uploadHandler'
+      // Change this param to the server's URL
+      postUrl: 'http://valuation.acuo.com/acuo/api/upload'
     }
 
     this.dropzone = null
@@ -50,19 +55,15 @@ export default class UploadWidget extends React.Component {
   handleFileAdded(file) {
     console.log("handling file add " + file)
 
-    const isGoodForSubmission = this.dropzone.files.length > 0
-
     this.setState({
-      isWidgetValidForSubmission: isGoodForSubmission
+      isWidgetValidForSubmission: this.dropzone.files.length > 0
     })
-    this.generateBtn.disabled = !isGoodForSubmission
 
-    // console.log("accepted: "+file.accepted)
-    console.log("accepted files: " + this.dropzone.getAcceptedFiles().length)
-    console.log("rejected files: " + this.dropzone.getRejectedFiles().length)
-    console.log("queued files: " + this.dropzone.getQueuedFiles().length)
-    console.log("uploading files: " + this.dropzone.getUploadingFiles().length)
-    console.log("all files: " + this.dropzone.files.length)
+    // console.log("accepted files: " + this.dropzone.getAcceptedFiles().length)
+    // console.log("rejected files: " + this.dropzone.getRejectedFiles().length)
+    // console.log("queued files: " + this.dropzone.getQueuedFiles().length)
+    // console.log("uploading files: " + this.dropzone.getUploadingFiles().length)
+    // console.log("all files: " + this.dropzone.files.length)
   }
 
   success(file) {
@@ -105,8 +106,8 @@ export default class UploadWidget extends React.Component {
 
     return (
       /*<form id="uploadbanner" enctype="multipart/form-data" method="post" action="http://localhost:3000/">
-       <input type="file" id="myFile"/>
-       <input type="submit" value="Submit"/>
+          <input type="file" id="myFile"/>
+          <input type="submit" value="Submit"/>
        </form>*/
       <div className={styles.componentStyle}>
         <div className={styles.widgetHeader}>Upload Portfolio</div>
@@ -115,12 +116,13 @@ export default class UploadWidget extends React.Component {
             <span>
               Drag and drop portfolio files, or <a href="#" className="triggerFileSelection">browse</a>.
             </span>
-          </div>
+      </div>
         </DropzoneComponent>
         <div
           className={this.state.isWidgetValidForSubmission ?
             styles.buttonContainerEnabled : styles.buttonContainerDisabled}>
-          <button type="button" onClick={this.onGenerate} ref={dom => this.generateBtn = dom}>
+          <button type="button" onClick={this.onGenerate}
+                  disabled={!(this.state.isWidgetValidForSubmission)}>
             Generate Margin Call Data
           </button>
         </div>

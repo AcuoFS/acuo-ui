@@ -8,6 +8,8 @@ div.componentStyle {
     box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
     border-radius: 8px;
     min-height: 410px;
+    display: inline-block;
+    width: 84%;
 }
 
 .alignFileIconLeft {
@@ -16,16 +18,17 @@ div.componentStyle {
 
 .buttonContainerDisabled{
     width: 100%;
-    margin-top: 10px;
+    margin: 10px;
+    text-align: right;
 }
 
 .buttonContainerEnabled{
     width: 100%;
-    margin-top: 10px;
+    margin: 10px;
+    text-align: right;
 }
 
 .buttonContainerDisabled button {
-    float: right;
     margin: 16px 24px;
     /*width: 146px;*/
     /*height: 32px;*/
@@ -43,7 +46,6 @@ div.componentStyle {
 }
 
 .buttonContainerEnabled button {
-    float: right;
     margin: 16px 24px;
     /*width: 146px;*/
     /*height: 32px;*/
@@ -58,6 +60,7 @@ div.componentStyle {
     border-radius: 20px;
     margin: 0 20px;
     align-self: center;
+    cursor: pointer;
 }
 
 .widgetHeader{
@@ -71,4 +74,17 @@ div.componentStyle {
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 10px;
+}
+
+
+.fileName {
+    background-color: #FAFAFA;
+    border: 1px solid #979797;
+    border-radius: 8px;
+}
+
+.fileNameText{
+    font-family: Helvetica;
+    font-size: 14px;
+    color: #4A4A4A;
 }
