@@ -9,6 +9,7 @@ import styles from './Reconcile.css'
 import { connect } from 'react-redux'
 import { lineItemInsertion } from '../../actions'
 import { fromJS } from 'immutable'
+import {RECON_URL} from '../../constants/APIcalls'
 
 
 class Reconcile extends React.Component{
@@ -16,7 +17,7 @@ class Reconcile extends React.Component{
     constructor(props){
         super(props)
 
-        fetch('http://margin.acuo.com/acuo/api/margin/items/all/999').then((response) => {
+        fetch(RECON_URL).then((response) => {
             return response.json()
         }).then((obj) => {
             this.props.onLineItemInsertion(fromJS(obj))

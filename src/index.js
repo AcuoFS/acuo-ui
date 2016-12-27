@@ -4,7 +4,6 @@ import {createStore} from 'redux'
 import {fromJS} from 'immutable'
 import {Provider} from 'react-redux'
 import {browserHistory, Router, Route} from 'react-router'
-
 import reducer from './reducers'
 import {initState} from './actions'
 import styles from './static/global.css'
@@ -15,6 +14,7 @@ import {
   UploadPortfolioPage,
   DeployedPage
 } from './pages'
+import {DASHBOARD_URL} from './constants/APIcalls'
 
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
@@ -24,7 +24,7 @@ class App extends React.Component {
     super(props)
     //http://localhost:3000/data
     //https://acuo.herokuapp.com/json
-    fetch('http://margin.acuo.com/acuo/api/margin/dashboard').then((response) => {
+    fetch(DASHBOARD_URL).then((response) => {
       return response.json()
     }).then((obj) => {
       store.dispatch(initState(fromJS(obj)))

@@ -3,11 +3,12 @@
  */
 import React from 'react'
 import {render} from 'react-dom'
-import styles from './Pledge.css'
 import OptItem from './sub-components/OptItem'
 import ChooseCalls from './sub-components/ChooseCalls'
 import Selection from '../pledge-selection/Selection'
 import CollateralAssetGroup from './sub-components/CollateralAssetGroup'
+import {OPTIMISATION_URL,MARGIN_SELECTION_URL} from '../../constants/APIcalls'
+import styles from './Pledge.css'
 
 import { List } from 'immutable'
 
@@ -35,13 +36,13 @@ class Pledge extends React.Component {
     this.onPledgeButtonClick = this.onPledgeButtonClick.bind(this)
     // this.renderCollateralItems = this.renderCollateralItems.bind(this)
 
-    fetch('http://52.74.186.112:8081/optimisation').then(response => {
+    fetch(OPTIMISATION_URL).then(response => {
       return response.json()
     }).then(obj => {
       this.props.onInitOptimisationSettings(obj)
     })
 
-    fetch('http://52.74.186.112:8081/init-selection').then(response => {
+    fetch(MARGIN_SELECTION_URL).then(response => {
       return response.json()
     }).then(obj => {
       this.props.initSelection(obj)

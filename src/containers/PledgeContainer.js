@@ -10,7 +10,7 @@ import {
   removeAssetFromEarmark } from '../actions'
 import { List, fromJS } from 'immutable'
 
-import { allocateCollateralsURL } from '../constants/APIcalls'
+import { ALLOCATE_COLLATERALS_URL } from '../constants/APIcalls'
 
 const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
   if(pendingAllocationSize >= selectionSize)
@@ -48,7 +48,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(toggleCheckall())
   },
   onAllocate: (e) => {
-    fetch(allocateCollateralsURL, {
+    fetch(ALLOCATE_COLLATERALS_URL, {
       method: 'POST',
       data: {
         optimisationSettings: e.currentTarget.dataset.optimisation,
