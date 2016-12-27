@@ -55,7 +55,7 @@ const mapDispatchToProps = dispatch => ({
         toBeAllocated: e.currentTarget.dataset.pendingAllocation
       }
     }).then(response => {
-      return response.json()
+      return response
     }).then(obj => {
       dispatch(updateCollateral(fromJS(obj.data.collateral)))
       dispatch(initSelection(fromJS(obj.data.inMarginCall)))
