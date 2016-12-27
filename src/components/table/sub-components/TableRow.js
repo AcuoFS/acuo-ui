@@ -25,6 +25,5 @@ class TableRow extends React.Component {
     )
   }
 }
-;
 
 export default TableRow

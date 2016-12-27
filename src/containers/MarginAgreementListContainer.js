@@ -11,8 +11,8 @@ const mapDispatchToProps = dispatch => ({
   onLineItemInsertion: (lineItem) => {
     dispatch(lineItemInsertion(lineItem))
   },
-  onReconItem : () => {
-    dispatch(reconItem())
+  onReconItem : (e) => {
+    dispatch(reconItem(e.currentTarget.dataset.ref))
   },
   onSelectedItem : (guid, assetName) => {
     dispatch(selectedItems(guid, assetName))

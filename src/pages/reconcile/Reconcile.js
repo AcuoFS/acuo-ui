@@ -16,10 +16,10 @@ class Reconcile extends React.Component{
     constructor(props){
         super(props)
 
-        fetch('https://acuo.herokuapp.com/json').then((response) => {
+        fetch('http://margin.acuo.com/acuo/api/margin/items/all/999').then((response) => {
             return response.json()
         }).then((obj) => {
-            this.props.onLineItemInsertion(fromJS(obj.recon))
+            this.props.onLineItemInsertion(fromJS(obj))
         })
     }
 

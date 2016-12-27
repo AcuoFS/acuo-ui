@@ -16,7 +16,7 @@ export default class GraphBody extends React.Component {
         return () => 0
       case 'unrecon':
         return () => browserHistory.push('/recon')
-      case 'recon':
+      case 'reconciled':
         return () => browserHistory.push('/pledge')
       case 'pledge':
         return () => browserHistory.push('/deployed')
@@ -83,14 +83,14 @@ export default class GraphBody extends React.Component {
     }).map((status) => {
       return status.get('timeFrames').map(timeFrame => {
 
-        let colour = this.getColour(status.get('status'))
+        let colour = this.getColour(status.get('status').toLowerCase())
         let timeDifference = (Date.parse(new Date(timeFrame.get('timeFrame'))) - (Date.parse(this.props.time)))/3600000
 
         function numberWithCommas(x) {
           return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
-        const onClickFunc = this.whichClickFuncToRun(status.get('status'))
+        const onClickFunc = this.whichClickFuncToRun(status.get('status').toLowerCase())
 
         return List()
         .push((timeFrame.get('inAmount') === 0)? 0 :
@@ -125,12 +125,13 @@ export default class GraphBody extends React.Component {
   }
 
   getColour(status){
+
     switch(status){
       case 'expected':
         return ['#FFCD2D', 42, 418]
       case 'unrecon':
         return ["#FF7D26", 82, 378]
-      case 'recon':
+      case 'reconciled':
         return ["#26DA6E", 122, 338]
       case 'pledge':
         return ["#58B6FF", 162, 298]
