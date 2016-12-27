@@ -21,6 +21,7 @@
   padding: 10px 25px;
   font-size: 15px;
   color:#fff;
+  position: relative;
 }
 
 .vertiCenter{
@@ -92,12 +93,13 @@
   position: relative;
   text-transform: uppercase;
   font-size: 12.5px;
-  background-color: #2393f5;
-  padding:8px;
+  background-color: #008B04;
+  padding: 5px;
   display: flex;
   cursor: pointer;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
+  box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
+  border-radius: 30px;
+  border: 3px solid #D5DADF;
 }
 .actionItem{
   width:18%;
@@ -121,16 +123,19 @@
   border-bottom: 10px solid transparent;
   position: absolute;
   top: 18%;
-  right: 15%;
+  /*right: 15%;*/
+  right: 65%;
 }
 .actionItem .arrow::after{
   content: '';
   border-top: 10px solid transparent;
-  border-left: 10px solid #2393f5;
+  /*border-left: 10px solid #2393f5;*/
+  border-left: 10px solid #008B04;
   border-bottom: 10px solid transparent;
   position: absolute;
   top: 18%;
-  right: 24%;
+  /*right: 24%;*/
+  right: 80%;
 }
 .tableBody{
   display:flex;
@@ -174,10 +179,6 @@
   cursor: pointer;
 }
 
-
-.table >div{
-  position: relative;
-}
 .table >div:nth-child(1){
   width: 12%!important;
 }
@@ -249,4 +250,30 @@
 .actionItem a {
   color: #fff;
   text-decoration: none;
+}
+
+.derivTypeText {
+  padding-left: 24px;
+}
+
+.derivType {
+  background-color: #E6E9EC;
+  color: #2B3C4C;
+  width: 141px;
+  height: 62px;
+  text-align: left;
+  border-radius: 8px 0 8px 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.derivType::before {
+  position: absolute;
+  top: 0px;
+  left: 140px;
+  content: '';
+  border-color: transparent transparent transparent #E6E9EC;
+  border-style: solid;
+  border-width: 0px 20px 56px 25px;
 }

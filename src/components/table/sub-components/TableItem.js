@@ -53,10 +53,9 @@ class TableItem extends React.Component {
     return (
       <div>
         <div className={styles.table}>
-
           <div className={styles.derivItem}>
-            <div className={styles.vertiCenter}>
-              <p className={styles.centerThis}>{this.props.deriv.get('type')}</p>
+            <div className={styles.vertiCenter + " " + styles.derivType}>
+              <p className={styles.centerThis + " " + styles.derivTypeText}>{this.props.deriv.get('type')}</p>
             </div>
           </div>
 
