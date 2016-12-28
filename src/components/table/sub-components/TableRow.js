@@ -9,18 +9,22 @@ class TableRow extends React.Component {
   }
 
   render() {
+
+    const { rowItems, numberWithCommas } = this.props
+    const excess = (rowItems.get('collateralBalance') + rowItems.get('pendingCollateral')) - (rowItems.get('variableMargin') + rowItems.get('variableMargin'))
+
     return (
       <div className={styles.tableRow}>
-        <TableCell bodyItemClass={'bodyItem'} cellValue={this.props.rowItems.get('legalEntity')}/>
-        <TableCell bodyItemClass={'innerItem'} cellValue={this.props.rowItems.get('cptyOrg')}/>
-        <TableCell bodyItemClass={'cptyItem'} cellValue={this.props.rowItems.get('cptyEntity')}/>
-        <TableCell bodyItemClass={'marginRow'} cellValue={this.props.rowItems.get('ccy')}/>
+        <TableCell bodyItemClass={'bodyItem'} cellValue={rowItems.get('legalEntity')}/>
+        <TableCell bodyItemClass={'innerItem'} cellValue={rowItems.get('cptyOrg')}/>
+        <TableCell bodyItemClass={'cptyItem'} cellValue={rowItems.get('cptyEntity')}/>
+        <TableCell bodyItemClass={'marginRow'} cellValue={rowItems.get('ccy')}/>
         <TableCell bodyItemClass={'marginItem'} cellValue={
-          this.props.numberWithCommas(this.props.rowItems.get('initialMargin'))}/>
+          numberWithCommas(rowItems.get('initialMargin'))}/>
         <TableCell bodyItemClass={'marginItem'} cellValue={
-          this.props.numberWithCommas(this.props.rowItems.get('variableMargin'))}/>
+          numberWithCommas(rowItems.get('variableMargin'))}/>
         <TableCell bodyItemClass={'outerItem'} cellValue={
-          this.props.numberWithCommas(this.props.rowItems.get('variableMargin'))}/>
+          numberWithCommas(excess)}/>
       </div>
     )
   }
