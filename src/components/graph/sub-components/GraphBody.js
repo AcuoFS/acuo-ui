@@ -98,7 +98,7 @@ export default class GraphBody extends React.Component {
             <circle cx={this.props.x + (timeDifference + 0.5) * 60} cy={colour[2]} r={(timeFrame.get('inAmount') === 0)? 0 :(Math.log(timeFrame.get('inAmount'))) } fill={colour[0]}>
             </circle>
             <g className={styles.toolTip} opacity="0.9">
-              <rect x={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? this.props.x - 110 + (timeDifference + 0.5) * 60 : this.props.x - 90 + (timeDifference + 0.5) * 60} y={colour[2] - 20} rx="4" width={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? 100 : 80} height="45" strokeWidth="1" stroke={colour[0]} fill="#FFFFFF"></rect>
+              <rect x={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? this.props.x - 110 + (timeDifference + 0.5) * 60 : this.props.x - 90 + (timeDifference + 0.5) * 60} y={colour[2] - 20} rx="4" width={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? 110 : 80} height="45" strokeWidth="1" stroke={colour[0]} fill="#FFFFFF"></rect>
               <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] - 2.5} fontSize="13" fontFamily="helvetica" fontWeight="bold" fill="#010101" textAnchor="end">{timeFrame.get('inNo')} {status.get('status').toUpperCase()}</text>
               <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] + 17.5} fontSize="13" fontFamily="helvetica" fill="#010101" textAnchor="end">{numberWithCommas(timeFrame.get('inAmount'))}</text>
             </g>
