@@ -490,3 +490,7 @@
     background-color: #dedede;
     border-bottom: none;
 }
+
+.hidePanel{
+    display: none;
+}

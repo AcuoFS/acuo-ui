@@ -168,10 +168,10 @@ export default class MarginAgreementPortfolio extends React.Component {
   render() {
     const {
       marginData, orgName, assetsName,
-      handlerTotalMargin, handlerSelectedItem
+      handlerTotalMargin, handlerSelectedItem, isHidePanel
     } = this.props
     return (
-      <div className={styles.panel}>
+      <div className={styles.panel + " " + (isHidePanel ? styles.hidePanel : "")}>
         <div className={styles.section + ' ' + styles.left}>
 
           <div className={styles.legalEntityContainer}>
@@ -240,4 +240,9 @@ MarginAgreementPortfolio.PropTypes = {
   assetsName: PropTypes.string.isRequired,
   handlerTotalMargin: PropTypes.func.isRequired,
   handlerSelectedItem: PropTypes.func.isRequired,
+  isHidePanel: PropTypes.bool
+}
+
+MarginAgreementPortfolio.defaultProps = {
+  isHidePanel: false
 }

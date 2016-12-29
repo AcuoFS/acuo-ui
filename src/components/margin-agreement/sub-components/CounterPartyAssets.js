@@ -5,73 +5,72 @@ import {TAB_MARGIN_AGREEMENT_PORTFOLIO, TAB_MARGIN_AGREEMENT_DISPUTE} from '../.
 import styles from '../MarginAgreementList.css'
 
 
-export default class CounterPartyAssets extends React.Component{
+export default class CounterPartyAssets extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
-      selectedTab : TAB_MARGIN_AGREEMENT_PORTFOLIO,
-      tabReconStyle : styles.tabActive,
+      selectedTab: TAB_MARGIN_AGREEMENT_PORTFOLIO,
+      tabReconStyle: styles.tabActive,
       tabDisputeStyle : styles.tabInactive
 
     }
     this.handleOnTabSelect = this.handleOnTabSelect.bind(this)
   }
 
-  handleOnTabSelect(e){
+  handleOnTabSelect(e) {
 
     console.log(e.currentTarget.value)
 
-    if(e.currentTarget.dataset.value == TAB_MARGIN_AGREEMENT_PORTFOLIO){
+    if (e.currentTarget.dataset.value == TAB_MARGIN_AGREEMENT_PORTFOLIO) {
 
       this.setState((prevState) => ({
         selectedTab: TAB_MARGIN_AGREEMENT_PORTFOLIO,
-        tabReconStyle : styles.tabActive,
-        tabDisputeStyle : styles.tabInactive
+        tabReconStyle: styles.tabActive,
+        tabDisputeStyle: styles.tabInactive
       }));
-    }else {
+    } else {
       this.setState((prevState) => ({
         selectedTab: TAB_MARGIN_AGREEMENT_DISPUTE,
-        tabReconStyle : styles.tabInactive,
-        tabDisputeStyle : styles.tabActive
+        tabReconStyle: styles.tabInactive,
+        tabDisputeStyle: styles.tabActive
       }));
     }
   }
 
-  render(){
+  render() {
     const {
       marginData, actStyle, orgName,
       assetsName, handlerTotalMargin, handlerSelectedItem
-    } = this.props
 
-    let activeTabComponent = null
-    if(this.state.selectedTab == TAB_MARGIN_AGREEMENT_PORTFOLIO){
-      activeTabComponent = <MarginAgreementPortfolio marginData={marginData}
-                                                     orgName={orgName}
-                                                     assetsName={assetsName}
-                                                     handlerTotalMargin={handlerTotalMargin}
-                                                     handlerSelectedItem={handlerSelectedItem}/>
-    }
-    else{
-      activeTabComponent = <Dispute marginData={marginData}
-                                    actStyle={actStyle}
-                                    orgName={orgName}
-                                    assetsName={assetsName}
-                                    handlerTotalMargin={handlerTotalMargin}
-                                    handlerSelectedItem={handlerSelectedItem}/>
-    }
+    } = this.props
 
     return (
       <div className={styles.actPanel + ' ' + styles[actStyle]}>
         <ul className={styles.tabs14}>
-          <li onClick={this.handleOnTabSelect} data-value={TAB_MARGIN_AGREEMENT_PORTFOLIO} className={styles.tabButton+ ' '+this.state.tabReconStyle}>
+          <li onClick={this.handleOnTabSelect} data-value={TAB_MARGIN_AGREEMENT_PORTFOLIO}
+              className={styles.tabButton + ' ' + this.state.tabReconStyle}>
             Reconcile
           </li>
-          <li onClick={this.handleOnTabSelect} data-value={TAB_MARGIN_AGREEMENT_DISPUTE} className={styles.tabButton+ ' '+this.state.tabDisputeStyle}>
+          <li onClick={this.handleOnTabSelect} data-value={TAB_MARGIN_AGREEMENT_DISPUTE}
+              className={styles.tabButton + ' ' + this.state.tabDisputeStyle}>
             Dispute
           </li>
         </ul>
-        {activeTabComponent}
+        <MarginAgreementPortfolio marginData={marginData}
+                                  orgName={orgName}
+                                  assetsName={assetsName}
+                                  handlerTotalMargin={handlerTotalMargin}
+                                  handlerSelectedItem={handlerSelectedItem}
+                                  isHidePanel={this.state.selectedTab == TAB_MARGIN_AGREEMENT_DISPUTE}/>
+        <Dispute marginData={marginData}
+                 actStyle={actStyle}
+                 orgName={orgName}
+                 assetsName={assetsName}
+                 handlerTotalMargin={handlerTotalMargin}
+                 handlerSelectedItem={handlerSelectedItem}
+                 isHidePanel={this.state.selectedTab == TAB_MARGIN_AGREEMENT_PORTFOLIO}
+        />
       </div>
 
     )
