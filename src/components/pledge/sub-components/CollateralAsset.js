@@ -223,7 +223,6 @@ class CollateralAsset extends React.Component {
           <div className={styles.collateralCell}>{propRating}</div>
           <div className={styles.collateralCell}>{propMaturityDate}</div>
           <div className={styles.collateralCell}>{propInternalCost}</div>
-          <div className={styles.collateralCell}>{propExternalCost}</div>
           <div className={styles.collateralCell}>{propOppCost}</div>
           <div className={styles.collateralCell}>{propIsin}</div>
           <div className={styles.collateralCell}>{propVenue}</div>

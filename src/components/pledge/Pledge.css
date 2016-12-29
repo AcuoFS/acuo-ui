@@ -514,6 +514,12 @@ input[type=range]:focus::-ms-fill-upper {
   color: #ffffff;
 }
 
+.collateralExpandEarmarkedRow{
+  background: #4E83B5;
+  line-height: 12px;
+  color: #ffffff;
+}
+
 .collateralCell {
   padding: 2px 2px;
   display: table-cell;
@@ -521,13 +527,15 @@ input[type=range]:focus::-ms-fill-upper {
   height: 16px;
 }
 
-.collateralExpandRow > .collateralCell{
+.collateralExpandRow > .collateralCell,
+.collateralExpandEarmarkedRow > .collateralCell{
   border-top-style: solid;
   border-top-width:3px;
   border-top-color:#FFFFFF;
 }
 
-.collateralExpandRow > .collateralCell > div{
+.collateralExpandRow > .collateralCell > div,
+.collateralExpandEarmarkedRow > .collateralCell > div{
   display: inline-block;
   padding-right: 2px;
   vertical-align: middle;
@@ -581,7 +589,7 @@ div.collateralTableExpanded div:nth-child(4){
 }
 /*Status*/
 div.collateralTableExpanded div:nth-child(5){
-  width: 6%;
+  width: 8%;
 }
 /*Rating*/
 div.collateralTableExpanded div:nth-child(6){
@@ -589,31 +597,31 @@ div.collateralTableExpanded div:nth-child(6){
 }
 /*Maturity Date*/
 div.collateralTableExpanded div:nth-child(7){
-  width: 12%;
+  width: 10%;
 }
 /*Internal Cost*/
 div.collateralTableExpanded div:nth-child(8){
-  width: 4%;
+  width: 7%;
 }
 /*External Cost*/
-div.collateralTableExpanded div:nth-child(9){
-  width: 4%;
-}
+/*div.collateralTableExpanded div:nth-child(9){*/
+  /*width: 4%;*/
+/*}*/
 /*Opp. Cost*/
-div.collateralTableExpanded div:nth-child(10){
-  width: 4%;
+div.collateralTableExpanded div:nth-child(9){
+  width: 7%;
 }
 /*ISIN*/
-div.collateralTableExpanded div:nth-child(11){
-  width: 11%;
+div.collateralTableExpanded div:nth-child(10){
+  width: 10%;
 }
 /*Venue*/
-div.collateralTableExpanded div:nth-child(12){
+div.collateralTableExpanded div:nth-child(11){
   width: 4%;
 }
 /*Acc ID*/
-div.collateralTableExpanded div:nth-child(13){
-  width: 11%;
+div.collateralTableExpanded div:nth-child(12){
+  width: 10%;
 }
 
 /*** END ***/
@@ -844,7 +852,7 @@ div.collateralTableExpanded div:nth-child(13){
 
 /*** Status Color classes****/
 .statusAR{
-  background: #FDC36D;
+  background: #58C4F5;
   color: #FFFFFF;
   width: 20px;
   height: 14px;
@@ -856,7 +864,7 @@ div.collateralTableExpanded div:nth-child(13){
   text-align: center;
 }
 .statusAV{
-  background: #2CBF9F;
+  background: #005544;
   color: #FFFFFF;
   width: 20px;
   height: 14px;
@@ -868,7 +876,7 @@ div.collateralTableExpanded div:nth-child(13){
   text-align: center;
 }
 .statusDP{
-  background: #4A4A4A;
+  background: #00B38F;
   color: #FFFFFF;
   width: 20px;
   height: 14px;
@@ -880,7 +888,7 @@ div.collateralTableExpanded div:nth-child(13){
   text-align: center;
 }
 .statusD{
-  background: #4E83B4;
+  background: #4E83B5;
   color: #FFFFFF;
   width: 20px;
   height: 14px;
