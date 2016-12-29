@@ -49,10 +49,10 @@ export const updateCollateral = (collateralData) => ({
 })
 
 
-export const selectedItems = (id, item) => ({
+export const selectedItems = (GUID, id) => ({
   type: ActionTypes.SELECT_ITEM,
-  GUID: id,
-  name: item
+  GUID: GUID,
+  id: id
 })
 
 export const reconItem = (id) => ({

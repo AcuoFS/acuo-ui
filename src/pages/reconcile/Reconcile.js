@@ -16,12 +16,6 @@ class Reconcile extends React.Component{
 
     constructor(props){
         super(props)
-
-        fetch(RECON_URL).then((response) => {
-            return response.json()
-        }).then((obj) => {
-            this.props.onLineItemInsertion(fromJS(obj))
-        })
     }
 
     render(){

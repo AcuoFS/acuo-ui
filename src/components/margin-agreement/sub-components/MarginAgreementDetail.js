@@ -64,7 +64,7 @@ export default class MarginAgreementDetail extends React.Component {
 
     return secondLevel.map((x, index) => {
 
-      let highlightThis = (x.get('assetName') == secondLevelDiscrepancy)
+      let highlightThis = (x.get('name') == secondLevelDiscrepancy)
 
       return (
         <div className={ x.get('recon') ? styles.packageRowGrey : (discrepancy && highlightThis ? styles.packageRowHighLight : '')} key={index}>
@@ -74,13 +74,13 @@ export default class MarginAgreementDetail extends React.Component {
               <div className={styles.packageLeft}>
                 <div className={styles.packageCheckBox} onClick={(e) => {
                   this.handleClick(e);
-                  this.sendAction(GUID, x.get('assetName'))
+                  this.sendAction(GUID, x.get('id'))
                 }}>
                   {x.get('recon') ? '' : <img
                     src={x.get('checked') ? "./images/reconcile/checkboxwithtick.png" : "./images/reconcile/checkbox.png"}
                     alt=""/>}
                 </div>
-                <div className={styles.secondLevelText}>{ x.get('assetName') }</div>
+                <div className={styles.secondLevelText}>{ x.get('name') }</div>
               </div>
               <div className={styles.packageRight}>{ numberWithCommas(x.get('amount')) }</div>
             </div>
@@ -93,7 +93,7 @@ export default class MarginAgreementDetail extends React.Component {
   firstLevelSelect() {
     const {secondLevel, handlerSelectedItem, GUID} = this.props
     secondLevel.map(secondLevelAsset => (
-        handlerSelectedItem(GUID, secondLevelAsset.get('assetName'))
+        handlerSelectedItem(GUID, secondLevelAsset.get('id'))
       )
     )
   }

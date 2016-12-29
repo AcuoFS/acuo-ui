@@ -5,7 +5,7 @@ import {fromJS} from 'immutable'
 import {Provider} from 'react-redux'
 import {browserHistory, Router, Route} from 'react-router'
 import reducer from './reducers'
-import {initState} from './actions'
+import {initState, lineItemInsertion} from './actions'
 import styles from './static/global.css'
 import {
   Dashboard,
@@ -14,8 +14,7 @@ import {
   UploadPortfolioPage,
   DeployedPage
 } from './pages'
-import {DASHBOARD_URL} from './constants/APIcalls'
-
+import { DASHBOARD_URL, RECON_URL } from './constants/APIcalls'
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
@@ -28,6 +27,11 @@ class App extends React.Component {
       return response.json()
     }).then((obj) => {
       store.dispatch(initState(fromJS(obj)))
+      fetch(RECON_URL).then((response) => {
+        return response.json()
+      }).then((obj) => {
+        store.dispatch(lineItemInsertion(fromJS(obj)))
+      })
     })
   }
 

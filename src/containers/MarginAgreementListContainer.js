@@ -24,14 +24,13 @@ const mapDispatchToProps = dispatch => ({
       fetch(RECON_URL).then((response) => {
         return response.json()
       }).then((obj) => {
-        console.log(obj)
         dispatch(lineItemInsertion(fromJS(obj)))
       })
     })
     //dispatch(reconItem(e.currentTarget.dataset.ref)) //old recon line by line
   },
-  onSelectedItem : (guid, assetName) => {
-    dispatch(selectedItems(guid, assetName))
+  onSelectedItem : (guid, assetID) => {
+    dispatch(selectedItems(guid, assetID))
   }
 })
 

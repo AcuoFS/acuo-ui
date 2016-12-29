@@ -92,7 +92,7 @@ export default class MarginAgreementPortfolio extends React.Component {
     let totalcounterAsset = this.getFirstLevelTotal(counterpartyAsset)
 
     let highestDifference = totalClientAsset.reduce((highest, x) => {
-      let difference = Math.abs(x.get('amount') - totalcounterAsset.filter(y => y.get('key') == x.get('key')).first().get('amount'))
+      let difference = Math.abs(x.get('amount') - totalcounterAsset.filter(y => { console.log(y.toJS()); return y.get('key') == x.get('key')}).first().get('amount'))
       return (highest.get('difference') > difference ? highest : Map({'key': x.get('key'), 'difference': difference}))
     }, Map())
 
@@ -140,13 +140,13 @@ export default class MarginAgreementPortfolio extends React.Component {
         if (x.get('data')) {
           return (<div key={x.get('groupName')}>{x.get('data').map((y) => {
             const secondLevel = y.get('secondLevel')
-            const discrepancy = this.checkDescrepency(marginData.get('clientAssets'), marginData.get('counterpartyAssets')).includes(y.get('firstLevel'))
+            //const discrepancy = this.checkDescrepency(marginData.get('clientAssets'), marginData.get('counterpartyAssets')).includes(y.get('firstLevel'))
 
-            let secondLevelDiscrepancy = this.secondLevelHighestDiscrepancy(y.get('firstLevel'), marginData, discrepancy)
+            //let secondLevelDiscrepancy = this.secondLevelHighestDiscrepancy(y.get('firstLevel'), marginData, discrepancy)
 
             return <MarginAgreementDetail
               GUID={marginData.get('GUID')}
-              topLevel={y.get('firstLevel')}
+              topLevel={x.get('groupName')}
               key={y.get('firstLevel') + x.get('groupName')}
               totalAmount={secondLevel.reduce((amount, j) => {
                 return amount + j.get('amount')
@@ -155,8 +155,8 @@ export default class MarginAgreementPortfolio extends React.Component {
               handlerSelectedItem={handlerSelectedItem}
               isSecondLevel={this.checkSecondLevel(secondLevel)}
               checkboxImageUrl={this.getCheckboxImageUrl(secondLevel)}
-              discrepancy={discrepancy}
-              secondLevelDiscrepancy={secondLevelDiscrepancy}
+              //discrepancy={discrepancy}
+              //secondLevelDiscrepancy={secondLevelDiscrepancy}
             />
           })}
             <hr/>
