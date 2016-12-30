@@ -18,7 +18,7 @@ const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
   else if(pendingAllocationSize == 0 && selectionSize != 0)
     return ["./images/pledge/checkbox.png", "None"]
   else
-    return ["./images/pledge/minusbox.png", "Selected"]
+    return ["./images/common/minusbox.png", "Selected"]
 }
 
 const checkIfExist = (something) => something || List()

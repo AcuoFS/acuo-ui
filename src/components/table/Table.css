@@ -1,5 +1,9 @@
 @value acuoAction from '../../static/css-components/colors.css';
 
+.tableComponent {
+  padding: 20px;
+}
+
 .tableWrapper{
   -webkit-border-radius: 10px;
   border-radius: 10px;
@@ -57,7 +61,7 @@
     text-align: center;
 }
 .centerThis{
-    /*display: table-cell;*/
+    display: table-cell;
     vertical-align: middle;
 }
 .table .margin{
@@ -130,8 +134,9 @@
 }
 .tableBody{
   display:flex;
-  background-color: #D1D6DC;
+  background-color: #7F8A93;
   padding:10px 25px;
+  color: #FFFFFF;
 }
 .tableBody .centerThis{
   display: table-cell;
@@ -197,40 +202,51 @@
 
 
 .tableBody >div:nth-child(1){
-  width: 15.5%!important;
+  width: 12.5%!important;
 }
 .tableBody >div:nth-child(2){
-  width: 15.7%!important;
+  width: 13.7%!important;
 }
 .tableBody >div:nth-child(3){
-  width: 16.7%!important;
+  width: 14.7%!important;
 }
 .tableBody >div:nth-child(4){
   width: 9.7%!important;
 }
 .tableBody >div:nth-child(5){
-  width: 18.7%!important;
+  width: 16.7%!important;
 }
 .tableBody >div:nth-child(6){
-
+  width: 16.7%!important;
+}
+.tableBody >div:nth-child(7){
+  width: 16.7%!important;
 }
 
 
 .tableRow >div:nth-child(1){
-  width: 15.5%!important;
+  width: 12.5%!important;
 }
 .tableRow >div:nth-child(2){
-  width: 15.7%!important;
+  width: 12.7%!important;
 }
 .tableRow >div:nth-child(3){
-  width: 16.7%!important;
+  width: 14.7%!important;
 }
 .tableRow >div:nth-child(4){
   width: 9.7%!important;
 }
 .tableRow >div:nth-child(5){
-  width: 18.7%!important;
+  width: 16.7%!important;
 }
 .tableRow >div:nth-child(6){
+  width: 16.7%!important;
+}
+.tableRow >div:nth-child(7){
+  width: 16.7%!important;
+}
 
+.actionItem a {
+  color: #fff;
+  text-decoration: none;
 }

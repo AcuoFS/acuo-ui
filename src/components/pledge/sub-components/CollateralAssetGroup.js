@@ -18,9 +18,9 @@ export default class CollateralAssetGroup extends React.Component {
 
   getPlusMinusImgURL(isExpanded) {
     if (isExpanded) {
-      return './images/pledge/minusbox.png'
+      return './images/common/minusbox.png'
     } else {
-      return './images/pledge/plusbox.png'
+      return './images/common/plusbox.png'
     }
   }
 

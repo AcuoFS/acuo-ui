@@ -7,7 +7,8 @@ import UploadPortfolioComponent from './upload-portfolio/UploadPortfolio'
 import UploadPortfolioButton from './upload-portfolio/UploadPortfolioButton'
 import UploadWidgetComponent from './upload-portfolio/UploadWidget'
 import PledgeComponent from './pledge/Pledge'
-
+import FlightComponent from './assets-deployed/Flight'
+import MarginCallComponent from './margin-call/MarginCall'
 
 export {
   GraphComponent,
@@ -18,5 +19,7 @@ export {
   UploadPortfolioComponent,
   PledgeComponent,
   UploadPortfolioButton,
-  UploadWidgetComponent
+  UploadWidgetComponent,
+  FlightComponent,
+  MarginCallComponent
 }

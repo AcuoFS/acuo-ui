@@ -29,46 +29,41 @@ div.componentStyle {
 }
 
 .buttonContainerDisabled button {
-    margin: 16px 24px;
-    /*width: 146px;*/
-    /*height: 32px;*/
     color: #d7dce0 ;
     background-color: #FAFAFA ;
     border: 1px solid #d7dce0 ;
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 32px;
+    font-size: 18px;
     text-align: center;
     -webkit-border-radius: 20px;
     border-radius: 20px;
     margin: 0 20px;
     align-self: center;
+    padding: 10px 24px;
 }
 
 .buttonContainerEnabled button {
-    margin: 16px 24px;
-    /*width: 146px;*/
-    /*height: 32px;*/
     color: #fff ;
     background-color: #00B9CC ;
     border: 1px solid #00B9CC ;
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 32px;
+    font-size: 18px;
     text-align: center;
     -webkit-border-radius: 20px;
     border-radius: 20px;
     margin: 0 20px;
     align-self: center;
     cursor: pointer;
+    padding: 10px 24px;
+}
+
+.textBold {
+    composes: baseFontBold from '../../static/css-components/fonts.css';
 }
 
 .widgetHeader{
     width: 187px;
     height: 29px;
-    font-family: Helvetica;
     font-size: 24px;
-    font-weight: bold;
+    composes: baseFontBold from '../../static/css-components/fonts.css';
     line-height: 29px;
     color: #6389AD;
     padding-top: 10px;

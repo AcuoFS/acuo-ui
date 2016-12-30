@@ -1,22 +1,20 @@
 import React from 'react'
 import {
   NavigationBarContainer,
-  MarginCallContainer
+  FlightContainer
 } from '../../containers'
 
-import { UploadWidgetComponent } from '../../components'
 
-
-class UploadPortfolioPage extends React.Component {
+class DeployedPage extends React.Component {
   render() {
     return (
       <div>
         <NavigationBarContainer curPage={this.props.location.pathname}/>
-        <UploadWidgetComponent/>
-        <MarginCallContainer/>
+        <FlightContainer/>
+        <div>Deployed</div>
       </div>
     )
   }
 }
 
-export { UploadPortfolioPage }
+export {DeployedPage}

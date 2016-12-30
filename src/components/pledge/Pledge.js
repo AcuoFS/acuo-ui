@@ -17,7 +17,7 @@ class Pledge extends React.Component {
     this.state = {
       open: true,
       class: styles.sectionOpen,
-      dropdown: "./images/pledge/minusbox.png",
+      dropdown: "./images/common/minusbox.png",
 
       toggleColwidthL: styles.minDivL, 
       toggleColwidthR: styles.expandDivR,
