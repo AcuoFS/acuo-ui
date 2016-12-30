@@ -38,9 +38,9 @@ export default class MarginAgreementList extends React.Component {
     if (asset) {
       return asset.reduce((sum, x) => {
         return sum + x.get('data').reduce((sum, y) => {
-          return sum + y.get('secondLevel').reduce((sum, z) => {
-            return sum + (z.get(checkedOrRecon) ? z.get('amount') : 0)
-          }, 0)
+          return sum + (y.get('firstLevel') - y.get('secondLevel').reduce((sum, z) => {
+            return sum + (z.get('checkedOrRecon') ? 0 : z.get('amount'))
+          }, 0))
         }, 0)
       }, 0)
     } else {
