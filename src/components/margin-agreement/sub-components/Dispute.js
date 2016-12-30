@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react'
 import styles from '../MarginAgreementList.css'
 import Dropdown from '../../Dropdown/Dropdown'
+import {Map} from 'immutable'
 
 
 export default class Dispute extends React.Component {
@@ -153,6 +154,6 @@ Dispute.propTypes = {
   isHidePanel: PropTypes.bool
 }
 
-Dispute.propTypes = {
+Dispute.defaultProps = {
   isHidePanel: false
 }
