@@ -49,14 +49,15 @@ export const updateCollateral = (collateralData) => ({
 })
 
 
-export const selectedItems = (id, item) => ({
+export const selectedItems = (GUID, id) => ({
   type: ActionTypes.SELECT_ITEM,
-  GUID: id,
-  name: item
+  GUID: GUID,
+  id: id
 })
 
-export const reconItem = () => ({
-  type: ActionTypes.RECON_ITEM
+export const reconItem = (id) => ({
+  type: ActionTypes.RECON_ITEM,
+  GUID: id
 })
 
 //pledgeReducer stuffs, to be split later

@@ -7,13 +7,14 @@ import {
 import { updateCollateral } from '../../actions'
 import { connect } from 'react-redux'
 import { fromJS } from 'immutable'
+import {COLLATERAL_URL} from '../../constants/APIcalls'
 
 
 class PledgePage extends React.Component{
   constructor(props){
     super(props)
 
-      fetch('http://52.74.186.112:8081/init-collateral').then((response) => {
+      fetch(COLLATERAL_URL).then((response) => {
       return response.json()
     }).then((obj) => {
       this.props.onCollateralDataAvailable(fromJS(obj.data))

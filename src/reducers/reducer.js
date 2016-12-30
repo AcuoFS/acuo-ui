@@ -185,6 +185,7 @@ export function attachFilter(state, action){
 //updating state when recon page info is retrieved
 export const appendList = (state, action) => {
   if(!state.get('data').isEmpty()){
+
     return state.setIn(['data', 'derivatives'], state.getIn(['data', 'derivatives']).map((x) =>{
 
       return x.set('marginStatus', x.get('marginStatus').map((y) => {
@@ -237,7 +238,7 @@ export const selectItem = (state, action) => {
             return a.set('clientAssets', a.get('clientAssets').map((b) => {
               return b.set('data', b.get('data').map((c) => {
                 return c.set('secondLevel', c.get('secondLevel').map(d => {
-                  if(d.get('assetName') == action.name){
+                  if(d.get('id') == action.id){
                     if(!d.get('checked') && !d.get('recon'))
                       return d.set('checked', true)
                     else {
@@ -252,7 +253,7 @@ export const selectItem = (state, action) => {
             })).set('counterpartyAssets', a.get('counterpartyAssets').map((b) => {
               return b.set('data', b.get('data').map((c) => {
                 return c.set('secondLevel', c.get('secondLevel').map(d => {
-                  if(d.get('assetName') == action.name){
+                  if(d.get('id') == action.id){
                     if(!d.get('checked') && !d.get('recon'))
                       return d.set('checked', true)
                     else {
@@ -310,7 +311,7 @@ export const reconItem = (state, action) => {
 
 
 // main reducer function
-export default function mainReducer(state = Map(), action, store = 'data') {
+export default function mainReducer(state = Map({"data": Map(), "display": Map()}), action, store = 'data') {
 
   switch(action.type) {
     case 'INIT_STATE':

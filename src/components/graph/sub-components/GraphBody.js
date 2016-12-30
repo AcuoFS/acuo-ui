@@ -17,7 +17,7 @@ export default class GraphBody extends React.Component {
         return () => 0
       case 'unrecon':
         return () => browserHistory.push('/recon')
-      case 'recon':
+      case 'reconciled':
         return () => browserHistory.push('/pledge')
       case 'pledge':
         return () => browserHistory.push('/deployed')
@@ -84,7 +84,7 @@ export default class GraphBody extends React.Component {
     }).map((status) => {
       return status.get('timeFrames').map(timeFrame => {
 
-        let colour = this.getColour(status.get('status'))
+        let colour = this.getColour(status.get('status').toLowerCase())
         let timeDifference = (Date.parse(new Date(timeFrame.get('timeFrame'))) - (Date.parse(this.props.time)))/3600000
 
         // Use a faded blue for pledge if it's past the current time
@@ -92,7 +92,7 @@ export default class GraphBody extends React.Component {
           colour[0] = "#8CC5DD"
         }
 
-        const onClickFunc = this.whichClickFuncToRun(status.get('status'))
+        const onClickFunc = this.whichClickFuncToRun(status.get('status').toLowerCase())
 
         return List()
         .push((timeFrame.get('inAmount') === 0)? 0 :
@@ -103,11 +103,12 @@ export default class GraphBody extends React.Component {
                     fill={colour[0]}>
             </circle>
             <g className={styles.toolTip} opacity="0.9">
+
               <rect x={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7)
                 ? this.props.x - 110 + (timeDifference + 0.5) * 60
                 : this.props.x - 90 + (timeDifference + 0.5) * 60}
                     y={colour[2] - 20} rx="4"
-                    width={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? 100 : 80}
+                    width={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? 110 : 80}
                     height="45" strokeWidth="1" stroke={colour[0]} fill="#FFFFFF"></rect>
               <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] - 2.5}
                     fontSize="13"
@@ -181,12 +182,13 @@ export default class GraphBody extends React.Component {
    * @returns {[string,number,number]}
    */
   getColour(status){
+
     switch(status){
       case 'expected':
         return ['#F7BD20', 42, 418]
       case 'unrecon':
         return ["#D65028", 82, 378]
-      case 'recon':
+      case 'reconciled':
         return ["#005544", 122, 338]
       case 'pledge':
         return ["#0170B0", 162, 298]
