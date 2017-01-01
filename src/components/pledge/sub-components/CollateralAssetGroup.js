@@ -3,10 +3,13 @@ import CollateralAssetContainer from '../../../containers/CollateralAssetContain
 import {formatDate} from '../../../utils/formatDate'
 import {numberWithCommas} from '../../../utils/numbersWithCommas'
 import {formatPercentageOneDecimal} from '../../../utils/formatPercentageOneDecimal'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import {timesWithIterator} from '../../../utils/immutableLoop'
 import styles from '../Pledge.css'
+import transitions from './CAGTransitions.css'
+
 
 export default class CollateralAssetGroup extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -30,6 +33,24 @@ export default class CollateralAssetGroup extends React.Component {
     })
   }
 
+  getEmptyCellDomList(propIsDisplayAll) {
+    // no of empty cells and list of divs
+    let numEmptyCells, emptyCellList = []
+
+    if (propIsDisplayAll) {
+      numEmptyCells = 11
+    } else {
+      numEmptyCells = 6
+    }
+    timesWithIterator(numEmptyCells)(
+      i => {
+        let cellDiv = <div className={styles.collateralCell} key={i}></div>
+        emptyCellList.push(...[cellDiv])
+      }
+    )
+    return emptyCellList
+  }
+
   render() {
     const {
       propCollateralType,
@@ -37,9 +58,10 @@ export default class CollateralAssetGroup extends React.Component {
       propIsDisplayAll,
       propHandleOnRemoveFromEarmarked
     } = this.props
-
     // []list of CollateralAsset components
     let componentList
+
+    const emptyCellList = this.getEmptyCellDomList(propIsDisplayAll)
 
     if (propCollateralAssetList && this.state.isGroupExpanded) {
       componentList = propCollateralAssetList.map((asset, index) => (
@@ -69,66 +91,29 @@ export default class CollateralAssetGroup extends React.Component {
       ))
     }
 
+    return (
+      <ReactCSSTransitionGroup component="div" className={styles.collateralRowGroup}
+                               transitionName={transitions}
+                               transitionEnterTimeout={500}
+                               transitionLeaveTimeout={300}>
 
-    if (propIsDisplayAll) {
-      return (
-
-        <div className={styles.collateralRowGroup}>
-
-          <div className={styles.collateralRow + ' ' +
-          (propCollateralType == 'Earmarked' ? styles.collateralExpandEarmarkedRow : styles.collateralExpandRow)}>
-            <div className={styles.collateralCell}>
-              <div>{propCollateralType} </div>
-              <div onClick={this.handlePlusMinus}><img src={this.getPlusMinusImgURL(this.state.isGroupExpanded)}
-                                                       alt=""/>
-              </div>
+        <div className={styles.collateralRow + ' ' +
+        (propCollateralType == 'Earmarked' ? styles.collateralExpandEarmarkedRow : styles.collateralExpandRow)}>
+          <div className={styles.collateralCell}>
+            <div>{propCollateralType} </div>
+            <div onClick={this.handlePlusMinus}><img src={this.getPlusMinusImgURL(this.state.isGroupExpanded)}
+                                                     alt=""/>
             </div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
           </div>
 
-          {componentList}
+          {emptyCellList}
 
         </div>
-      )
 
-    } else {
-      return (
+        {componentList}
 
-        <div className={styles.collateralRowGroup}>
-
-          <div className={styles.collateralRow + ' ' +
-          (propCollateralType == 'Earmarked' ? styles.collateralExpandEarmarkedRow : styles.collateralExpandRow)}>
-            <div className={styles.collateralCell}>
-              <div>{propCollateralType}</div>
-              <div onClick={this.handlePlusMinus}><img src={this.getPlusMinusImgURL(this.state.isGroupExpanded)}
-                                                       alt=""/>
-              </div>
-
-            </div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-          </div>
-
-          {componentList}
-
-        </div>
-      )
-
-    }
+      </ReactCSSTransitionGroup>
+    )
 
   }
 }
