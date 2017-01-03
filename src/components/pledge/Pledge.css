@@ -518,7 +518,7 @@ div.collateralTableExpanded div:nth-child(3){
 }
 /*Delivery Time*/
 div.collateralTableExpanded div:nth-child(4){
-  width: 7%;
+  width: 6%;
 }
 /*Status*/
 div.collateralTableExpanded div:nth-child(5){
@@ -534,7 +534,7 @@ div.collateralTableExpanded div:nth-child(7){
 }
 /*Internal Cost*/
 div.collateralTableExpanded div:nth-child(8){
-  width: 6%;
+  width: 7%;
 }
 /*External Cost*/
 /*div.collateralTableExpanded div:nth-child(9){*/
@@ -555,6 +555,16 @@ div.collateralTableExpanded div:nth-child(11){
 /*Acc ID*/
 div.collateralTableExpanded div:nth-child(12){
   width: 10%;
+}
+
+/* Center align for columns(not header or group header) */
+/*.collateralRowGroup > .collateralRow > div:nth-child(8),*/
+/*.collateralRowGroup > .collateralRow > div:nth-child(9) {*/
+  /*text-align: center;*/
+/*}*/
+.collateralTable .collateralRow > div:nth-child(8),
+.collateralTable .collateralRow > div:nth-child(9) {
+  text-align: center;
 }
 
 /*** END ***/
