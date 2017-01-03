@@ -17,7 +17,6 @@ class Pledge extends React.Component {
     super(props)
     this.state = {
       open: true,
-      class: styles.sectionOpen,
       dropdown: "./images/common/minusbox.png",
 
       toggleColwidthL: styles.minDivL, 
@@ -196,8 +195,6 @@ class Pledge extends React.Component {
                 </div>
 
                 <div className={styles.collateralTable}>
-
-
 
                   {collateralHeader}
 
