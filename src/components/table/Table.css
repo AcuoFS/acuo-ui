@@ -180,71 +180,57 @@
 }
 
 .table >div:nth-child(1){
-  width: 12%!important;
+  width: 12%;
 }
 .table >div:nth-child(2){
-  width: 12%!important;
+  width: 14%;
 }
 .table >div:nth-child(3){
-  width: 13%!important;
+  width: 14%;
 }
 .table >div:nth-child(4){
-  width: 6%!important;
+  width: 14%;
 }
 .table >div:nth-child(5){
-  width: 15%!important;
+  width: 14%;
 }
 .table >div:nth-child(6){
-  width: 18%!important;
+  width: 14%;
 }
 .table >div:nth-child(7){
-
+  width: 16%;
+}
+.table >div:nth-child(8){
+  width: 2%;
 }
 
-
-.tableBody >div:nth-child(1){
-  width: 12.5%!important;
-}
-.tableBody >div:nth-child(2){
-  width: 13.7%!important;
-}
-.tableBody >div:nth-child(3){
-  width: 14.7%!important;
-}
-.tableBody >div:nth-child(4){
-  width: 9.7%!important;
-}
-.tableBody >div:nth-child(5){
-  width: 16.7%!important;
-}
-.tableBody >div:nth-child(6){
-  width: 16.7%!important;
-}
-.tableBody >div:nth-child(7){
-  width: 16.7%!important;
-}
-
-
+.tableBody >div:nth-child(1),
 .tableRow >div:nth-child(1){
-  width: 12.5%!important;
+  width: 12.5%;
 }
+.tableBody >div:nth-child(2),
 .tableRow >div:nth-child(2){
-  width: 12.7%!important;
+  width: 13.7%;
 }
+.tableBody >div:nth-child(3),
 .tableRow >div:nth-child(3){
-  width: 14.7%!important;
+  width: 14.7%;
 }
+.tableBody >div:nth-child(4),
 .tableRow >div:nth-child(4){
-  width: 9.7%!important;
+  width: 9.0%;
 }
+.tableBody >div:nth-child(5),
 .tableRow >div:nth-child(5){
-  width: 16.7%!important;
+  width: 16.7%;
 }
+.tableBody >div:nth-child(6),
 .tableRow >div:nth-child(6){
-  width: 16.7%!important;
+  width: 16.7%;
 }
+.tableBody >div:nth-child(7),
 .tableRow >div:nth-child(7){
-  width: 16.7%!important;
+  width: 16.7%;
 }
 
 .actionItem a {
