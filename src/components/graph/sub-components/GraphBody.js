@@ -111,7 +111,7 @@ export default class GraphBody extends React.Component {
                     width={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? 110 : 80}
                     height="45" strokeWidth="1" stroke={colour[0]} fill="#FFFFFF"></rect>
               <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] - 2.5}
-                    fontSize="13"
+                    fontSize="11"
                     fontFamily="helvetica"
                     fontWeight="bold"
                     fill="#010101"
@@ -148,7 +148,7 @@ export default class GraphBody extends React.Component {
                       fill="#FFFFFF"></rect>
                 <text x={this.props.x - 12 + (timeDifference + 0.5) * 60}
                       y={colour[1] - 2.5}
-                      fontSize="13"
+                      fontSize="11"
                       fontFamily="helvetica"
                       fontWeight="bold"
                       fill="#010101"
