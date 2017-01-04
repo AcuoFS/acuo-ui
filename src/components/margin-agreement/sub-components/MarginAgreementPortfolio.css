@@ -1,0 +1,11 @@
+.btnAddAdj {
+    width: 45px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    margin-left: 10px;
+}
+
+.adjAmtTextbox {
+    width: 50px;
+    font-size: 15px;
+}

@@ -3,6 +3,7 @@ import {Map, List} from 'immutable'
 import MarginAgreementDetail from './MarginAgreementDetail'
 import {numberWithCommas} from '../../../utils/numbersWithCommas'
 import styles from '../MarginAgreementList.css'
+import selfStyles from './MarginAgreementPortfolio.css'
 
 
 export default class MarginAgreementPortfolio extends React.Component {
@@ -186,6 +187,23 @@ export default class MarginAgreementPortfolio extends React.Component {
           </div>
 
           <div className={styles.sectionText}> {/* two row div for bold*/}
+            <div className={styles.sectionRow}>
+              <div className={styles.packageLeft}>
+                <div>Difference</div>
+              </div>
+              <div className={styles.packageRight}>
+                0.00
+              </div>
+            </div>
+            <div className={styles.sectionRow}>
+              <div className={styles.packageLeft}>
+                <div>Adjustment Amount</div>
+                <button className={selfStyles.btnAddAdj}>Add</button>
+              </div>
+              <div className={styles.packageRight}>
+                <input className={selfStyles.adjAmtTextbox} type="text" value="0.00" disabled/>
+              </div>
+            </div>
             <div className={styles.sectionRow}> {/* one row div*/}
               <div className={styles.packageLeft}>
                 <div>Total Amount Selected</div>

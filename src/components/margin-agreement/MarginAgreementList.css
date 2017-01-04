@@ -129,7 +129,7 @@
 
 .sectionRow{
     display:flex;
-    padding:7px 0;
+    padding:4px 0;
 }
 .legalEntityContainer{
     color:#9b9b9b;
@@ -179,6 +179,7 @@
     align-content: flex-start;
     flex:3;
     padding: 3px 0;
+    align-items: center;
 }
 .packageLeft .packageCheckBox{
     /*padding: 3px 4px 3px 10px;*/
@@ -194,6 +195,7 @@
 .packageRight{
     flex:1;
     padding: 3px 0;
+    align-items: center;
 }
 
 .packageLeft div{
