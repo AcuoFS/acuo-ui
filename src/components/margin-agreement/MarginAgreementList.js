@@ -39,7 +39,7 @@ export default class MarginAgreementList extends React.Component {
       return asset.reduce((sum, x) => {
         return sum + x.get('data').reduce((sum, y) => {
           return sum + (y.get('firstLevel') - y.get('secondLevel').reduce((sum, z) => {
-            return sum + (z.get('checkedOrRecon') ? 0 : z.get('amount'))
+            return sum + (z.get(checkedOrRecon) ? 0 : z.get('amount'))
           }, 0))
         }, 0)
       }, 0)
@@ -106,8 +106,8 @@ export default class MarginAgreementList extends React.Component {
                 <div className={styles.actPanel + ' ' + styles.act_C}>
                   {/*Action button goes here*/}
                   <div className={styles.btnWrap}>
-                    <div
-                      className={styles.actFig + ' ' + this.getTextColour(this.getPercentage(i))}>{this.getPercentage(i)}%
+                    <div className={styles.actFig + ' ' + this.getTextColour(this.getPercentage(i))}>
+                      {this.getPercentage(i)}%
                     </div>
                     <div className={styles.actBtn + ' ' + this.getBtnColour(this.getPercentage(i))}
                          onClick={onReconItem} data-ref={i.get('GUID')}>OK
