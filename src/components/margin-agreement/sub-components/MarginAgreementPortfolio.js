@@ -207,12 +207,58 @@ export default class MarginAgreementPortfolio extends React.Component {
     let diff = this.getDifferencePortfolio(assetsName, marginData)
     diff = (diff < 0) ? "(" + (diff * -1) + ")" : diff
 
+    let diffCal, adjCal
+
+    if ('clientAssets' == assetsName) {
+      diffCal = <div className={styles.sectionRow}>
+        <div className={styles.packageLeft}>
+          <div>Difference</div>
+        </div>
+        <div className={styles.packageRight}>
+          {diff}
+        </div>
+      </div>
+
+      adjCal = <div className={styles.sectionRow}>
+        <div className={styles.packageLeft}>
+          <div>Adjustment Amount</div>
+          <button className={selfStyles.btnAddAdj} onClick={this.onAddAdjAmount}
+                  disabled={(this.getDifferencePortfolio(assetsName, marginData) == 0)
+                  || this.state.adjAmount != 0}>
+            Add
+          </button>
+        </div>
+        <div className={styles.packageRight}>
+          <input className={selfStyles.adjAmtTextbox} type="text"
+                 value={this.state.adjAmount} disabled/>
+        </div>
+      </div>
+    } else {
+      diffCal = <div className={styles.sectionRow}>
+        <div className={styles.packageLeft}>
+          <div>Difference</div>
+        </div>
+        <div className={styles.packageRight}>
+          NA
+        </div>
+      </div>
+
+      adjCal = <div className={styles.sectionRow}>
+        <div className={styles.packageLeft}>
+          <div>Adjustment Amount</div>
+        </div>
+        <div className={styles.packageRight}>
+          NA
+        </div>
+      </div>
+    }
+
     return (
       <div className={styles.panel + " " + (isHidePanel ? styles.hidePanel : "")}>
         <div className={styles.section + ' ' + styles.left}>
 
           <div className={styles.legalEntityContainer}>
-            <div className={styles.legalEntity}>{ marginData.get(orgName) }</div>
+            <div className={styles.legalEntity}>{ marginData.get(orgName) + "GUID: " + marginData.get('GUID')}</div>
             <div className={styles.legalEntityDetails}>
               <div>{ orgName } -</div>
               <div>Global Mutual Fund</div>
@@ -223,35 +269,15 @@ export default class MarginAgreementPortfolio extends React.Component {
           </div>
 
           <div className={styles.sectionText}> {/* two row div for bold*/}
-            <div className={styles.sectionRow}>
-              <div className={styles.packageLeft}>
-                <div>Difference</div>
-              </div>
-              <div className={styles.packageRight}>
-                {diff}
-              </div>
-            </div>
-            <div className={styles.sectionRow}>
-              <div className={styles.packageLeft}>
-                <div>Adjustment Amount</div>
-                <button className={selfStyles.btnAddAdj} onClick={this.onAddAdjAmount}
-                        disabled={(this.getDifferencePortfolio(assetsName, marginData) == 0)
-                        || this.state.adjAmount != 0}>
-                  Add
-                </button>
-              </div>
-              <div className={styles.packageRight}>
-                <input className={selfStyles.adjAmtTextbox} type="text"
-                       value={this.state.adjAmount} disabled/>
-              </div>
-            </div>
+            {diffCal}
+            {adjCal}
             <div className={styles.sectionRow}> {/* one row div*/}
               <div className={styles.packageLeft}>
                 <div>Total Amount Selected</div>
               </div>
               <div className={styles.packageRight}>
                 {numberWithCommas(this.getTotalAmount(
-                  marginData.get(assetsName)))}
+                  marginData.get(assetsName)) + this.state.adjAmount)}
               </div>
             </div>
             {/*<div className={styles.sectionRow}> /!* one row div*!/*/}

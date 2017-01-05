@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import { fromJS } from 'immutable'
 import { MarginAgreementsComponent } from '../components'
-import { lineItemInsertion, reconItem, selectedItems } from '../actions'
-import {RECON_DATA_URL, RECON_URL} from '../constants/APIcalls'
+import { lineItemInsertion, selectedItems, initState } from '../actions'
+import {RECON_DATA_URL, RECON_URL, DASHBOARD_URL} from '../constants/APIcalls'
 
 
 const mapStateToProps = state => ({
@@ -21,10 +21,15 @@ const mapDispatchToProps = dispatch => ({
     }).then(response => {
       return response
     }).then(obj => {
-      fetch(RECON_URL).then((response) => {
+      fetch(DASHBOARD_URL).then((response) => {
         return response.json()
       }).then((obj) => {
-        dispatch(lineItemInsertion(fromJS(obj)))
+        dispatch(initState(fromJS(obj)))
+        fetch(RECON_URL).then((response) => {
+          return response.json()
+        }).then((obj) => {
+          dispatch(lineItemInsertion(fromJS(obj)))
+        })
       })
     })
     //dispatch(reconItem(e.currentTarget.dataset.ref)) //old recon line by line
