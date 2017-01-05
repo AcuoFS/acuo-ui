@@ -361,22 +361,6 @@ input[type=range]:focus::-ms-fill-upper {
   padding-left: 5px;
 }
 
-.sectionClose{
-  max-height: 0;
-  overflow: hidden;
-  transition: .2s ease-in;
-  opacity: 0;
-}
-.sectionOpen{
-  opacity: 1;
-  transition: 0.7s ease-out;
-  overflow:hidden;
-  max-height:1000px;
-}
-.sectionOpen .tableRow >div{
-  display: inline-block;
-}
-
 .imageRight{
   /*display: block;*/
   position: absolute;
@@ -408,58 +392,6 @@ input[type=range]:focus::-ms-fill-upper {
 .showCol{
   display: block;
 }
-
-
-
-/*** table bar ***/
-
-
-/*** section open ***/
-.sectionOpen >div{
-  position: relative;
-  display: inline-block;
-}
-.sectionOpen >div:nth-child(1){
-  width: 18%!important;
-  /*margin-right: 35px;*/
-}
-.sectionOpen >div:nth-child(2){
-  width: 5%!important;
-}
-.sectionOpen >div:nth-child(3){
-  width: 3%!important;
-}
-.sectionOpen >div:nth-child(4){
-  width: 10%!important;
-}
-.sectionOpen >div:nth-child(5){
-  width: 5%!important;
-}
-.sectionOpen >div:nth-child(6){
-  width: 5%!important;
-}
-.sectionOpen >div:nth-child(7){
-  width: 10%!important;
-}
-.sectionOpen >div:nth-child(8){
-  width: 4%!important;
-}
-.sectionOpen >div:nth-child(9){
-  width: 4%!important;
-}
-.sectionOpen >div:nth-child(10){
-  width: 4%!important;
-}
-.sectionOpen >div:nth-child(11){
-  width: 10%!important;
-}
-.sectionOpen >div:nth-child(12){
-  width: 4%!important;
-}
-.sectionOpen >div:nth-child(13){
-  width: 10%!important;
-}
-
 
 .showL{
   display: inherit;
@@ -505,7 +437,8 @@ input[type=range]:focus::-ms-fill-upper {
   padding: 7px 8px 7px 8px;
   height: 38px;
   vertical-align: middle;
-  border-top:5px solid green
+  border-top:5px solid green;
+  composes: baseFontBold from '../../static/css-components/fonts.css';
 }
 
 .collateralExpandRow{
@@ -521,7 +454,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .collateralCell {
-  padding: 2px 2px;
+  padding: 4px;
   display: table-cell;
   vertical-align: middle;
   height: 16px;
@@ -607,7 +540,7 @@ div.collateralTableExpanded div:nth-child(8){
 /*div.collateralTableExpanded div:nth-child(9){*/
   /*width: 4%;*/
 /*}*/
-/*Opp. Cost*/
+/*Opportunity Cost*/
 div.collateralTableExpanded div:nth-child(9){
   width: 7%;
 }
@@ -622,6 +555,16 @@ div.collateralTableExpanded div:nth-child(11){
 /*Acc ID*/
 div.collateralTableExpanded div:nth-child(12){
   width: 10%;
+}
+
+/* Center align for columns(not header or group header) */
+/*.collateralRowGroup > .collateralRow > div:nth-child(8),*/
+/*.collateralRowGroup > .collateralRow > div:nth-child(9) {*/
+  /*text-align: center;*/
+/*}*/
+.collateralTable .collateralRow > div:nth-child(8),
+.collateralTable .collateralRow > div:nth-child(9) {
+  text-align: center;
 }
 
 /*** END ***/
