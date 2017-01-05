@@ -17,7 +17,6 @@ class Pledge extends React.Component {
     super(props)
     this.state = {
       open: true,
-      class: styles.sectionOpen,
       dropdown: "./images/common/minusbox.png",
 
       toggleColwidthL: styles.minDivL, 
@@ -39,7 +38,7 @@ class Pledge extends React.Component {
     fetch(OPTIMISATION_URL).then(response => {
       return response.json()
     }).then(obj => {
-      this.props.onInitOptimisationSettings(obj)
+      this.props.onInitOptimisationSettings(obj.items)
     })
 
     fetch(MARGIN_SELECTION_URL).then(response => {
@@ -196,8 +195,6 @@ class Pledge extends React.Component {
                 </div>
 
                 <div className={styles.collateralTable}>
-
-
 
                   {collateralHeader}
 
