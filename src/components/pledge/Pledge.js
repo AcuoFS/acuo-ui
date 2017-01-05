@@ -39,7 +39,7 @@ class Pledge extends React.Component {
     fetch(OPTIMISATION_URL).then(response => {
       return response.json()
     }).then(obj => {
-      this.props.onInitOptimisationSettings(obj)
+      this.props.onInitOptimisationSettings(obj.items)
     })
 
     fetch(MARGIN_SELECTION_URL).then(response => {
