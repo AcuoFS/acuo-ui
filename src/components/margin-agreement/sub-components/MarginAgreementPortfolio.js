@@ -7,6 +7,15 @@ import selfStyles from './MarginAgreementPortfolio.css'
 
 
 export default class MarginAgreementPortfolio extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      adjAmount: 0.0
+    }
+
+    this.onAddAdjAmount = this.onAddAdjAmount.bind(this)
+  }
 
   checkSecondLevel(secondLevel) {
     if (secondLevel.size <= secondLevel.reduce((count, x) => {
@@ -87,22 +96,42 @@ export default class MarginAgreementPortfolio extends React.Component {
     else return List()
   }
 
+  getDifferencePortfolio(assetsName, marginData) {
+    let diff = 0
+    if ('clientAssets' == assetsName) {
+      diff = this.getTotalAmount(marginData.get('counterpartyAssets')) -
+        this.getTotalAmount(marginData.get(assetsName))
+
+    }
+    return diff
+  }
+
+  onAddAdjAmount() {
+    this.setState({
+      adjAmount: this.getDifferencePortfolio(this.props.assetsName, this.props.marginData)
+    })
+  }
+
+
   checkDescrepency(clientAsset, counterpartyAsset) {
 
     let totalClientAsset = this.getFirstLevelTotal(clientAsset)
     let totalcounterAsset = this.getFirstLevelTotal(counterpartyAsset)
 
     let highestDifference = totalClientAsset.reduce((highest, x) => {
-      let difference = Math.abs(x.get('amount') - totalcounterAsset.filter(y => { console.log(y.toJS()); return y.get('key') == x.get('key')}).first().get('amount'))
+      let difference = Math.abs(x.get('amount') - totalcounterAsset.filter(y => {
+          console.log(y.toJS());
+          return y.get('key') == x.get('key')
+        }).first().get('amount'))
       return (highest.get('difference') > difference ? highest : Map({'key': x.get('key'), 'difference': difference}))
     }, Map())
 
     return highestDifference
   }
 
-  secondLevelHighestDiscrepancy(firstLevelName, marginData, discrepancy){
+  secondLevelHighestDiscrepancy(firstLevelName, marginData, discrepancy) {
 
-    if(discrepancy){
+    if (discrepancy) {
       let clientFirstLevel = marginData.get('clientAssets').reduce((highestValue, x) => {
         let current = x.get('data').filter(x => {
           return x.get('firstLevel') == firstLevelName
@@ -118,17 +147,20 @@ export default class MarginAgreementPortfolio extends React.Component {
       }, '').first()
 
 
-      if(clientFirstLevel && cptyFirstLevel){
+      if (clientFirstLevel && cptyFirstLevel) {
 
         let highestDiscrepancy = clientFirstLevel.get('secondLevel').reduce((highest, x) => {
           let difference = Math.abs(x.get('amount') - cptyFirstLevel.get('secondLevel').filter(y => y.get('assetName') == x.get('assetName')).first().get('amount'))
 
-          return (highest.get('difference') > difference ? highest : Map({'assetName': x.get('assetName'), 'difference': difference}))
+          return (highest.get('difference') > difference ? highest : Map({
+              'assetName': x.get('assetName'),
+              'difference': difference
+            }))
         }, Map())
 
         return (highestDiscrepancy.get('assetName'))
       }
-      else{
+      else {
         return null
       }
 
@@ -139,16 +171,16 @@ export default class MarginAgreementPortfolio extends React.Component {
     if (marginData.get(assetsName))
       return marginData.get(assetsName).map((x) => {
         if (x.get('data')) {
-          return (<div key={x.get('groupName')}>{x.get('data').map((y) => {
-            const secondLevel = y.get('secondLevel')
+          return (<div key={x.get('groupName')}>{x.get('data').map((groupData) => {
+            const secondLevel = groupData.get('secondLevel')
             //const discrepancy = this.checkDescrepency(marginData.get('clientAssets'), marginData.get('counterpartyAssets')).includes(y.get('firstLevel'))
 
             //let secondLevelDiscrepancy = this.secondLevelHighestDiscrepancy(y.get('firstLevel'), marginData, discrepancy)
 
             return <MarginAgreementDetail
               GUID={marginData.get('GUID')}
-              topLevel={x.get('groupName')}
-              key={y.get('firstLevel') + x.get('groupName')}
+              topLevel={groupData.get('firstLevel')}
+              key={groupData.get('firstLevel') + x.get('groupName')}
               totalAmount={secondLevel.reduce((amount, j) => {
                 return amount + j.get('amount')
               }, 0)}
@@ -171,6 +203,10 @@ export default class MarginAgreementPortfolio extends React.Component {
       marginData, orgName, assetsName,
       handlerTotalMargin, handlerSelectedItem, isHidePanel
     } = this.props
+
+    let diff = this.getDifferencePortfolio(assetsName, marginData)
+    diff = (diff < 0) ? "(" + (diff * -1) + ")" : diff
+
     return (
       <div className={styles.panel + " " + (isHidePanel ? styles.hidePanel : "")}>
         <div className={styles.section + ' ' + styles.left}>
@@ -192,16 +228,21 @@ export default class MarginAgreementPortfolio extends React.Component {
                 <div>Difference</div>
               </div>
               <div className={styles.packageRight}>
-                0.00
+                {diff}
               </div>
             </div>
             <div className={styles.sectionRow}>
               <div className={styles.packageLeft}>
                 <div>Adjustment Amount</div>
-                <button className={selfStyles.btnAddAdj}>Add</button>
+                <button className={selfStyles.btnAddAdj} onClick={this.onAddAdjAmount}
+                        disabled={(this.getDifferencePortfolio(assetsName, marginData) == 0)
+                        || this.state.adjAmount != 0}>
+                  Add
+                </button>
               </div>
               <div className={styles.packageRight}>
-                <input className={selfStyles.adjAmtTextbox} type="text" value="0.00" disabled/>
+                <input className={selfStyles.adjAmtTextbox} type="text"
+                       value={this.state.adjAmount} disabled/>
               </div>
             </div>
             <div className={styles.sectionRow}> {/* one row div*/}
@@ -213,14 +254,14 @@ export default class MarginAgreementPortfolio extends React.Component {
                   marginData.get(assetsName)))}
               </div>
             </div>
-            <div className={styles.sectionRow}> {/* one row div*/}
-              <div className={styles.packageLeft}>
-                <div>Total Reconciled</div>
-              </div>
-              <div className={styles.packageRight}>
-                {numberWithCommas(this.getTotalReconAmount(marginData.get(assetsName)))}
-              </div>
-            </div>
+            {/*<div className={styles.sectionRow}> /!* one row div*!/*/}
+            {/*<div className={styles.packageLeft}>*/}
+            {/*<div>Total Reconciled</div>*/}
+            {/*</div>*/}
+            {/*<div className={styles.packageRight}>*/}
+            {/*{numberWithCommas(this.getTotalReconAmount(marginData.get(assetsName)))}*/}
+            {/*</div>*/}
+            {/*</div>*/}
           </div>
         </div>
 
@@ -249,6 +290,7 @@ export default class MarginAgreementPortfolio extends React.Component {
     )
 
   }
+
 }
 
 MarginAgreementPortfolio.PropTypes = {
