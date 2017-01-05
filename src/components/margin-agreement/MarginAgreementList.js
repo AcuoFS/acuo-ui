@@ -3,7 +3,6 @@
  */
 import React, {PropTypes} from 'react'
 import {List, Map} from 'immutable'
-import MarginAgreementPortfolio from './sub-components/MarginAgreementPortfolio'
 import CounterPartyAssets from './sub-components/CounterPartyAssets'
 import ClientAsset from './sub-components/ClientAsset'
 import styles from './MarginAgreementList.css'
@@ -12,6 +11,11 @@ import styles from './MarginAgreementList.css'
 export default class MarginAgreementList extends React.Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      adjAmount: 0.0
+    }
+
     const {recon, onLineItemInsertion} = this.props
     this.displayLineItems = this.displayLineItems.bind(this)
     if (!recon.isEmpty()) {
@@ -20,6 +24,8 @@ export default class MarginAgreementList extends React.Component {
     this.getTotalAmount = this.getTotalAmount.bind(this)
     this.getPercentage = this.getPercentage.bind(this)
     this.getBtnColour = this.getBtnColour.bind(this)
+    this.onUpdateAdjAmount = this.onUpdateAdjAmount.bind(this)
+    this.isDisableReconButton = this.isDisableReconButton.bind(this)
   }
 
   displayTotalMargin(i, assetType) {
@@ -88,37 +94,51 @@ export default class MarginAgreementList extends React.Component {
     }
   }
 
-  isDisableReconButton(actionItem) {
-    if (actionItem.get('clientAssets')) {
+  checkSecondLeveIsNotAllChecked(clientOrCpty, actionItem){
+    if (actionItem.get(clientOrCpty)) {
 
-      const clientAssets = actionItem.get('clientAssets')
-      clientAssets.map((groupAssets) => {
-        groupAssets.get('data').map(firstLevelRecon => {
-          firstLevelRecon.get('secondLevel').map(secondlevelItem => {
-            // console.log(secondlevelItem.get('checked') == true)
-            if (secondlevelItem.get('checked') == false) {
+      const clientAssets = actionItem.get(clientOrCpty)
+
+      for (let groupAssets of clientAssets) {
+        for (let firstLevelRecon of groupAssets.get('data')) {
+          for (let secondLevelItem of firstLevelRecon.get('secondLevel')) {
+            if (!secondLevelItem.get('checked')) {
               return true
             }
-          })
-        })
-      })
+          }
+        }
+      }
+    }
+  }
+
+  isDisableReconButton(actionItem, percentage) {
+
+    // Either client and cpty has no recon details
+    if(percentage == 0){
+      return true
     }
 
-    if (actionItem.get('counterpartyAssets')) {
-
-      const clientAssets = actionItem.get('counterpartyAssets')
-      clientAssets.map((groupAssets) => {
-        groupAssets.get('data').map(firstLevelRecon => {
-          firstLevelRecon.get('secondLevel').map(secondlevelItem => {
-            // console.log(secondlevelItem.get('checked') == true)
-            if (secondlevelItem.get('checked') == false) {
-              return true
-            }
-          })
-        })
-      })
+    if(this.checkSecondLeveIsNotAllChecked('clientAssets', actionItem)){
+      return true
     }
+
+    if(this.checkSecondLeveIsNotAllChecked('counterpartyAssets', actionItem)){
+      return true
+    }
+
+    // Need adjustment
+    if (percentage != 100 && this.state.adjAmount == 0.0) {
+      return true
+    }
+
     return false
+  }
+
+  onUpdateAdjAmount(amt){
+    // console.log("onUpdateAdjAmount from MarginAgreementList called")
+    this.setState({
+      adjAmount: amt
+    })
   }
 
   displayLineItems(recon, onReconItem, onSelectedItem) {
@@ -127,24 +147,29 @@ export default class MarginAgreementList extends React.Component {
         return y.get('timeFrames').map((z) => {
           return z.get('actionsList').map((i) => {
 
+            let percentage = this.getPercentage(i)
+
             return (
               <div className={styles.actionWrap}>
 
                 <ClientAsset marginData={i}
-                                          actStyle={'act_L'}
-                                          orgName={'legalEntity'}
-                                          assetsName={'clientAssets'}
-                                          handlerTotalMargin={this.displayTotalMargin}
-                                          handlerSelectedItem={onSelectedItem}/>
+                             actStyle={'act_L'}
+                             orgName={'legalEntity'}
+                             assetsName={'clientAssets'}
+                             handlerTotalMargin={this.displayTotalMargin}
+                             handlerSelectedItem={onSelectedItem}
+                             handlerUpdateAdj={this.onUpdateAdjAmount}
+                             adjAmt={this.state.adjAmount}/>
 
                 <div className={styles.actPanel + ' ' + styles.act_C}>
                   {/*Action button goes here*/}
                   <div className={styles.btnWrap}>
-                    <div className={styles.actFig + ' ' + this.getTextColour(this.getPercentage(i))}>
-                      {this.getPercentage(i)}%
+                    <div className={styles.actFig + ' ' + this.getTextColour(percentage)}>
+                      {percentage}%
                     </div>
                     <div className={styles.actBtn + ' '
-                      + this.getBtnColour(this.getPercentage(i))}
+                      + (this.isDisableReconButton(i, percentage) ?
+                      styles.actBtnDisable : this.getBtnColour(percentage))}
                          onClick={onReconItem} data-ref={i.get('GUID')}>OK
                     </div>
                   </div>

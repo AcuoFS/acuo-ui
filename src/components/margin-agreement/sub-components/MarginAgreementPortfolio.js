@@ -10,10 +10,6 @@ export default class MarginAgreementPortfolio extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      adjAmount: 0.0
-    }
-
     this.onAddAdjAmount = this.onAddAdjAmount.bind(this)
   }
 
@@ -107,9 +103,11 @@ export default class MarginAgreementPortfolio extends React.Component {
   }
 
   onAddAdjAmount() {
-    this.setState({
-      adjAmount: this.getDifferencePortfolio(this.props.assetsName, this.props.marginData)
-    })
+    // this.setState({
+    //   adjAmount: this.getDifferencePortfolio(this.props.assetsName, this.props.marginData)
+    // })
+
+    this.props.handlerUpdateAdj(this.getDifferencePortfolio(this.props.assetsName, this.props.marginData))
   }
 
 
@@ -201,7 +199,7 @@ export default class MarginAgreementPortfolio extends React.Component {
   render() {
     const {
       marginData, orgName, assetsName,
-      handlerTotalMargin, handlerSelectedItem, isHidePanel
+      handlerTotalMargin, handlerSelectedItem, isHidePanel, adjAmt
     } = this.props
 
     let diff = this.getDifferencePortfolio(assetsName, marginData)
@@ -224,13 +222,13 @@ export default class MarginAgreementPortfolio extends React.Component {
           <div>Adjustment Amount</div>
           <button className={selfStyles.btnAddAdj} onClick={this.onAddAdjAmount}
                   disabled={(this.getDifferencePortfolio(assetsName, marginData) == 0)
-                  || this.state.adjAmount != 0}>
+                  || adjAmt != 0}>
             Add
           </button>
         </div>
         <div className={styles.packageRight}>
           <input className={selfStyles.adjAmtTextbox} type="text"
-                 value={this.state.adjAmount} disabled/>
+                 value={adjAmt} disabled/>
         </div>
       </div>
     } else {
@@ -277,7 +275,7 @@ export default class MarginAgreementPortfolio extends React.Component {
               </div>
               <div className={styles.packageRight}>
                 {numberWithCommas(this.getTotalAmount(
-                  marginData.get(assetsName)) + this.state.adjAmount)}
+                  marginData.get(assetsName)) + adjAmt)}
               </div>
             </div>
             {/*<div className={styles.sectionRow}> /!* one row div*!/*/}
@@ -326,9 +324,13 @@ MarginAgreementPortfolio.PropTypes = {
   assetsName: PropTypes.string.isRequired,
   handlerTotalMargin: PropTypes.func.isRequired,
   handlerSelectedItem: PropTypes.func.isRequired,
-  isHidePanel: PropTypes.bool
+  isHidePanel: PropTypes.bool,
+  handlerUpdateAdj: PropTypes.func,
+  adjAmt: PropTypes.number
 }
 
 MarginAgreementPortfolio.defaultProps = {
-  isHidePanel: false
+  isHidePanel: false,
+  handlerUpdateAdj: null,
+  adjAmt: 0.0
 }

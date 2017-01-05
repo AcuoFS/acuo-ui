@@ -78,7 +78,7 @@
     cursor: pointer;
 }
 
-.actBtnDisable{
+.actionWrap .actPanel.act_C .btnWrap .actBtnDisable{
     background-color: #FAFAFA;
     color: #D5DADF;
     pointer-events: none;

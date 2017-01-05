@@ -7,7 +7,8 @@ export default class ClientAsset extends React.Component {
   render() {
     const {
       marginData, actStyle, orgName,
-      assetsName, handlerTotalMargin, handlerSelectedItem
+      assetsName, handlerTotalMargin, handlerSelectedItem,
+      handlerUpdateAdj, adjAmt
     } = this.props
 
     return (
@@ -16,7 +17,9 @@ export default class ClientAsset extends React.Component {
                                   orgName={orgName}
                                   assetsName={assetsName}
                                   handlerTotalMargin={handlerTotalMargin}
-                                  handlerSelectedItem={handlerSelectedItem}/>
+                                  handlerSelectedItem={handlerSelectedItem}
+                                  handlerUpdateAdj={handlerUpdateAdj}
+                                  adjAmt={adjAmt}/>
 
       </div>
     )
