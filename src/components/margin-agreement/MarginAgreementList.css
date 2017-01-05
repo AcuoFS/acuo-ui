@@ -78,6 +78,14 @@
     cursor: pointer;
 }
 
+.actBtnDisable{
+    background-color: #FAFAFA;
+    color: #D5DADF;
+    pointer-events: none;
+}
+
+
+
 .actBtnOrange{
     background-color: acuoActionOrange;
 }

@@ -88,11 +88,45 @@ export default class MarginAgreementList extends React.Component {
     }
   }
 
+  isDisableReconButton(actionItem) {
+    if (actionItem.get('clientAssets')) {
+
+      const clientAssets = actionItem.get('clientAssets')
+      clientAssets.map((groupAssets) => {
+        groupAssets.get('data').map(firstLevelRecon => {
+          firstLevelRecon.get('secondLevel').map(secondlevelItem => {
+            // console.log(secondlevelItem.get('checked') == true)
+            if (secondlevelItem.get('checked') == false) {
+              return true
+            }
+          })
+        })
+      })
+    }
+
+    if (actionItem.get('counterpartyAssets')) {
+
+      const clientAssets = actionItem.get('counterpartyAssets')
+      clientAssets.map((groupAssets) => {
+        groupAssets.get('data').map(firstLevelRecon => {
+          firstLevelRecon.get('secondLevel').map(secondlevelItem => {
+            // console.log(secondlevelItem.get('checked') == true)
+            if (secondlevelItem.get('checked') == false) {
+              return true
+            }
+          })
+        })
+      })
+    }
+    return false
+  }
+
   displayLineItems(recon, onReconItem, onSelectedItem) {
     return (recon.map((x) => {
       return x.get('marginStatus').map((y) => {
         return y.get('timeFrames').map((z) => {
           return z.get('actionsList').map((i) => {
+
             return (
               <div className={styles.actionWrap}>
 
@@ -109,7 +143,8 @@ export default class MarginAgreementList extends React.Component {
                     <div className={styles.actFig + ' ' + this.getTextColour(this.getPercentage(i))}>
                       {this.getPercentage(i)}%
                     </div>
-                    <div className={styles.actBtn + ' ' + this.getBtnColour(this.getPercentage(i))}
+                    <div className={styles.actBtn + ' '
+                      + this.getBtnColour(this.getPercentage(i))}
                          onClick={onReconItem} data-ref={i.get('GUID')}>OK
                     </div>
                   </div>
