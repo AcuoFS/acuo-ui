@@ -232,7 +232,7 @@ export default class MarginAgreementPortfolio extends React.Component {
         </div>
       </div>
     } else {
-      diffCal = <div className={styles.sectionRow}>
+      diffCal = <div className={styles.sectionRow + ' ' + styles.greyText}>
         <div className={styles.packageLeft}>
           <div>Difference</div>
         </div>
@@ -241,7 +241,7 @@ export default class MarginAgreementPortfolio extends React.Component {
         </div>
       </div>
 
-      adjCal = <div className={styles.sectionRow}>
+      adjCal = <div className={styles.sectionRow + ' ' + styles.greyText}>
         <div className={styles.packageLeft}>
           <div>Adjustment Amount</div>
         </div>
