@@ -28,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
         fetch(RECON_URL).then((response) => {
           return response.json()
         }).then((obj) => {
-          dispatch(lineItemInsertion(fromJS(obj)))
+          dispatch(lineItemInsertion(fromJS(obj.items)))
         })
       })
     })

@@ -30,7 +30,7 @@ class App extends React.Component {
       fetch(RECON_URL).then((response) => {
         return response.json()
       }).then((obj) => {
-        store.dispatch(lineItemInsertion(fromJS(obj)))
+        store.dispatch(lineItemInsertion(fromJS(obj.items)))
       })
     })
   }
