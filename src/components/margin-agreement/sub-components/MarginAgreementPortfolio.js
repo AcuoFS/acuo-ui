@@ -11,6 +11,7 @@ export default class MarginAgreementPortfolio extends React.Component {
     super(props)
 
     this.onAddAdjAmount = this.onAddAdjAmount.bind(this)
+    this.onChangeAdjInput = this.onChangeAdjInput.bind(this)
   }
 
   checkSecondLevel(secondLevel) {
@@ -103,13 +104,16 @@ export default class MarginAgreementPortfolio extends React.Component {
   }
 
   onAddAdjAmount() {
-    // this.setState({
-    //   adjAmount: this.getDifferencePortfolio(this.props.assetsName, this.props.marginData)
-    // })
+    const differencePortfolio = this.getDifferencePortfolio(this.props.assetsName, this.props.marginData)
 
-    this.props.handlerUpdateAdj(this.getDifferencePortfolio(this.props.assetsName, this.props.marginData))
+    this.props.handlerUpdateAdj(differencePortfolio)
+    this.adjInput.value = differencePortfolio
   }
 
+  onChangeAdjInput(){
+    // console.log(this.adjInput.value == '')
+    this.props.handlerUpdateAdj(this.adjInput.value != '' ? this.adjInput.value : 0.0)
+  }
 
   checkDescrepency(clientAsset, counterpartyAsset) {
 
@@ -227,8 +231,10 @@ export default class MarginAgreementPortfolio extends React.Component {
           </button>
         </div>
         <div className={styles.packageRight}>
-          <input className={selfStyles.adjAmtTextbox} type="text"
-                 value={adjAmt} disabled/>
+          <input className={selfStyles.adjAmtTextbox}
+                 type="text"
+                 ref={dom => this.adjInput = dom}
+                 onChange={this.onChangeAdjInput}/>
         </div>
       </div>
     } else {
@@ -274,8 +280,10 @@ export default class MarginAgreementPortfolio extends React.Component {
                 <div>Total Amount Selected</div>
               </div>
               <div className={styles.packageRight}>
-                {numberWithCommas(this.getTotalAmount(
-                  marginData.get(assetsName)) + adjAmt)}
+                {numberWithCommas(
+                  this.getTotalAmount(marginData.get(assetsName)) +
+                  (adjAmt ? Number.parseInt(adjAmt) : 0.0)
+                )}
               </div>
             </div>
             {/*<div className={styles.sectionRow}> /!* one row div*!/*/}
