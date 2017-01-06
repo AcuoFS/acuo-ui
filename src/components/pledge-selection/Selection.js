@@ -63,7 +63,10 @@ export default class Selection extends React.Component {
   }
 
   calSubTotal(a, s){
-    return (a.getIn(['allocated', s]).reduce((SumX , x)=>{return SumX + x.get('price')},0))
+    if(a.getIn(['allocated', s]))
+      return (a.getIn(['allocated', s]).reduce((SumX , x)=>{return SumX + x.get('price')},0))
+    else
+      return 0
   }
   calTotal(a, i, j){
     return this.calSubTotal(a, i) + this.calSubTotal(a, j)
@@ -83,9 +86,9 @@ export default class Selection extends React.Component {
           <div className={styles.leftColumn + ' ' + (!this.props.toggleL ? styles.bigger : '')}>
             <div className={styles.titleHolder}>
               <img src={(this.checkIfExist(pendingAllocationStore).includes(marginCall.get('GUID')) ? "./images/pledge/checkboxwithtick.png" : "./images/pledge/checkbox.png")} className={styles.selTick} onClick={this.togglePendingAllocation} data-ref={marginCall.get('GUID')}/>
-              <span className={styles.panelTitle}>{marginCall.get('marginCallName')}</span>
+              <span className={styles.panelTitle}>{marginCall.get('GUID')}</span>
               <div className={styles.subtitle}>
-                {marginCall.get('legalEntity')} - {marginCall.get('marginCallName')}
+                {marginCall.get('legalEntity')} - {marginCall.get('GUID')}
               </div>
             </div>
             <div className={styles.callTitle}>
