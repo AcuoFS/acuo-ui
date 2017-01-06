@@ -39,7 +39,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateOptimisationSettings(newSettings))
   },
   initSelection: (selection) => {
-    dispatch(initSelection(selection.data.inMarginCall))
+    dispatch(initSelection(selection.items))
   },
   onTogglePendingAllocation: (GUID) => {
     dispatch(togglePendingAllocation(GUID))
@@ -58,7 +58,7 @@ const mapDispatchToProps = dispatch => ({
       return response.json()
     }).then(obj => {
       dispatch(updateCollateral(fromJS(obj.data.collateral)))
-      dispatch(initSelection(fromJS(obj.data.inMarginCall)))
+      dispatch(initSelection(fromJS(obj.items)))
     })
   },
 

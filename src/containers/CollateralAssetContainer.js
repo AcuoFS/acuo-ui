@@ -5,7 +5,7 @@ import CollateralAssetComponent from './../components/pledge/sub-components/Coll
 const mapStateToProps = state => ({
   // Get property marginCallName from each object of the margin call list
   listOfMarginCallName: state.PledgeReducer.getIn(['pledgeData', 'selection']) ? (state.PledgeReducer.getIn(['pledgeData', 'selection'])
-    .map(portfolio => portfolio.get('marginCallName'))).toJS() : []
+    .map(portfolio => portfolio.get('GUID'))).toJS() : []
 })
 
 const CollateralAssetContainer = connect(

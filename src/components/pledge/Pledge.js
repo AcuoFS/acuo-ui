@@ -161,8 +161,9 @@ class Pledge extends React.Component {
                 <div className={styles.optButton  + (
 
                     this.checkIfExist(selection).reduce((sumSelX, x) => {
+
                       //console.log("+++ " + x.getIn(['allocated', 'initialMargin']))
-                      return sumSelX + x.getIn(['allocated', 'initialMargin']).size + x.getIn(['allocated', 'variationMargin']).size
+                      return sumSelX + (x.getIn(['allocated', 'initialMargin']) ? x.getIn(['allocated', 'initialMargin']).size + x.getIn(['allocated', 'variationMargin']).size : 0 )
                     }, 0) > 0
 
                   ? ' '+styles.btnEnabled : ' '+styles.btnDisabled )} id={styles.optBtnPledge}>Pledge</div>
