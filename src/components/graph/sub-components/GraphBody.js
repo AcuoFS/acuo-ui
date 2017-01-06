@@ -60,12 +60,12 @@ export default class GraphBody extends React.Component {
         return Map({'timeFrame': y.get('timeFrame'),
             "inAmount": y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
-              return (xx.get('direction') == 'IN' ? a2 + xx.get('initialMargin') : a2)
+              return (xx.get('direction') == 'IN' ? a2 + Number.parseInt(xx.get('initialMargin')) : a2)
             }, 0)
           }, 0)
           , "outAmount": y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
-              return (xx.get('direction') == 'OUT' ? a2 + xx.get('initialMargin') : a2)
+              return (xx.get('direction') == 'OUT' ? a2 + Number.parseInt(xx.get('initialMargin')) : a2)
             }, 0)
           }, 0)
           , "inNo":  y.get('actionsList').reduce((a, z) => {
@@ -194,6 +194,8 @@ export default class GraphBody extends React.Component {
         return ["#0170B0", 162, 298]
       case 'dispute':
         return ["#D0011B", 202, 258]
+      default:
+        return ["#D0011B", -100, -100]
     }
 
   }

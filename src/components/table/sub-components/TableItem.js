@@ -22,7 +22,7 @@ class TableItem extends React.Component {
       if (x.get('timeFrames'))
         return sum + x.get('timeFrames').reduce((sum, y) => {
             return sum + y.get('actionsList').reduce((sum, z) => {
-                return sum + z.get(key)
+                return sum + Number.parseInt(z.get(key) ? z.get(key) : 0)
               }, 0)
           }, 0)
       else

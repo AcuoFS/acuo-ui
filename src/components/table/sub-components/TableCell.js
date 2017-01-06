@@ -15,9 +15,13 @@ class TableCell extends React.Component {
     }
 }
 
-TableCell.propTypes = {
-    bodyItemClass : PropTypes.string.isRequired,
-    cellValue: PropTypes.string.isRequired
+TableCell.PropTypes = {
+  bodyItemClass: PropTypes.string.isRequired,
+  cellValue: PropTypes.string
+}
+
+TableCell.DefaultProps = {
+  cellValue: ""
 }
 
 export default TableCell
