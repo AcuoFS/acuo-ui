@@ -67,8 +67,8 @@
   border-width: 8px 8px 0 8px;
   border-color: #AAAAAA transparent transparent transparent;
   position: absolute;
-  top: 30%;
-  left: 8%
+  top: 6px;
+  left: 2px;
 }
 
 .filterDropdownArrow::after {
@@ -79,8 +79,8 @@
   border-width: 5px 5px 0 5px;
   border-color: #fff transparent transparent transparent;
   position: absolute;
-  top: 30%;
-  left: 23%;
+  top: 6px;
+  left: 5px;
 }
 
 .filtersList {
@@ -99,6 +99,11 @@
 
 .filtersList li {
   padding: 4px 8px;
+}
+
+.selectedText {
+  padding: 0px 8px;
+  line-height: 30px;
 }
 
 .filtersList li:hover {

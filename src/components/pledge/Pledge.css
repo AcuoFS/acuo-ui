@@ -24,7 +24,7 @@
 }
 
 .panelTitle {
-  font-family: baseFontBold from './../../static';
+  composes: baseFontBold from './../../static/css-components/fonts.css';
   font-size: 20px;
   line-height: 24px;
   text-transform: uppercase;
@@ -579,38 +579,38 @@ div.collateralTableExpanded div:nth-child(12){
   /*padding-top: 5px;*/
 
   z-index: 1;
-  top:-5px; /* set top value */
-  left:25px; /* set left value */
-  width:120px;
+  top: -5px; /* set top value */
+  left: 0px; /* set left value */
+  width:300px;
   border: 1px solid #1c2124;
   display: none;
   position: absolute;
   background-color: #ffffff;
 }
-.boxed:before{
-  content: '';
-  display: block;
-  position: absolute;
-  right: 100%;
-  top: 20%;
-  margin-top: -10px;
-  border-top: 8px solid transparent;
-  border-right: 12px solid #000;
-  border-bottom: 8px solid transparent;
-  border-left: 11px solid transparent;
-}
-.boxed:after{
-  content: '';
-  display: block;
-  position: absolute;
-  right: 99%;
-  top: 24%;
-  margin-top: -10px;
-  border-top: 7px solid transparent;
-  border-right: 12px solid #ffffff;
-  border-bottom: 8px solid transparent;
-  border-left: 6px solid transparent;
-}
+/*.boxed:before{*/
+  /*content: '';*/
+  /*display: block;*/
+  /*position: absolute;*/
+  /*right: 100%;*/
+  /*top: 20%;*/
+  /*margin-top: -10px;*/
+  /*border-top: 8px solid transparent;*/
+  /*border-right: 12px solid #000;*/
+  /*border-bottom: 8px solid transparent;*/
+  /*border-left: 11px solid transparent;*/
+/*}*/
+/*.boxed:after{*/
+  /*content: '';*/
+  /*display: block;*/
+  /*position: absolute;*/
+  /*right: 99%;*/
+  /*top: 24%;*/
+  /*margin-top: -10px;*/
+  /*border-top: 7px solid transparent;*/
+  /*border-right: 12px solid #ffffff;*/
+  /*border-bottom: 8px solid transparent;*/
+  /*border-left: 6px solid transparent;*/
+/*}*/
 
 .leftBoxed {
   border-radius: 80px;
@@ -621,37 +621,37 @@ div.collateralTableExpanded div:nth-child(12){
 
   z-index: 1;
   top:-5px; /* set top value */
-  left:-134px; /* set left value */
-  width:120px;
+  left:-294px; /* set left value */
+  width:300px;
   border: 1px solid #1c2124;
   display: none;
   position: absolute;
   background-color: #ffffff;
 }
-.leftBoxed:before{
-  content: '';
-  display: block;
-  position: absolute;
-  right: -16%;
-  top: 20%;
-  margin-top: -10px;
-  border-top: 8px solid transparent;
-  border-left: 12px solid #000;
-  border-bottom: 8px solid transparent;
-  border-right: 11px solid transparent;
-}
-.leftBoxed:after{
-  content: '';
-  display: block;
-  position: absolute;
-  right: -11%;
-  top: 24%;
-  margin-top: -10px;
-  border-top: 7px solid transparent;
-  border-left: 12px solid #ffffff;
-  border-bottom: 8px solid transparent;
-  border-right: 6px solid transparent;
-}
+/*.leftBoxed:before{*/
+  /*content: '';*/
+  /*display: block;*/
+  /*position: absolute;*/
+  /*right: -16%;*/
+  /*top: 20%;*/
+  /*margin-top: -10px;*/
+  /*border-top: 8px solid transparent;*/
+  /*border-left: 12px solid #000;*/
+  /*border-bottom: 8px solid transparent;*/
+  /*border-right: 11px solid transparent;*/
+/*}*/
+/*.leftBoxed:after{*/
+  /*content: '';*/
+  /*display: block;*/
+  /*position: absolute;*/
+  /*right: -11%;*/
+  /*top: 24%;*/
+  /*margin-top: -10px;*/
+  /*border-top: 7px solid transparent;*/
+  /*border-left: 12px solid #ffffff;*/
+  /*border-bottom: 8px solid transparent;*/
+  /*border-right: 6px solid transparent;*/
+/*}*/
 
 
 .boxAllocate {
@@ -696,6 +696,7 @@ div.collateralTableExpanded div:nth-child(12){
 
 .showBox{
   display: block;
+  cursor: default;
 }
 
 .relative{
@@ -705,7 +706,8 @@ div.collateralTableExpanded div:nth-child(12){
 
 /* css for allocate asset pop up-------------->*/
 .popupAllocateRoot{
-  font:13px Helvetica;
+  font-size:13px;
+  composes: baseFont from './../../static/css-components/fonts.css';
   padding: 0 5px;
   /*margin-top: 12px;*/
 }
@@ -717,22 +719,24 @@ div.collateralTableExpanded div:nth-child(12){
 
 .popupText{
   /*width: 145px;*/
-  align-content: flex-start;
+  align-self: center;
   flex: 2;
-  padding: 3px 0;
+  padding: 3px 5px;
   display: inline-block;
+  text-align: right;
 }
 
 .popupInputBox{
   display: inline-block;
   flex:3;
   min-height: 26px;
-  width: 100%;
+  width: 98%;
 }
 
 .buttonContainer{
   width: 100%;
-  margin-top: 10px;
+  margin: 5px 0;
+  text-align: right;
 }
 
 /*.buttonContainerEnabled{*/
@@ -741,8 +745,6 @@ div.collateralTableExpanded div:nth-child(12){
 /*}*/
 
 .buttonContainer .btnDisabled {
-  float: right;
-  margin: 16px 24px;
   width: 100px;
   /*height: 32px;*/
   color: #d7dce0 ;
@@ -750,30 +752,27 @@ div.collateralTableExpanded div:nth-child(12){
   border: 1px solid #d7dce0 ;
   font-size: 13px;
   font-weight: bold;
-  /*line-height: 32px;*/
+  line-height: 21px;
   text-align: center;
   -webkit-border-radius: 20px;
   border-radius: 20px;
-  margin: 0 20px;
   align-self: center;
 }
 
 .buttonContainer .btnEnabled {
-  float: right;
-  margin: 16px 24px;
   width: 100px;
   /*height: 32px;*/
   color: #fff ;
-  background-color: #00B9CC ;
-  border: 1px solid #00B9CC ;
+  background-color: #118A17 ;
+  border: 1px solid #118A17 ;
   font-size: 13px;
   font-weight: bold;
-  /*line-height: 32px;*/
+  line-height: 21px;
   text-align: center;
   -webkit-border-radius: 20px;
   border-radius: 20px;
-  margin: 0 20px;
   align-self: center;
+  cursor: pointer;
 }
 
 .optButton.btnEnabled {
@@ -785,7 +784,7 @@ div.collateralTableExpanded div:nth-child(12){
   border: 1px solid #979797 ;
   font-size: 13px;
   font-weight: bold;
-  line-height: 32px;
+  line-height: 21px;
   text-align: center;
   -webkit-border-radius: 20px;
   border-radius: 20px;
@@ -843,3 +842,50 @@ div.collateralTableExpanded div:nth-child(12){
   text-align: center;
 }
 /*** End ***/
+
+/*** New changes ***/
+.tabHolder {
+  position: relative;
+}
+
+.tab {
+  display: inline-block;
+  composes: baseFontBold from './../../static/css-components/fonts.css';
+  padding: 5px 0px 3px 0px;
+  margin: 0px 5px;
+  color: #A9A9A9;
+  cursor: pointer;
+}
+
+.closeButton {
+  color: #585858;
+  float: right;
+  font-size: 15px;
+  padding: 0px 5px;
+  cursor: pointer;
+}
+
+.selectedTab{
+  color: #4C81B1;
+  border-bottom: 3px solid #4C81B1;
+}
+
+.tabbedContent {
+  display: none;
+  padding: 5px;
+}
+
+.showContent {
+  display: block;
+}
+
+.removeAsset {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.removeAsset .btnEnabled{
+  color: #585858;
+  background-color: #fff;
+  border-color: #585858;
+}
