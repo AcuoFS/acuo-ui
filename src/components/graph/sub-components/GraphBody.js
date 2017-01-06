@@ -2,6 +2,7 @@ import React from 'react';
 import { List, Set, Map } from 'immutable'
 import styles from '../Graph.css'
 import { browserHistory } from 'react-router'
+import {numberWithCommas} from '../../../utils/numbersWithCommas'
 
 export default class GraphBody extends React.Component {
 
@@ -16,7 +17,7 @@ export default class GraphBody extends React.Component {
         return () => 0
       case 'unrecon':
         return () => browserHistory.push('/recon')
-      case 'recon':
+      case 'reconciled':
         return () => browserHistory.push('/pledge')
       case 'pledge':
         return () => browserHistory.push('/deployed')
@@ -83,34 +84,85 @@ export default class GraphBody extends React.Component {
     }).map((status) => {
       return status.get('timeFrames').map(timeFrame => {
 
-        let colour = this.getColour(status.get('status'))
+        let colour = this.getColour(status.get('status').toLowerCase())
         let timeDifference = (Date.parse(new Date(timeFrame.get('timeFrame'))) - (Date.parse(this.props.time)))/3600000
 
-        function numberWithCommas(x) {
-          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        // Use a faded blue for pledge if it's past the current time
+        if (status.get('status') == 'pledge' && timeDifference < 0) {
+          colour[0] = "#8CC5DD"
         }
 
-        const onClickFunc = this.whichClickFuncToRun(status.get('status'))
+        const onClickFunc = this.whichClickFuncToRun(status.get('status').toLowerCase())
 
         return List()
         .push((timeFrame.get('inAmount') === 0)? 0 :
           <g id={styles.componentId} key={status.get('status') + timeFrame.get('timeFrame') + 'in'}>
-            <circle cx={this.props.x + (timeDifference + 0.5) * 60} cy={colour[2]} r={(timeFrame.get('inAmount') === 0)? 0 :(Math.log(timeFrame.get('inAmount'))) } fill={colour[0]}>
+            <circle cx={this.props.x + (timeDifference + 0.5) * 60}
+                    cy={colour[2]}
+                    r={(timeFrame.get('inAmount') === 0)? 0 :(Math.log(timeFrame.get('inAmount'))) }
+                    fill={colour[0]}>
             </circle>
             <g className={styles.toolTip} opacity="0.9">
-              <rect x={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? this.props.x - 110 + (timeDifference + 0.5) * 60 : this.props.x - 90 + (timeDifference + 0.5) * 60} y={colour[2] - 20} rx="4" width={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? 100 : 80} height="45" strokeWidth="1" stroke={colour[0]} fill="#FFFFFF"></rect>
-              <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] - 2.5} fontSize="13" fontFamily="helvetica" fontWeight="bold" fill="#010101" textAnchor="end">{timeFrame.get('inNo')} {status.get('status').toUpperCase()}</text>
-              <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] + 17.5} fontSize="13" fontFamily="helvetica" fill="#010101" textAnchor="end">{numberWithCommas(timeFrame.get('inAmount'))}</text>
+
+              <rect x={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7)
+                ? this.props.x - 110 + (timeDifference + 0.5) * 60
+                : this.props.x - 90 + (timeDifference + 0.5) * 60}
+                    y={colour[2] - 20} rx="4"
+                    width={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? 110 : 80}
+                    height="45" strokeWidth="1" stroke={colour[0]} fill="#FFFFFF"></rect>
+              <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] - 2.5}
+                    fontSize="11"
+                    fontFamily="helvetica"
+                    fontWeight="bold"
+                    fill="#010101"
+                    textAnchor="end">
+                {timeFrame.get('inNo')} {status.get('status').toUpperCase()}
+              </text>
+              <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] + 17.5}
+                    fontSize="13"
+                    fontFamily="helvetica"
+                    fill="#010101"
+                    textAnchor="end">
+                {numberWithCommas(timeFrame.get('inAmount'))}
+              </text>
             </g>
           </g>)
           .push((timeFrame.get('outAmount') === 0)? 0 :
-            <g id={styles.componentId} key={status.get('status') + timeFrame.get('timeFrame') + 'out'} onClick={onClickFunc}>
-              <circle cx={this.props.x + (timeDifference + 0.5) * 60} cy={colour[1]} r={(timeFrame.get('outAmount') === 0)? 0 :(Math.log(timeFrame.get('outAmount'))) } fill={colour[0]}>
+            <g id={styles.componentId} key={status.get('status') + timeFrame.get('timeFrame') + 'out'}
+               onClick={onClickFunc}>
+              <circle cx={this.props.x + (timeDifference + 0.5) * 60}
+                      cy={colour[1]}
+                      r={(timeFrame.get('outAmount') === 0)? 0 :(Math.log(timeFrame.get('outAmount'))) }
+                      fill={colour[0]}>
               </circle>
               <g className={styles.toolTip} opacity="0.9">
-                <rect x={(timeFrame.get('outAmount') > 100000000 || status.get('status').length > 7) ? this.props.x - 110 + (timeDifference + 0.5) * 60 : this.props.x - 90 + (timeDifference + 0.5) * 60} y={colour[1] - 20} rx="4" width={(timeFrame.get('outAmount') > 100000000 || status.get('status').length > 7) ? 100 : 80} height="45" strokeWidth="1" stroke={colour[0]} fill="#FFFFFF"></rect>
-                <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[1] - 2.5} fontSize="13" fontFamily="helvetica" fontWeight="bold" fill="#010101" textAnchor="end">{timeFrame.get('outNo')} {status.get('status').toUpperCase()}</text>
-                <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[1] + 17.5} fontSize="13" fontFamily="helvetica" fill="#010101" textAnchor="end">{numberWithCommas(timeFrame.get('outAmount'))}</text>
+                <rect x={(timeFrame.get('outAmount') > 100000000 || status.get('status').length > 7)
+                  ? this.props.x - 110 + (timeDifference + 0.5) * 60
+                  : this.props.x - 90 + (timeDifference + 0.5) * 60}
+                      y={colour[1] - 20}
+                      rx="4"
+                      width={(timeFrame.get('outAmount') > 100000000 || status.get('status').length > 7) ? 100 : 80}
+                      height="45"
+                      strokeWidth="1"
+                      stroke={colour[0]}
+                      fill="#FFFFFF"></rect>
+                <text x={this.props.x - 12 + (timeDifference + 0.5) * 60}
+                      y={colour[1] - 2.5}
+                      fontSize="11"
+                      fontFamily="helvetica"
+                      fontWeight="bold"
+                      fill="#010101"
+                      textAnchor="end">
+                  {timeFrame.get('outNo')} {status.get('status').toUpperCase()}
+                </text>
+                <text x={this.props.x - 12 + (timeDifference + 0.5) * 60}
+                      y={colour[1] + 17.5}
+                      fontSize="13"
+                      fontFamily="helvetica"
+                      fill="#010101"
+                      textAnchor="end">
+                  {numberWithCommas(timeFrame.get('outAmount'))}
+                </text>
               </g>
             </g>)
       })
@@ -124,20 +176,28 @@ export default class GraphBody extends React.Component {
 
   }
 
+  /**
+   * Function to specify colour and both y values of circle
+   * @param status
+   * @returns {[string,number,number]}
+   */
   getColour(status){
+
     switch(status){
       case 'expected':
-        return ['#FFCD2D', 42, 418]
+        return ['#F7BD20', 42, 418]
       case 'unrecon':
-        return ["#FF7D26", 82, 378]
-      case 'recon':
-        return ["#26DA6E", 122, 338]
+        return ["#D65028", 82, 378]
+      case 'reconciled':
+        return ["#005544", 122, 338]
       case 'pledge':
-        return ["#58B6FF", 162, 298]
+        return ["#0170B0", 162, 298]
       case 'dispute':
-        return ["#FF1E25", 202, 258]
+        return ["#D0011B", 202, 258]
     }
+
   }
+
   getDeriv(){
     return this.props.data || []
   }

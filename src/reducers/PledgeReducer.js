@@ -3,7 +3,7 @@ import { Map, fromJS, List } from 'immutable'
 
 
 const initOptimisationSettings = (state, settings) => {
-  return state.setIn(['pledgeData', 'optimisation'], fromJS(settings.data))
+  return state.setIn(['pledgeData', 'optimisation'], fromJS(settings))
 }
 
 const updateOptimisationSettings = (state, newSettings) => {

@@ -75,14 +75,14 @@ export default class CollateralAssetGroup extends React.Component {
 
         <div className={styles.collateralRowGroup}>
 
-          <div className={styles.collateralRow + ' ' + styles.collateralExpandRow}>
+          <div className={styles.collateralRow + ' ' +
+          (propCollateralType == 'Earmarked' ? styles.collateralExpandEarmarkedRow : styles.collateralExpandRow)}>
             <div className={styles.collateralCell}>
-              <div>{propCollateralType}</div>
+              <div>{propCollateralType} </div>
               <div onClick={this.handlePlusMinus}><img src={this.getPlusMinusImgURL(this.state.isGroupExpanded)}
                                                        alt=""/>
               </div>
             </div>
-            <div className={styles.collateralCell}></div>
             <div className={styles.collateralCell}></div>
             <div className={styles.collateralCell}></div>
             <div className={styles.collateralCell}></div>
@@ -106,12 +106,14 @@ export default class CollateralAssetGroup extends React.Component {
 
         <div className={styles.collateralRowGroup}>
 
-          <div className={styles.collateralRow + ' ' + styles.collateralExpandRow}>
+          <div className={styles.collateralRow + ' ' +
+          (propCollateralType == 'Earmarked' ? styles.collateralExpandEarmarkedRow : styles.collateralExpandRow)}>
             <div className={styles.collateralCell}>
               <div>{propCollateralType}</div>
               <div onClick={this.handlePlusMinus}><img src={this.getPlusMinusImgURL(this.state.isGroupExpanded)}
                                                        alt=""/>
               </div>
+
             </div>
             <div className={styles.collateralCell}></div>
             <div className={styles.collateralCell}></div>

@@ -53,10 +53,9 @@ class TableItem extends React.Component {
     return (
       <div>
         <div className={styles.table}>
-
           <div className={styles.derivItem}>
-            <div className={styles.vertiCenter}>
-              <p className={styles.centerThis}>{this.props.deriv.get('type')}</p>
+            <div className={styles.vertiCenter + " " + styles.derivType}>
+              <p className={styles.centerThis + " " + styles.derivTypeText}>{this.props.deriv.get('type')}</p>
             </div>
           </div>
 
@@ -64,35 +63,35 @@ class TableItem extends React.Component {
             <div className={styles.margin}>
               <p className={styles.leftThis}>Initial Margin</p>
               <p
-                className={styles.fineFont}>{this.numberWithCommas(this.compute('variableMargin') + this.compute('initialMargin'))}</p>
+                className={styles.fineFont}>{this.numberWithCommas(this.compute('initialMargin'))}</p>
             </div>
           </div>
 
           <div className={styles.tableItem}>
             <div className={styles.margin}>
               <p className={styles.leftThis}>Variation Margin</p>
-              <p className={styles.fineFont}>TBC</p>
+              <p className={styles.fineFont}>{this.numberWithCommas(this.compute('variableMargin'))}</p>
             </div>
           </div>
 
           <div className={styles.tableItem}>
             <div className={styles.margin}>
               <p className={styles.leftThis}>Excess</p>
-              <p className={styles.fineFont}>TBC</p>
+              <p className={styles.fineFont}>{this.numberWithCommas((this.compute('collateralBalance') + this.compute('pendingCollateral')) - (this.compute('variableMargin') + this.compute('initialMargin')))}</p>
             </div>
           </div>
 
           <div className={styles.tableItem}>
             <div className={styles.margin}>
               <p className={styles.leftThis}>Collateral Balance</p>
-              <p className={styles.fineFont}>TBC</p>
+              <p className={styles.fineFont}>{this.numberWithCommas(this.compute('collateralBalance'))}</p>
             </div>
           </div>
 
           <div className={styles.tableItem}>
             <div className={styles.margin}>
               <p className={styles.leftThis}>Pending Collateral</p>
-              <p className={styles.fineFont}>TBC</p>
+              <p className={styles.fineFont}>{this.numberWithCommas(this.compute('pendingCollateral'))}</p>
             </div>
           </div>
 

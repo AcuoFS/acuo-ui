@@ -1,23 +1,24 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import styles from '../MarginAgreementList.css'
 import Dropdown from '../../Dropdown/Dropdown'
+import {Map} from 'immutable'
 
 
 export default class Dispute extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.toggleDropDown = this.toggleDropDown.bind(this)
     this.state = {
       isDropDownSelected: false,
-      isValidForm : false
+      isValidForm: false
     }
 
     this.onDropdownItemChange = this.onDropdownItemChange.bind(this)
     this.validateForm = this.validateForm.bind(this)
   }
 
-  toggleDropDown(e){
+  toggleDropDown(e) {
   }
 
 
@@ -32,7 +33,7 @@ export default class Dispute extends React.Component {
       return
   }
 
-  onDropdownItemChange(e){
+  onDropdownItemChange(e) {
     this.setState({
       isDropDownSelected: true
     }, this.validateForm)
@@ -40,13 +41,10 @@ export default class Dispute extends React.Component {
     e.stopPropagation();
   }
 
-  validateForm(){
+  validateForm() {
     const isAllInputFilled =
-      !(this.disAmtInput.value.trim() == "") &&
-      !(this.agreeAmtInput.value.trim() == "") &&
-      this.state.isDropDownSelected &&
-      !(this.mtmInput.value.trim() == "") &&
-      !(this.collatBalInput.value.trim() == "")
+      !(this.disAmtInput.value.trim() == "") && !(this.agreeAmtInput.value.trim() == "") &&
+      this.state.isDropDownSelected && !(this.mtmInput.value.trim() == "") && !(this.collatBalInput.value.trim() == "")
 
     this.setState({
       isValidForm: isAllInputFilled
@@ -56,12 +54,11 @@ export default class Dispute extends React.Component {
 
   render() {
     const {
-      marginData, actStyle, orgName,
-      assetsName, handlerTotalMargin, handlerSelectedItem
+      marginData, orgName, isHidePanel
     } = this.props
 
     return (
-      <div className={styles.panelDispute}>
+      <div className={styles.panelDispute + " " + (isHidePanel ? styles.hidePanel : "")}>
         <div className={styles.firstRow}>
           <div className={styles.legalEntityContainerDispute}>
             <div className={styles.legalEntityContainer}>
@@ -94,7 +91,7 @@ export default class Dispute extends React.Component {
               <div className={styles.columnleft}> Dispute Amount
               </div>
               <input type="text" className={styles.inputBox} onChange={this.validateForm}
-              ref={dom => this.disAmtInput = dom}/>
+                     ref={dom => this.disAmtInput = dom}/>
               <div className={styles.usd}>USD</div>
 
             </div>
@@ -114,8 +111,8 @@ export default class Dispute extends React.Component {
                   handleOnSelectedItemChange={this.onDropdownItemChange}
                   selectedOption='Select One'
                   options={['Portfolio Discrepancy', 'Initial Margin/ Independent Amount Discrepancy', 'Collateral Discrepancy'
-                    ,'Agreement Discrepancy', 'Notification Time','Call Amount Discrepancy','MTM Discrepancy','Below Threshold Limit'
-                    ,'Two Way Call','UnKnown Business Error','Other']} />
+                    , 'Agreement Discrepancy', 'Notification Time', 'Call Amount Discrepancy', 'MTM Discrepancy', 'Below Threshold Limit'
+                    , 'Two Way Call', 'UnKnown Business Error', 'Other']}/>
               </div>
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
@@ -149,4 +146,14 @@ export default class Dispute extends React.Component {
       </div>
     )
   }
+}
+
+Dispute.propTypes = {
+  marginData: PropTypes.instanceOf(Map).isRequired,
+  orgName: PropTypes.string.isRequired,
+  isHidePanel: PropTypes.bool
+}
+
+Dispute.defaultProps = {
+  isHidePanel: false
 }

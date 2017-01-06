@@ -3,11 +3,12 @@
  */
 import React from 'react'
 import {render} from 'react-dom'
-import styles from './Pledge.css'
 import OptItem from './sub-components/OptItem'
 import ChooseCalls from './sub-components/ChooseCalls'
 import Selection from '../pledge-selection/Selection'
 import CollateralAssetGroup from './sub-components/CollateralAssetGroup'
+import {OPTIMISATION_URL,MARGIN_SELECTION_URL} from '../../constants/APIcalls'
+import styles from './Pledge.css'
 
 import { List } from 'immutable'
 
@@ -16,7 +17,6 @@ class Pledge extends React.Component {
     super(props)
     this.state = {
       open: true,
-      class: styles.sectionOpen,
       dropdown: "./images/common/minusbox.png",
 
       toggleColwidthL: styles.minDivL, 
@@ -35,13 +35,13 @@ class Pledge extends React.Component {
     this.onPledgeButtonClick = this.onPledgeButtonClick.bind(this)
     // this.renderCollateralItems = this.renderCollateralItems.bind(this)
 
-    fetch('http://52.74.186.112:8081/optimisation').then(response => {
+    fetch(OPTIMISATION_URL).then(response => {
       return response.json()
     }).then(obj => {
       this.props.onInitOptimisationSettings(obj)
     })
 
-    fetch('http://52.74.186.112:8081/init-selection').then(response => {
+    fetch(MARGIN_SELECTION_URL).then(response => {
       return response.json()
     }).then(obj => {
       this.props.initSelection(obj)
@@ -130,13 +130,12 @@ class Pledge extends React.Component {
           <div className={styles.collateralCell}>Asset</div>
           <div className={styles.collateralCell}>Price</div>
           <div className={styles.collateralCell}>CCY</div>
-          <div className={styles.collateralCell}>Del. Time</div>
+          <div className={styles.collateralCell}>Delivery Time</div>
           <div className={styles.collateralCell}>Status</div>
           <div className={styles.collateralCell}>Rating</div>
           <div className={styles.collateralCell}>Maturity Date</div>
-          <div className={styles.collateralCell}>Int. Cost</div>
-          <div className={styles.collateralCell}>Ext. Cost</div>
-          <div className={styles.collateralCell}>Opp. Cost</div>
+          <div className={styles.collateralCell}>Internal Cost (bps)</div>
+          <div className={styles.collateralCell}>Opportunity Cost (bps)</div>
           <div className={styles.collateralCell}>ISIN</div>
           <div className={styles.collateralCell}>Venue</div>
           <div className={styles.collateralCell}>Acc ID</div>
@@ -196,8 +195,6 @@ class Pledge extends React.Component {
                 </div>
 
                 <div className={styles.collateralTable}>
-
-
 
                   {collateralHeader}
 

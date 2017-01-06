@@ -361,22 +361,6 @@ input[type=range]:focus::-ms-fill-upper {
   padding-left: 5px;
 }
 
-.sectionClose{
-  max-height: 0;
-  overflow: hidden;
-  transition: .2s ease-in;
-  opacity: 0;
-}
-.sectionOpen{
-  opacity: 1;
-  transition: 0.7s ease-out;
-  overflow:hidden;
-  max-height:1000px;
-}
-.sectionOpen .tableRow >div{
-  display: inline-block;
-}
-
 .imageRight{
   /*display: block;*/
   position: absolute;
@@ -408,58 +392,6 @@ input[type=range]:focus::-ms-fill-upper {
 .showCol{
   display: block;
 }
-
-
-
-/*** table bar ***/
-
-
-/*** section open ***/
-.sectionOpen >div{
-  position: relative;
-  display: inline-block;
-}
-.sectionOpen >div:nth-child(1){
-  width: 18%!important;
-  /*margin-right: 35px;*/
-}
-.sectionOpen >div:nth-child(2){
-  width: 5%!important;
-}
-.sectionOpen >div:nth-child(3){
-  width: 3%!important;
-}
-.sectionOpen >div:nth-child(4){
-  width: 10%!important;
-}
-.sectionOpen >div:nth-child(5){
-  width: 5%!important;
-}
-.sectionOpen >div:nth-child(6){
-  width: 5%!important;
-}
-.sectionOpen >div:nth-child(7){
-  width: 10%!important;
-}
-.sectionOpen >div:nth-child(8){
-  width: 4%!important;
-}
-.sectionOpen >div:nth-child(9){
-  width: 4%!important;
-}
-.sectionOpen >div:nth-child(10){
-  width: 4%!important;
-}
-.sectionOpen >div:nth-child(11){
-  width: 10%!important;
-}
-.sectionOpen >div:nth-child(12){
-  width: 4%!important;
-}
-.sectionOpen >div:nth-child(13){
-  width: 10%!important;
-}
-
 
 .showL{
   display: inherit;
@@ -505,7 +437,8 @@ input[type=range]:focus::-ms-fill-upper {
   padding: 7px 8px 7px 8px;
   height: 38px;
   vertical-align: middle;
-  border-top:5px solid green
+  border-top:5px solid green;
+  composes: baseFontBold from '../../static/css-components/fonts.css';
 }
 
 .collateralExpandRow{
@@ -514,20 +447,28 @@ input[type=range]:focus::-ms-fill-upper {
   color: #ffffff;
 }
 
+.collateralExpandEarmarkedRow{
+  background: #4E83B5;
+  line-height: 12px;
+  color: #ffffff;
+}
+
 .collateralCell {
-  padding: 2px 2px;
+  padding: 4px;
   display: table-cell;
   vertical-align: middle;
   height: 16px;
 }
 
-.collateralExpandRow > .collateralCell{
+.collateralExpandRow > .collateralCell,
+.collateralExpandEarmarkedRow > .collateralCell{
   border-top-style: solid;
   border-top-width:3px;
   border-top-color:#FFFFFF;
 }
 
-.collateralExpandRow > .collateralCell > div{
+.collateralExpandRow > .collateralCell > div,
+.collateralExpandEarmarkedRow > .collateralCell > div{
   display: inline-block;
   padding-right: 2px;
   vertical-align: middle;
@@ -581,7 +522,7 @@ div.collateralTableExpanded div:nth-child(4){
 }
 /*Status*/
 div.collateralTableExpanded div:nth-child(5){
-  width: 6%;
+  width: 8%;
 }
 /*Rating*/
 div.collateralTableExpanded div:nth-child(6){
@@ -589,31 +530,41 @@ div.collateralTableExpanded div:nth-child(6){
 }
 /*Maturity Date*/
 div.collateralTableExpanded div:nth-child(7){
-  width: 12%;
+  width: 10%;
 }
 /*Internal Cost*/
 div.collateralTableExpanded div:nth-child(8){
-  width: 4%;
+  width: 7%;
 }
 /*External Cost*/
+/*div.collateralTableExpanded div:nth-child(9){*/
+  /*width: 4%;*/
+/*}*/
+/*Opportunity Cost*/
 div.collateralTableExpanded div:nth-child(9){
-  width: 4%;
-}
-/*Opp. Cost*/
-div.collateralTableExpanded div:nth-child(10){
-  width: 4%;
+  width: 7%;
 }
 /*ISIN*/
-div.collateralTableExpanded div:nth-child(11){
-  width: 11%;
+div.collateralTableExpanded div:nth-child(10){
+  width: 10%;
 }
 /*Venue*/
-div.collateralTableExpanded div:nth-child(12){
+div.collateralTableExpanded div:nth-child(11){
   width: 4%;
 }
 /*Acc ID*/
-div.collateralTableExpanded div:nth-child(13){
-  width: 11%;
+div.collateralTableExpanded div:nth-child(12){
+  width: 10%;
+}
+
+/* Center align for columns(not header or group header) */
+/*.collateralRowGroup > .collateralRow > div:nth-child(8),*/
+/*.collateralRowGroup > .collateralRow > div:nth-child(9) {*/
+  /*text-align: center;*/
+/*}*/
+.collateralTable .collateralRow > div:nth-child(8),
+.collateralTable .collateralRow > div:nth-child(9) {
+  text-align: center;
 }
 
 /*** END ***/
@@ -844,7 +795,7 @@ div.collateralTableExpanded div:nth-child(13){
 
 /*** Status Color classes****/
 .statusAR{
-  background: #FDC36D;
+  background: #58C4F5;
   color: #FFFFFF;
   width: 20px;
   height: 14px;
@@ -856,7 +807,7 @@ div.collateralTableExpanded div:nth-child(13){
   text-align: center;
 }
 .statusAV{
-  background: #2CBF9F;
+  background: #005544;
   color: #FFFFFF;
   width: 20px;
   height: 14px;
@@ -868,7 +819,7 @@ div.collateralTableExpanded div:nth-child(13){
   text-align: center;
 }
 .statusDP{
-  background: #4A4A4A;
+  background: #00B38F;
   color: #FFFFFF;
   width: 20px;
   height: 14px;
@@ -880,7 +831,7 @@ div.collateralTableExpanded div:nth-child(13){
   text-align: center;
 }
 .statusD{
-  background: #4E83B4;
+  background: #4E83B5;
   color: #FFFFFF;
   width: 20px;
   height: 14px;

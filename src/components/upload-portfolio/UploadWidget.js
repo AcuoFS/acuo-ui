@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import DropzoneComponent from 'react-dropzone-component'
+import {UPLOAD_FILE_URL} from '../../constants/APIcalls'
 import styles from './UploadWidget.css'
 
 
@@ -45,7 +46,7 @@ export default class UploadWidget extends React.Component {
       iconFiletypes: ['.xlsx'],
       showFiletypeIcon: false,
       // Change this param to the server's URL
-      postUrl: 'http://valuation.acuo.com/acuo/api/upload'
+      postUrl: UPLOAD_FILE_URL
     }
 
     this.dropzone = null
