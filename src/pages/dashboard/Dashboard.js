@@ -7,6 +7,7 @@ import {
   NavigationBarContainer
 } from '../../containers'
 import styles from './Dashboard.css'
+import SortableSimple from '../../components/dnd-test'
 
 
 class Dashboard extends React.Component {
@@ -21,6 +22,7 @@ class Dashboard extends React.Component {
           <GraphContainer />
         </div>
         <TableContainer />
+        <SortableSimple />
       </div>
     )
   }
