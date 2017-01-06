@@ -1,4 +1,4 @@
-export const DASHBOARD_URL = 'http://margin.acuo.com/acuo/api/margin/dashboard'
+export const DASHBOARD_URL = 'http://margin.acuo.com/acuo/api/margin/dashboard/999'
 export const RECON_URL = 'http://margin.acuo.com/acuo/api/margin/items/all/999'
 export const RECON_DATA_URL = 'http://margin.acuo.com/acuo/api/margin/reconcile/'
 export const ALLOCATE_COLLATERALS_URL = 'http://52.74.186.112:8081/allocate-selection'
