@@ -17,6 +17,8 @@ class CollateralAsset extends React.Component {
     this.selectTab = this.selectTab.bind(this)
     this.checkSelection = this.checkSelection.bind(this)
     this.checkContent = this.checkContent.bind(this)
+    this.changeAllocateAmount = this.changeAllocateAmount.bind(this)
+    this.changeAmendAmount = this.changeAmendAmount.bind(this)
 
     this.state = {
       toggle: "",
@@ -24,7 +26,9 @@ class CollateralAsset extends React.Component {
       isAssetValidToAmend: false,
       isMgnAgreementDropDownSelected: false,
       isCallTypeDropDownSelected: false,
-      selectedTab: 'allocate'
+      selectedTab: 'allocate',
+      allocateAmount: 0.00,
+      amendAmount: 0.00
     }
 
 
@@ -138,14 +142,34 @@ class CollateralAsset extends React.Component {
     })
   }
 
-  roundDown(int){
-    return Math.floor(int/1000) * 1000
+  checkAmountExceeding(total, amount){
+    if(amount > total)
+      return (
+        <div className={styles.errorPopUp}>
+          Amount entered is larger than available.
+        </div>
+      )
+  }
+
+  changeAllocateAmount(e){
+
+    this.setState({
+      allocateAmount: e.target.value
+    })
+  }
+
+  changeAmendAmount(e){
+
+    this.setState({
+      amendAmount: e.target.value
+    })
   }
 
   render() {
     const {
       propAsset,
       propPrice,
+      rawPrice,
       propCcy,
       propDeliveryTime,
       propStatus,
@@ -172,7 +196,7 @@ class CollateralAsset extends React.Component {
     if (propCollateralType == 'Earmarked') {
 
       statusDisplay = (
-        <div className={styles.relative} onClick={this.amendCollateral} data-ref={propCollateralType + propAssetId + propAssetIdType} onMouseLeave={this.removeCollateralBox}>
+        <div className={styles.relative} onClick={this.amendCollateral} data-ref={propCollateralType + propAssetId + propAssetIdType} >
           <span className={statusClass}>{propStatus}</span>
           <div
             className={(propIsDisplayAll ? styles.boxed : styles.leftBoxed ) + ' ' + ((this.state.toggle == propCollateralType + propAssetId + propAssetIdType) ? styles.showBox : '')}>
@@ -240,7 +264,16 @@ class CollateralAsset extends React.Component {
                   </div>
                   <div className={styles.popupInputBox}>
                     <input type="number" className={styles.popupInputBox}
-                           ref={dom => this.amountInput = dom} onChange={this.validateAllocateForm}/>
+                           ref={dom => this.amountInput = dom} value={this.state.allocateAmount} onChange={(e) => {this.validateAllocateForm; this.changeAllocateAmount(e)}}/>
+                  </div>
+                </div>
+
+                <div className={styles.popupRow}> {/* one row div*/}
+                  <div className={styles.popupText}>
+                  </div>
+                  <div className={styles.popupInputBox}>
+                    <div className={styles.helperText}>Amount rounded down to nearest unit value</div>
+                    {this.checkAmountExceeding(rawPrice, this.state.allocateAmount)}
                   </div>
                 </div>
 
@@ -259,7 +292,16 @@ class CollateralAsset extends React.Component {
                   </div>
                   <div className={styles.popupInputBox}>
                     <input type="number" className={styles.popupInputBox}
-                           ref={dom => this.amendAmount = dom} onChange={this.validateAmendForm}/>
+                           ref={dom => this.amendAmount = dom} value={this.state.amendAmount.toFixed(2)} onChange={(e) => {this.validateAmendForm; this.changeAmendAmount(e)}}/>
+                  </div>
+                </div>
+
+                <div className={styles.popupRow}> {/* one row div*/}
+                  <div className={styles.popupText}>
+                  </div>
+                  <div className={styles.popupInputBox}>
+                    <div className={styles.helperText}>Amount rounded down to nearest unit value</div>
+                    {this.checkAmountExceeding(rawPrice, this.state.amendAmount)}
                   </div>
                 </div>
 

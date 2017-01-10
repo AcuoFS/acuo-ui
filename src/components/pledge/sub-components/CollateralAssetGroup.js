@@ -48,6 +48,7 @@ export default class CollateralAssetGroup extends React.Component {
           rowStyle={"tableRow"}
           propAsset={asset.assetName}
           propPrice={numberWithCommas(asset.price)}
+          rawPrice={asset.price}
           propCcy={asset.ccy}
           propDeliveryTime={asset.deliveryTime}
           propStatus={asset.status}

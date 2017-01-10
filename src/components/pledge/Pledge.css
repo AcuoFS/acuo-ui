@@ -581,7 +581,7 @@ div.collateralTableExpanded div:nth-child(12){
   z-index: 1;
   top: -5px; /* set top value */
   left: 0px; /* set left value */
-  width:300px;
+  width:350px;
   border: 1px solid #1c2124;
   display: none;
   position: absolute;
@@ -621,8 +621,8 @@ div.collateralTableExpanded div:nth-child(12){
 
   z-index: 1;
   top:-5px; /* set top value */
-  left:-294px; /* set left value */
-  width:300px;
+  left:-344px; /* set left value */
+  width:350px;
   border: 1px solid #1c2124;
   display: none;
   position: absolute;
@@ -728,9 +728,14 @@ div.collateralTableExpanded div:nth-child(12){
 
 .popupInputBox{
   display: inline-block;
-  flex:3;
+  flex: 4;
   min-height: 26px;
   width: 98%;
+  position: relative;
+}
+
+.popupInputBox input{
+  text-indent: 5px;
 }
 
 .buttonContainer{
@@ -761,7 +766,6 @@ div.collateralTableExpanded div:nth-child(12){
 
 .buttonContainer .btnEnabled {
   width: 100px;
-  /*height: 32px;*/
   color: #fff ;
   background-color: #118A17 ;
   border: 1px solid #118A17 ;
@@ -888,4 +892,39 @@ div.collateralTableExpanded div:nth-child(12){
   color: #585858;
   background-color: #fff;
   border-color: #585858;
+}
+
+.helperText{
+  color: #989898;
+  font-style: italic;
+}
+
+.errorPopUp {
+  position: absolute;
+  background-color: #fff;
+  top: -8px;
+  padding: 5px;
+  border: 1px solid #AB0017;
+  border-radius: 5px;
+  color: #AB0017;
+}
+
+.errorPopUp::before{
+  position: absolute;
+  content: '';
+  border-bottom: 9px solid #AB0017;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  top: -9px;
+  left: 6px;
+}
+
+.errorPopUp::after{
+  position: absolute;
+  content: '';
+  border-bottom: 8px solid #fff;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  top: -8px;
+  left: 7px;
 }

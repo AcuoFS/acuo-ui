@@ -29,9 +29,9 @@ class TableRow extends React.Component {
         <TableCell bodyItemClass={'cptyItem'} cellValue={rowItems.get('cptyEntity')}/>
         <TableCell bodyItemClass={'marginRow'} cellValue={rowItems.get('ccy')}/>
         <TableCell bodyItemClass={'marginItem'} cellValue={
-          numberWithCommas(Number.parseInt(rowItems.get('initialMargin')))}/>
+          numberWithCommas(Number.parseInt(rowItems.get('initialMargin') || 0))}/>
         <TableCell bodyItemClass={'marginItem'} cellValue={
-          numberWithCommas(Number.parseInt(rowItems.get('variableMargin')))}/>
+          numberWithCommas(Number.parseInt(rowItems.get('variableMargin') || 0))}/>
         <TableCell bodyItemClass={'outerItem'} cellValue={
           numberWithCommas(excess)}/>
       </div>
