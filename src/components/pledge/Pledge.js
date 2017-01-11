@@ -155,8 +155,8 @@ class Pledge extends React.Component {
               <div className={styles.buttonHolder}>
                 <ChooseCalls tickImg={sliderCheckbox[0]} tickState={sliderCheckbox[1]}
                              tickClick={onToggleCheckall} />
-                           
-                <div className={styles.optButton + (this.checkIfExist(pendingAllocation).size > 0 ? ' '+styles.btnEnabled : ' '+styles.btnDisabled )} id={styles.optBtnAllocate} onClick={onAllocate} data-optimisation={this.checkIfExist(optimisation).toJS()} data-pendingAllocation={this.checkIfExist(pendingAllocation).toJS()}>Allocate</div>
+
+                           <div className={styles.optButton + (this.checkIfExist(pendingAllocation).size > 0 ? ' '+styles.btnEnabled : ' '+styles.btnDisabled )} id={styles.optBtnAllocate} onClick={()=> onAllocate(pendingAllocation.toJS(), optimisation.toJS())} >Allocate</div>
 
                 <div className={styles.optButton  + (
 
