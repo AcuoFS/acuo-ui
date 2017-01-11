@@ -32,6 +32,7 @@ export default class Selection extends React.Component {
   }
 
   renderMargin(x, index){
+    console.log(marginCall.getIn(['allocated', 'variationMargin']))
     return (
       <tr key={index}>
         <td>{x.get('assetName')}</td>
@@ -185,16 +186,16 @@ export default class Selection extends React.Component {
                 <div className={styles.subSectionHeader}>Variation Margin</div>
                 <table className={styles.selTable + ( evlEmptyForVariMargin ? ' ' + styles.notAllocated : '')}>
                   <thead>
-                  <tr className={styles.bold}>
-                    <th></th>
-                    <th>Price(Net <br/>of Haircut)</th>
-                    <th>CCY</th>
-                    <th>Haircut</th>
-                    <th>Venue</th>
-                    <th>Price</th>
-                    <th>CCY</th>
-                    <th></th>
-                  </tr>
+                    <tr className={styles.bold}>
+                      <th></th>
+                      <th>Value(post <br/>haircut)</th>
+                      <th>CCY</th>
+                      <th>Haircut</th>
+                      <th>Value</th>
+                      <th>FX</th>
+                      <th>Venue</th>
+                      <th></th>
+                    </tr>
                   </thead>
                   <tbody>
 
