@@ -1,5 +1,5 @@
 import * as ActionTypes from '../constants/ActionTypes'
-import { Map, fromJS, List } from 'immutable'
+import { Map, fromJS, List, toJS } from 'immutable'
 
 
 const initOptimisationSettings = (state, settings) => {
@@ -28,11 +28,11 @@ export const initSelection = (state, selection) => {
 
 export const togglePendingAllocation = (state, GUID) => {
   if(!state.getIn(['pledgeData', 'pendingAllocation']) || state.getIn(['pledgeData', 'pendingAllocation']).isEmpty())
-    return state.setIn(['pledgeData', 'pendingAllocation'], List().push(parseInt(GUID)))
-  else if(state.getIn(['pledgeData', 'pendingAllocation']).includes(parseInt(GUID)))
+    return state.setIn(['pledgeData', 'pendingAllocation'], List().push(GUID))
+  else if(state.getIn(['pledgeData', 'pendingAllocation']).includes(GUID))
     return state.setIn(['pledgeData', 'pendingAllocation'], state.getIn(['pledgeData', 'pendingAllocation']).filter(x => x != GUID))
   else
-    return state.setIn(['pledgeData', 'pendingAllocation'], state.getIn(['pledgeData', 'pendingAllocation']).push(parseInt(GUID)))
+    return state.setIn(['pledgeData', 'pendingAllocation'], state.getIn(['pledgeData', 'pendingAllocation']).push(GUID))
 }
 
 export const toggleCheckall = (state) => {

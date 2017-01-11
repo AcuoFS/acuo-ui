@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Selection.css'
 import { numberWithCommas } from '../../utils/numbersWithCommas'
 
-import { List } from 'immutable'
+import { List, toJS } from 'immutable'
 
 export default class Selection extends React.Component {
   constructor(props) {
@@ -35,12 +35,12 @@ export default class Selection extends React.Component {
     return (
       <tr key={index}>
         <td>{x.get('assetName')}</td>
-        <td>{numberWithCommas(x.get('priceNetHaircut'))}</td>
-        <td>{x.get('priceNetHaircutCcy')}</td>
-        <td>{x.get('haircutPct')}%</td>
+        <td>{numberWithCommas(x.get('valuePostHaircut'))}</td>
+        <td>{x.get('CCY')}</td>
+        <td>{x.get('haircut')}%</td>
+        <td>{x.get('value')}</td>
+        <td>{numberWithCommas(x.get('FX'))}</td>
         <td>{x.get('venue')}</td>
-        <td>{numberWithCommas(x.get('price'))}</td>
-        <td>{x.get('priceCcy')}</td>
         <td><
           div className={styles.earmarkAssetButton}>
             <span>E</span>
@@ -151,12 +151,12 @@ export default class Selection extends React.Component {
                   <thead>
                     <tr className={styles.bold}>
                       <th></th>
-                      <th>Price(Net <br/>of Haircut)</th>
+                      <th>Value(post <br/>haircut)</th>
                       <th>CCY</th>
                       <th>Haircut</th>
+                      <th>Value</th>
+                      <th>FX</th>
                       <th>Venue</th>
-                      <th>Price</th>
-                      <th>CCY</th>
                       <th></th>
                     </tr>
                   </thead>
