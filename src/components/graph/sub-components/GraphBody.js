@@ -21,7 +21,7 @@ export default class GraphBody extends React.Component {
         return () => browserHistory.push('/pledge')
       case 'pledged':
         return () => browserHistory.push('/deployed')
-      case 'actiondispute':
+      case 'dispute':
         return () => browserHistory.push('/dispute')
     }
   }
@@ -160,7 +160,7 @@ export default class GraphBody extends React.Component {
                       fontWeight="bold"
                       fill="#010101"
                       textAnchor="end">
-                  {timeFrame.get('outNo')} {(status.get('status').toUpperCase() == 'ACTIONDISPUTE' ? 'DISPUTE' : status.get('status').toUpperCase())}
+                  {timeFrame.get('outNo')} {status.get('status').toUpperCase()}
                 </text>
                 <text x={this.props.x - 12 + (timeDifference + 0.5) * 60}
                       y={colour[1] + 17.5}
@@ -199,7 +199,7 @@ export default class GraphBody extends React.Component {
         return ["#005544", 122, 338]
       case 'pledged':
         return ["#0170B0", 162, 298]
-      case 'actiondispute':
+      case 'dispute':
         return ["#D0011B", 202, 258]
       default:
         return ["#D0011B", -100, -100]
