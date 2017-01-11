@@ -7,9 +7,9 @@ class TableHead extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      open: true,
-      class: styles.sectionOpen,
-      dropdown: "./images/dashboard/table/Droplist(up).png"
+      open: false,
+      class: styles.sectionClose,
+      dropdown: "./images/dashboard/table/Droplist(down).png"
     }
     this.handleClick = this.handleClick.bind(this);
 
