@@ -46,9 +46,18 @@ class TableItem extends React.Component {
     return this.props.deriv.get('marginStatus') || []
   }
 
+  checkNegative(excess, numbersWithCommas){
+    if(excess < 0)
+      return '(' + numbersWithCommas(Math.abs(excess)) + ')'
+    else
+      return excess
+  }
+
   render() {
 
     const {redirect} = this.props
+
+    const excess = (this.compute('collateralBalance') + this.compute('pendingCollateral')) - (this.compute('variableMargin') + this.compute('initialMargin'))
 
     return (
       <div>
@@ -77,7 +86,7 @@ class TableItem extends React.Component {
           <div className={styles.tableItem}>
             <div className={styles.margin}>
               <p className={styles.leftThis}>Excess</p>
-              <p className={styles.fineFont}>{this.numberWithCommas((this.compute('collateralBalance') + this.compute('pendingCollateral')) - (this.compute('variableMargin') + this.compute('initialMargin')))}</p>
+              <p className={styles.fineFont}>{this.checkNegative(excess, this.numberWithCommas)}</p>
             </div>
           </div>
 

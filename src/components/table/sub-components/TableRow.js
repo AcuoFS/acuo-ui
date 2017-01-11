@@ -8,6 +8,13 @@ class TableRow extends React.Component {
     super(props)
   }
 
+  checkNegative(excess, numbersWithCommas){
+    if(excess < 0)
+      return '(' + numbersWithCommas(Math.abs(excess)) + ')'
+    else
+      return excess
+  }
+
   render() {
 
     const { rowItems, numberWithCommas } = this.props
@@ -33,7 +40,7 @@ class TableRow extends React.Component {
         <TableCell bodyItemClass={'marginItem'} cellValue={
           numberWithCommas(Number.parseInt(rowItems.get('variableMargin') || 0))}/>
         <TableCell bodyItemClass={'outerItem'} cellValue={
-          numberWithCommas(excess)}/>
+          this.checkNegative(excess, numberWithCommas)}/>
       </div>
     )
   }
