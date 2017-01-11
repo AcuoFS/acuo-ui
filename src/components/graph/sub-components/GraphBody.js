@@ -76,6 +76,7 @@ export default class GraphBody extends React.Component {
           }, 0)
           , "inNo":  y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
+
               return (xx.get('direction') == 'IN' ? a2+1 : a2)
             }, 0)
           }, 0)
@@ -159,7 +160,7 @@ export default class GraphBody extends React.Component {
                       fontWeight="bold"
                       fill="#010101"
                       textAnchor="end">
-                  {timeFrame.get('inNo')} {(status.get('status').toUpperCase() == 'ACTIONDISPUTE' ? 'DISPUTE' : status.get('status').toUpperCase())}
+                  {timeFrame.get('outNo')} {(status.get('status').toUpperCase() == 'ACTIONDISPUTE' ? 'DISPUTE' : status.get('status').toUpperCase())}
                 </text>
                 <text x={this.props.x - 12 + (timeDifference + 0.5) * 60}
                       y={colour[1] + 17.5}
