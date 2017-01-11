@@ -123,7 +123,7 @@ export default class GraphBody extends React.Component {
                     fontWeight="bold"
                     fill="#010101"
                     textAnchor="end">
-                {timeFrame.get('inNo')} {(status.get('status').toUpperCase() == 'ACTIONDISPUTE' ? 'DISPUTE' : status.get('status').toUpperCase())}
+                {timeFrame.get('inNo')} {status.get('status').toUpperCase()}
               </text>
               <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] + 17.5}
                     fontSize="13"
