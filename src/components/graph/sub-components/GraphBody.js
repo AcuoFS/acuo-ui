@@ -190,8 +190,6 @@ export default class GraphBody extends React.Component {
    */
   getColour(status){
 
-    console.log(status)
-
     switch(status){
       case 'expected':
         return ['#F7BD20', 42, 418]

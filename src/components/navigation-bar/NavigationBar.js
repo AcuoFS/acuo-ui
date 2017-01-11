@@ -16,7 +16,7 @@ export default class NavigationBar extends React.Component {
   }
 
   render() {
-    /*console.log('nav', this.props.curPage)*/
+
     return (
       <nav className={styles.nav}>
 
