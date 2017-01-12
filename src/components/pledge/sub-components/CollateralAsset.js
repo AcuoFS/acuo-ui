@@ -75,16 +75,16 @@ class CollateralAsset extends React.Component {
 
     let statusClass
     switch (status) {
-      case 'AR':
+      case 'Arriving':
         statusClass = styles.statusAR;
         break;
-      case 'AV':
+      case 'Available':
         statusClass = styles.statusAV;
         break;
-      case 'DP':
+      case 'Deployed':
         statusClass = styles.statusDP;
         break;
-      case 'D':
+      case 'Departed':
         statusClass = styles.statusD;
         break;
     }
