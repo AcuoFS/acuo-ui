@@ -134,8 +134,8 @@ class Pledge extends React.Component {
           <div className={styles.collateralCell}>Status</div>
           <div className={styles.collateralCell}>Rating</div>
           <div className={styles.collateralCell}>Maturity Date</div>
-          <div className={styles.collateralCell}>Internal Cost (bps)</div>
-          <div className={styles.collateralCell}>Opportunity Cost (bps)</div>
+          <div className={styles.collateralCell}>Internal Cost</div>
+          <div className={styles.collateralCell}>Opportunity Cost</div>
           <div className={styles.collateralCell}>ISIN</div>
           <div className={styles.collateralCell}>Venue</div>
           <div className={styles.collateralCell}>Acc ID</div>
