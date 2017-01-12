@@ -196,7 +196,7 @@ export const appendList = (state, action) => {
             }).first()
 
             if(item) {
-              return a.set('clientAssets', item.get('ClientAssets')).set('counterpartyAssets', item.get('counterpartyAssets')).set('currencyInfo', item.get('currencyInfo'))
+              return a.set('clientAssets', item.get('clientAssets')).set('counterpartyAssets', item.get('counterpartyAssets')).set('currencyInfo', item.get('currencyInfo'))
             }
             else {
               return a
@@ -213,7 +213,7 @@ export const appendList = (state, action) => {
             }).first()
 
             if(item) {
-              return a.set('clientAssets', item.get('ClientAssets')).set('counterpartyAssets', item.get('counterpartyAssets')).set('currencyInfo', item.get('currencyInfo'))
+              return a.set('clientAssets', item.get('clientAssets')).set('counterpartyAssets', item.get('counterpartyAssets')).set('currencyInfo', item.get('currencyInfo'))
             }
             else {
               return a

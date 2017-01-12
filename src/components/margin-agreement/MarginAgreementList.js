@@ -33,12 +33,13 @@ export default class MarginAgreementList extends React.Component {
         return y.get('timeFrames').map((z) => {
           return z.get('actionsList').map((i) => {
 
-            return (
-              <MarginAgreementPortfolio
-                onSelectedItem={onSelectedItem}
-                portfolioData={i}
-                onReconItem={onReconItem}/>
-            )
+            if(i.get('direction') == 'OUT')
+              return (
+                <MarginAgreementPortfolio
+                  onSelectedItem={onSelectedItem}
+                  portfolioData={i}
+                  onReconItem={onReconItem}/>
+              )
           })
         })
       })

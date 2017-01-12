@@ -102,7 +102,8 @@ export default class MarginAgreementDetail extends React.Component {
 
     const {
       topLevel, secondLevel, GUID,
-      totalAmount, isSecondLevel, checkboxImageUrl, discrepancy, secondLevelDiscrepancy
+      totalAmount, isSecondLevel, checkboxImageUrl, discrepancy, secondLevelDiscrepancy,
+      firstLevelAmount
     } = this.props
 
     return (
@@ -121,7 +122,7 @@ export default class MarginAgreementDetail extends React.Component {
               image={this.state.expand}
             />
           </div>
-          <div className={styles.packageRight}>{numberWithCommas(totalAmount)}</div>
+          <div className={styles.packageRight}>{(firstLevelAmount ? numberWithCommas(firstLevelAmount) : numberWithCommas(totalAmount))}</div>
         </div>
 
         {this.renderHidden(secondLevel, GUID, discrepancy, secondLevelDiscrepancy)}
