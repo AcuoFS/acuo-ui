@@ -811,7 +811,7 @@ div.collateralTableExpanded div:nth-child(12){
 .statusAR{
   background: #58C4F5;
   color: #FFFFFF;
-  width: 20px;
+  /*width: 20px;*/
   height: 14px;
   display: block;
   border-radius: 2px;
@@ -823,7 +823,7 @@ div.collateralTableExpanded div:nth-child(12){
 .statusAV{
   background: #005544;
   color: #FFFFFF;
-  width: 20px;
+  /*width: 20px;*/
   height: 14px;
   display: block;
   border-radius: 2px;
@@ -835,7 +835,7 @@ div.collateralTableExpanded div:nth-child(12){
 .statusDP{
   background: #00B38F;
   color: #FFFFFF;
-  width: 20px;
+  /*width: 20px;*/
   height: 14px;
   display: block;
   border-radius: 2px;
@@ -847,7 +847,7 @@ div.collateralTableExpanded div:nth-child(12){
 .statusD{
   background: #4E83B5;
   color: #FFFFFF;
-  width: 20px;
+  /*width: 20px;*/
   height: 14px;
   display: block;
   border-radius: 2px;

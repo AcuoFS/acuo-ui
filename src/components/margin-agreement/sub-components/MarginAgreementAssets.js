@@ -40,7 +40,7 @@ export default class MarginAgreementPortfolio extends React.Component {
       return asset.reduce((sum, x) => {
         return sum + x.get('data').reduce((sum, y) => {
             return sum + y.get('secondLevel').reduce((sum, z) => {
-                return sum + (z.get('checked') ? z.get('amount') : 0)
+                return sum + (z.get('checked') ? parseInt(z.get('amount')) : 0)
               }, 0)
           }, 0)
       }, 0)
@@ -54,7 +54,7 @@ export default class MarginAgreementPortfolio extends React.Component {
       return asset.reduce((sum, x) => {
         return sum + x.get('data').reduce((sum, y) => {
             return sum + y.get('secondLevel').reduce((sum, z) => {
-                return sum + (z.get('recon') ? z.get('amount') : 0)
+                return sum + (z.get('recon') ? parseInt(z.get('amount')) : 0)
               }, 0)
           }, 0)
       }, 0)
@@ -81,7 +81,7 @@ export default class MarginAgreementPortfolio extends React.Component {
 
           let list = Map({
             'key': y.get('firstLevel'), 'amount': y.get('secondLevel').reduce((sum, z) => {
-              return sum + z.get('amount')
+              return sum + parseInt(z.get('amount'))
             }, 0)
           })
           //return (list > 0 ? listY.push(y.set('secondLevel', list)) : listY)
@@ -183,9 +183,10 @@ export default class MarginAgreementPortfolio extends React.Component {
             return <MarginAgreementDetail
               GUID={marginData.get('GUID')}
               topLevel={groupData.get('firstLevel')}
+              firstLevelAmount={parseInt(x.get('amount'))}
               key={groupData.get('firstLevel') + x.get('groupName')}
               totalAmount={secondLevel.reduce((amount, j) => {
-                return amount + j.get('amount')
+                return amount + parseInt(j.get('amount'))
               }, 0)}
               secondLevel={secondLevel}
               handlerSelectedItem={handlerSelectedItem}
