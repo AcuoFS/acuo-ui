@@ -221,7 +221,7 @@ class Pledge extends React.Component {
                   <CollateralAssetGroup propCollateralType={"Soverign Bonds"}
                                         propCollateralAssetList={
                                           this.props.collateral ? this.props.collateral.get('sovereignBonds').toJS() : [] }
-                                        propIsExpanded={false}
+                                        propIsExpanded={true}
                                         propIsDisplayAll={this.state.open}/>
 
                   <CollateralAssetGroup propCollateralType={"Govt Agencies"}
@@ -239,7 +239,7 @@ class Pledge extends React.Component {
                   <CollateralAssetGroup propCollateralType={"Corporate Equity"}
                                         propCollateralAssetList={
                                           this.props.collateral ? this.props.collateral.get('corporateEquity').toJS() : [] }
-                                        propIsExpanded={false}
+                                        propIsExpanded={true}
                                         propIsDisplayAll={this.state.open}/>
                 </div>
 
