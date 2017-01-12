@@ -131,13 +131,9 @@ export default class Selection extends React.Component {
             <div className={styles.ttlMarginWrap + ' ' + (this.props.toggleR ? styles.showR : styles.hideR)}>
               <div className={styles.ttlMargin}>
                 <div>Total Margin</div>
-                <div className={styles.bigFig + ' ' +styles.bold}>{numberWithCommas((this.checkIfExist(marginCall.get('ClientAssets')).reduce((sum, x) => {
-                  return sum + x.get('data').reduce((sum, y) => {
-                      return sum + y.get('secondLevel').reduce((sum, z) => {
-                          return sum + z.get('amount')
-                        }, 0)
-                    }, 0)
-                }, 0) / 1000000).toFixed(1))}</div>
+                <div className={styles.bigFig + ' ' +styles.bold}>
+                  {Math.round((marginCall.getIn(['allocated', 'marginTotal']) || 0)/10000)/100}
+                </div>
                 <div className={styles.bold}>Million</div>
               </div>
             </div>
