@@ -3,6 +3,8 @@
 .pledgeContainer {
   position: relative;
   padding: 20px;
+  margin: 0 auto;
+  max-width: 1440px;
 }
 
 .secDivider {
@@ -29,6 +31,14 @@
   line-height: 24px;
   text-transform: uppercase;
   color: #6389ad;
+  position: relative;
+}
+
+.panelTitle img {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  cursor: pointer;
 }
 
 #optSetting {
@@ -63,13 +73,14 @@
   width: 100px;
   text-align: right;
   margin-right: 10px;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 16px;
   color: #4A4A4A;
   vertical-align: middle;
   flex: 1;
   flex-grow: 2;
   margin-top: 6px;
+  text-transform: capitalize;
 }
 
 #optSetting .optPnlWrap .optItem .optItemSlider {

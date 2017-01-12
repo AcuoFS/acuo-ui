@@ -54,7 +54,7 @@ const mapDispatchToProps = dispatch => ({
   onLoad: ()=> {
     setTimeout(()=>{
       dispatch(filterStateStatus('unrecon'))
-    }, 1500)
+    }, 2000)
   }
 })
 

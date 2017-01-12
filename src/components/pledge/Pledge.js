@@ -148,7 +148,7 @@ class Pledge extends React.Component {
         <div className={styles.pledgeContainer}>
           <div className={styles.sliderAndStatus}>
             <div className={styles.panel} id={styles.optSetting}>
-              <div className={styles.panelTitle}>Optimization Setting</div>
+              <div className={styles.panelTitle}>Optimization Setting <img src={'./images/pledge/locked.png'} /></div>
               <div className={styles.optPnlWrap}>
                 {this.renderOptItems(optimisation, onUpdateOptimisationSettings)}
               </div>

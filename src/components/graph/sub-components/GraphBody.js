@@ -23,6 +23,8 @@ export default class GraphBody extends React.Component {
         return () => hashHistory.push('/deployed')
       case 'dispute':
         return () => hashHistory.push('/dispute')
+      case 'actiondispute':
+        return () => hashHistory.push('/dispute')
     }
   }
 
@@ -123,7 +125,7 @@ export default class GraphBody extends React.Component {
                     fontWeight="bold"
                     fill="#010101"
                     textAnchor="end">
-                {timeFrame.get('inNo')} {status.get('status').toUpperCase()}
+                {timeFrame.get('inNo')} {(status.get('status').toUpperCase() == 'ACTIONDISPUTE' ? 'DISPUTE' : status.get('status').toUpperCase())}
               </text>
               <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] + 17.5}
                     fontSize="13"
@@ -160,7 +162,7 @@ export default class GraphBody extends React.Component {
                       fontWeight="bold"
                       fill="#010101"
                       textAnchor="end">
-                  {timeFrame.get('outNo')} {status.get('status').toUpperCase()}
+                  {timeFrame.get('outNo')} {(status.get('status').toUpperCase() == 'ACTIONDISPUTE' ? 'DISPUTE' : status.get('status').toUpperCase())}
                 </text>
                 <text x={this.props.x - 12 + (timeDifference + 0.5) * 60}
                       y={colour[1] + 17.5}
@@ -200,6 +202,8 @@ export default class GraphBody extends React.Component {
       case 'pledged':
         return ["#0170B0", 162, 298]
       case 'dispute':
+        return ["#D0011B", 202, 258]
+      case 'actiondispute':
         return ["#D0011B", 202, 258]
       default:
         return ["#D0011B", -100, -100]
