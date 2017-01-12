@@ -32,6 +32,11 @@ export default class FlightDetailRow extends React.Component {
     return statusCell;
   }
 
+  renderSecondRow(value){
+    if(value)
+      return (<div className={styles.secondRow}>{value}</div>)
+  }
+
   render() {
     const {
       propIsGroupHeader,
@@ -66,18 +71,38 @@ export default class FlightDetailRow extends React.Component {
                     onClick={propHandlerExpand}/>
     }
 
-    statusCell = propStatus
-    statusCell = this.getDomForStatus(propIsGroupHeader, propStatus, statusCell);
+    statusCell = propStatus.main
+    statusCell = this.getDomForStatus(propIsGroupHeader, propStatus.main, statusCell);
 
     return (
       <div className={rowStyle}>
-        <div className={styles.flightItemTableCell}>{propTime}</div>
-        <div className={styles.flightItemTableCell}>{propAgreement}</div>
-        <div className={styles.flightItemTableCell}>{propFrom}</div>
-        <div className={styles.flightItemTableCell}>{propTo}</div>
-        <div className={styles.flightItemTableCell}>{propValue}</div>
-        <div className={styles.flightItemTableCell}>{propCcy}</div>
-        <div className={styles.flightItemTableCell}>{statusCell}</div>
+        <div className={styles.flightItemTableCell}>
+          <div>{propTime.main}</div>
+          {this.renderSecondRow(propTime.secondary)}
+        </div>
+        <div className={styles.flightItemTableCell}>
+          <div>{propAgreement.main}</div>
+          {this.renderSecondRow(propAgreement.secondary)}
+        </div>
+        <div className={styles.flightItemTableCell}>
+          <div>{propFrom.main}</div>
+          {this.renderSecondRow(propFrom.secondary)}
+        </div>
+        <div className={styles.flightItemTableCell}>
+          <div>{propTo.main}</div>
+          {this.renderSecondRow(propTo.secondary)}
+        </div>
+        <div className={styles.flightItemTableCell}>
+          <div>{propValue.main}</div>
+          {this.renderSecondRow(propValue.secondary)}
+        </div>
+        <div className={styles.flightItemTableCell}>
+          <div>{propCcy.main}</div>
+          {this.renderSecondRow(propCcy.secondary)}
+        </div>
+        <div className={styles.flightItemTableCell}>
+          <div>{statusCell}</div>
+        </div>
         <div className={styles.flightItemTableCell}>{imgDom}</div>
       </div>
     )
@@ -85,13 +110,13 @@ export default class FlightDetailRow extends React.Component {
 }
 
 FlightDetailRow.propTypes = {
-  propTime: PropTypes.string.isRequired,
-  propAgreement: PropTypes.string.isRequired,
-  propFrom: PropTypes.string.isRequired,
-  propTo: PropTypes.string.isRequired,
-  propValue: PropTypes.string.isRequired,
-  propCcy: PropTypes.string.isRequired,
-  propStatus: PropTypes.string.isRequired,
+  propTime: PropTypes.object.isRequired,
+  propAgreement: PropTypes.object.isRequired,
+  propFrom: PropTypes.object.isRequired,
+  propTo: PropTypes.object.isRequired,
+  propValue: PropTypes.object.isRequired,
+  propCcy: PropTypes.object.isRequired,
+  propStatus: PropTypes.object.isRequired,
   propIsGroupHeader: PropTypes.bool,
   propIsGroupExpanded: PropTypes.bool,
   propRowStyle: PropTypes.string
