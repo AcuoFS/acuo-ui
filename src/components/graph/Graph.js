@@ -7,7 +7,7 @@ import Pointer from './sub-components/Pointer'
 
 export default class Graph extends React.Component {
   static get defaultProps() {
-    const now = new Date("2016-10-25T08:00:00.000Z")
+    const now = new Date("2017-01-13T08:00:00.000Z")
     const time = [now.getHours(), (now.getMinutes() <10 ? '0' : ' ')  + now.getMinutes()]
     const currentTime = time.join(":")
 
