@@ -93,7 +93,7 @@ class TableItem extends React.Component {
           <div className={styles.tableItem}>
             <div className={styles.margin}>
               <p className={styles.leftThis}>Collateral Balance</p>
-              <p className={styles.fineFont}>{this.numberWithCommas(this.compute('collateralBalance'))}</p>
+              <p className={styles.fineFont}>{this.checkNegative(this.compute('balanceAmount'), this.numberWithCommas)}</p>
             </div>
           </div>
 

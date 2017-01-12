@@ -32,7 +32,6 @@ export default class Selection extends React.Component {
   }
 
   renderMargin(x, index){
-    console.log(marginCall.getIn(['allocated', 'variationMargin']))
     return (
       <tr key={index}>
         <td>{x.get('assetName')}</td>
