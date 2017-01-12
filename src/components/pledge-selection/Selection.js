@@ -31,9 +31,9 @@ export default class Selection extends React.Component {
     )
   }
 
-  renderMargin(x, index){
+  renderMargin(x){
     return (
-      <tr key={index}>
+      <tr key={x.get('assetName')}>
         <td>{x.get('assetName')}</td>
         <td>{numberWithCommas(x.get('valuePostHaircut'))}</td>
         <td>{x.get('CCY')}</td>
@@ -73,7 +73,6 @@ export default class Selection extends React.Component {
   }
 
   render() {
-
     const { marginCall, pendingAllocationStore } = this.props
 
     let evlEmptyForIntMargin = this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).isEmpty()
@@ -169,7 +168,9 @@ export default class Selection extends React.Component {
                   }
                     <tr className={styles.bold}>
                       <td>Sub-Total</td>
-                      <td>{evlEmptyForIntMargin ? '' : numberWithCommas(this.calSubTotal(marginCall, 'initialMargin'))}</td>
+                      <td>
+                        {numberWithCommas((marginCall.getIn(['allocated', 'initialMarginTotal']) || 0).toFixed(2))}
+                      </td>
                       <td></td>
                       <td></td>
                       <td></td>
@@ -208,7 +209,9 @@ export default class Selection extends React.Component {
 
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
-                    <td>{evlEmptyForVariMargin ? '' : numberWithCommas(this.calSubTotal(marginCall, 'variationMargin'))}</td>
+                    <td>
+                      {numberWithCommas((marginCall.getIn(['allocated', 'variationMarginTotal']) || 0).toFixed(2))}
+                    </td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -223,7 +226,7 @@ export default class Selection extends React.Component {
                   <tbody>
                     <tr>
                       <td>Total</td>
-                      <td colSpan="7">{numberWithCommas(this.calTotal(marginCall, 'initialMargin', 'variationMargin'))}</td>
+                      <td colSpan="7">{numberWithCommas((marginCall.getIn(['allocated', 'marginTotal']) || 0).toFixed(2))}</td>
                     </tr>
                   </tbody>
                 </table>
