@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, Set, Map } from 'immutable'
 import styles from '../Graph.css'
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 import {numberWithCommas} from '../../../utils/numbersWithCommas'
 
 export default class GraphBody extends React.Component {
@@ -16,13 +16,13 @@ export default class GraphBody extends React.Component {
       case 'expected':
         return () => 0
       case 'unrecon':
-        return () => browserHistory.push('/recon')
+        return () => hashHistory.push('/recon')
       case 'reconciled':
-        return () => browserHistory.push('/pledge')
+        return () => hashHistory.push('/pledge')
       case 'pledged':
-        return () => browserHistory.push('/deployed')
+        return () => hashHistory.push('/deployed')
       case 'dispute':
-        return () => browserHistory.push('/dispute')
+        return () => hashHistory.push('/dispute')
     }
   }
 
