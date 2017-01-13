@@ -22,7 +22,7 @@ export default class Selection extends React.Component {
               </div>
               <div className={styles.amount}>
                 {numberWithCommas(y.get('secondLevel').reduce((sum, z) => {
-                  return sum + z.get('amount')
+                  return sum + parseFloat(z.get('amount'))
                 }, 0))}
               </div>
             </div>)
@@ -64,7 +64,7 @@ export default class Selection extends React.Component {
 
   calSubTotal(a, s){
     if(a.getIn(['allocated', s]))
-      return (a.getIn(['allocated', s]).reduce((SumX , x)=>{return SumX + x.get('price')},0))
+      return (a.getIn(['allocated', s]).reduce((SumX , x)=>{return SumX + parseFloat(x.get('price'))},0))
     else
       return 0
   }
@@ -96,7 +96,7 @@ export default class Selection extends React.Component {
 
             <div>
 
-              {this.checkIfExist(marginCall.get('ClientAssets')).map(x => this.renderGroup(x, marginCall.get('GUID')))}
+              {this.checkIfExist(marginCall.get('clientAssets')).map(x => this.renderGroup(x, marginCall.get('GUID')))}
 
             </div>
 
@@ -106,10 +106,10 @@ export default class Selection extends React.Component {
                   Total
                 </div>
                 <div className={styles.amount}>
-                  {numberWithCommas(this.checkIfExist(marginCall.get('ClientAssets')).reduce((sum, x) => {
+                  {numberWithCommas(this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {
                     return sum + x.get('data').reduce((sum, y) => {
                       return sum + y.get('secondLevel').reduce((sum, z) => {
-                        return sum + z.get('amount')
+                        return sum + parseFloat(z.get('amount'))
                         }, 0)
                     }, 0)
                   }, 0))}
@@ -130,7 +130,7 @@ export default class Selection extends React.Component {
 
             <div className={styles.ttlMarginWrap + ' ' + (this.props.toggleR ? styles.showR : styles.hideR)}>
               <div className={styles.ttlMargin}>
-                <div>Total Margin</div>
+                <div>Total Allocated</div>
                 <div className={styles.bigFig + ' ' +styles.bold}>
                   {Math.round((marginCall.getIn(['allocated', 'marginTotal']) || 0)/10000)/100}
                 </div>
