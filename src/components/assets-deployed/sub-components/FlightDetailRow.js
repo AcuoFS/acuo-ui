@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react'
 import * as FLIGHT_STATUS from '../../../constants/FlightStatuses'
 import styles from './FlightItemTable.css'
+import { numberWithCommas } from '../../../utils/numbersWithCommas'
 
 export default class FlightDetailRow extends React.Component {
   // Additional styling for status on header row
@@ -93,7 +94,7 @@ export default class FlightDetailRow extends React.Component {
           {this.renderSecondRow(propTo.secondary)}
         </div>
         <div className={styles.flightItemTableCell}>
-          <div>{propValue.main}</div>
+          <div>{numberWithCommas(parseFloat(propValue.main))}</div>
           {this.renderSecondRow(propValue.secondary)}
         </div>
         <div className={styles.flightItemTableCell}>
