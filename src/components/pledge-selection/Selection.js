@@ -215,7 +215,6 @@ export default class Selection extends React.Component {
                   </tr>
                   </tbody>
                 </table>
-                {console.log(evlEmptyForMargin)}
                 <table className={styles.selTable}>
                   <tbody>
                     <tr className={styles.bold}>
