@@ -5,10 +5,21 @@ import ContentRow from './MarginCallRow'
 export default class MarginCall extends React.Component {
   constructor(props){
     super(props)
-    this.openRow = this.openRow.bind(this)
+
     this.state = {
-      openedRows: []
+      openedRows: [],
+      isChecked: false
     }
+
+    this.openRow = this.openRow.bind(this)
+    this.toggleIsChecked = this.toggleIsChecked.bind(this)
+  }
+
+  toggleIsChecked() {
+    // console.log(!this.state.isChecked)
+    this.setState({
+      isChecked: true
+    })
   }
 
   openRow(e){
@@ -39,7 +50,9 @@ export default class MarginCall extends React.Component {
         </div>
         <div className={styles.content}>
           <div className={styles.masterRow}>
-            <div className={styles.cell}><input type="checkbox" /></div>
+            <div className={styles.cell}>
+              
+            </div>
             <div className={styles.cell}>Legal Entity</div>
             <div className={styles.cell}>Cpty Organisation</div>
             <div className={styles.cell}>Cpty Entity</div>
@@ -56,8 +69,8 @@ export default class MarginCall extends React.Component {
             <div className={styles.cell}></div>
           </div>
 
-          <ContentRow id={1} key={1} spillContents={this.openRow} isOpen={this.state.openedRows.indexOf(1) > -1}/>
-          <ContentRow id={2} key={2} spillContents={this.openRow} isOpen={this.state.openedRows.indexOf(2) > -1}/>
+          <ContentRow spillContents={this.openRow} isChecked={this.state.isChecked} isOpen={this.state.openedRows.indexOf(1) > -1}/>
+          <ContentRow spillContents={this.openRow} isChecked={this.state.isChecked} isOpen={this.state.openedRows.indexOf(2) > -1}/>
 
         </div>
       </div>
