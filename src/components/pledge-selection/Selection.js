@@ -41,12 +41,9 @@ export default class Selection extends React.Component {
         <td>{x.get('value')}</td>
         <td>{numberWithCommas(x.get('FX'))}</td>
         <td>{x.get('venue')}</td>
-        <td><
-          div className={styles.earmarkAssetButton}>
-            <span>E</span>
-            <div className={styles.tooltip}>
-              Move to Earmarked
-            </div>
+        <td>
+          <div className={styles.imgCancel}>
+            <img src="./images/pledge/cancel.png"></img>
           </div>
         </td>
       </tr>
@@ -77,6 +74,7 @@ export default class Selection extends React.Component {
 
     let evlEmptyForIntMargin = this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).isEmpty()
     let evlEmptyForVariMargin = this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).isEmpty()
+    let evlEmptyForMargin = !this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).isEmpty() || !this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).isEmpty()
 
     return (
       <div className={styles.panel} key={marginCall.get('GUID')}>
@@ -167,7 +165,7 @@ export default class Selection extends React.Component {
                       <td>
                         {numberWithCommas((marginCall.getIn(['allocated', 'initialMarginTotal']) || 0).toFixed(2))}
                       </td>
-                      <td></td>
+                      <td>USD</td>
                       <td></td>
                       <td></td>
                       <td></td>
@@ -208,7 +206,7 @@ export default class Selection extends React.Component {
                     <td>
                       {numberWithCommas((marginCall.getIn(['allocated', 'variationMarginTotal']) || 0).toFixed(2))}
                     </td>
-                    <td></td>
+                    <td>USD</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -217,12 +215,18 @@ export default class Selection extends React.Component {
                   </tr>
                   </tbody>
                 </table>
-
-                <table className={styles.ttlAmount + ' ' + styles.bold}>
+                {console.log(evlEmptyForMargin)}
+                <table className={styles.selTable}>
                   <tbody>
-                    <tr>
+                    <tr className={styles.bold}>
                       <td>Total</td>
-                      <td colSpan="7">{numberWithCommas((marginCall.getIn(['allocated', 'marginTotal']) || 0).toFixed(2))}</td>
+                      <td className={styles.totalTable1 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>{numberWithCommas((marginCall.getIn(['allocated', 'marginTotal']) || 0).toFixed(2))}</td>
+                      <td className={styles.totalTable2 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>USD</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                     </tr>
                   </tbody>
                 </table>
