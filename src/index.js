@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import {createStore} from 'redux'
 import {fromJS} from 'immutable'
 import {Provider} from 'react-redux'
-import {hashHistory, Router, Route} from 'react-router'
+import {browserHistory, Router, Route} from 'react-router'
 import reducer from './reducers'
 import {initState, lineItemInsertion} from './actions'
 import styles from './static/global.css'
@@ -39,7 +39,7 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <div className={styles.globalStyles}>
-          <Router history={hashHistory}>
+          <Router history={browserHistory}>
             <Route path="/" component={Dashboard}/>
             <Route path="recon" component={ReconcileContainer}/>
             <Route path="pledge" component={PledgePageContainer}/>
