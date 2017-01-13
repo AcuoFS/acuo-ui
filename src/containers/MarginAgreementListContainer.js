@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { fromJS } from 'immutable'
 import { MarginAgreementsComponent } from '../components'
 import { lineItemInsertion, selectedItems, initState, filterStateStatus } from '../actions'
-import {RECON_DATA_URL, RECON_URL, DASHBOARD_URL} from '../constants/APIcalls'
+import { RECON_DATA_URL, RECON_URL, DASHBOARD_URL } from '../constants/APIcalls'
 
 
 const mapStateToProps = state => ({
