@@ -65,7 +65,7 @@ export default class GraphBody extends React.Component {
 
               const amount = xx.get('initialMargin') || xx.get('variableMargin')
 
-              return (xx.get('direction') == 'IN' ? a2 + Number.parseInt(amount) : a2)
+              return (xx.get('direction') == 'IN' ? a2 + Math.abs(Number.parseFloat(amount)) : a2)
             }, 0)
           }, 0)
           , "outAmount": y.get('actionsList').reduce((a, z) => {
@@ -73,7 +73,7 @@ export default class GraphBody extends React.Component {
 
                 const amount = xx.get('initialMargin') || xx.get('variableMargin')
 
-                return (xx.get('direction') == 'OUT' ? a2 + Number.parseInt(amount) : a2)
+                return (xx.get('direction') == 'OUT' ? a2 + Math.abs(Number.parseFloat(amount)) : a2)
             }, 0)
           }, 0)
           , "inNo":  y.get('actionsList').reduce((a, z) => {

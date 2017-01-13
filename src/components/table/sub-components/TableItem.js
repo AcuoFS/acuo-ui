@@ -46,11 +46,13 @@ class TableItem extends React.Component {
     return this.props.deriv.get('marginStatus') || []
   }
 
-  checkNegative(excess, numbersWithCommas){
-    if(excess < 0)
-      return '(' + numbersWithCommas(Math.abs(excess)) + ')'
+  checkNegative(orgAmount, numbersWithCommas){
+    const amount = parseFloat(orgAmount)
+
+    if(amount < 0)
+      return '(' + numbersWithCommas(Math.abs(amount || 0)) + ')'
     else
-      return excess
+      return numbersWithCommas(amount || 0)
   }
 
   render() {
@@ -72,14 +74,14 @@ class TableItem extends React.Component {
             <div className={styles.margin}>
               <p className={styles.leftThis}>Initial Margin</p>
               <p
-                className={styles.fineFont}>{this.numberWithCommas(this.compute('initialMargin'))}</p>
+                className={styles.fineFont}>{this.checkNegative(this.compute('initialMargin'), this.numberWithCommas)}</p>
             </div>
           </div>
 
           <div className={styles.tableItem}>
             <div className={styles.margin}>
               <p className={styles.leftThis}>Variation Margin</p>
-              <p className={styles.fineFont}>{this.numberWithCommas(this.compute('variableMargin'))}</p>
+              <p className={styles.fineFont}>{this.checkNegative(this.compute('variableMargin'), this.numberWithCommas)}</p>
             </div>
           </div>
 
