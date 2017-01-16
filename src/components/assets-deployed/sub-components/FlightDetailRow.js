@@ -30,7 +30,7 @@ export default class FlightDetailRow extends React.Component {
           statusCell = propStatus
       }
     }
-    return statusCell;
+    return statusCell
   }
 
   renderSecondRow(value){
