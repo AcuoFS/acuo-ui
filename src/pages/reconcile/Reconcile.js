@@ -18,6 +18,10 @@ class Reconcile extends React.Component {
     this.props.onLoad()
   }
 
+  componentDidMount () {
+    window.scrollTo(0, 0)
+  }
+
   render() {
 
     const { numberOfItems } = this.props
