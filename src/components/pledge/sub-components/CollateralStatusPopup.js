@@ -1,5 +1,6 @@
 import React from 'react'
 import CollateralAllocateTab from './CollateralAllocateTab'
+import CollateralAmendEarmarkTab from './CollateralAmendEarmarkTab'
 import styles from '../Pledge.css'
 
 
@@ -21,17 +22,9 @@ export default class CollateralAllocatePopup extends React.Component{
     // this.cancelCollateral = this.cancelCollateral.bind(this)
     // this.onRemoveFromEarmarked = this.onRemoveFromEarmarked.bind(this)
     this.removeCollateralBox = this.removeCollateralBox.bind(this)
-    this.validateAmendForm = this.validateAmendForm.bind(this)
     this.selectTab = this.selectTab.bind(this)
     this.checkSelection = this.checkSelection.bind(this)
     this.checkContent = this.checkContent.bind(this)
-    this.changeAmendAmount = this.changeAmendAmount.bind(this)
-  }
-
-  changeAmendAmount(e) {
-    this.setState({
-      amendAmount: e.target.value
-    }, this.validateAmendForm)
   }
 
   allocateCollateral(e) {
@@ -78,15 +71,6 @@ export default class CollateralAllocatePopup extends React.Component{
       )
   }
 
-  validateAmendForm() {
-    const isAllInputFilled =
-      !(this.amendAmount.value == "0" || this.amendAmount.value.trim() == "")
-
-    this.setState({
-      isAssetValidToAmend: isAllInputFilled
-    })
-  }
-
   render(){
     const {propCollateralType, propAssetId, propAssetIdType, statusClass,
       propStatus, propIsDisplayAll, listOfMarginCallName, rawPrice} = this.props
@@ -129,34 +113,10 @@ export default class CollateralAllocatePopup extends React.Component{
                                    listOfMarginCallName={listOfMarginCallName}
                                    rawPrice={rawPrice}/>
 
-            <div className={styles.tabbedContent + ' ' + this.checkContent('amend')}>
-              <div className={styles.popupRow}> {/* one row div*/}
-                <div className={styles.popupText}> Amount
-                </div>
-                <div className={styles.popupInputBox}>
-                  <input type="number" className={styles.popupInputBox}
-                         ref={dom => this.amendAmount = dom} value={this.state.amendAmount}
-                         onChange={(e) => {this.changeAmendAmount(e)}}/>
-                </div>
-              </div>
+            <CollateralAmendEarmarkTab checkContent={this.checkContent}
+                                       checkAmountExceeding={this.checkAmountExceeding}
+                                       rawPrice={rawPrice}/>
 
-              <div className={styles.popupRow}>
-                <div className={styles.popupText}>
-                </div>
-                <div className={styles.popupInputBox}>
-                  <div className={styles.helperText}>Amount rounded down to nearest unit value</div>
-                  {this.checkAmountExceeding(rawPrice, this.state.amendAmount)}
-                </div>
-              </div>
-
-              <div className={styles.buttonContainer}>
-                <button type="submit" disabled={!this.state.isAssetValidToAmend}
-                        className={this.state.isAssetValidToAmend ?
-                          styles.btnEnabled : styles.btnDisabled}>
-                  Earmark
-                </button>
-              </div>
-            </div>
             <div className={styles.tabbedContent + ' ' + this.checkContent('remove')}>
               <div className={styles.removeAsset}>
                 Unearmark Asset
