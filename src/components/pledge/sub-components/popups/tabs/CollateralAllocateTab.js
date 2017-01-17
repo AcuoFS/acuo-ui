@@ -1,6 +1,6 @@
 import React from 'react'
-import Dropdown from '../../Dropdown/Dropdown'
-import styles from '../Pledge.css'
+import Dropdown from '../../../../Dropdown/Dropdown'
+import styles from '../../../Pledge.css'
 
 
 export default class CollateralAllocate extends React.Component{

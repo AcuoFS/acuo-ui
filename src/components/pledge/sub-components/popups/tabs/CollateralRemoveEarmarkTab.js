@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../Pledge.css'
+import styles from '../../../Pledge.css'
 
 
 export default class CollateralRemoveEarmarkTab extends React.Component{

@@ -1,11 +1,10 @@
 import React from 'react'
-import CollateralAllocateTab from './CollateralAllocateTab'
-import CollateralAmendEarmarkTab from './CollateralAmendEarmarkTab'
-import CollateralRemoveEarmarkTab from './CollateralRemoveEarmarkTab'
-import styles from '../Pledge.css'
+import CollateralAllocateTab from './tabs/CollateralAllocateTab'
+import CollateralEarmarkCollateralTab from './tabs/CollateralEarmarkCollateralTab'
+import styles from '../../Pledge.css'
 
 
-export default class CollateralAllocatePopup extends React.Component{
+export default class CollateralStatusPopup extends React.Component{
   constructor(props){
     super(props)
     this.state = {
@@ -14,20 +13,11 @@ export default class CollateralAllocatePopup extends React.Component{
     }
 
     this.showPopup = this.showPopup.bind(this)
-    // this.allocateCollateral = this.allocateCollateral.bind(this)
-    // this.cancelCollateral = this.cancelCollateral.bind(this)
-    // this.onRemoveFromEarmarked = this.onRemoveFromEarmarked.bind(this)
     this.removeCollateralBox = this.removeCollateralBox.bind(this)
     this.selectTab = this.selectTab.bind(this)
     this.checkSelection = this.checkSelection.bind(this)
     this.checkContent = this.checkContent.bind(this)
   }
-
-  // allocateCollateral(e) {
-  //   this.setState({
-  //     allocateCollateral: e.currentTarget.dataset.ref
-  //   })
-  // }
 
   showPopup(e) {
     this.setState({
@@ -85,16 +75,10 @@ export default class CollateralAllocatePopup extends React.Component{
               Allocate to Call
             </div>
             <div
-              className={styles.tab + ' ' + this.checkSelection('amend')}
-              data-ref="amend"
+              className={styles.tab + ' ' + this.checkSelection('earmark')}
+              data-ref="earmark"
               onClick={this.selectTab}>
-              Amend
-            </div>
-            <div
-              className={styles.tab + ' ' + this.checkSelection('remove')}
-              data-ref="remove"
-              onClick={this.selectTab}>
-              Remove
+              Earmark
             </div>
 
             <div className={styles.closeButton} onClick={this.removeCollateralBox}>
@@ -108,11 +92,9 @@ export default class CollateralAllocatePopup extends React.Component{
                                    listOfMarginCallName={listOfMarginCallName}
                                    rawPrice={rawPrice}/>
 
-            <CollateralAmendEarmarkTab checkContent={this.checkContent}
-                                       checkAmountExceeding={this.checkAmountExceeding}
-                                       rawPrice={rawPrice}/>
-
-            <CollateralRemoveEarmarkTab checkContent={this.checkContent}/>
+            <CollateralEarmarkCollateralTab checkContent={this.checkContent}
+                                            checkAmountExceeding={this.checkAmountExceeding}
+                                            rawPrice={rawPrice}/>
 
           </div>
         </div>
