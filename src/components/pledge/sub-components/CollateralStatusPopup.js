@@ -1,6 +1,7 @@
 import React from 'react'
 import CollateralAllocateTab from './CollateralAllocateTab'
 import CollateralAmendEarmarkTab from './CollateralAmendEarmarkTab'
+import CollateralRemoveEarmarkTab from './CollateralRemoveEarmarkTab'
 import styles from '../Pledge.css'
 
 
@@ -9,16 +10,11 @@ export default class CollateralAllocatePopup extends React.Component{
     super(props)
     this.state = {
       toggle: "",
-      isAssetValidToAmend: false,
-      selectedTab: 'allocate',
-      amendAmount: 0.00
+      selectedTab: 'allocate'
     }
 
-    this.amountInput = null
-    this.amendAmount = null
-
-    this.amendCollateral = this.amendCollateral.bind(this)
-    this.allocateCollateral = this.allocateCollateral.bind(this)
+    this.showPopup = this.showPopup.bind(this)
+    // this.allocateCollateral = this.allocateCollateral.bind(this)
     // this.cancelCollateral = this.cancelCollateral.bind(this)
     // this.onRemoveFromEarmarked = this.onRemoveFromEarmarked.bind(this)
     this.removeCollateralBox = this.removeCollateralBox.bind(this)
@@ -27,13 +23,13 @@ export default class CollateralAllocatePopup extends React.Component{
     this.checkContent = this.checkContent.bind(this)
   }
 
-  allocateCollateral(e) {
-    this.setState({
-      allocateCollateral: e.currentTarget.dataset.ref
-    })
-  }
+  // allocateCollateral(e) {
+  //   this.setState({
+  //     allocateCollateral: e.currentTarget.dataset.ref
+  //   })
+  // }
 
-  amendCollateral(e) {
+  showPopup(e) {
     this.setState({
       toggle: e.currentTarget.dataset.ref
     })
@@ -51,8 +47,7 @@ export default class CollateralAllocatePopup extends React.Component{
 
   removeCollateralBox(e) {
     this.setState({
-      toggle: "",
-      allocateCollateral: ""
+      toggle: ""
     })
 
     e.stopPropagation()
@@ -76,7 +71,7 @@ export default class CollateralAllocatePopup extends React.Component{
       propStatus, propIsDisplayAll, listOfMarginCallName, rawPrice} = this.props
 
     return (
-      <div className={styles.relative} onClick={this.amendCollateral}
+      <div className={styles.relative} onClick={this.showPopup}
            data-ref={propCollateralType + propAssetId + propAssetIdType}>
         <span className={statusClass}>{propStatus}</span>
         <div
@@ -117,19 +112,9 @@ export default class CollateralAllocatePopup extends React.Component{
                                        checkAmountExceeding={this.checkAmountExceeding}
                                        rawPrice={rawPrice}/>
 
-            <div className={styles.tabbedContent + ' ' + this.checkContent('remove')}>
-              <div className={styles.removeAsset}>
-                Unearmark Asset
-              </div>
-              <div className={styles.buttonContainer + ' ' + styles.removeAsset}>
-                <button type="submit" className={styles.btnEnabled}>
-                  Remove
-                </button>
-              </div>
-            </div>
+            <CollateralRemoveEarmarkTab checkContent={this.checkContent}/>
+
           </div>
-
-
         </div>
       </div>
 
