@@ -1,5 +1,5 @@
 import React from 'react'
-import Dropdown from '../../Dropdown/Dropdown'
+import CollateralAllocateTab from './CollateralAllocateTab'
 import styles from '../Pledge.css'
 
 
@@ -8,12 +8,8 @@ export default class CollateralAllocatePopup extends React.Component{
     super(props)
     this.state = {
       toggle: "",
-      isAssetValidToAllocate: false,
       isAssetValidToAmend: false,
-      isMgnAgreementDropDownSelected: false,
-      isCallTypeDropDownSelected: false,
       selectedTab: 'allocate',
-      allocateAmount: 0.00,
       amendAmount: 0.00
     }
 
@@ -25,14 +21,10 @@ export default class CollateralAllocatePopup extends React.Component{
     // this.cancelCollateral = this.cancelCollateral.bind(this)
     // this.onRemoveFromEarmarked = this.onRemoveFromEarmarked.bind(this)
     this.removeCollateralBox = this.removeCollateralBox.bind(this)
-    this.validateAllocateForm = this.validateAllocateForm.bind(this)
     this.validateAmendForm = this.validateAmendForm.bind(this)
-    this.onAgreementDropdownItemChange = this.onAgreementDropdownItemChange.bind(this)
-    this.onCallTypeDropdownItemChange = this.onCallTypeDropdownItemChange.bind(this)
     this.selectTab = this.selectTab.bind(this)
     this.checkSelection = this.checkSelection.bind(this)
     this.checkContent = this.checkContent.bind(this)
-    this.changeAllocateAmount = this.changeAllocateAmount.bind(this)
     this.changeAmendAmount = this.changeAmendAmount.bind(this)
   }
 
@@ -75,42 +67,6 @@ export default class CollateralAllocatePopup extends React.Component{
 
   checkContent(selection) {
     return (selection == this.state.selectedTab ? styles.showContent : '')
-  }
-
-  onAgreementDropdownItemChange(e) {
-    this.setState({
-      isMgnAgreementDropDownSelected: true
-    }, this.validateAllocateForm)
-
-    e.stopPropagation();
-  }
-
-  toggleDropDown(e) {
-  }
-
-  onCallTypeDropdownItemChange(e) {
-    this.setState({
-      isCallTypeDropDownSelected: true
-    }, this.validateAllocateForm)
-
-    e.stopPropagation();
-  }
-
-  validateAllocateForm() {
-    const isAllInputFilled =
-      !(this.amountInput.value.trim() == "") &&
-      this.state.isMgnAgreementDropDownSelected &&
-      this.state.isCallTypeDropDownSelected
-
-    this.setState({
-      isAssetValidToAllocate: isAllInputFilled
-    })
-  }
-
-  changeAllocateAmount(e) {
-    this.setState({
-      allocateAmount: e.target.value
-    })
   }
 
   checkAmountExceeding(total, amount) {
@@ -168,68 +124,10 @@ export default class CollateralAllocatePopup extends React.Component{
           </div>
 
           <div className="content">
-            <div className={styles.tabbedContent + ' ' + this.checkContent('allocate')}>
-              <div className={styles.popupRow}> {/* one row div*/}
-                <div className={styles.popupText}> Margin Agreement
-                </div>
-                <div className={styles.popupInputBox}>
-                  <Dropdown
-                    handlerOnClick={this.toggleDropDown}
-                    handleOnSelectedItemChange={this.onAgreementDropdownItemChange}
-                    selectedOption='Select One'
-                    options={listOfMarginCallName}
-                    activateMouseLeaveEvent
-                  />
-                </div>
-              </div>
-              <div className={styles.popupRow}> {/* one row div*/}
-                <div className={styles.popupText}> Call Type
-                </div>
-                <div id="marginOption" className={styles.popupInputBox}>
-                  <Dropdown
-                    handlerOnClick={this.toggleDropDown}
-                    handleOnSelectedItemChange={this.onCallTypeDropdownItemChange}
-                    selectedOption='Select One'
-                    options={['Consolidated',
-                      'Credit',
-                      'Initial',
-                      'Netted',
-                      'Variation']}
-                    activateMouseLeaveEvent
-                  />
-                </div>
-                {/*<input type="text" className={styles.popupInputBox}/>*/}
-              </div>
-
-              <div className={styles.popupRow}> {/* one row div*/}
-                <div className={styles.popupText}> Amount
-                </div>
-                <div className={styles.popupInputBox}>
-                  <input type="number" className={styles.popupInputBox}
-                         ref={dom => this.amountInput = dom} value={this.state.allocateAmount} onChange={(e) => {
-                    this.validateAllocateForm
-                    this.changeAllocateAmount(e)
-                  }}/>
-                </div>
-              </div>
-
-              <div className={styles.popupRow}> {/* one row div*/}
-                <div className={styles.popupText}>
-                </div>
-                <div className={styles.popupInputBox}>
-                  <div className={styles.helperText}>Amount rounded down to nearest unit value</div>
-                  {this.checkAmountExceeding(rawPrice, this.state.allocateAmount)}
-                </div>
-              </div>
-
-              <div className={styles.buttonContainer}>
-                <button type="submit" disabled={!this.state.isAssetValidToAllocate}
-                        className={this.state.isAssetValidToAllocate ?
-                          styles.btnEnabled : styles.btnDisabled}>
-                  Allocate
-                </button>
-              </div>
-            </div>
+            <CollateralAllocateTab checkContent={this.checkContent}
+                                   checkAmountExceeding={this.checkAmountExceeding}
+                                   listOfMarginCallName={listOfMarginCallName}
+                                   rawPrice={rawPrice}/>
 
             <div className={styles.tabbedContent + ' ' + this.checkContent('amend')}>
               <div className={styles.popupRow}> {/* one row div*/}
@@ -242,7 +140,7 @@ export default class CollateralAllocatePopup extends React.Component{
                 </div>
               </div>
 
-              <div className={styles.popupRow}> {/* one row div*/}
+              <div className={styles.popupRow}>
                 <div className={styles.popupText}>
                 </div>
                 <div className={styles.popupInputBox}>

@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import CollateralAllocatePopup from './CollateralAllocatePopup'
+import CollateralStatusPopup from './CollateralStatusPopup'
 import styles from '../Pledge.css'
 
 
@@ -58,14 +58,14 @@ class CollateralAsset extends React.Component {
     )
     if (propCollateralType == 'Earmarked') {
 
-      statusDisplay = (<CollateralAllocatePopup propCollateralType={propCollateralType}
-                                                propAssetId={propAssetId}
-                                                propAssetIdType={propAssetIdType}
-                                                statusClass={statusClass}
-                                                propStatus={propStatus}
-                                                propIsDisplayAll={propIsDisplayAll}
-                                                listOfMarginCallName={listOfMarginCallName}
-                                                rawPrice={rawPrice}/>)
+      statusDisplay = (<CollateralStatusPopup propCollateralType={propCollateralType}
+                                              propAssetId={propAssetId}
+                                              propAssetIdType={propAssetIdType}
+                                              statusClass={statusClass}
+                                              propStatus={propStatus}
+                                              propIsDisplayAll={propIsDisplayAll}
+                                              listOfMarginCallName={listOfMarginCallName}
+                                              rawPrice={rawPrice}/>)
     }
     if (propIsDisplayAll) {
       return (
