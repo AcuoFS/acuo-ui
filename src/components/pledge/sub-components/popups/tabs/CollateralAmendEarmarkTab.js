@@ -1,4 +1,5 @@
 import React from 'react'
+import {POPUP_TAB_AMEND} from'../../../../../constants/CollateralTypes'
 import styles from '../../../Pledge.css'
 
 
@@ -38,7 +39,7 @@ export default class CollateralEarmarkAmendTab extends React.Component {
     } = this.props
 
     return (
-      <div className={styles.tabbedContent + ' ' + checkContent('amend')}>
+      <div className={styles.tabbedContent + ' ' + checkContent(POPUP_TAB_AMEND)}>
         <div className={styles.popupRow}>
           <div className={styles.popupText}> Amount
           </div>

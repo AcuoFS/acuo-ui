@@ -2,6 +2,11 @@ import React from 'react'
 import CollateralAllocateTab from './tabs/CollateralAllocateTab'
 import CollateralAmendEarmarkTab from './tabs/CollateralAmendEarmarkTab'
 import CollateralRemoveEarmarkTab from './tabs/CollateralRemoveEarmarkTab'
+import {
+  POPUP_TAB_ALLOCATE,
+  POPUP_TAB_AMEND,
+  POPUP_TAB_REMOVE_EARMARK
+} from '../../../../constants/CollateralTypes'
 import styles from '../../Pledge.css'
 
 
@@ -79,20 +84,20 @@ export default class CollateralAllocatePopup extends React.Component{
           ((this.state.toggle == propCollateralType + propAssetId + propAssetIdType) ? styles.showBox : '')}>
           <div className={styles.tabHolder}>
             <div
-              className={styles.tab + ' ' + this.checkSelection('allocate')}
-              data-ref="allocate"
+              className={styles.tab + ' ' + this.checkSelection(POPUP_TAB_ALLOCATE)}
+              data-ref={POPUP_TAB_ALLOCATE}
               onClick={this.selectTab}>
               Allocate to Call
             </div>
             <div
-              className={styles.tab + ' ' + this.checkSelection('amend')}
-              data-ref="amend"
+              className={styles.tab + ' ' + this.checkSelection(POPUP_TAB_AMEND)}
+              data-ref={POPUP_TAB_AMEND}
               onClick={this.selectTab}>
               Amend
             </div>
             <div
-              className={styles.tab + ' ' + this.checkSelection('remove')}
-              data-ref="remove"
+              className={styles.tab + ' ' + this.checkSelection(POPUP_TAB_REMOVE_EARMARK)}
+              data-ref={POPUP_TAB_REMOVE_EARMARK}
               onClick={this.selectTab}>
               Remove
             </div>

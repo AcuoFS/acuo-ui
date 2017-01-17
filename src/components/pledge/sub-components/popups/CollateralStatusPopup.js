@@ -1,6 +1,10 @@
 import React from 'react'
 import CollateralAllocateTab from './tabs/CollateralAllocateTab'
 import CollateralEarmarkCollateralTab from './tabs/CollateralEarmarkCollateralTab'
+import {
+  POPUP_TAB_ALLOCATE,
+  POPUP_TAB_EARMARK
+} from '../../../../constants/CollateralTypes'
 import styles from '../../Pledge.css'
 
 
@@ -9,7 +13,7 @@ export default class CollateralStatusPopup extends React.Component{
     super(props)
     this.state = {
       toggle: "",
-      selectedTab: 'allocate'
+      selectedTab: POPUP_TAB_ALLOCATE
     }
 
     this.showPopup = this.showPopup.bind(this)
@@ -69,14 +73,14 @@ export default class CollateralStatusPopup extends React.Component{
           ((this.state.toggle == propCollateralType + propAssetId + propAssetIdType) ? styles.showBox : '')}>
           <div className={styles.tabHolder}>
             <div
-              className={styles.tab + ' ' + this.checkSelection('allocate')}
-              data-ref="allocate"
+              className={styles.tab + ' ' + this.checkSelection(POPUP_TAB_ALLOCATE)}
+              data-ref={POPUP_TAB_ALLOCATE}
               onClick={this.selectTab}>
               Allocate to Call
             </div>
             <div
-              className={styles.tab + ' ' + this.checkSelection('earmark')}
-              data-ref="earmark"
+              className={styles.tab + ' ' + this.checkSelection(POPUP_TAB_EARMARK)}
+              data-ref={POPUP_TAB_EARMARK}
               onClick={this.selectTab}>
               Earmark
             </div>

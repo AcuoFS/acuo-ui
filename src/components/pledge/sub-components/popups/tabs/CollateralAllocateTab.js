@@ -1,5 +1,6 @@
 import React from 'react'
 import Dropdown from '../../../../Dropdown/Dropdown'
+import {POPUP_TAB_ALLOCATE} from'../../../../../constants/CollateralTypes'
 import styles from '../../../Pledge.css'
 
 
@@ -65,7 +66,7 @@ export default class CollateralAllocate extends React.Component{
     } = this.props
 
     return (
-      <div className={styles.tabbedContent + ' ' + checkContent('allocate')}>
+      <div className={styles.tabbedContent + ' ' + checkContent(POPUP_TAB_ALLOCATE)}>
         <div className={styles.popupRow}> {/* one row div*/}
           <div className={styles.popupText}> Margin Agreement
           </div>

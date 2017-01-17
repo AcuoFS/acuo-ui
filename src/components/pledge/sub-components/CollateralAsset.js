@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react'
 import CollateralEarmarkStatusPopup from './popups/CollateralEarmarkStatusPopup'
 import CollateralStatusPopup from './popups/CollateralStatusPopup'
+import {COLLATERAL_EARMARKED} from '../../../constants/CollateralTypes'
 import styles from '../Pledge.css'
 
 
@@ -57,7 +58,7 @@ class CollateralAsset extends React.Component {
     let statusDisplay = (
       <div className={styles.collateralCell}><span className={statusClass}>{propStatus}</span></div>
     )
-    if (propCollateralType == 'Earmarked') {
+    if (propCollateralType == COLLATERAL_EARMARKED) {
 
       statusDisplay = (<CollateralEarmarkStatusPopup propCollateralType={propCollateralType}
                                                      propAssetId={propAssetId}

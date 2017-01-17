@@ -1,11 +1,12 @@
 import React from 'react'
+import {POPUP_TAB_REMOVE_EARMARK} from'../../../../../constants/CollateralTypes'
 import styles from '../../../Pledge.css'
 
 
 export default class CollateralRemoveEarmarkTab extends React.Component{
   render(){
     return (
-      <div className={styles.tabbedContent + ' ' + this.props.checkContent('remove')}>
+      <div className={styles.tabbedContent + ' ' + this.props.checkContent(POPUP_TAB_REMOVE_EARMARK)}>
         <div className={styles.removeAsset}>
           Unearmark Asset
         </div>
