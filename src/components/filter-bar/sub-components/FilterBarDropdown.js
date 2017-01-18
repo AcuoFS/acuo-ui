@@ -47,7 +47,7 @@ export default class FilterDropdown extends React.Component {
     this.props.handleOnSelectedItemChange(e)
   }
 
-  handleOnOptionChangeTimeSelect(e, selectedOption, timeWindowMin, timeWindowMax) {
+  handleOnOptionChangeTimeSelect(selectedOption, timeWindowMin, timeWindowMax) {
     this.setState({
       selectedOption: selectedOption,
       isOpen: false
