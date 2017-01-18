@@ -172,7 +172,7 @@
 .sectionOpen{
   opacity: 1;
   transition: 0.7s ease-out;
-  overflow:hidden;
+  overflow-y: scroll;
   max-height:1000px;
 }
 .toggleItem{

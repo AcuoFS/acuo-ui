@@ -72,6 +72,8 @@ export default class UploadWidget extends React.Component {
   onGenerate() {
     console.log(this.componentConfig.postUrl)
     this.dropzone.processQueue()
+
+    this.props.showMarginCall()
   }
 
   handleError(file) {

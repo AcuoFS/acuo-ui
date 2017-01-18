@@ -19,9 +19,11 @@ export default class GraphBody extends React.Component {
         return () => browserHistory.push('/recon')
       case 'reconciled':
         return () => browserHistory.push('/pledge')
-      case 'pledge':
+      case 'pledged':
         return () => browserHistory.push('/deployed')
       case 'dispute':
+        return () => browserHistory.push('/dispute')
+      case 'actiondispute':
         return () => browserHistory.push('/dispute')
     }
   }
@@ -60,16 +62,23 @@ export default class GraphBody extends React.Component {
         return Map({'timeFrame': y.get('timeFrame'),
             "inAmount": y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
-              return (xx.get('direction') == 'IN' ? a2 + Number.parseInt(xx.get('initialMargin')) : a2)
+
+              const amount = xx.get('initialMargin') || xx.get('variableMargin')
+
+              return (xx.get('direction') == 'IN' ? a2 + Math.abs(Number.parseFloat(amount)) : a2)
             }, 0)
           }, 0)
           , "outAmount": y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
-              return (xx.get('direction') == 'OUT' ? a2 + Number.parseInt(xx.get('initialMargin')) : a2)
+
+                const amount = xx.get('initialMargin') || xx.get('variableMargin')
+
+                return (xx.get('direction') == 'OUT' ? a2 + Math.abs(Number.parseFloat(amount)) : a2)
             }, 0)
           }, 0)
           , "inNo":  y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
+
               return (xx.get('direction') == 'IN' ? a2+1 : a2)
             }, 0)
           }, 0)
@@ -116,7 +125,7 @@ export default class GraphBody extends React.Component {
                     fontWeight="bold"
                     fill="#010101"
                     textAnchor="end">
-                {timeFrame.get('inNo')} {status.get('status').toUpperCase()}
+                {timeFrame.get('inNo')} {(status.get('status').toUpperCase() == 'ACTIONDISPUTE' ? 'DISPUTE' : status.get('status').toUpperCase())}
               </text>
               <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] + 17.5}
                     fontSize="13"
@@ -153,7 +162,7 @@ export default class GraphBody extends React.Component {
                       fontWeight="bold"
                       fill="#010101"
                       textAnchor="end">
-                  {timeFrame.get('outNo')} {status.get('status').toUpperCase()}
+                  {timeFrame.get('outNo')} {(status.get('status').toUpperCase() == 'ACTIONDISPUTE' ? 'DISPUTE' : status.get('status').toUpperCase())}
                 </text>
                 <text x={this.props.x - 12 + (timeDifference + 0.5) * 60}
                       y={colour[1] + 17.5}
@@ -190,9 +199,11 @@ export default class GraphBody extends React.Component {
         return ["#D65028", 82, 378]
       case 'reconciled':
         return ["#005544", 122, 338]
-      case 'pledge':
+      case 'pledged':
         return ["#0170B0", 162, 298]
       case 'dispute':
+        return ["#D0011B", 202, 258]
+      case 'actiondispute':
         return ["#D0011B", 202, 258]
       default:
         return ["#D0011B", -100, -100]

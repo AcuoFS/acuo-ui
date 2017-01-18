@@ -8,6 +8,15 @@ class TableRow extends React.Component {
     super(props)
   }
 
+  checkNegative(orgAmount, numbersWithCommas){
+    const amount = parseFloat(orgAmount)
+
+    if(amount < 0)
+      return '(' + numbersWithCommas(Math.abs(amount || 0)) + ')'
+    else
+      return numbersWithCommas(amount || 0)
+  }
+
   render() {
 
     const { rowItems, numberWithCommas } = this.props
@@ -28,12 +37,10 @@ class TableRow extends React.Component {
         <TableCell bodyItemClass={'innerItem'} cellValue={rowItems.get('cptyOrg')}/>
         <TableCell bodyItemClass={'cptyItem'} cellValue={rowItems.get('cptyEntity')}/>
         <TableCell bodyItemClass={'marginRow'} cellValue={rowItems.get('ccy')}/>
-        <TableCell bodyItemClass={'marginItem'} cellValue={
-          numberWithCommas(Number.parseInt(rowItems.get('initialMargin')))}/>
-        <TableCell bodyItemClass={'marginItem'} cellValue={
-          numberWithCommas(Number.parseInt(rowItems.get('variableMargin')))}/>
+        <TableCell bodyItemClass={'marginItem'} cellValue={this.checkNegative(rowItems.get('initialMargin'), numberWithCommas)}/>
+        <TableCell bodyItemClass={'marginItem'} cellValue={this.checkNegative(rowItems.get('variableMargin'), numberWithCommas)}/>
         <TableCell bodyItemClass={'outerItem'} cellValue={
-          numberWithCommas(excess)}/>
+          this.checkNegative(excess, numberWithCommas)}/>
       </div>
     )
   }

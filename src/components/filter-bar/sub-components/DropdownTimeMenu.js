@@ -71,7 +71,7 @@ export default class DropdownTimeMenu extends React.Component{
 
   onMenuOptionSelect(e, handleOnOptionChange){
 
-    let currTime = new Date('Sun Oct 23 2016 13:58:04 GMT+0800 (SGT)')
+    let currTime = new Date('2017-01-13T08:00:00.000Z')
     if (e.currentTarget.dataset.min == 'All') {
       handleOnOptionChange(e,
         this.state.timeWindowTitle + ": " + e.currentTarget.dataset.min,

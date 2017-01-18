@@ -47,17 +47,15 @@ const mapDispatchToProps = dispatch => ({
   onToggleCheckall: () => {
     dispatch(toggleCheckall())
   },
-  onAllocate: (e) => {
+  onAllocate: (guids, optimisationSetting) => {
+    const data = {guids, optimisationSetting}
     fetch(ALLOCATE_COLLATERALS_URL, {
       method: 'POST',
-      data: {
-        optimisationSettings: e.currentTarget.dataset.optimisation,
-        toBeAllocated: e.currentTarget.dataset.pendingAllocation
-      }
+      body: JSON.stringify(data)
     }).then(response => {
       return response.json()
     }).then(obj => {
-      dispatch(updateCollateral(fromJS(obj.data.collateral)))
+      // dispatch(updateCollateral(fromJS(obj.data.collateral)))
       dispatch(initSelection(fromJS(obj.items)))
     })
   },

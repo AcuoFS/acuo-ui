@@ -100,7 +100,7 @@ export function updateStateLegal(state, action, store){
 }
 
 export function updateStateStatus(state, action, store) {
-  if (action.get('filter') == "All") {
+  if (action.get('filter') == "all") {
     return state.set('display', state.get(store))
   } else
     return state.setIn(['display', 'derivatives'], applyStatusFilter(state.getIn([store, 'derivatives']), action.get('filter')))
@@ -196,7 +196,7 @@ export const appendList = (state, action) => {
             }).first()
 
             if(item) {
-              return a.set('clientAssets', item.get('ClientAssets')).set('counterpartyAssets', item.get('counterpartyAssets')).set('currencyInfo', item.get('currencyInfo'))
+              return a.set('clientAssets', item.get('clientAssets')).set('counterpartyAssets', item.get('counterpartyAssets')).set('currencyInfo', item.get('currencyInfo'))
             }
             else {
               return a
@@ -213,7 +213,7 @@ export const appendList = (state, action) => {
             }).first()
 
             if(item) {
-              return a.set('clientAssets', item.get('ClientAssets')).set('counterpartyAssets', item.get('counterpartyAssets')).set('currencyInfo', item.get('currencyInfo'))
+              return a.set('clientAssets', item.get('clientAssets')).set('counterpartyAssets', item.get('counterpartyAssets')).set('currencyInfo', item.get('currencyInfo'))
             }
             else {
               return a
