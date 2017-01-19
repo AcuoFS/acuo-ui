@@ -38,22 +38,21 @@ export default class Selection extends React.Component {
     )
   }
 
-  renderMargin(x, mgnType){
-    const popupID = x.get('GUID') + mgnType + x.get('assetName')
+  renderMargin(asset, mgnType){
+    const popupID = asset.get('GUID') + mgnType + asset.get('assetName')
 
     return (
-      <tr key={x.get('assetName')}>
-        <td>{x.get('assetName')}</td>
-        <td>{numberWithCommas(x.get('valuePostHaircut'))}</td>
-        <td>{x.get('CCY')}</td>
-        <td>{x.get('haircut')}%</td>
-        <td>{x.get('value')}</td>
-        <td>{numberWithCommas(x.get('FX'))}</td>
-        <td>{x.get('venue')}</td>
+      <tr key={asset.get('assetName')}>
+        <td>{asset.get('assetName')}</td>
+        <td>{numberWithCommas(asset.get('valuePostHaircut'))}</td>
+        <td>{asset.get('CCY')}</td>
+        <td>{asset.get('haircut')}%</td>
+        <td>{asset.get('value')}</td>
+        <td>{numberWithCommas(asset.get('FX'))}</td>
+        <td>{asset.get('venue')}</td>
         <td>
           <div className={styles.earmarkAssetButton}
-               data-ref={popupID}
-               onClick={this.setDeselectionPopup}>
+               onClick={() => {this.setDeselectionPopup(popupID)}}>
             <img src="./images/pledge/cancel.png"></img>
             <div className={styles.tooltip}>
               Move to Earmarked
@@ -84,9 +83,9 @@ export default class Selection extends React.Component {
     return this.calSubTotal(a, i) + this.calSubTotal(a, j)
   }
 
-  setDeselectionPopup(e) {
+  setDeselectionPopup(popupID) {
     this.setState({
-      openedDeselectionPopup: e.currentTarget.dataset.ref
+      openedDeselectionPopup: popupID
     })
   }
 
@@ -96,13 +95,12 @@ export default class Selection extends React.Component {
     })
   }
 
-  handlerChangeSideWaysClick(){
-    const {clicked, toggleL} = this.props
+  handlerChangeSideWaysClick({clicked, toggleL}) {
     clicked()
 
     // Clear popup when selection panel is collapsed
-    if(toggleL){
-     this.clearDeselectionPopup()
+    if (toggleL) {
+      this.clearDeselectionPopup()
     }
   }
 
@@ -161,7 +159,10 @@ export default class Selection extends React.Component {
                 Selection
               </div>
               <div className={styles.imageRight}>
-                <img src={this.props.sideways} onClick={this.handlerChangeSideWaysClick} alt=""/>
+                <img src={this.props.sideways}
+                     onClick={() => {
+                       this.handlerChangeSideWaysClick(this.props)
+                     }} alt=""/>
               </div>
             </div>
 
