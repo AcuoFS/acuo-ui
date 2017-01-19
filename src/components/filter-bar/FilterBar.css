@@ -6,7 +6,7 @@
     background-color: #fff;
     font-size: 13px;
     display: block;
-    padding: 8px 18px;
+    padding: 5px;
     z-index: 20;
 }
 
@@ -79,6 +79,7 @@
 .filterContainer .filterItemWrap{
     height: auto;
     display: block;
+    padding: 5px 0;
 }
 
 .filterContainer .filterItemWrap.show{
