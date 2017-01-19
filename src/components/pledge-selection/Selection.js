@@ -1,14 +1,21 @@
 import React from 'react'
-import styles from './Selection.css'
 import { numberWithCommas } from '../../utils/numbersWithCommas'
-
+import DeselectionPopup from './DeselectionPopup'
 import { List, toJS } from 'immutable'
+import styles from './Selection.css'
 
 export default class Selection extends React.Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      openedDeselectionPopup: ""
+    }
+
     this.togglePendingAllocation = this.togglePendingAllocation.bind(this)
+    this.setDeselectionPopup = this.setDeselectionPopup.bind(this)
+    this.clearDeselectionPopup = this.clearDeselectionPopup.bind(this)
+    this.handlerChangeSideWaysClick = this.handlerChangeSideWaysClick.bind(this)
   }
 
   renderGroup(x, GUID) {
@@ -31,7 +38,9 @@ export default class Selection extends React.Component {
     )
   }
 
-  renderMargin(x){
+  renderMargin(x, mgnType){
+    const popupID = x.get('GUID') + mgnType + x.get('assetName')
+
     return (
       <tr key={x.get('assetName')}>
         <td>{x.get('assetName')}</td>
@@ -42,9 +51,15 @@ export default class Selection extends React.Component {
         <td>{numberWithCommas(x.get('FX'))}</td>
         <td>{x.get('venue')}</td>
         <td>
-          <div className={styles.imgCancel}>
+          <div className={styles.earmarkAssetButton}
+               data-ref={popupID}
+               onClick={this.setDeselectionPopup}>
             <img src="./images/pledge/cancel.png"></img>
+            <div className={styles.tooltip}>
+              Move to Earmarked
+            </div>
           </div>
+
         </td>
       </tr>
     )
@@ -69,6 +84,28 @@ export default class Selection extends React.Component {
     return this.calSubTotal(a, i) + this.calSubTotal(a, j)
   }
 
+  setDeselectionPopup(e) {
+    this.setState({
+      openedDeselectionPopup: e.currentTarget.dataset.ref
+    })
+  }
+
+  clearDeselectionPopup() {
+    this.setState({
+      openedDeselectionPopup: ""
+    })
+  }
+
+  handlerChangeSideWaysClick(){
+    const {clicked, toggleL} = this.props
+    clicked()
+
+    // Clear popup when selection panel is collapsed
+    if(toggleL){
+     this.clearDeselectionPopup()
+    }
+  }
+
   render() {
     const { marginCall, pendingAllocationStore } = this.props
 
@@ -78,6 +115,8 @@ export default class Selection extends React.Component {
 
     return (
       <div className={styles.panel} key={marginCall.get('GUID')}>
+        <DeselectionPopup propOpenedDeselectionPopup={this.state.openedDeselectionPopup}
+                          propHandlerClearPopup={this.clearDeselectionPopup}/>
 
         <div className={styles.columnContainer}>
           <div className={styles.leftColumn + ' ' + (!this.props.toggleL ? styles.bigger : '')}>
@@ -122,7 +161,7 @@ export default class Selection extends React.Component {
                 Selection
               </div>
               <div className={styles.imageRight}>
-                <img src={this.props.sideways} onClick={this.props.clicked} alt=""/>
+                <img src={this.props.sideways} onClick={this.handlerChangeSideWaysClick} alt=""/>
               </div>
             </div>
 
@@ -158,7 +197,8 @@ export default class Selection extends React.Component {
                       <tr>
                         <td colSpan="8" className={styles.notAlcText}>Collateral has not been allocated</td>
                       </tr> :
-                      this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).map(x => this.renderMargin(x))
+                      this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).map(
+                        x => this.renderMargin(x,'initialMargin'))
                   }
                     <tr className={styles.bold}>
                       <td>Sub-Total</td>
@@ -197,7 +237,8 @@ export default class Selection extends React.Component {
                         <tr>
                           <td colSpan="8" className={styles.notAlcText}>Collateral has not been allocated</td>
                         </tr> :
-                      this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).map(x => this.renderMargin(x))
+                      this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).map(
+                        x => this.renderMargin(x,'variationMargin'))
                   }
 
 
