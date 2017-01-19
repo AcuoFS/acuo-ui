@@ -9,6 +9,7 @@ import UploadWidgetComponent from './upload-portfolio/UploadWidget'
 import PledgeComponent from './pledge/Pledge'
 import FlightComponent from './assets-deployed/Flight'
 import MarginCallComponent from './margin-call/MarginCall'
+import PledgeSelectionComponent from './pledge-selection/Selection'
 
 export {
   GraphComponent,
@@ -21,5 +22,6 @@ export {
   UploadPortfolioButton,
   UploadWidgetComponent,
   FlightComponent,
-  MarginCallComponent
+  MarginCallComponent,
+  PledgeSelectionComponent
 }

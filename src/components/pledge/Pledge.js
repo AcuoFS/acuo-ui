@@ -5,7 +5,7 @@ import React from 'react'
 import {render} from 'react-dom'
 import OptItem from './sub-components/OptItem'
 import ChooseCalls from './sub-components/ChooseCalls'
-import Selection from '../pledge-selection/Selection'
+import PledgeSelectionContainer from '../../containers/SelectionContainer'
 import CollateralAssetGroup from './sub-components/CollateralAssetGroup'
 import {OPTIMISATION_URL,MARGIN_SELECTION_URL} from '../../constants/APIcalls'
 import styles from './Pledge.css'
@@ -86,7 +86,7 @@ class Pledge extends React.Component {
   }
 
   renderSelection(x, onTogglePendingAllocation, pendingAllocation, index){
-    return (<Selection  sideways={this.state.selectionSideway}
+    return (<PledgeSelectionContainer sideways={this.state.selectionSideway}
                         clicked={this.changeSideways}
                         chkTick={this.chkTick}
                         toggleL={this.state.toggleShowHideL}
@@ -103,9 +103,7 @@ class Pledge extends React.Component {
   }
 
 
-  onPledgeButtonClick(e){
-
-
+  onPledgeButtonClick(){
     alert('Pledge Button Click')
   }
 
@@ -166,7 +164,7 @@ class Pledge extends React.Component {
                       return sumSelX + (x.getIn(['allocated', 'initialMargin']) ? x.getIn(['allocated', 'initialMargin']).size + x.getIn(['allocated', 'variationMargin']).size : 0 )
                     }, 0) > 0
 
-                  ? ' '+styles.btnEnabled : ' '+styles.btnDisabled )} id={styles.optBtnPledge}>Pledge</div>
+                  ? ' '+styles.btnEnabled : ' '+styles.btnDisabled )} id={styles.optBtnPledge} onClick={() => this.onPledgeButtonClick()}>Pledge</div>
 
               </div>
               {/* change btnEnabled to btnDisabled to disable the button*/}

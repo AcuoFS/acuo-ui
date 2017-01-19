@@ -4,11 +4,24 @@ import { numberWithCommas } from '../../utils/numbersWithCommas'
 
 import { List, toJS } from 'immutable'
 
-export default class Selection extends React.Component {
+/***
+ *
+ *
+ <div className={styles.earmarkAssetButton} onClick={()=> {this.earmarkAsset(x.get('assetName'), GUID)}}>
+ <span>E</span>
+ <div className={styles.tooltip}>
+ Move to Earmarked
+ </div>
+
+ */
+
+export default class PledgeSelectionComponent extends React.Component {
   constructor(props) {
     super(props)
 
     this.togglePendingAllocation = this.togglePendingAllocation.bind(this)
+
+    this.earmarkAsset = this.earmarkAsset.bind(this)
   }
 
   renderGroup(x, GUID) {
@@ -31,7 +44,10 @@ export default class Selection extends React.Component {
     )
   }
 
-  renderMargin(x){
+  renderMargin(x, GUID){
+
+    console.log(GUID)
+
     return (
       <tr key={x.get('assetName')}>
         <td>{x.get('assetName')}</td>
@@ -42,8 +58,8 @@ export default class Selection extends React.Component {
         <td>{numberWithCommas(x.get('FX'))}</td>
         <td>{x.get('venue')}</td>
         <td>
-          <div className={styles.imgCancel}>
-            <img src="./images/pledge/cancel.png"></img>
+          <div className={styles.imgCancel} onClick={()=> {this.earmarkAsset(x.get('assetName'), GUID)}}>
+            <img src="./images/pledge/cancel.png"/>
           </div>
         </td>
       </tr>
@@ -69,8 +85,21 @@ export default class Selection extends React.Component {
     return this.calSubTotal(a, i) + this.calSubTotal(a, j)
   }
 
+
+  /***** TEMP FUNCTION DELETE AFTER DEMO *****/
+  /** allows for simulated earmarking of an asset **/
+
+  earmarkAsset(assetName, GUID){
+    this.props.onRemoveEarmarked(assetName, GUID)
+  }
+
+  /***** END *****/
+
   render() {
     const { marginCall, pendingAllocationStore } = this.props
+
+    const trueGUID = marginCall.get('GUID')
+    console.log('trueGUID', trueGUID)
 
     let evlEmptyForIntMargin = this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).isEmpty()
     let evlEmptyForVariMargin = this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).isEmpty()
@@ -158,7 +187,7 @@ export default class Selection extends React.Component {
                       <tr>
                         <td colSpan="8" className={styles.notAlcText}>Collateral has not been allocated</td>
                       </tr> :
-                      this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).map(x => this.renderMargin(x))
+                      this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).map(x => this.renderMargin(x, trueGUID))
                   }
                     <tr className={styles.bold}>
                       <td>Sub-Total</td>
