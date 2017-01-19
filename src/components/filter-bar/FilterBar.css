@@ -251,6 +251,11 @@
 
 .timeSlot{
     text-align: center;
+    display: none;
+}
+
+.timeShow{
+    display: inline-block;
 }
 
 .timeTitle{
