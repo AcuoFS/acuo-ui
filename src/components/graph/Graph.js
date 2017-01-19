@@ -62,6 +62,7 @@ export default class Graph extends React.Component {
           y={this.props.height * 0.5}
           time={this.props.now}
           data={this.props.derivatives}
+          onUnreconBubbleClick={this.props.onUnreconBubbleClick}
         />
 
       </svg>
