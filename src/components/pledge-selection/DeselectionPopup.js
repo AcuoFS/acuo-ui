@@ -22,12 +22,23 @@ export default class DeselectionPopup extends React.Component {
 
     // Clear values
     comp.setState({isValidForm: false})
-    if(radioCurDom){
+    if (radioCurDom) {
       radioCurDom.checked = false
     }
-    if(radioAllDom){
+    if (radioAllDom) {
       radioAllDom.checked = false
     }
+  }
+
+  onConfirm(radioAllDom, radioCurDom, propOpenedDeselectionPopup) {
+    let checkMsg = ''
+    if (radioAllDom.checked) {
+      checkMsg = 'All calls is selected'
+    }
+    if (radioCurDom.checked) {
+      checkMsg = 'Current call is selected'
+    }
+    alert('Confirm button clicked. id: ' + propOpenedDeselectionPopup + ', ' + checkMsg)
   }
 
   render() {
@@ -39,11 +50,11 @@ export default class DeselectionPopup extends React.Component {
     } = this.props
 
     // reset values of radio buttons
-    if(propOpenedDeselectionPopup == ''){
-      if(this.radioCurDom){
+    if (propOpenedDeselectionPopup == '') {
+      if (this.radioCurDom) {
         this.radioCurDom.checked = false
       }
-      if(this.radioAllDom){
+      if (this.radioAllDom) {
         this.radioAllDom.checked = false
       }
     }
@@ -84,14 +95,7 @@ export default class DeselectionPopup extends React.Component {
             (propIsValidFlag ? styles.buttonEnabled : '')}
                     disabled={!propIsValidFlag}
                     onClick={() => {
-                      let checkMsg = ''
-                      if (this.radioAllDom.checked) {
-                        checkMsg = 'All calls is selected'
-                      }
-                      if (this.radioCurDom.checked) {
-                        checkMsg = 'Current call is selected'
-                      }
-                      alert('Confirm button clicked. id: ' + propOpenedDeselectionPopup + ', ' + checkMsg)
+                      this.onConfirm(this.radioAllDom, this.radioCurDom, propOpenedDeselectionPopup)
                     }}>
               Confirm
             </button>
