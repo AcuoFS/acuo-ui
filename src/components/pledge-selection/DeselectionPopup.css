@@ -48,7 +48,6 @@
 
 .buttonStyle {
     width: 100px;
-    background-color: #FFFFFF;
     border: 1px solid;
     font-size: 13px;
     line-height: 21px;
@@ -56,6 +55,13 @@
     text-align: center;
     border-radius: 20px;
     align-self: center;
-    cursor: pointer;
     margin: 10px 0;
+    color: #d7dce0;
+    background-color: #FAFAFA;
+}
+
+.buttonEnabled{
+    color: #000000;
+    background-color: #FFFFFF;
+    cursor: pointer;
 }
