@@ -58,7 +58,7 @@ export default class DeselectionPopup extends React.Component {
         </div>
         <div className={styles.popupBody}>
           Exclude this asset from:
-          <div className={styles.popupRow}>
+          <label className={styles.popupRow}>
             <div className={styles.rowRadio}>
               <input type="radio" name="excludeOption" value="current"
                      ref={dom => this.radioCurDom = dom}
@@ -67,8 +67,8 @@ export default class DeselectionPopup extends React.Component {
                      }}/>
             </div>
             <div className={styles.rowText}>This margin call only</div>
-          </div>
-          <div className={styles.popupRow}>
+          </label>
+          <label className={styles.popupRow}>
             <div className={styles.rowRadio}>
               <input type="radio" name="excludeOption" value="all"
                      ref={dom => this.radioAllDom = dom}
@@ -77,7 +77,7 @@ export default class DeselectionPopup extends React.Component {
                      }}/>
             </div>
             <div className={styles.rowText}>All margin calls</div>
-          </div>
+          </label>
 
           <div>
             <button type="submit" className={styles.buttonStyle + ' ' +
