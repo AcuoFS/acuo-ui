@@ -26,6 +26,10 @@ class UploadPortfolioPage extends React.Component {
     })
   }
 
+  componentDidMount () {
+    window.scrollTo(0, 0)
+  }
+
   renderMarginCall(call){
     if(call)
       return (<MarginCallContainer/>)
