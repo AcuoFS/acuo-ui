@@ -16,12 +16,11 @@ export default class DeselectionPopup extends React.Component {
     }
   }
 
-  closePopup(comp, propHandlerClearPopup, radioCurDom, radioAllDom) {
+  closePopup(propHandlerClearPopup, radioCurDom, radioAllDom) {
     // Execute parent's handler
     propHandlerClearPopup()
 
     // Clear values
-    comp.setState({isValidForm: false})
     if (radioCurDom) {
       radioCurDom.checked = false
     }
@@ -41,6 +40,19 @@ export default class DeselectionPopup extends React.Component {
     alert('Confirm button clicked. id: ' + propOpenedDeselectionPopup + ', ' + checkMsg)
   }
 
+  // Before change of props
+  componentWillReceiveProps(nextProps) {
+    // reset values of radio buttons
+    if (nextProps.propOpenedDeselectionPopup == '') {
+      if (this.radioCurDom) {
+        this.radioCurDom.checked = false
+      }
+      if (this.radioAllDom) {
+        this.radioAllDom.checked = false
+      }
+    }
+  }
+
   render() {
     const {
       propOpenedDeselectionPopup,
@@ -49,21 +61,11 @@ export default class DeselectionPopup extends React.Component {
       propHandlerSetFormValidity
     } = this.props
 
-    // reset values of radio buttons
-    if (propOpenedDeselectionPopup == '') {
-      if (this.radioCurDom) {
-        this.radioCurDom.checked = false
-      }
-      if (this.radioAllDom) {
-        this.radioAllDom.checked = false
-      }
-    }
-
     return (
       <div className={styles.popupPanel + ' ' +
       ((propOpenedDeselectionPopup == '') ? '' : styles.popupShow)}>
         <div className={styles.closeButton} onClick={
-          () => this.closePopup(this, propHandlerClearPopup, this.radioCurDom, this.radioAllDom)
+          () => this.closePopup(propHandlerClearPopup, this.radioCurDom, this.radioAllDom)
         }>
           x
         </div>

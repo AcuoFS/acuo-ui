@@ -116,8 +116,19 @@ export default class Selection extends React.Component {
     this.setState({isValidPopupForm: isValid})
   }
 
+  // Before change of props
+  componentWillReceiveProps(nextProps) {
+    // Clear and close popup if selection list is collapsed
+    if (!nextProps.toggleL && nextProps.toggleR) {
+      this.clearDeselectionPopup()
+    }
+  }
+
   render() {
-    const {marginCall, pendingAllocationStore} = this.props
+    const {
+      marginCall, pendingAllocationStore,
+      toggleL, toggleR, sideways
+    } = this.props
 
     let evlEmptyForIntMargin = this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).isEmpty()
     let evlEmptyForVariMargin = this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).isEmpty()
@@ -131,7 +142,7 @@ export default class Selection extends React.Component {
                           propHandlerSetFormValidity={this.setPopupFormValidity}/>
 
         <div className={styles.columnContainer}>
-          <div className={styles.leftColumn + ' ' + (!this.props.toggleL ? styles.bigger : '')}>
+          <div className={styles.leftColumn + ' ' + (!toggleL ? styles.bigger : '')}>
             <div className={styles.titleHolder}>
               <img
                 src={(this.checkIfExist(pendingAllocationStore).includes(marginCall.get('GUID')) ? "./images/pledge/checkboxwithtick.png" : "./images/pledge/checkbox.png")}
@@ -171,18 +182,18 @@ export default class Selection extends React.Component {
           </div>
           <div className={styles.rightColumn}>
             <div className={styles.rightColHeading}>
-              <div className={styles.rightColumnTitle + ' ' + (this.props.toggleL ? styles.showL : styles.hideL)}>
+              <div className={styles.rightColumnTitle + ' ' + (toggleL ? styles.showL : styles.hideL)}>
                 Selection
               </div>
               <div className={styles.imageRight}>
-                <img src={this.props.sideways}
+                <img src={sideways}
                      onClick={() => {
                        this.handlerChangeSideWaysClick(this.props)
                      }} alt=""/>
               </div>
             </div>
 
-            <div className={styles.ttlMarginWrap + ' ' + (this.props.toggleR ? styles.showR : styles.hideR)}>
+            <div className={styles.ttlMarginWrap + ' ' + (toggleR ? styles.showR : styles.hideR)}>
               <div className={styles.ttlMargin}>
                 <div>Total Allocated</div>
                 <div className={styles.bigFig + ' ' + styles.bold}>
@@ -192,7 +203,7 @@ export default class Selection extends React.Component {
               </div>
             </div>
 
-            <div className={this.props.toggleL ? styles.showL : styles.hideL}>
+            <div className={toggleL ? styles.showL : styles.hideL}>
 
               <div className={styles.rightColSubSection}>
                 <div className={styles.subSectionHeader}>Initial Margin</div>
