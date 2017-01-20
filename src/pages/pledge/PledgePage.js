@@ -21,6 +21,10 @@ class PledgePage extends React.Component{
     })
   }
 
+  componentDidMount () {
+    window.scrollTo(0, 0)
+  }
+
   render(){
     return (
       <div className={stylesG.globalStyles}>
