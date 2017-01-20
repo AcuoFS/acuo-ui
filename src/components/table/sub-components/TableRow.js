@@ -60,9 +60,10 @@ class TableRow extends React.Component {
         break
       case DASHBOARD_CONSTANTS.STATUS_CODE_DISPUTE:
         statusCell =
-          <div className={selfStyles.statusCont + ' ' + selfStyles.dispute}>
+          <div className={selfStyles.statusCont + ' ' + selfStyles.statusDispute}>
             {statusCode}
           </div>
+
     }
     return statusCell
   }
@@ -83,7 +84,7 @@ class TableRow extends React.Component {
 
     const directionText = rowItems.get('direction')
     // Get only first letter of status for display of color
-    const statusCode = rowItems.get('status').substring(0,1)
+    const statusCode = rowItems.get('status').substring(0,1).toUpperCase()
 
     let directionCell = this.getDirectionCell(directionText)
     let statusCell = this.getStatusCell(statusCode)
