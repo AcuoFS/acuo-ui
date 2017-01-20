@@ -20,3 +20,5 @@ export const ALLOCATE_COLLATERALS_URL = 'http://52.74.186.112:8081/pledge/alloca
 // POST
 export const UPLOAD_FILE_URL = 'http://valuation.acuo.com/acuo/api/upload'
 export const RECON_DATA_URL  = 'http://margin.acuo.com/acuo/api/margin/reconcile/'
+
+export const REMOVE_ASSET_ALLOCATION_URL = 'url to remove(and earmark) asset from margin call'

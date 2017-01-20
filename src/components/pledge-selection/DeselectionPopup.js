@@ -1,4 +1,5 @@
 import React from 'react'
+import {REMOVE_ASSET_ALLOCATION_URL} from '../../constants/APIcalls'
 import styles from './DeselectionPopup.css'
 
 
@@ -37,6 +38,9 @@ export default class DeselectionPopup extends React.Component {
     if (radioCurDom.checked) {
       checkMsg = 'Current call is selected'
     }
+
+    // todo: fetch request goes here REMOVE_ASSET_ALLOCATION_URL
+
     alert('Confirm button clicked. id: ' + propOpenedDeselectionPopup + ', ' + checkMsg)
   }
 
