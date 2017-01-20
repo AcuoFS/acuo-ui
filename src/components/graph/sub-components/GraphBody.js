@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, Set, Map } from 'immutable'
 import styles from '../Graph.css'
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 import {numberWithCommas} from '../../../utils/numbersWithCommas'
 
 export default class GraphBody extends React.Component {
@@ -17,7 +17,7 @@ export default class GraphBody extends React.Component {
         return () => 0
       case 'unrecon':
         return () => {
-          browserHistory.push('/recon')
+          hashHistory.push('/recon')
 
           //1st param: time range start
           //2nd param: time range start + 1 hour
@@ -31,13 +31,13 @@ export default class GraphBody extends React.Component {
           )
         }
       case 'reconciled':
-        return () => browserHistory.push('/pledge')
+        return () => hashHistory.push('/pledge')
       case 'pledged':
-        return () => browserHistory.push('/deployed')
+        return () => hashHistory.push('/deployed')
       case 'dispute':
-        return () => browserHistory.push('/dispute')
+        return () => hashHistory.push('/dispute')
       case 'actiondispute':
-        return () => browserHistory.push('/dispute')
+        return () => hashHistory.push('/dispute')
     }
   }
 
