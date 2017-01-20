@@ -213,7 +213,8 @@ input[type=range]:focus::-ms-fill-upper {
   font-size: 14px;
   line-height: 17px;
   color: #4A4A4A;
-  margin: 10px 30px auto 20px;
+  /*margin: 10px 30px auto 20px;*/
+  margin: 0px 10px;
 }
 
 .chsCalls .tick {
@@ -221,17 +222,18 @@ input[type=range]:focus::-ms-fill-upper {
   position: relative;
   vertical-align: text-bottom;
   margin: auto 4px;
+  width: 20px;
+  height: 20px
 }
 
 .chsCalls .tick:hover {
   cursor: pointer;
 }
 
-.optButton,
-.optButton.btnEnabled {
+/* Enabled optimisation button style */
+.optButton {
   flex: 1;
   width: 146px;
-  /*height: 32px;*/
   color: #4A4A4A;
   background-color: #FAFAFA;
   border: 1px solid #979797;
@@ -245,10 +247,6 @@ input[type=range]:focus::-ms-fill-upper {
   align-self: center;
 }
 
-.optButton:hover {
-  cursor: pointer;
-}
-
 .optButton.btnDisabled {
   color: #d7dce0;
   background-color: #FAFAFA;
@@ -256,19 +254,19 @@ input[type=range]:focus::-ms-fill-upper {
   pointer-events: none;
 }
 
-.optButton#optBtnAllocate {
+.optButton.optBtnPledge {
+  color: #fff;
+  background-color: #00B9CC;
+  border-color: #00B9CC;
+}
 
+.optButton:hover {
+  cursor: pointer;
 }
 
 .sliderAndStatus{
   display: flex;
   align-items: flex-start;
-}
-
-.optButton#optBtnPledge.btnEnabled {
-  color: #fff;
-  background-color: #00B9CC;
-  border-color: #00B9CC;
 }
 
 #pleStatus {
@@ -788,23 +786,6 @@ div.collateralTableExpanded div:nth-child(12){
   border-radius: 20px;
   align-self: center;
   cursor: pointer;
-}
-
-.optButton.btnEnabled {
-  flex: 1;
-  width: 146px;
-  /*height: 32px;*/
-  color: #4A4A4A ;
-  background-color: #FAFAFA ;
-  border: 1px solid #979797 ;
-  font-size: 13px;
-  font-weight: bold;
-  line-height: 21px;
-  text-align: center;
-  -webkit-border-radius: 20px;
-  border-radius: 20px;
-  margin: 0 20px;
-  align-self: center;
 }
 
 /*** Status Color classes****/
