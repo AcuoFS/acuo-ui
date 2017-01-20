@@ -11,12 +11,25 @@ export default class GraphBody extends React.Component {
     this.getDeriv = this.getDeriv.bind(this)
   }
 
-  whichClickFuncToRun(status){
+  whichClickFuncToRun(status, lastUpdatedTime, bubbleTimeStart, timeDifference, onUnreconBubbleClick){
     switch(status){
       case 'expected':
         return () => 0
       case 'unrecon':
-        return () => browserHistory.push('/recon')
+        return () => {
+          browserHistory.push('/recon')
+
+          //1st param: time range start
+          //2nd param: time range start + 1 hour
+          //3rd param: getDay() returns 'today', 'tomorrow', 'yesterday' based on summation of
+          //           today's hours + the difference in time of the bubble, appends it with
+          //           the 'hours' portion of time start to form a string for dispatch use
+          onUnreconBubbleClick(
+            bubbleTimeStart,
+            (new Date(bubbleTimeStart).setHours((new Date(bubbleTimeStart).getHours()+1))),
+            this.getDay(new Date(Date.parse(lastUpdatedTime)).getHours() + timeDifference) + ': ' + new Date(bubbleTimeStart).getHours() + ':00 HRS'
+          )
+        }
       case 'reconciled':
         return () => browserHistory.push('/pledge')
       case 'pledged':
@@ -28,7 +41,18 @@ export default class GraphBody extends React.Component {
     }
   }
 
-  getCircle(){
+  getDay(hrs){
+    switch(true){
+      case (hrs > 23):
+        return 'tomorrow'
+      case (hrs < 0):
+        return 'yesterday'
+      default:
+        return 'today'
+    }
+  }
+
+  getCircle(lastUpdatedTime, onUnreconBubbleClick){
     let status = this.getDeriv().reduce((setX, x) => {
       return setX.union(x.get('marginStatus').map(y => y.get('status')))
     }, Set()).toList()
@@ -94,14 +118,14 @@ export default class GraphBody extends React.Component {
       return status.get('timeFrames').map(timeFrame => {
 
         let colour = this.getColour(status.get('status').toLowerCase())
-        let timeDifference = (Date.parse(new Date(timeFrame.get('timeFrame'))) - (Date.parse(this.props.time)))/3600000
+        let timeDifference = (Date.parse(new Date(timeFrame.get('timeFrame'))) - (Date.parse(lastUpdatedTime)))/3600000
 
         // Use a faded blue for pledge if it's past the current time
         if (status.get('status') == 'pledge' && timeDifference < 0) {
           colour[0] = "#8CC5DD"
         }
 
-        const onClickFunc = this.whichClickFuncToRun(status.get('status').toLowerCase())
+        const onClickFunc = this.whichClickFuncToRun(status.get('status').toLowerCase(), lastUpdatedTime, timeFrame.get('timeFrame'), timeDifference, onUnreconBubbleClick)
 
         return List()
         .push((timeFrame.get('inAmount') === 0)? 0 :
@@ -215,9 +239,12 @@ export default class GraphBody extends React.Component {
     return this.props.data || []
   }
   render() {
+
+    const { time, onUnreconBubbleClick } = this.props
+
     return(
       <svg>
-        {this.getCircle().map(x => x)}
+        {this.getCircle(time, onUnreconBubbleClick).map(x => x)}
       </svg>
     )
   }
