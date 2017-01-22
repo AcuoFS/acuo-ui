@@ -42,7 +42,7 @@ function applyTimeWindowFilter(derivatives, minTime, maxTime){
       let list = y.get('timeFrames').filter((z)=>{
         let timeFrame = z.get('timeRangeStart')
         let timeFrameInMill = new Date(timeFrame).getTime()
-            if((timeFrameInMill >= minTime.getTime()) && (timeFrameInMill < maxTime.getTime()))
+            if((timeFrameInMill >= minTime) && (timeFrameInMill < maxTime))
                return true
       })
       return (list.size > 0 ? listY.push(y.set('timeFrames', list)) : listY)

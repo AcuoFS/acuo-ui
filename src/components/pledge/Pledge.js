@@ -109,8 +109,16 @@ class Pledge extends React.Component {
     alert('Pledge Button Click')
   }
 
+  sumOfIMVM(sumSelX, x) {
+    return sumSelX + (x.getIn(['allocated', 'initialMargin'])
+        ? (x.getIn(['allocated', 'initialMargin']).size
+        + x.getIn(['allocated', 'variationMargin']).size)
+        : 0 )
+  }
+
   render() {
-    const { optimisation, selection, onUpdateOptimisationSettings, onTogglePendingAllocation, pendingAllocation, sliderCheckbox, onToggleCheckall, onAllocate } = this.props
+    const { optimisation, selection, onUpdateOptimisationSettings, onTogglePendingAllocation,
+      pendingAllocation, sliderCheckbox, onToggleCheckall, onAllocate } = this.props
 
     let collateralHeader = (
       <div className={styles.collateralRow + ' ' + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
@@ -154,19 +162,20 @@ class Pledge extends React.Component {
               </div>
               <div className={styles.buttonHolder}>
                 <ChooseCalls tickImg={sliderCheckbox[0]} tickState={sliderCheckbox[1]}
-                             tickClick={onToggleCheckall} />
+                             tickClick={onToggleCheckall}/>
 
-                           <div className={styles.optButton + (this.checkIfExist(pendingAllocation).size > 0 ? ' '+styles.btnEnabled : ' '+styles.btnDisabled )} id={styles.optBtnAllocate} onClick={()=> onAllocate(pendingAllocation.toJS(), optimisation.toJS())} >Allocate</div>
+                <div className={styles.optButton + ' ' +
+                (this.checkIfExist(pendingAllocation).size > 0 ? '' : styles.btnDisabled )}
+                     onClick={() => onAllocate(pendingAllocation.toJS(), optimisation.toJS())}>
+                  Allocate
+                </div>
 
-                <div className={styles.optButton  + (
-
-                    this.checkIfExist(selection).reduce((sumSelX, x) => {
-
-                      //console.log("+++ " + x.getIn(['allocated', 'initialMargin']))
-                      return sumSelX + (x.getIn(['allocated', 'initialMargin']) ? x.getIn(['allocated', 'initialMargin']).size + x.getIn(['allocated', 'variationMargin']).size : 0 )
-                    }, 0) > 0
-
-                  ? ' '+styles.btnEnabled : ' '+styles.btnDisabled )} id={styles.optBtnPledge}>Pledge</div>
+                <div className={styles.optButton + ' ' +
+                (this.checkIfExist(selection).reduce(this.sumOfIMVM, 0) > 0
+                  ? styles.optBtnPledge
+                  : styles.btnDisabled )}>
+                  Pledge
+                </div>
 
               </div>
               {/* change btnEnabled to btnDisabled to disable the button*/}

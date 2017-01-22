@@ -1,0 +1,67 @@
+.popupPanel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 370px;
+    height: 150px;
+    border: 1px solid #1c2124;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 5px;
+    display: none;
+}
+
+.popupShow {
+    display: block;
+}
+
+.closeButton {
+    color: #585858;
+    text-align: right;
+    font-size: 15px;
+    padding: 0px 5px;
+    cursor: pointer;
+}
+
+.popupBody {
+    text-align: center;
+}
+
+.popupRow {
+    display: flex;
+    padding: 6px;
+    text-align: center;
+}
+
+.rowRadio {
+    flex: 1;
+    text-align: right;
+}
+
+.rowText {
+    flex: 2;
+    text-align: left;
+}
+
+.buttonStyle {
+    width: 100px;
+    border: 1px solid;
+    font-size: 13px;
+    line-height: 21px;
+    composes: baseFontBold from './../../static/css-components/fonts.css';
+    text-align: center;
+    border-radius: 20px;
+    align-self: center;
+    margin: 10px 0;
+    color: #d7dce0;
+    background-color: #FAFAFA;
+}
+
+.buttonEnabled{
+    color: #000000;
+    background-color: #FFFFFF;
+    cursor: pointer;
+}

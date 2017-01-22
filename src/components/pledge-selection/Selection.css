@@ -225,13 +225,14 @@ td{
   composes: baseFontBold from '../../static/css-components/fonts.css';
 }
 
-.imgCancel{
-  margin-top:2px;
-  margin-left:2px;
+.earmarkAssetButton{
   padding: 2px;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
 }
 
-.imgCancel img {
+.earmarkAssetButton img {
   width:17px;
 }
 
