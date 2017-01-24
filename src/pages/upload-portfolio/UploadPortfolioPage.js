@@ -14,7 +14,7 @@ class UploadPortfolioPage extends React.Component {
     super(props)
 
     this.state = {
-      showMarginCall: true
+      showMarginCall: false
     }
 
     this.showMarginCall = this.showMarginCall.bind(this)
