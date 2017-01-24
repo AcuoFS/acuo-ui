@@ -31,7 +31,7 @@ export default class MarginCallRow extends React.Component{
   }
 
   onArrowClick(e){
-    this.props.spillContents(e)
+    // this.props.spillContents(e)
     this.setState({
       isExpanded: !this.state.isExpanded
     })
