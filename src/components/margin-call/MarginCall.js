@@ -71,8 +71,6 @@ export default class MarginCall extends React.Component {
         <ChangeCallAmountPopup propIsShow={this.state.isShowPopup}
                                propDeliverAmt=
                                  {Number.parseInt(this.state.totalCallAmount ? this.state.totalCallAmount : 0)}
-                               propTotalCallAmt=
-                                 {Number.parseInt(this.state.totalCallAmount ? this.state.totalCallAmount : 0)}
                                propCurrentId={this.state.marginCallUploadId}
                                propHandlerClearPopup={this.clearPopup}/>
 

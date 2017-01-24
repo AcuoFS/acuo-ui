@@ -11,15 +11,13 @@ export default class ChangeCallAmountPopup extends React.Component {
     this.state = {
       currentId: propCurrentId,
       returnAmt: 0,
-      deliverAmt: propDeliverAmt,
-      totalAmt: propTotalCallAmt,
+      deliverAmt: propDeliverAmt
     }
 
     this.onCancel = this.onCancel.bind(this)
     this.onSave = this.onSave.bind(this)
     this.onReturnChange = this.onReturnChange.bind(this)
     this.onDeliverChange = this.onDeliverChange.bind(this)
-    this.onTotalChange = this.onTotalChange.bind(this)
   }
 
   // When there's update in props from parent, use parent's values and clear returnAmt
@@ -27,8 +25,7 @@ export default class ChangeCallAmountPopup extends React.Component {
     this.setState({
       currentId: nextProps.propCurrentId,
       returnAmt: 0,
-      deliverAmt: nextProps.propDeliverAmt,
-      totalAmt: nextProps.propTotalCallAmt,
+      deliverAmt: nextProps.propDeliverAmt
     })
   }
 
@@ -51,12 +48,6 @@ export default class ChangeCallAmountPopup extends React.Component {
   onDeliverChange(e) {
     this.setState({
       deliverAmt: e.target.value
-    })
-  }
-
-  onTotalChange(e) {
-    this.setState({
-      totalAmt: e.target.value
     })
   }
 
@@ -85,9 +76,9 @@ export default class ChangeCallAmountPopup extends React.Component {
           </div>
           <div className={styles.flexRow}>
             <div className={styles.formLabel}>Total Call Amount</div>
-            <div className={styles.formInput}><input type="number" className={styles.inputStyle}
-                                                     value={this.state.totalAmt}
-                                                     onChange={(e) => this.onTotalChange(e)}/>
+            <div className={styles.formInput}><input disabled type="number" className={styles.inputStyle}
+                                                     value={Number(this.state.returnAmt)
+                                                     + Number(this.state.deliverAmt)}/>
             </div>
           </div>
         </div>
@@ -104,7 +95,6 @@ export default class ChangeCallAmountPopup extends React.Component {
 ChangeCallAmountPopup.PropTypes = {
   propIsShow: PropTypes.bool.isRequired,
   propDeliverAmt: PropTypes.number.isRequired,
-  propTotalCallAmt: PropTypes.number.isRequired,
   propCurrentId: PropTypes.string.isRequired,
   propHandlerClearPopup: PropTypes.func.isRequired
 }
