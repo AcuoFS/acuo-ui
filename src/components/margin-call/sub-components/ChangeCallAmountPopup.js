@@ -34,9 +34,11 @@ export default class ChangeCallAmountPopup extends React.Component {
   }
 
   onSave() {
-    alert('state: ' + JSON.stringify(this.state))
-
     // TODO: update to endpoint
+    this.props.propHandlerSave(Number(this.state.returnAmt)
+      + Number(this.state.deliverAmt), this.state.currentId)
+
+    this.onCancel()
   }
 
   onReturnChange(e) {
@@ -96,5 +98,6 @@ ChangeCallAmountPopup.PropTypes = {
   propIsShow: PropTypes.bool.isRequired,
   propDeliverAmt: PropTypes.number.isRequired,
   propCurrentId: PropTypes.string.isRequired,
-  propHandlerClearPopup: PropTypes.func.isRequired
+  propHandlerClearPopup: PropTypes.func.isRequired,
+  propHandlerSave: PropTypes.func.isRequired
 }

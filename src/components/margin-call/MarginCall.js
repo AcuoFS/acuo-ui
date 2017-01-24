@@ -3,10 +3,11 @@ import styles from './MarginCall.css'
 import ContentRows from './MarginCallRows'
 import {checkBox, checkBoxWithTick} from '../../../images/common'
 import ChangeCallAmountPopup from './sub-components/ChangeCallAmountPopup'
+import marginCallData from '../../data/data'
 
 
 export default class MarginCall extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -21,6 +22,9 @@ export default class MarginCall extends React.Component {
     this.toggleIsChecked = this.toggleIsChecked.bind(this)
     this.onTotalCallAmt = this.onTotalCallAmt.bind(this)
     this.clearPopup = this.clearPopup.bind(this)
+
+    // TODO: should be fetched from endpoint. This is the interim mock data
+    props.onGetMarginUploadData(marginCallData)
   }
 
   toggleIsChecked() {
@@ -30,26 +34,26 @@ export default class MarginCall extends React.Component {
     })
   }
 
-  openRow(e){
+  openRow(e) {
     //console.log(this.toggleRow(this.state.openedRows, e.currentTarget.dataset.ref))
     this.setState({
       openedRows: this.toggleRow(this.state.openedRows, e.currentTarget.dataset.ref)
     })
   }
 
-  toggleRow(arr, index){
+  toggleRow(arr, index) {
     console.log(arr.length)
-    if(arr.length){
-      if(arr.indexOf(index) > -1)
+    if (arr.length) {
+      if (arr.indexOf(index) > -1)
         console.log(arr.splice(arr.indexOf(index), 1))
       else
         console.log(arr.push(index))
-    }else{
+    } else {
       console.log(arr.push(index))
     }
   }
 
-  onTotalCallAmt(totalCallAmount, marginCallUploadId){
+  onTotalCallAmt(totalCallAmount, marginCallUploadId) {
     this.setState({
       isShowPopup: true,
       marginCallUploadId: marginCallUploadId,
@@ -57,7 +61,7 @@ export default class MarginCall extends React.Component {
     })
   }
 
-  clearPopup(){
+  clearPopup() {
     this.setState({
       isShowPopup: false,
       marginCallUploadId: '',
@@ -66,13 +70,14 @@ export default class MarginCall extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <div className={styles.container}>
         <ChangeCallAmountPopup propIsShow={this.state.isShowPopup}
                                propDeliverAmt=
                                  {Number.parseInt(this.state.totalCallAmount ? this.state.totalCallAmount : 0)}
                                propCurrentId={this.state.marginCallUploadId}
-                               propHandlerClearPopup={this.clearPopup}/>
+                               propHandlerClearPopup={this.clearPopup}
+                               propHandlerSave={this.props.onUpdateMarginCallUpload}/>
 
         <div className={styles.header}>
           <div className={styles.title}>Margin Call</div>
@@ -103,7 +108,8 @@ export default class MarginCall extends React.Component {
 
           <ContentRows spillContents={this.openRow} isChecked={this.state.isChecked}
                        isOpen={this.state.openedRows.indexOf(1) > -1}
-                       propHandlerOnTotalMargin={this.onTotalCallAmt}/>
+                       propHandlerOnTotalMargin={this.onTotalCallAmt}
+                       propMarginCallUploadData={this.props.uploadData}/>
           {/*<ContentRows spillContents={this.openRow} isChecked={this.state.isChecked} isOpen={this.state.openedRows.indexOf(2) > -1}/>*/}
         </div>
       </div>
