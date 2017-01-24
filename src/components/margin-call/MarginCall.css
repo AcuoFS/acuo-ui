@@ -79,6 +79,10 @@
   flex: 0 0 5%;
 }
 
+.boldCellText {
+  composes: baseFontBold from './../../static/css-components/fonts.css';
+}
+
 /*content*/
 .flexContainer{
   color: #2C3B4A;

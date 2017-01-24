@@ -54,11 +54,17 @@ export default class MarginCallRow extends React.Component{
       <div className={styles.cell}>{item.cptyOrg}</div>
       <div className={styles.cell}>{item.cptyEntity}</div>
       <div className={styles.cell}>{item.marginAgreement}</div>
-      <div className={styles.cell + ' ' + styles.dateCell}>{item.valuationDate}</div>
-      <div className={styles.cell + ' ' + styles.dateCell}>{item.callDate}</div>
+      <div className={styles.cell + ' ' + styles.dateCell + ' ' + styles.boldCellText}>
+        {item.valuationDate}
+      </div>
+      <div className={styles.cell + ' ' + styles.dateCell + ' ' + styles.boldCellText}>
+        {item.callDate}
+      </div>
       <div className={styles.cell + ' ' + styles.callTypeCell}>{item.callType}</div>
       <div className={styles.cell + ' ' + styles.ccyCell}>{item.currency}</div>
-      <div className={styles.cell + ' ' + styles.largeCell}>{checkNegative(item.totalCallAmount)}</div>
+      <div className={styles.cell + ' ' + styles.largeCell + ' ' + styles.boldCellText}>
+        {checkNegative(item.totalCallAmount)}
+      </div>
       <div className={styles.cell}>{item.referenceIdentifier}</div>
       <div className={styles.cell + ' ' + styles.largeCell}>{checkNegative(item.exposure)}</div>
       <div className={styles.cell + ' ' + styles.largeCell}>{checkNegative(item.collateralValue)}</div>
