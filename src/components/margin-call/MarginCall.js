@@ -1,6 +1,8 @@
 import React from 'react'
 import styles from './MarginCall.css'
 import ContentRows from './MarginCallRows'
+import {checkBox, checkBoxWithTick} from '../../../images/common'
+
 
 export default class MarginCall extends React.Component {
   constructor(props){
@@ -51,7 +53,9 @@ export default class MarginCall extends React.Component {
         <div className={styles.content}>
           <div className={styles.masterRow}>
             <div className={styles.cell}>
-              <input type="checkbox" checked={this.state.isChecked} onChange={this.toggleIsChecked} />
+              {/*<input type="checkbox" checked={this.state.isChecked} onChange={this.toggleIsChecked} />*/}
+              <img onClick={this.toggleIsChecked}
+                   src={this.state.isChecked ? checkBoxWithTick : checkBox}/>
             </div>
             <div className={styles.cell}>Legal Entity</div>
             <div className={styles.cell}>Cpty Organisation</div>

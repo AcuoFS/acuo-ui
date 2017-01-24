@@ -5,6 +5,7 @@
 import React from 'react'
 import styles from './MarginCall.css'
 import { checkNegative } from '../../utils/formatNegativeAmount'
+import {checkBox, checkBoxWithTick} from '../../../images/common'
 
 
 export default class MarginCallRow extends React.Component{
@@ -45,7 +46,10 @@ export default class MarginCallRow extends React.Component{
 
     return <div className={styles.flexContainer + ' ' +
     (this.state.isExpanded ? styles.contentRowExpand :styles.contentRow)}>
-      <div className={styles.cell}><input type="checkbox" checked={this.state.isChecked} onChange={this.toggleIsChecked} /></div>
+      <div className={styles.cell}>
+        {/*<input type="checkbox" checked={this.state.isChecked} onChange={this.toggleIsChecked} />*/}
+        <img onClick={this.toggleIsChecked} src={this.state.isChecked ? checkBoxWithTick : checkBox}/>
+      </div>
       <div className={styles.cell}>{item.legalEntity}</div>
       <div className={styles.cell}>{item.cptyOrg}</div>
       <div className={styles.cell}>{item.cptyEntity}</div>
