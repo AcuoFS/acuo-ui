@@ -39,10 +39,8 @@ export default class MarginCallRow extends React.Component{
   }
 
   render(){
-    const {isOpen, displayAll, spillContents, row:item} = this.props
+    const {isOpen, displayAll, spillContents, row:item, propHandlerOnTotalMargin} = this.props
     const id = 'temp_static_id'
-
-    // console.log(spillContents)
 
     return <div className={styles.flexContainer + ' ' +
     (this.state.isExpanded ? styles.contentRowExpand :styles.contentRow)}>
@@ -62,7 +60,9 @@ export default class MarginCallRow extends React.Component{
       </div>
       <div className={styles.cell + ' ' + styles.callTypeCell}>{item.callType}</div>
       <div className={styles.cell + ' ' + styles.ccyCell}>{item.currency}</div>
-      <div className={styles.cell + ' ' + styles.largeCell + ' ' + styles.boldCellText}>
+      <div className={styles.cell + ' ' + styles.largeCell + ' ' + styles.boldCellText
+      + ' ' + styles.clickableCell}
+           onClick={() => propHandlerOnTotalMargin(item.totalCallAmount, item.mgnCallUploadId)}>
         {checkNegative(item.totalCallAmount)}
       </div>
       <div className={styles.cell}>{item.referenceIdentifier}</div>

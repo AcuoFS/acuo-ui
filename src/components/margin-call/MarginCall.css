@@ -9,6 +9,8 @@
   display: inline-block;
   width: 97%;
   padding: 10px;
+
+  position: relative;
 }
 
 .header{
@@ -83,6 +85,10 @@
   composes: baseFontBold from './../../static/css-components/fonts.css';
 }
 
+.clickableCell {
+  cursor: pointer;
+}
+
 /*content*/
 .flexContainer{
   color: #2C3B4A;
@@ -130,6 +136,7 @@
 .contentRow .cell:last-child,
 .contentRowExpand .cell:last-child{
   position: relative;
+  cursor: pointer;
 }
 
 .contentRow .cell:last-child::before{

@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './MarginCall.css'
 import ContentRows from './MarginCallRows'
 import {checkBox, checkBoxWithTick} from '../../../images/common'
+import ChangeCallAmountPopup from './sub-components/ChangeCallAmountPopup'
 
 
 export default class MarginCall extends React.Component {
@@ -10,11 +11,16 @@ export default class MarginCall extends React.Component {
 
     this.state = {
       openedRows: [],
-      isChecked: false
+      isChecked: false,
+      isShowPopup: false,
+      marginCallUploadId: '',
+      totalCallAmount: ''
     }
 
     this.openRow = this.openRow.bind(this)
     this.toggleIsChecked = this.toggleIsChecked.bind(this)
+    this.onTotalCallAmt = this.onTotalCallAmt.bind(this)
+    this.clearPopup = this.clearPopup.bind(this)
   }
 
   toggleIsChecked() {
@@ -43,9 +49,33 @@ export default class MarginCall extends React.Component {
     }
   }
 
+  onTotalCallAmt(totalCallAmount, marginCallUploadId){
+    this.setState({
+      isShowPopup: true,
+      marginCallUploadId: marginCallUploadId,
+      totalCallAmount: totalCallAmount
+    })
+  }
+
+  clearPopup(){
+    this.setState({
+      isShowPopup: false,
+      marginCallUploadId: '',
+      totalCallAmount: ''
+    })
+  }
+
   render() {
     return(
       <div className={styles.container}>
+        <ChangeCallAmountPopup propIsShow={this.state.isShowPopup}
+                               propDeliverAmt=
+                                 {Number.parseInt(this.state.totalCallAmount ? this.state.totalCallAmount : 0)}
+                               propTotalCallAmt=
+                                 {Number.parseInt(this.state.totalCallAmount ? this.state.totalCallAmount : 0)}
+                               propCurrentId={this.state.marginCallUploadId}
+                               propHandlerClearPopup={this.clearPopup}/>
+
         <div className={styles.header}>
           <div className={styles.title}>Margin Call</div>
           <div className={styles.button}>Send selected Margin Calls</div>
@@ -73,8 +103,10 @@ export default class MarginCall extends React.Component {
             <div className={styles.cell}></div>
           </div>
 
-          <ContentRows spillContents={this.openRow} isChecked={this.state.isChecked} isOpen={this.state.openedRows.indexOf(1) > -1}/>
-          <ContentRows spillContents={this.openRow} isChecked={this.state.isChecked} isOpen={this.state.openedRows.indexOf(2) > -1}/>
+          <ContentRows spillContents={this.openRow} isChecked={this.state.isChecked}
+                       isOpen={this.state.openedRows.indexOf(1) > -1}
+                       propHandlerOnTotalMargin={this.onTotalCallAmt}/>
+          {/*<ContentRows spillContents={this.openRow} isChecked={this.state.isChecked} isOpen={this.state.openedRows.indexOf(2) > -1}/>*/}
         </div>
       </div>
     )
