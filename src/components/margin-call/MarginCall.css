@@ -85,11 +85,13 @@
   display: flex;
 }
 
-.contentRow:nth-child(odd){
+.contentRow:nth-child(odd),
+.contentRowExpand:nth-child(odd){
   background-color: #DCEEFF;
 }
 
-.contentRow:nth-child(even){
+.contentRow:nth-child(even),
+.contentRowExpand:nth-child(even){
   background-color: #EEEEEE;
 }
 
@@ -121,7 +123,8 @@
 }
 
 /* arrow */
-.contentRow .cell:last-child{
+.contentRow .cell:last-child,
+.contentRowExpand .cell:last-child{
   position: relative;
 }
 
@@ -152,3 +155,34 @@
 .contentRow:nth-child(even) .cell:last-child::after{
   border-top: 12px solid #EEEEEE;
 }
+
+/************* Up triangle after expansion *************/
+.contentRowExpand .cell:last-child::before{
+  content: '';
+  position: absolute;
+  border-bottom: 12px solid #2C3B4A;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  top: -3px;
+  left: 7px;
+}
+
+.contentRowExpand .cell:last-child::after{
+  content: '';
+  position: absolute;
+  border-bottom: 12px solid #2C3B4A;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  top: 0px;
+  left: 7px;
+}
+
+.contentRowExpand:nth-child(odd) .cell:last-child::after{
+  border-bottom: 12px solid #DCEEFF;
+}
+
+.contentRowExpand:nth-child(even) .cell:last-child::after{
+  border-bottom: 12px solid #EEEEEE;
+}
+
+/************* Up triangle after expansion *************/

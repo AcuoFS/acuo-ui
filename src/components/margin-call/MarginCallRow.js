@@ -4,7 +4,7 @@
  */
 import React from 'react'
 import styles from './MarginCall.css'
-import { numberWithCommas } from '../../utils/numbersWithCommas'
+import { checkNegative } from '../../utils/formatNegativeAmount'
 
 
 export default class MarginCallRow extends React.Component{
@@ -12,10 +12,12 @@ export default class MarginCallRow extends React.Component{
     super(props)
 
     this.state = {
-      isChecked: props.isChecked
+      isChecked: props.isChecked,
+      isExpanded: false
     }
 
     this.toggleIsChecked = this.toggleIsChecked.bind(this)
+    this.onArrowClick = this.onArrowClick.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -24,22 +26,25 @@ export default class MarginCallRow extends React.Component{
     })
   }
 
-  checkNegative(amount){
-    if(amount < 0)
-      return '(' + numberWithCommas(Math.abs(amount)) + ')'
-    else
-      return  numberWithCommas(Math.abs(amount))
-  }
-
   toggleIsChecked() {
     this.setState(state => Object.assign({}, state, {isChecked: !state.isChecked}))
+  }
+
+  onArrowClick(e){
+    this.props.spillContents(e)
+    this.setState({
+      isExpanded: !this.state.isExpanded
+    })
   }
 
   render(){
     const {isOpen, displayAll, spillContents, row:item} = this.props
     const id = 'temp_static_id'
 
-    return <div className={styles.flexContainer}>
+    // console.log(spillContents)
+
+    return <div className={styles.flexContainer + ' ' +
+    (this.state.isExpanded ? styles.contentRowExpand :styles.contentRow)}>
       <div className={styles.cell}><input type="checkbox" checked={this.state.isChecked} onChange={this.toggleIsChecked} /></div>
       <div className={styles.cell}>{item.legalEntity}</div>
       <div className={styles.cell}>{item.cptyOrg}</div>
@@ -49,12 +54,12 @@ export default class MarginCallRow extends React.Component{
       <div className={styles.cell + ' ' + styles.dateCell}>{item.callDate}</div>
       <div className={styles.cell + ' ' + styles.callTypeCell}>{item.callType}</div>
       <div className={styles.cell + ' ' + styles.ccyCell}>{item.currency}</div>
-      <div className={styles.cell + ' ' + styles.largeCell}>{this.checkNegative(item.totalCallAmount)}</div>
+      <div className={styles.cell + ' ' + styles.largeCell}>{checkNegative(item.totalCallAmount)}</div>
       <div className={styles.cell}>{item.referenceIdentifier}</div>
-      <div className={styles.cell + ' ' + styles.largeCell}>{this.checkNegative(item.exposure)}</div>
-      <div className={styles.cell + ' ' + styles.largeCell}>{this.checkNegative(item.collateralValue)}</div>
+      <div className={styles.cell + ' ' + styles.largeCell}>{checkNegative(item.exposure)}</div>
+      <div className={styles.cell + ' ' + styles.largeCell}>{checkNegative(item.collateralValue)}</div>
       <div className={styles.cell + ' ' + styles.largeCell}>{item.pendingCollateral}</div>
-      <div className={styles.cell} onClick={spillContents} data-ref={id}></div>
+      <div className={styles.cell} onClick={(e) => this.onArrowClick(e)} data-ref={id}></div>
     </div>
   }
 }
