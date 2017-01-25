@@ -123,7 +123,6 @@ export default class MarginAgreementPortfolio extends React.Component {
 
     let highestDifference = totalClientAsset.reduce((highest, x) => {
       let difference = Math.abs(x.get('amount') - totalcounterAsset.filter(y => {
-          console.log(y.toJS());
           return y.get('key') == x.get('key')
         }).first().get('amount'))
       return (highest.get('difference') > difference ? highest : Map({'key': x.get('key'), 'difference': difference}))

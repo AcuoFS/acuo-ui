@@ -4,9 +4,8 @@ import { MarginAgreementsComponent } from '../components'
 import { selectedItems, initState, filterStateStatus } from '../actions'
 import { RECON_DATA_URL, RECON_URL, DASHBOARD_URL } from '../constants/APIcalls'
 
-
 const mapStateToProps = state => ({
-  recon : state.mainReducer.getIn(['display', 'derivatives'])
+  recon : state.ReconReducer.get('items')
 })
 
 const mapDispatchToProps = dispatch => ({
