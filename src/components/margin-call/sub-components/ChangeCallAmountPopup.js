@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react'
+import {numberWithCommas} from '../../../utils/numbersWithCommas'
 import styles from './ChangeCallAmountPopup.css'
 
 
@@ -17,7 +18,7 @@ export default class ChangeCallAmountPopup extends React.Component {
     this.onCancel = this.onCancel.bind(this)
     this.onSave = this.onSave.bind(this)
     this.onReturnChange = this.onReturnChange.bind(this)
-    this.onDeliverChange = this.onDeliverChange.bind(this)
+    // this.onDeliverChange = this.onDeliverChange.bind(this)
   }
 
   // When there's update in props from parent, use parent's values and clear returnAmt
@@ -47,11 +48,11 @@ export default class ChangeCallAmountPopup extends React.Component {
     })
   }
 
-  onDeliverChange(e) {
-    this.setState({
-      deliverAmt: e.target.value
-    })
-  }
+  // onDeliverChange(e) {
+  //   this.setState({
+  //     deliverAmt: e.target.value
+  //   })
+  // }
 
   render() {
     const {
@@ -64,23 +65,25 @@ export default class ChangeCallAmountPopup extends React.Component {
         <div>
           <div className={styles.flexRow}>
             <div className={styles.formLabel}>Return Amount</div>
-            <div className={styles.formInput}><input type="number" className={styles.inputStyle}
-                                                     value={this.state.returnAmt}
-                                                     onChange={(e) => this.onReturnChange(e)}/>
+            <div className={styles.formInput}>
+              <input type="number" className={styles.inputStyle}
+                     value={this.state.returnAmt}
+                     onChange={(e) => this.onReturnChange(e)}/>
             </div>
           </div>
           <div className={styles.flexRow}>
             <div className={styles.formLabel}>Deliver Amount</div>
-            <div className={styles.formInput}><input type="number" className={styles.inputStyle}
-                                                     value={this.state.deliverAmt}
-                                                     onChange={(e) => this.onDeliverChange(e)}/>
+            <div className={styles.formInput}>
+              <input disabled type="text" className={styles.inputStyle}
+                     value={numberWithCommas(this.state.deliverAmt)}/>
             </div>
           </div>
           <div className={styles.flexRow}>
             <div className={styles.formLabel}>Total Call Amount</div>
-            <div className={styles.formInput}><input disabled type="number" className={styles.inputStyle}
-                                                     value={Number(this.state.returnAmt)
-                                                     + Number(this.state.deliverAmt)}/>
+            <div className={styles.formInput}>
+              <input disabled type="text" className={styles.inputStyle}
+                     value={numberWithCommas((Number(this.state.returnAmt)
+                     + Number(this.state.deliverAmt)))}/>
             </div>
           </div>
         </div>
