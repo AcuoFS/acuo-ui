@@ -27,11 +27,6 @@ class App extends React.Component {
       return response.json()
     }).then((obj) => {
       store.dispatch(initState(fromJS(obj)))
-      fetch(RECON_URL).then((response) => {
-        return response.json()
-      }).then((obj) => {
-        store.dispatch(lineItemInsertion(fromJS(obj.items)))
-      })
     })
   }
 
