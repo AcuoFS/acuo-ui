@@ -66,75 +66,106 @@ export default class FilterBar extends React.Component {
     }
   }
 
-  render() {
-    return (
-      <div className={styles.filterContainer}>
-        <div className={styles.filterBarName + ' ' + this.state.filterBar} onClick={this.toggleFilter}>
-          <span>Filter</span>
-          <div className={styles.switchArrow}>
-            <div className={styles.arrowLine} id={styles.line1}></div>
-            <div className={styles.arrowLine} id={styles.line2}></div>
-          </div>
-        </div>
+  render () {
+    return  <div className={styles.filterContainer}>
+              <div className={styles.filterBarName + ' ' + this.state.filterBar} onClick={this.toggleFilter}>
+                <span>Filter</span>
+                <div className={styles.switchArrow}>
+                  <div className={styles.arrowLine} id={styles.line1}></div>
+                  <div className={styles.arrowLine} id={styles.line2}></div>
+                </div>
+              </div>
 
-        <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
+              <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
+                <FilterDropdown title={'Legal Entity'}
+                                handleOnSelectedItemChange={this.props.onLegalEntityChange}
+                                options={this.props.legalEntityList}
+                                selectedOption={this.props.filters.legalEntity}/>
 
-          <FilterDropdown
-            title={'Legal Entity'}
-            handleOnSelectedItemChange={this.props.onLegalEntityChange}
-            options={this.props.legalEntityList}
-            selectedOption={
-              this.props.filters.getIn(['legalEntityFilter', 'filter'])}/>
+                <FilterDropdown title={'Deriv Type'}
+                                handleOnSelectedItemChange={this.props.onDerivChange}
+                                options={this.props.derivativeType}
+                                selectedOption={this.props.filters.derivType}/>
 
-          <FilterDropdown
-            title={'Deriv Type'}
-            handleOnSelectedItemChange={this.props.onDerivChange}
-            options={this.props.derivativeType}
-            selectedOption={
-              this.props.filters.getIn(['typeFilter', 'filter'])}/>
+                <FilterDropdown title={'CPTY Organisation'}
+                                handleOnSelectedItemChange={this.props.onCptyOrgChange}
+                                options={this.props.cptyOrganisation}
+                                selectedOption={this.props.filters.cptyOrg}/>
 
-          <FilterDropdown
-            title={'Time Window'}
-            handleOnSelectedItemChange={this.props.onFilterTimeWindowStatus}
-            optionList={this.props.timeWindowList}
-            dropdownType={DROPDOWN_TYPE_TIME_SELECT}
-            selectedOption={
-              this.props.filters.getIn(['timeWindowFilter', 'timeRangeText']) ?
-                this.props.filters.getIn(['timeWindowFilter', 'timeRangeText']) : 'Today: ALL'}/>
-
-          <FilterDropdown
-            title={'CPTY Organisation'}
-            handleOnSelectedItemChange={this.props.onCptyOrgChange}
-            options={this.props.cptyOrganisation}
-            selectedOption={
-              this.props.filters.getIn(['cptyOrgFilter', 'filter'])}/>
-
-          <FilterDropdown
-            title={'CPTY Entity'}
-            handleOnSelectedItemChange={this.handleCPTYEntityChange}
-            dropdownType={DROPDOWN_TYPE_MULTI_SELECT}
-            options={this.props.cptyEntity}
-            selectedOptionList={this.props.filters.getIn(['cptyEntityFilter', 'filter']) ? this.props.filters.getIn(['cptyEntityFilter', 'filter']).toArray() : []}/>
-
-        </div>
-
-      </div>
-    )
+                <FilterDropdown title={'CPTY Entity'}
+                                handleOnSelectedItemChange={this.handleCPTYEntityChange}
+                                dropdownType={DROPDOWN_TYPE_MULTI_SELECT}
+                                options={this.props.cptyEntity}
+                                selectedOptionList={this.props.filters.cptyEntity || []}/>
+              </div>
+            </div>
   }
+
+  // rendera() {
+  //   return (
+  //     <div className={styles.filterContainer}>
+  //       <div className={styles.filterBarName + ' ' + this.state.filterBar} onClick={this.toggleFilter}>
+  //         <span>Filter</span>
+  //         <div className={styles.switchArrow}>
+  //           <div className={styles.arrowLine} id={styles.line1}></div>
+  //           <div className={styles.arrowLine} id={styles.line2}></div>
+  //         </div>
+  //       </div>
+  //
+  //       <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
+  //
+  //         <FilterDropdown
+  //           title={'Legal Entity'}
+  //           handleOnSelectedItemChange={this.props.onLegalEntityChange}
+  //           options={this.props.legalEntityList}
+  //           selectedOption={
+  //             this.props.filters.getIn(['legalEntityFilter', 'filter'])}/>
+  //
+  //         <FilterDropdown
+  //           title={'Deriv Type'}
+  //           handleOnSelectedItemChange={this.props.onDerivChange}
+  //           options={this.props.derivativeType}
+  //           selectedOption={
+  //             this.props.filters.getIn(['typeFilter', 'filter'])}/>
+  //
+  //         <FilterDropdown
+  //           title={'Time Window'}
+  //           handleOnSelectedItemChange={this.props.onFilterTimeWindowStatus}
+  //           optionList={this.props.timeWindowList}
+  //           dropdownType={DROPDOWN_TYPE_TIME_SELECT}
+  //           selectedOption={
+  //             this.props.filters.getIn(['timeWindowFilter', 'timeRangeText']) ?
+  //               this.props.filters.getIn(['timeWindowFilter', 'timeRangeText']) : 'Today: ALL'}/>
+  //
+  //         <FilterDropdown
+  //           title={'CPTY Organisation'}
+  //           handleOnSelectedItemChange={this.props.onCptyOrgChange}
+  //           options={this.props.cptyOrganisation}
+  //           selectedOption={
+  //             this.props.filters.getIn(['cptyOrgFilter', 'filter'])}/>
+  //
+  //         <FilterDropdown
+  //           title={'CPTY Entity'}
+  //           handleOnSelectedItemChange={this.handleCPTYEntityChange}
+  //           dropdownType={DROPDOWN_TYPE_MULTI_SELECT}
+  //           options={this.props.cptyEntity}
+  //           selectedOptionList={this.props.filters.getIn(['cptyEntityFilter', 'filter']) ? this.props.filters.getIn(['cptyEntityFilter', 'filter']).toArray() : []}/>
+  //
+  //       </div>
+  //
+  //     </div>
+  //   )
+  // }
 }
 
 
-FilterBar.propTypes = {
-  onLegalEntityChange: PropTypes.func.isRequired,
-  onDerivChange: PropTypes.func.isRequired,
-  onStatusChange: PropTypes.func.isRequired,
-  onCptyOrgChange: PropTypes.func.isRequired,
-  onCPTYEntityChange: PropTypes.func.isRequired,
-  onFilterTimeWindowStatus: PropTypes.func.isRequired,
-  legalEntityList: PropTypes.arrayOf(PropTypes.string),
-  // filters : PropTypes.array
-}
-
-FilterBar.defaultProps = {
-  filters: Map()
-}
+// FilterBar.propTypes = {
+//   onLegalEntityChange: PropTypes.func.isRequired,
+//   onDerivChange: PropTypes.func.isRequired,
+//   onStatusChange: PropTypes.func.isRequired,
+//   onCptyOrgChange: PropTypes.func.isRequired,
+//   onCPTYEntityChange: PropTypes.func.isRequired,
+//   onFilterTimeWindowStatus: PropTypes.func.isRequired,
+//   legalEntityList: PropTypes.arrayOf(PropTypes.string),
+//   filters : PropTypes.array
+// }

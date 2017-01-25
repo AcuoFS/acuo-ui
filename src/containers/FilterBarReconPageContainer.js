@@ -1,9 +1,9 @@
 import {connect} from 'react-redux'
+import _ from 'lodash'
 import jsonObjectToFlatArray from '../utils/jsonObjectToFlatArray'
 import {
   filterStateLegal,
   filterStateDeriv,
-  filterStateStatus,
   filterCptyOrg,
   filterCptyEntity,
   filterTimeWindowStatus
@@ -12,49 +12,22 @@ import {FilterBarReconPageComponent} from '../components'
 import { Set, Map, List, fromJS } from 'immutable'
 
 
-const mapStateToProps = state => ({
-  filters: state.mainReducer.getIn(['inputs', 'filters']),
-  legalEntityList: computeLegalEntityList(state.mainReducer),
-  derivativeType: computeDerivativeType(state.mainReducer),
-  timeWindowList: computeTimeWindowList(state.mainReducer),
-  statusList: computeStatusList(state.mainReducer),
-  cptyOrganisation: computeCptyOrganisation(state.mainReducer),
-  cptyEntity: computeCptyEntity(state.mainReducer)
-})
+const mapStateToProps = state => {
+  const filters = state.ReconReducer.get('filters').toJS()
+  const items   = state.ReconReducer.get('items').toJS()
 
-const computeLegalEntityList = (state) => {
-  let derivatives = state.getIn(['data', 'derivatives'])
-  let derivativeList = derivatives ? jsonObjectToFlatArray(derivatives.toJSON()) : []
-  let legalEntitySet = derivativeList.reduce((entitySet, derivative) => (
-    entitySet.add(derivative.legalEntity)
-  ), Set())
-  return legalEntitySet.toArray()
+  return {
+    filters,
+    legalEntityList:  getUniqueValuesAfterFilter(items, filters, "legalEntity"),
+    derivativeType:   getUniqueValuesAfterFilter(items, filters, "derivative"),
+    // timeWindowList:   getUniqueValuesAfterFilter(items, filters, "time"),
+    cptyOrganisation: getUniqueValuesAfterFilter(items, filters, "cptyOrg"),
+    cptyEntity:       getUniqueValuesAfterFilter(items, filters, "cptyEntity"),
+  }
 }
 
-const computeDerivativeType = (state) => {
-  let derivatives = state.getIn(['data', 'derivatives']) || []
-  let derivativeTypeSet = derivatives.reduce((typeSet, derivative) => (
-    typeSet.add(derivative.get('type'))
-  ), Set())
-  return derivativeTypeSet.toArray()
-}
-
-const computeStatusList = (state) => {
-  let derivatives = state.getIn(['data', 'derivatives'])
-  let derivativeList = derivatives ? jsonObjectToFlatArray(derivatives.toJSON()) : []
-  let marginStatusSet = derivativeList.reduce((marginStatus, derivative) => (
-    marginStatus.add(derivative.status)
-  ), Set())
-  return marginStatusSet.toArray()
-}
-
-const computeCptyOrganisation = (state) => {
-  let derivatives = state.getIn(['data', 'derivatives'])
-  let derivativeList = derivatives ? jsonObjectToFlatArray(derivatives.toJSON()) : []
-  let cptyOrganisationSet = derivativeList.reduce((cptyOrganisation, derivative) => (
-    cptyOrganisation.add(derivative.cptyOrg)
-  ), Set())
-  return cptyOrganisationSet.toArray()
+const getUniqueValuesAfterFilter = (items, filters, attr) => {
+  return _.uniq(_.map(_.filter(items, filters), attr))
 }
 
 const getYesterday = (currTime) => {
@@ -164,10 +137,9 @@ const computeCptyEntity = (state) => {
 
 
 const mapDispatchToProps = dispatch => ({
-
-  onLegalEntityChange: (e) => {
-    e.stopPropagation()
-    dispatch(filterStateLegal(e.currentTarget.dataset.ref))
+  onLegalEntityChange: (text) => {
+    console.log(text)
+    // dispatch(filterStateLegal(e.currentTarget.dataset.ref))
   },
 
   onDerivChange: (e) => {

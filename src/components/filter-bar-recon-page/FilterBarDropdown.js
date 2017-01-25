@@ -27,39 +27,41 @@ export default class FilterDropdown extends React.Component {
     })
   }
 
-  handleOnOptionChange(e) {
+  handleOnOptionChange(selectedOption) {
     this.setState({
-      selectedOption: e.currentTarget.textContent,
+      selectedOption,
       isOpen: false
     })
-    this.props.handleOnSelectedItemChange(e)
+
+    this.props.handleOnSelectedItemChange(selectedOption)
   }
 
   render() {
-    // merge option 'ALL', with actual options
-    const options = [[], 'All', ...this.props.options]
-    let menu = null
-    if (this.state.isOpen) {
-      menu = (
-        <ul className={styles.filtersList}>
-          {options.map(option => (
-            <li key={option}
-                data-ref={option}
-                onClick={this.handleOnOptionChange}>
-              {String(option).toUpperCase()}
-            </li>
-          ))}
-        </ul>)
-    }
+    // merge option 'all', with actual options and make it uppercase
+    const options = [['all'], ...this.props.options].map(text => String(text).toUpperCase())
+
+    // menu if open
+    const menu = (
+      <ul className={styles.filtersList}>
+        {options.map(option => (
+          <li key={option}
+              onClick={e => {e.stopPropagation()
+                             console.log("recompile!!")
+                             this.handleOnOptionChange(option)}>
+            option
+          </li>
+        ))}
+      </ul>
+    )
 
     return (
       <div className={styles.filterItem}>
         <label className={styles.filterLabel}>{this.props.title}</label>
         <div className={styles.filters} onClick={this.handleToggleDropdown} onMouseLeave={this.handleOnMouseLeave}>
           <div className={styles.selectedText}>
-            {( this.state.selectedOption ).toUpperCase()}
+            {(this.state.selectedOption).toUpperCase()}
           </div>
-          {menu}
+          {this.state.isOpen? menu: null}
         </div>
         <div className={styles.filterDropdownArrow}></div>
       </div>
