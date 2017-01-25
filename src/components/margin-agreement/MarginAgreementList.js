@@ -15,11 +15,8 @@ export default class MarginAgreementList extends React.Component {
     //   adjAmount: 0.0
     // }
 
-    const {recon, onLineItemInsertion} = this.props
+    const {recon} = this.props
     this.displayLineItems = this.displayLineItems.bind(this)
-    if (!recon.isEmpty()) {
-      onLineItemInsertion(recon)
-    }
     // this.getTotalAmount = this.getTotalAmount.bind(this)
     // this.getPercentage = this.getPercentage.bind(this)
     // this.getBtnColour = this.getBtnColour.bind(this)
@@ -58,7 +55,6 @@ export default class MarginAgreementList extends React.Component {
 
 MarginAgreementList.PropTypes = {
   recon: PropTypes.instanceOf(List).isRequired,
-  onLineItemInsertion: PropTypes.func.isRequired,
   onReconItem: PropTypes.func.isRequired,
   onSelectedItem: PropTypes.func.isRequired
 }

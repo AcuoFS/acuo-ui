@@ -38,11 +38,6 @@ export const filterCptyEntity = (cptyEntity) => ({
   filter: cptyEntity
 })
 
-export const lineItemInsertion = (lineItem) => ({
-  type: ActionTypes.LINE_ITEM_INSERTION,
-  addition: lineItem
-})
-
 export const updateCollateral = (collateralData) => ({
   type: ActionTypes.UPDATE_COLLATERAL,
   collateralData: collateralData

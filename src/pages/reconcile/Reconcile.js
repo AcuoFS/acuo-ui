@@ -7,7 +7,7 @@ import {
 import stylesG from '../../static/global.css'
 import styles from './Reconcile.css'
 import { connect } from 'react-redux'
-import { lineItemInsertion, filterStateStatus } from '../../actions'
+import { filterStateStatus } from '../../actions'
 
 
 class Reconcile extends React.Component {
@@ -54,9 +54,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  onLineItemInsertion: (lineItem) => {
-    dispatch(lineItemInsertion(lineItem))
-  },
   onLoad: ()=> {
     setTimeout(()=>{
       dispatch(filterStateStatus('unrecon'))

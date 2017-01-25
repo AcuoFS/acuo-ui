@@ -5,7 +5,7 @@ import {fromJS} from 'immutable'
 import {Provider} from 'react-redux'
 import {hashHistory, Router, Route} from 'react-router'
 import reducer from './reducers'
-import {initState, lineItemInsertion} from './actions'
+import {initState} from './actions'
 import styles from './static/global.css'
 import {
   Dashboard,
