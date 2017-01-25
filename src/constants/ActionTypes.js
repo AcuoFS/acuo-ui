@@ -1,4 +1,5 @@
 export const INIT_STATE = 'INIT_STATE'
+export const RECON_INIT_STATE = 'RECON_INIT_STATE'
 
 //filters
 export const FILTER_STATE_DERIV = 'FILTER_STATE_DERIV'

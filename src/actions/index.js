@@ -6,6 +6,11 @@ export const initState = (state) => ({
   state: state
 })
 
+export const reconInitState = (state) => ({
+  type: ActionTypes.RECON_INIT_STATE,
+  state: state
+})
+
 export const filterStateDeriv = (derivType) => ({
   type: ActionTypes.FILTER_STATE_DERIV,
   filter: derivType
