@@ -57,8 +57,8 @@ export default class CollateralAssetGroup extends React.Component {
           propMaturityDate={formatDate(asset.maturityDate)}
           propInternalCost={formatPercentageOneDecimal(asset.internalCostPct)}
           propExternalCost={formatPercentageOneDecimal(asset.externalCostPct)}
-          propOppCost={formatPercentageOneDecimal(asset.OppCostPct)}
-          propIsin={asset.isin}
+          propOppCost={formatPercentageOneDecimal(asset.oppCostPct)}
+          propIsin={asset.assetId}
           propVenue={asset.venue}
           propAcctId={asset.acctId}
           propIsDisplayAll={propIsDisplayAll}
