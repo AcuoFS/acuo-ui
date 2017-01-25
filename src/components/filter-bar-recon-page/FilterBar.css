@@ -1,0 +1,305 @@
+@value acuoAction from '../../static/css-components/colors.css';
+@value acuoGrey from '../../static/css-components/colors.css';
+
+.filterContainer{
+    position: relative;
+    background-color: #fff;
+    font-size: 13px;
+    display: block;
+    padding: 5px;
+    z-index: 20;
+}
+
+.filterContainer .filterBarName{
+    display: block;
+    position: relative;
+    width: 80px;
+    padding:6px 6px;
+    /*margin-bottom: 10px;*/
+    font-size: 1.4em;
+    color: acuoGrey;
+    cursor: pointer;
+}
+
+.filterContainer .filterBarName span{
+    display: inline-block;
+    position: relative;
+    margin-right: 6px;
+}
+.filterContainer .filterBarName .switchArrow{
+    display: inline-block;
+    position: relative;
+    width: 16px;
+    height: 12px;
+    top: 0px;
+}
+.filterContainer .filterBarName.open .switchArrow{
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    top: 0px;
+}
+.filterContainer .filterBarName.close .switchArrow{
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    top: -2px;
+}
+
+.filterContainer .filterBarName .switchArrow .arrowLine#line1,
+.filterContainer .filterBarName .switchArrow .arrowLine#line2{
+    display: inline-block;
+    position: absolute;
+    width:10px;
+    height: 2px;
+    background-color: acuoGrey;
+    top:4px;
+}
+.filterContainer .filterBarName .switchArrow .arrowLine#line1{
+    -moz-transform: rotate(-40deg);
+    -webkit-transform: rotate(-40deg);
+    -o-transform: rotate(-40deg);
+    -ms-transform: rotate(-40deg);
+    transform: rotate(-40deg);
+
+}
+.filterContainer .filterBarName .switchArrow .arrowLine#line2{
+    -moz-transform: rotate(40deg);
+    -webkit-transform: rotate(40deg);
+    -o-transform: rotate(40deg);
+    -ms-transform: rotate(40deg);
+    transform: rotate(40deg);
+    left: 6px;
+}
+
+.filterContainer .filterItemWrap{
+    height: auto;
+    display: block;
+    padding: 5px 0;
+}
+
+.filterContainer .filterItemWrap.show{
+    height: auto;
+    display: block;
+}
+
+.filterContainer .filterItemWrap.hide{
+    height: 0px;
+    display: none;
+}
+
+.filterContainer .filterItem{
+    display: inline-block;
+    color: #494949;
+    width: 15%;
+    height: 50px;
+    margin: 4px 8px;
+    position: relative;
+    z-index: 20;
+    vertical-align: top;
+}
+.filterContainer .filterItem .filterLabel{
+    display: block;
+    margin: 0 0 4px 0;
+}
+
+.filterContainer .filterItem .filters{
+    font-size: 13px;
+    color: #494949;
+    background-color: #fff;
+    width: 100%;
+    min-height: 16px;
+    height: 30px;
+    border: none;
+    padding: 0 0px;
+    border: 1px solid #494949;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+    -moz-appearance:    none;
+    appearance:         none;
+}
+.filterContainer .filterItem .filters:focus{
+    outline: none;
+}
+.filterContainer .filterItem .filters:hover{
+    cursor: pointer;
+}
+
+.filterDropdownArrow{
+    display: block;
+    background-color: #fff;
+    width: 20px;
+    height: 20px;
+    float: right;
+    position: relative;
+    top: -26px;
+    right: 8px;
+    pointer-events: none;
+}
+
+.filterDropdownArrow::before{
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 8px 0 8px;
+    border-color: #494949 transparent transparent transparent;
+    position: absolute;
+    top: 7px;
+    left: 3px;
+}
+.filterDropdownArrow::after{
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 8px 0 8px;
+    border-color: #fff transparent transparent transparent;
+    position: absolute;
+    top: 4px;
+    left: 3px;
+}
+
+.filtersList {
+    position: absolute;
+    left: 0;
+    top: 98%;
+    width: 100%;
+    background-color: #fff;
+    -webkit-box-shadow: 5px 5px 14px -2px rgba(166,166,166,1);
+    -moz-box-shadow: 5px 5px 14px -2px rgba(166,166,166,1);
+    box-shadow: 5px 5px 14px -2px rgba(166,166,166,1);
+    list-style-type: none;
+    padding: 0px;
+    margin: 0;
+    border: 1px solid acuoGrey;
+}
+
+.selectedText {
+    padding: 0px 8px;
+    line-height: 30px;
+}
+
+.filtersList li{
+   padding: 4px 8px;
+}
+
+.paddingless{
+  padding: 0 !important;
+}
+
+.all{
+  composes: baseFontBold from '../../static/css-components/fonts.css';
+}
+
+.filtersList li:hover{
+    background-color: #eeeeee;
+}
+.filtersList li:active{
+    background-color: #55a3ff;
+    color: #fff;
+}
+
+.openDropdown ul{
+  opacity: 1;
+  pointer-events: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.closeDropdown ul{
+  opacity: 0;
+  pointer-events: none;
+}
+
+.timeDay{
+    width: 100%;
+    padding: 0px 8px;
+    line-height: 30px;
+    text-transform: uppercase;
+    /*border: 1px solid acuoGrey;*/
+}
+
+.filtersList .timeTitle{
+    padding: 10px 0px;
+}
+.filtersList .timeTitle:hover{
+    background-color: transparent;
+    cursor: default;
+}
+.filtersList .timeTitle:active{
+    color: inherit;
+}
+.filtersList .timeTitle .timeArrowLeft,
+.filtersList .timeTitle .timeArrowRight{
+    display: inline-block;
+    cursor: pointer;
+    /*background-color: #4A90e2;*/
+}
+.filtersList .timeTitle .timeArrowLeft.show,
+.filtersList .timeTitle .timeArrowRight.show{
+    display: inline-block;
+}
+.filtersList .timeTitle .timeArrowLeft.hide,
+.filtersList .timeTitle .timeArrowRight.hide{
+    display: none;
+}
+
+.timeSlot{
+    text-align: center;
+    display: none;
+}
+
+.timeShow{
+    display: inline-block;
+}
+
+.timeTitle{
+    position: relative;
+    text-align: center;
+    padding: 6px;
+    text-transform: uppercase;
+}
+
+.timeTitle .timeArrowLeft{
+    right: 80%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    border-color: rgba(0, 0, 0, 0);
+    border-right-color: #000000;
+    border-width: 8px;
+    margin-top: -8px;
+}
+.timeTitle .timeArrowRight{
+    left: 80%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    border-color: rgba(0, 0, 0, 0);
+    border-left-color: #000000;
+    border-width: 8px;
+    margin-top: -8px;
+}
+
+.filtersList .filterSearchBox {
+  width: 96%;
+  text-indent: 4px;
+  font-size: 13px;
+}
+
+.selectedList {
+  background-color: #4A90e2;
+  color: #fff;
+}

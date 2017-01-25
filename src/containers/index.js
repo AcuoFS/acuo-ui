@@ -1,4 +1,5 @@
 import FilterContainer from './FilterBarContainer'
+import FilterReconPageContainer from './FilterBarReconPageContainer'
 import GraphContainer from './GraphContainer'
 import MarginAgreementListContainer from './MarginAgreementListContainer'
 import NavigationBarContainer from './NavigationBarContainer'
@@ -10,6 +11,7 @@ import MarginCallContainer from './MarginCallContainer'
 
 export {
   FilterContainer,
+  FilterReconPageContainer,
   GraphContainer,
   MarginAgreementListContainer,
   NavigationBarContainer,

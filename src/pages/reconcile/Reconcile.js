@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  FilterContainer,
+  FilterReconPageContainer,
   MarginAgreementListContainer,
   NavigationBarContainer
 } from '../../containers'
@@ -34,7 +34,7 @@ class Reconcile extends React.Component {
           <div className={styles.title}>{numberOfItems} Actions to reconcile</div>
           <div className={styles.titleTriangle}></div>
         </div>
-        <FilterContainer/>
+        <FilterReconPageContainer/>
         <MarginAgreementListContainer/>
       </div>
     )
