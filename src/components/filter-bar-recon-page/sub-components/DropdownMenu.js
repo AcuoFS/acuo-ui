@@ -1,23 +1,28 @@
 import React from 'react'
 import styles from '../FilterBar.css'
 
-export default class DropdownMenu extends React.Component{
+const DropdownMenu = (props) => {
+    const {handleOnSelectChange, options} = props
 
-  render(){
-    const {handleOnOptionChange, options} = this.props
     // merge option 'ALL', with actual options
-    const optionList = [[], 'All', ...options]
+    const optionList = ['all', ...options].map(text => String(text).toUpperCase())
 
-    return(
+    // handleLocalOptionChange
+    const handleLocalOptionChange = (e, option) => {
+      e.stopPropagation()
+      handleOnSelectChange(option)
+    }
+
+    return (
       <ul className={styles.filtersList}>
         {optionList.map(option => (
           <li key={option}
-              data-ref={option}
-              onClick={ e => handleOnOptionChange(e, option)}>
-            {String(option).toUpperCase()}
+              onClick={e => handleLocalOptionChange(e, option)}>
+            {option}
           </li>
         ))}
       </ul>
     )
   }
-}
+
+export default DropdownMenu

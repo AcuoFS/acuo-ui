@@ -135,7 +135,6 @@ const computeCptyEntity = (state) => {
     return cptyEntityList.toArray()
 }
 
-
 const mapDispatchToProps = dispatch => ({
   onLegalEntityChange: (text) => {
     console.log(text)

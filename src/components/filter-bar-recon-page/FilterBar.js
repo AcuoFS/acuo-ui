@@ -78,22 +78,22 @@ export default class FilterBar extends React.Component {
 
               <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
                 <FilterDropdown title={'Legal Entity'}
-                                handleOnSelectedItemChange={this.props.onLegalEntityChange}
+                                handleSelectChange={this.props.onLegalEntityChange}
                                 options={this.props.legalEntityList}
                                 selectedOption={this.props.filters.legalEntity}/>
 
                 <FilterDropdown title={'Deriv Type'}
-                                handleOnSelectedItemChange={this.props.onDerivChange}
+                                handleSelectChange={this.props.onDerivChange}
                                 options={this.props.derivativeType}
                                 selectedOption={this.props.filters.derivType}/>
 
                 <FilterDropdown title={'CPTY Organisation'}
-                                handleOnSelectedItemChange={this.props.onCptyOrgChange}
+                                handleSelectChange={this.props.onCptyOrgChange}
                                 options={this.props.cptyOrganisation}
                                 selectedOption={this.props.filters.cptyOrg}/>
 
                 <FilterDropdown title={'CPTY Entity'}
-                                handleOnSelectedItemChange={this.handleCPTYEntityChange}
+                                handleSelectChange={this.handleCPTYEntityChange}
                                 dropdownType={DROPDOWN_TYPE_MULTI_SELECT}
                                 options={this.props.cptyEntity}
                                 selectedOptionList={this.props.filters.cptyEntity || []}/>

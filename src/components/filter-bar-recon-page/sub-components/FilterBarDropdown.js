@@ -1,50 +1,39 @@
 import React, {PropTypes} from 'react'
+
+// sub components
 import DropdownMenu from './DropdownMenu'
 import DropdownTimeMenu from './DropdownTimeMenu'
 import DropdownMultiSelectMenu from './DropdownMultiSelectMenu'
-import styles from '../FilterBar.css'
-import {
-  DROPDOWN_TYPE_NORMAL,
-  DROPDOWN_TYPE_MULTI_SELECT,
-  DROPDOWN_TYPE_TIME_SELECT
-}from '../../../constants/ComponentConstants'
 
+// styles
+import styles from '../FilterBar.css'
 
 export default class FilterDropdown extends React.Component {
-
   constructor(props) {
     super(props)
-    this.state = {
-      isOpen: false,
-      selectedOption: props.selectedOption,
-      selectedOptionList: props.selectedOptionList
-    }
+
+    this.state = {isOpen: false}
+
     this.handleToggleDropdown = this.handleToggleDropdown.bind(this)
     this.handleOnMouseLeave = this.handleOnMouseLeave.bind(this)
-    this.handleOnOptionChange = this.handleOnOptionChange.bind(this)
+    this.handleSelectChange = this.handleSelectChange.bind(this)
+
     this.handleOnOptionChangeMultiSelect = this.handleOnOptionChangeMultiSelect.bind(this)
     this.handleOnOptionChangeTimeSelect = this.handleOnOptionChangeTimeSelect.bind(this)
-    this.displaySelectedText = this.displaySelectedText.bind(this)
   }
 
   handleToggleDropdown(e) {
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
+    e.preventDefault()
+    this.setState({isOpen: !this.state.isOpen})
   }
 
   handleOnMouseLeave(e) {
-    this.setState({
-      isOpen: false
-    })
+    e.preventDefault()
+    this.setState({isOpen: false})
   }
 
-  handleOnOptionChange(e, selectedOption) {
-    this.setState({
-      selectedOption: selectedOption,
-      isOpen: false
-    })
-    this.props.handleOnSelectedItemChange(e)
+  handleSelectChange(selected) {
+    this.setState({selected, isOpen: false})
   }
 
   handleOnOptionChangeTimeSelect(selectedOption, timeWindowMin, timeWindowMax) {
@@ -64,62 +53,44 @@ export default class FilterDropdown extends React.Component {
     this.props.handleOnSelectedItemChange(e)
   }
 
-  dropdownMenu() {
-    let menu = null
-    if (this.state.isOpen) {
-      switch (this.props.dropdownType) {
-        case DROPDOWN_TYPE_MULTI_SELECT:
-          menu = (
-            <DropdownMultiSelectMenu
-              options={this.props.options}
-              handleOnOptionChange={this.handleOnOptionChangeMultiSelect}
-              selectedOptionList={this.props.selectedOptionList}/>
-          )
-          break;
-        case DROPDOWN_TYPE_TIME_SELECT:
-          menu = (
-            <DropdownTimeMenu
-              options={this.props.optionList}
-              handleOnOptionChange={this.handleOnOptionChangeTimeSelect}/>
-          )
-          break;
-        default:
-          menu = (
-            <DropdownMenu
-              options={this.props.options}
-              handleOnOptionChange={this.handleOnOptionChange}/>
-          )
-          break;
-      }
-    }
-    return menu;
-  }
+  renderMenu(menuType = 'default', props) {
+    let Menu
 
-  displaySelectedText(selectedOption, selectedOptionList) {
-    // selected list is used and length is 1
-    if (selectedOptionList.length == 1) {
-      return selectedOptionList[0].toUpperCase()
+    switch (menuType) {
+      case 'multi':
+        Menu = DropdownMultiSelectMenu
+        break
+      case 'time':
+        Menu = DropdownTimeMenu
+        break
+      default:
+        Menu = DropdownMenu
     }
-    // selected list is used and length is more than 1
-    else if (selectedOptionList.length > 1) {
-      return 'MULTIPLE'
-    }
-    // selected list is not used. Use selected option
-    else {
-      return selectedOption.toUpperCase()
-    }
+
+    return <Menu options={this.props.options}
+                 selected={this.props.selected}
+                 handleOnSelectChange={this.handleSelectChange} />
   }
 
   render() {
-    let menu = this.dropdownMenu()
+    const menu = this.renderMenu(this.props.dropdownType, this.props)
+
+    const displaySeletedAsText = (text = 'all') => {
+      const displayedText = ((typeof text) === 'string')
+                            ? text
+                            : 'multiple'
+
+      return displayedText.toUpperCase()
+    }
+
     return (
       <div className={styles.filterItem}>
         <label className={styles.filterLabel}>{this.props.title}</label>
         <div className={styles.filters} onClick={this.handleToggleDropdown} onMouseLeave={this.handleOnMouseLeave}>
           <div className={styles.selectedText}>
-            {this.displaySelectedText(this.state.selectedOption, this.state.selectedOptionList)}
+            {displaySeletedAsText(this.state.selected)}
           </div>
-          {menu}
+          {this.state.isOpen? menu: null}
         </div>
         <div className={styles.filterDropdownArrow}></div>
       </div>
@@ -129,20 +100,12 @@ export default class FilterDropdown extends React.Component {
 
 
 FilterDropdown.propTypes = {
-  title: PropTypes.string,
-  selectedOption: PropTypes.string,
-  options: PropTypes.arrayOf(PropTypes.string),
-  optionList: PropTypes.arrayOf(PropTypes.object),
-  selectedOptionList: PropTypes.arrayOf(PropTypes.string),
+  title: PropTypes.string.isRequired,
+  selected: PropTypes.oneOfType([
+              PropTypes.string,
+              PropTypes.arrayOf(PropTypes.string),
+            ]),
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
   dropdownType: PropTypes.string,
-  handleOnSelectedItemChange: PropTypes.func.isRequired,
-}
-
-FilterDropdown.defaultProps = {
-  title: '',
-  selectedOption: 'All',
-  dropdownType: DROPDOWN_TYPE_NORMAL,
-  options: [],
-  optionList: [],
-  selectedOptionList: []
+  handleSelectChange: PropTypes.func.isRequired,
 }
