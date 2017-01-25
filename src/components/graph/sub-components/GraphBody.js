@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, Set, Map } from 'immutable'
 import styles from '../Graph.css'
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 import {numberWithCommas} from '../../../utils/numbersWithCommas'
 
 export default class GraphBody extends React.Component {
@@ -11,22 +11,48 @@ export default class GraphBody extends React.Component {
     this.getDeriv = this.getDeriv.bind(this)
   }
 
-  whichClickFuncToRun(status){
+  whichClickFuncToRun(status, lastUpdatedTime, bubbleTimeStart, timeDifference, onUnreconBubbleClick){
     switch(status){
       case 'expected':
         return () => 0
       case 'unrecon':
-        return () => browserHistory.push('/recon')
+        return () => {
+          hashHistory.push('/recon')
+
+          //1st param: time range start
+          //2nd param: time range start + 1 hour
+          //3rd param: getDay() returns 'today', 'tomorrow', 'yesterday' based on summation of
+          //           today's hours + the difference in time of the bubble, appends it with
+          //           the 'hours' portion of time start to form a string for dispatch use
+          onUnreconBubbleClick(
+            bubbleTimeStart,
+            (new Date(bubbleTimeStart).setHours((new Date(bubbleTimeStart).getHours()+1))),
+            this.getDay(new Date(Date.parse(lastUpdatedTime)).getHours() + timeDifference) + ': ' + new Date(bubbleTimeStart).getHours() + ':00 HRS'
+          )
+        }
       case 'reconciled':
-        return () => browserHistory.push('/pledge')
-      case 'pledge':
-        return () => browserHistory.push('/deployed')
+        return () => hashHistory.push('/pledge')
+      case 'pledged':
+        return () => hashHistory.push('/deployed')
       case 'dispute':
-        return () => browserHistory.push('/dispute')
+        return () => hashHistory.push('/dispute')
+      case 'actiondispute':
+        return () => hashHistory.push('/dispute')
     }
   }
 
-  getCircle(){
+  getDay(hrs){
+    switch(true){
+      case (hrs > 23):
+        return 'tomorrow'
+      case (hrs < 0):
+        return 'yesterday'
+      default:
+        return 'today'
+    }
+  }
+
+  getCircle(lastUpdatedTime, onUnreconBubbleClick){
     let status = this.getDeriv().reduce((setX, x) => {
       return setX.union(x.get('marginStatus').map(y => y.get('status')))
     }, Set()).toList()
@@ -60,16 +86,23 @@ export default class GraphBody extends React.Component {
         return Map({'timeFrame': y.get('timeFrame'),
             "inAmount": y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
-              return (xx.get('direction') == 'IN' ? a2 + xx.get('initialMargin') : a2)
+
+              const amount = xx.get('initialMargin') || xx.get('variableMargin')
+
+              return (xx.get('direction') == 'IN' ? a2 + Math.abs(Number.parseFloat(amount)) : a2)
             }, 0)
           }, 0)
           , "outAmount": y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
-              return (xx.get('direction') == 'OUT' ? a2 + xx.get('initialMargin') : a2)
+
+                const amount = xx.get('initialMargin') || xx.get('variableMargin')
+
+                return (xx.get('direction') == 'OUT' ? a2 + Math.abs(Number.parseFloat(amount)) : a2)
             }, 0)
           }, 0)
           , "inNo":  y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
+
               return (xx.get('direction') == 'IN' ? a2+1 : a2)
             }, 0)
           }, 0)
@@ -85,14 +118,14 @@ export default class GraphBody extends React.Component {
       return status.get('timeFrames').map(timeFrame => {
 
         let colour = this.getColour(status.get('status').toLowerCase())
-        let timeDifference = (Date.parse(new Date(timeFrame.get('timeFrame'))) - (Date.parse(this.props.time)))/3600000
+        let timeDifference = (Date.parse(new Date(timeFrame.get('timeFrame'))) - (Date.parse(lastUpdatedTime)))/3600000
 
         // Use a faded blue for pledge if it's past the current time
         if (status.get('status') == 'pledge' && timeDifference < 0) {
           colour[0] = "#8CC5DD"
         }
 
-        const onClickFunc = this.whichClickFuncToRun(status.get('status').toLowerCase())
+        const onClickFunc = this.whichClickFuncToRun(status.get('status').toLowerCase(), lastUpdatedTime, timeFrame.get('timeFrame'), timeDifference, onUnreconBubbleClick)
 
         return List()
         .push((timeFrame.get('inAmount') === 0)? 0 :
@@ -116,7 +149,7 @@ export default class GraphBody extends React.Component {
                     fontWeight="bold"
                     fill="#010101"
                     textAnchor="end">
-                {timeFrame.get('inNo')} {status.get('status').toUpperCase()}
+                {timeFrame.get('inNo')} {(status.get('status').toUpperCase() == 'ACTIONDISPUTE' ? 'DISPUTE' : status.get('status').toUpperCase())}
               </text>
               <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] + 17.5}
                     fontSize="13"
@@ -153,7 +186,7 @@ export default class GraphBody extends React.Component {
                       fontWeight="bold"
                       fill="#010101"
                       textAnchor="end">
-                  {timeFrame.get('outNo')} {status.get('status').toUpperCase()}
+                  {timeFrame.get('outNo')} {(status.get('status').toUpperCase() == 'ACTIONDISPUTE' ? 'DISPUTE' : status.get('status').toUpperCase())}
                 </text>
                 <text x={this.props.x - 12 + (timeDifference + 0.5) * 60}
                       y={colour[1] + 17.5}
@@ -190,10 +223,14 @@ export default class GraphBody extends React.Component {
         return ["#D65028", 82, 378]
       case 'reconciled':
         return ["#005544", 122, 338]
-      case 'pledge':
+      case 'pledged':
         return ["#0170B0", 162, 298]
       case 'dispute':
         return ["#D0011B", 202, 258]
+      case 'actiondispute':
+        return ["#D0011B", 202, 258]
+      default:
+        return ["#D0011B", -100, -100]
     }
 
   }
@@ -202,9 +239,12 @@ export default class GraphBody extends React.Component {
     return this.props.data || []
   }
   render() {
+
+    const { time, onUnreconBubbleClick } = this.props
+
     return(
       <svg>
-        {this.getCircle().map(x => x)}
+        {this.getCircle(time, onUnreconBubbleClick).map(x => x)}
       </svg>
     )
   }

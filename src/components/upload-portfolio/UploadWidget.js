@@ -72,6 +72,8 @@ export default class UploadWidget extends React.Component {
   onGenerate() {
     console.log(this.componentConfig.postUrl)
     this.dropzone.processQueue()
+
+    this.props.showMarginCall()
   }
 
   handleError(file) {
@@ -109,9 +111,11 @@ export default class UploadWidget extends React.Component {
         <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig}>
           <div className="dz-message">
             <span>
-              Drag and drop portfolio files, or <a href="#" className="triggerFileSelection">browse</a>.
+              Drag and drop portfolio files, or&nbsp;
+              <a href="#" className="triggerFileSelection"
+                 onClick={(e)=> e.preventDefault()}>browse</a>.
             </span>
-      </div>
+          </div>
         </DropzoneComponent>
         <div
           className={this.state.isWidgetValidForSubmission ?

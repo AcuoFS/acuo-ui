@@ -3,6 +3,7 @@ import CollateralAssetContainer from '../../../containers/CollateralAssetContain
 import {formatDate} from '../../../utils/formatDate'
 import {numberWithCommas} from '../../../utils/numbersWithCommas'
 import {formatPercentageOneDecimal} from '../../../utils/formatPercentageOneDecimal'
+import {COLLATERAL_EARMARKED} from '../../../constants/CollateralTypes'
 import styles from '../Pledge.css'
 
 export default class CollateralAssetGroup extends React.Component {
@@ -48,6 +49,7 @@ export default class CollateralAssetGroup extends React.Component {
           rowStyle={"tableRow"}
           propAsset={asset.assetName}
           propPrice={numberWithCommas(asset.price)}
+          rawPrice={asset.price}
           propCcy={asset.ccy}
           propDeliveryTime={asset.deliveryTime}
           propStatus={asset.status}
@@ -69,14 +71,13 @@ export default class CollateralAssetGroup extends React.Component {
       ))
     }
 
-
     if (propIsDisplayAll) {
       return (
 
         <div className={styles.collateralRowGroup}>
 
           <div className={styles.collateralRow + ' ' +
-          (propCollateralType == 'Earmarked' ? styles.collateralExpandEarmarkedRow : styles.collateralExpandRow)}>
+          (propCollateralType == COLLATERAL_EARMARKED ? styles.collateralExpandEarmarkedRow : styles.collateralExpandRow)}>
             <div className={styles.collateralCell}>
               <div>{propCollateralType} </div>
               <div onClick={this.handlePlusMinus}><img src={this.getPlusMinusImgURL(this.state.isGroupExpanded)}
@@ -107,7 +108,7 @@ export default class CollateralAssetGroup extends React.Component {
         <div className={styles.collateralRowGroup}>
 
           <div className={styles.collateralRow + ' ' +
-          (propCollateralType == 'Earmarked' ? styles.collateralExpandEarmarkedRow : styles.collateralExpandRow)}>
+          (propCollateralType == COLLATERAL_EARMARKED ? styles.collateralExpandEarmarkedRow : styles.collateralExpandRow)}>
             <div className={styles.collateralCell}>
               <div>{propCollateralType}</div>
               <div onClick={this.handlePlusMinus}><img src={this.getPlusMinusImgURL(this.state.isGroupExpanded)}

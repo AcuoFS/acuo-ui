@@ -1,0 +1,35 @@
+.directionCont {
+    width: 35px;
+    padding: 4px;
+}
+
+.directionOut {
+    background-color: #EEEEEE;
+    color: #000000;
+}
+
+.directionIn {
+    background-color: #55626F;
+    color: #FFFFFF;
+}
+
+.statusCont {
+    border-radius: 5px;
+    width: 24px;
+    padding: 4px;
+    color: #FFFFFF;
+}
+
+.statusExpected {
+    background-color: #F7BD20;
+}
+.statusRecon {
+    background-color: #075544;
+}
+.statusUnrecon {
+    background-color: #D45131;
+}
+
+.statusDispute {
+    background-color: #CE0B24;
+}

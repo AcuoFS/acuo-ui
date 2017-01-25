@@ -29,7 +29,7 @@ export default class FlightItem extends React.Component {
           <div className={styles.headerDates}>Dates</div>
           <input type="text" placeholder="Search" className={styles.headerSearch}/>
         </div>
-        <FlightItemTable/>
+        <FlightItemTable isArrival={this.isArrival(this.props.name)}/>
       </div>
     )
   }

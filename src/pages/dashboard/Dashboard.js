@@ -12,6 +12,10 @@ import SortableSimple from '../../components/dnd-test'
 
 class Dashboard extends React.Component {
 
+  componentDidMount () {
+    window.scrollTo(0, 0)
+  }
+
   render() {
     return (
       <div>

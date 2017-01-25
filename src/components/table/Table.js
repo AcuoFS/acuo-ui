@@ -9,8 +9,8 @@ export default class Table extends React.Component {
     this.renderTable = this.renderTable.bind(this)
   }
 
-  renderTable(deriv) {
-    return (<TableHead key={deriv.get('type')} deriv={deriv} redirect={this.props.redirect}/>)
+  renderTable(deriv, index) {
+    return (<TableHead key={index} deriv={deriv} redirect={this.props.redirect}/>)
   }
 
   getDeriv() {
@@ -22,7 +22,7 @@ export default class Table extends React.Component {
       <div className={styles.tableComponent}>
         {this.getDeriv().map(this.renderTable)}
       </div>
-    );
+    )
   }
 
 }

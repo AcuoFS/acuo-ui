@@ -3,6 +3,8 @@
 .pledgeContainer {
   position: relative;
   padding: 20px;
+  margin: 0 auto;
+  max-width: 1440px;
 }
 
 .secDivider {
@@ -24,11 +26,19 @@
 }
 
 .panelTitle {
-  font-family: baseFontBold from './../../static';
+  composes: baseFontBold from './../../static/css-components/fonts.css';
   font-size: 20px;
   line-height: 24px;
   text-transform: uppercase;
   color: #6389ad;
+  position: relative;
+}
+
+.panelTitle img {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  cursor: pointer;
 }
 
 #optSetting {
@@ -63,13 +73,14 @@
   width: 100px;
   text-align: right;
   margin-right: 10px;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 16px;
   color: #4A4A4A;
   vertical-align: middle;
   flex: 1;
   flex-grow: 2;
   margin-top: 6px;
+  text-transform: capitalize;
 }
 
 #optSetting .optPnlWrap .optItem .optItemSlider {
@@ -202,7 +213,8 @@ input[type=range]:focus::-ms-fill-upper {
   font-size: 14px;
   line-height: 17px;
   color: #4A4A4A;
-  margin: 10px 30px auto 20px;
+  /*margin: 10px 30px auto 20px;*/
+  margin: 0px 10px;
 }
 
 .chsCalls .tick {
@@ -210,17 +222,18 @@ input[type=range]:focus::-ms-fill-upper {
   position: relative;
   vertical-align: text-bottom;
   margin: auto 4px;
+  width: 20px;
+  height: 20px
 }
 
 .chsCalls .tick:hover {
   cursor: pointer;
 }
 
-.optButton,
-.optButton.btnEnabled {
+/* Enabled optimisation button style */
+.optButton {
   flex: 1;
   width: 146px;
-  /*height: 32px;*/
   color: #4A4A4A;
   background-color: #FAFAFA;
   border: 1px solid #979797;
@@ -234,10 +247,6 @@ input[type=range]:focus::-ms-fill-upper {
   align-self: center;
 }
 
-.optButton:hover {
-  cursor: pointer;
-}
-
 .optButton.btnDisabled {
   color: #d7dce0;
   background-color: #FAFAFA;
@@ -245,19 +254,19 @@ input[type=range]:focus::-ms-fill-upper {
   pointer-events: none;
 }
 
-.optButton#optBtnAllocate {
+.optButton.optBtnPledge {
+  color: #fff;
+  background-color: #00B9CC;
+  border-color: #00B9CC;
+}
 
+.optButton:hover {
+  cursor: pointer;
 }
 
 .sliderAndStatus{
   display: flex;
   align-items: flex-start;
-}
-
-.optButton#optBtnPledge.btnEnabled {
-  color: #fff;
-  background-color: #00B9CC;
-  border-color: #00B9CC;
 }
 
 #pleStatus {
@@ -579,38 +588,38 @@ div.collateralTableExpanded div:nth-child(12){
   /*padding-top: 5px;*/
 
   z-index: 1;
-  top:-5px; /* set top value */
-  left:25px; /* set left value */
-  width:120px;
+  top: -5px; /* set top value */
+  left: 0px; /* set left value */
+  width:350px;
   border: 1px solid #1c2124;
   display: none;
   position: absolute;
   background-color: #ffffff;
 }
-.boxed:before{
-  content: '';
-  display: block;
-  position: absolute;
-  right: 100%;
-  top: 20%;
-  margin-top: -10px;
-  border-top: 8px solid transparent;
-  border-right: 12px solid #000;
-  border-bottom: 8px solid transparent;
-  border-left: 11px solid transparent;
-}
-.boxed:after{
-  content: '';
-  display: block;
-  position: absolute;
-  right: 99%;
-  top: 24%;
-  margin-top: -10px;
-  border-top: 7px solid transparent;
-  border-right: 12px solid #ffffff;
-  border-bottom: 8px solid transparent;
-  border-left: 6px solid transparent;
-}
+/*.boxed:before{*/
+  /*content: '';*/
+  /*display: block;*/
+  /*position: absolute;*/
+  /*right: 100%;*/
+  /*top: 20%;*/
+  /*margin-top: -10px;*/
+  /*border-top: 8px solid transparent;*/
+  /*border-right: 12px solid #000;*/
+  /*border-bottom: 8px solid transparent;*/
+  /*border-left: 11px solid transparent;*/
+/*}*/
+/*.boxed:after{*/
+  /*content: '';*/
+  /*display: block;*/
+  /*position: absolute;*/
+  /*right: 99%;*/
+  /*top: 24%;*/
+  /*margin-top: -10px;*/
+  /*border-top: 7px solid transparent;*/
+  /*border-right: 12px solid #ffffff;*/
+  /*border-bottom: 8px solid transparent;*/
+  /*border-left: 6px solid transparent;*/
+/*}*/
 
 .leftBoxed {
   border-radius: 80px;
@@ -621,37 +630,37 @@ div.collateralTableExpanded div:nth-child(12){
 
   z-index: 1;
   top:-5px; /* set top value */
-  left:-134px; /* set left value */
-  width:120px;
+  left:-344px; /* set left value */
+  width:350px;
   border: 1px solid #1c2124;
   display: none;
   position: absolute;
   background-color: #ffffff;
 }
-.leftBoxed:before{
-  content: '';
-  display: block;
-  position: absolute;
-  right: -16%;
-  top: 20%;
-  margin-top: -10px;
-  border-top: 8px solid transparent;
-  border-left: 12px solid #000;
-  border-bottom: 8px solid transparent;
-  border-right: 11px solid transparent;
-}
-.leftBoxed:after{
-  content: '';
-  display: block;
-  position: absolute;
-  right: -11%;
-  top: 24%;
-  margin-top: -10px;
-  border-top: 7px solid transparent;
-  border-left: 12px solid #ffffff;
-  border-bottom: 8px solid transparent;
-  border-right: 6px solid transparent;
-}
+/*.leftBoxed:before{*/
+  /*content: '';*/
+  /*display: block;*/
+  /*position: absolute;*/
+  /*right: -16%;*/
+  /*top: 20%;*/
+  /*margin-top: -10px;*/
+  /*border-top: 8px solid transparent;*/
+  /*border-left: 12px solid #000;*/
+  /*border-bottom: 8px solid transparent;*/
+  /*border-right: 11px solid transparent;*/
+/*}*/
+/*.leftBoxed:after{*/
+  /*content: '';*/
+  /*display: block;*/
+  /*position: absolute;*/
+  /*right: -11%;*/
+  /*top: 24%;*/
+  /*margin-top: -10px;*/
+  /*border-top: 7px solid transparent;*/
+  /*border-left: 12px solid #ffffff;*/
+  /*border-bottom: 8px solid transparent;*/
+  /*border-right: 6px solid transparent;*/
+/*}*/
 
 
 .boxAllocate {
@@ -696,6 +705,7 @@ div.collateralTableExpanded div:nth-child(12){
 
 .showBox{
   display: block;
+  cursor: default;
 }
 
 .relative{
@@ -705,7 +715,8 @@ div.collateralTableExpanded div:nth-child(12){
 
 /* css for allocate asset pop up-------------->*/
 .popupAllocateRoot{
-  font:13px Helvetica;
+  font-size:13px;
+  composes: baseFont from './../../static/css-components/fonts.css';
   padding: 0 5px;
   /*margin-top: 12px;*/
 }
@@ -717,22 +728,29 @@ div.collateralTableExpanded div:nth-child(12){
 
 .popupText{
   /*width: 145px;*/
-  align-content: flex-start;
+  align-self: center;
   flex: 2;
-  padding: 3px 0;
+  padding: 3px 5px;
   display: inline-block;
+  text-align: right;
 }
 
 .popupInputBox{
   display: inline-block;
-  flex:3;
+  flex: 4;
   min-height: 26px;
-  width: 100%;
+  width: 98%;
+  position: relative;
+}
+
+.popupInputBox input{
+  text-indent: 5px;
 }
 
 .buttonContainer{
   width: 100%;
-  margin-top: 10px;
+  margin: 5px 0;
+  text-align: right;
 }
 
 /*.buttonContainerEnabled{*/
@@ -741,8 +759,6 @@ div.collateralTableExpanded div:nth-child(12){
 /*}*/
 
 .buttonContainer .btnDisabled {
-  float: right;
-  margin: 16px 24px;
   width: 100px;
   /*height: 32px;*/
   color: #d7dce0 ;
@@ -750,54 +766,33 @@ div.collateralTableExpanded div:nth-child(12){
   border: 1px solid #d7dce0 ;
   font-size: 13px;
   font-weight: bold;
-  /*line-height: 32px;*/
+  line-height: 21px;
   text-align: center;
   -webkit-border-radius: 20px;
   border-radius: 20px;
-  margin: 0 20px;
   align-self: center;
 }
 
 .buttonContainer .btnEnabled {
-  float: right;
-  margin: 16px 24px;
   width: 100px;
-  /*height: 32px;*/
   color: #fff ;
-  background-color: #00B9CC ;
-  border: 1px solid #00B9CC ;
+  background-color: #118A17 ;
+  border: 1px solid #118A17 ;
   font-size: 13px;
   font-weight: bold;
-  /*line-height: 32px;*/
+  line-height: 21px;
   text-align: center;
   -webkit-border-radius: 20px;
   border-radius: 20px;
-  margin: 0 20px;
   align-self: center;
-}
-
-.optButton.btnEnabled {
-  flex: 1;
-  width: 146px;
-  /*height: 32px;*/
-  color: #4A4A4A ;
-  background-color: #FAFAFA ;
-  border: 1px solid #979797 ;
-  font-size: 13px;
-  font-weight: bold;
-  line-height: 32px;
-  text-align: center;
-  -webkit-border-radius: 20px;
-  border-radius: 20px;
-  margin: 0 20px;
-  align-self: center;
+  cursor: pointer;
 }
 
 /*** Status Color classes****/
 .statusAR{
   background: #58C4F5;
   color: #FFFFFF;
-  width: 20px;
+  /*width: 20px;*/
   height: 14px;
   display: block;
   border-radius: 2px;
@@ -809,7 +804,7 @@ div.collateralTableExpanded div:nth-child(12){
 .statusAV{
   background: #005544;
   color: #FFFFFF;
-  width: 20px;
+  /*width: 20px;*/
   height: 14px;
   display: block;
   border-radius: 2px;
@@ -821,7 +816,7 @@ div.collateralTableExpanded div:nth-child(12){
 .statusDP{
   background: #00B38F;
   color: #FFFFFF;
-  width: 20px;
+  /*width: 20px;*/
   height: 14px;
   display: block;
   border-radius: 2px;
@@ -833,7 +828,7 @@ div.collateralTableExpanded div:nth-child(12){
 .statusD{
   background: #4E83B5;
   color: #FFFFFF;
-  width: 20px;
+  /*width: 20px;*/
   height: 14px;
   display: block;
   border-radius: 2px;
@@ -843,3 +838,85 @@ div.collateralTableExpanded div:nth-child(12){
   text-align: center;
 }
 /*** End ***/
+
+/*** New changes ***/
+.tabHolder {
+  position: relative;
+}
+
+.tab {
+  display: inline-block;
+  composes: baseFontBold from './../../static/css-components/fonts.css';
+  padding: 5px 0px 3px 0px;
+  margin: 0px 5px;
+  color: #A9A9A9;
+  cursor: pointer;
+}
+
+.closeButton {
+  color: #585858;
+  float: right;
+  font-size: 15px;
+  padding: 0px 5px;
+  cursor: pointer;
+}
+
+.selectedTab{
+  color: #4C81B1;
+  border-bottom: 3px solid #4C81B1;
+}
+
+.tabbedContent {
+  display: none;
+  padding: 5px;
+}
+
+.showContent {
+  display: block;
+}
+
+.removeAsset {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.removeAsset .btnEnabled{
+  color: #585858;
+  background-color: #fff;
+  border-color: #585858;
+}
+
+.helperText{
+  color: #989898;
+  font-style: italic;
+}
+
+.errorPopUp {
+  position: absolute;
+  background-color: #fff;
+  top: -8px;
+  padding: 5px;
+  border: 1px solid #AB0017;
+  border-radius: 5px;
+  color: #AB0017;
+}
+
+.errorPopUp::before{
+  position: absolute;
+  content: '';
+  border-bottom: 9px solid #AB0017;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  top: -9px;
+  left: 6px;
+}
+
+.errorPopUp::after{
+  position: absolute;
+  content: '';
+  border-bottom: 8px solid #fff;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  top: -8px;
+  left: 7px;
+}

@@ -4,9 +4,9 @@ import styles from '../Table.css'
 
 class TableCell extends React.Component {
     render() {
-        const {bodyItemClass, cellValue} = this.props
+        const {cellValue} = this.props
         return (
-            <div className={styles[bodyItemClass]}>
+            <div>
                 <div className={styles.vertiCenter}>
                     <div className={styles.centerThis}>{cellValue}</div>
                 </div>
@@ -15,9 +15,13 @@ class TableCell extends React.Component {
     }
 }
 
-TableCell.propTypes = {
-    bodyItemClass : PropTypes.string.isRequired,
-    cellValue: PropTypes.string.isRequired
+TableCell.PropTypes = {
+  bodyItemClass: PropTypes.string.isRequired,
+  cellValue: PropTypes.string
+}
+
+TableCell.DefaultProps = {
+  cellValue: ""
 }
 
 export default TableCell
