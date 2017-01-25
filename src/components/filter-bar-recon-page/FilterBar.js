@@ -1,25 +1,20 @@
-/**
- * Created by vikassaryal on 26/10/16.
- */
 import React, {PropTypes} from 'react'
 import {Set, Map} from 'immutable'
+import FilterBarDropdown from './sub-components/FilterBarDropdown'
+
 import styles from './FilterBar.css'
-import FilterDropdown from './sub-components/FilterBarDropdown'
-import {
-  DROPDOWN_TYPE_MULTI_SELECT,
-  DROPDOWN_TYPE_TIME_SELECT
-}from '../../constants/ComponentConstants'
-
-
 
 export default class FilterBar extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {
       filterBarNameClicked: true,
       filterBar: styles.open,
       filterItems: styles.show,
     }
+
+    props.setFilter('legalEntity', {a: 1})
 
     this.handleCPTYEntityChange = this.handleCPTYEntityChange.bind(this)
     this.toggleFilter = this.toggleFilter.bind(this)
@@ -77,26 +72,26 @@ export default class FilterBar extends React.Component {
               </div>
 
               <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
-                <FilterDropdown title={'Legal Entity'}
-                                handleSelectChange={this.props.onLegalEntityChange}
-                                options={this.props.legalEntityList}
-                                selectedOption={this.props.filters.legalEntity}/>
+                <FilterBarDropdown title={'Legal Entity'}
+                                   options={this.props.legalEntityList}
+                                   handleSelectChange={this.props.onLegalEntityChange}
+                                   selectedOption={this.props.filters.legalEntity}/>
 
-                <FilterDropdown title={'Deriv Type'}
-                                handleSelectChange={this.props.onDerivChange}
-                                options={this.props.derivativeType}
-                                selectedOption={this.props.filters.derivType}/>
+                <FilterBarDropdown title={'Deriv Type'}
+                                   handleSelectChange={this.props.onDerivChange}
+                                   options={this.props.derivativeType}
+                                   selectedOption={this.props.filters.derivType}/>
 
-                <FilterDropdown title={'CPTY Organisation'}
-                                handleSelectChange={this.props.onCptyOrgChange}
-                                options={this.props.cptyOrganisation}
-                                selectedOption={this.props.filters.cptyOrg}/>
+                <FilterBarDropdown title={'CPTY Organisation'}
+                                   handleSelectChange={this.props.onCptyOrgChange}
+                                   options={this.props.cptyOrganisation}
+                                   selectedOption={this.props.filters.cptyOrg}/>
 
-                <FilterDropdown title={'CPTY Entity'}
-                                handleSelectChange={this.handleCPTYEntityChange}
-                                dropdownType={DROPDOWN_TYPE_MULTI_SELECT}
-                                options={this.props.cptyEntity}
-                                selectedOptionList={this.props.filters.cptyEntity || []}/>
+                <FilterBarDropdown title={'CPTY Entity'}
+                                   handleSelectChange={this.handleCPTYEntityChange}
+                                   dropdownType='multi'
+                                   options={this.props.cptyEntity}
+                                   selectedOptionList={this.props.filters.cptyEntity || []}/>
               </div>
             </div>
   }

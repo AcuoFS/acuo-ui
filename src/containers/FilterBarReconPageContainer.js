@@ -1,13 +1,5 @@
 import {connect} from 'react-redux'
 import _ from 'lodash'
-import jsonObjectToFlatArray from '../utils/jsonObjectToFlatArray'
-import {
-  filterStateLegal,
-  filterStateDeriv,
-  filterCptyOrg,
-  filterCptyEntity,
-  filterTimeWindowStatus
-} from '../actions'
 import {FilterBarReconPageComponent} from '../components'
 import { Set, Map, List, fromJS } from 'immutable'
 
@@ -136,6 +128,12 @@ const computeCptyEntity = (state) => {
 }
 
 const mapDispatchToProps = dispatch => ({
+  setFilter: (filter, value) => dispatch({
+    type: 'RECON_FILTER_SET',
+    filter,
+    value
+  }),
+
   onLegalEntityChange: (text) => {
     console.log(text)
     // dispatch(filterStateLegal(e.currentTarget.dataset.ref))
