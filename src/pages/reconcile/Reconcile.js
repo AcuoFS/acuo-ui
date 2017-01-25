@@ -42,15 +42,9 @@ class Reconcile extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  numberOfItems: (state.mainReducer.getIn(['display', 'derivatives']) ? state.mainReducer.getIn(['display', 'derivatives']).reduce((sum, x) => {
-    return sum + x.get('marginStatus').reduce((sum, y) => {
-        return sum + y.get('timeFrames').reduce((sum, z) => {
-            return sum + z.get('actionsList').reduce((sum, xx) => {
-                return (xx.get('direction') == 'OUT' ? sum + 1 : sum)
-              }, 0)
-          }, 0)
-      }, 0)
-  }, 0) : 0)
+  numberOfItems: state.ReconReducer.get('items').reduce((sum, x) => {
+    return (x.get('direction') == 'OUT' ? sum + 1 : sum)
+  }, 0)
 })
 
 const mapDispatchToProps = dispatch => ({
