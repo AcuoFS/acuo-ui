@@ -1,9 +1,11 @@
 import React from 'react'
+import _ from 'lodash'
 import {
   FilterReconPageContainer,
   MarginAgreementListContainer,
   NavigationBarContainer
 } from '../../containers'
+import filterItems from '../../utils/filterItems'
 import stylesG from '../../static/global.css'
 import styles from './Reconcile.css'
 import { connect } from 'react-redux'
@@ -41,11 +43,18 @@ class Reconcile extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  numberOfItems: state.ReconReducer.get('items').reduce((sum, x) => {
-    return (x.get('direction') == 'OUT' ? sum + 1 : sum)
-  }, 0)
-})
+const mapStateToProps = state => {
+  const filters = state.ReconReducer.get('filters').toJS()
+  const items   = state.ReconReducer.get('items').toJS()
+
+  const filteredItems = filterItems(items, filters)
+
+  const outItems = _.filter(filteredItems, ['direction', 'OUT'])
+
+  return {
+    numberOfItems: outItems.length
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
   onLoad: ()=> {
