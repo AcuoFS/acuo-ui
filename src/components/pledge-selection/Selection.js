@@ -1,6 +1,6 @@
 import React from 'react'
 import {numberWithCommas} from '../../utils/numbersWithCommas'
-import DeselectionPopup from './DeselectionPopup'
+import DeselectionPopup from './sub-components/DeselectionPopup'
 import {List, toJS} from 'immutable'
 import styles from './Selection.css'
 
@@ -58,9 +58,9 @@ export default class Selection extends React.Component {
                  this.setDeselectionPopup(popupID)
                }}>
             <img src="./images/pledge/cancel.png"></img>
-            <div className={styles.tooltip}>
-              Move to Earmarked
-            </div>
+            {/*<div className={styles.tooltip}>*/}
+              {/*Move to Earmarked*/}
+            {/*</div>*/}
           </div>
 
         </td>

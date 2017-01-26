@@ -51,7 +51,7 @@
     border: 1px solid;
     font-size: 13px;
     line-height: 21px;
-    composes: baseFontBold from './../../static/css-components/fonts.css';
+    composes: baseFontBold from '../../../static/css-components/fonts.css';
     text-align: center;
     border-radius: 20px;
     align-self: center;
