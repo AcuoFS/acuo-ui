@@ -47,6 +47,7 @@
     "mocha": "^3.1.2",
     "mock-css-modules": "^1.0.0",
     "nodemon": "^1.11.0",
+    "postcss-loader": "^1.2.2",
     "react-addons-test-utils": "^15.3.2",
     "react-css-modules": "^3.7.10",
     "react-hot-loader": "^3.0.0-beta.5",
