@@ -33,7 +33,7 @@ class App extends React.Component {
       return response.json()
     }).then((obj) => {
       const {items} = obj
-      store.dispatch(reconInitState(fromJS(items)))
+      store.dispatch(reconInitState(items))
     })
   }
 
