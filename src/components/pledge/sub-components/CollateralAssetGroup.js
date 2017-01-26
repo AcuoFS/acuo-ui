@@ -47,24 +47,24 @@ export default class CollateralAssetGroup extends React.Component {
         <CollateralAssetContainer
           key={index}
           rowStyle={"tableRow"}
-          propAsset={asset.assetName}
+          propAsset={asset.assetName || '-'}
           propPrice={numberWithCommas(asset.price)}
-          rawPrice={asset.price}
-          propCcy={asset.ccy}
-          propDeliveryTime={asset.deliveryTime}
-          propStatus={asset.status}
-          propRating={asset.rating}
-          propMaturityDate={formatDate(asset.maturityDate)}
-          propInternalCost={formatPercentageOneDecimal(asset.internalCostPct)}
-          propExternalCost={formatPercentageOneDecimal(asset.externalCostPct)}
-          propOppCost={formatPercentageOneDecimal(asset.oppCostPct)}
-          propIsin={asset.assetId}
-          propVenue={asset.venue}
-          propAcctId={asset.acctId}
+          rawPrice={asset.price || '-'}
+          propCcy={asset.ccy || '-'}
+          propDeliveryTime={asset.deliveryTime || '-'}
+          propStatus={asset.status || '-'}
+          propRating={asset.rating || '-'}
+          propMaturityDate={asset.maturityDate ? formatDate(asset.maturityDate) : '-'}
+          propInternalCost={asset.internalCostPct || '-'}
+          propExternalCost={asset.externalCostPct || '-'}
+          propOppCost={asset.oppCostPct || '-'}
+          propIsin={asset.assetId || '-'}
+          propVenue={asset.venue || '-'}
+          propAcctId={asset.acctId || '-'}
           propIsDisplayAll={propIsDisplayAll}
           propCollateralType={propCollateralType}
-          propAssetId={asset.assetId}
-          propAssetIdType={asset.assetIdType}
+          propAssetId={asset.assetId || '-'}
+          propAssetIdType={asset.assetIdType || '-'}
           propHandleOnRemoveFromEarmarked={propHandleOnRemoveFromEarmarked}
         />
 
