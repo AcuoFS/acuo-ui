@@ -157,14 +157,14 @@ class Pledge extends React.Component {
     if (collateral) {
       const collateralJSList = collateral.toJS()
       for (const key of Object.keys(collateralJSList)) {
-        collateralAssetGroupList.push(...[
+        collateralAssetGroupList = [...collateralAssetGroupList,
           <CollateralAssetGroup key={key}
                                 propCollateralType={key}
                                 propCollateralAssetList={collateralJSList[key]}
                                 propIsExpanded={true}
                                 propIsDisplayAll={this.state.open}
                                 propHandleOnRemoveFromEarmarked={onRemoveFromEarmarked}/>
-        ])
+        ]
       }
     }
 
