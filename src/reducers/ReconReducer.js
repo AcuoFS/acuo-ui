@@ -23,7 +23,7 @@ export default function reconReducer(state = initState, action) {
   switch(action.type) {
     case 'RECON_INIT_STATE':
       let items = action.items
-      
+
       let filters = _.map(filterPropMapping, mapping => _.merge(mapping, {
         selected: "",
         options: uniqueInColumn(items, mapping.attr)
@@ -46,6 +46,5 @@ export default function reconReducer(state = initState, action) {
 
 // get unique value of one column from items
 const uniqueInColumn = (items, column) => {
-  console.log(items)
   return _.uniq(_.map(items, column))
 }
