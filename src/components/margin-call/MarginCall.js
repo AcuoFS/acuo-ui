@@ -15,13 +15,15 @@ export default class MarginCall extends React.Component {
       isChecked: false,
       isShowPopup: false,
       marginCallUploadId: '',
-      totalCallAmount: ''
+      totalCallAmount: '',
+      selectedRows: []
     }
 
     this.openRow = this.openRow.bind(this)
     this.toggleIsChecked = this.toggleIsChecked.bind(this)
     this.onTotalCallAmt = this.onTotalCallAmt.bind(this)
     this.clearPopup = this.clearPopup.bind(this)
+    this.onSingleRow = this.onSingleRow.bind(this)
 
     // TODO: should be fetched from endpoint. This is the interim mock data
     props.onGetMarginUploadData(marginCallData)
@@ -32,6 +34,19 @@ export default class MarginCall extends React.Component {
       const currIsCheckedValue = state.isChecked
       return Object.assign({}, state, {isChecked: !currIsCheckedValue})
     })
+
+    // check all
+    if (!this.state.isChecked) {
+      this.setState({
+        selectedRows: [...this.props.uploadData]
+      })
+    }
+    // uncheck all
+    else {
+      this.setState({
+        selectedRows: []
+      })
+    }
   }
 
   openRow(e) {
@@ -69,6 +84,27 @@ export default class MarginCall extends React.Component {
     })
   }
 
+  onSingleRow(rowObj, actionIsChecked) {
+    // check action coming from row
+    if (actionIsChecked) {
+      this.setState({
+        selectedRows: [...this.state.selectedRows, rowObj]
+      })
+    }
+    // uncheck action from row
+    else {
+      this.setState({
+        selectedRows: this.state.selectedRows.filter(row =>
+        row.mgnCallUploadId != rowObj.mgnCallUploadId)
+      })
+    }
+  }
+
+  onSendButton(selectedRows) {
+    // todo: API call to endpoint should be here
+    alert('selected ids: ' + selectedRows.map(row => row.mgnCallUploadId))
+  }
+
   render() {
     return (
       <div className={styles.container}>
@@ -81,7 +117,9 @@ export default class MarginCall extends React.Component {
 
         <div className={styles.header}>
           <div className={styles.title}>Margin Call</div>
-          <div className={styles.button}>Send selected Margin Calls</div>
+          <div className={styles.button} onClick={() => this.onSendButton(this.state.selectedRows)}>
+            Send selected Margin Calls
+          </div>
         </div>
         <div className={styles.content}>
           <div className={styles.masterRow}>
@@ -109,7 +147,8 @@ export default class MarginCall extends React.Component {
           <ContentRows spillContents={this.openRow} isChecked={this.state.isChecked}
                        isOpen={this.state.openedRows.indexOf(1) > -1}
                        propHandlerOnTotalMargin={this.onTotalCallAmt}
-                       propMarginCallUploadData={this.props.uploadData}/>
+                       propMarginCallUploadData={this.props.uploadData}
+                       propHandlerSingleRow={this.onSingleRow}/>
           {/*<ContentRows spillContents={this.openRow} isChecked={this.state.isChecked} isOpen={this.state.openedRows.indexOf(2) > -1}/>*/}
         </div>
       </div>

@@ -23,12 +23,18 @@ export default class MarginCallRow extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      isChecked: nextProps.isChecked
-    })
+    // Make sure it's really an update of the checkbox from
+    // parent before update of state from prop
+    if (nextProps.isChecked != this.props.isChecked) {
+      this.setState({
+        isChecked: nextProps.isChecked
+      })
+    }
   }
 
   toggleIsChecked() {
+    // update parent via callback
+    this.props.propHandlerSingleRow(this.props.row, !this.state.isChecked)
     this.setState(state => Object.assign({}, state, {isChecked: !state.isChecked}))
   }
 
