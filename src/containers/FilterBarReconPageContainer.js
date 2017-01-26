@@ -8,19 +8,44 @@ const mapStateToProps = state => {
   const filters = state.ReconReducer.get('filters').toJS()
   const items   = state.ReconReducer.get('items').toJS()
 
+  const filteredItems = filter(items, filters)
+
   return {
     filters,
-    legalEntityList:  getUniqueValuesAfterFilter(items, filters, "legalEntity"),
-    derivativeType:   getUniqueValuesAfterFilter(items, filters, "derivative"),
-    // timeWindowList:   getUniqueValuesAfterFilter(items, filters, "time"),
-    cptyOrganisation: getUniqueValuesAfterFilter(items, filters, "cptyOrg"),
-    cptyEntity:       getUniqueValuesAfterFilter(items, filters, "cptyEntity"),
+    legalEntityList:  uniqueInColumn(filteredItems, "legalEntity"),
+    // derivativeType:   uniqueInColumn(filteredItems, "derivative"),
+    // // timeWindowList:   getUniqueValuesAfterFilter(items, filters, "time"),
+    cptyOrganisation: uniqueInColumn(filteredItems, "cptyOrg"),
+    cptyEntity:       uniqueInColumn(filteredItems, "cptyEntity"),
   }
 }
 
-const getUniqueValuesAfterFilter = (items, filters, attr) => {
-  return _.uniq(_.map(_.filter(items, filters), attr))
+
+// filter items
+const filter = (items, filterArray) => {
+  // filters passed in should be array consisting: name, options and selected
+  // filter out those with selected = "" or []
+  const filters = _.filter(filterArray, ({selected}) => (
+    _.isString(selected)
+    ? selected.length
+    : !_.isEmpty(selected)
+  ))
+
+  // as we need to apply multiple filters to multiple items
+  // here, we use reduce on filters (less iteration) to filter items
+  return _.reduce(filters, (items, {name, selected}) => (
+    _.isString(selected)
+    ? _.filter(items, [name, selected])
+    : _.filter(items, item => selected.includes(_.get(item, name)))
+  ), items)
 }
+
+// get unique value of one column from items
+const uniqueInColumn = (items, column) => {
+  return _.uniq(_.map(items, column))
+}
+
+
 
 const getYesterday = (currTime) => {
   const currTimeNew = new Date(currTime)
@@ -128,10 +153,9 @@ const computeCptyEntity = (state) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  setFilter: (filter, value) => dispatch({
+  setFilter: (value) => dispatch({
     type: 'RECON_FILTER_SET',
-    filter,
-    value
+    value,
   }),
 
   onLegalEntityChange: (text) => {
