@@ -3,12 +3,23 @@ import { fromJS } from 'immutable'
 import { MarginAgreementsComponent } from '../components'
 import { selectedItems, initState, filterStateStatus } from '../actions'
 import { RECON_DATA_URL, RECON_URL, DASHBOARD_URL } from '../constants/APIcalls'
+import filterItems from '../utils/filterItems'
 
-const mapStateToProps = state => ({
-  recon : state.ReconReducer.get('items')
-})
+const mapStateToProps = state => {
+  const items = state.ReconReducer.get('items').toJS()
+  const filters = state.ReconReducer.get('filters').toJS()
+
+  const filteredItems = filterItems(items, filters)
+
+  return {
+    recon : fromJS(filteredItems)
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
+  // ************************************
+  // !!! THIS LOGIC PART NEED REVIEW !!!
+  // ************************************
   onReconItem : (e) => {
     //console.log(e.currentTarget.dataset.ref)
     //new recon entire margin call with one get api

@@ -2,7 +2,6 @@
  * Created by panyong on 4/11/16.
  */
 import React, {PropTypes} from 'react'
-import {List, Map, toJS} from 'immutable'
 import MarginAgreementPortfolio from './sub-components/MarginAgreementPortfolio'
 import styles from './MarginAgreementList.css'
 
@@ -50,11 +49,7 @@ export default class MarginAgreementList extends React.Component {
 }
 
 MarginAgreementList.PropTypes = {
-  recon: PropTypes.instanceOf(List).isRequired,
+  recon: PropTypes.array.isRequired,
   onReconItem: PropTypes.func.isRequired,
   onSelectedItem: PropTypes.func.isRequired
-}
-
-MarginAgreementList.defaultProps = {
-  recon: List()
 }
