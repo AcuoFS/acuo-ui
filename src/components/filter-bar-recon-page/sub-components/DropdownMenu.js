@@ -5,11 +5,11 @@ const DropdownMenu = (props) => {
     const {handleOnSelectChange, options} = props
 
     // merge option 'ALL', with actual options
-    const optionList = ['all', ...options].map(text => String(text).toUpperCase())
+    const optionList = ['all', ...options]
 
     // handleLocalOptionChange
     const handleLocalOptionChange = (e, option) => {
-      e.stopPropagation()
+      e.preventDefault()
       handleOnSelectChange(option)
     }
 
@@ -18,7 +18,7 @@ const DropdownMenu = (props) => {
         {optionList.map(option => (
           <li key={option}
               onClick={e => handleLocalOptionChange(e, option)}>
-            {option}
+            {option.toUpperCase()}
           </li>
         ))}
       </ul>

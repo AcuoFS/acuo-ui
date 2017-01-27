@@ -70,95 +70,12 @@ export default class FilterBar extends React.Component {
               </div>
 
               <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
-                <FilterBarDropdown title="Legal Entity"
-                                   options={this.props.legalEntityList}
-                                   handleSelectChange={this.props.onLegalEntityChange}
-                                   selected={this.props.filters.legalEntity}/>
-
-                <FilterBarDropdown title="Deriv Type"
-                                   handleSelectChange={this.props.onDerivChange}
-                                   options={this.props.derivativeType}
-                                   selected={this.props.filters.derivType}/>
-
-                <FilterBarDropdown title="CPTY Organisation"
-                                   handleSelectChange={this.props.onCptyOrgChange}
-                                   options={this.props.cptyOrganisation}
-                                   selected={this.props.filters.cptyOrg}/>
-
-                <FilterBarDropdown title="CPTY Entity"
-                                   handleSelectChange={this.handleCPTYEntityChange}
-                                   dropdownType='multi'
-                                   options={this.props.cptyEntity}
-                                   selected={this.props.filters.cptyEntity || []}/>
+                {this.props.filters.map(filter => (
+                  <FilterBarDropdown key={filter.attr}
+                                     {...filter}
+                                     setFilter={this.props.setFilter}/>
+                ))}
               </div>
             </div>
   }
-
-  // rendera() {
-  //   return (
-  //     <div className={styles.filterContainer}>
-  //       <div className={styles.filterBarName + ' ' + this.state.filterBar} onClick={this.toggleFilter}>
-  //         <span>Filter</span>
-  //         <div className={styles.switchArrow}>
-  //           <div className={styles.arrowLine} id={styles.line1}></div>
-  //           <div className={styles.arrowLine} id={styles.line2}></div>
-  //         </div>
-  //       </div>
-  //
-  //       <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
-  //
-  //         <FilterDropdown
-  //           title={'Legal Entity'}
-  //           handleOnSelectedItemChange={this.props.onLegalEntityChange}
-  //           options={this.props.legalEntityList}
-  //           selectedOption={
-  //             this.props.filters.getIn(['legalEntityFilter', 'filter'])}/>
-  //
-  //         <FilterDropdown
-  //           title={'Deriv Type'}
-  //           handleOnSelectedItemChange={this.props.onDerivChange}
-  //           options={this.props.derivativeType}
-  //           selectedOption={
-  //             this.props.filters.getIn(['typeFilter', 'filter'])}/>
-  //
-  //         <FilterDropdown
-  //           title={'Time Window'}
-  //           handleOnSelectedItemChange={this.props.onFilterTimeWindowStatus}
-  //           optionList={this.props.timeWindowList}
-  //           dropdownType={DROPDOWN_TYPE_TIME_SELECT}
-  //           selectedOption={
-  //             this.props.filters.getIn(['timeWindowFilter', 'timeRangeText']) ?
-  //               this.props.filters.getIn(['timeWindowFilter', 'timeRangeText']) : 'Today: ALL'}/>
-  //
-  //         <FilterDropdown
-  //           title={'CPTY Organisation'}
-  //           handleOnSelectedItemChange={this.props.onCptyOrgChange}
-  //           options={this.props.cptyOrganisation}
-  //           selectedOption={
-  //             this.props.filters.getIn(['cptyOrgFilter', 'filter'])}/>
-  //
-  //         <FilterDropdown
-  //           title={'CPTY Entity'}
-  //           handleOnSelectedItemChange={this.handleCPTYEntityChange}
-  //           dropdownType={DROPDOWN_TYPE_MULTI_SELECT}
-  //           options={this.props.cptyEntity}
-  //           selectedOptionList={this.props.filters.getIn(['cptyEntityFilter', 'filter']) ? this.props.filters.getIn(['cptyEntityFilter', 'filter']).toArray() : []}/>
-  //
-  //       </div>
-  //
-  //     </div>
-  //   )
-  // }
 }
-
-
-// FilterBar.propTypes = {
-//   onLegalEntityChange: PropTypes.func.isRequired,
-//   onDerivChange: PropTypes.func.isRequired,
-//   onStatusChange: PropTypes.func.isRequired,
-//   onCptyOrgChange: PropTypes.func.isRequired,
-//   onCPTYEntityChange: PropTypes.func.isRequired,
-//   onFilterTimeWindowStatus: PropTypes.func.isRequired,
-//   legalEntityList: PropTypes.arrayOf(PropTypes.string),
-//   filters : PropTypes.array
-// }

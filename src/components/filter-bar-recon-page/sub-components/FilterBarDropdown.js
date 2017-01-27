@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react'
+import _ from 'lodash'
 
 // sub components
 import DropdownMenu from './DropdownMenu'
@@ -12,45 +13,42 @@ export default class FilterDropdown extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {isOpen: false}
+    this.state = {
+      isOpen: false,
+    }
 
     this.handleToggleDropdown = this.handleToggleDropdown.bind(this)
     this.handleOnMouseLeave = this.handleOnMouseLeave.bind(this)
-    this.handleSelectChange = this.handleSelectChange.bind(this)
-
-    this.handleOnOptionChangeMultiSelect = this.handleOnOptionChangeMultiSelect.bind(this)
-    this.handleOnOptionChangeTimeSelect = this.handleOnOptionChangeTimeSelect.bind(this)
+    this.handleOnSelectChange = this.handleOnSelectChange.bind(this)
   }
 
   handleToggleDropdown(e) {
-    e.preventDefault()
+    e.stopPropagation()
     this.setState({isOpen: !this.state.isOpen})
   }
 
   handleOnMouseLeave(e) {
-    e.preventDefault()
-    this.setState({isOpen: false})
+    e.stopPropagation()
+    // close it if it is open
+    if(this.state.isOpen) this.setState({isOpen: false})
   }
 
-  handleSelectChange(selected) {
-    this.setState({selected, isOpen: false})
-  }
+  // this function will handle selectChange from subComponent
+  handleOnSelectChange(selected) {
+    const { attr, setFilter, type } = this.props
 
-  handleOnOptionChangeTimeSelect(selectedOption, timeWindowMin, timeWindowMax) {
-    this.setState({
-      selectedOption: selectedOption,
-      isOpen: false
-    })
-    this.props.handleOnSelectedItemChange(timeWindowMin, timeWindowMax, selectedOption)
-  }
-
-  handleOnOptionChangeMultiSelect(e, displayOptionText, selectedOptionList) {
-    this.setState({
-      selectedOption: displayOptionText,
-      selectedOptionList: selectedOptionList,
-      isOpen: true
-    })
-    this.props.handleOnSelectedItemChange(e)
+    if(type === 'multi') {
+      // if it is multi-value filter
+      setFilter([{attr, selected}])
+    } else {
+      // if it is single-value filter
+      setFilter([{
+        attr,
+        selected: (_.toUpper(selected) === 'ALL')
+                  ? ""
+                  : selected
+      }])
+    }
   }
 
   renderMenu(menuType = 'default', props) {
@@ -69,43 +67,49 @@ export default class FilterDropdown extends React.Component {
 
     return <Menu options={this.props.options}
                  selected={this.props.selected}
-                 handleOnSelectChange={this.handleSelectChange} />
+                 handleOnSelectChange={this.handleOnSelectChange} />
   }
 
   render() {
-    const menu = this.renderMenu(this.props.dropdownType, this.props)
+    const { type, selected, label } = this.props
+    const menu = this.renderMenu(type, this.props)
 
-    const displaySeletedAsText = (text = 'all') => {
-      const displayedText = ((typeof text) === 'string')
-                            ? text
-                            : 'multiple'
+    // as selected might be undefined, which is illegal
+    // make it legal according to type
+    const legalSelected = selected || 'all'
 
-      return displayedText.toUpperCase()
-    }
+    const seletedAsText = (
+      (_.isString(legalSelected))
+      // if it is string
+      ? legalSelected
+      // if it is array (not string)
+      : _.isEmpty(legalSelected)
+        // if it is empty array
+        ? 'all'
+        // if it is non-empty array
+        : (legalSelected.length === 1)
+          // 1 element array
+          ? _.head(legalSelected)
+          // multi elements array
+          : 'multiple'
+    )
 
     return (
       <div className={styles.filterItem}>
-        <label className={styles.filterLabel}>{this.props.title}</label>
-        <div className={styles.filters} onClick={this.handleToggleDropdown} onMouseLeave={this.handleOnMouseLeave}>
+        <label className={styles.filterLabel}>{label}</label>
+        <div className={styles.filters}
+             onClick={this.handleToggleDropdown}
+             onMouseLeave={this.handleOnMouseLeave}>
+
           <div className={styles.selectedText}>
-            {displaySeletedAsText(this.state.selected)}
+            {_.toUpper(seletedAsText)}
           </div>
-          {this.state.isOpen? menu: null}
+
+          {this.state.isOpen && menu}
+
         </div>
         <div className={styles.filterDropdownArrow}></div>
       </div>
     )
   }
-}
-
-
-FilterDropdown.propTypes = {
-  title: PropTypes.string.isRequired,
-  selected: PropTypes.oneOfType([
-              PropTypes.string,
-              PropTypes.arrayOf(PropTypes.string),
-            ]),
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
-  dropdownType: PropTypes.string,
-  handleSelectChange: PropTypes.func.isRequired,
 }

@@ -1,21 +1,29 @@
 import {connect} from 'react-redux'
 import _ from 'lodash'
 import {FilterBarReconPageComponent} from '../components'
-import filterItems from '../utils/filterItems'
 import { Set, Map, List, fromJS } from 'immutable'
-
+import filterItems from '../utils/filterItems'
 
 const mapStateToProps = state => {
   const filters = state.ReconReducer.get('filters').toJS()
-  return {filters}
+  const items   = state.ReconReducer.get('items').toJS()
+
+  const outItems = _.filter(items, ['direction', 'OUT'])
+  const filteredOutItems = filterItems(outItems, filters)
+
+  const filterWithOptions = _.map(filters, filter => {
+    const options = (_.get(filter, 'type', 'non-multi') === 'multi')
+                    // if it is multi-value filter
+                    ? _.uniq(_.map(outItems, filter.attr))
+                    // if it is single-value filter
+                    : _.uniq(_.map(filteredOutItems, filter.attr))
+    return _.set(filter, 'options', options)
+  })
+
+  return {
+    filters: _.orderBy(filterWithOptions, 'order'),
+  }
 }
-
-// get unique value of one column from items
-const uniqueInColumn = (items, column) => {
-  return _.uniq(_.map(items, column))
-}
-
-
 
 const getYesterday = (currTime) => {
   const currTimeNew = new Date(currTime)

@@ -1,88 +1,103 @@
 import React from 'react'
+import _ from 'lodash'
 import styles from '../FilterBar.css'
 
+/*
+  This component is a multi select component
+  It will look like below
+  ==========
+  filter
+  ----------
+  selected
+  ----------
+  unselected
+  ==========
+
+*/
+
 export default class DropdownMultiSelectMenu extends React.Component{
-
-  constructor(props){
+  constructor(props) {
     super(props)
+
     this.state = {
-      filterEntity: '',
-      selectedItems : props.selectedOptionList
-    }
-    this.filterEntities = this.filterEntities.bind(this)
-    this.onMenuOptionSelect = this.onMenuOptionSelect.bind(this)
-  }
-
-  filterEntities(e) {
-    this.setState({
-      filterEntity : e.currentTarget.value
-    })
-  }
-
-  onMenuOptionSelect(e, option, handleOnOptionChange){
-    let selectedOptionText = "All"
-    let selectedItems = this.state.selectedItems
-
-    if(option == "All" ){
-      selectedItems = []
-    }else if (this.state.selectedItems.length == 0) {
-      selectedOptionText = option
-      selectedItems = [...selectedItems, option]
-    }
-    else if (this.state.selectedItems.length > 0){
-      if(selectedItems.indexOf(option) >= 0){
-        selectedItems.splice(selectedItems.indexOf(option), 1)
-        if(selectedItems.length == 0){
-          selectedOptionText = "All"
-        }
-        else if(selectedItems.length == 1){
-          selectedOptionText = selectedItems[0].toUpperCase()
-        }else{
-          selectedOptionText = "Multiple"
-        }
-      }
-      else{
-        selectedItems = [...selectedItems, option]
-        selectedOptionText = "Multiple"
-      }
+      filter: '',
     }
 
-    this.setState((prevState) => ({
-      selectedItems: selectedItems
-    }))
-    handleOnOptionChange(e, selectedOptionText, selectedItems)
+    this.setFilter = this.setFilter.bind(this)
+    this.select = this.select.bind(this)
+    this.deselect = this.deselect.bind(this)
+    this.deselectAll = this.deselectAll.bind(this)
   }
 
-  isSelectedOption(option){
-    return (this.state.selectedItems.indexOf(option) >= 0) ? styles.selectedList : null;
+  setFilter(value) {
+    this.setState(state => _.set(state, 'filter', value))
   }
 
-  render(){
-    const {handleOnOptionChange, options} = this.props
-    let optionList = options
-    if(this.state.filterEntity){
-      optionList = options.filter(option => option.includes(this.state.filterEntity.toUpperCase()))
-    }
-    // merge option 'ALL', with actual options
-    optionList = [[], 'All', ...optionList]
+  select(option) {
+    // prev selected coule be undefined, make it an array in that case
+    const prevSelected = this.props.selected || []
+    const selected = _.concat(prevSelected, option)
+
+    this.props.handleOnSelectChange(selected)
+  }
+
+  deselect(option) {
+    // prev selected must be an non-empty array
+    const prevSelected = this.props.selected
+    const selected = _.filter(prevSelected, o => (o != option))
+
+    this.props.handleOnSelectChange(selected)
+  }
+
+  deselectAll() {
+    this.props.handleOnSelectChange([])
+  }
+
+  render() {
+    const { options, selected } = this.props
+
+    // calculate unselected
+    const unselected = _.difference(options, selected)
+
+    // filter feature
+    const filterRegExp = new RegExp(_.toUpper(this.state.filter))
+    const filteredUnselected = _.filter(unselected, o => _.toUpper(o).match(filterRegExp))
+
+    // sort them
+    const sortedSelected = _.orderBy(selected)
+    const sortedUnselected = _.orderBy(filteredUnselected)
 
     return(
       <ul className={styles.filtersList}>
-        <li className={styles.paddingless} onClick={(e) => e.stopPropagation()}><input type="text"
-                                                                                       className={styles.filterSearchBox}
-                                                                                       onChange={this.filterEntities}
-                                                                                       placeholder="Search..."/>
+        <li className={styles.paddingless}
+            onClick={e => e.stopPropagation()}>
+          <input className={styles.filterSearchBox}
+                 onInput={e => this.setFilter(e.currentTarget.value)}
+                 placeholder="Search..."/>
         </li>
-        {optionList.map(option => (
-          <li key={option}
-              data-ref={option}
-              className={this.isSelectedOption(option)}
-              onClick={ e => this.onMenuOptionSelect(e, option, handleOnOptionChange)}>
-            {String(option).toUpperCase()}
+
+        <li onClick={e => {e.stopPropagation()
+                           this.deselectAll()}}>
+          ALL
+        </li>
+
+        {sortedSelected.map(option => (
+          <li key={'selected_' + option}
+              className={styles.selectedList}
+              onClick={e => {e.stopPropagation()
+                             this.deselect(option)}}>
+            {_.toUpper(option)}
+          </li>
+        ))}
+
+        {sortedUnselected.map(option => (
+          <li key={'unselected_' + option}
+              onClick={e => {e.stopPropagation()
+                             this.select(option)}}>
+            {_.toUpper(option)}
           </li>
         ))}
       </ul>
     )
   }
 }
-
