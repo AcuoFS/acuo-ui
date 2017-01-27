@@ -462,12 +462,14 @@ input[type=range]:focus::-ms-fill-upper {
   background: #7F8A93;
   line-height: 12px;
   color: #ffffff;
+  text-transform: capitalize;
 }
 
 .collateralExpandEarmarkedRow{
   background: #4E83B5;
   line-height: 12px;
   color: #ffffff;
+  text-transform: capitalize;
 }
 
 .collateralCell {
