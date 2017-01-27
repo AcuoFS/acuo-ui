@@ -113,7 +113,7 @@ const mapDispatchToProps = dispatch => ({
 
     onStatusChange: (e) => {
         e.stopPropagation()
-        dispatch(filterStateStatus(e.currentTarget.dataset.ref))
+        dispatch(filterStateStatus((e.currentTarget.dataset.ref).toLowerCase()))
     },
 
     onCptyOrgChange: (e) => {

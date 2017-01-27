@@ -21,11 +21,12 @@ export default class MarginAgreementPortfolio extends React.Component {
       return i.get(assetType).reduce((asset, x) => {
         return asset + x.get('data').reduce((data, y) => {
             return data + y.get('secondLevel').reduce((amount, z) => {
-                return amount + z.get('amount')
+                return amount + parseFloat(z.get('amount'))
               }, 0)
           }, 0)
       }, 0)
-    }
+    }else
+      return 0
   }
 
   onUpdateAdjAmount(amt) {
@@ -122,7 +123,7 @@ export default class MarginAgreementPortfolio extends React.Component {
       return asset.reduce((sum, x) => {
         return sum + x.get('data').reduce((sum, y) => {
             return sum + (y.get('firstLevel') - y.get('secondLevel').reduce((sum, z) => {
-                return sum + (z.get(checkedOrRecon) ? 0 : z.get('amount'))
+                return sum + (z.get(checkedOrRecon) ? 0 : parseInt(z.get('amount')))
               }, 0))
           }, 0)
       }, 0)

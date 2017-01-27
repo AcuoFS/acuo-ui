@@ -3,11 +3,12 @@ import Axis from './sub-components/Axis'
 import SubAxis from './sub-components/SubAxis'
 import GraphBody from './sub-components/GraphBody'
 import Pointer from './sub-components/Pointer'
+import styles from './Graph.css'
 
 
 export default class Graph extends React.Component {
   static get defaultProps() {
-    const now = new Date("2016-10-25T08:00:00.000Z")
+    const now = new Date("2017-01-13T08:00:00.000Z")
     const time = [now.getHours(), (now.getMinutes() <10 ? '0' : ' ')  + now.getMinutes()]
     const currentTime = time.join(":")
 
@@ -23,6 +24,7 @@ export default class Graph extends React.Component {
   }
   render() {
     return (
+    <div className={styles.graphCont}>
       <svg viewBox="0 0 1440 460" preserveAspectRatio="xMaxYMax meet">
         <Axis
           x={0}
@@ -30,14 +32,14 @@ export default class Graph extends React.Component {
           length={this.props.width}
           horizontal={true}
           stroke={"#9B9B9B" }
-          />
+        />
         <Axis
           x={this.props.width * 0.5}
           y={0}
           length={this.props.height}
           horizontal={false}
           stroke="#F91233"
-          />
+        />
         <Pointer
           xrec={this.props.width * 0.5 -50} //670
           yrec={0}
@@ -49,19 +51,23 @@ export default class Graph extends React.Component {
           triangle2={"720,450 710,460 730,460"}
           color="#F91233"
           text= {this.props.time}
-          />
+        />
         <SubAxis
           x={0}
           y={this.props.height * 0.5 - 10}
           length={this.props.width }
-          />
+        />
         <GraphBody
           x={this.props.width * 0.5}
           y={this.props.height * 0.5}
           time={this.props.now}
           data={this.props.derivatives}
-          />
+        />
+
       </svg>
+      <div className={styles.moneyIcon + " " + styles.moneyOutIcon}>OUT</div>
+      <div className={styles.moneyIcon + " " + styles.moneyInIcon}>IN</div>
+    </div>
     )
   }
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Selection.css'
 import { numberWithCommas } from '../../utils/numbersWithCommas'
 
-import { List } from 'immutable'
+import { List, toJS } from 'immutable'
 
 export default class Selection extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ export default class Selection extends React.Component {
               </div>
               <div className={styles.amount}>
                 {numberWithCommas(y.get('secondLevel').reduce((sum, z) => {
-                  return sum + z.get('amount')
+                  return sum + parseFloat(z.get('amount'))
                 }, 0))}
               </div>
             </div>)
@@ -31,22 +31,19 @@ export default class Selection extends React.Component {
     )
   }
 
-  renderMargin(x, index){
+  renderMargin(x){
     return (
-      <tr key={index}>
+      <tr key={x.get('assetName')}>
         <td>{x.get('assetName')}</td>
-        <td>{numberWithCommas(x.get('priceNetHaircut'))}</td>
-        <td>{x.get('priceNetHaircutCcy')}</td>
-        <td>{x.get('haircutPct')}%</td>
+        <td>{numberWithCommas(x.get('valuePostHaircut'))}</td>
+        <td>{x.get('CCY')}</td>
+        <td>{x.get('haircut')}%</td>
+        <td>{x.get('value')}</td>
+        <td>{numberWithCommas(x.get('FX'))}</td>
         <td>{x.get('venue')}</td>
-        <td>{numberWithCommas(x.get('price'))}</td>
-        <td>{x.get('priceCcy')}</td>
-        <td><
-          div className={styles.earmarkAssetButton}>
-            <span>E</span>
-            <div className={styles.tooltip}>
-              Move to Earmarked
-            </div>
+        <td>
+          <div className={styles.imgCancel}>
+            <img src="./images/pledge/cancel.png"></img>
           </div>
         </td>
       </tr>
@@ -64,7 +61,7 @@ export default class Selection extends React.Component {
 
   calSubTotal(a, s){
     if(a.getIn(['allocated', s]))
-      return (a.getIn(['allocated', s]).reduce((SumX , x)=>{return SumX + x.get('price')},0))
+      return (a.getIn(['allocated', s]).reduce((SumX , x)=>{return SumX + parseFloat(x.get('price'))},0))
     else
       return 0
   }
@@ -73,11 +70,11 @@ export default class Selection extends React.Component {
   }
 
   render() {
-
     const { marginCall, pendingAllocationStore } = this.props
 
     let evlEmptyForIntMargin = this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).isEmpty()
     let evlEmptyForVariMargin = this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).isEmpty()
+    let evlEmptyForMargin = !this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).isEmpty() || !this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).isEmpty()
 
     return (
       <div className={styles.panel} key={marginCall.get('GUID')}>
@@ -97,7 +94,7 @@ export default class Selection extends React.Component {
 
             <div>
 
-              {this.checkIfExist(marginCall.get('ClientAssets')).map(x => this.renderGroup(x, marginCall.get('GUID')))}
+              {this.checkIfExist(marginCall.get('clientAssets')).map(x => this.renderGroup(x, marginCall.get('GUID')))}
 
             </div>
 
@@ -107,10 +104,10 @@ export default class Selection extends React.Component {
                   Total
                 </div>
                 <div className={styles.amount}>
-                  {numberWithCommas(this.checkIfExist(marginCall.get('ClientAssets')).reduce((sum, x) => {
+                  {numberWithCommas(this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {
                     return sum + x.get('data').reduce((sum, y) => {
                       return sum + y.get('secondLevel').reduce((sum, z) => {
-                        return sum + z.get('amount')
+                        return sum + parseFloat(z.get('amount'))
                         }, 0)
                     }, 0)
                   }, 0))}
@@ -131,14 +128,10 @@ export default class Selection extends React.Component {
 
             <div className={styles.ttlMarginWrap + ' ' + (this.props.toggleR ? styles.showR : styles.hideR)}>
               <div className={styles.ttlMargin}>
-                <div>Total Margin</div>
-                <div className={styles.bigFig + ' ' +styles.bold}>{numberWithCommas((this.checkIfExist(marginCall.get('ClientAssets')).reduce((sum, x) => {
-                  return sum + x.get('data').reduce((sum, y) => {
-                      return sum + y.get('secondLevel').reduce((sum, z) => {
-                          return sum + z.get('amount')
-                        }, 0)
-                    }, 0)
-                }, 0) / 1000000).toFixed(1))}</div>
+                <div>Total Allocated</div>
+                <div className={styles.bigFig + ' ' +styles.bold}>
+                  {Math.round((marginCall.getIn(['allocated', 'marginTotal']) || 0)/10000)/100}
+                </div>
                 <div className={styles.bold}>Million</div>
               </div>
             </div>
@@ -151,12 +144,12 @@ export default class Selection extends React.Component {
                   <thead>
                     <tr className={styles.bold}>
                       <th></th>
-                      <th>Price(Net <br/>of Haircut)</th>
+                      <th>Value(post <br/>haircut)</th>
                       <th>CCY</th>
                       <th>Haircut</th>
+                      <th>Value</th>
+                      <th>FX</th>
                       <th>Venue</th>
-                      <th>Price</th>
-                      <th>CCY</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -169,8 +162,10 @@ export default class Selection extends React.Component {
                   }
                     <tr className={styles.bold}>
                       <td>Sub-Total</td>
-                      <td>{evlEmptyForIntMargin ? '' : numberWithCommas(this.calSubTotal(marginCall, 'initialMargin'))}</td>
-                      <td></td>
+                      <td>
+                        {numberWithCommas((marginCall.getIn(['allocated', 'initialMarginTotal']) || 0).toFixed(2))}
+                      </td>
+                      <td>USD</td>
                       <td></td>
                       <td></td>
                       <td></td>
@@ -185,16 +180,16 @@ export default class Selection extends React.Component {
                 <div className={styles.subSectionHeader}>Variation Margin</div>
                 <table className={styles.selTable + ( evlEmptyForVariMargin ? ' ' + styles.notAllocated : '')}>
                   <thead>
-                  <tr className={styles.bold}>
-                    <th></th>
-                    <th>Price(Net <br/>of Haircut)</th>
-                    <th>CCY</th>
-                    <th>Haircut</th>
-                    <th>Venue</th>
-                    <th>Price</th>
-                    <th>CCY</th>
-                    <th></th>
-                  </tr>
+                    <tr className={styles.bold}>
+                      <th></th>
+                      <th>Value(post <br/>haircut)</th>
+                      <th>CCY</th>
+                      <th>Haircut</th>
+                      <th>Value</th>
+                      <th>FX</th>
+                      <th>Venue</th>
+                      <th></th>
+                    </tr>
                   </thead>
                   <tbody>
 
@@ -208,8 +203,10 @@ export default class Selection extends React.Component {
 
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
-                    <td>{evlEmptyForVariMargin ? '' : numberWithCommas(this.calSubTotal(marginCall, 'variationMargin'))}</td>
-                    <td></td>
+                    <td>
+                      {numberWithCommas((marginCall.getIn(['allocated', 'variationMarginTotal']) || 0).toFixed(2))}
+                    </td>
+                    <td>USD</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -218,12 +215,17 @@ export default class Selection extends React.Component {
                   </tr>
                   </tbody>
                 </table>
-
-                <table className={styles.ttlAmount + ' ' + styles.bold}>
+                <table className={styles.selTable}>
                   <tbody>
-                    <tr>
+                    <tr className={styles.bold}>
                       <td>Total</td>
-                      <td colSpan="7">{numberWithCommas(this.calTotal(marginCall, 'initialMargin', 'variationMargin'))}</td>
+                      <td className={styles.totalTable1 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>{numberWithCommas((marginCall.getIn(['allocated', 'marginTotal']) || 0).toFixed(2))}</td>
+                      <td className={styles.totalTable2 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>USD</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                     </tr>
                   </tbody>
                 </table>

@@ -17,8 +17,12 @@ class PledgePage extends React.Component{
       fetch(COLLATERAL_URL).then((response) => {
       return response.json()
     }).then((obj) => {
-      this.props.onCollateralDataAvailable(fromJS(obj))
+      this.props.onCollateralDataAvailable(fromJS(obj.data))
     })
+  }
+
+  componentDidMount () {
+    window.scrollTo(0, 0)
   }
 
   render(){

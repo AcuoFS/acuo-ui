@@ -1,55 +1,28 @@
+/**
+ * Created by Rui on 12/1/17.
+ */
+
 export default [
   {
-  header: {
-    time: {
-      main: "14:00",
-      secondary: ""
-    },
-    agreement: {
-      main: "ACUO SG - Counterparty A1",
-      secondary: ""
-    },
-    from: {
-      main: "ACUO SG",
-      secondary: ""
-    },
-    to: {
-      main: "Counterparty A1",
-      secondary: ""
-    },
-    value: {
-      main: "738981.6",
-      secondary: ""
-    },
-    ccy: {
-      main: "USD",
-      secondary: ""
-    },
-    status: {
-      main: "In-Flight",
-      secondary: ""
-    }
-  },
-  flightDetailList: [
-    {
+    header: {
       time: {
-        main: "",
+        main: "14:00",
         secondary: ""
       },
       agreement: {
-        main: "US Dollar",
+        main: "ACUO US - Counterparty A2",
         secondary: ""
       },
       from: {
-        main: "Custodian 1",
-        secondary: "CustAcct1D"
+        main: "Counterparty A2",
+        secondary: ""
       },
       to: {
-        main: "Custodian 3",
-        secondary: "CustAcct3D"
+        main: "ACUO US",
+        secondary: ""
       },
       value: {
-        main: "100000",
+        main: "738981.6",
         secondary: ""
       },
       ccy: {
@@ -57,73 +30,104 @@ export default [
         secondary: ""
       },
       status: {
-        main: "",
+        main: "In-Flight",
         secondary: ""
       }
     },
-    {
-      time: {
-        main: "",
-        secondary: ""
+    flightDetailList: [
+      {
+        time: {
+          main: "",
+          secondary: ""
+        },
+        agreement: {
+          main: "US Dollar",
+          secondary: ""
+        },
+        from: {
+          main: "Custodian 6",
+          secondary: "CustAcct6D"
+        },
+        to: {
+          main: "Custodian 2",
+          secondary: "CustAcct2D"
+        },
+        value: {
+          main: "100000",
+          secondary: ""
+        },
+        ccy: {
+          main: "USD",
+          secondary: ""
+        },
+        status: {
+          main: "",
+          secondary: ""
+        }
       },
-      agreement: {
-        main: "TREASURY BILL",
-        secondary: ""
+      {
+        time: {
+          main: "",
+          secondary: ""
+        },
+        agreement: {
+          main: "TREASURY BILL",
+          secondary: ""
+        },
+        from: {
+          main: "Custodian 6",
+          secondary: "CustAcct6E"
+        },
+        to: {
+          main: "Custodian 2",
+          secondary: "CustAcct2A"
+        },
+        value: {
+          main: "200000",
+          secondary: ""
+        },
+        ccy: {
+          main: "USD",
+          secondary: ""
+        },
+        status: {
+          main: "",
+          secondary: ""
+        }
       },
-      from: {
-        main: "Custodian 1",
-        secondary: "CustAcct1A"
-      },
-      to: {
-        main: "Custodian 3",
-        secondary: "CustAcct3D"
-      },
-      value: {
-        main: "200000",
-        secondary: ""
-      },
-      ccy: {
-        main: "USD",
-        secondary: ""
-      },
-      status: {
-        main: "",
-        secondary: ""
+      {
+        time: {
+          main: "",
+          secondary: ""
+        },
+        agreement: {
+          main: "JAPAN (5 YEAR ISSUE)",
+          secondary: ""
+        },
+        from: {
+          main: "Custodian 6",
+          secondary: "CustAcct6E"
+        },
+        to: {
+          main: "Custodian 2",
+          secondary: "CustAcct2A"
+        },
+        value: {
+          main: "50000000",
+          secondary: ""
+        },
+        ccy: {
+          main: "JPY",
+          secondary: ""
+        },
+        status: {
+          main: "",
+          secondary: ""
+        }
       }
-    },
-    {
-      time: {
-        main: "",
-        secondary: ""
-      },
-      agreement: {
-        main: "JAPAN (5 YEAR ISSUE)",
-        secondary: ""
-      },
-      from: {
-        main: "Custodian 1",
-        secondary: "CustAcct1A"
-      },
-      to: {
-        main: "Custodian 3",
-        secondary: "CustAcct3E"
-      },
-      value: {
-        main: "50000000",
-        secondary: ""
-      },
-      ccy: {
-        main: "JPY",
-        secondary: ""
-      },
-      status: {
-        main: "",
-        secondary: ""
-      }
-    }
 
-  ]
-},
+    ]
+  },
   {
     header: {
       time: {
@@ -131,15 +135,15 @@ export default [
         secondary: ""
       },
       agreement: {
-        main: "ACUO SG - Counterparty B1",
+        main: "ACUO US - Counterparty B2",
         secondary: ""
       },
       from: {
-        main: "ACUO SG",
+        main: "Counterparty B2",
         secondary: ""
       },
       to: {
-        main: "Counterparty B1",
+        main: "ACUO US",
         secondary: ""
       },
       value: {
@@ -166,12 +170,12 @@ export default [
           secondary: ""
         },
         from: {
-          main: "Custodian 1",
-          secondary: "CustAcct1D"
+          main: "Custodian 7",
+          secondary: "CustAcct7E"
         },
         to: {
-          main: "Custodian 4",
-          secondary: "CustAcct4D"
+          main: "Custodian 2",
+          secondary: "CustAcct2D"
         },
         value: {
           main: "39000",
@@ -196,12 +200,12 @@ export default [
           secondary: ""
         },
         from: {
-          main: "Custodian 1",
-          secondary: "CustAcct1B"
+          main: "Custodian 7",
+          secondary: "CustAcct7E"
         },
         to: {
-          main: "Custodian 4",
-          secondary: "CustAcct4D"
+          main: "Custodian 2",
+          secondary: "CustAcct2A"
         },
         value: {
           main: "50000",
@@ -226,12 +230,12 @@ export default [
           secondary: ""
         },
         from: {
-          main: "Custodian 1",
-          secondary: "CustAcct1E"
+          main: "Custodian 7",
+          secondary: "CustAcct7E"
         },
         to: {
-          main: "Custodian 4",
-          secondary: "CustAcct4B"
+          main: "Custodian 2",
+          secondary: "CustAcct2A"
         },
         value: {
           main: "65000",
@@ -256,15 +260,15 @@ export default [
         secondary: ""
       },
       agreement: {
-        main: "ACUO SG - Counterparty C1",
+        main: "ACUO US - Counterparty C2",
         secondary: ""
       },
       from: {
-        main: "ACUO SG",
+        main: "Counterparty C1",
         secondary: ""
       },
       to: {
-        main: "Counterparty C1",
+        main: "ACUO US",
         secondary: ""
       },
       value: {
@@ -291,12 +295,12 @@ export default [
           secondary: ""
         },
         from: {
-          main: "Custodian 1",
-          secondary: "CustAcct1E"
+          main: "Custodian 8",
+          secondary: "CustAcct8E"
         },
         to: {
-          main: "Custodian 5",
-          secondary: "CustAcct5D"
+          main: "Custodian 2",
+          secondary: "CustAcct2D"
         },
         value: {
           main: "500000",
@@ -321,12 +325,12 @@ export default [
           secondary: ""
         },
         from: {
-          main: "Custodian 1",
-          secondary: "CustAcct1B"
+          main: "Custodian 8",
+          secondary: "CustAcct8E"
         },
         to: {
-          main: "Custodian 5",
-          secondary: "CustAcct5D"
+          main: "Custodian 2",
+          secondary: "CustAcct2A"
         },
         value: {
           main: "347963.2",
@@ -351,12 +355,12 @@ export default [
           secondary: ""
         },
         from: {
-          main: "Custodian 1",
-          secondary: "CustAcct1E"
+          main: "Custodian 8",
+          secondary: "CustAcct8E"
         },
         to: {
-          main: "Custodian 5",
-          secondary: "CustAcct5E"
+          main: "Custodian 2",
+          secondary: "CustAcct2A"
         },
         value: {
           main: "7834.8",
