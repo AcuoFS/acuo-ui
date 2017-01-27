@@ -118,7 +118,8 @@ class Pledge extends React.Component {
 
   render() {
     const { optimisation, selection, onUpdateOptimisationSettings, onTogglePendingAllocation,
-      pendingAllocation, sliderCheckbox, onToggleCheckall, onAllocate } = this.props
+      pendingAllocation, sliderCheckbox, onToggleCheckall, onAllocate,
+      collateral, onRemoveFromEarmarked} = this.props
 
     let collateralHeader = (
       <div className={styles.collateralRow + ' ' + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
@@ -142,14 +143,31 @@ class Pledge extends React.Component {
           <div className={styles.collateralCell}>Status</div>
           <div className={styles.collateralCell}>Rating</div>
           <div className={styles.collateralCell}>Maturity Date</div>
-          <div className={styles.collateralCell}>Internal Cost</div>
-          <div className={styles.collateralCell}>Opportunity Cost</div>
+          <div className={styles.collateralCell}>Internal Cost (bps)</div>
+          <div className={styles.collateralCell}>Opportunity Cost (bps)</div>
           <div className={styles.collateralCell}>ISIN</div>
           <div className={styles.collateralCell}>Venue</div>
           <div className={styles.collateralCell}>Acc ID</div>
         </div>
       )
     }
+
+    let collateralAssetGroupList = []
+
+    if (collateral) {
+      const collateralJSList = collateral.toJS()
+      for (const key of Object.keys(collateralJSList)) {
+        collateralAssetGroupList = [...collateralAssetGroupList,
+          <CollateralAssetGroup key={key}
+                                propCollateralType={key}
+                                propCollateralAssetList={collateralJSList[key]}
+                                propIsExpanded={true}
+                                propIsDisplayAll={this.state.open}
+                                propHandleOnRemoveFromEarmarked={onRemoveFromEarmarked}/>
+        ]
+      }
+    }
+
 
     return (
 
@@ -208,7 +226,9 @@ class Pledge extends React.Component {
 
                   {collateralHeader}
 
-                  <CollateralAssetGroup propCollateralType={"Earmarked"}
+                  {collateralAssetGroupList}
+
+                  {/*<CollateralAssetGroup propCollateralType={"Earmarked"}
                                         propCollateralAssetList={
                                           this.props.collateral ? this.props.collateral.get('earmarked').toJS() : [] }
                                         propIsExpanded={true}
@@ -249,7 +269,7 @@ class Pledge extends React.Component {
                                         propCollateralAssetList={
                                           this.props.collateral ? this.props.collateral.get('corporateEquity').toJS() : [] }
                                         propIsExpanded={true}
-                                        propIsDisplayAll={this.state.open}/>
+                                        propIsDisplayAll={this.state.open}/>*/}
                 </div>
 
               </div>

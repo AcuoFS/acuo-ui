@@ -1,3 +1,3 @@
 export const formatPercentageOneDecimal = (value) => (
-  value.toFixed(1) + "%"
+  parseFloat(value).toFixed(1) + "%"
 )
