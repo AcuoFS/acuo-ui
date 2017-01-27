@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react'
 import CollateralEarmarkStatusPopup from './popups/CollateralEarmarkStatusPopup'
 import CollateralStatusPopup from './popups/CollateralStatusPopup'
 import {COLLATERAL_EARMARKED} from '../../../constants/CollateralTypes'
+import { maxLengthToEllipsis } from '../../../utils'
 import styles from '../Pledge.css'
 
 
@@ -82,7 +83,7 @@ class CollateralAsset extends React.Component {
     if (propIsDisplayAll) {
       return (
         <div className={styles.collateralRow}>
-          <div className={styles.collateralCell}>{propAsset}</div>
+          <div className={styles.collateralCell} title={propAsset}>{maxLengthToEllipsis(propAsset, 25)}</div>
           <div className={styles.collateralCell}>{propPrice}</div>
           <div className={styles.collateralCell}>{propCcy}</div>
           <div className={styles.collateralCell}>{propDeliveryTime}</div>
@@ -92,8 +93,8 @@ class CollateralAsset extends React.Component {
           <div className={styles.collateralCell}>{propInternalCost}</div>
           <div className={styles.collateralCell}>{propOppCost}</div>
           <div className={styles.collateralCell}>{propIsin}</div>
-          <div className={styles.collateralCell}>{propVenue}</div>
-          <div className={styles.collateralCell}>{propAcctId}</div>
+          <div className={styles.collateralCell} title={propVenue}>{maxLengthToEllipsis(propVenue, 10)}</div>
+          <div className={styles.collateralCell} title={propAcctId}>{maxLengthToEllipsis(propAcctId, 10)}</div>
         </div>
       )
     }
