@@ -5,32 +5,30 @@ import _ from 'lodash'
 const initState = Map({"items":   List(),
                        "filters": List()})
 
-const filterPropMapping = [
-  {attr: "legalEntity", label: "Legal Entity"},
-  {attr: "derivative",  label: "Deriv Type"},
-  {attr: "time",        label: "Time Window", type: "time"},
-  {attr: "cptyOrg",     label: "CPTY Organisation"},
-  {attr: "cptyEntity",  label: "CPTY Entity", type: "multi"},
+const initFilters = [
+  {order: 1, attr: "legalEntity", selected:"", label: "Legal Entity"},
+  {order: 2, attr: "type",        selected:"", label: "Deriv Type"},
+  {order: 3, attr: "time",        selected:"", label: "Time Window", type: "time"},
+  {order: 4, attr: "cptyOrg",     selected:"", label: "CPTY Organisation"},
+  {order: 5, attr: "cptyEntity",  selected:"", label: "CPTY Entity", type: "multi"},
 ]
 
-const updateFilters = (filters, newFilters) => {
-  const newFilterAttrs = _.map(newFilters, 'attr')
-  const untouchedFilters = _.filter(filters, ({attr}) => (!newFilterAttrs.includes(attr)))
-  return _.concat(untouchedFilters, newFilters)
-}
+const updateFilters = (filters, newFilters) => (
+  _.reduce(newFilters, (filters, newFilter) => (
+    _.map(filters, filter => (
+      (filter.attr === newFilter.attr)
+      ? _.set(filter, 'selected', newFilter.selected)
+      : filter
+    ))
+  ), filters)
+)
 
 export default function reconReducer(state = initState, action) {
   switch(action.type) {
     case 'RECON_INIT_STATE':
       let items = action.items
-
-      let filters = _.map(filterPropMapping, mapping => _.merge(mapping, {
-        selected: "",
-        options: uniqueInColumn(items, mapping.attr)
-      }))
-
       return state.set('items', fromJS(items))
-                  .set('filters', fromJS(filters))
+                  .set('filters', fromJS(initFilters))
 
     case 'RECON_FILTER_SET':
       let newFilters = action.value
@@ -41,10 +39,5 @@ export default function reconReducer(state = initState, action) {
 
     default:
       return state
-    }
   }
-
-// get unique value of one column from items
-const uniqueInColumn = (items, column) => {
-  return _.uniq(_.map(items, column))
 }

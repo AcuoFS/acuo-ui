@@ -14,8 +14,6 @@ export default class FilterBar extends React.Component {
       filterItems: styles.show,
     }
 
-    props.setFilter('legalEntity', {a: 1})
-
     this.handleCPTYEntityChange = this.handleCPTYEntityChange.bind(this)
     this.toggleFilter = this.toggleFilter.bind(this)
     this.selectFilteredEntities = this.selectFilteredEntities.bind(this)
@@ -72,26 +70,26 @@ export default class FilterBar extends React.Component {
               </div>
 
               <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
-                <FilterBarDropdown title={'Legal Entity'}
+                <FilterBarDropdown title="Legal Entity"
                                    options={this.props.legalEntityList}
                                    handleSelectChange={this.props.onLegalEntityChange}
-                                   selectedOption={this.props.filters.legalEntity}/>
+                                   selected={this.props.filters.legalEntity}/>
 
-                <FilterBarDropdown title={'Deriv Type'}
+                <FilterBarDropdown title="Deriv Type"
                                    handleSelectChange={this.props.onDerivChange}
                                    options={this.props.derivativeType}
-                                   selectedOption={this.props.filters.derivType}/>
+                                   selected={this.props.filters.derivType}/>
 
-                <FilterBarDropdown title={'CPTY Organisation'}
+                <FilterBarDropdown title="CPTY Organisation"
                                    handleSelectChange={this.props.onCptyOrgChange}
                                    options={this.props.cptyOrganisation}
-                                   selectedOption={this.props.filters.cptyOrg}/>
+                                   selected={this.props.filters.cptyOrg}/>
 
-                <FilterBarDropdown title={'CPTY Entity'}
+                <FilterBarDropdown title="CPTY Entity"
                                    handleSelectChange={this.handleCPTYEntityChange}
                                    dropdownType='multi'
                                    options={this.props.cptyEntity}
-                                   selectedOptionList={this.props.filters.cptyEntity || []}/>
+                                   selected={this.props.filters.cptyEntity || []}/>
               </div>
             </div>
   }
