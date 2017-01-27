@@ -25,8 +25,6 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = () => {}
-
 // =============================================================================
 // redux
 class Reconcile extends React.Component {
@@ -59,7 +57,7 @@ class Reconcile extends React.Component {
 // connect component with redux
 const ReconcileContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
+  {}
 )(Reconcile)
 
 export {ReconcileContainer}
