@@ -35,20 +35,12 @@ export default class FilterDropdown extends React.Component {
 
   // this function will handle selectChange from subComponent
   handleOnSelectChange(selected) {
-    const { attr, setFilter, type } = this.props
+    const { attr, setFilter } = this.props
 
-    if(type === 'multi') {
-      // if it is multi-value filter
-      setFilter([{attr, selected}])
-    } else {
-      // if it is single-value filter
-      setFilter([{
-        attr,
-        selected: (_.toUpper(selected) === 'ALL')
-                  ? ""
-                  : selected
-      }])
-    }
+    setFilter({
+      attr,
+      selected,
+    })
   }
 
   renderMenu(menuType = 'default', props) {
@@ -74,26 +66,6 @@ export default class FilterDropdown extends React.Component {
     const { type, selected, label } = this.props
     const menu = this.renderMenu(type, this.props)
 
-    // as selected might be undefined, which is illegal
-    // make it legal according to type
-    const legalSelected = selected || 'all'
-
-    const seletedAsText = (
-      (_.isString(legalSelected))
-      // if it is string
-      ? legalSelected
-      // if it is array (not string)
-      : _.isEmpty(legalSelected)
-        // if it is empty array
-        ? 'all'
-        // if it is non-empty array
-        : (legalSelected.length === 1)
-          // 1 element array
-          ? _.head(legalSelected)
-          // multi elements array
-          : 'multiple'
-    )
-
     return (
       <div className={styles.filterItem}>
         <label className={styles.filterLabel}>{label}</label>
@@ -102,7 +74,7 @@ export default class FilterDropdown extends React.Component {
              onMouseLeave={this.handleOnMouseLeave}>
 
           <div className={styles.selectedText}>
-            {_.toUpper(seletedAsText)}
+            {selected? (selected.label || 'ALL') : 'ALL'}
           </div>
 
           {this.state.isOpen && menu}

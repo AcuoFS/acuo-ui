@@ -4,20 +4,24 @@ import styles from '../FilterBar.css'
 const DropdownMenu = (props) => {
     const {handleOnSelectChange, options} = props
 
-    // merge option 'ALL', with actual options
-    const optionList = ['all', ...options]
-
     // handleLocalOptionChange
-    const handleLocalOptionChange = (e, option) => {
+    const handleLocalOptionChange = (e, label, value = '') => {
       e.preventDefault()
-      handleOnSelectChange(option)
+      handleOnSelectChange({
+        label,
+        value,
+      })
     }
 
     return (
       <ul className={styles.filtersList}>
-        {optionList.map(option => (
+        <li onClick={e => handleLocalOptionChange(e, 'ALL')}>
+          ALL
+        </li>
+
+        {options.map(option => (
           <li key={option}
-              onClick={e => handleLocalOptionChange(e, option)}>
+              onClick={e => handleLocalOptionChange(e, option.toUpperCase(), option)}>
             {option.toUpperCase()}
           </li>
         ))}

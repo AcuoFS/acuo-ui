@@ -12,9 +12,7 @@ import styles from '../FilterBar.css'
   ----------
   unselected
   ==========
-
 */
-
 export default class DropdownMultiSelectMenu extends React.Component{
   constructor(props) {
     super(props)
@@ -23,38 +21,58 @@ export default class DropdownMultiSelectMenu extends React.Component{
       filter: '',
     }
 
-    this.setFilter = this.setFilter.bind(this)
+    this.setLocalFilter = this.setLocalFilter.bind(this)
     this.select = this.select.bind(this)
     this.deselect = this.deselect.bind(this)
     this.deselectAll = this.deselectAll.bind(this)
   }
 
-  setFilter(value) {
+  setLocalFilter(value) {
     this.setState(state => _.set(state, 'filter', value))
   }
 
   select(option) {
     // prev selected coule be undefined, make it an array in that case
-    const prevSelected = this.props.selected || []
-    const selected = _.concat(prevSelected, option)
+    const prevSelected = _.get(this.props, 'selected.value', [])
+    const selected = (prevSelected === '')
+                     ? [option]
+                     : _.concat(prevSelected, option)
 
-    this.props.handleOnSelectChange(selected)
+    this.props.handleOnSelectChange({
+      label: (selected.length > 1)
+             // more than 1 selected
+             ? 'MULTIPLE'
+             // only 1 selected
+             : _.toUpper(selected[0]),
+      value: selected,
+    })
   }
 
   deselect(option) {
     // prev selected must be an non-empty array
-    const prevSelected = this.props.selected
+    const prevSelected = _.get(this.props, 'selected.value', [])
     const selected = _.filter(prevSelected, o => (o != option))
 
-    this.props.handleOnSelectChange(selected)
+    this.props.handleOnSelectChange({
+      label: (selected.length > 1)
+             // more than 1 selected
+             ? 'MULTIPLE'
+             // only 1 selected
+             : _.toUpper(_.get(selected, 0, 'ALL')),
+      value: selected,
+    })
   }
 
   deselectAll() {
-    this.props.handleOnSelectChange([])
+    this.props.handleOnSelectChange({
+      label: 'ALL',
+      value: ''
+    })
   }
 
   render() {
-    const { options, selected } = this.props
+    const { options } = this.props
+    const selected = _.get(this.props, 'selected.value', [])
 
     // calculate unselected
     const unselected = _.difference(options, selected)
@@ -72,7 +90,7 @@ export default class DropdownMultiSelectMenu extends React.Component{
         <li className={styles.paddingless}
             onClick={e => e.stopPropagation()}>
           <input className={styles.filterSearchBox}
-                 onInput={e => this.setFilter(e.currentTarget.value)}
+                 onInput={e => this.setLocalFilter(e.currentTarget.value)}
                  placeholder="Search..."/>
         </li>
 

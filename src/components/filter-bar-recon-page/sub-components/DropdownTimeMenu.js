@@ -1,123 +1,210 @@
 import React from 'react'
+import _ from 'lodash'
+import clearTime from '../../../utils/clearTime'
 import styles from '../FilterBar.css'
 
 export default class DropdownTimeMenu extends React.Component {
-
   constructor(props) {
     super(props)
+
     this.state = {
-      timeWindowTitle: 'today',
+      currentMenu: 'today',
+
+      // today's date can be hacked
+      // during development, the data from backend is all 2017-01-13
+      today: new Date(2017, 0, 14),
+      // this should be the real config if backend data is correct
+      // today: new Date(),
     }
-    this.renderPrevDay = this.renderPrevDay.bind(this)
-    this.renderNextDay = this.renderNextDay.bind(this)
-    this.preventClose = this.preventClose.bind(this)
-    this.onMenuOptionSelect = this.onMenuOptionSelect.bind(this)
+
+    this.setCurrentMenu = this.setCurrentMenu.bind(this)
+    this.select = this.select.bind(this)
   }
 
-  checkTimeDay() {
-    switch (this.state.timeWindowTitle) {
-      case 'yesterday':
-        return (
-          this.setState({
-            timeWindowTitle: 'yesterday',
-          })
-        )
-
-      case 'tomorrow':
-        return (
-          this.setState({
-            timeWindowTitle: 'tomorrow',
-          })
-        )
-
-      default:
-        return (
-          this.setState({
-            timeWindowTitle: 'today',
-          })
-        )
-    }
+  select(selected) {
+    this.props.handleOnSelectChange(selected)
   }
 
-  renderPrevDay() {
-    if (this.state.timeWindowTitle == 'today') {
-      this.state.timeWindowTitle = 'yesterday'
-    } else {
-      this.state.timeWindowTitle = 'today'
-    }
-    this.checkTimeDay()
+  setCurrentMenu(menu) {
+    this.setState(state => _.set(state, 'currentMenu', menu))
   }
 
-  renderNextDay() {
-    if (this.state.timeWindowTitle == 'today') {
-      this.state.timeWindowTitle = 'tomorrow'
-    } else {
-      this.state.timeWindowTitle = 'today'
-    }
-    this.checkTimeDay()
+  // if this menu is shown, yesterdaySlots MUST NOT be empty
+  yesterdayMenu(yesterdaySlots, todaySlots, tomorrowSlots) {
+    const day = _.toUpper('yesterday')
+
+    return (
+    <ul className={styles.filtersList + ' ' + styles.center}>
+      <li className={styles.timeTitle} onClick={e => e.stopPropagation()}>
+        <span>{day}</span>
+        <div className={styles.timeArrowRight}
+             onClick={e => {e.stopPropagation()
+                            this.setCurrentMenu('today')}}></div>
+      </li>
+
+      <li onClick={() => this.select({
+                           label: day + ': ALL',
+                           value: yesterdaySlots[0].getTime(),
+                           type: 'sameDay',
+                         })}>
+        ALL
+      </li>
+
+      {yesterdaySlots.map(time => (
+        <li key={time.getTime()}
+            onClick={() => this.select({
+              label: day +': ' + time.getHours() + ':00 HRS',
+              value: time.getTime(),
+            })}>
+          {time.getHours()}:00 HRS
+        </li>
+      ))}
+    </ul>
+    )
   }
 
-  preventClose(e) {
-    return e.stopPropagation()
+  // it MIGHT BE empty for todaySlots, it will be shown as the entry point
+  todayMenu(yesterdaySlots, todaySlots, tomorrowSlots) {
+    const day = _.toUpper('today')
+
+    return (
+    <ul className={styles.filtersList + ' ' + styles.center}>
+      <li className={styles.timeTitle} onClick={e => e.stopPropagation()}>
+        {(yesterdaySlots.length > 0)
+         &&
+         <div className={styles.timeArrowLeft}
+              onClick={e => {e.stopPropagation()
+                            this.setCurrentMenu('yesterday')}}></div>}
+        <span>{day}</span>
+        {(tomorrowSlots.length > 0)
+         &&
+         <div className={styles.timeArrowRight}
+              onClick={e => {e.stopPropagation()
+                            this.setCurrentMenu('tomorrow')}}></div>}
+      </li>
+
+      {(todaySlots.length > 0)
+       &&
+       <li onClick={() => this.select({
+             label: day + ': ALL',
+             value: todaySlots[0].getTime(),
+             type: 'sameDay',
+           })}>
+        ALL
+      </li>}
+
+      {todaySlots.map(time => (
+        <li key={time.getTime()}
+            onClick={() => this.select({
+              label: day +': ' + time.getHours() + ':00 HRS',
+              value: time.getTime(),
+            })}>
+          {time.getHours()}:00 HRS
+        </li>
+      ))}
+    </ul>
+    )
   }
 
-  onMenuOptionSelect(handleOnOptionChange, minTime, maxTime, string) {
-    handleOnOptionChange(this.state.timeWindowTitle + ": " + string, minTime, maxTime)
-  }
+  // if this menu is shown, tomorrowSlots MUST NOT be empty
+  tomorrowMenu(yesterdaySlots, todaySlots, tomorrowSlots) {
+    const day = _.toUpper('tomorrow')
 
-  checkShow(day, stateDay) {
-    if (day == stateDay)
-      return styles.timeShow
-    else
-      return ''
-  }
+    return (
+    <ul className={styles.filtersList + ' ' + styles.center}>
+      <li className={styles.timeTitle} onClick={e => e.stopPropagation()}>
+        <div className={styles.timeArrowLeft}
+             onClick={e => {e.stopPropagation()
+                            this.setCurrentMenu('today')}}></div>
+        <span>{day}</span>
+      </li>
 
-  checkTimesList(obj) {
-    if (obj)
-      if (obj.times.length)
-        return styles.show
-      else
-        return styles.hide
-    else return styles.hide
+      <li onClick={() => this.select({
+                           label: day + ': ALL',
+                           value: tomorrowSlots[0].getTime(),
+                           type: 'sameDay',
+                         })}>
+        ALL
+      </li>
+
+      {tomorrowSlots.map(time => (
+        <li key={time.getTime()}
+            onClick={() => this.select({
+              label: day +': ' + time.getHours() + ':00 HRS',
+              value: time.getTime(),
+            })}>
+          {time.getHours()}:00 HRS
+        </li>
+      ))}
+    </ul>
+    )
   }
 
   render() {
-    const {handleOnOptionChange, options} = this.props
-    // merge option 'ALL', with actual options
-    const optionList = options
+    const { options } = this.props
+    const { today } = this.state
+    const optionsInDate = _.map(options, o => new Date(o))
 
-    return (
-      <div>
-        {optionList.map((option, index) => {
+    const yesterdaySlots = _.sortBy(filterDates(optionsInDate, this.state.today, -1))
+    const todaySlots     = _.sortBy(filterDates(optionsInDate, this.state.today))
+    const tomorrowSlots  = _.sortBy(filterDates(optionsInDate, this.state.today, 1))
 
-          if (option.times.length > 0)
-            return (
-              <ul key={index}
-                  className={styles.filtersList + ' ' + styles.timeSlot + ' ' + this.checkShow(option.day, this.state.timeWindowTitle)}>
+    let menu
+    switch (this.state.currentMenu) {
+      case 'yesterday':
+        menu = this.yesterdayMenu(yesterdaySlots, todaySlots, tomorrowSlots)
+        break
 
-                <li className={styles.timeTitle} onClick={this.preventClose}>
-                  <div className={styles.timeArrowLeft + ' ' + this.checkTimesList(optionList[index - 1])}
-                       onClick={this.renderPrevDay}></div>
-                  <span>{this.state.timeWindowTitle}</span>
-                  <div className={styles.timeArrowRight + ' ' + this.checkTimesList(optionList[index + 1])}
-                       onClick={this.renderNextDay}></div>
-                </li>
+      case 'tomorrow':
+        menu = this.tomorrowMenu(yesterdaySlots, todaySlots, tomorrowSlots)
+        break
 
-                <li
-                  onClick={ e => this.onMenuOptionSelect(handleOnOptionChange, option.minTime, option.maxTime, 'All')}>
-                  All
-                </li>
+      default:
+        menu = this.todayMenu(yesterdaySlots, todaySlots, tomorrowSlots)
+    }
 
-                {option.times.map((time, index) => (
-                  <li key={index}
-                      onClick={ e => this.onMenuOptionSelect(handleOnOptionChange, time.min, time.max, String((new Date(time.min)).getHours() + ':00 Hrs').toUpperCase())}>
-                    {String((new Date(time.min)).getHours() + ':00 Hrs').toUpperCase()}
-                  </li>
-                ))}
+    return <div>{menu}</div>
+  }
+}
 
-              </ul>)
-        })}
-      </div>
-    )
+
+/*
+ offset will be 0: (today),
+               -1: (yesterday)
+                1: (tomorrow)
+    d-1     d     d+1    d+2
+-----*------*------*------*-------
+     |      |      |      |
+     |      |      |      |
+     |y'day |today |t'rrow|
+     |-1    |0     |1     |
+*/
+const filterDates = (dates, baseDate, offset = 0) => {
+  const oneDayTime = 24 * 60 * 60 * 1000
+
+  // create critical points
+  const d = clearTime(baseDate)
+  const dMinusOne = new Date(d.getTime() - oneDayTime)
+  const dPlusOne = new Date(d.getTime() + oneDayTime)
+  const dPlusTwo = new Date(d.getTime() + 2 * oneDayTime)
+
+  switch (offset) {
+    // yesterday [d-1, d)
+    case -1:
+      return _.filter(dates, date => (
+        _.inRange(date.getTime(), dMinusOne.getTime(), d.getTime())
+      ))
+
+    // tomorrow [d, d+1)
+    case 1:
+      return _.filter(dates, date => (
+        _.inRange(date.getTime(), dPlusOne.getTime(), dPlusTwo.getTime())
+      ))
+
+    // today [d+1, d+2)
+    default:
+      return _.filter(dates, date => (
+        _.inRange(date.getTime(), d.getTime(), dPlusOne.getTime())
+      ))
   }
 }

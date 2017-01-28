@@ -13,18 +13,16 @@ const initFilters = [
   {order: 5, attr: "cptyEntity",  label: "CPTY Entity", type: "multi"},
 ]
 
-const updateFilters = (filters, newFilters) => (
-  _.reduce(newFilters, (filters, newFilter) => (
-    _.map(filters, filter => (
-      (filter.attr === newFilter.attr)
-      ? _.set(filter, 'selected', newFilter.selected)
-      : filter
+const updateFilters = (filters, newFilter) => (
+  _.map(filters, filter => (
+    (filter.attr === newFilter.attr)
+    ? _.set(filter, 'selected', newFilter.selected)
+    : filter
     ))
-  ), filters)
 )
 
 export default function reconReducer(state = initState, action) {
-  let items, filters, newFilters, updatedFilters
+  let items, filters, newFilter, updatedFilters
 
   switch(action.type) {
     case 'RECON_INIT_STATE':
@@ -33,9 +31,9 @@ export default function reconReducer(state = initState, action) {
                   .set('filters', fromJS(initFilters))
 
     case 'RECON_FILTER_SET':
-      newFilters = action.value
+      newFilter = action.value
       filters = state.get('filters').toJS()
-      updatedFilters = updateFilters(filters, newFilters)
+      updatedFilters = updateFilters(filters, newFilter)
       return state.set('filters', fromJS(updatedFilters))
 
     default:
