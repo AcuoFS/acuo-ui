@@ -1,4 +1,4 @@
-export const COLLATERAL_EARMARKED = "Earmarked"
+export const COLLATERAL_EARMARKED = "earmarked"
 export const POPUP_TAB_ALLOCATE = "allocate"
 export const POPUP_TAB_AMEND = "amend"
 export const POPUP_TAB_EARMARK = "earmark"

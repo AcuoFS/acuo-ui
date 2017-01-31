@@ -2,9 +2,14 @@ import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import DropzoneComponent from 'react-dropzone-component'
 import {UPLOAD_FILE_URL} from '../../constants/APIcalls'
+import {FILE_XLSX, FILE_CSV} from '../../constants/UploadFileTypes'
 import styles from './UploadWidget.css'
 
-
+/**
+ * React component from:
+ * https://github.com/felixrieseberg/React-Dropzone-Component
+ * http://www.dropzonejs.com/
+ */
 export default class UploadWidget extends React.Component {
   constructor(props) {
     super(props)
@@ -14,12 +19,10 @@ export default class UploadWidget extends React.Component {
     }
 
     this.djsConfig = {
-      // addRemoveLinks: true,
       autoProcessQueue: false
       , maxFiles: 5
       , parallelUploads: 5
-      // Accept only XLSX files
-      , acceptedFiles: ".xlsx"
+      , acceptedFiles: FILE_XLSX + "," + FILE_CSV
       // Overriding the default HTML tags by DZ
       , previewTemplate: ReactDOMServer.renderToStaticMarkup(
         <div className={"dz-preview dz-file-preview " + styles.alignFileIconLeft}>
@@ -43,8 +46,8 @@ export default class UploadWidget extends React.Component {
     }
 
     this.componentConfig = {
-      iconFiletypes: ['.xlsx'],
-      showFiletypeIcon: false,
+      // iconFiletypes: ['.xlsx'],
+      // showFiletypeIcon: false,
       // Change this param to the server's URL
       postUrl: UPLOAD_FILE_URL
     }
@@ -103,8 +106,8 @@ export default class UploadWidget extends React.Component {
 
     return (
       /*<form id="uploadbanner" enctype="multipart/form-data" method="post" action="http://localhost:3000/">
-          <input type="file" id="myFile"/>
-          <input type="submit" value="Submit"/>
+       <input type="file" id="myFile"/>
+       <input type="submit" value="Submit"/>
        </form>*/
       <div className={styles.componentStyle}>
         <div className={styles.widgetHeader}>Upload Portfolio</div>
@@ -113,7 +116,7 @@ export default class UploadWidget extends React.Component {
             <span>
               Drag and drop portfolio files, or&nbsp;
               <a href="#" className="triggerFileSelection"
-                 onClick={(e)=> e.preventDefault()}>browse</a>.
+                 onClick={(e) => e.preventDefault()}>browse</a>.
             </span>
           </div>
         </DropzoneComponent>
