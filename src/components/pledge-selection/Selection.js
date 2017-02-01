@@ -49,7 +49,7 @@ export default class Selection extends React.Component {
         <td>{numberWithCommas(asset.get('valuePostHaircut'))}</td>
         <td>{asset.get('CCY')}</td>
         <td>{asset.get('haircut')}%</td>
-        <td>{asset.get('value')}</td>
+        <td>{numberWithCommas(asset.get('value'))}</td>
         <td>{numberWithCommas(asset.get('FX'))}</td>
         <td>{asset.get('venue')}</td>
         <td>
