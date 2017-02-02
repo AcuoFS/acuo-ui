@@ -10,7 +10,7 @@ import {
   removeAssetFromEarmark } from '../actions'
 import { List, fromJS } from 'immutable'
 
-import {ALLOCATE_COLLATERALS_URL} from '../constants/APIcalls'
+import {ALLOCATE_COLLATERALS_URL, ALLOCATE_COLLATERALS_URL_NEW} from '../constants/APIcalls'
 
 const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
   if(pendingAllocationSize >= selectionSize)
@@ -60,9 +60,8 @@ const mapDispatchToProps = dispatch => ({
     })
   },
   onAllocateEndpoint: (guids, optimisationSetting) => {
-    fetch('http://collateral.acuo.com/acuo/api/optimization/allocate', {
+    fetch(ALLOCATE_COLLATERALS_URL_NEW, {
       method: 'POST',
-      headers: new Headers({'Content-Type': 'application/json'}),
       body: JSON.stringify({
         optimisationSettings: optimisationSetting,
         toBeAllocated: guids
@@ -71,6 +70,7 @@ const mapDispatchToProps = dispatch => ({
       return response.json()
     }).then(obj => {
       console.log('obj' + JSON.stringify(obj))
+      dispatch(initSelection(fromJS(obj.items)))
     })
   },
 

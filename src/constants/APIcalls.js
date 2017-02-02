@@ -16,6 +16,7 @@ export const OPTIMISATION_URL         = 'http://52.74.186.112:8081/pledge/optimi
 export const COLLATERAL_URL           = 'http://52.74.186.112:8081/pledge/init-new-collateral'
 export const MARGIN_SELECTION_URL     = 'http://52.74.186.112:8081/pledge/init-selection'
 export const ALLOCATE_COLLATERALS_URL = 'http://52.74.186.112:8081/pledge/allocate-selection'
+export const ALLOCATE_COLLATERALS_URL_NEW = 'http://52.74.186.112:8081/pledge/allocate-selection-new'
 
 // POST
 export const UPLOAD_FILE_URL = 'http://valuation.acuo.com/acuo/api/upload'
