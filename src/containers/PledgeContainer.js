@@ -59,16 +59,18 @@ const mapDispatchToProps = dispatch => ({
       dispatch(initSelection(fromJS(obj.items)))
     })
   },
-  onAllocateEndpoint: (toBeAllocated, optimisationSettings) => {
-    const data = {optimisationSettings, toBeAllocated}
+  onAllocateEndpoint: (guids, optimisationSetting) => {
     fetch('http://collateral.acuo.com/acuo/api/optimization/allocate', {
       method: 'POST',
-      headers: new Headers({ 'Content-Type': 'application/json' }),
-      body: JSON.stringify({optimisationSettings, toBeAllocated})
+      headers: new Headers({'Content-Type': 'application/json'}),
+      body: JSON.stringify({
+        optimisationSettings: optimisationSetting,
+        toBeAllocated: guids
+      })
     }).then(response => {
       return response.json()
-    }).then(obj =>{
-      console.log('obj'+JSON.stringify(obj))
+    }).then(obj => {
+      console.log('obj' + JSON.stringify(obj))
     })
   },
 
