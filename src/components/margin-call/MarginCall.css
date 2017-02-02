@@ -54,7 +54,9 @@
 }
 
 .cell{
-  flex: 0 0 6.6%;
+  /*flex: 0 0 6.6%;*/
+  flex-grow: 1;
+  flex-basis: 0;
   align-self: center;
   padding: 5px;
 }
