@@ -1,0 +1,8 @@
+export const A_NAME = 'assetName'
+export const A_PRC_NET_HAIRCUT = 'valuePostHaircut'
+export const A_PRC_CCY = 'CCY'
+export const A_HAIRCUT_PCT = 'haircut'
+export const A_PRC = 'value'
+export const A_VENUE = 'venue'
+export const A_FX = 'FX'
+export const A_GUID = 'GUID'

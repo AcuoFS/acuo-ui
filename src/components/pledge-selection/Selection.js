@@ -2,6 +2,7 @@ import React from 'react'
 import {numberWithCommas} from '../../utils/numbersWithCommas'
 import DeselectionPopup from './sub-components/DeselectionPopup'
 import {List, toJS} from 'immutable'
+import * as ASSET from '../../constants/AllocatedAssetAttributes'
 import styles from './Selection.css'
 
 export default class Selection extends React.Component {
@@ -41,17 +42,16 @@ export default class Selection extends React.Component {
   }
 
   renderMargin(asset, mgnType) {
-    const popupID = asset.get('GUID') + mgnType + asset.get('assetName')
-
+    const popupID = asset.get(ASSET.A_GUID) + mgnType + asset.get(ASSET.A_NAME)
     return (
-      <tr key={asset.get('assetName')}>
-        <td>{asset.get('assetName')}</td>
-        <td>{numberWithCommas(asset.get('valuePostHaircut'))}</td>
-        <td>{asset.get('CCY')}</td>
-        <td>{asset.get('haircut')}%</td>
-        <td>{asset.get('value')}</td>
-        <td>{numberWithCommas(asset.get('FX'))}</td>
-        <td>{asset.get('venue')}</td>
+      <tr key={asset.get(ASSET.A_NAME)}>
+        <td>{asset.get(ASSET.A_NAME)}</td>
+        <td>{numberWithCommas(asset.get(ASSET.A_PRC_NET_HAIRCUT))}</td>
+        <td>{asset.get(ASSET.A_PRC_CCY)}</td>
+        <td>{asset.get(ASSET.A_HAIRCUT_PCT)}%</td>
+        <td>{numberWithCommas(asset.get(ASSET.A_PRC))}</td>
+        <td>{numberWithCommas(asset.get(ASSET.A_FX))}</td>
+        <td>{asset.get(ASSET.A_VENUE)}</td>
         <td>
           <div className={styles.earmarkAssetButton}
                onClick={() => {
