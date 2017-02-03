@@ -43,14 +43,14 @@ export default class Selection extends React.Component {
   }
 
   renderMargin(asset, mgnType, guid) {
-    const popupID = guid + mgnType + asset.get(ASSET.A_NAME)
+    const popupID = guid + mgnType + asset.get(ASSET.A_ID) + asset.get(ASSET.A_NAME)
     return (
-      <tr key={asset.get(ASSET.A_NAME)}>
+      <tr key={asset.get(ASSET.A_ID)}>
         <td>{asset.get(ASSET.A_NAME)}</td>
-        <td>{numberWithCommas(asset.get(ASSET.A_PRC_NET_HAIRCUT))}</td>
-        <td>{asset.get(ASSET.A_PRC_CCY)}</td>
+        <td>{numberWithCommas(asset.get(ASSET.A_NET_AMT))}</td>
+        <td>{asset.get(ASSET.A_CCY)}</td>
         <td>{asset.get(ASSET.A_HAIRCUT_PCT)}%</td>
-        <td>{numberWithCommas(asset.get(ASSET.A_PRC))}</td>
+        <td>{numberWithCommas(asset.get(ASSET.A_AMT))}</td>
         <td>{numberWithCommas(asset.get(ASSET.A_FX))}</td>
         <td>{asset.get(ASSET.A_VENUE)}</td>
         <td>

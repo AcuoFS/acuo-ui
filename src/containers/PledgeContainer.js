@@ -47,19 +47,19 @@ const mapDispatchToProps = dispatch => ({
   onToggleCheckall: () => {
     dispatch(toggleCheckall())
   },
+  // onAllocate_old: (guids, optimisationSetting) => {
+  //   const data = {guids, optimisationSetting}
+  //   fetch(ALLOCATE_COLLATERALS_URL, {
+  //     method: 'POST',
+  //     body: JSON.stringify(data)
+  //   }).then(response => {
+  //     return response.json()
+  //   }).then(obj => {
+  //     // dispatch(updateCollateral(fromJS(obj.data.collateral)))
+  //     dispatch(initSelection(fromJS(obj.items)))
+  //   })
+  // },
   onAllocate: (guids, optimisationSetting) => {
-    const data = {guids, optimisationSetting}
-    fetch(ALLOCATE_COLLATERALS_URL, {
-      method: 'POST',
-      body: JSON.stringify(data)
-    }).then(response => {
-      return response.json()
-    }).then(obj => {
-      // dispatch(updateCollateral(fromJS(obj.data.collateral)))
-      dispatch(initSelection(fromJS(obj.items)))
-    })
-  },
-  onAllocateEndpoint: (guids, optimisationSetting) => {
     fetch(ALLOCATE_COLLATERALS_URL_NEW, {
       method: 'POST',
       body: JSON.stringify({
@@ -69,11 +69,9 @@ const mapDispatchToProps = dispatch => ({
     }).then(response => {
       return response.json()
     }).then(obj => {
-      console.log('obj' + JSON.stringify(obj))
       dispatch(initSelection(fromJS(obj.items)))
     })
   },
-
   onRemoveFromEarmarked: (e, assetType, propAssetId, propAssetIdType) => {
 
     dispatch(removeAssetFromEarmark(e, assetType, propAssetId, propAssetIdType))
