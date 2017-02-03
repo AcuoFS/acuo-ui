@@ -34,6 +34,7 @@ const updatePledgeListToSend = (assetList, pledgeToSend, guid) => {
     pledgeToSend = [...pledgeToSend, {
       marginCallId: guid,
       assetId: asset[ASSET.A_ID],
+      // TODO quantity field to be provided by endpoint
       quantity: 10000.0,
       fromAccount: asset[ASSET.A_FROM_ACCT]
     }]
