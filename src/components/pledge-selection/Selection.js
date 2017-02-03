@@ -43,7 +43,6 @@ export default class Selection extends React.Component {
   }
 
   renderMargin(asset, mgnType, guid) {
-    console.log(JSON.stringify(asset))
     const popupID = guid + mgnType + asset.get(ASSET.A_NAME)
     return (
       <tr key={asset.get(ASSET.A_NAME)}>
