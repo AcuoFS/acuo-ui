@@ -29,10 +29,10 @@ export default class Selection extends React.Component {
           return (
             <div className={styles.firstLevel} key={index}>
               <div className={styles.assetName}>
-                {y.get('firstLevel')}
+                {y.getIn(['firstLevel', 'name'])}
               </div>
               <div className={styles.amount}>
-                {numberWithCommas(y.get('secondLevel').reduce((sum, z) => {
+                {numberWithCommas(y.getIn(['firstLevel', 'secondLevel']).reduce((sum, z) => {
                   return sum + parseFloat(z.get('amount'))
                 }, 0))}
               </div>
@@ -171,7 +171,7 @@ export default class Selection extends React.Component {
                 <div className={styles.amount}>
                   {numberWithCommas(this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {
                     return sum + x.get('data').reduce((sum, y) => {
-                        return sum + y.get('secondLevel').reduce((sum, z) => {
+                        return sum + y.getIn(['firstLevel','secondLevel']).reduce((sum, z) => {
                             return sum + parseFloat(z.get('amount'))
                           }, 0)
                       }, 0)
