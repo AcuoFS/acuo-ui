@@ -116,6 +116,17 @@ class Pledge extends React.Component {
         : 0 )
   }
 
+  isShowPledgeBtn(selection) {
+    if (selection) {
+      for (const statement of selection) {
+        if (statement.get('allocated')) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
   render() {
     const { optimisation, selection, onUpdateOptimisationSettings, onTogglePendingAllocation,
       pendingAllocation, sliderCheckbox, onToggleCheckall, onAllocate,
@@ -188,13 +199,22 @@ class Pledge extends React.Component {
                   Allocate
                 </div>
 
+                {/*<div className={styles.optButton + ' ' +*/}
+                {/*(this.checkIfExist(selection).reduce(this.sumOfIMVM, 0) > 0*/}
+                  {/*? styles.optBtnPledge*/}
+                  {/*: styles.btnDisabled )}*/}
+                     {/*onClick={() => onPledge(selection.toJS())}>*/}
+                  {/*Pledge*/}
+                {/*</div>*/}
+
                 <div className={styles.optButton + ' ' +
-                (this.checkIfExist(selection).reduce(this.sumOfIMVM, 0) > 0
+                (this.isShowPledgeBtn(selection)
                   ? styles.optBtnPledge
                   : styles.btnDisabled )}
                      onClick={() => onPledge(selection.toJS())}>
                   Pledge
                 </div>
+
 
               </div>
               {/* change btnEnabled to btnDisabled to disable the button*/}

@@ -12,7 +12,8 @@ import { List, fromJS } from 'immutable'
 import {
   ALLOCATE_COLLATERALS_URL,
   ALLOCATE_COLLATERALS_URL_NEW,
-  PLEDGE_ALLOCATIONS
+  PLEDGE_ALLOCATIONS,
+  MARGIN_SELECTION_URL
 } from '../constants/APIcalls'
 import * as ASSET from '../constants/AllocatedAssetAttributes'
 
@@ -100,12 +101,19 @@ const mapDispatchToProps = dispatch => ({
       // Check statement w allocations
       if (statement.allocated) {
         if (statement.allocated[ASSET.A_LIST_IM]) {
-          pledgeToSend = updatePledgeListToSend(statement.allocated[ASSET.A_LIST_IM], pledgeToSend, statement.GUID)
+          pledgeToSend =
+            updatePledgeListToSend(
+              statement.allocated[ASSET.A_LIST_IM],
+              pledgeToSend,
+              statement.GUID)
         }
         if (statement.allocated[ASSET.A_LIST_VM]) {
-          pledgeToSend = updatePledgeListToSend(statement.allocated[ASSET.A_LIST_VM], pledgeToSend, statement.GUID)
+          pledgeToSend =
+            updatePledgeListToSend(
+              statement.allocated[ASSET.A_LIST_VM],
+              pledgeToSend,
+              statement.GUID)
         }
-
       }
     })
 
@@ -116,8 +124,14 @@ const mapDispatchToProps = dispatch => ({
       return response.json()
     }).then(obj => {
       console.log(obj)
+    }).then(() => {
+      // Refresh selections
+      fetch(MARGIN_SELECTION_URL).then(response => {
+        return response.json()
+      }).then(obj => {
+        dispatch(initSelection(obj.items))
+      })
     })
-
   }
 })
 
