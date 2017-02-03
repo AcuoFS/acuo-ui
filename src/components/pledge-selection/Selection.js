@@ -42,9 +42,9 @@ export default class Selection extends React.Component {
     )
   }
 
-  renderMargin(asset, mgnType) {
+  renderMargin(asset, mgnType, guid) {
     console.log(JSON.stringify(asset))
-    const popupID = asset.get(ASSET.A_GUID) + mgnType + asset.get(ASSET.A_NAME)
+    const popupID = guid + mgnType + asset.get(ASSET.A_NAME)
     return (
       <tr key={asset.get(ASSET.A_NAME)}>
         <td>{asset.get(ASSET.A_NAME)}</td>
@@ -228,7 +228,7 @@ export default class Selection extends React.Component {
                       <td colSpan="8" className={styles.notAlcText}>Collateral has not been allocated</td>
                     </tr> :
                     this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).map(
-                      x => this.renderMargin(x, ASSET.A_LIST_IM))
+                      x => this.renderMargin(x, ASSET.A_LIST_IM, marginCall.get('GUID')))
                   }
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
@@ -268,7 +268,7 @@ export default class Selection extends React.Component {
                       <td colSpan="8" className={styles.notAlcText}>Collateral has not been allocated</td>
                     </tr> :
                     this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).map(
-                      x => this.renderMargin(x, ASSET.A_LIST_VM))
+                      x => this.renderMargin(x, ASSET.A_LIST_VM, marginCall.get('GUID')))
                   }
 
 
