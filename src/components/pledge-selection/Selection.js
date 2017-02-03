@@ -3,6 +3,7 @@ import {numberWithCommas} from '../../utils/numbersWithCommas'
 import DeselectionPopup from './sub-components/DeselectionPopup'
 import {List, toJS} from 'immutable'
 import * as ASSET from '../../constants/AllocatedAssetAttributes'
+import * as ALLOCATED from '../../constants/AllocatedAttributes'
 import styles from './Selection.css'
 
 export default class Selection extends React.Component {
@@ -42,6 +43,7 @@ export default class Selection extends React.Component {
   }
 
   renderMargin(asset, mgnType) {
+    console.log(JSON.stringify(asset))
     const popupID = asset.get(ASSET.A_GUID) + mgnType + asset.get(ASSET.A_NAME)
     return (
       <tr key={asset.get(ASSET.A_NAME)}>
@@ -130,9 +132,9 @@ export default class Selection extends React.Component {
       toggleL, toggleR, sideways
     } = this.props
 
-    let evlEmptyForIntMargin = this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).isEmpty()
-    let evlEmptyForVariMargin = this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).isEmpty()
-    let evlEmptyForMargin = !this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).isEmpty() || !this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).isEmpty()
+    let evlEmptyForIntMargin = this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).isEmpty()
+    let evlEmptyForVariMargin = this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).isEmpty()
+    let evlEmptyForMargin = !this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).isEmpty() || !this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).isEmpty()
 
     return (
       <div className={styles.panel} key={marginCall.get('GUID')}>
@@ -197,7 +199,7 @@ export default class Selection extends React.Component {
               <div className={styles.ttlMargin}>
                 <div>Total Allocated</div>
                 <div className={styles.bigFig + ' ' + styles.bold}>
-                  {Math.round((marginCall.getIn(['allocated', 'marginTotal']) || 0) / 10000) / 100}
+                  {Math.round((marginCall.getIn(['allocated', ALLOCATED.MGN_TOTAL]) || 0) / 10000) / 100}
                 </div>
                 <div className={styles.bold}>Million</div>
               </div>
@@ -225,13 +227,13 @@ export default class Selection extends React.Component {
                     <tr>
                       <td colSpan="8" className={styles.notAlcText}>Collateral has not been allocated</td>
                     </tr> :
-                    this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).map(
-                      x => this.renderMargin(x, 'initialMargin'))
+                    this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).map(
+                      x => this.renderMargin(x, ASSET.A_LIST_IM))
                   }
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
                     <td>
-                      {numberWithCommas((marginCall.getIn(['allocated', 'initialMarginTotal']) || 0).toFixed(2))}
+                      {numberWithCommas((marginCall.getIn(['allocated', ALLOCATED.IM_TOTAL]) || 0).toFixed(2))}
                     </td>
                     <td>USD</td>
                     <td></td>
@@ -265,15 +267,15 @@ export default class Selection extends React.Component {
                     <tr>
                       <td colSpan="8" className={styles.notAlcText}>Collateral has not been allocated</td>
                     </tr> :
-                    this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).map(
-                      x => this.renderMargin(x, 'variationMargin'))
+                    this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).map(
+                      x => this.renderMargin(x, ASSET.A_LIST_VM))
                   }
 
 
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
                     <td>
-                      {numberWithCommas((marginCall.getIn(['allocated', 'variationMarginTotal']) || 0).toFixed(2))}
+                      {numberWithCommas((marginCall.getIn(['allocated', ALLOCATED.VM_TOTAL]) || 0).toFixed(2))}
                     </td>
                     <td>USD</td>
                     <td></td>
@@ -289,7 +291,7 @@ export default class Selection extends React.Component {
                   <tr className={styles.bold}>
                     <td>Total</td>
                     <td
-                      className={styles.totalTable1 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>{numberWithCommas((marginCall.getIn(['allocated', 'marginTotal']) || 0).toFixed(2))}</td>
+                      className={styles.totalTable1 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>{numberWithCommas((marginCall.getIn(['allocated', ALLOCATED.MGN_TOTAL]) || 0).toFixed(2))}</td>
                     <td className={styles.totalTable2 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>USD</td>
                     <td></td>
                     <td></td>
