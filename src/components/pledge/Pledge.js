@@ -119,7 +119,7 @@ class Pledge extends React.Component {
   render() {
     const { optimisation, selection, onUpdateOptimisationSettings, onTogglePendingAllocation,
       pendingAllocation, sliderCheckbox, onToggleCheckall, onAllocate,
-      collateral, onRemoveFromEarmarked} = this.props
+      collateral, onRemoveFromEarmarked, onPledge} = this.props
 
     let collateralHeader = (
       <div className={styles.collateralRow + ' ' + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
@@ -191,7 +191,8 @@ class Pledge extends React.Component {
                 <div className={styles.optButton + ' ' +
                 (this.checkIfExist(selection).reduce(this.sumOfIMVM, 0) > 0
                   ? styles.optBtnPledge
-                  : styles.btnDisabled )}>
+                  : styles.btnDisabled )}
+                     onClick={() => onPledge(selection.toJS())}>
                   Pledge
                 </div>
 

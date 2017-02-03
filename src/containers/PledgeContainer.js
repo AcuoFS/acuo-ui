@@ -9,8 +9,12 @@ import {
   updateCollateral,
   removeAssetFromEarmark } from '../actions'
 import { List, fromJS } from 'immutable'
-
-import {ALLOCATE_COLLATERALS_URL, ALLOCATE_COLLATERALS_URL_NEW} from '../constants/APIcalls'
+import {
+  ALLOCATE_COLLATERALS_URL,
+  ALLOCATE_COLLATERALS_URL_NEW,
+  PLEDGE_ALLOCATIONS
+} from '../constants/APIcalls'
+import * as ASSET from '../constants/AllocatedAssetAttributes'
 
 const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
   if(pendingAllocationSize >= selectionSize)
@@ -22,6 +26,20 @@ const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
 }
 
 const checkIfExist = (something) => something || List()
+
+const updatePledgeListToSend = (assetList, pledgeToSend, guid) => {
+  assetList.map((asset) => {
+    // Create obj and push into array to send
+    pledgeToSend = [...pledgeToSend, {
+      marginCallId: guid,
+      assetId: asset[ASSET.A_ID],
+      quantity: 10000.0,
+      fromAccount: 'CustodianAccount1A'
+    }]
+  })
+
+  return pledgeToSend
+}
 
 const mapStateToProps = state => ({
   collateral : state.PledgeReducer.getIn(['pledgeData', 'collateral']),
@@ -75,6 +93,31 @@ const mapDispatchToProps = dispatch => ({
   onRemoveFromEarmarked: (e, assetType, propAssetId, propAssetIdType) => {
 
     dispatch(removeAssetFromEarmark(e, assetType, propAssetId, propAssetIdType))
+  },
+  onPledge: (selectionList) => {
+    let pledgeToSend = []
+    selectionList.map((statement) => {
+      // Check statement w allocations
+      if (statement.allocated) {
+        if (statement.allocated[ASSET.A_LIST_IM]) {
+          pledgeToSend = updatePledgeListToSend(statement.allocated[ASSET.A_LIST_IM], pledgeToSend, statement.GUID)
+        }
+        if (statement.allocated[ASSET.A_LIST_VM]) {
+          pledgeToSend = updatePledgeListToSend(statement.allocated[ASSET.A_LIST_VM], pledgeToSend, statement.GUID)
+        }
+
+      }
+    })
+
+    fetch(PLEDGE_ALLOCATIONS, {
+      method: 'POST',
+      body: JSON.stringify(pledgeToSend)
+    }).then(response => {
+      return response.json()
+    }).then(obj => {
+      console.log(obj)
+    })
+
   }
 })
 
