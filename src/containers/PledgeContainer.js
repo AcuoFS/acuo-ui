@@ -35,7 +35,7 @@ const updatePledgeListToSend = (assetList, pledgeToSend, guid) => {
       marginCallId: guid,
       assetId: asset[ASSET.A_ID],
       quantity: 10000.0,
-      fromAccount: 'CustodianAccount1A'
+      fromAccount: asset[ASSET.A_FROM_ACCT]
     }]
   })
 
