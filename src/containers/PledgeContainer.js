@@ -16,6 +16,7 @@ import {
   MARGIN_SELECTION_URL
 } from '../constants/APIcalls'
 import * as ASSET from '../constants/AllocatedAssetAttributes'
+import * as P_ASSET from '../constants/PledgeAssetAttribute'
 
 const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
   if(pendingAllocationSize >= selectionSize)
@@ -32,13 +33,12 @@ const updatePledgeListToSend = (assetList, pledgeToSend, guid) => {
   assetList.map((asset) => {
     // Create obj and push into array to send
     pledgeToSend = [...pledgeToSend, {
-      marginCallId: guid,
-      assetId: asset[ASSET.A_ID],
-      quantity: asset[ASSET.A_QTY],
-      fromAccount: asset[ASSET.A_FROM_ACCT]
+      [P_ASSET.P_MGN_CALL_ID]: guid,
+      [ASSET.A_ID]: asset[ASSET.A_ID],
+      [ASSET.A_QTY]: asset[ASSET.A_QTY],
+      [ASSET.A_FROM_ACCT]: asset[ASSET.A_FROM_ACCT]
     }]
   })
-
   return pledgeToSend
 }
 
@@ -99,21 +99,19 @@ const mapDispatchToProps = dispatch => ({
     let pledgeToSend = []
     selectionList.map((statement) => {
       // Check statement w allocations
-      if (statement.allocated) {
-        if (statement.allocated[ASSET.A_LIST_IM]) {
-          pledgeToSend =
-            updatePledgeListToSend(
-              statement.allocated[ASSET.A_LIST_IM],
-              pledgeToSend,
-              statement.GUID)
-        }
-        if (statement.allocated[ASSET.A_LIST_VM]) {
-          pledgeToSend =
-            updatePledgeListToSend(
-              statement.allocated[ASSET.A_LIST_VM],
-              pledgeToSend,
-              statement.GUID)
-        }
+      if (statement.allocated && statement.allocated[ASSET.A_LIST_IM]) {
+        pledgeToSend =
+          updatePledgeListToSend(
+            statement.allocated[ASSET.A_LIST_IM],
+            pledgeToSend,
+            statement.GUID)
+      }
+      if (statement.allocated && statement.allocated[ASSET.A_LIST_VM]) {
+        pledgeToSend =
+          updatePledgeListToSend(
+            statement.allocated[ASSET.A_LIST_VM],
+            pledgeToSend,
+            statement.GUID)
       }
     })
 
