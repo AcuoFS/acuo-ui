@@ -20,9 +20,7 @@ export default class MarginAgreementPortfolio extends React.Component {
     if (i.get(assetType)) {
       return i.get(assetType).reduce((asset, x) => {
         return asset + x.get('data').reduce((data, y) => {
-            return data + y.get('secondLevel').reduce((amount, z) => {
-                return amount + parseFloat(z.get('amount'))
-              }, 0)
+            return data + parseFloat(y.getIn(['firstLevel', 'amount']))
           }, 0)
       }, 0)
     }else
@@ -51,24 +49,19 @@ export default class MarginAgreementPortfolio extends React.Component {
 
       const clientAssets = actionItem.get(clientOrCpty)
 
-      for (let groupAssets of clientAssets) {
-        for (let firstLevelRecon of groupAssets.get('data')) {
-          for (let secondLevelItem of firstLevelRecon.get('secondLevel')) {
-            if (!secondLevelItem.get('checked')) {
-              return true
-            }
-          }
-        }
-      }
+      // for (let groupAssets of clientAssets) {
+      //   for (let firstLevelRecon of groupAssets.get('data')) {
+      //     for (let secondLevelItem of firstLevelRecon.get('secondLevel')) {
+      //       if (!secondLevelItem.get('checked')) {
+      //         return true
+      //       }
+      //     }
+      //   }
+      // }
     }
   }
 
   isDisableReconButton(actionItem, percentage) {
-
-    // Either client and cpty has no recon details
-    if (percentage == 0) {
-      return true
-    }
 
     if (this.checkSecondLeveIsNotAllChecked('clientAssets', actionItem)) {
       return true
@@ -79,7 +72,12 @@ export default class MarginAgreementPortfolio extends React.Component {
     }
 
     // Need adjustment
-    if (percentage != 100 && this.state.adjAmount == 0.0) {
+    if (percentage != 100.00 && this.state.adjAmount == 0.0) {
+      return true
+    }
+
+    // Either client and cpty has no recon details
+    if (percentage === 0.00) {
       return true
     }
 
@@ -99,20 +97,10 @@ export default class MarginAgreementPortfolio extends React.Component {
 
   getPercentage(actionItem) {
     if (actionItem.get('clientAssets') && actionItem.get('counterpartyAssets')) {
-      if (this.getTotalAmount(actionItem.get('clientAssets'), 'recon')) {
-        return ((this.displayTotalMargin(actionItem, 'clientAssets') -
-        (this.getTotalAmount(actionItem.get('clientAssets'), 'recon'))) /
-        (this.displayTotalMargin(actionItem, 'counterpartyAssets') -
-        (this.getTotalAmount(actionItem.get('counterpartyAssets'), 'recon'))) * 100).toFixed(0)
-      }
-      else if (this.getTotalAmount(actionItem.get('clientAssets'), 'checked')) {
-        return (this.getTotalAmount(actionItem.get('clientAssets'), 'checked') /
-        this.getTotalAmount(actionItem.get('counterpartyAssets'), 'checked') * 100).toFixed(0)
-      }
-      else {
+
         return (this.displayTotalMargin(actionItem, 'clientAssets') /
         this.displayTotalMargin(actionItem, 'counterpartyAssets') * 100).toFixed(0)
-      }
+
     } else {
       return 0.00
     }
@@ -122,9 +110,7 @@ export default class MarginAgreementPortfolio extends React.Component {
     if (asset) {
       return asset.reduce((sum, x) => {
         return sum + x.get('data').reduce((sum, y) => {
-            return sum + (y.get('firstLevel') - y.get('secondLevel').reduce((sum, z) => {
-                return sum + (z.get(checkedOrRecon) ? 0 : parseInt(z.get('amount')))
-              }, 0))
+            return sum + parseFloat(y.get('amount'))
           }, 0)
       }, 0)
     } else {
@@ -135,7 +121,7 @@ export default class MarginAgreementPortfolio extends React.Component {
 
   render() {
 
-    const {onSelectedItem, portfolioData, onReconItem} = this.props
+    const {onSelectFirstLevelItem, portfolioData, onReconItem, firstLevelList, secondLevelList, onSelectSecondLevelItem} = this.props
 
     let percentage = this.getPercentage(portfolioData)
 
@@ -147,9 +133,12 @@ export default class MarginAgreementPortfolio extends React.Component {
                      orgName={'legalEntity'}
                      assetsName={'clientAssets'}
                      handlerTotalMargin={this.displayTotalMargin}
-                     handlerSelectedItem={onSelectedItem}
+                     handlerSelectedItem={onSelectFirstLevelItem}
                      handlerUpdateAdj={this.onUpdateAdjAmount}
-                     adjAmt={this.state.adjAmount}/>
+                     adjAmt={this.state.adjAmount}
+                     firstLevelList={firstLevelList}
+                     secondLevelList={secondLevelList}
+                     onSelectSecondLevelItem={onSelectSecondLevelItem}/>
 
         <div className={styles.actPanel + ' ' + styles.act_C}>
           <div className={styles.btnWrap}>
@@ -169,7 +158,10 @@ export default class MarginAgreementPortfolio extends React.Component {
                             orgName={'cptyOrg'}
                             assetsName={'counterpartyAssets'}
                             handlerTotalMargin={this.displayTotalMargin}
-                            handlerSelectedItem={onSelectedItem}/>
+                            handlerSelectedItem={onSelectFirstLevelItem}
+                            firstLevelList={firstLevelList}
+                            secondLevelList={secondLevelList}
+                            onSelectSecondLevelItem={onSelectSecondLevelItem}/>
       </div>)
 
     )

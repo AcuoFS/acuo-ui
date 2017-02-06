@@ -8,7 +8,9 @@ export default class ClientAsset extends React.Component {
     const {
       marginData, actStyle, orgName,
       assetsName, handlerTotalMargin, handlerSelectedItem,
-      handlerUpdateAdj, adjAmt
+      handlerUpdateAdj, adjAmt,
+      firstLevelList, secondLevelList,
+      onSelectSecondLevelItem
     } = this.props
 
     return (
@@ -19,7 +21,10 @@ export default class ClientAsset extends React.Component {
                                handlerTotalMargin={handlerTotalMargin}
                                handlerSelectedItem={handlerSelectedItem}
                                handlerUpdateAdj={handlerUpdateAdj}
-                               adjAmt={adjAmt}/>
+                               adjAmt={adjAmt}
+                               firstLevelList={firstLevelList}
+                               secondLevelList={secondLevelList}
+                               onSelectSecondLevelItem={onSelectSecondLevelItem}/>
 
       </div>
     )

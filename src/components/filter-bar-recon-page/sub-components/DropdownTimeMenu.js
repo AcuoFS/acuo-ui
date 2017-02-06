@@ -12,9 +12,9 @@ export default class DropdownTimeMenu extends React.Component {
 
       // today's date can be hacked
       // during development, the data from backend is all 2017-01-13
-      // today: new Date(2017, 0, 13),
+      today: new Date(2017, 0, 13),
       // this should be the real config if backend data is correct
-      today: new Date(),
+      // today: new Date(),
     }
 
     this.setCurrentMenu = this.setCurrentMenu.bind(this)

@@ -23,26 +23,29 @@ export default class MarginAgreementList extends React.Component {
     // this.isDisableReconButton = this.isDisableReconButton.bind(this)
   }
 
-  displayLineItems(recon, onReconItem, onSelectedItem) {
+  displayLineItems(recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList, onSelectSecondLevelItem) {
     return (recon.map((x) => {
 
       if(x.get('direction') == 'OUT')
       return (
         <MarginAgreementPortfolio
           key={x}
-          onSelectedItem={onSelectedItem}
+          onSelectFirstLevelItem={onSelectFirstLevelItem}
           portfolioData={x}
-          onReconItem={onReconItem}/>
+          onReconItem={onReconItem}
+          firstLevelList={firstLevelList}
+          secondLevelList={secondLevelList}
+          onSelectSecondLevelItem={onSelectSecondLevelItem}/>
       )
 
     }))
   }
 
   render() {
-    const {recon, onReconItem, onSelectedItem} = this.props
+    const {recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList, onSelectSecondLevelItem } = this.props
     return (
       <div className={styles.actionContainer}>
-        {this.displayLineItems(recon, onReconItem, onSelectedItem)}
+        {this.displayLineItems(recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList, onSelectSecondLevelItem)}
       </div>
     )
   }

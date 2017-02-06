@@ -21,20 +21,74 @@ const updateFilters = (filters, newFilter) => (
     ))
 )
 
+const updateFirstLevelList = (list, guid, id) => (
+  (_.some(list, {"GUID": guid, "id": id}) ?
+    _.filter(list, (x) => !_.isMatch(x, {"GUID": guid, "id": id})) :
+    _.concat([], list, {"GUID": guid, "id": id}))
+)
+
+const updateSecondLevelListFromFirstLevel = (firstLevelList, list, listOfItems) => (
+  _.reduce(
+    _.filter(listOfItems, (x) => _.find(firstLevelList, {"GUID": x.GUID})), (list, item) =>
+      _.concat(list, _.reduce(item.clientAssets, (list, group) =>
+        _.concat(list, _.reduce(group.data, (list, first) =>
+          _.concat(list, _.reduce(first.firstLevel.secondLevel, (list, second) =>
+            (_.find(firstLevelList, {"GUID": item.GUID, "id": second.parentIndex}) ?
+              _.concat(list, {"GUID": item.GUID, "parentIndex": second.parentIndex, "id": second.id}) :
+              [])
+          , []))
+        , []))
+      , []))
+  , [])
+)
+
+const updateSecondLevelList = (list, guid, parentID, id) => (
+  (_.some(list, {"GUID": guid, "id": id, "parentIndex": parentID}) ?
+    _.filter(list, (x) => !_.isMatch(x, {"GUID": guid, "id": id, "parentIndex": parentID})) :
+    _.concat([], list, {"GUID": guid, "id": id, "parentIndex": parentID}))
+)
+
+const updateFirstlevelListFromSecondLevel = (secondLevelList, firstLevelList, items) => {
+  const test = _.uniq(_.map(secondLevelList, 'GUID'))
+  const filteredItems = _.filter(items, test)
+  console.log(test)
+  return 0
+}
+
 export default function reconReducer(state = initState, action) {
   let items, filters, newFilter, updatedFilters
 
   switch(action.type) {
-    case 'RECON_INIT_STATE':
+    case ActionTypes.RECON_INIT_STATE:
       items = action.items
       return state.set('items', fromJS(items))
                   .set('filters', fromJS(initFilters))
 
-    case 'RECON_FILTER_SET':
+    case ActionTypes.RECON_FILTER_SET:
       newFilter = action.value
       filters = state.get('filters').toJS()
       updatedFilters = updateFilters(filters, newFilter)
       return state.set('filters', fromJS(updatedFilters))
+
+    case ActionTypes.FIRSTLEVEL_SELECT:
+      const selectedFirstLevelList = state.get('firstLevelList') || List()
+      const updatedFirstLevelList = updateFirstLevelList(selectedFirstLevelList.toJS(), action.GUID, action.firstLevelID)
+
+      const selectedSecondLevel = state.get('secondLevelList') || List()
+      const updatedSecondLevelList = updateSecondLevelListFromFirstLevel(updatedFirstLevelList, selectedSecondLevel.toJS(), state.get('items').toJS())
+
+      return state.set('firstLevelList', fromJS(updatedFirstLevelList)).set('secondLevelList', fromJS(updatedSecondLevelList))
+
+    case ActionTypes.SECONDLEVEL_SELECT:
+      console.log(action.GUID, action.parentID, action.secondLevelID)
+
+      const secondLevelList = state.get('secondLevelList') || List()
+      const updatedSecondLevelList2 = updateSecondLevelList(secondLevelList.toJS(), action.GUID, action.parentID, action.secondLevelID)
+
+      const firstLevelList = state.get('firstLevelList') || List()
+      const updatedFirstLevelList2 = updateFirstlevelListFromSecondLevel(updatedSecondLevelList2, firstLevelList.toJS(), state.get('items').toJS())
+
+      return state.set('secondLevelList', fromJS(updatedSecondLevelList2))
 
     default:
       return state

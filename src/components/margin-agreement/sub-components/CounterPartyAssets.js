@@ -41,8 +41,9 @@ export default class CounterPartyAssets extends React.Component {
   render() {
     const {
       marginData, actStyle, orgName,
-      assetsName, handlerTotalMargin, handlerSelectedItem
-
+      assetsName, handlerTotalMargin, handlerSelectedItem,
+      firstLevelList, secondLevelList,
+      onSelectSecondLevelItem
     } = this.props
 
     return (
@@ -62,7 +63,10 @@ export default class CounterPartyAssets extends React.Component {
                                assetsName={assetsName}
                                handlerTotalMargin={handlerTotalMargin}
                                handlerSelectedItem={handlerSelectedItem}
-                               isHidePanel={this.state.selectedTab == TAB_MARGIN_AGREEMENT_DISPUTE}/>
+                               isHidePanel={this.state.selectedTab == TAB_MARGIN_AGREEMENT_DISPUTE}
+                               firstLevelList={firstLevelList}
+                               secondLevelList={secondLevelList}
+                               onSelectSecondLevelItem={onSelectSecondLevelItem}/>
         <Dispute marginData={marginData}
                  actStyle={actStyle}
                  orgName={orgName}
