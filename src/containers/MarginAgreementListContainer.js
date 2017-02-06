@@ -1,18 +1,19 @@
 import { connect } from 'react-redux'
-import { fromJS } from 'immutable'
+import { fromJS, List } from 'immutable'
 import { MarginAgreementsComponent } from '../components'
-import { selectedItems, initState, filterStateStatus } from '../actions'
+import { selectedItems, initState, firstLeveSelect, secondLevelSelect } from '../actions'
 import { RECON_DATA_URL, RECON_URL, DASHBOARD_URL } from '../constants/APIcalls'
 import filterItems from '../utils/filterItems'
 
 const mapStateToProps = state => {
   const items = state.ReconReducer.get('items').toJS()
   const filters = state.ReconReducer.get('filters').toJS()
-
   const filteredItems = filterItems(items, filters)
 
   return {
-    recon : fromJS(filteredItems)
+    recon : fromJS(filteredItems),
+    firstLevelList : state.ReconReducer.get('firstLevelList') || List(),
+    secondLevelList : state.ReconReducer.get('secondLevelList') || List(),
   }
 }
 
@@ -38,7 +39,14 @@ const mapDispatchToProps = dispatch => ({
   },
   onSelectedItem : (guid, assetID) => {
     dispatch(selectedItems(guid, assetID))
+  },
+  onSelectFirstLevelItem: (GUID, firstLevelID) => {
+    dispatch(firstLeveSelect(GUID, firstLevelID))
+  },
+  onSelectSecondLevelItem: (GUID, parentID, secondLevelID) => {
+    dispatch(secondLevelSelect(GUID, parentID, secondLevelID))
   }
+
 })
 
 const MarginAgreementsContainer = connect(

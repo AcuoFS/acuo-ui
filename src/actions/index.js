@@ -93,3 +93,17 @@ export const removeAssetFromEarmark = (e, assetType, assetId, assetIdType) => ({
     assetIdType : assetIdType
   }
 })
+
+//recon
+export const firstLeveSelect = (GUID, firstLevelID) => ({
+  type: ActionTypes.FIRSTLEVEL_SELECT,
+  GUID: GUID,
+  firstLevelID: firstLevelID
+})
+
+export const secondLevelSelect = (GUID, parentID, secondLevelID) => ({
+  type: ActionTypes.SECONDLEVEL_SELECT,
+  GUID: GUID,
+  parentID: parentID,
+  secondLevelID: secondLevelID
+})

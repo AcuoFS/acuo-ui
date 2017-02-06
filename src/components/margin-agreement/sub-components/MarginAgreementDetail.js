@@ -6,6 +6,7 @@ import MarginAgreementDetailExpand from './MarginAgreementDetailExpand'
 import {List} from 'immutable'
 import {numberWithCommas} from '../../../utils/numbersWithCommas'
 import styles from '../MarginAgreementList.css'
+import _ from 'lodash'
 
 
 export default class MarginAgreementDetail extends React.Component {
@@ -19,27 +20,8 @@ export default class MarginAgreementDetail extends React.Component {
       cbLvl1: styles.show,
       pkgLvl2: styles.hide
     }
-    this.handleClick = this.handleClick.bind(this)
     this.handlePlusMinus = this.handlePlusMinus.bind(this)
     this.firstLevelSelect = this.firstLevelSelect.bind(this)
-  }
-
-  sendAction(i, j) {
-    this.props.handlerSelectedItem(i, j)
-  }
-
-  handleClick() {
-    if (this.state.cbTicked) {
-      this.setState({
-        cbTicked: false,
-        checkbox: "./images/reconcile/checkbox.png"
-      })
-    } else {
-      this.setState({
-        cbTicked: true,
-        checkbox: "./images/reconcile/checkboxwithtick.png"
-      });
-    }
   }
 
   handlePlusMinus() {
@@ -60,51 +42,77 @@ export default class MarginAgreementDetail extends React.Component {
     }
   }
 
-  renderHidden(secondLevel, GUID, discrepancy, secondLevelDiscrepancy) {
+  renderHidden(secondLevel, GUID, discrepancy, secondLevelDiscrepancy, secondLevelList, parentID, onSelectSecondLevelItem) {
+    if(secondLevel)
+      return secondLevel.map((x, index) => {
 
-    return secondLevel.map((x, index) => {
+        let highlightThis = (x.get('name') == secondLevelDiscrepancy)
 
-      let highlightThis = (x.get('name') == secondLevelDiscrepancy)
+        {/*<div className={ x.get('recon') ? styles.packageRowGrey : (discrepancy && highlightThis ? styles.packageRowHighLight : '')} key={index}>*/}
 
-      return (
-        <div className={ x.get('recon') ? styles.packageRowGrey : (discrepancy && highlightThis ? styles.packageRowHighLight : '')} key={index}>
-          <div className={styles.packageLvl2 + ' ' + this.state.pkgLvl2} key={Date.now() * Math.random()}>
-            {/* have second level table rendering structure here */}
-            <div className={styles.packageRow}>
-              <div className={styles.packageLeft}>
-                <div className={styles.packageCheckBox} onClick={(e) => {
-                  this.handleClick(e);
-                  this.sendAction(GUID, x.get('id'))
-                }}>
-                  {x.get('recon') ? '' : <img
-                    src={x.get('checked') ? "./images/reconcile/checkboxwithtick.png" : "./images/reconcile/checkbox.png"}
-                    alt=""/>}
+        return (
+          <div key={index}>
+            <div className={styles.packageLvl2 + ' ' + this.state.pkgLvl2} key={Date.now() * Math.random()}>
+              {/* have second level table rendering structure here */}
+              <div className={styles.packageRow}>
+                <div className={styles.packageLeft}>
+                  <div className={styles.packageCheckBox} onClick={(e) => {
+                    this.secondLevelSelect(GUID, parentID, x.get('id'), onSelectSecondLevelItem)
+                  }}>
+                    <img src={this.getSecondLevelCheckboxImageUrl(secondLevelList.toJS(), GUID, parentID, x.get('id'))}/>
+                  </div>
+                  <div className={styles.secondLevelText}>{ x.get('name') }</div>
                 </div>
-                <div className={styles.secondLevelText}>{ x.get('name') }</div>
+                <div className={styles.packageRight}>{ numberWithCommas(x.get('amount')) }</div>
               </div>
-              <div className={styles.packageRight}>{ numberWithCommas(x.get('amount')) }</div>
             </div>
           </div>
-        </div>
-      )
-    })
+        )
+      })
   }
 
-  firstLevelSelect() {
-    const {secondLevel, handlerSelectedItem, GUID} = this.props
-    secondLevel.map(secondLevelAsset => (
-        handlerSelectedItem(GUID, secondLevelAsset.get('id'))
-      )
-    )
+  firstLevelSelect(GUID, id, handlerSelectedItem) {
+    handlerSelectedItem(GUID, id)
+  }
+
+  secondLevelSelect(GUID, parentID, id, onSelectSecondLevelItem){
+    onSelectSecondLevelItem(GUID, parentID, id)
+  }
+
+  getCheckboxImageUrl(list, GUID, id) {
+    if(list){
+      if(_.some(list, {"GUID": GUID, "id": id}))
+        return "./images/reconcile/checkboxwithtick.png"
+      else
+        return "./images/reconcile/checkbox.png"
+    }else
+      return "./images/reconcile/checkbox.png"
+  }
+
+  getSecondLevelCheckboxImageUrl(list, GUID, parentID, id){
+    if(list){
+      if(_.some(list, {"GUID": GUID, "id": id, "parentIndex": parentID}))
+        return "./images/reconcile/checkboxwithtick.png"
+      else
+        return "./images/reconcile/checkbox.png"
+    }else
+      return "./images/reconcile/checkbox.png"
   }
 
   render() {
 
     const {
       topLevel, secondLevel, GUID,
-      totalAmount, isSecondLevel, checkboxImageUrl, discrepancy, secondLevelDiscrepancy,
-      firstLevelAmount
+      totalAmount, isSecondLevel, discrepancy, secondLevelDiscrepancy,
+      firstLevelAmount, firstLevelID, handlerSelectedItem,
+      firstLevelList, secondLevelList, id,
+      onSelectSecondLevelItem
     } = this.props
+
+    const expand = <MarginAgreementDetailExpand
+      doClick={this.handlePlusMinus}
+      image={this.state.expand}
+    />
 
     return (
       <div className={ isSecondLevel ? styles.packageRowGrey : ''}>
@@ -113,19 +121,19 @@ export default class MarginAgreementDetail extends React.Component {
         + (discrepancy && !this.state.open && !isSecondLevel ? styles.packageRowHighLight : '')}> {/* one row div*/}
           <div className={styles.packageLeft}>
             <div className={styles.packageCheckBox + ' ' + this.state.cbLvl1}
-                 onClick={this.firstLevelSelect}>
-              {isSecondLevel ? '' : <img src={checkboxImageUrl}/>}
+                 onClick={() => this.firstLevelSelect(GUID, firstLevelID, handlerSelectedItem)}>
+              {isSecondLevel ? '' : <img src={this.getCheckboxImageUrl(firstLevelList.toJS(), GUID, id)}/>}
             </div>
             <div className={styles.packageText}>{topLevel}</div>
-            <MarginAgreementDetailExpand
-              doClick={this.handlePlusMinus}
-              image={this.state.expand}
-            />
+
+            {/*show only if second level exists*/}
+            {secondLevel && expand}
+
           </div>
-          <div className={styles.packageRight}>{(firstLevelAmount ? numberWithCommas(firstLevelAmount) : numberWithCommas(totalAmount))}</div>
+          <div className={styles.packageRight}>{numberWithCommas(totalAmount.toFixed(2))}</div>
         </div>
 
-        {this.renderHidden(secondLevel, GUID, discrepancy, secondLevelDiscrepancy)}
+        {this.renderHidden(secondLevel, GUID, discrepancy, secondLevelDiscrepancy, secondLevelList, id, onSelectSecondLevelItem)}
       </div>
     )
   }
