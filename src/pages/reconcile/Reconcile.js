@@ -6,14 +6,20 @@ import {
 } from '../../containers'
 import stylesG from '../../static/global.css'
 import styles from './Reconcile.css'
-import {connect} from 'react-redux'
-import {lineItemInsertion} from '../../actions'
+import { connect } from 'react-redux'
+import { lineItemInsertion, filterStateStatus } from '../../actions'
 
 
 class Reconcile extends React.Component {
 
   constructor(props) {
     super(props)
+
+    this.props.onLoad()
+  }
+
+  componentDidMount () {
+    window.scrollTo(0, 0)
   }
 
   render() {
@@ -39,7 +45,9 @@ const mapStateToProps = state => ({
   numberOfItems: (state.mainReducer.getIn(['display', 'derivatives']) ? state.mainReducer.getIn(['display', 'derivatives']).reduce((sum, x) => {
     return sum + x.get('marginStatus').reduce((sum, y) => {
         return sum + y.get('timeFrames').reduce((sum, z) => {
-            return sum + z.get('actionsList').size
+            return sum + z.get('actionsList').reduce((sum, xx) => {
+                return (xx.get('direction') == 'OUT' ? sum + 1 : sum)
+              }, 0)
           }, 0)
       }, 0)
   }, 0) : 0)
@@ -48,6 +56,11 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onLineItemInsertion: (lineItem) => {
     dispatch(lineItemInsertion(lineItem))
+  },
+  onLoad: ()=> {
+    setTimeout(()=>{
+      dispatch(filterStateStatus('unrecon'))
+    }, 2000)
   }
 })
 

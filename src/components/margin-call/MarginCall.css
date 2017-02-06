@@ -9,6 +9,8 @@
   display: inline-block;
   width: 97%;
   padding: 10px;
+
+  position: relative;
 }
 
 .header{
@@ -52,7 +54,9 @@
 }
 
 .cell{
-  flex: 0 0 6.6%;
+  /*flex: 0 0 6.6%;*/
+  flex-grow: 1;
+  flex-basis: 0;
   align-self: center;
   padding: 5px;
 }
@@ -79,17 +83,25 @@
   flex: 0 0 5%;
 }
 
+.boldCellText {
+  composes: baseFontBold from './../../static/css-components/fonts.css';
+}
+
+.clickableCell {
+  cursor: pointer;
+}
+
 /*content*/
 .flexContainer{
   color: #2C3B4A;
   display: flex;
 }
 
-.contentRow:nth-child(odd){
+.groupContainer:nth-child(odd) {
   background-color: #DCEEFF;
 }
 
-.contentRow:nth-child(even){
+.groupContainer:nth-child(even) {
   background-color: #EEEEEE;
 }
 
@@ -121,8 +133,10 @@
 }
 
 /* arrow */
-.contentRow .cell:last-child{
+.contentRow .cell:last-child,
+.contentRowExpand .cell:last-child{
   position: relative;
+  cursor: pointer;
 }
 
 .contentRow .cell:last-child::before{
@@ -145,10 +159,41 @@
   left: 7px;
 }
 
-.contentRow:nth-child(odd) .cell:last-child::after{
+.groupContainer:nth-child(odd) .contentRow .cell:last-child::after{
   border-top: 12px solid #DCEEFF;
 }
 
-.contentRow:nth-child(even) .cell:last-child::after{
+.groupContainer:nth-child(even) .contentRow .cell:last-child::after{
   border-top: 12px solid #EEEEEE;
 }
+
+/************* Up triangle after expansion *************/
+.contentRowExpand .cell:last-child::before{
+  content: '';
+  position: absolute;
+  border-bottom: 12px solid #2C3B4A;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  top: -3px;
+  left: 7px;
+}
+
+.contentRowExpand .cell:last-child::after{
+  content: '';
+  position: absolute;
+  border-bottom: 12px solid #2C3B4A;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  top: 0px;
+  left: 7px;
+}
+
+.groupContainer:nth-child(odd) .contentRowExpand .cell:last-child::after{
+  border-bottom: 12px solid #DCEEFF;
+}
+
+.groupContainer:nth-child(even) .contentRowExpand .cell:last-child::after{
+  border-bottom: 12px solid #EEEEEE;
+}
+
+/************* Up triangle after expansion *************/

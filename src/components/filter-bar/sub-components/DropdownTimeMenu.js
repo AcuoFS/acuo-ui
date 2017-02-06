@@ -1,14 +1,12 @@
 import React from 'react'
 import styles from '../FilterBar.css'
 
-export default class DropdownTimeMenu extends React.Component{
+export default class DropdownTimeMenu extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
-      timeWindowTitle: 'Today',
-      timeArrowLeft: styles.show,
-      timeArrowRight: styles.show
+      timeWindowTitle: 'today',
     }
     this.renderPrevDay = this.renderPrevDay.bind(this)
     this.renderNextDay = this.renderNextDay.bind(this)
@@ -18,49 +16,43 @@ export default class DropdownTimeMenu extends React.Component{
 
   checkTimeDay() {
     switch (this.state.timeWindowTitle) {
-      case 'Yesterday':
+      case 'yesterday':
         return (
           this.setState({
-            timeWindowTitle: 'Yesterday',
-            timeArrowLeft: styles.hide,
-            timeArrowRight: styles.show
+            timeWindowTitle: 'yesterday',
           })
         )
 
-      case 'Tomorrow':
+      case 'tomorrow':
         return (
           this.setState({
-            timeWindowTitle: 'Tomorrow',
-            timeArrowLeft: styles.show,
-            timeArrowRight: styles.hide
+            timeWindowTitle: 'tomorrow',
           })
         )
 
       default:
         return (
           this.setState({
-            timeWindowTitle: 'Today',
-            timeArrowLeft: styles.show,
-            timeArrowRight: styles.show
+            timeWindowTitle: 'today',
           })
         )
     }
   }
 
   renderPrevDay() {
-    if (this.state.timeWindowTitle == 'Today') {
-      this.state.timeWindowTitle = 'Yesterday'
+    if (this.state.timeWindowTitle == 'today') {
+      this.state.timeWindowTitle = 'yesterday'
     } else {
-      this.state.timeWindowTitle = 'Today'
+      this.state.timeWindowTitle = 'today'
     }
     this.checkTimeDay()
   }
 
   renderNextDay() {
-    if (this.state.timeWindowTitle == 'Today') {
-      this.state.timeWindowTitle = 'Tomorrow'
+    if (this.state.timeWindowTitle == 'today') {
+      this.state.timeWindowTitle = 'tomorrow'
     } else {
-      this.state.timeWindowTitle = 'Today'
+      this.state.timeWindowTitle = 'today'
     }
     this.checkTimeDay()
   }
@@ -69,49 +61,63 @@ export default class DropdownTimeMenu extends React.Component{
     return e.stopPropagation()
   }
 
-  onMenuOptionSelect(e, handleOnOptionChange){
-
-    let currTime = new Date('Sun Oct 23 2016 13:58:04 GMT+0800 (SGT)')
-    if (e.currentTarget.dataset.min == 'All') {
-      handleOnOptionChange(e,
-        this.state.timeWindowTitle + ": " + e.currentTarget.dataset.min,
-        this.state.timeWindowTitle + ":" + e.currentTarget.dataset.min,
-        null)
-    }
-    else {
-      if (this.state.timeWindowTitle == 'Yesterday') currTime.setDate(currTime.getDate() - 1)
-      else if (this.state.timeWindowTitle == 'Tomorrow') currTime.setDate(currTime.getDate() + 1)
-      let minTimeRange = new Date(currTime.setHours(e.currentTarget.dataset.min, 0, 0))
-      let maxTimeRange = new Date(currTime.setHours(e.currentTarget.dataset.max, 0, 0))
-
-      handleOnOptionChange(e, this.state.timeWindowTitle + ": " + e.currentTarget.dataset.ref, minTimeRange, maxTimeRange)
-    }
+  onMenuOptionSelect(handleOnOptionChange, minTime, maxTime, string) {
+    handleOnOptionChange(this.state.timeWindowTitle + ": " + string, minTime, maxTime)
   }
 
-  render(){
+  checkShow(day, stateDay) {
+    if (day == stateDay)
+      return styles.timeShow
+    else
+      return ''
+  }
+
+  checkTimesList(obj) {
+    if (obj)
+      if (obj.times.length)
+        return styles.show
+      else
+        return styles.hide
+    else return styles.hide
+  }
+
+  render() {
     const {handleOnOptionChange, options} = this.props
     // merge option 'ALL', with actual options
     const optionList = options
 
-    return(
-      <ul className={styles.filtersList + ' ' + styles.timeSlot}>
+    return (
+      <div>
+        {optionList.map((option, index) => {
 
-        <li className={styles.timeTitle} onClick={this.preventClose}>
-          <div className={styles.timeArrowLeft + ' ' + this.state.timeArrowLeft} onClick={this.renderPrevDay}></div>
-          <span>{this.state.timeWindowTitle}</span>
-          <div className={styles.timeArrowRight + ' ' + this.state.timeArrowRight} onClick={this.renderNextDay}></div>
-        </li>
+          if (option.times.length > 0)
+            return (
+              <ul key={index}
+                  className={styles.filtersList + ' ' + styles.timeSlot + ' ' + this.checkShow(option.day, this.state.timeWindowTitle)}>
 
-        {optionList.map(option => (
-          <li key={option.text}
-              data-ref={option.text}
-              data-min={option.min}
-              data-max={option.max}
-              onClick={ e => this.onMenuOptionSelect(e, handleOnOptionChange)}>
-            {String(option.text).toUpperCase()}
-          </li>
-        ))}
-      </ul>
+                <li className={styles.timeTitle} onClick={this.preventClose}>
+                  <div className={styles.timeArrowLeft + ' ' + this.checkTimesList(optionList[index - 1])}
+                       onClick={this.renderPrevDay}></div>
+                  <span>{this.state.timeWindowTitle}</span>
+                  <div className={styles.timeArrowRight + ' ' + this.checkTimesList(optionList[index + 1])}
+                       onClick={this.renderNextDay}></div>
+                </li>
+
+                <li
+                  onClick={ e => this.onMenuOptionSelect(handleOnOptionChange, option.minTime, option.maxTime, 'All')}>
+                  All
+                </li>
+
+                {option.times.map((time, index) => (
+                  <li key={index}
+                      onClick={ e => this.onMenuOptionSelect(handleOnOptionChange, time.min, time.max, String((new Date(time.min)).getHours() + ':00 Hrs').toUpperCase())}>
+                    {String((new Date(time.min)).getHours() + ':00 Hrs').toUpperCase()}
+                  </li>
+                ))}
+
+              </ul>)
+        })}
+      </div>
     )
   }
 }

@@ -1,5 +1,8 @@
 // DD-MM-YY
 export const formatDate = (dateStr) => {
+  if(dateStr === '-'){
+    return dateStr
+  }
   let myDate = new Date(dateStr)
   let dd = myDate.getDate()
   let mm = myDate.getMonth() + 1

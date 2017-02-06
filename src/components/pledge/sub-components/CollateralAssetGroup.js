@@ -3,6 +3,7 @@ import CollateralAssetContainer from '../../../containers/CollateralAssetContain
 import {formatDate} from '../../../utils/formatDate'
 import {numberWithCommas} from '../../../utils/numbersWithCommas'
 import {formatPercentageOneDecimal} from '../../../utils/formatPercentageOneDecimal'
+import {COLLATERAL_EARMARKED} from '../../../constants/CollateralTypes'
 import styles from '../Pledge.css'
 
 export default class CollateralAssetGroup extends React.Component {
@@ -46,29 +47,29 @@ export default class CollateralAssetGroup extends React.Component {
         <CollateralAssetContainer
           key={index}
           rowStyle={"tableRow"}
-          propAsset={asset.assetName}
+          propAsset={asset.assetName || '-'}
           propPrice={numberWithCommas(asset.price)}
-          propCcy={asset.ccy}
-          propDeliveryTime={asset.deliveryTime}
-          propStatus={asset.status}
-          propRating={asset.rating}
-          propMaturityDate={formatDate(asset.maturityDate)}
-          propInternalCost={formatPercentageOneDecimal(asset.internalCostPct)}
-          propExternalCost={formatPercentageOneDecimal(asset.externalCostPct)}
-          propOppCost={formatPercentageOneDecimal(asset.OppCostPct)}
-          propIsin={asset.isin}
-          propVenue={asset.venue}
-          propAcctId={asset.acctId}
+          rawPrice={asset.price || '-'}
+          propCcy={asset.ccy || '-'}
+          propDeliveryTime={asset.deliveryTime || '-'}
+          propStatus={asset.status || '-'}
+          propRating={asset.rating || '-'}
+          propMaturityDate={asset.maturityDate ? formatDate(asset.maturityDate) : '-'}
+          propInternalCost={asset.internalCostPct || '-'}
+          propExternalCost={asset.externalCostPct || '-'}
+          propOppCost={asset.oppCostPct || '-'}
+          propIsin={asset.assetId || '-'}
+          propVenue={asset.venue || '-'}
+          propAcctId={asset.acctId || '-'}
           propIsDisplayAll={propIsDisplayAll}
           propCollateralType={propCollateralType}
-          propAssetId={asset.assetId}
-          propAssetIdType={asset.assetIdType}
+          propAssetId={asset.assetId || '-'}
+          propAssetIdType={asset.assetIdType || '-'}
           propHandleOnRemoveFromEarmarked={propHandleOnRemoveFromEarmarked}
         />
 
       ))
     }
-
 
     if (propIsDisplayAll) {
       return (
@@ -76,7 +77,7 @@ export default class CollateralAssetGroup extends React.Component {
         <div className={styles.collateralRowGroup}>
 
           <div className={styles.collateralRow + ' ' +
-          (propCollateralType == 'Earmarked' ? styles.collateralExpandEarmarkedRow : styles.collateralExpandRow)}>
+          (propCollateralType == COLLATERAL_EARMARKED ? styles.collateralExpandEarmarkedRow : styles.collateralExpandRow)}>
             <div className={styles.collateralCell}>
               <div>{propCollateralType} </div>
               <div onClick={this.handlePlusMinus}><img src={this.getPlusMinusImgURL(this.state.isGroupExpanded)}
@@ -107,7 +108,7 @@ export default class CollateralAssetGroup extends React.Component {
         <div className={styles.collateralRowGroup}>
 
           <div className={styles.collateralRow + ' ' +
-          (propCollateralType == 'Earmarked' ? styles.collateralExpandEarmarkedRow : styles.collateralExpandRow)}>
+          (propCollateralType == COLLATERAL_EARMARKED ? styles.collateralExpandEarmarkedRow : styles.collateralExpandRow)}>
             <div className={styles.collateralCell}>
               <div>{propCollateralType}</div>
               <div onClick={this.handlePlusMinus}><img src={this.getPlusMinusImgURL(this.state.isGroupExpanded)}

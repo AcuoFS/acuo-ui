@@ -109,8 +109,17 @@ class Pledge extends React.Component {
     alert('Pledge Button Click')
   }
 
+  sumOfIMVM(sumSelX, x) {
+    return sumSelX + (x.getIn(['allocated', 'initialMargin'])
+        ? (x.getIn(['allocated', 'initialMargin']).size
+        + x.getIn(['allocated', 'variationMargin']).size)
+        : 0 )
+  }
+
   render() {
-    const { optimisation, selection, onUpdateOptimisationSettings, onTogglePendingAllocation, pendingAllocation, sliderCheckbox, onToggleCheckall, onAllocate } = this.props
+    const { optimisation, selection, onUpdateOptimisationSettings, onTogglePendingAllocation,
+      pendingAllocation, sliderCheckbox, onToggleCheckall, onAllocate,
+      collateral, onRemoveFromEarmarked} = this.props
 
     let collateralHeader = (
       <div className={styles.collateralRow + ' ' + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
@@ -143,30 +152,48 @@ class Pledge extends React.Component {
       )
     }
 
+    let collateralAssetGroupList = []
+
+    if (collateral) {
+      const collateralJSList = collateral.toJS()
+      for (const key of Object.keys(collateralJSList)) {
+        collateralAssetGroupList = [...collateralAssetGroupList,
+          <CollateralAssetGroup key={key}
+                                propCollateralType={key}
+                                propCollateralAssetList={collateralJSList[key]}
+                                propIsExpanded={true}
+                                propIsDisplayAll={this.state.open}
+                                propHandleOnRemoveFromEarmarked={onRemoveFromEarmarked}/>
+        ]
+      }
+    }
+
+
     return (
 
         <div className={styles.pledgeContainer}>
           <div className={styles.sliderAndStatus}>
             <div className={styles.panel} id={styles.optSetting}>
-              <div className={styles.panelTitle}>Optimization Setting</div>
+              <div className={styles.panelTitle}>Optimization Setting <img src={'./images/pledge/locked.png'} /></div>
               <div className={styles.optPnlWrap}>
                 {this.renderOptItems(optimisation, onUpdateOptimisationSettings)}
               </div>
               <div className={styles.buttonHolder}>
                 <ChooseCalls tickImg={sliderCheckbox[0]} tickState={sliderCheckbox[1]}
-                             tickClick={onToggleCheckall} />
+                             tickClick={onToggleCheckall}/>
 
-                <div className={styles.optButton + (this.checkIfExist(pendingAllocation).size > 0 ? ' '+styles.btnEnabled : ' '+styles.btnDisabled )} id={styles.optBtnAllocate} onClick={onAllocate} data-optimisation={this.checkIfExist(optimisation).toJS()} data-pendingAllocation={this.checkIfExist(pendingAllocation).toJS()}>Allocate</div>
+                <div className={styles.optButton + ' ' +
+                (this.checkIfExist(pendingAllocation).size > 0 ? '' : styles.btnDisabled )}
+                     onClick={() => onAllocate(pendingAllocation.toJS(), optimisation.toJS())}>
+                  Allocate
+                </div>
 
-                <div className={styles.optButton  + (
-
-                    this.checkIfExist(selection).reduce((sumSelX, x) => {
-
-                      //console.log("+++ " + x.getIn(['allocated', 'initialMargin']))
-                      return sumSelX + (x.getIn(['allocated', 'initialMargin']) ? x.getIn(['allocated', 'initialMargin']).size + x.getIn(['allocated', 'variationMargin']).size : 0 )
-                    }, 0) > 0
-
-                  ? ' '+styles.btnEnabled : ' '+styles.btnDisabled )} id={styles.optBtnPledge}>Pledge</div>
+                <div className={styles.optButton + ' ' +
+                (this.checkIfExist(selection).reduce(this.sumOfIMVM, 0) > 0
+                  ? styles.optBtnPledge
+                  : styles.btnDisabled )}>
+                  Pledge
+                </div>
 
               </div>
               {/* change btnEnabled to btnDisabled to disable the button*/}
@@ -199,7 +226,9 @@ class Pledge extends React.Component {
 
                   {collateralHeader}
 
-                  <CollateralAssetGroup propCollateralType={"Earmarked"}
+                  {collateralAssetGroupList}
+
+                  {/*<CollateralAssetGroup propCollateralType={"Earmarked"}
                                         propCollateralAssetList={
                                           this.props.collateral ? this.props.collateral.get('earmarked').toJS() : [] }
                                         propIsExpanded={true}
@@ -221,7 +250,7 @@ class Pledge extends React.Component {
                   <CollateralAssetGroup propCollateralType={"Soverign Bonds"}
                                         propCollateralAssetList={
                                           this.props.collateral ? this.props.collateral.get('sovereignBonds').toJS() : [] }
-                                        propIsExpanded={false}
+                                        propIsExpanded={true}
                                         propIsDisplayAll={this.state.open}/>
 
                   <CollateralAssetGroup propCollateralType={"Govt Agencies"}
@@ -239,8 +268,8 @@ class Pledge extends React.Component {
                   <CollateralAssetGroup propCollateralType={"Corporate Equity"}
                                         propCollateralAssetList={
                                           this.props.collateral ? this.props.collateral.get('corporateEquity').toJS() : [] }
-                                        propIsExpanded={false}
-                                        propIsDisplayAll={this.state.open}/>
+                                        propIsExpanded={true}
+                                        propIsDisplayAll={this.state.open}/>*/}
                 </div>
 
               </div>

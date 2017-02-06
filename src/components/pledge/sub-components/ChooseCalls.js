@@ -1,15 +1,7 @@
-/**
- * Created by panyong on 22/11/16.
- */
 import React from 'react'
-import {render} from 'react-dom'
 import styles from '../Pledge.css'
 
 class ChooseCalls extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
       <div className={styles.chsCalls}>

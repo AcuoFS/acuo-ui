@@ -206,19 +206,34 @@ td{
 .notAllocated .notAlcText{
   padding: 30px 20px;
 }
+.totalTable1 {
+  width:102.22px;
+  box-sizing: border-box;
+  text-align: center;
+}
+.totalTable2{
+  width:45.56px;
+  box-sizing: border-box;
+  text-align: center;
+}
+.notAll {
+  width:86.67px;
+  text-align: left;
+}
 
 .bold{
   composes: baseFontBold from '../../static/css-components/fonts.css';
 }
 
-
-.earmarkAssetButton {
-  padding: 2px 5px;
-  border: 1px solid acuoGrey;
-  border-radius: 5px;
+.earmarkAssetButton{
+  padding: 2px;
   display: inline-block;
   cursor: pointer;
   position: relative;
+}
+
+.earmarkAssetButton img {
+  width:17px;
 }
 
 .earmarkAssetButton .tooltip{
