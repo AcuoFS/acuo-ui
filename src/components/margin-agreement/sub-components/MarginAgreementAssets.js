@@ -248,8 +248,19 @@ export default class MarginAgreementPortfolio extends React.Component {
       </div>
     }
 
-    return (
-      <div className={styles.panel + " " + (isHidePanel ? styles.hidePanel : "")}>
+    let displayAssets
+
+    if ('counterpartyAssets' == assetsName && !marginData.get(assetsName)) {
+      displayAssets =
+        <div className={styles.section + ' ' + styles.left}>
+          <div className={styles.legalEntityContainer}>
+            <div className={styles.legalEntity + ' ' + styles.noMatched}>No matched Portfolio</div>
+            <div className={styles.legalEntity + ' ' + styles.findPortfolio}>Find portfolio</div>
+          </div>
+
+        </div>
+    } else {
+      displayAssets =
         <div className={styles.section + ' ' + styles.left}>
 
           <div className={styles.legalEntityContainer}>
@@ -287,7 +298,11 @@ export default class MarginAgreementPortfolio extends React.Component {
             {/*</div>*/}
           </div>
         </div>
+    }
 
+    return (
+      <div className={styles.panel + " " + (isHidePanel ? styles.hidePanel : "")}>
+        {displayAssets}
         <div className={styles.section + ' ' + styles.right}>
           <div className={styles.currency}>
             <div>CCY:{marginData.get('ccy')}</div>

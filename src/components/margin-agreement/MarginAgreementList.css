@@ -148,7 +148,8 @@
 
 .legalEntity{
     color:#759BBB;
-    font: bold 18px Helvetica;
+    font-size: 18px;
+    composes: baseFontBold from '../../static/css-components/fonts.css';
 }
 
 .legalEntityDetails{
@@ -507,4 +508,15 @@
 
 .greyText {
     color: #c9c9c9;
+}
+
+.noMatched {
+    color: #FF0000;
+}
+
+.findPortfolio {
+    color: #6EA6E8;
+    cursor: pointer;
+    margin: 10px 0;
+    font-size: 16px;
 }
