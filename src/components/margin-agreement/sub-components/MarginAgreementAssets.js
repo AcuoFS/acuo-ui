@@ -266,8 +266,8 @@ export default class MarginAgreementPortfolio extends React.Component {
           <div className={styles.legalEntityContainer}>
             <div className={styles.legalEntity}>{ marginData.get(orgName) }</div>
             <div className={styles.legalEntityDetails}>
-              <div>{ orgName } -</div>
-              <div>Global Mutual Fund</div>
+              {/*<div>{ orgName } -</div>*/}
+              <div>{ marginData.get('agreementName') }</div>
             </div>
           </div>
           <div className={styles.package}> {/* table outer div*/}

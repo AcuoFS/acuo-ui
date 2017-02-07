@@ -1,6 +1,6 @@
 {
   "name": "acuo",
-  "version": "0.7.0",
+  "version": "0.11.0",
   "description": "Acuo test bed",
   "main": "index.js",
   "scripts": {
