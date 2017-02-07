@@ -47,7 +47,7 @@ export default class CounterPartyAssets extends React.Component {
     } = this.props
 
     return (
-      <div className={styles.actPanel + ' ' + styles[actStyle]}>
+      <div className={styles.actPanel + ' ' + styles[actStyle] + ' ' + styles.counterPartyCont}>
         <ul className={styles.tabs14}>
           <li onClick={this.handleOnTabSelect} data-value={TAB_MARGIN_AGREEMENT_PORTFOLIO}
               className={styles.tabButton + ' ' + this.state.tabReconStyle}>
