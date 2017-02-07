@@ -135,7 +135,7 @@ class Pledge extends React.Component {
     let collateralHeader = (
       <div className={styles.collateralRow + ' ' + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
         <div className={styles.collateralCell}>Asset</div>
-        <div className={styles.collateralCell}>Price</div>
+        <div className={styles.collateralCell}>Total Value</div>
         <div className={styles.collateralCell}>CCY</div>
         <div className={styles.collateralCell}>Delivery Time</div>
         <div className={styles.collateralCell}>Status</div>
@@ -148,7 +148,7 @@ class Pledge extends React.Component {
       collateralHeader = (
         <div className={styles.collateralRow + ' ' + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
           <div className={styles.collateralCell}>Asset</div>
-          <div className={styles.collateralCell}>Price</div>
+          <div className={styles.collateralCell}>Total Value</div>
           <div className={styles.collateralCell}>CCY</div>
           <div className={styles.collateralCell}>Delivery Time</div>
           <div className={styles.collateralCell}>Status</div>
