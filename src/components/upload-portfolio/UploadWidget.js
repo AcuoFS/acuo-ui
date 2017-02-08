@@ -1,16 +1,8 @@
 import React from 'react'
-import ReactDOMServer from 'react-dom/server'
-import DropzoneComponent from 'react-dropzone-component'
-import {UPLOAD_FILE_URL} from '../../constants/APIcalls'
-import {FILE_XLSX, FILE_CSV} from '../../constants/UploadFileTypes'
 import DzComponent from './DzComponent'
 import styles from './UploadWidget.css'
 
-/**
- * React component from:
- * https://github.com/felixrieseberg/React-Dropzone-Component
- * http://www.dropzonejs.com/
- */
+
 export default class UploadWidget extends React.Component {
   constructor(props) {
     super(props)
