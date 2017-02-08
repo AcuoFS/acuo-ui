@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react'
 import CounterPartyAssets from './CounterPartyAssets'
 import ClientAsset from './ClientAsset'
+import MarginAgreementUpload from '../../margin-agreement-upload/MarginAgreementUpload'
 import styles from '../MarginAgreementList.css'
 
 
@@ -9,11 +10,13 @@ export default class MarginAgreementPortfolio extends React.Component {
     super(props)
 
     this.state = {
-      adjAmount: 0.0
+      adjAmount: 0.0,
+      isUploading: false
     }
 
     this.onUpdateAdjAmount = this.onUpdateAdjAmount.bind(this)
     this.isDisableReconButton = this.isDisableReconButton.bind(this)
+    this.onTogglePortfolioPopup = this.onTogglePortfolioPopup.bind(this)
   }
 
   displayTotalMargin(i, assetType) {
@@ -118,6 +121,11 @@ export default class MarginAgreementPortfolio extends React.Component {
     }
   }
 
+  onTogglePortfolioPopup(){
+    this.setState({
+      isUploading: !this.state.isUploading
+    })
+  }
 
   render() {
 
@@ -127,6 +135,18 @@ export default class MarginAgreementPortfolio extends React.Component {
 
     return (
       (<div className={styles.actionWrap}>
+
+        <MarginAgreementUpload
+          propPortfolioData={portfolioData}
+          propHandlerTotalMargin={this.displayTotalMargin}
+          propHandlerSelectedItem={onSelectFirstLevelItem}
+          propHandlerUpdateAdj={this.onUpdateAdjAmount}
+          propAdjAmt={this.state.adjAmount}
+          propFirstLevelList={firstLevelList}
+          propSecondLevelList={secondLevelList}
+          propOnSelectSecondLevelItem={onSelectSecondLevelItem}
+          propIsUploading={this.state.isUploading}
+          propOnTogglePortfolioPopup={this.onTogglePortfolioPopup}/>
 
         <ClientAsset marginData={portfolioData}
                      actStyle={'act_L'}
@@ -161,7 +181,8 @@ export default class MarginAgreementPortfolio extends React.Component {
                             handlerSelectedItem={onSelectFirstLevelItem}
                             firstLevelList={firstLevelList}
                             secondLevelList={secondLevelList}
-                            onSelectSecondLevelItem={onSelectSecondLevelItem}/>
+                            onSelectSecondLevelItem={onSelectSecondLevelItem}
+                            onTogglePortfolioPopup={this.onTogglePortfolioPopup}/>
       </div>)
 
     )

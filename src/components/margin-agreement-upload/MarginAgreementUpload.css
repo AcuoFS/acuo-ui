@@ -1,0 +1,35 @@
+.popupContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 99%;
+    height: 760px;
+    background-color: #FAFAFA;
+    box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
+    border: 1px solid #9B9B9B;
+    border-radius: 8px;
+    z-index: 50;
+    padding: 5px;
+    overflow: scroll;
+    display:none;
+}
+
+.showPopup {
+    display: block;
+}
+
+.portfolioContainer {
+    display: flex;
+    margin-top: 35px;
+}
+
+.portfolioTableContainer {
+    height: 200px;
+}
+
+.closeBtn {
+    color: #4A4A4A;
+    float: right;
+    font-size: 1.5em;
+    cursor: pointer;
+}

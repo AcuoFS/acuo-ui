@@ -3,6 +3,7 @@ import {Map, List} from 'immutable'
 import MarginAgreementDetail from './MarginAgreementDetail'
 import {numberWithCommas} from '../../../utils/numbersWithCommas'
 import styles from '../MarginAgreementList.css'
+import CounterPartyUpload from './CounterPartyUpload'
 import selfStyles from './MarginAgreementAssets.css'
 
 
@@ -194,7 +195,7 @@ export default class MarginAgreementPortfolio extends React.Component {
       marginData, orgName, assetsName,
       handlerTotalMargin, handlerSelectedItem, isHidePanel, adjAmt,
       firstLevelList, secondLevelList,
-      onSelectSecondLevelItem
+      onSelectSecondLevelItem, isUploading, onTogglePortfolioPopup
     } = this.props
 
     let diff = this.getDifferencePortfolio(assetsName, marginData)
@@ -251,11 +252,28 @@ export default class MarginAgreementPortfolio extends React.Component {
     let displayAssets
 
     if ('counterpartyAssets' == assetsName && !marginData.get(assetsName)) {
+      let findDom
+
+      // Display the upload widget when it's displayed on a popup
+      if(isUploading){
+        findDom =
+          <div>
+            <CounterPartyUpload/>
+            <div className={selfStyles.comment}>or select from the list below</div>
+          </div>
+      }else{
+        findDom =
+          <div className={styles.legalEntity + ' ' + styles.findPortfolio}
+               onClick={() => onTogglePortfolioPopup()}>
+            Find portfolio
+          </div>
+      }
+
       displayAssets =
         <div className={styles.section + ' ' + styles.left}>
           <div className={styles.legalEntityContainer}>
             <div className={styles.legalEntity + ' ' + styles.noMatched}>No matched Portfolio</div>
-            <div className={styles.legalEntity + ' ' + styles.findPortfolio}>Find portfolio</div>
+            {findDom}
           </div>
 
         </div>

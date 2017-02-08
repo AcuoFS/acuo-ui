@@ -43,7 +43,7 @@ export default class CounterPartyAssets extends React.Component {
       marginData, actStyle, orgName,
       assetsName, handlerTotalMargin, handlerSelectedItem,
       firstLevelList, secondLevelList,
-      onSelectSecondLevelItem
+      onSelectSecondLevelItem, onTogglePortfolioPopup, isUploading
     } = this.props
 
     return (
@@ -66,7 +66,10 @@ export default class CounterPartyAssets extends React.Component {
                                isHidePanel={this.state.selectedTab == TAB_MARGIN_AGREEMENT_DISPUTE}
                                firstLevelList={firstLevelList}
                                secondLevelList={secondLevelList}
-                               onSelectSecondLevelItem={onSelectSecondLevelItem}/>
+                               onSelectSecondLevelItem={onSelectSecondLevelItem}
+                               onTogglePortfolioPopup={onTogglePortfolioPopup}
+                               isUploading={isUploading}/>
+
         <Dispute marginData={marginData}
                  actStyle={actStyle}
                  orgName={orgName}
