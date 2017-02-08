@@ -79,14 +79,13 @@ export default class MarginAgreementDetail extends React.Component {
     onSelectSecondLevelItem(GUID, parentID, id)
   }
 
-  getCheckboxImageUrl(list, GUID, id) {
+  getCheckboxImageUrl(list, GUID, id, party) {
     if(list){
-      if(_.some(list, {"GUID": GUID, "id": id}))
+      if(_.find(list, {"GUID": GUID, "id": id, "parties": [party]}))
         return "./images/reconcile/checkboxwithtick.png"
-      else
-        return "./images/reconcile/checkbox.png"
-    }else
-      return "./images/reconcile/checkbox.png"
+    }
+
+    return "./images/reconcile/checkbox.png"
   }
 
   getSecondLevelCheckboxImageUrl(list, GUID, parentID, id){
@@ -106,7 +105,7 @@ export default class MarginAgreementDetail extends React.Component {
       totalAmount, isSecondLevel, discrepancy, secondLevelDiscrepancy,
       firstLevelAmount, firstLevelID, handlerSelectedItem,
       firstLevelList, secondLevelList, id,
-      onSelectSecondLevelItem
+      onSelectSecondLevelItem, party
     } = this.props
 
     const expand = <MarginAgreementDetailExpand
@@ -122,7 +121,7 @@ export default class MarginAgreementDetail extends React.Component {
           <div className={styles.packageLeft}>
             <div className={styles.packageCheckBox + ' ' + this.state.cbLvl1}
                  onClick={() => this.firstLevelSelect(GUID, firstLevelID, handlerSelectedItem)}>
-              {isSecondLevel ? '' : <img src={this.getCheckboxImageUrl(firstLevelList.toJS(), GUID, id)}/>}
+              {isSecondLevel ? '' : <img src={this.getCheckboxImageUrl(firstLevelList.toJS(), GUID, id, party)}/>}
             </div>
             <div className={styles.packageText}>{topLevel}</div>
 

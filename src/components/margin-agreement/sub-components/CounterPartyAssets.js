@@ -66,7 +66,8 @@ export default class CounterPartyAssets extends React.Component {
                                isHidePanel={this.state.selectedTab == TAB_MARGIN_AGREEMENT_DISPUTE}
                                firstLevelList={firstLevelList}
                                secondLevelList={secondLevelList}
-                               onSelectSecondLevelItem={onSelectSecondLevelItem}/>
+                               onSelectSecondLevelItem={onSelectSecondLevelItem}
+                               party={'cpty'}/>
         <Dispute marginData={marginData}
                  actStyle={actStyle}
                  orgName={orgName}

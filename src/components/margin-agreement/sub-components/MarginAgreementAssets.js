@@ -155,7 +155,7 @@ export default class MarginAgreementPortfolio extends React.Component {
     }
   }
 
-  renderItem(marginData, assetsName, handlerSelectedItem, firstLevelList, secondLevelList, onSelectSecondLevelItem) {
+  renderItem(marginData, assetsName, handlerSelectedItem, firstLevelList, secondLevelList, onSelectSecondLevelItem, party) {
     if (marginData.get(assetsName))
       return marginData.get(assetsName).map((x) => {
         if (x.get('data')) {
@@ -181,6 +181,7 @@ export default class MarginAgreementPortfolio extends React.Component {
               //discrepancy={discrepancy}
               //secondLevelDiscrepancy={secondLevelDiscrepancy}
               onSelectSecondLevelItem={onSelectSecondLevelItem}
+              party={party}
             />
           })}
             <hr/>
@@ -194,7 +195,7 @@ export default class MarginAgreementPortfolio extends React.Component {
       marginData, orgName, assetsName,
       handlerTotalMargin, handlerSelectedItem, isHidePanel, adjAmt,
       firstLevelList, secondLevelList,
-      onSelectSecondLevelItem
+      onSelectSecondLevelItem, party
     } = this.props
 
     let diff = this.getDifferencePortfolio(assetsName, marginData)
@@ -260,7 +261,7 @@ export default class MarginAgreementPortfolio extends React.Component {
             </div>
           </div>
           <div className={styles.package}> {/* table outer div*/}
-            { this.renderItem(marginData, assetsName, handlerSelectedItem, firstLevelList, secondLevelList, onSelectSecondLevelItem) }
+            { this.renderItem(marginData, assetsName, handlerSelectedItem, firstLevelList, secondLevelList, onSelectSecondLevelItem, party) }
           </div>
 
           <div className={styles.sectionText}> {/* two row div for bold*/}
