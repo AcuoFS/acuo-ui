@@ -7,7 +7,7 @@
     margin: auto;
     padding: 10px;
     width: 274px;
-    height: 193px;
+    height: 200px;
     background-color: #FFFFFF;
     border: 1px solid #979797;
     border-radius: 8px;
@@ -22,6 +22,7 @@
     font-size: 14px;
     line-height: 17px;
     color: #2B3C4C;
+    margin: 5px 0px;
 }
 
 .flexRow {
@@ -71,4 +72,11 @@
     background-color: #FFFFFF;
     color: #000000;
     border: none;
+}
+
+.closeButton {
+    color: #585858;
+    float: right;
+    font-size: 15px;
+    cursor: pointer;
 }
