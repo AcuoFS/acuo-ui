@@ -1,5 +1,6 @@
 import React from 'react'
 import DzComponent from './DzComponent'
+import {UPLOAD_FILE_URL} from '../../constants/APIcalls'
 import styles from './UploadWidget.css'
 
 
@@ -77,7 +78,8 @@ export default class UploadWidget extends React.Component {
                      propIsSendToBackend={this.state.isSendToBackend}
                      propClearSendToBackend={this.clearSend}
                      propTemplate={this.templateForDz()}
-                     propNoOfFiles={5}/>
+                     propNoOfFiles={5}
+                     propPostUrl={UPLOAD_FILE_URL}/>
 
         <div
           className={this.state.isWidgetValidForSubmission ?

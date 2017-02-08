@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import DropzoneComponent from 'react-dropzone-component'
-import {UPLOAD_FILE_URL} from '../../constants/APIcalls'
 import {FILE_XLSX, FILE_CSV} from '../../constants/UploadFileTypes'
 
 /**
@@ -28,7 +27,7 @@ export default class DzComponent extends React.Component {
       // iconFiletypes: ['.xlsx'],
       // showFiletypeIcon: false,
       // Change this param to the server's URL
-      postUrl: UPLOAD_FILE_URL
+      postUrl: props.propPostUrl
     }
 
     this.dropzone = null
