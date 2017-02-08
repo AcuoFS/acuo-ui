@@ -14,31 +14,8 @@ export default class MarginAgreementPortfolio extends React.Component {
     this.onChangeAdjInput = this.onChangeAdjInput.bind(this)
   }
 
-  checkSecondLevel(secondLevel) {
-    // if (secondLevel.size <= secondLevel.reduce((count, x) => {
-    //     return count + (x.get('recon') ? 1 : 0)
-    //   }, 0)) {
-    //   return true
-    // } else {
-    //   return false
-    // }
-  }
-
   getTotalAmount(asset) {
     if (asset) {
-      return asset.reduce((sum, x) => {
-        return sum + x.get('data').reduce((sum, y) => {
-            return sum + parseFloat(y.getIn(['firstLevel', 'amount']))
-          }, 0)
-      }, 0)
-    } else {
-      return 0
-    }
-  }
-
-  getTotalReconAmount(asset) {
-    if (asset) {
-
       return asset.reduce((sum, x) => {
         return sum + x.get('data').reduce((sum, y) => {
             return sum + parseFloat(y.getIn(['firstLevel', 'amount']))
@@ -58,25 +35,6 @@ export default class MarginAgreementPortfolio extends React.Component {
       })
     else
       return
-  }
-
-  getFirstLevelTotal(asset) {
-    if (asset) {
-      return asset.reduce((listX, x) => {
-        let list = x.get('data').reduce((listY, y) => {
-
-          let list = Map({
-            'key': y.get('firstLevel'), 'amount': y.get('secondLevel').reduce((sum, z) => {
-              return sum + parseFloat(z.get('amount') || 0)
-            }, 0)
-          })
-          //return (list > 0 ? listY.push(y.set('secondLevel', list)) : listY)
-          return (list.size > 0 ? listY.push(list) : listY)
-        }, List())
-        return (list.size > 0 ? listX.concat(list) : listX)
-      }, List())
-    }
-    else return List()
   }
 
   getDifferencePortfolio(assetsName, marginData) {
@@ -102,68 +60,12 @@ export default class MarginAgreementPortfolio extends React.Component {
     this.props.handlerUpdateAdj(this.adjInput.value != '' ? this.adjInput.value : 0.0)
   }
 
-  checkDescrepency(clientAsset, counterpartyAsset) {
-
-    let totalClientAsset = this.getFirstLevelTotal(clientAsset)
-    let totalcounterAsset = this.getFirstLevelTotal(counterpartyAsset)
-
-    let highestDifference = totalClientAsset.reduce((highest, x) => {
-      let difference = Math.abs(x.get('amount') - totalcounterAsset.filter(y => {
-          return y.get('key') == x.get('key')
-        }).first().get('amount'))
-      return (highest.get('difference') > difference ? highest : Map({'key': x.get('key'), 'difference': difference}))
-    }, Map())
-
-    return highestDifference
-  }
-
-  secondLevelHighestDiscrepancy(firstLevelName, marginData, discrepancy) {
-
-    if (discrepancy) {
-      let clientFirstLevel = marginData.get('clientAssets').reduce((highestValue, x) => {
-        let current = x.get('data').filter(x => {
-          return x.get('firstLevel') == firstLevelName
-        })
-        return (current.size > 0 ? current : highestValue)
-      }, '').first()
-
-      let cptyFirstLevel = marginData.get('counterpartyAssets').reduce((highestValue, x) => {
-        let current = x.get('data').filter(x => {
-          return x.get('firstLevel') == firstLevelName
-        })
-        return (current.size > 0 ? current : highestValue)
-      }, '').first()
-
-
-      if (clientFirstLevel && cptyFirstLevel) {
-
-        let highestDiscrepancy = clientFirstLevel.get('secondLevel').reduce((highest, x) => {
-          let difference = Math.abs(x.get('amount') - cptyFirstLevel.get('secondLevel').filter(y => y.get('assetName') == x.get('assetName')).first().get('amount'))
-
-          return (highest.get('difference') > difference ? highest : Map({
-              'assetName': x.get('assetName'),
-              'difference': difference
-            }))
-        }, Map())
-
-        return (highestDiscrepancy.get('assetName'))
-      }
-      else {
-        return null
-      }
-
-    }
-  }
-
   renderItem(marginData, assetsName, handlerSelectedItem, firstLevelList, secondLevelList, onSelectSecondLevelItem, party) {
     if (marginData.get(assetsName))
       return marginData.get(assetsName).map((x) => {
         if (x.get('data')) {
           return (<div key={x.get('groupName')}>{x.get('data').map((groupData) => {
             const secondLevel = groupData.getIn(['firstLevel', 'secondLevel'])
-            //const discrepancy = this.checkDescrepency(marginData.get('clientAssets'), marginData.get('counterpartyAssets')).includes(y.get('firstLevel'))
-
-            //let secondLevelDiscrepancy = this.secondLevelHighestDiscrepancy(y.get('firstLevel'), marginData, discrepancy)
 
             return <MarginAgreementDetail
               GUID={marginData.get('GUID')}
@@ -174,12 +76,9 @@ export default class MarginAgreementPortfolio extends React.Component {
               secondLevel={secondLevel}
               handlerSelectedItem={handlerSelectedItem}
               firstLevelID={groupData.getIn(['firstLevel', 'id'])}
-              isSecondLevel={this.checkSecondLevel(secondLevel)}
               firstLevelList={firstLevelList}
               secondLevelList={secondLevelList}
               id={groupData.getIn(['firstLevel', 'id'])}
-              //discrepancy={discrepancy}
-              //secondLevelDiscrepancy={secondLevelDiscrepancy}
               onSelectSecondLevelItem={onSelectSecondLevelItem}
               party={party}
             />

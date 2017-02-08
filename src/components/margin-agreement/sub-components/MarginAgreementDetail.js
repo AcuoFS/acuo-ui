@@ -42,11 +42,9 @@ export default class MarginAgreementDetail extends React.Component {
     }
   }
 
-  renderHidden(secondLevel, GUID, discrepancy, secondLevelDiscrepancy, secondLevelList, parentID, onSelectSecondLevelItem) {
+  renderHidden(secondLevel, GUID, secondLevelList, parentID, onSelectSecondLevelItem) {
     if(secondLevel)
       return secondLevel.map((x, index) => {
-
-        let highlightThis = (x.get('name') == secondLevelDiscrepancy)
 
         {/*<div className={ x.get('recon') ? styles.packageRowGrey : (discrepancy && highlightThis ? styles.packageRowHighLight : '')} key={index}>*/}
 
@@ -102,8 +100,7 @@ export default class MarginAgreementDetail extends React.Component {
 
     const {
       topLevel, secondLevel, GUID,
-      totalAmount, isSecondLevel, discrepancy, secondLevelDiscrepancy,
-      firstLevelAmount, firstLevelID, handlerSelectedItem,
+      totalAmount, firstLevelID, handlerSelectedItem,
       firstLevelList, secondLevelList, id,
       onSelectSecondLevelItem, party
     } = this.props
@@ -114,14 +111,13 @@ export default class MarginAgreementDetail extends React.Component {
     />
 
     return (
-      <div className={ isSecondLevel ? styles.packageRowGrey : ''}>
+      <div className=''>
 
-        <div className={ styles.packageRow + ' '
-        + (discrepancy && !this.state.open && !isSecondLevel ? styles.packageRowHighLight : '')}> {/* one row div*/}
+        <div className={ styles.packageRow }> {/* one row div*/}
           <div className={styles.packageLeft}>
             <div className={styles.packageCheckBox + ' ' + this.state.cbLvl1}
                  onClick={() => this.firstLevelSelect(GUID, firstLevelID, handlerSelectedItem)}>
-              {isSecondLevel ? '' : <img src={this.getCheckboxImageUrl(firstLevelList.toJS(), GUID, id, party)}/>}
+              <img src={this.getCheckboxImageUrl(firstLevelList.toJS(), GUID, id, party)}/>
             </div>
             <div className={styles.packageText}>{topLevel}</div>
 
@@ -132,7 +128,7 @@ export default class MarginAgreementDetail extends React.Component {
           <div className={styles.packageRight}>{numberWithCommas(totalAmount.toFixed(2))}</div>
         </div>
 
-        {this.renderHidden(secondLevel, GUID, discrepancy, secondLevelDiscrepancy, secondLevelList, id, onSelectSecondLevelItem)}
+        {this.renderHidden(secondLevel, GUID, secondLevelList, id, onSelectSecondLevelItem)}
       </div>
     )
   }
@@ -146,5 +142,4 @@ MarginAgreementDetail.PropTypes = {
   handlerSelectedItem: PropTypes.func.isRequired,
   isSecondLevel: PropTypes.bool.isRequired,
   checkboxImageUrl: PropTypes.string.isRequired
-  // discrepancy:
 }
