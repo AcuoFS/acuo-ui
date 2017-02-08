@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import { FilterBarReconPageComponent } from '../components'
-import { Set, Map, List, fromJS } from 'immutable'
 import filterItems from '../utils/filterItems'
 import * as ActionTypes from '../constants/ActionTypes'
+import { updateReconFilter } from '../actions'
 
 const mapStateToProps = state => {
   const filters = state.ReconReducer.get('filters').toJS()
@@ -29,10 +29,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   // use this function to dispatch an action to set filter
   // value here should be array with objects like {name, options, selected(str/[])}
-  setFilter: (value) => dispatch({
-    type: ActionTypes.RECON_FILTER_SET,
-    value,
-  })
+  setFilter: (value) => dispatch(updateReconFilter(value))
 })
 
 const FilterContainer = connect(

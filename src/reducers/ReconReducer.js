@@ -101,6 +101,7 @@ export default function reconReducer(state = initState, action) {
                   .set('filters', fromJS(initFilters))
 
     case ActionTypes.RECON_FILTER_SET:
+      console.log(action.value)
       newFilter = action.value
       filters = state.get('filters').toJS()
       updatedFilters = updateFilters(filters, newFilter)

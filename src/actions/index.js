@@ -107,3 +107,8 @@ export const secondLevelSelect = (GUID, parentID, secondLevelID) => ({
   parentID: parentID,
   secondLevelID: secondLevelID
 })
+
+export const updateReconFilter = (value) =>({
+  type: ActionTypes.RECON_FILTER_SET,
+  value: value
+})
