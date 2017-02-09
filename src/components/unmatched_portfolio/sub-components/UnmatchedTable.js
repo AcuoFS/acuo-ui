@@ -1,12 +1,14 @@
 import React from 'react'
-import {checkBox} from '../../../../images/common'
-import {UNMATCHED_PORTFOLIO_URL} from '../../../constants/APIcalls'
+import UnmatchedTableRow from './UnmatchedTableRow'
 import styles from './UnmatchedTable.css'
 
 
 export default class UnmatchedTable extends React.Component {
-render() {
-    const {unmatchedPortfolios} = this.props
+  render() {
+    const {
+      unmatchedPortfolios,
+      onTableRow
+    } = this.props
     /**
      * format:
      * {
@@ -23,18 +25,8 @@ render() {
     },
      */
     let rows = unmatchedPortfolios.map(portfolio => (
-      <div className={styles.unmatchedTableRow} key={portfolio.msId}>
-        <div className={styles.unmatchedTableCell}><img src={checkBox}/></div>
-        <div className={styles.unmatchedTableCell}>{portfolio.counterparty}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.netTotalIm}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.netVmCall}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.interestPayment}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.productCashFlow}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.dailyPai}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.feesComms}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.pendingNonCash}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.pendingCash}</div>
-      </div>
+      <UnmatchedTableRow portfolio={portfolio} key={portfolio.msId}
+                         onTableRow={onTableRow}/>
     ))
 
     return (
@@ -53,6 +45,7 @@ render() {
         </div>
 
         {rows}
+
       </div>
     )
   }

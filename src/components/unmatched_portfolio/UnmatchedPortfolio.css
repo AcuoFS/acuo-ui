@@ -36,3 +36,21 @@
 .searchCont {
     align-self: center;
 }
+
+.buttonContainer {
+    margin: 10px;
+    text-align: right;
+}
+
+.buttonContainer button {
+    width: 82px;
+    height: 32px;
+    background-color: #008B04;
+    border-radius: 20px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
