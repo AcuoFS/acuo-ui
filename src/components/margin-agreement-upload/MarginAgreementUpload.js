@@ -1,6 +1,7 @@
 import React from 'react'
 import ClientAsset from '../margin-agreement/sub-components/ClientAsset'
 import CounterPartyAssets from '../margin-agreement/sub-components/CounterPartyAssets'
+import UnmatchedPortfolio from '../unmatched_portfolio/UnmatchedPortfolio'
 import styles from './MarginAgreementUpload.css'
 import portfolioStyles from '../margin-agreement/MarginAgreementList.css'
 
@@ -55,7 +56,7 @@ export default class MarginAgreementUpload extends React.Component {
                               isUploading={propIsUploading}/>
         </div>
 
-        <div className={styles.portfolioTableContainer}>select portfolio</div>
+        <UnmatchedPortfolio/>
       </div>
     )
   }

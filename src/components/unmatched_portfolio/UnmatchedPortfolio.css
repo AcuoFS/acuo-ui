@@ -1,0 +1,38 @@
+.compContainer {
+    /*width: 1372px;*/
+    height: 300px;
+    background-color: #FAFAFA;
+    border: 1px solid #D5DADF;
+    border-radius: 8px;
+    margin: 10px 0px;
+    padding: 10px 0px;
+}
+
+.compHeader {
+    font-size: 18px;
+    composes: baseFontBold from '../../static/css-components/fonts.css';
+    line-height: 22px;
+    color: #4A4A4A;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+.searchLabel {
+    font-size: 13px;
+    line-height: 16px;
+    color: #4A4A4A;
+}
+
+.flexCont {
+    display: flex;
+}
+
+.searchInput {
+    width: 218px;
+    height: 27px;
+    font-size: 16px;
+}
+
+.searchCont {
+    align-self: center;
+}
