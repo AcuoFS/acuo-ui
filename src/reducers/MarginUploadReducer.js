@@ -8,7 +8,7 @@ const initialState = Map({
   uploadData: List()
 })
 
-export const MarginUploadReducer = (state = initialState, action) => {
+const MarginUploadReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_MARGIN_CALL_UPLOAD:
       return state.set('uploadData', fromJS(action.uploadData))
@@ -27,3 +27,5 @@ export const MarginUploadReducer = (state = initialState, action) => {
       return state
   }
 }
+
+export default MarginUploadReducer

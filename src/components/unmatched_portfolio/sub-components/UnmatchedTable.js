@@ -1,10 +1,27 @@
 import React from 'react'
 import {checkBox} from '../../../../images/common'
+import {UNMATCHED_PORTFOLIO_URL} from '../../../constants/APIcalls'
 import styles from './UnmatchedTable.css'
 
 
 export default class UnmatchedTable extends React.Component {
-  render(){
+
+  componentWillMount() {
+    const {onInitUnmatchedPortfolio, unmatchedPortfolios} = this.props
+
+    // Fetch only when unmatched portfolio list is empty
+    if (unmatchedPortfolios.size == 0) {
+      // console.log('onInitUnmatchedPortfolio is empty')
+      fetch(UNMATCHED_PORTFOLIO_URL).then((response) => {
+        return response.json()
+      }).then((obj) => {
+        onInitUnmatchedPortfolio(obj)
+      })
+    }
+  }
+
+  render() {
+
     return (
       <div className={styles.unmatchedTable}>
         <div className={styles.unmatchedTableHeader}>

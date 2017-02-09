@@ -1,5 +1,6 @@
 import React from 'react'
-import UnmatchedTable from './sub-components/UnmatchedTable'
+// index.js import doesn't work well with containers, use explicit
+import UnmatchedTableContainer from '../../containers/UnmatchedTableContainer'
 import styles from './UnmatchedPortfolio.css'
 
 
@@ -14,7 +15,7 @@ export default class UnmatchedPortfolio extends React.Component {
             <input className={styles.searchInput} type="text"/>
           </div>
         </div>
-        <UnmatchedTable/>
+        <UnmatchedTableContainer/>
       </div>
     )
   }
