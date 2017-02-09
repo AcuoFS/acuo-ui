@@ -5,22 +5,37 @@ import styles from './UnmatchedTable.css'
 
 
 export default class UnmatchedTable extends React.Component {
-
-  componentWillMount() {
-    const {onInitUnmatchedPortfolio, unmatchedPortfolios} = this.props
-
-    // Fetch only when unmatched portfolio list is empty
-    if (unmatchedPortfolios.size == 0) {
-      // console.log('onInitUnmatchedPortfolio is empty')
-      fetch(UNMATCHED_PORTFOLIO_URL).then((response) => {
-        return response.json()
-      }).then((obj) => {
-        onInitUnmatchedPortfolio(obj)
-      })
-    }
-  }
-
-  render() {
+render() {
+    const {unmatchedPortfolios} = this.props
+    /**
+     * format:
+     * {
+    "msId": "msp7",
+    "counterparty": "DBS",
+    "netTotalIm": 100000.0,
+    "netVmCall": 50000.0,
+    "interestPayment": 1000.0,
+    "productCashFlow": 500.0,
+    "dailyPai": 100.0,
+    "feesComms": 100.0,
+    "pendingNonCash": 0.0,
+    "pendingCash": 1000.0
+    },
+     */
+    let rows = unmatchedPortfolios.map(portfolio => (
+      <div className={styles.unmatchedTableRow} key={portfolio.msId}>
+        <div className={styles.unmatchedTableCell}><img src={checkBox}/></div>
+        <div className={styles.unmatchedTableCell}>{portfolio.counterparty}</div>
+        <div className={styles.unmatchedTableCell}>{portfolio.netTotalIm}</div>
+        <div className={styles.unmatchedTableCell}>{portfolio.netVmCall}</div>
+        <div className={styles.unmatchedTableCell}>{portfolio.interestPayment}</div>
+        <div className={styles.unmatchedTableCell}>{portfolio.productCashFlow}</div>
+        <div className={styles.unmatchedTableCell}>{portfolio.dailyPai}</div>
+        <div className={styles.unmatchedTableCell}>{portfolio.feesComms}</div>
+        <div className={styles.unmatchedTableCell}>{portfolio.pendingNonCash}</div>
+        <div className={styles.unmatchedTableCell}>{portfolio.pendingCash}</div>
+      </div>
+    ))
 
     return (
       <div className={styles.unmatchedTable}>
@@ -36,31 +51,8 @@ export default class UnmatchedTable extends React.Component {
           <div className={styles.unmatchedTableCell}>Pending Non-Cash</div>
           <div className={styles.unmatchedTableCell}>Pending Cash</div>
         </div>
-        <div className={styles.unmatchedTableRow}>
-          <div className={styles.unmatchedTableCell}><img src={checkBox}/></div>
-          <div className={styles.unmatchedTableCell}>c2</div>
-          <div className={styles.unmatchedTableCell}>c3</div>
-          <div className={styles.unmatchedTableCell}>c4</div>
-          <div className={styles.unmatchedTableCell}>c5</div>
-          <div className={styles.unmatchedTableCell}>c6</div>
-          <div className={styles.unmatchedTableCell}>c7</div>
-          <div className={styles.unmatchedTableCell}>c8</div>
-          <div className={styles.unmatchedTableCell}>c9</div>
-          <div className={styles.unmatchedTableCell}>c10</div>
-        </div>
-        <div className={styles.unmatchedTableRow}>
-          <div className={styles.unmatchedTableCell}><img src={checkBox}/></div>
-          <div className={styles.unmatchedTableCell}>c2</div>
-          <div className={styles.unmatchedTableCell}>c3</div>
-          <div className={styles.unmatchedTableCell}>c4</div>
-          <div className={styles.unmatchedTableCell}>c5</div>
-          <div className={styles.unmatchedTableCell}>c6</div>
-          <div className={styles.unmatchedTableCell}>c7</div>
-          <div className={styles.unmatchedTableCell}>c8</div>
-          <div className={styles.unmatchedTableCell}>c9</div>
-          <div className={styles.unmatchedTableCell}>c10</div>
-        </div>
 
+        {rows}
       </div>
     )
   }

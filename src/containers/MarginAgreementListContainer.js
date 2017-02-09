@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { fromJS, List } from 'immutable'
 import { MarginAgreementsComponent } from '../components'
 import { selectedItems, initState, firstLeveSelect, secondLevelSelect } from '../actions'
+import {initUnmatchedPortfolio} from '../actions/UnmatchedPortfolioActions'
 import { RECON_DATA_URL, RECON_URL, DASHBOARD_URL } from '../constants/APIcalls'
 import filterItems from '../utils/filterItems'
 
@@ -14,6 +15,7 @@ const mapStateToProps = state => {
     recon : fromJS(filteredItems),
     firstLevelList : state.ReconReducer.get('firstLevelList') || List(),
     secondLevelList : state.ReconReducer.get('secondLevelList') || List(),
+    unmatchedPortfolios: state.UnmatchedPortfolioReducer.get('unmatchedPortfolios').toJS()
   }
 }
 
@@ -45,6 +47,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onSelectSecondLevelItem: (GUID, parentID, secondLevelID) => {
     dispatch(secondLevelSelect(GUID, parentID, secondLevelID))
+  },
+  onInitUnmatchedPortfolio: (unmatchedPortfolios) => {
+    dispatch(initUnmatchedPortfolio(unmatchedPortfolios))
   }
 
 })

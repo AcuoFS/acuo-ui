@@ -3,6 +3,7 @@
  */
 import React, {PropTypes} from 'react'
 import MarginAgreementPortfolio from './sub-components/MarginAgreementPortfolio'
+import {UNMATCHED_PORTFOLIO_URL} from '../../constants/APIcalls'
 import styles from './MarginAgreementList.css'
 
 
@@ -23,7 +24,21 @@ export default class MarginAgreementList extends React.Component {
     // this.isDisableReconButton = this.isDisableReconButton.bind(this)
   }
 
-  displayLineItems(recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList, onSelectSecondLevelItem) {
+  componentWillMount() {
+    const {onInitUnmatchedPortfolio, unmatchedPortfolios} = this.props
+
+    // Fetch only when unmatched portfolio list is empty
+    if (unmatchedPortfolios.length == 0) {
+      fetch(UNMATCHED_PORTFOLIO_URL).then((response) => {
+        return response.json()
+      }).then((obj) => {
+        onInitUnmatchedPortfolio(obj)
+      })
+    }
+  }
+
+  displayLineItems(recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList,
+                   onSelectSecondLevelItem, unmatchedPortfolios) {
     return (recon.map((x) => {
 
       if(x.get('direction') == 'OUT')
@@ -35,17 +50,20 @@ export default class MarginAgreementList extends React.Component {
           onReconItem={onReconItem}
           firstLevelList={firstLevelList}
           secondLevelList={secondLevelList}
-          onSelectSecondLevelItem={onSelectSecondLevelItem}/>
+          onSelectSecondLevelItem={onSelectSecondLevelItem}
+          unmatchedPortfolios={unmatchedPortfolios}/>
       )
 
     }))
   }
 
   render() {
-    const {recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList, onSelectSecondLevelItem } = this.props
+    const {recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList,
+      onSelectSecondLevelItem, unmatchedPortfolios } = this.props
     return (
       <div className={styles.actionContainer}>
-        {this.displayLineItems(recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList, onSelectSecondLevelItem)}
+        {this.displayLineItems(recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList,
+          onSelectSecondLevelItem, unmatchedPortfolios)}
       </div>
     )
   }

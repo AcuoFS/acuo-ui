@@ -19,7 +19,8 @@ export default class MarginAgreementUpload extends React.Component {
       propSecondLevelList,
       propOnSelectSecondLevelItem,
       propIsUploading,
-      propOnTogglePortfolioPopup
+      propOnTogglePortfolioPopup,
+      unmatchedPortfolios
     } = this.props
 
     return (
@@ -56,7 +57,7 @@ export default class MarginAgreementUpload extends React.Component {
                               isUploading={propIsUploading}/>
         </div>
 
-        <UnmatchedPortfolio/>
+        <UnmatchedPortfolio unmatchedPortfolios={unmatchedPortfolios}/>
       </div>
     )
   }

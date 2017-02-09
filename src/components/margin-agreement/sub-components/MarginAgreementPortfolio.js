@@ -129,7 +129,8 @@ export default class MarginAgreementPortfolio extends React.Component {
 
   render() {
 
-    const {onSelectFirstLevelItem, portfolioData, onReconItem, firstLevelList, secondLevelList, onSelectSecondLevelItem} = this.props
+    const {onSelectFirstLevelItem, portfolioData, onReconItem, firstLevelList, secondLevelList,
+      onSelectSecondLevelItem, unmatchedPortfolios} = this.props
 
     let percentage = this.getPercentage(portfolioData)
 
@@ -146,7 +147,8 @@ export default class MarginAgreementPortfolio extends React.Component {
           propSecondLevelList={secondLevelList}
           propOnSelectSecondLevelItem={onSelectSecondLevelItem}
           propIsUploading={this.state.isUploading}
-          propOnTogglePortfolioPopup={this.onTogglePortfolioPopup}/>
+          propOnTogglePortfolioPopup={this.onTogglePortfolioPopup}
+          unmatchedPortfolios={unmatchedPortfolios}/>
 
         <ClientAsset marginData={portfolioData}
                      actStyle={'act_L'}

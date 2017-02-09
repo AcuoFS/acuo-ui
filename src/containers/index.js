@@ -8,7 +8,6 @@ import PledgeContainer from './PledgeContainer'
 import CollateralAssetContainer from './CollateralAssetContainer'
 import FlightContainer from './FlightContainer'
 import MarginCallContainer from './MarginCallContainer'
-import UnmatchedTableContainer from './UnmatchedTableContainer'
 
 export {
   FilterContainer,
@@ -20,6 +19,5 @@ export {
   PledgeContainer,
   CollateralAssetContainer,
   FlightContainer,
-  MarginCallContainer,
-  UnmatchedTableContainer
+  MarginCallContainer
 }
