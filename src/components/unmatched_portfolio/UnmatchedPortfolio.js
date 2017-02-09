@@ -10,7 +10,8 @@ export default class UnmatchedPortfolio extends React.Component {
     super(props)
 
     this.state = {
-      selectedList: []
+      selectedList: [],
+      filterText: ''
     }
     this.onTableRow = this.onTableRow.bind(this)
   }
@@ -28,6 +29,12 @@ export default class UnmatchedPortfolio extends React.Component {
     }
   }
 
+  onSearch(text) {
+    this.setState({
+      filterText: text
+    })
+  }
+
   render() {
     return (
       <div className={styles.compContainer}>
@@ -35,11 +42,14 @@ export default class UnmatchedPortfolio extends React.Component {
           <div className={styles.compHeader}>Select Portfolio</div>
           <div className={styles.searchCont}>
             <div className={styles.searchLabel}>Search by Counterparty name</div>
-            <input className={styles.searchInput} type="text"/>
+            <input className={styles.searchInput} type="text"
+                   onChange={(e) => this.onSearch(e.target.value)}/>
           </div>
         </div>
         <UnmatchedTable unmatchedPortfolios={this.props.unmatchedPortfolios}
-                        onTableRow={this.onTableRow}/>
+                        onTableRow={this.onTableRow}
+                        filterText={this.state.filterText}
+                        selectedList={this.state.selectedList}/>
         <div className={
           (this.state.selectedList.length > 0)
             ? styles.buttonContainer : styles.hide}>

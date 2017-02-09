@@ -8,7 +8,10 @@ export default class UnmatchedTableRow extends React.Component {
     super(props)
 
     this.state = {
-      isChecked: false
+      // isChecked: _.some(props.selectedList,
+      //   (selectedItem) => selectedItem.msId == props.portfolio.msId)
+      // Set checkbox if list contains this portfolio
+      isChecked: props.selectedList.includes(props.portfolio)
     }
 
     this.onCheck = this.onCheck.bind(this)

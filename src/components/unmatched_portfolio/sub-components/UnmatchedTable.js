@@ -1,5 +1,6 @@
 import React from 'react'
 import UnmatchedTableRow from './UnmatchedTableRow'
+import _ from 'lodash'
 import styles from './UnmatchedTable.css'
 
 
@@ -7,7 +8,9 @@ export default class UnmatchedTable extends React.Component {
   render() {
     const {
       unmatchedPortfolios,
-      onTableRow
+      onTableRow,
+      filterText,
+      selectedList
     } = this.props
     /**
      * format:
@@ -24,10 +27,14 @@ export default class UnmatchedTable extends React.Component {
     "pendingCash": 1000.0
     },
      */
-    let rows = unmatchedPortfolios.map(portfolio => (
-      <UnmatchedTableRow portfolio={portfolio} key={portfolio.msId}
-                         onTableRow={onTableRow}/>
-    ))
+    const filteredByCounterPty = _.filter(unmatchedPortfolios,
+      o => _.toUpper(o.counterparty).match(new RegExp(_.toUpper(filterText))))
+
+    let rows = filteredByCounterPty.map(portfolio => {
+      return <UnmatchedTableRow portfolio={portfolio} key={portfolio.msId}
+                                onTableRow={onTableRow}
+                                selectedList={selectedList}/>
+    })
 
     return (
       <div className={styles.unmatchedTable}>
