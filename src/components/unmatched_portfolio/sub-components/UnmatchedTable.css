@@ -26,6 +26,10 @@
     padding: 5px;
 }
 
+.unmatchedTableHeader > .unmatchedTableCell {
+    border-bottom: 1px solid #D5DADF;
+}
+
 .unmatchedTableRow > .unmatchedTableCell {
     background-color: #FFFFFF;
 }
