@@ -26,4 +26,4 @@ export const RECON_DATA_URL  = 'http://margin.acuo.com/acuo/api/margin/reconcile
 export const REMOVE_ASSET_ALLOCATION_URL = 'url to remove(and earmark) asset from margin call'
 
 // UNMATCHED PORTFOLIO
-export const UNMATCHED_PORTFOLIO_URL = 'http://margin.acuo.com/acuo/api/margin/items/unmatched/999'
+export const UNMATCHED_PORTFOLIO_URL = 'http://52.74.186.112:8081/unmatched'

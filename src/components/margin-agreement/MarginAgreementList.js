@@ -32,7 +32,7 @@ export default class MarginAgreementList extends React.Component {
       fetch(UNMATCHED_PORTFOLIO_URL).then((response) => {
         return response.json()
       }).then((obj) => {
-        onInitUnmatchedPortfolio(obj)
+        onInitUnmatchedPortfolio(obj.items)
       })
     }
   }
