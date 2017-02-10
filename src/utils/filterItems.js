@@ -43,14 +43,14 @@ export default (items, filterArray) => {
         const dPlusOne = new Date(d.getTime() + oneDayDuration)
 
         return _.filter(items, item => {
-          const itemDay = new Date(item.time)
+          const itemDay = new Date(item.notificationTime)
           return _.inRange(itemDay.getTime(), d.getTime(), dPlusOne.getTime())
         })
 
       } else {
       // otherwise: exact datetime match
         return _.filter(items, item => {
-          const itemDatetime = new Date(item.time)
+          const itemDatetime = new Date(item.notificationTime)
           return (itemDatetime.getTime() === selectedDatetime.getTime())
         })
       }

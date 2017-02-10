@@ -10,10 +10,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onUnreconBubbleClick: (minTime, maxTime, timeRangeText) => {
     return dispatch(updateReconFilter({
-      attr: 'time',
+      attr: 'notificationTime',
       selected: {
         label: timeRangeText.toUpperCase(),
-        value: new Date(maxTime).getTime()
+        value: new Date(minTime).getTime()
       }
     }))
   }
