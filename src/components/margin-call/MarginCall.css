@@ -8,7 +8,7 @@
   min-height: 410px;
   /*display: inline-block;*/
   /*width: 97%;*/
-  width: 1400px;
+  min-width: 1400px;
   padding: 10px;
 
   position: relative;
