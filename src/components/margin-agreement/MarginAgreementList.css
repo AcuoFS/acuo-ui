@@ -518,10 +518,3 @@
 .noMatched {
     color: #FF0000;
 }
-
-.findPortfolio {
-    color: #6EA6E8;
-    cursor: pointer;
-    margin: 10px 0;
-    font-size: 16px;
-}

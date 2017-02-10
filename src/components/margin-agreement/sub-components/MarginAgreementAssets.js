@@ -263,7 +263,7 @@ export default class MarginAgreementPortfolio extends React.Component {
           </div>
       }else{
         findDom =
-          <div className={styles.legalEntity + ' ' + styles.findPortfolio}
+          <div className={selfStyles.findPortfolio}
                onClick={() => onTogglePortfolioPopup()}>
             Find portfolio
           </div>
