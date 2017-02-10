@@ -68,8 +68,8 @@ export default class CounterPartyAssets extends React.Component {
                                secondLevelList={secondLevelList}
                                onSelectSecondLevelItem={onSelectSecondLevelItem}
                                onTogglePortfolioPopup={onTogglePortfolioPopup}
-                               isUploading={isUploading}/>
-
+                               isUploading={isUploading}
+                               party={'cpty'}/>
         <Dispute marginData={marginData}
                  actStyle={actStyle}
                  orgName={orgName}

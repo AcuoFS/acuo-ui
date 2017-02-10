@@ -47,32 +47,19 @@ export default class MarginAgreementPortfolio extends React.Component {
     }
   }
 
-  checkSecondLeveIsNotAllChecked(clientOrCpty, actionItem) {
-    if (actionItem.get(clientOrCpty)) {
+  isDisableReconButton(actionItem, percentage, firstLevelList) {
 
-      const clientAssets = actionItem.get(clientOrCpty)
+    const firstLevelLength = Math.max.apply(Math,
+      [
+        actionItem.get('clientAssets').reduce((sum, group) => sum + group.get('data').size, 0),
+        actionItem.get('counterpartyAssets').reduce((sum, group) => sum + group.get('data').size, 0)
+      ]
+    )
 
-      // for (let groupAssets of clientAssets) {
-      //   for (let firstLevelRecon of groupAssets.get('data')) {
-      //     for (let secondLevelItem of firstLevelRecon.get('secondLevel')) {
-      //       if (!secondLevelItem.get('checked')) {
-      //         return true
-      //       }
-      //     }
-      //   }
-      // }
-    }
-  }
+    const checkedFirstLevelLength = firstLevelList.filter((x) => x.get('GUID') == actionItem.get('GUID')).size
 
-  isDisableReconButton(actionItem, percentage) {
-
-    if (this.checkSecondLeveIsNotAllChecked('clientAssets', actionItem)) {
+    if(firstLevelLength > checkedFirstLevelLength)
       return true
-    }
-
-    if (this.checkSecondLeveIsNotAllChecked('counterpartyAssets', actionItem)) {
-      return true
-    }
 
     // Need adjustment
     if (percentage != 100.00 && this.state.adjAmount == 0.0) {
@@ -168,7 +155,7 @@ export default class MarginAgreementPortfolio extends React.Component {
               {percentage}%
             </div>
             <div className={styles.actBtn + ' '
-            + (this.isDisableReconButton(portfolioData, percentage) ?
+            + (this.isDisableReconButton(portfolioData, percentage, firstLevelList) ?
               styles.actBtnDisable : this.getBtnColour(percentage))}
                  onClick={onReconItem} data-ref={portfolioData.get('GUID') + "?amount=" + this.state.adjAmount}>OK
             </div>

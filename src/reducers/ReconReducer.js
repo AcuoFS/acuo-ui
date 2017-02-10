@@ -24,21 +24,32 @@ const updateFilters = (filters, newFilter) => (
 const updateFirstLevelList = (list, guid, id) => (
   (_.some(list, {"GUID": guid, "id": id}) ?
     _.filter(list, (x) => !_.isMatch(x, {"GUID": guid, "id": id})) :
-    _.concat([], list, {"GUID": guid, "id": id}))
+    _.concat([], list, {"GUID": guid, "id": id, 'parties': ['cpty', 'client']}))
 )
 
 const updateSecondLevelListFromFirstLevel = (firstLevelList, list, listOfItems) => (
   _.reduce(
     _.filter(listOfItems, (x) => _.find(firstLevelList, {"GUID": x.GUID})), (list, item) =>
-      _.concat(list, _.reduce(item.clientAssets, (list, group) =>
-        _.concat(list, _.reduce(group.data, (list, first) =>
-          _.concat(list, _.reduce(first.firstLevel.secondLevel, (list, second) =>
-            (_.find(firstLevelList, {"GUID": item.GUID, "id": second.parentIndex}) ?
-              _.concat(list, {"GUID": item.GUID, "parentIndex": second.parentIndex, "id": second.id}) :
-              [])
+      _.unionWith(
+        _.concat(list, _.reduce(item.clientAssets, (list, group) =>
+          _.concat(list, _.reduce(group.data, (list, first) =>
+            _.concat(list, _.reduce(first.firstLevel.secondLevel, (list, second) =>
+              (_.find(firstLevelList, {"GUID": item.GUID, "id": second.parentIndex}) ?
+                _.concat(list, {"GUID": item.GUID, "parentIndex": second.parentIndex, "id": second.id}) :
+                [])
+            , []))
           , []))
-        , []))
-      , []))
+        , [])),
+        _.concat(list, _.reduce(item.counterpartyAssets, (list, group) =>
+            _.concat(list, _.reduce(group.data, (list, first) =>
+                _.concat(list, _.reduce(first.firstLevel.secondLevel, (list, second) =>
+                    (_.find(firstLevelList, {"GUID": item.GUID, "id": second.parentIndex}) ?
+                      _.concat(list, {"GUID": item.GUID, "parentIndex": second.parentIndex, "id": second.id}) :
+                      [])
+                  , []))
+              , []))
+          , []))
+        , _.isEqual)
   , [])
 )
 
@@ -48,11 +59,36 @@ const updateSecondLevelList = (list, guid, parentID, id) => (
     _.concat([], list, {"GUID": guid, "id": id, "parentIndex": parentID}))
 )
 
+const retrieveSecondLevelCount = (list, guid, id) => (
+  list.reduce((sum, group) => sum = _.find(group.data, {"firstLevel": {"id": id, "GUID": guid}}).firstLevel.secondLevelCount, 0)
+)
+
 const updateFirstlevelListFromSecondLevel = (secondLevelList, firstLevelList, items) => {
-  const test = _.uniq(_.map(secondLevelList, 'GUID'))
-  const filteredItems = _.filter(items, test)
-  console.log(test)
-  return 0
+  const test = _.reduce(secondLevelList, (set, item) => (
+    _.unionWith(set, [{"GUID": item.GUID, "id": item.parentIndex}], _.isEqual)
+  ), [])
+
+  const newFirstLevel = test.map((x) => {
+    const statement = _.find(items, {"GUID": x.GUID})
+    const clientAssetFirstLevelList = statement.clientAssets || []
+    const counterpartyAssetList = statement.counterpartyAssets  || []
+
+    //number of second level items in this first lvl obj in the list
+    const noPresentInList = _.filter(secondLevelList, (y) => _.isMatch(y, {"GUID": x.GUID, "parentIndex": x.id})).length
+
+    const clientAll = retrieveSecondLevelCount(clientAssetFirstLevelList, x.GUID, x.id)
+
+    const cptyAll = retrieveSecondLevelCount(counterpartyAssetList, x.GUID, x.id)
+
+    let parties = []
+
+    parties = (noPresentInList >= clientAll ? _.concat(parties, 'client') : parties)
+    parties = (noPresentInList >= cptyAll ? _.concat(parties, 'cpty') : parties)
+
+    return {"GUID": x.GUID, "id": x.id, "parties": parties}
+  })
+
+  return newFirstLevel
 }
 
 export default function reconReducer(state = initState, action) {
@@ -65,6 +101,7 @@ export default function reconReducer(state = initState, action) {
                   .set('filters', fromJS(initFilters))
 
     case ActionTypes.RECON_FILTER_SET:
+      console.log(action.value)
       newFilter = action.value
       filters = state.get('filters').toJS()
       updatedFilters = updateFilters(filters, newFilter)
@@ -88,7 +125,7 @@ export default function reconReducer(state = initState, action) {
       const firstLevelList = state.get('firstLevelList') || List()
       const updatedFirstLevelList2 = updateFirstlevelListFromSecondLevel(updatedSecondLevelList2, firstLevelList.toJS(), state.get('items').toJS())
 
-      return state.set('secondLevelList', fromJS(updatedSecondLevelList2))
+      return state.set('secondLevelList', fromJS(updatedSecondLevelList2)).set('firstLevelList', fromJS(updatedFirstLevelList2))
 
     default:
       return state

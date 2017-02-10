@@ -24,7 +24,8 @@ export default class ClientAsset extends React.Component {
                                adjAmt={adjAmt}
                                firstLevelList={firstLevelList}
                                secondLevelList={secondLevelList}
-                               onSelectSecondLevelItem={onSelectSecondLevelItem}/>
+                               onSelectSecondLevelItem={onSelectSecondLevelItem}
+                               party={'client'}/>
 
       </div>
     )

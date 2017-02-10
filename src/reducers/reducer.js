@@ -162,6 +162,7 @@ export function multifilters(state, action){
 }
 
 export function attachFilter(state, action){
+  console.log(action)
   switch(action.type){
     case 'FILTER_STATE_DERIV':
       return state.setIn(['inputs','filters','typeFilter'], fromJS(action))

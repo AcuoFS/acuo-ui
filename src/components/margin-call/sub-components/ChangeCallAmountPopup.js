@@ -61,6 +61,9 @@ export default class ChangeCallAmountPopup extends React.Component {
 
     return (
       <div className={styles.popupPanel + ' ' + (propIsShow ? styles.showPopup : '')}>
+        <div className={styles.closeButton} onClick={this.onCancel}>
+          x
+        </div>
         <div className={styles.popupHeader}>Edit Total Call Amount</div>
         <div>
           <div className={styles.flexRow}>
