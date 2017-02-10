@@ -90,9 +90,12 @@ const mapDispatchToProps = dispatch => ({
         toBeAllocated: guids
       })
     }).then(response => {
+      console.log('Allocate response: ' + response)
       return response.json()
     }).then(obj => {
       dispatch(initSelection(fromJS(obj.items)))
+    }).catch(error => {
+      console.log('Error: ' + error)
     })
   },
   onRemoveFromEarmarked: (e, assetType, propAssetId, propAssetIdType) => {
@@ -123,6 +126,7 @@ const mapDispatchToProps = dispatch => ({
       method: 'POST',
       body: JSON.stringify(pledgeToSend)
     }).then(response => {
+      console.log('Pledge response: ' + response)
       if (response.status == 200) {
         // TODO: To handle how to inform user that pledge data is sucessfully sent
         alert('Sent to endpoint!' + JSON.stringify(pledgeToSend))
@@ -136,6 +140,8 @@ const mapDispatchToProps = dispatch => ({
       } else {
         alert('Error sending pledge details')
       }
+    }).catch(error => {
+      console.log('Error: ' + error)
     })
   }
 })
