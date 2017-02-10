@@ -44,7 +44,7 @@ export default class MarginAgreementDetail extends React.Component {
 
   renderHidden(secondLevel, GUID, secondLevelList, parentID, onSelectSecondLevelItem) {
     if(secondLevel)
-      return secondLevel.map((x, index) => {
+      return secondLevel.sort().map((x, index) => {
 
         {/*<div className={ x.get('recon') ? styles.packageRowGrey : (discrepancy && highlightThis ? styles.packageRowHighLight : '')} key={index}>*/}
 
