@@ -57,7 +57,7 @@ export default class FilterDropdown extends React.Component {
         Menu = DropdownMenu
     }
 
-    return <Menu options={this.props.options}
+    return <Menu options={_.sortBy(this.props.options)}
                  selected={this.props.selected}
                  handleOnSelectChange={this.handleOnSelectChange} />
   }
