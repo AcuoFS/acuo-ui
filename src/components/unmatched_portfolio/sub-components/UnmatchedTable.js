@@ -1,10 +1,24 @@
 import React from 'react'
 import UnmatchedTableRow from './UnmatchedTableRow'
 import _ from 'lodash'
+import {UNMATCHED_PORTFOLIO_URL} from '../../../constants/APIcalls'
 import styles from './UnmatchedTable.css'
 
 
 export default class UnmatchedTable extends React.Component {
+  componentWillMount() {
+    const {onInitUnmatchedPortfolio, unmatchedPortfolios} = this.props
+
+    // Fetch only when unmatched portfolio list is empty
+    if (unmatchedPortfolios.length == 0) {
+      fetch(UNMATCHED_PORTFOLIO_URL).then((response) => {
+        return response.json()
+      }).then((obj) => {
+        onInitUnmatchedPortfolio(obj.items)
+      })
+    }
+  }
+
   render() {
     const {
       unmatchedPortfolios,
@@ -30,11 +44,11 @@ export default class UnmatchedTable extends React.Component {
     const filteredByCounterPty = _.filter(unmatchedPortfolios,
       o => _.toUpper(o.counterparty).match(new RegExp(_.toUpper(filterText))))
 
-    let rows = filteredByCounterPty.map(portfolio => {
-      return <UnmatchedTableRow portfolio={portfolio} key={portfolio.msId}
-                                onTableRow={onTableRow}
-                                selectedList={selectedList}/>
-    })
+    let rows = filteredByCounterPty.map(portfolio => (
+      <UnmatchedTableRow portfolio={portfolio} key={portfolio.msId}
+                         onTableRow={onTableRow}
+                         selectedList={selectedList}/>
+    ))
 
     return (
       <div className={styles.unmatchedTable}>

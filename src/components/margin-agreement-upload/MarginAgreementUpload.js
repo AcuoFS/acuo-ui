@@ -19,14 +19,13 @@ export default class MarginAgreementUpload extends React.Component {
       propSecondLevelList,
       propOnSelectSecondLevelItem,
       propIsUploading,
-      propOnTogglePortfolioPopup,
-      unmatchedPortfolios
+      propOnTogglePortfolioPopup
     } = this.props
 
     return (
       <div className={styles.popupContainer + ' ' + (propIsUploading ? styles.showPopup : '')}>
 
-        <div className={styles.closeBtn} onClick={()=>propOnTogglePortfolioPopup()}>x</div>
+        <div className={styles.closeBtn} onClick={() => propOnTogglePortfolioPopup()}>x</div>
 
         <div className={styles.portfolioContainer}>
           <ClientAsset marginData={propPortfolioData}
@@ -57,7 +56,7 @@ export default class MarginAgreementUpload extends React.Component {
                               isUploading={propIsUploading}/>
         </div>
 
-        <UnmatchedPortfolio unmatchedPortfolios={unmatchedPortfolios}/>
+        <UnmatchedPortfolio/>
       </div>
     )
   }

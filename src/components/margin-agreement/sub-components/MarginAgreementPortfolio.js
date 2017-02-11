@@ -26,7 +26,7 @@ export default class MarginAgreementPortfolio extends React.Component {
             return data + parseFloat(y.getIn(['firstLevel', 'amount']))
           }, 0)
       }, 0)
-    }else
+    } else
       return 0
   }
 
@@ -58,7 +58,7 @@ export default class MarginAgreementPortfolio extends React.Component {
 
     const checkedFirstLevelLength = firstLevelList.filter((x) => x.get('GUID') == actionItem.get('GUID')).size
 
-    if(firstLevelLength > checkedFirstLevelLength)
+    if (firstLevelLength > checkedFirstLevelLength)
       return true
 
     // Need adjustment
@@ -88,8 +88,8 @@ export default class MarginAgreementPortfolio extends React.Component {
   getPercentage(actionItem) {
     if (actionItem.get('clientAssets') && actionItem.get('counterpartyAssets')) {
 
-        return (this.displayTotalMargin(actionItem, 'clientAssets') /
-        this.displayTotalMargin(actionItem, 'counterpartyAssets') * 100).toFixed(0)
+      return (this.displayTotalMargin(actionItem, 'clientAssets') /
+      this.displayTotalMargin(actionItem, 'counterpartyAssets') * 100).toFixed(0)
 
     } else {
       return 0.00
@@ -108,7 +108,7 @@ export default class MarginAgreementPortfolio extends React.Component {
     }
   }
 
-  onTogglePortfolioPopup(){
+  onTogglePortfolioPopup() {
     this.setState({
       isUploading: !this.state.isUploading
     })
@@ -116,15 +116,17 @@ export default class MarginAgreementPortfolio extends React.Component {
 
   render() {
 
-    const {onSelectFirstLevelItem, portfolioData, onReconItem, firstLevelList, secondLevelList,
-      onSelectSecondLevelItem, unmatchedPortfolios} = this.props
+    const {
+      onSelectFirstLevelItem, portfolioData, onReconItem, firstLevelList, secondLevelList,
+      onSelectSecondLevelItem
+    } = this.props
 
     let percentage = this.getPercentage(portfolioData)
 
     return (
-      (<div className={styles.actionWrap}>
+      <div className={styles.actionWrap}>
 
-        <MarginAgreementUpload
+        {this.state.isUploading && <MarginAgreementUpload
           propPortfolioData={portfolioData}
           propHandlerTotalMargin={this.displayTotalMargin}
           propHandlerSelectedItem={onSelectFirstLevelItem}
@@ -134,8 +136,7 @@ export default class MarginAgreementPortfolio extends React.Component {
           propSecondLevelList={secondLevelList}
           propOnSelectSecondLevelItem={onSelectSecondLevelItem}
           propIsUploading={this.state.isUploading}
-          propOnTogglePortfolioPopup={this.onTogglePortfolioPopup}
-          unmatchedPortfolios={unmatchedPortfolios}/>
+          propOnTogglePortfolioPopup={this.onTogglePortfolioPopup}/>}
 
         <ClientAsset marginData={portfolioData}
                      actStyle={'act_L'}
@@ -172,8 +173,7 @@ export default class MarginAgreementPortfolio extends React.Component {
                             secondLevelList={secondLevelList}
                             onSelectSecondLevelItem={onSelectSecondLevelItem}
                             onTogglePortfolioPopup={this.onTogglePortfolioPopup}/>
-      </div>)
-
+      </div>
     )
   }
 }

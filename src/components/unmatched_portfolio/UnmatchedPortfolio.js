@@ -1,7 +1,6 @@
 import React from 'react'
 // index.js import doesn't work well with containers, use explicit
-// import UnmatchedTableContainer from '../../containers/UnmatchedTableContainer'
-import UnmatchedTable from './sub-components/UnmatchedTable'
+import UnmatchedTableContainer from '../../containers/UnmatchedTableContainer'
 import styles from './UnmatchedPortfolio.css'
 
 
@@ -46,10 +45,9 @@ export default class UnmatchedPortfolio extends React.Component {
                    onChange={(e) => this.onSearch(e.target.value)}/>
           </div>
         </div>
-        <UnmatchedTable unmatchedPortfolios={this.props.unmatchedPortfolios}
-                        onTableRow={this.onTableRow}
-                        filterText={this.state.filterText}
-                        selectedList={this.state.selectedList}/>
+        <UnmatchedTableContainer onTableRow={this.onTableRow}
+                                 filterText={this.state.filterText}
+                                 selectedList={this.state.selectedList}/>
         <div className={
           (this.state.selectedList.length > 0)
             ? styles.buttonContainer : styles.hide}>
