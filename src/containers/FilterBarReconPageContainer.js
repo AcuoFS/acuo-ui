@@ -13,7 +13,7 @@ const mapStateToProps = state => {
   const filteredOutItems = filterItems(outItems, filters)
 
   const filterWithOptions = _.map(filters, filter => {
-    const options = (_.get(filter, 'type', 'single') === 'single')
+    const options = (((_.get(filter, 'type', 'single') === 'single') && (_.get(filter, 'attr') !== 'cptyOrg')) || (_.get(filter, 'attr') === 'cptyEntity'))
                     // if it is single-value filter
                     ? _.uniq(_.map(filteredOutItems, filter.attr))
                     // if it is non-single-value filter
