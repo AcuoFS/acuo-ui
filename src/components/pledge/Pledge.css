@@ -32,6 +32,7 @@
   text-transform: uppercase;
   color: #6389ad;
   position: relative;
+  display: flex;
 }
 
 .panelTitle img {

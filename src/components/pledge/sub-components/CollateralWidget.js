@@ -1,9 +1,27 @@
 import React from 'react'
 import CollateralAssetGroup from './CollateralAssetGroup'
 import styles from '../Pledge.css'
+import selfStyles from './CollateralWidget.css'
 
 
 export default class Collateral extends React.Component {
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      filterText: ''
+    }
+
+    this.handleFilterChange = this.handleFilterChange.bind(this)
+  }
+
+  handleFilterChange(value) {
+    this.setState({
+      filterText: value
+    })
+  }
+
   render() {
     const {
       toggleColwidthR,
@@ -65,6 +83,9 @@ export default class Collateral extends React.Component {
       <div className={styles.col_R + ' ' + toggleColwidthR}>
         <div className={styles.panel}>
           <div className={styles.panelTitle}>Collateral
+            <input type="text" placeholder="Search" className={selfStyles.searchInput}
+                   value={this.state.filterText}
+                   onChange={(e) => this.handleFilterChange(e.target.value)}/>
             <img src={sideways} className={styles.imageRight} onClick={changeSideways}/>
           </div>
 
