@@ -25,13 +25,15 @@ class TableBody extends React.Component {
     return (
       <div className={this.props.open}>
         <div className={styles.tableBody}>
-          <TableCell bodyItemClass={'bodyItem'} cellValue={'LEGAL ENTITY'}/>
-          <TableCell bodyItemClass={'innerItem'} cellValue={'CPTY Org'}/>
-          <TableCell bodyItemClass={'cptyItem'} cellValue={'CPTY Entity'}/>
-          <TableCell bodyItemClass={'marginItem'} cellValue={'CCY'}/>
-          <TableCell bodyItemClass={'marginItem'} cellValue={'IM'}/>
-          <TableCell bodyItemClass={'marginItem'} cellValue={'VM'}/>
-          <TableCell bodyItemClass={'outerItem'} cellValue={'Excess'}/>
+          <TableCell cellValue={'LEGAL ENTITY'}/>
+          <TableCell cellValue={'CPTY Org'}/>
+          <TableCell cellValue={'CPTY Entity'}/>
+          <TableCell cellValue={'CCY'}/>
+          <TableCell cellValue={'IM'}/>
+          <TableCell cellValue={'VM'}/>
+          <TableCell cellValue={'Excess'}/>
+          <TableCell cellValue={'In / Out'}/>
+          <TableCell cellValue={'Status'}/>
         </div>
         {this.props.marginStatus.map(this.renderRow)}
       </div>

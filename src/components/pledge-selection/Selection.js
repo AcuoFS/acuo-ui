@@ -1,28 +1,39 @@
 import React from 'react'
+import {numberWithCommas} from '../../utils/numbersWithCommas'
+import DeselectionPopup from './sub-components/DeselectionPopup'
+import {List, toJS} from 'immutable'
+import * as ASSET from '../../constants/AllocatedAssetAttributes'
+import * as ALLOCATED from '../../constants/AllocatedAttributes'
 import styles from './Selection.css'
-import { numberWithCommas } from '../../utils/numbersWithCommas'
-
-import { List } from 'immutable'
 
 export default class Selection extends React.Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      openedDeselectionPopup: "",
+      isValidPopupForm: false
+    }
+
     this.togglePendingAllocation = this.togglePendingAllocation.bind(this)
+    this.setDeselectionPopup = this.setDeselectionPopup.bind(this)
+    this.clearDeselectionPopup = this.clearDeselectionPopup.bind(this)
+    this.handlerChangeSideWaysClick = this.handlerChangeSideWaysClick.bind(this)
+    this.setPopupFormValidity = this.setPopupFormValidity.bind(this)
   }
 
   renderGroup(x, GUID) {
     return (
-      <div className={styles.group} key={x.get('groupName')+GUID}>
+      <div className={styles.group} key={x.get('groupName') + GUID}>
         {this.checkIfExist(x.get('data')).map((y, index) => {
           return (
             <div className={styles.firstLevel} key={index}>
               <div className={styles.assetName}>
-                {y.get('firstLevel')}
+                {y.getIn(['firstLevel', 'name'])}
               </div>
               <div className={styles.amount}>
-                {numberWithCommas(y.get('secondLevel').reduce((sum, z) => {
-                  return sum + z.get('amount')
+                {numberWithCommas(y.getIn(['firstLevel', 'secondLevel']).reduce((sum, z) => {
+                  return sum + parseFloat(z.get('amount'))
                 }, 0))}
               </div>
             </div>)
@@ -31,62 +42,113 @@ export default class Selection extends React.Component {
     )
   }
 
-  renderMargin(x, index){
+  renderMargin(asset, mgnType, guid) {
+    const popupID = guid + mgnType + asset.get(ASSET.A_ID) + asset.get(ASSET.A_NAME)
     return (
-      <tr key={index}>
-        <td>{x.get('assetName')}</td>
-        <td>{numberWithCommas(x.get('priceNetHaircut'))}</td>
-        <td>{x.get('priceNetHaircutCcy')}</td>
-        <td>{x.get('haircutPct')}%</td>
-        <td>{x.get('venue')}</td>
-        <td>{numberWithCommas(x.get('price'))}</td>
-        <td>{x.get('priceCcy')}</td>
-        <td><
-          div className={styles.earmarkAssetButton}>
-            <span>E</span>
-            <div className={styles.tooltip}>
-              Move to Earmarked
-            </div>
+      <tr key={asset.get(ASSET.A_ID)}>
+        <td>{asset.get(ASSET.A_NAME)}</td>
+        <td>{numberWithCommas(asset.get(ASSET.A_NET_AMT))}</td>
+        <td>{asset.get(ASSET.A_CCY)}</td>
+        <td>{asset.get(ASSET.A_HAIRCUT_PCT)}%</td>
+        <td>{numberWithCommas(asset.get(ASSET.A_AMT))}</td>
+        <td>{numberWithCommas(asset.get(ASSET.A_FX))}</td>
+        <td>{asset.get(ASSET.A_VENUE)}</td>
+        <td>
+          <div className={styles.earmarkAssetButton}
+               onClick={() => {
+                 this.setDeselectionPopup(popupID)
+               }}>
+            <img src="./images/pledge/cancel.png"></img>
+            {/*<div className={styles.tooltip}>*/}
+              {/*Move to Earmarked*/}
+            {/*</div>*/}
           </div>
+
         </td>
       </tr>
     )
   }
 
-  togglePendingAllocation(e){
+  togglePendingAllocation(e) {
     this.props.onTogglePendingAllocation(e.currentTarget.dataset.ref)
   }
 
   //generic checker
-  checkIfExist(something){
+  checkIfExist(something) {
     return something || List()
   }
 
-  calSubTotal(a, s){
-    if(a.getIn(['allocated', s]))
-      return (a.getIn(['allocated', s]).reduce((SumX , x)=>{return SumX + x.get('price')},0))
+  calSubTotal(a, s) {
+    if (a.getIn(['allocated', s]))
+      return (a.getIn(['allocated', s]).reduce((SumX, x) => {
+        return SumX + parseFloat(x.get('price'))
+      }, 0))
     else
       return 0
   }
-  calTotal(a, i, j){
+
+  calTotal(a, i, j) {
     return this.calSubTotal(a, i) + this.calSubTotal(a, j)
   }
 
+  setDeselectionPopup(popupID) {
+    this.setState({
+      openedDeselectionPopup: popupID
+    })
+  }
+
+  clearDeselectionPopup() {
+    this.setState({
+      openedDeselectionPopup: "",
+      isValidPopupForm: false
+    })
+  }
+
+  handlerChangeSideWaysClick({clicked, toggleL}) {
+    clicked()
+
+    // Clear popup when selection panel is collapsed
+    if (toggleL) {
+      this.clearDeselectionPopup()
+    }
+  }
+
+  setPopupFormValidity(isValid) {
+    this.setState({isValidPopupForm: isValid})
+  }
+
+  // Before change of props
+  componentWillReceiveProps(nextProps) {
+    // Clear and close popup if selection list is collapsed
+    if (!nextProps.toggleL && nextProps.toggleR) {
+      this.clearDeselectionPopup()
+    }
+  }
+
   render() {
+    const {
+      marginCall, pendingAllocationStore,
+      toggleL, toggleR, sideways
+    } = this.props
 
-    const { marginCall, pendingAllocationStore } = this.props
-
-    let evlEmptyForIntMargin = this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).isEmpty()
-    let evlEmptyForVariMargin = this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).isEmpty()
+    let evlEmptyForIntMargin = this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).isEmpty()
+    let evlEmptyForVariMargin = this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).isEmpty()
+    let evlEmptyForMargin = !this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).isEmpty() || !this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).isEmpty()
 
     return (
       <div className={styles.panel} key={marginCall.get('GUID')}>
+        <DeselectionPopup propOpenedDeselectionPopup={this.state.openedDeselectionPopup}
+                          propHandlerClearPopup={this.clearDeselectionPopup}
+                          propIsValidFlag={this.state.isValidPopupForm}
+                          propHandlerSetFormValidity={this.setPopupFormValidity}/>
 
         <div className={styles.columnContainer}>
-          <div className={styles.leftColumn + ' ' + (!this.props.toggleL ? styles.bigger : '')}>
+          <div className={styles.leftColumn + ' ' + (!toggleL ? styles.bigger : '')}>
             <div className={styles.titleHolder}>
-              <img src={(this.checkIfExist(pendingAllocationStore).includes(marginCall.get('GUID')) ? "./images/pledge/checkboxwithtick.png" : "./images/pledge/checkbox.png")} className={styles.selTick} onClick={this.togglePendingAllocation} data-ref={marginCall.get('GUID')}/>
-              <span className={styles.panelTitle}>{marginCall.get('GUID')}</span>
+              <img
+                src={(this.checkIfExist(pendingAllocationStore).includes(marginCall.get('GUID')) ? "./images/pledge/checkboxwithtick.png" : "./images/pledge/checkbox.png")}
+                className={styles.selTick} onClick={this.togglePendingAllocation} data-ref={marginCall.get('GUID')}/>
+              <span className={styles.panelTitle}>{marginCall.get('agreementName')}</span>
               <div className={styles.subtitle}>
                 {marginCall.get('legalEntity')} - {marginCall.get('GUID')}
               </div>
@@ -97,7 +159,7 @@ export default class Selection extends React.Component {
 
             <div>
 
-              {this.checkIfExist(marginCall.get('ClientAssets')).map(x => this.renderGroup(x, marginCall.get('GUID')))}
+              {this.checkIfExist(marginCall.get('clientAssets')).map(x => this.renderGroup(x, marginCall.get('GUID')))}
 
             </div>
 
@@ -107,12 +169,12 @@ export default class Selection extends React.Component {
                   Total
                 </div>
                 <div className={styles.amount}>
-                  {numberWithCommas(this.checkIfExist(marginCall.get('ClientAssets')).reduce((sum, x) => {
+                  {numberWithCommas(this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {
                     return sum + x.get('data').reduce((sum, y) => {
-                      return sum + y.get('secondLevel').reduce((sum, z) => {
-                        return sum + z.get('amount')
-                        }, 0)
-                    }, 0)
+                        return sum + y.getIn(['firstLevel','secondLevel']).reduce((sum, z) => {
+                            return sum + parseFloat(z.get('amount'))
+                          }, 0)
+                      }, 0)
                   }, 0))}
                 </div>
               </div>
@@ -121,62 +183,64 @@ export default class Selection extends React.Component {
           </div>
           <div className={styles.rightColumn}>
             <div className={styles.rightColHeading}>
-              <div className={styles.rightColumnTitle + ' ' + (this.props.toggleL ? styles.showL : styles.hideL)}>
+              <div className={styles.rightColumnTitle + ' ' + (toggleL ? styles.showL : styles.hideL)}>
                 Selection
               </div>
               <div className={styles.imageRight}>
-                <img src={this.props.sideways} onClick={this.props.clicked} alt=""/>
+                <img src={sideways}
+                     onClick={() => {
+                       this.handlerChangeSideWaysClick(this.props)
+                     }} alt=""/>
               </div>
             </div>
 
-            <div className={styles.ttlMarginWrap + ' ' + (this.props.toggleR ? styles.showR : styles.hideR)}>
+            <div className={styles.ttlMarginWrap + ' ' + (toggleR ? styles.showR : styles.hideR)}>
               <div className={styles.ttlMargin}>
-                <div>Total Margin</div>
-                <div className={styles.bigFig + ' ' +styles.bold}>{numberWithCommas((this.checkIfExist(marginCall.get('ClientAssets')).reduce((sum, x) => {
-                  return sum + x.get('data').reduce((sum, y) => {
-                      return sum + y.get('secondLevel').reduce((sum, z) => {
-                          return sum + z.get('amount')
-                        }, 0)
-                    }, 0)
-                }, 0) / 1000000).toFixed(1))}</div>
+                <div>Total Allocated</div>
+                <div className={styles.bigFig + ' ' + styles.bold}>
+                  {Math.round((marginCall.getIn(['allocated', ALLOCATED.MGN_TOTAL]) || 0) / 10000) / 100}
+                </div>
                 <div className={styles.bold}>Million</div>
               </div>
             </div>
 
-            <div className={this.props.toggleL ? styles.showL : styles.hideL}>
+            <div className={toggleL ? styles.showL : styles.hideL}>
 
               <div className={styles.rightColSubSection}>
                 <div className={styles.subSectionHeader}>Initial Margin</div>
                 <table className={styles.selTable + ( evlEmptyForIntMargin ? ' ' + styles.notAllocated : '')}>
                   <thead>
-                    <tr className={styles.bold}>
-                      <th></th>
-                      <th>Price(Net <br/>of Haircut)</th>
-                      <th>CCY</th>
-                      <th>Haircut</th>
-                      <th>Venue</th>
-                      <th>Price</th>
-                      <th>CCY</th>
-                      <th></th>
-                    </tr>
+                  <tr className={styles.bold}>
+                    <th></th>
+                    <th>Value(post <br/>haircut)</th>
+                    <th>CCY</th>
+                    <th>Haircut</th>
+                    <th>Value</th>
+                    <th>FX</th>
+                    <th>Venue</th>
+                    <th></th>
+                  </tr>
                   </thead>
                   <tbody>
                   { evlEmptyForIntMargin ?
-                      <tr>
-                        <td colSpan="8" className={styles.notAlcText}>Collateral has not been allocated</td>
-                      </tr> :
-                      this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).map(x => this.renderMargin(x))
+                    <tr>
+                      <td colSpan="8" className={styles.notAlcText}>Collateral has not been allocated</td>
+                    </tr> :
+                    this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).map(
+                      x => this.renderMargin(x, ASSET.A_LIST_IM, marginCall.get('GUID')))
                   }
-                    <tr className={styles.bold}>
-                      <td>Sub-Total</td>
-                      <td>{evlEmptyForIntMargin ? '' : numberWithCommas(this.calSubTotal(marginCall, 'initialMargin'))}</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
+                  <tr className={styles.bold}>
+                    <td>Sub-Total</td>
+                    <td>
+                      {numberWithCommas((marginCall.getIn(['allocated', ALLOCATED.IM_TOTAL]) || 0).toFixed(2))}
+                    </td>
+                    <td>USD</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
                   </tbody>
                 </table>
               </div>
@@ -187,29 +251,32 @@ export default class Selection extends React.Component {
                   <thead>
                   <tr className={styles.bold}>
                     <th></th>
-                    <th>Price(Net <br/>of Haircut)</th>
+                    <th>Value(post <br/>haircut)</th>
                     <th>CCY</th>
                     <th>Haircut</th>
+                    <th>Value</th>
+                    <th>FX</th>
                     <th>Venue</th>
-                    <th>Price</th>
-                    <th>CCY</th>
                     <th></th>
                   </tr>
                   </thead>
                   <tbody>
 
                   { evlEmptyForVariMargin ?
-                        <tr>
-                          <td colSpan="8" className={styles.notAlcText}>Collateral has not been allocated</td>
-                        </tr> :
-                      this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).map(x => this.renderMargin(x))
+                    <tr>
+                      <td colSpan="8" className={styles.notAlcText}>Collateral has not been allocated</td>
+                    </tr> :
+                    this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).map(
+                      x => this.renderMargin(x, ASSET.A_LIST_VM, marginCall.get('GUID')))
                   }
 
 
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
-                    <td>{evlEmptyForVariMargin ? '' : numberWithCommas(this.calSubTotal(marginCall, 'variationMargin'))}</td>
-                    <td></td>
+                    <td>
+                      {numberWithCommas((marginCall.getIn(['allocated', ALLOCATED.VM_TOTAL]) || 0).toFixed(2))}
+                    </td>
+                    <td>USD</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -218,13 +285,19 @@ export default class Selection extends React.Component {
                   </tr>
                   </tbody>
                 </table>
-
-                <table className={styles.ttlAmount + ' ' + styles.bold}>
+                <table className={styles.selTable}>
                   <tbody>
-                    <tr>
-                      <td>Total</td>
-                      <td colSpan="7">{numberWithCommas(this.calTotal(marginCall, 'initialMargin', 'variationMargin'))}</td>
-                    </tr>
+                  <tr className={styles.bold}>
+                    <td>Total</td>
+                    <td
+                      className={styles.totalTable1 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>{numberWithCommas((marginCall.getIn(['allocated', ALLOCATED.MGN_TOTAL]) || 0).toFixed(2))}</td>
+                    <td className={styles.totalTable2 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>USD</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
                   </tbody>
                 </table>
               </div>

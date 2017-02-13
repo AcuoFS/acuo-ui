@@ -3,6 +3,8 @@
 .pledgeContainer {
   position: relative;
   padding: 20px;
+  margin: 0 auto;
+  max-width: 1440px;
 }
 
 .secDivider {
@@ -29,6 +31,14 @@
   line-height: 24px;
   text-transform: uppercase;
   color: #6389ad;
+  position: relative;
+}
+
+.panelTitle img {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  cursor: pointer;
 }
 
 #optSetting {
@@ -63,13 +73,14 @@
   width: 100px;
   text-align: right;
   margin-right: 10px;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 16px;
   color: #4A4A4A;
   vertical-align: middle;
   flex: 1;
   flex-grow: 2;
   margin-top: 6px;
+  text-transform: capitalize;
 }
 
 #optSetting .optPnlWrap .optItem .optItemSlider {
@@ -202,7 +213,8 @@ input[type=range]:focus::-ms-fill-upper {
   font-size: 14px;
   line-height: 17px;
   color: #4A4A4A;
-  margin: 10px 30px auto 20px;
+  /*margin: 10px 30px auto 20px;*/
+  margin: 0px 10px;
 }
 
 .chsCalls .tick {
@@ -210,17 +222,18 @@ input[type=range]:focus::-ms-fill-upper {
   position: relative;
   vertical-align: text-bottom;
   margin: auto 4px;
+  width: 20px;
+  height: 20px
 }
 
 .chsCalls .tick:hover {
   cursor: pointer;
 }
 
-.optButton,
-.optButton.btnEnabled {
+/* Enabled optimisation button style */
+.optButton {
   flex: 1;
   width: 146px;
-  /*height: 32px;*/
   color: #4A4A4A;
   background-color: #FAFAFA;
   border: 1px solid #979797;
@@ -234,10 +247,6 @@ input[type=range]:focus::-ms-fill-upper {
   align-self: center;
 }
 
-.optButton:hover {
-  cursor: pointer;
-}
-
 .optButton.btnDisabled {
   color: #d7dce0;
   background-color: #FAFAFA;
@@ -245,19 +254,19 @@ input[type=range]:focus::-ms-fill-upper {
   pointer-events: none;
 }
 
-.optButton#optBtnAllocate {
+.optButton.optBtnPledge {
+  color: #fff;
+  background-color: #00B9CC;
+  border-color: #00B9CC;
+}
 
+.optButton:hover {
+  cursor: pointer;
 }
 
 .sliderAndStatus{
   display: flex;
   align-items: flex-start;
-}
-
-.optButton#optBtnPledge.btnEnabled {
-  color: #fff;
-  background-color: #00B9CC;
-  border-color: #00B9CC;
 }
 
 #pleStatus {
@@ -284,6 +293,14 @@ input[type=range]:focus::-ms-fill-upper {
   display: flex;
   margin-left: 0.5%;
   margin-top: -5.5px;
+  pointer-events: none;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari*/
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
 
 @-moz-document url-prefix() {
@@ -445,12 +462,14 @@ input[type=range]:focus::-ms-fill-upper {
   background: #7F8A93;
   line-height: 12px;
   color: #ffffff;
+  text-transform: capitalize;
 }
 
 .collateralExpandEarmarkedRow{
   background: #4E83B5;
   line-height: 12px;
   color: #ffffff;
+  text-transform: capitalize;
 }
 
 .collateralCell {
@@ -581,7 +600,7 @@ div.collateralTableExpanded div:nth-child(12){
   z-index: 1;
   top: -5px; /* set top value */
   left: 0px; /* set left value */
-  width:300px;
+  width:350px;
   border: 1px solid #1c2124;
   display: none;
   position: absolute;
@@ -621,8 +640,8 @@ div.collateralTableExpanded div:nth-child(12){
 
   z-index: 1;
   top:-5px; /* set top value */
-  left:-294px; /* set left value */
-  width:300px;
+  left:-344px; /* set left value */
+  width:350px;
   border: 1px solid #1c2124;
   display: none;
   position: absolute;
@@ -728,9 +747,14 @@ div.collateralTableExpanded div:nth-child(12){
 
 .popupInputBox{
   display: inline-block;
-  flex:3;
+  flex: 4;
   min-height: 26px;
   width: 98%;
+  position: relative;
+}
+
+.popupInputBox input{
+  text-indent: 5px;
 }
 
 .buttonContainer{
@@ -761,7 +785,6 @@ div.collateralTableExpanded div:nth-child(12){
 
 .buttonContainer .btnEnabled {
   width: 100px;
-  /*height: 32px;*/
   color: #fff ;
   background-color: #118A17 ;
   border: 1px solid #118A17 ;
@@ -775,69 +798,52 @@ div.collateralTableExpanded div:nth-child(12){
   cursor: pointer;
 }
 
-.optButton.btnEnabled {
-  flex: 1;
-  width: 146px;
-  /*height: 32px;*/
-  color: #4A4A4A ;
-  background-color: #FAFAFA ;
-  border: 1px solid #979797 ;
-  font-size: 13px;
-  font-weight: bold;
-  line-height: 21px;
-  text-align: center;
-  -webkit-border-radius: 20px;
-  border-radius: 20px;
-  margin: 0 20px;
-  align-self: center;
-}
-
 /*** Status Color classes****/
 .statusAR{
   background: #58C4F5;
   color: #FFFFFF;
-  width: 20px;
+  /*width: 20px;*/
   height: 14px;
   display: block;
   border-radius: 2px;
   padding-top: 2px;
-  margin-top: 1px;
+  margin-top: 3px;
   margin-bottom: 1px;
   text-align: center;
 }
 .statusAV{
   background: #005544;
   color: #FFFFFF;
-  width: 20px;
+  /*width: 20px;*/
   height: 14px;
   display: block;
   border-radius: 2px;
   padding-top: 2px;
-  margin-top: 1px;
+  margin-top: 3px;
   margin-bottom: 1px;
   text-align: center;
 }
 .statusDP{
   background: #00B38F;
   color: #FFFFFF;
-  width: 20px;
+  /*width: 20px;*/
   height: 14px;
   display: block;
   border-radius: 2px;
   padding-top: 2px;
-  margin-top: 1px;
+  margin-top: 3px;
   margin-bottom: 1px;
   text-align: center;
 }
 .statusD{
   background: #4E83B5;
   color: #FFFFFF;
-  width: 20px;
+  /*width: 20px;*/
   height: 14px;
   display: block;
   border-radius: 2px;
   padding-top: 2px;
-  margin-top: 1px;
+  margin-top: 3px;
   margin-bottom: 1px;
   text-align: center;
 }
@@ -888,4 +894,39 @@ div.collateralTableExpanded div:nth-child(12){
   color: #585858;
   background-color: #fff;
   border-color: #585858;
+}
+
+.helperText{
+  color: #989898;
+  font-style: italic;
+}
+
+.errorPopUp {
+  position: absolute;
+  background-color: #fff;
+  top: -8px;
+  padding: 5px;
+  border: 1px solid #AB0017;
+  border-radius: 5px;
+  color: #AB0017;
+}
+
+.errorPopUp::before{
+  position: absolute;
+  content: '';
+  border-bottom: 9px solid #AB0017;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  top: -9px;
+  left: 6px;
+}
+
+.errorPopUp::after{
+  position: absolute;
+  content: '';
+  border-bottom: 8px solid #fff;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  top: -8px;
+  left: 7px;
 }

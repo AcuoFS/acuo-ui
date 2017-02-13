@@ -37,25 +37,12 @@
   width:12%;
   font-weight: bold;
 }
-.cptyItem{
-  width:27.5%;
-}
-.innerItem{
-  width:17.5%;
-}
-.marginItem{
-  width:25%;
-}
-.marginRow{
-  width:23%;
-}
+
 .table .listItem{
   width:8%;
   font-weight: bold;
 }
-.outerItem{
-  flex-grow:1;
-}
+
 .vertiCenter{
     display: table;
     height: 100%;
@@ -155,9 +142,7 @@
 .tableRow .centerThis{
   display: table-cell;
 }
-.bodyItem{
-  width:20%;
-}
+
 .divMid{
   flex-grow:2;
   display:flex;
@@ -172,7 +157,7 @@
 .sectionOpen{
   opacity: 1;
   transition: 0.7s ease-out;
-  overflow:hidden;
+  overflow-y: scroll;
   max-height:1000px;
 }
 .toggleItem{
@@ -220,17 +205,33 @@
 .tableRow >div:nth-child(4){
   width: 9.0%;
 }
+
+/* IM */
 .tableBody >div:nth-child(5),
 .tableRow >div:nth-child(5){
-  width: 16.7%;
+  width: 11.7%;
 }
+
+/* VM */
 .tableBody >div:nth-child(6),
 .tableRow >div:nth-child(6){
-  width: 16.7%;
+  width: 11.7%;
 }
+
+/* Excess */
 .tableBody >div:nth-child(7),
 .tableRow >div:nth-child(7){
-  width: 16.7%;
+  width: 15.7%
+}
+
+.tableBody >div:nth-child(8),
+.tableRow >div:nth-child(8){
+  width: 7%;
+}
+
+.tableBody >div:nth-child(9),
+.tableRow >div:nth-child(9){
+  width: 4%;
 }
 
 .actionItem a {

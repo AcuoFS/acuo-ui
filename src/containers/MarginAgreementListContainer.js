@@ -1,20 +1,28 @@
 import { connect } from 'react-redux'
-import { fromJS } from 'immutable'
+import { fromJS, List } from 'immutable'
 import { MarginAgreementsComponent } from '../components'
-import { lineItemInsertion, selectedItems, initState } from '../actions'
-import {RECON_DATA_URL, RECON_URL, DASHBOARD_URL} from '../constants/APIcalls'
+import { selectedItems, initState, firstLeveSelect, secondLevelSelect } from '../actions'
+import { RECON_DATA_URL, RECON_URL, DASHBOARD_URL } from '../constants/APIcalls'
+import filterItems from '../utils/filterItems'
 
+const mapStateToProps = state => {
+  const items = state.ReconReducer.get('items').toJS()
+  const filters = state.ReconReducer.get('filters').toJS()
+  const filteredItems = filterItems(items, filters)
 
-const mapStateToProps = state => ({
-  recon : state.mainReducer.getIn(['display', 'derivatives'])
-})
+  return {
+    recon : fromJS(filteredItems),
+    firstLevelList : state.ReconReducer.get('firstLevelList') || List(),
+    secondLevelList : state.ReconReducer.get('secondLevelList') || List(),
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
-  onLineItemInsertion: (lineItem) => {
-    dispatch(lineItemInsertion(lineItem))
-  },
+  // ************************************
+  // !!! THIS LOGIC PART NEED REVIEW !!!
+  // ************************************
   onReconItem : (e) => {
-    console.log(e.currentTarget.dataset.ref)
+    //console.log(e.currentTarget.dataset.ref)
     //new recon entire margin call with one get api
     fetch(RECON_DATA_URL + e.currentTarget.dataset.ref, {
       method: 'GET'
@@ -25,18 +33,20 @@ const mapDispatchToProps = dispatch => ({
         return response.json()
       }).then((obj) => {
         dispatch(initState(fromJS(obj)))
-        fetch(RECON_URL).then((response) => {
-          return response.json()
-        }).then((obj) => {
-          dispatch(lineItemInsertion(fromJS(obj.items)))
-        })
       })
     })
     //dispatch(reconItem(e.currentTarget.dataset.ref)) //old recon line by line
   },
   onSelectedItem : (guid, assetID) => {
     dispatch(selectedItems(guid, assetID))
+  },
+  onSelectFirstLevelItem: (GUID, firstLevelID) => {
+    dispatch(firstLeveSelect(GUID, firstLevelID))
+  },
+  onSelectSecondLevelItem: (GUID, parentID, secondLevelID) => {
+    dispatch(secondLevelSelect(GUID, parentID, secondLevelID))
   }
+
 })
 
 const MarginAgreementsContainer = connect(

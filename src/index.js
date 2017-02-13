@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 import {createStore} from 'redux'
 import {fromJS} from 'immutable'
 import {Provider} from 'react-redux'
-import {browserHistory, Router, Route} from 'react-router'
+import {hashHistory, Router, Route} from 'react-router'
 import reducer from './reducers'
-import {initState, lineItemInsertion} from './actions'
+import {initState, reconInitState} from './actions'
 import styles from './static/global.css'
 import {
   Dashboard,
@@ -27,11 +27,13 @@ class App extends React.Component {
       return response.json()
     }).then((obj) => {
       store.dispatch(initState(fromJS(obj)))
-      fetch(RECON_URL).then((response) => {
-        return response.json()
-      }).then((obj) => {
-        store.dispatch(lineItemInsertion(fromJS(obj.items)))
-      })
+    })
+
+    fetch(RECON_URL).then((response) => {
+      return response.json()
+    }).then((obj) => {
+      const {items} = obj
+      store.dispatch(reconInitState(items))
     })
   }
 
@@ -39,7 +41,7 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <div className={styles.globalStyles}>
-          <Router history={browserHistory}>
+          <Router history={hashHistory}>
             <Route path="/" component={Dashboard}/>
             <Route path="recon" component={ReconcileContainer}/>
             <Route path="pledge" component={PledgePageContainer}/>

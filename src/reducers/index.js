@@ -1,11 +1,15 @@
-import { combineReducers } from 'redux'
+import {combineReducers} from 'redux'
 
 import mainReducer from './reducer'
+import ReconReducer from './ReconReducer'
 import PledgeReducer from './PledgeReducer'
+import {MarginUploadReducer} from './MarginUploadReducer'
 
 const reducer = combineReducers({
   mainReducer,
-  PledgeReducer
+  ReconReducer,
+  PledgeReducer,
+  MarginUploadReducer
 })
 
 export default reducer

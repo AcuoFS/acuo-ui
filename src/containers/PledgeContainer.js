@@ -9,8 +9,14 @@ import {
   updateCollateral,
   removeAssetFromEarmark } from '../actions'
 import { List, fromJS } from 'immutable'
-
-import {ALLOCATE_COLLATERALS_URL} from '../constants/APIcalls'
+import {
+  ALLOCATE_COLLATERALS_URL,
+  ALLOCATE_COLLATERALS_URL_NEW,
+  PLEDGE_ALLOCATIONS,
+  MARGIN_SELECTION_URL
+} from '../constants/APIcalls'
+import * as ASSET from '../constants/AllocatedAssetAttributes'
+import * as P_ASSET from '../constants/PledgeAssetAttribute'
 
 const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
   if(pendingAllocationSize >= selectionSize)
@@ -22,6 +28,19 @@ const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
 }
 
 const checkIfExist = (something) => something || List()
+
+const updatePledgeListToSend = (assetList, pledgeToSend, guid) => {
+  assetList.map((asset) => {
+    // Create obj and push into array to send
+    pledgeToSend = [...pledgeToSend, {
+      [P_ASSET.P_MGN_CALL_ID]: guid,
+      [ASSET.A_ID]: asset[ASSET.A_ID],
+      [ASSET.A_QTY]: asset[ASSET.A_QTY],
+      [ASSET.A_FROM_ACCT]: asset[ASSET.A_FROM_ACCT]
+    }]
+  })
+  return pledgeToSend
+}
 
 const mapStateToProps = state => ({
   collateral : state.PledgeReducer.getIn(['pledgeData', 'collateral']),
@@ -47,24 +66,70 @@ const mapDispatchToProps = dispatch => ({
   onToggleCheckall: () => {
     dispatch(toggleCheckall())
   },
-  onAllocate: (e) => {
-    fetch(ALLOCATE_COLLATERALS_URL, {
+  // onAllocate_old: (guids, optimisationSetting) => {
+  //   const data = {guids, optimisationSetting}
+  //   fetch(ALLOCATE_COLLATERALS_URL, {
+  //     method: 'POST',
+  //     body: JSON.stringify(data)
+  //   }).then(response => {
+  //     return response.json()
+  //   }).then(obj => {
+  //     // dispatch(updateCollateral(fromJS(obj.data.collateral)))
+  //     dispatch(initSelection(fromJS(obj.items)))
+  //   })
+  // },
+  onAllocate: (guids, optimisationSetting) => {
+    fetch(ALLOCATE_COLLATERALS_URL_NEW, {
       method: 'POST',
-      data: {
-        optimisationSettings: e.currentTarget.dataset.optimisation,
-        toBeAllocated: e.currentTarget.dataset.pendingAllocation
-      }
+      body: JSON.stringify({
+        optimisationSettings: optimisationSetting,
+        toBeAllocated: guids
+      })
     }).then(response => {
       return response.json()
     }).then(obj => {
-      dispatch(updateCollateral(fromJS(obj.data.collateral)))
       dispatch(initSelection(fromJS(obj.items)))
     })
   },
-
   onRemoveFromEarmarked: (e, assetType, propAssetId, propAssetIdType) => {
 
     dispatch(removeAssetFromEarmark(e, assetType, propAssetId, propAssetIdType))
+  },
+  onPledge: (selectionList) => {
+    let pledgeToSend = []
+    selectionList.map((statement) => {
+      // Check statement w allocations
+      if (statement.allocated && statement.allocated[ASSET.A_LIST_IM]) {
+        pledgeToSend =
+          updatePledgeListToSend(
+            statement.allocated[ASSET.A_LIST_IM],
+            pledgeToSend,
+            statement.GUID)
+      }
+      if (statement.allocated && statement.allocated[ASSET.A_LIST_VM]) {
+        pledgeToSend =
+          updatePledgeListToSend(
+            statement.allocated[ASSET.A_LIST_VM],
+            pledgeToSend,
+            statement.GUID)
+      }
+    })
+
+    fetch(PLEDGE_ALLOCATIONS, {
+      method: 'POST',
+      body: JSON.stringify(pledgeToSend)
+    }).then(response => {
+      return response.json()
+    }).then(obj => {
+      console.log(obj)
+    }).then(() => {
+      // Refresh selections
+      fetch(MARGIN_SELECTION_URL).then(response => {
+        return response.json()
+      }).then(obj => {
+        dispatch(initSelection(obj.items))
+      })
+    })
   }
 })
 

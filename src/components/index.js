@@ -1,5 +1,6 @@
 import GraphComponent from './graph/Graph'
 import FilterBarComponent from './filter-bar/FilterBar'
+import FilterBarReconPageComponent from './filter-bar-recon-page/FilterBar'
 import MarginAgreementsComponent from './margin-agreement/MarginAgreementList'
 import NavigationBarComponent from './navigation-bar/NavigationBar'
 import TableComponent from './table/Table'
@@ -13,6 +14,7 @@ import MarginCallComponent from './margin-call/MarginCall'
 export {
   GraphComponent,
   FilterBarComponent,
+  FilterBarReconPageComponent,
   MarginAgreementsComponent,
   NavigationBarComponent,
   TableComponent,

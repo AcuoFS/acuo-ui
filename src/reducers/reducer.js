@@ -42,7 +42,7 @@ function applyTimeWindowFilter(derivatives, minTime, maxTime){
       let list = y.get('timeFrames').filter((z)=>{
         let timeFrame = z.get('timeRangeStart')
         let timeFrameInMill = new Date(timeFrame).getTime()
-            if((timeFrameInMill >= minTime.getTime()) && (timeFrameInMill < maxTime.getTime()))
+            if((timeFrameInMill >= minTime) && (timeFrameInMill < maxTime))
                return true
       })
       return (list.size > 0 ? listY.push(y.set('timeFrames', list)) : listY)
@@ -100,7 +100,7 @@ export function updateStateLegal(state, action, store){
 }
 
 export function updateStateStatus(state, action, store) {
-  if (action.get('filter') == "All") {
+  if (action.get('filter') == "all") {
     return state.set('display', state.get(store))
   } else
     return state.setIn(['display', 'derivatives'], applyStatusFilter(state.getIn([store, 'derivatives']), action.get('filter')))
@@ -162,6 +162,7 @@ export function multifilters(state, action){
 }
 
 export function attachFilter(state, action){
+  console.log(action)
   switch(action.type){
     case 'FILTER_STATE_DERIV':
       return state.setIn(['inputs','filters','typeFilter'], fromJS(action))
@@ -196,7 +197,7 @@ export const appendList = (state, action) => {
             }).first()
 
             if(item) {
-              return a.set('clientAssets', item.get('ClientAssets')).set('counterpartyAssets', item.get('counterpartyAssets')).set('currencyInfo', item.get('currencyInfo'))
+              return a.set('clientAssets', item.get('clientAssets')).set('counterpartyAssets', item.get('counterpartyAssets')).set('currencyInfo', item.get('currencyInfo'))
             }
             else {
               return a
@@ -213,7 +214,7 @@ export const appendList = (state, action) => {
             }).first()
 
             if(item) {
-              return a.set('clientAssets', item.get('ClientAssets')).set('counterpartyAssets', item.get('counterpartyAssets')).set('currencyInfo', item.get('currencyInfo'))
+              return a.set('clientAssets', item.get('clientAssets')).set('counterpartyAssets', item.get('counterpartyAssets')).set('currencyInfo', item.get('currencyInfo'))
             }
             else {
               return a

@@ -22,22 +22,22 @@
 
 /* Agreement */
 .flightItemTableHeader div:nth-child(2){
-    width: 26%;
+    width: 27%;
 }
 
 /* From */
 .flightItemTableHeader div:nth-child(3){
-    width: 10%;
+    width: 16%;
 }
 
 /* To */
 .flightItemTableHeader div:nth-child(4){
-    width: 15%;
+    width: 16%;
 }
 
 /* Value */
 .flightItemTableHeader div:nth-child(5){
-    width: 20%;
+    width: 12%;
 }
 
 /* CCY */
@@ -120,4 +120,9 @@
 
 .imageCursor {
     cursor: pointer;
+}
+
+.secondRow{
+    color: #7b7b7b;
+    font-style: italic;
 }

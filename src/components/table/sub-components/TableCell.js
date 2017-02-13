@@ -4,9 +4,9 @@ import styles from '../Table.css'
 
 class TableCell extends React.Component {
     render() {
-        const {bodyItemClass, cellValue} = this.props
+        const {cellValue} = this.props
         return (
-            <div className={styles[bodyItemClass]}>
+            <div>
                 <div className={styles.vertiCenter}>
                     <div className={styles.centerThis}>{cellValue}</div>
                 </div>
