@@ -2,12 +2,14 @@ import React, {PropTypes} from 'react'
 import CollateralAssetContainer from '../../../containers/CollateralAssetContainer'
 import {formatDate} from '../../../utils/formatDate'
 import {checkNegative} from '../../../utils'
-import {formatPercentageOneDecimal} from '../../../utils/formatPercentageOneDecimal'
 import {COLLATERAL_EARMARKED} from '../../../constants/CollateralTypes'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import _ from 'lodash'
 import styles from '../Pledge.css'
+import transitions from './CAGTransitions.css'
+
 
 export default class CollateralAssetGroup extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -31,6 +33,24 @@ export default class CollateralAssetGroup extends React.Component {
     })
   }
 
+  /**
+   * Create the number(11/6) of empty cells for group header
+   *
+   * @param propIsDisplayAll
+   * @returns {Array}
+   */
+  getEmptyCellDomList(propIsDisplayAll) {
+    // no of empty cells and list of divs
+    let emptyCellList = []
+
+    _.times((propIsDisplayAll ? 11 : 6), (i) => {
+      emptyCellList = [...emptyCellList,
+        <div className={styles.collateralCell} key={i}></div>]
+    })
+
+    return emptyCellList
+  }
+
   render() {
     const {
       propCollateralType,
@@ -39,9 +59,12 @@ export default class CollateralAssetGroup extends React.Component {
       propHandleOnRemoveFromEarmarked
     } = this.props
 
+    const groupHeaderStyle = (propCollateralType == COLLATERAL_EARMARKED)
+      ? styles.collateralExpandEarmarkedRow
+      : styles.collateralExpandRow
+
     // []list of CollateralAsset components
     let componentList
-
     if (propCollateralAssetList && this.state.isGroupExpanded) {
       componentList = propCollateralAssetList.map((asset, index) => (
         <CollateralAssetContainer
@@ -67,65 +90,31 @@ export default class CollateralAssetGroup extends React.Component {
           propAssetIdType={asset.assetIdType || '-'}
           propHandleOnRemoveFromEarmarked={propHandleOnRemoveFromEarmarked}
         />
-
       ))
     }
 
-    const collateralTypeCell =
-      <div className={styles.collateralCell}>
-        <div>{propCollateralType}</div>
-        {
-          (propCollateralAssetList.length > 0) &&
-          <div onClick={this.handlePlusMinus}>
-            <img src={this.getPlusMinusImgURL(this.state.isGroupExpanded)} alt=""/>
+    return (
+      <ReactCSSTransitionGroup component="div" className={styles.collateralRowGroup}
+                               transitionName={transitions}
+                               transitionEnterTimeout={500}
+                               transitionLeaveTimeout={300}>
+        <div className={styles.collateralRow + ' ' + groupHeaderStyle}>
+          <div className={styles.collateralCell}>
+            <div>{propCollateralType}</div>
+            {
+              (propCollateralAssetList.length > 0) &&
+              <div onClick={this.handlePlusMinus}>
+                <img src={this.getPlusMinusImgURL(this.state.isGroupExpanded)} alt=""/>
+              </div>
+            }
           </div>
-        }
-      </div>
-
-    const groupHeaderStyle = (propCollateralType == COLLATERAL_EARMARKED)
-      ? styles.collateralExpandEarmarkedRow
-      : styles.collateralExpandRow
-
-    if (propIsDisplayAll) {
-      return (
-        <div className={styles.collateralRowGroup}>
-          <div className={styles.collateralRow + ' ' + groupHeaderStyle}>
-            {collateralTypeCell}
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-          </div>
-
-          {componentList}
-
+          {this.getEmptyCellDomList(propIsDisplayAll)}
         </div>
-      )
-    } else {
-      return (
-        <div className={styles.collateralRowGroup}>
-          <div className={styles.collateralRow + ' ' + groupHeaderStyle}>
-            {collateralTypeCell}
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-            <div className={styles.collateralCell}></div>
-          </div>
 
-          {componentList}
+        {componentList}
 
-        </div>
-      )
-    }
+      </ReactCSSTransitionGroup>
+    )
   }
 }
 
