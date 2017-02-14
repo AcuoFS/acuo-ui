@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import CollateralAssetGroup from './CollateralAssetGroup'
 import {COLLATERAL_URL} from '../../../constants/APIcalls'
 import _ from 'lodash'
-import { fromJS } from 'immutable'
+import {fromJS} from 'immutable'
 import styles from '../Pledge.css'
 import selfStyles from './CollateralWidget.css'
 
@@ -19,7 +19,7 @@ export default class CollateralWidget extends React.Component {
   }
 
   componentWillMount() {
-    if(_.isEmpty(this.props.collateral)){
+    if (_.isEmpty(this.props.collateral)) {
       fetch(COLLATERAL_URL).then((response) => {
         return response.json()
       }).then((obj) => {
@@ -34,6 +34,11 @@ export default class CollateralWidget extends React.Component {
     })
   }
 
+  getAdditionalColumns(listOfNames) {
+    return _.map(listOfNames, (columnName, i) =>
+      <div className={styles.collateralCell} key={i}>{columnName}</div>)
+  }
+
   /**
    * Function that filters(all properties of asset) and
    * creates a list of group components for rendering
@@ -44,7 +49,8 @@ export default class CollateralWidget extends React.Component {
    * @param onRemoveFromEarmarked
    * @returns {*}
    */
-  createAssetGrpCompList(collateralJSList, collateralAssetGroupList, open, onRemoveFromEarmarked) {
+  createAssetGrpCompList(collateralJSList, open, onRemoveFromEarmarked) {
+    let collateralAssetGroupList = []
     let newCollateralObj = {}
 
     _.forOwn(collateralJSList, (value, key) => {
@@ -116,45 +122,6 @@ export default class CollateralWidget extends React.Component {
       onRemoveFromEarmarked
     } = this.props
 
-    let collateralHeader = (
-      <div className={styles.collateralRow + ' ' + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
-        <div className={styles.collateralCell}>Asset</div>
-        <div className={styles.collateralCell}>Total Value</div>
-        <div className={styles.collateralCell}>CCY</div>
-        <div className={styles.collateralCell}>Delivery Time</div>
-        <div className={styles.collateralCell}>Status</div>
-        <div className={styles.collateralCell}>Rating</div>
-        <div className={styles.collateralCell}>Maturity Date</div>
-      </div>
-    )
-
-    if (open) {
-      collateralHeader = (
-        <div className={styles.collateralRow + ' ' + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
-          <div className={styles.collateralCell}>Asset</div>
-          <div className={styles.collateralCell}>Total Value</div>
-          <div className={styles.collateralCell}>CCY</div>
-          <div className={styles.collateralCell}>Delivery Time</div>
-          <div className={styles.collateralCell}>Status</div>
-          <div className={styles.collateralCell}>Rating</div>
-          <div className={styles.collateralCell}>Maturity Date</div>
-          <div className={styles.collateralCell}>Internal Cost (bps)</div>
-          <div className={styles.collateralCell}>Opportunity Cost (bps)</div>
-          <div className={styles.collateralCell}>ISIN</div>
-          <div className={styles.collateralCell}>Venue</div>
-          <div className={styles.collateralCell}>Acc ID</div>
-        </div>
-      )
-    }
-
-    let collateralAssetGroupList = []
-
-    if (collateral) {
-      collateralAssetGroupList = this.createAssetGrpCompList(collateral,
-        collateralAssetGroupList,
-        open, onRemoveFromEarmarked)
-    }
-
     return (
       <div className={styles.col_R + ' ' + toggleColwidthR}>
         <div className={styles.panel}>
@@ -167,9 +134,32 @@ export default class CollateralWidget extends React.Component {
 
           <div className={styles.collateralTable}>
 
-            {collateralHeader}
+            <div className={styles.collateralRow + ' '
+            + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
+              <div className={styles.collateralCell}>Asset</div>
+              <div className={styles.collateralCell}>Total Value</div>
+              <div className={styles.collateralCell}>CCY</div>
+              <div className={styles.collateralCell}>Delivery Time</div>
+              <div className={styles.collateralCell}>Status</div>
+              <div className={styles.collateralCell}>Rating</div>
+              <div className={styles.collateralCell}>Maturity Date</div>
+              {
+                open && this.getAdditionalColumns(
+                  [
+                    'Internal Cost (bps)',
+                    'Opportunity Cost (bps)',
+                    'ISIN',
+                    'Venue',
+                    'Acc ID'
+                  ])
+              }
+            </div>
 
-            {collateralAssetGroupList}
+            {
+              collateral &&
+              this.createAssetGrpCompList(collateral,
+                open, onRemoveFromEarmarked)
+            }
 
           </div>
 
@@ -178,4 +168,13 @@ export default class CollateralWidget extends React.Component {
 
     )
   }
+}
+
+CollateralWidget.PropTypes = {
+  toggleColwidthR: PropTypes.object.isRequired,
+  sideways: PropTypes.object.isRequired,
+  open: PropTypes.bool.isRequired,
+  collateral: PropTypes.object.isRequired,
+  changeSideways: PropTypes.func.isRequired,
+  onRemoveFromEarmarked: PropTypes.func.isRequired
 }
