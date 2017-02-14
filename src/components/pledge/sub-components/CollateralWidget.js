@@ -1,10 +1,11 @@
 import React from 'react'
 import CollateralAssetGroup from './CollateralAssetGroup'
+import _ from 'lodash'
 import styles from '../Pledge.css'
 import selfStyles from './CollateralWidget.css'
 
 
-export default class Collateral extends React.Component {
+export default class CollateralWidget extends React.Component {
 
   constructor(props) {
     super(props)
@@ -20,6 +21,78 @@ export default class Collateral extends React.Component {
     this.setState({
       filterText: value
     })
+  }
+
+  /**
+   * Function that filters(all properties of asset) and
+   * creates a list of group components for rendering
+   *
+   * @param collateralJSList
+   * @param collateralAssetGroupList
+   * @param open
+   * @param onRemoveFromEarmarked
+   * @returns {*}
+   */
+  createAssetGrpCompList(collateralJSList, collateralAssetGroupList, open, onRemoveFromEarmarked) {
+    let newCollateralObj = {}
+
+    _.forOwn(collateralJSList, (value, key) => {
+      newCollateralObj = Object.assign(
+        {},
+        newCollateralObj,
+        {[key]: this.filterByAllProperties(value, this.state.filterText)}
+      )
+    })
+
+    _.forOwn(newCollateralObj, (value, key) => {
+      collateralAssetGroupList = [...collateralAssetGroupList,
+        <CollateralAssetGroup key={key}
+                              propCollateralType={key}
+                              propCollateralAssetList={value}
+                              propIsExpanded={true}
+                              propIsDisplayAll={open}
+                              propHandleOnRemoveFromEarmarked={onRemoveFromEarmarked}/>
+      ]
+    })
+    return collateralAssetGroupList
+  }
+
+  /**
+   * Fields:
+   * asset.assetName
+   * asset.price
+   * asset.ccy
+   * asset.deliveryTime
+   * asset.status
+   * asset.rating
+   * asset.maturityDate
+   * asset.internalCostPct
+   * asset.externalCostPct
+   * asset.oppCostPct
+   * asset.assetId
+   * asset.venue
+   * asset.acctId
+   * asset.assetId
+   * asset.assetIdType
+   * @param collateralList
+   * @param filterText
+   */
+  filterByAllProperties(collateralList, filterText) {
+    return _.filter(collateralList,
+      o => {
+        let isAnyPropertyMatches = false
+
+        // Check for all properties
+        _.forOwn(o, (value) => {
+          isAnyPropertyMatches = _.toUpper(String(value)).match(new RegExp(_.toUpper(filterText)))
+
+          // Stop iteration if matches; return false to stop
+          return !isAnyPropertyMatches
+        })
+
+        // Include into filteredList when any property matches
+        return isAnyPropertyMatches
+      })
   }
 
   render() {
@@ -66,17 +139,9 @@ export default class Collateral extends React.Component {
     let collateralAssetGroupList = []
 
     if (collateral) {
-      const collateralJSList = collateral.toJS()
-      for (const key of Object.keys(collateralJSList)) {
-        collateralAssetGroupList = [...collateralAssetGroupList,
-          <CollateralAssetGroup key={key}
-                                propCollateralType={key}
-                                propCollateralAssetList={collateralJSList[key]}
-                                propIsExpanded={true}
-                                propIsDisplayAll={open}
-                                propHandleOnRemoveFromEarmarked={onRemoveFromEarmarked}/>
-        ]
-      }
+      collateralAssetGroupList = this.createAssetGrpCompList(collateral.toJS(),
+        collateralAssetGroupList,
+        open, onRemoveFromEarmarked)
     }
 
     return (
