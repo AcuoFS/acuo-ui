@@ -71,19 +71,26 @@ export default class CollateralAssetGroup extends React.Component {
       ))
     }
 
+    const collateralTypeCell =
+      <div className={styles.collateralCell}>
+        <div>{propCollateralType}</div>
+        {
+          (propCollateralAssetList.length > 0) &&
+          <div onClick={this.handlePlusMinus}>
+            <img src={this.getPlusMinusImgURL(this.state.isGroupExpanded)} alt=""/>
+          </div>
+        }
+      </div>
+
+    const groupHeaderStyle = (propCollateralType == COLLATERAL_EARMARKED)
+      ? styles.collateralExpandEarmarkedRow
+      : styles.collateralExpandRow
+
     if (propIsDisplayAll) {
       return (
-
         <div className={styles.collateralRowGroup}>
-
-          <div className={styles.collateralRow + ' ' +
-          (propCollateralType == COLLATERAL_EARMARKED ? styles.collateralExpandEarmarkedRow : styles.collateralExpandRow)}>
-            <div className={styles.collateralCell}>
-              <div>{propCollateralType} </div>
-              <div onClick={this.handlePlusMinus}><img src={this.getPlusMinusImgURL(this.state.isGroupExpanded)}
-                                                       alt=""/>
-              </div>
-            </div>
+          <div className={styles.collateralRow + ' ' + groupHeaderStyle}>
+            {collateralTypeCell}
             <div className={styles.collateralCell}></div>
             <div className={styles.collateralCell}></div>
             <div className={styles.collateralCell}></div>
@@ -101,21 +108,11 @@ export default class CollateralAssetGroup extends React.Component {
 
         </div>
       )
-
     } else {
       return (
-
         <div className={styles.collateralRowGroup}>
-
-          <div className={styles.collateralRow + ' ' +
-          (propCollateralType == COLLATERAL_EARMARKED ? styles.collateralExpandEarmarkedRow : styles.collateralExpandRow)}>
-            <div className={styles.collateralCell}>
-              <div>{propCollateralType}</div>
-              <div onClick={this.handlePlusMinus}><img src={this.getPlusMinusImgURL(this.state.isGroupExpanded)}
-                                                       alt=""/>
-              </div>
-
-            </div>
+          <div className={styles.collateralRow + ' ' + groupHeaderStyle}>
+            {collateralTypeCell}
             <div className={styles.collateralCell}></div>
             <div className={styles.collateralCell}></div>
             <div className={styles.collateralCell}></div>
@@ -128,9 +125,7 @@ export default class CollateralAssetGroup extends React.Component {
 
         </div>
       )
-
     }
-
   }
 }
 
