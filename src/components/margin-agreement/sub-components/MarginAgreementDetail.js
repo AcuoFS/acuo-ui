@@ -4,7 +4,7 @@
 import React, {PropTypes} from 'react'
 import MarginAgreementDetailExpand from './MarginAgreementDetailExpand'
 import {List} from 'immutable'
-import {numberWithCommas} from '../../../utils/numbersWithCommas'
+import {checkNegative} from '../../../utils'
 import styles from '../MarginAgreementList.css'
 import _ from 'lodash'
 
@@ -61,7 +61,7 @@ export default class MarginAgreementDetail extends React.Component {
                   </div>
                   <div className={styles.secondLevelText}>{ x.get('name') }</div>
                 </div>
-                <div className={styles.packageRight}>{ numberWithCommas(x.get('amount')) }</div>
+                <div className={styles.packageRight}>{ checkNegative(x.get('amount')) }</div>
               </div>
             </div>
           </div>
@@ -125,7 +125,7 @@ export default class MarginAgreementDetail extends React.Component {
             {secondLevel && expand}
 
           </div>
-          <div className={styles.packageRight}>{numberWithCommas(totalAmount.toFixed(2))}</div>
+          <div className={styles.packageRight}>{checkNegative(totalAmount.toFixed(2))}</div>
         </div>
 
         {this.renderHidden(secondLevel, GUID, secondLevelList, id, onSelectSecondLevelItem)}

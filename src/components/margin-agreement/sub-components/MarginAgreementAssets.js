@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import {Map, List} from 'immutable'
 import MarginAgreementDetail from './MarginAgreementDetail'
-import {numberWithCommas} from '../../../utils/numbersWithCommas'
+import {checkNegative} from '../../../utils'
 import styles from '../MarginAgreementList.css'
 import CounterPartyUpload from './CounterPartyUpload'
 import selfStyles from './MarginAgreementAssets.css'
@@ -100,7 +100,7 @@ export default class MarginAgreementPortfolio extends React.Component {
     } = this.props
 
     let diff = this.getDifferencePortfolio(assetsName, marginData)
-    diff = (diff < 0) ? "(" + (diff * -1) + ")" : diff
+    // diff = (diff < 0) ? "(" + (diff * -1) + ")" : diff
 
     let diffCal, adjCal
 
@@ -110,7 +110,7 @@ export default class MarginAgreementPortfolio extends React.Component {
           <div>Difference</div>
         </div>
         <div className={styles.packageRight}>
-          {numberWithCommas(diff)}
+          {checkNegative(diff)}
         </div>
       </div>
 
@@ -201,7 +201,7 @@ export default class MarginAgreementPortfolio extends React.Component {
                 <div>Total Amount</div>
               </div>
               <div className={styles.packageRight}>
-                {numberWithCommas(
+                {checkNegative(
                   this.getTotalAmount(marginData.get(assetsName)) +
                   (adjAmt ? Number.parseInt(adjAmt) : 0.0)
                 )}

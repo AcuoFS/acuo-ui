@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import CollateralAssetContainer from '../../../containers/CollateralAssetContainer'
 import {formatDate} from '../../../utils/formatDate'
-import {numberWithCommas} from '../../../utils/numbersWithCommas'
+import {checkNegative} from '../../../utils'
 import {formatPercentageOneDecimal} from '../../../utils/formatPercentageOneDecimal'
 import {COLLATERAL_EARMARKED} from '../../../constants/CollateralTypes'
 import styles from '../Pledge.css'
@@ -48,7 +48,7 @@ export default class CollateralAssetGroup extends React.Component {
           key={index}
           rowStyle={"tableRow"}
           propAsset={asset.assetName || '-'}
-          propPrice={numberWithCommas(asset.price)}
+          propPrice={checkNegative(asset.price)}
           rawPrice={asset.price || '-'}
           propCcy={asset.ccy || '-'}
           propDeliveryTime={asset.deliveryTime || '-'}

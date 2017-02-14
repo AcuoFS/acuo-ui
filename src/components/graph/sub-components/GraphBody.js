@@ -2,7 +2,7 @@ import React from 'react';
 import { List, Set, Map } from 'immutable'
 import styles from '../Graph.css'
 import { hashHistory } from 'react-router'
-import {numberWithCommas} from '../../../utils/numbersWithCommas'
+import {checkNegative} from '../../../utils'
 
 export default class GraphBody extends React.Component {
 
@@ -156,7 +156,7 @@ export default class GraphBody extends React.Component {
                     fontFamily="helvetica"
                     fill="#010101"
                     textAnchor="end">
-                {numberWithCommas(timeFrame.get('inAmount'))}
+                {checkNegative(timeFrame.get('inAmount'))}
               </text>
             </g>
           </g>)
@@ -194,7 +194,7 @@ export default class GraphBody extends React.Component {
                       fontFamily="helvetica"
                       fill="#010101"
                       textAnchor="end">
-                  {numberWithCommas(timeFrame.get('outAmount'))}
+                  {checkNegative(timeFrame.get('outAmount'))}
                 </text>
               </g>
             </g>)
