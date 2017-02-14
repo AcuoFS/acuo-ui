@@ -1,12 +1,13 @@
 import React from 'react'
 import CollateralAssetGroup from './CollateralAssetGroup'
+import {COLLATERAL_URL} from '../../../constants/APIcalls'
 import _ from 'lodash'
+import { fromJS } from 'immutable'
 import styles from '../Pledge.css'
 import selfStyles from './CollateralWidget.css'
 
 
 export default class CollateralWidget extends React.Component {
-
   constructor(props) {
     super(props)
 
@@ -15,6 +16,16 @@ export default class CollateralWidget extends React.Component {
     }
 
     this.handleFilterChange = this.handleFilterChange.bind(this)
+  }
+
+  componentWillMount() {
+    if(_.isEmpty(this.props.collateral)){
+      fetch(COLLATERAL_URL).then((response) => {
+        return response.json()
+      }).then((obj) => {
+        this.props.onCollateralDataAvailable(fromJS(obj.items))
+      })
+    }
   }
 
   handleFilterChange(value) {
@@ -139,7 +150,7 @@ export default class CollateralWidget extends React.Component {
     let collateralAssetGroupList = []
 
     if (collateral) {
-      collateralAssetGroupList = this.createAssetGrpCompList(collateral.toJS(),
+      collateralAssetGroupList = this.createAssetGrpCompList(collateral,
         collateralAssetGroupList,
         open, onRemoveFromEarmarked)
     }

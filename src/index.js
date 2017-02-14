@@ -10,7 +10,7 @@ import styles from './static/global.css'
 import {
   Dashboard,
   ReconcileContainer,
-  PledgePageContainer,
+  PledgePage,
   UploadPortfolioPage,
   DeployedPage
 } from './pages'
@@ -44,7 +44,7 @@ class App extends React.Component {
           <Router history={hashHistory}>
             <Route path="/" component={Dashboard}/>
             <Route path="recon" component={ReconcileContainer}/>
-            <Route path="pledge" component={PledgePageContainer}/>
+            <Route path="pledge" component={PledgePage}/>
             <Route path="upload_portfolio" component={UploadPortfolioPage}/>
             <Route path="deployed" component={DeployedPage}/>
           </Router>

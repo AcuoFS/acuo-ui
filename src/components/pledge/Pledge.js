@@ -6,7 +6,7 @@ import {render} from 'react-dom'
 import OptItem from './sub-components/OptItem'
 import ChooseCalls from './sub-components/ChooseCalls'
 import Selection from '../pledge-selection/Selection'
-import CollateralWidget from './sub-components/CollateralWidget'
+import CollateralWidgetContainer from '../../containers/CollateralWidgetContainer'
 import {OPTIMISATION_URL,MARGIN_SELECTION_URL} from '../../constants/APIcalls'
 import styles from './Pledge.css'
 
@@ -130,7 +130,7 @@ class Pledge extends React.Component {
   render() {
     const { optimisation, selection, onUpdateOptimisationSettings, onTogglePendingAllocation,
       pendingAllocation, sliderCheckbox, onToggleCheckall, onAllocate,
-      collateral, onRemoveFromEarmarked, onPledge} = this.props
+      onPledge} = this.props
 
     return (
 
@@ -189,13 +189,11 @@ class Pledge extends React.Component {
 
             </div>
 
-            <CollateralWidget
+            <CollateralWidgetContainer
               toggleColwidthR={this.state.toggleColwidthR}
               sideways={this.state.sideways}
               open={this.state.open}
-              collateral={collateral}
-              changeSideways={this.changeSideways}
-              onRemoveFromEarmarked={onRemoveFromEarmarked}/>
+              changeSideways={this.changeSideways}/>
 
           </div>
         </div>

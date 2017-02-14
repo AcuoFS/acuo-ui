@@ -6,12 +6,9 @@ import {
   initSelection,
   togglePendingAllocation,
   toggleCheckall,
-  clearPendingAllocation,
-  updateCollateral,
-  removeAssetFromEarmark } from '../actions'
+  clearPendingAllocation} from '../actions'
 import { List, fromJS } from 'immutable'
 import {
-  ALLOCATE_COLLATERALS_URL,
   ALLOCATE_COLLATERALS_URL_NEW,
   PLEDGE_ALLOCATIONS,
   MARGIN_SELECTION_URL
@@ -44,7 +41,6 @@ const updatePledgeListToSend = (assetList, pledgeToSend, guid) => {
 }
 
 const mapStateToProps = state => ({
-  collateral : state.PledgeReducer.getIn(['pledgeData', 'collateral']),
   optimisation: state.PledgeReducer.getIn(['pledgeData', 'optimisation']),
   selection: state.PledgeReducer.getIn(['pledgeData', 'selection']),
   pendingAllocation: state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation']),
@@ -97,10 +93,6 @@ const mapDispatchToProps = dispatch => ({
     }).catch(error => {
       console.log('Error: ' + error)
     })
-  },
-  onRemoveFromEarmarked: (e, assetType, propAssetId, propAssetIdType) => {
-
-    dispatch(removeAssetFromEarmark(e, assetType, propAssetId, propAssetIdType))
   },
   onPledge: (selectionList) => {
     let pledgeToSend = []
