@@ -12,7 +12,8 @@ import {
   ReconcileContainer,
   PledgePageContainer,
   UploadPortfolioPage,
-  DeployedPage
+  DeployedPage,
+  DisputePage
 } from './pages'
 import { DASHBOARD_URL, RECON_URL } from './constants/APIcalls'
 
@@ -47,6 +48,7 @@ class App extends React.Component {
             <Route path="pledge" component={PledgePageContainer}/>
             <Route path="upload_portfolio" component={UploadPortfolioPage}/>
             <Route path="deployed" component={DeployedPage}/>
+            <Route path="disputes" component={DisputePage}/>
           </Router>
         </div>
       </Provider>
