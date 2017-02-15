@@ -1,0 +1,41 @@
+.compContainer {
+    margin: 2% 2%;
+    min-width: 1363px;
+    min-height: 415px;
+    background-color: #FFFFFF;
+    box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.compTitle {
+    font-size: 24px;
+    composes: baseFontBold from '../../static/css-components/fonts.css';
+    line-height: 29px;
+    color: #6389AD;
+}
+
+.btnContainer {
+    margin: 15px 0;
+}
+
+.btnStyle {
+    line-height: 16px;
+    font-size: 13px;
+    composes: baseFontBold from '../../static/css-components/fonts.css';
+    border-radius: 20px;
+    border: 1px solid #D5DADF;
+    margin: 0 10px;
+    padding: 5px 20px
+}
+
+.btnInactive {
+    background-color: #FFFFFF;
+    color: #D5DADF;
+}
+
+.btnActive {
+    background-color: #FAFAFA;
+    color: #4A4A4A;
+    cursor: pointer;
+}
