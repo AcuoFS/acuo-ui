@@ -26,7 +26,7 @@ export default class GraphBody extends React.Component {
             bubbleTimeStart,
             (new Date(bubbleTimeStart).setHours((new Date(bubbleTimeStart).getHours()+1))),
             this.getDay(new Date(Date.parse(lastUpdatedTime)).getHours() + timeDifference) + ': ' + (new Date(bubbleTimeStart).getHours()) + ':00 HRS',
-            'expected'
+            'Expected'
           )
         }
       case 'unrecon':
@@ -42,7 +42,7 @@ export default class GraphBody extends React.Component {
             bubbleTimeStart,
             (new Date(bubbleTimeStart).setHours((new Date(bubbleTimeStart).getHours()+1))),
             this.getDay(new Date(Date.parse(lastUpdatedTime)).getHours() + timeDifference) + ': ' + (new Date(bubbleTimeStart).getHours()) + ':00 HRS',
-            'unrecon'
+            'Unrecon'
           )
         }
       case 'reconciled':
