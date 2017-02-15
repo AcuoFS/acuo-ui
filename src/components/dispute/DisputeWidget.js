@@ -1,10 +1,19 @@
 import React from 'react'
 import DisputeTable from './sub-components/DisputeTable'
 import * as DISPUTE_FILTER from '../../constants/DisputeFilters'
+import mockData from './MockDisputes'
 import styles from './DisputeWidget.css'
 
 
 export default class DisputeWidget extends React.Component {
+  componentWillMount() {
+    const {disputeData, onInitDisputeData} = this.props
+    if (disputeData.length == 0) {
+      // TODO fetch from endpoint when it's ready
+      onInitDisputeData(mockData)
+    }
+  }
+
   generateFilterButton(type, display, disputeFilter, onUpdateDisputeFilter) {
     return (
       <button className={styles.btnStyle + ' '

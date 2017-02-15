@@ -7,7 +7,9 @@ import styles from './DisputeTable.css'
 
 const filterBySelectedRange = (disputeData, dateFilter) => (
   _.filter(disputeData, (disputeRecord) => {
-    const currentDate = new Date()
+    // const currentDate = new Date()
+    // TODO Using 15 Feb 2017 as reference date as calendar is not ready
+    const currentDate = new Date(2017, 1, 15)
     const currentYear = currentDate.getFullYear()
     const currentMonth = currentDate.getMonth()
     const recordDate = new Date(disputeRecord.lastUpdated)
@@ -58,6 +60,7 @@ const DisputeTable = ({disputeData, dateFilter}) => {
       </div>
 
       {
+        disputeData.length > 0 &&
         filterBySelectedRange(disputeData, dateFilter).map((dispute, index) =>
           <DisputeTableRow
             key={index}
