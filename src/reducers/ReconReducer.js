@@ -116,7 +116,6 @@ export default function reconReducer(state = initState, action) {
       return state.set('firstLevelList', fromJS(updatedFirstLevelList)).set('secondLevelList', fromJS(updatedSecondLevelList))
 
     case ActionTypes.SECONDLEVEL_SELECT:
-      console.log(action.GUID, action.parentID, action.secondLevelID)
 
       const secondLevelList = state.get('secondLevelList') || List()
       const updatedSecondLevelList2 = updateSecondLevelList(secondLevelList.toJS(), action.GUID, action.parentID, action.secondLevelID)
