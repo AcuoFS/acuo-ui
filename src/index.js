@@ -5,17 +5,15 @@ import {fromJS} from 'immutable'
 import {Provider} from 'react-redux'
 import {hashHistory, Router, Route} from 'react-router'
 import reducer from './reducers'
-import {initState, reconInitState} from './actions'
 import styles from './static/global.css'
 import {
-  Dashboard,
+  DashboardContainer,
   ReconcileContainer,
   PledgePage,
   UploadPortfolioPage,
   DeployedPage,
   DisputePage
 } from './pages'
-import { DASHBOARD_URL, RECON_URL } from './constants/APIcalls'
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
@@ -24,18 +22,6 @@ class App extends React.Component {
     super(props)
     //http://localhost:3000/data
     //https://acuo.herokuapp.com/json
-    fetch(DASHBOARD_URL).then((response) => {
-      return response.json()
-    }).then((obj) => {
-      store.dispatch(initState(fromJS(obj)))
-    })
-
-    fetch(RECON_URL).then((response) => {
-      return response.json()
-    }).then((obj) => {
-      const {items} = obj
-      store.dispatch(reconInitState(items))
-    })
   }
 
   render() {
@@ -43,7 +29,7 @@ class App extends React.Component {
       <Provider store={store}>
         <div className={styles.globalStyles}>
           <Router history={hashHistory}>
-            <Route path="/" component={Dashboard}/>
+            <Route path="/" component={DashboardContainer}/>
             <Route path="recon" component={ReconcileContainer}/>
             <Route path="pledge" component={PledgePage}/>
             <Route path="upload_portfolio" component={UploadPortfolioPage}/>

@@ -6,10 +6,17 @@ import {
   GraphContainer,
   NavigationBarContainer
 } from '../../containers'
+import { connect } from 'react-redux'
 import styles from './Dashboard.css'
+import { initState } from '../../actions'
+import { DASHBOARD_URL } from '../../constants/APIcalls'
+import { fromJS } from 'immutable'
 
-
-class Dashboard extends React.Component {
+export class Dashboard extends React.Component {
+  constructor(props){
+    super(props)
+    this.props.initDashboard()
+  }
 
   componentDidMount () {
     window.scrollTo(0, 0)
@@ -30,4 +37,26 @@ class Dashboard extends React.Component {
   }
 }
 
-export {Dashboard}
+// =============================================================================
+// connect component with redux
+
+const mapStateToProps = state => {
+  return { test: 0 }
+}
+
+const mapDispatchToProps = dispatch => ({
+  initDashboard: () => {
+    fetch(DASHBOARD_URL).then((response) => {
+      return response.json()
+    }).then((obj) => {
+      dispatch(initState(fromJS(obj)))
+    })
+  }
+})
+
+const DashboardContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Dashboard)
+
+export {DashboardContainer}

@@ -17,6 +17,8 @@ const mapDispatchToProps = dispatch => ({
       selected: {
         label: value.toUpperCase(),
         value: value
+      }
+    }))
   },
   onLineItemClick: (type, status, notificationTime, cptyEntity, legalEntity, cptyOrg) => {
 
@@ -38,20 +40,14 @@ const mapDispatchToProps = dispatch => ({
     const dPlusOne = new Date(d.getTime() + oneDayTime)
     const dPlusTwo = new Date(d.getTime() + 2 * oneDayTime)
 
-    console.log(now)
-    console.log(notificationTime)
-    console.log(dMinusOne, itemTime, d)
-    console.log(_.inRange(itemTime.getTime(), dMinusOne.getTime(), d.getTime()))
-
-    if(_.inRange(itemTime, dMinusOne.getTime(), d.getTime()))
+    if(_.inRange(itemTime.getTime(), dMinusOne.getTime(), d.getTime()))
       dateText = 'yesterday'
-    else if(_.inRange(itemTime, d.getTime(), dPlusOne.getTime()))
-      dateText = 'yesterday'
-    else if(_.inRange(itemTime, dPlusOne.getTime(), dPlusTwo.getTime()))
+    else if(_.inRange(itemTime.getTime(), d.getTime(), dPlusOne.getTime()))
+      dateText = 'today'
+    else if(_.inRange(itemTime.getTime(), dPlusOne.getTime(), dPlusTwo.getTime()))
       dateText = 'tomorrow'
     else
       dateText = 'failed'
-
 
     return dispatch(updateReconFilter({
       attr: 'type',
@@ -64,7 +60,7 @@ const mapDispatchToProps = dispatch => ({
       attr: 'status',
       selected: {
         label: status.toUpperCase(),
-        value: type
+        value: status
       }
     })),
     dispatch(updateReconFilter({
@@ -78,7 +74,7 @@ const mapDispatchToProps = dispatch => ({
       attr: 'notificationTime',
       selected: {
         label: dateText.toUpperCase() + ': ' + hours + ':00 HRS',
-        value: itemTime
+        value: itemTime.getTime()
       }
     })),
     dispatch(updateReconFilter({
