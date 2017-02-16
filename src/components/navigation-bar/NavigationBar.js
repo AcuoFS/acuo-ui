@@ -33,11 +33,15 @@ export default class NavigationBar extends React.Component {
         <NavigationBarItem selected={this.props.curPage == '/recon'}
                            label={'Reconcile'}
                            toUrl={'/recon'}/>
-        <NavigationBarItem label={'Disputes'} toUrl={'/disputes'}/>
+        <NavigationBarItem selected={this.props.curPage == '/disputes'}
+                           label={'Disputes'}
+                           toUrl={'/disputes'}/>
         <NavigationBarItem selected={this.props.curPage == '/pledge'}
-                           label={'Pledge'} toUrl={'/pledge'}/>
+                           label={'Pledge'}
+                           toUrl={'/pledge'}/>
         <NavigationBarItem selected={this.props.curPage == '/deployed'}
-                           label={'Deployed'} toUrl={'/deployed'}/>
+                           label={'Deployed'}
+                           toUrl={'/deployed'}/>
         <NavigationBarItem label={'Analytics'} toUrl={'/analytics'}/>
 
         {/*<div className={styles.uploadPortfolio}>*/}

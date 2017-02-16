@@ -10,6 +10,8 @@ import FlightContainer from './FlightContainer'
 import MarginCallContainer from './MarginCallContainer'
 import UnmatchedTableContainer from './UnmatchedTableContainer'
 import CollateralWidgetContainer from './CollateralWidgetContainer'
+import DisputeWidgetContainer from './DisputeWidgetContainer'
+
 
 export {
   FilterContainer,
@@ -23,5 +25,6 @@ export {
   FlightContainer,
   MarginCallContainer,
   UnmatchedTableContainer,
-  CollateralWidgetContainer
+  CollateralWidgetContainer,
+  DisputeWidgetContainer
 }

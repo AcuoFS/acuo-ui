@@ -94,7 +94,8 @@ export default class FlightDetailRow extends React.Component {
           {this.renderSecondRow(propTo.secondary)}
         </div>
         <div className={styles.flightItemTableCell}>
-          <div>{checkNegative(parseFloat(propValue.main))}</div>
+          <div>{propRowStyle ? propValue.main
+            : checkNegative(parseFloat(propValue.main))}</div>
           {this.renderSecondRow(propValue.secondary)}
         </div>
         <div className={styles.flightItemTableCell}>
