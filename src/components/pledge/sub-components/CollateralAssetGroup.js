@@ -104,7 +104,8 @@ export default class CollateralAssetGroup extends React.Component {
             {
               (propCollateralAssetList.length > 0) &&
               <div onClick={this.handlePlusMinus}>
-                <img src={this.getPlusMinusImgURL(this.state.isGroupExpanded)} alt=""/>
+                <img src={this.getPlusMinusImgURL(this.state.isGroupExpanded)} alt=""
+                     className={styles.cursorPointer}/>
               </div>
             }
           </div>

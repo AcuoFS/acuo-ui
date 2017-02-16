@@ -190,7 +190,7 @@ export default class Selection extends React.Component {
                 <img src={sideways}
                      onClick={() => {
                        this.handlerChangeSideWaysClick(this.props)
-                     }} alt=""/>
+                     }} alt="" className={styles.cursorPointer}/>
               </div>
             </div>
 

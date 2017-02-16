@@ -931,3 +931,7 @@ div.collateralTableExpanded div:nth-child(12){
   top: -8px;
   left: 7px;
 }
+
+.cursorPointer {
+  cursor: pointer;
+}
