@@ -15,7 +15,7 @@ export default class CollateralAllocatePopup extends React.Component{
     super(props)
     this.state = {
       toggle: "",
-      selectedTab: 'allocate'
+      selectedTab: POPUP_TAB_ALLOCATE
     }
 
     this.showPopup = this.showPopup.bind(this)
@@ -31,19 +31,19 @@ export default class CollateralAllocatePopup extends React.Component{
   //   })
   // }
 
-  showPopup(e) {
+  showPopup(popupId) {
     this.setState({
-      toggle: e.currentTarget.dataset.ref
+      toggle: popupId
     })
   }
 
-  checkSelection(selection) {
-    return (selection == this.state.selectedTab ? styles.selectedTab : '')
+  checkSelection(selection, selectedTab) {
+    return (selection == selectedTab ? styles.selectedTab : '')
   }
 
-  selectTab(e) {
+  selectTab(tab) {
     this.setState({
-      selectedTab: e.currentTarget.dataset.ref
+      selectedTab: tab
     })
   }
 
@@ -65,51 +65,54 @@ export default class CollateralAllocatePopup extends React.Component{
       checkAmountExceeding} = this.props
 
     return (
-      <div className={styles.relative} onClick={this.showPopup}
-           data-ref={propCollateralType + propAssetId + propAssetIdType}>
+      <div className={styles.relative} onClick={() =>
+        this.showPopup(propCollateralType + propAssetId + propAssetIdType)}>
         <span className={statusClass}>{propStatus}</span>
-        <div
-          className={(propIsDisplayAll ? styles.boxed : styles.leftBoxed ) + ' ' +
-          ((this.state.toggle == propCollateralType + propAssetId + propAssetIdType) ? styles.showBox : '')}>
-          <div className={styles.tabHolder}>
-            <div
-              className={styles.tab + ' ' + this.checkSelection(POPUP_TAB_ALLOCATE)}
-              data-ref={POPUP_TAB_ALLOCATE}
-              onClick={this.selectTab}>
-              Allocate to Call
-            </div>
-            <div
-              className={styles.tab + ' ' + this.checkSelection(POPUP_TAB_AMEND)}
-              data-ref={POPUP_TAB_AMEND}
-              onClick={this.selectTab}>
-              Amend
-            </div>
-            <div
-              className={styles.tab + ' ' + this.checkSelection(POPUP_TAB_REMOVE_EARMARK)}
-              data-ref={POPUP_TAB_REMOVE_EARMARK}
-              onClick={this.selectTab}>
-              Remove
+
+        {
+          (this.state.toggle == propCollateralType + propAssetId + propAssetIdType) &&
+          <div className={(propIsDisplayAll ? styles.boxed : styles.leftBoxed )
+          + ' ' + styles.showBox}>
+            <div className={styles.tabHolder}>
+              <div
+                className={styles.tab + ' ' +
+                this.checkSelection(POPUP_TAB_ALLOCATE, this.state.selectedTab)}
+                onClick={() => this.selectTab(POPUP_TAB_ALLOCATE)}>
+                Allocate to Call
+              </div>
+              <div
+                className={styles.tab + ' ' +
+                this.checkSelection(POPUP_TAB_AMEND, this.state.selectedTab)}
+                onClick={() => this.selectTab(POPUP_TAB_AMEND)}>
+                Amend
+              </div>
+              <div
+                className={styles.tab + ' ' +
+                this.checkSelection(POPUP_TAB_REMOVE_EARMARK, this.state.selectedTab)}
+                onClick={() => this.selectTab(POPUP_TAB_REMOVE_EARMARK)}>
+                Remove
+              </div>
+
+              <div className={styles.closeButton} onClick={this.removeCollateralBox}>
+                x
+              </div>
             </div>
 
-            <div className={styles.closeButton} onClick={this.removeCollateralBox}>
-              x
+            <div className="content">
+              <CollateralAllocateTab checkContent={this.checkContent}
+                                     checkAmountExceeding={checkAmountExceeding}
+                                     listOfMarginCallName={listOfMarginCallName}
+                                     rawPrice={rawPrice}/>
+
+              <CollateralAmendEarmarkTab checkContent={this.checkContent}
+                                         checkAmountExceeding={checkAmountExceeding}
+                                         rawPrice={rawPrice}/>
+
+              <CollateralRemoveEarmarkTab checkContent={this.checkContent}/>
+
             </div>
           </div>
-
-          <div className="content">
-            <CollateralAllocateTab checkContent={this.checkContent}
-                                   checkAmountExceeding={checkAmountExceeding}
-                                   listOfMarginCallName={listOfMarginCallName}
-                                   rawPrice={rawPrice}/>
-
-            <CollateralAmendEarmarkTab checkContent={this.checkContent}
-                                       checkAmountExceeding={checkAmountExceeding}
-                                       rawPrice={rawPrice}/>
-
-            <CollateralRemoveEarmarkTab checkContent={this.checkContent}/>
-
-          </div>
-        </div>
+        }
       </div>
 
     )

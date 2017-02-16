@@ -23,19 +23,19 @@ export default class CollateralStatusPopup extends React.Component{
     this.checkContent = this.checkContent.bind(this)
   }
 
-  showPopup(e) {
+  showPopup(popupId) {
     this.setState({
-      toggle: e.currentTarget.dataset.ref
+      toggle: popupId
     })
   }
 
-  checkSelection(selection) {
-    return (selection == this.state.selectedTab ? styles.selectedTab : '')
+  checkSelection(selection, selectedTab) {
+    return (selection == selectedTab ? styles.selectedTab : '')
   }
 
-  selectTab(e) {
+  selectTab(tab) {
     this.setState({
-      selectedTab: e.currentTarget.dataset.ref
+      selectedTab: tab
     })
   }
 
@@ -58,43 +58,46 @@ export default class CollateralStatusPopup extends React.Component{
     } = this.props
 
     return (
-      <div className={styles.relative} onClick={this.showPopup}
-           data-ref={propCollateralType + propAssetId + propAssetIdType}>
+      <div className={styles.relative} onClick={() =>
+        this.showPopup(propCollateralType + propAssetId + propAssetIdType)}>
         <span className={statusClass}>{propStatus}</span>
-        <div
-          className={(propIsDisplayAll ? styles.boxed : styles.leftBoxed ) + ' ' +
-          ((this.state.toggle == propCollateralType + propAssetId + propAssetIdType) ? styles.showBox : '')}>
-          <div className={styles.tabHolder}>
-            <div
-              className={styles.tab + ' ' + this.checkSelection(POPUP_TAB_ALLOCATE)}
-              data-ref={POPUP_TAB_ALLOCATE}
-              onClick={this.selectTab}>
-              Allocate to Call
-            </div>
-            <div
-              className={styles.tab + ' ' + this.checkSelection(POPUP_TAB_EARMARK)}
-              data-ref={POPUP_TAB_EARMARK}
-              onClick={this.selectTab}>
-              Earmark
+
+        {
+          (this.state.toggle == propCollateralType + propAssetId + propAssetIdType) &&
+          <div className={(propIsDisplayAll ? styles.boxed : styles.leftBoxed )
+          + ' ' + styles.showBox}>
+            <div className={styles.tabHolder}>
+              <div
+                className={styles.tab + ' ' +
+                this.checkSelection(POPUP_TAB_ALLOCATE, this.state.selectedTab)}
+                onClick={() => this.selectTab(POPUP_TAB_ALLOCATE)}>
+                Allocate to Call
+              </div>
+              <div
+                className={styles.tab + ' ' +
+                this.checkSelection(POPUP_TAB_EARMARK, this.state.selectedTab)}
+                onClick={() => this.selectTab(POPUP_TAB_EARMARK)}>
+                Earmark
+              </div>
+
+              <div className={styles.closeButton} onClick={this.removeCollateralBox}>
+                x
+              </div>
             </div>
 
-            <div className={styles.closeButton} onClick={this.removeCollateralBox}>
-              x
+            <div className="content">
+              <CollateralAllocateTab checkContent={this.checkContent}
+                                     checkAmountExceeding={checkAmountExceeding}
+                                     listOfMarginCallName={listOfMarginCallName}
+                                     rawPrice={rawPrice}/>
+
+              <CollateralEarmarkCollateralTab checkContent={this.checkContent}
+                                              checkAmountExceeding={checkAmountExceeding}
+                                              rawPrice={rawPrice}/>
+
             </div>
           </div>
-
-          <div className="content">
-            <CollateralAllocateTab checkContent={this.checkContent}
-                                   checkAmountExceeding={checkAmountExceeding}
-                                   listOfMarginCallName={listOfMarginCallName}
-                                   rawPrice={rawPrice}/>
-
-            <CollateralEarmarkCollateralTab checkContent={this.checkContent}
-                                            checkAmountExceeding={checkAmountExceeding}
-                                            rawPrice={rawPrice}/>
-
-          </div>
-        </div>
+        }
       </div>
 
     )
