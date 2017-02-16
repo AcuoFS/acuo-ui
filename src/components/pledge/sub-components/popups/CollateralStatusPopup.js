@@ -51,18 +51,11 @@ export default class CollateralStatusPopup extends React.Component{
     return (selection == this.state.selectedTab ? styles.showContent : '')
   }
 
-  checkAmountExceeding(total, amount) {
-    if (amount > total)
-      return (
-        <div className={styles.errorPopUp}>
-          Amount entered is larger than available.
-        </div>
-      )
-  }
-
   render(){
     const {propCollateralType, propAssetId, propAssetIdType, statusClass,
-      propStatus, propIsDisplayAll, listOfMarginCallName, rawPrice} = this.props
+      propStatus, propIsDisplayAll, listOfMarginCallName, rawPrice,
+      checkAmountExceeding
+    } = this.props
 
     return (
       <div className={styles.relative} onClick={this.showPopup}
@@ -92,12 +85,12 @@ export default class CollateralStatusPopup extends React.Component{
 
           <div className="content">
             <CollateralAllocateTab checkContent={this.checkContent}
-                                   checkAmountExceeding={this.checkAmountExceeding}
+                                   checkAmountExceeding={checkAmountExceeding}
                                    listOfMarginCallName={listOfMarginCallName}
                                    rawPrice={rawPrice}/>
 
             <CollateralEarmarkCollateralTab checkContent={this.checkContent}
-                                            checkAmountExceeding={this.checkAmountExceeding}
+                                            checkAmountExceeding={checkAmountExceeding}
                                             rawPrice={rawPrice}/>
 
           </div>

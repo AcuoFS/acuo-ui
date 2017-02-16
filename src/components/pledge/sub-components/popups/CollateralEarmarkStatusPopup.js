@@ -19,9 +19,6 @@ export default class CollateralAllocatePopup extends React.Component{
     }
 
     this.showPopup = this.showPopup.bind(this)
-    // this.allocateCollateral = this.allocateCollateral.bind(this)
-    // this.cancelCollateral = this.cancelCollateral.bind(this)
-    // this.onRemoveFromEarmarked = this.onRemoveFromEarmarked.bind(this)
     this.removeCollateralBox = this.removeCollateralBox.bind(this)
     this.selectTab = this.selectTab.bind(this)
     this.checkSelection = this.checkSelection.bind(this)
@@ -62,18 +59,10 @@ export default class CollateralAllocatePopup extends React.Component{
     return (selection == this.state.selectedTab ? styles.showContent : '')
   }
 
-  checkAmountExceeding(total, amount) {
-    if (amount > total)
-      return (
-        <div className={styles.errorPopUp}>
-          Amount entered is larger than available.
-        </div>
-      )
-  }
-
   render(){
     const {propCollateralType, propAssetId, propAssetIdType, statusClass,
-      propStatus, propIsDisplayAll, listOfMarginCallName, rawPrice} = this.props
+      propStatus, propIsDisplayAll, listOfMarginCallName, rawPrice,
+      checkAmountExceeding} = this.props
 
     return (
       <div className={styles.relative} onClick={this.showPopup}
@@ -109,12 +98,12 @@ export default class CollateralAllocatePopup extends React.Component{
 
           <div className="content">
             <CollateralAllocateTab checkContent={this.checkContent}
-                                   checkAmountExceeding={this.checkAmountExceeding}
+                                   checkAmountExceeding={checkAmountExceeding}
                                    listOfMarginCallName={listOfMarginCallName}
                                    rawPrice={rawPrice}/>
 
             <CollateralAmendEarmarkTab checkContent={this.checkContent}
-                                       checkAmountExceeding={this.checkAmountExceeding}
+                                       checkAmountExceeding={checkAmountExceeding}
                                        rawPrice={rawPrice}/>
 
             <CollateralRemoveEarmarkTab checkContent={this.checkContent}/>
