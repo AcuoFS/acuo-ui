@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import DisputeTableRow from './DisputeTableRow'
 import _ from 'lodash'
 import * as DISPUTE_FILTER from '../../../constants/DisputeFilters'
@@ -79,6 +79,11 @@ const DisputeTable = ({disputeData, dateFilter}) => {
     </div>
   )
 
+}
+
+DisputeTable.PropTypes = {
+  disputeData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dateFilter: PropTypes.string.isRequired
 }
 
 export default DisputeTable

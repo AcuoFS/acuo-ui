@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import ExclamationIcon from '../../../../images/dispute/Exclamation.svg'
 import {formatDate} from '../../../utils/'
 import styles from './DisputeTable.css'
@@ -47,6 +47,18 @@ const DisputeTableRow = ({
     </div>
 
   )
+}
+
+DisputeTableRow.PropTypes = {
+  propRole: PropTypes.string.isRequired,
+  propLegalEntity: PropTypes.string.isRequired,
+  propCptyOrg: PropTypes.string.isRequired,
+  propCptyEntity: PropTypes.string.isRequired,
+  propAgreementName: PropTypes.string.isRequired,
+  propId: PropTypes.string.isRequired,
+  propDaysOpened: PropTypes.string.isRequired,
+  propLastUpdated: PropTypes.string.isRequired,
+  propStatus: PropTypes.string.isRequired,
 }
 
 export default DisputeTableRow

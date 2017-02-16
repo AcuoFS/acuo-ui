@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import DisputeTable from './sub-components/DisputeTable'
 import * as DISPUTE_FILTER from '../../constants/DisputeFilters'
 import mockData from './MockDisputes'
@@ -46,4 +46,11 @@ export default class DisputeWidget extends React.Component {
       </div>
     )
   }
+}
+
+DisputeWidget.PropTypes = {
+  disputeData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dateFilter: PropTypes.string.isRequired,
+  onUpdateDisputeFilter: PropTypes.func.isRequired,
+  onInitDisputeData: PropTypes.func.isRequired
 }
