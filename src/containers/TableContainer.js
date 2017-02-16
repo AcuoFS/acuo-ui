@@ -1,14 +1,20 @@
 import { connect } from 'react-redux'
 import { TableComponent } from '../components'
-import { filterStateDeriv } from '../actions'
+import { updateReconFilter } from '../actions'
 
 const mapStateToProps = state => ({
   derivatives: state.mainReducer.getIn(['display', 'derivatives'])
 })
 
 const mapDispatchToProps = dispatch => ({
-  redirect: (e) => {
-    dispatch(filterStateDeriv(e.currentTarget.dataset.ref))
+  redirect: (value) => {
+    dispatch(updateReconFilter({
+      attr: 'type',
+      selected: {
+        label: value.toUpperCase(),
+        value: value
+      }
+    }))
   }
 })
 

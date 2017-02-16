@@ -9,8 +9,9 @@ const initFilters = [
   {order: 1, attr: "legalEntity", label: "Legal Entity"},
   {order: 2, attr: "type",        label: "Deriv Type"},
   {order: 3, attr: "notificationTime",        label: "Time Window", type: "time"},
-  {order: 4, attr: "cptyOrg",     label: "CPTY Organisation"},
-  {order: 5, attr: "cptyEntity",  label: "CPTY Entity", type: "multi"},
+  {order: 4, attr: "status",      label: "Status"},
+  {order: 5, attr: "cptyOrg",     label: "CPTY Organisation"},
+  {order: 6, attr: "cptyEntity",  label: "CPTY Entity", type: "multi"},
 ]
 
 const updateFilters = (filters, newFilter) => (
