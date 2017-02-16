@@ -109,7 +109,7 @@ class TableItem extends React.Component {
           <div className={styles.actionItem}>
             <div className={styles.actionVertiCenter}>
               <Link to={'/recon'}>
-                <div className={styles.actions} onClick={redirect} data-ref={this.props.deriv.get('type')} to={'/recon'}>
+                <div className={styles.actions} onClick={() => redirect(this.props.deriv.get('type'))} to={'/recon'}>
                   <div className={styles.text}>{this.getNumberOfActions()} ACTION ITEMS</div>
                   <div className={styles.arrow}></div>
                 </div>
