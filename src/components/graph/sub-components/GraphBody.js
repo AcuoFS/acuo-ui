@@ -14,7 +14,21 @@ export default class GraphBody extends React.Component {
   whichClickFuncToRun(status, lastUpdatedTime, bubbleTimeStart, timeDifference, onUnreconBubbleClick){
     switch(status){
       case 'expected':
-        return () => 0
+        return () => {
+          hashHistory.push('/recon')
+
+          //1st param: time range start
+          //2nd param: time range start + 1 hour
+          //3rd param: getDay() returns 'today', 'tomorrow', 'yesterday' based on summation of
+          //           today's hours + the difference in time of the bubble, appends it with
+          //           the 'hours' portion of time start to form a string for dispatch use
+          onUnreconBubbleClick(
+            bubbleTimeStart,
+            (new Date(bubbleTimeStart).setHours((new Date(bubbleTimeStart).getHours()+1))),
+            this.getDay(new Date(Date.parse(lastUpdatedTime)).getHours() + timeDifference) + ': ' + (new Date(bubbleTimeStart).getHours()) + ':00 HRS',
+            'Expected'
+          )
+        }
       case 'unrecon':
         return () => {
           hashHistory.push('/recon')
@@ -27,7 +41,8 @@ export default class GraphBody extends React.Component {
           onUnreconBubbleClick(
             bubbleTimeStart,
             (new Date(bubbleTimeStart).setHours((new Date(bubbleTimeStart).getHours()+1))),
-            this.getDay(new Date(Date.parse(lastUpdatedTime)).getHours() + timeDifference) + ': ' + (new Date(bubbleTimeStart).getHours()) + ':00 HRS'
+            this.getDay(new Date(Date.parse(lastUpdatedTime)).getHours() + timeDifference) + ': ' + (new Date(bubbleTimeStart).getHours()) + ':00 HRS',
+            'Unrecon'
           )
         }
       case 'reconciled':
