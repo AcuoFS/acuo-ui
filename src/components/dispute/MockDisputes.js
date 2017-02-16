@@ -1,43 +1,75 @@
+import * as DISPUTE_ATTRIBUTE from '../../constants/DisputeAttributes'
+
 /**
  * This is just interim as endpoint is not ready
  * @type {[*]}
  */
 const mockData = [
   {
-    role: 'S', legalEntity: 'Acuo SG', cptyOrg: 'Counterparty C',
-    cptyEntity: 'Counterparty C', agreementName: 'Acuo SG vs Counterparty C',
-    disputeId: '1234567890', daysOpened: '100', lastUpdated: '2016-11-23T00:00:00.000Z',
-    status: 'Received'
+    [DISPUTE_ATTRIBUTE.ROLE]: 'S',
+    [DISPUTE_ATTRIBUTE.LEGAL_ENTITY]: 'Acuo SG',
+    [DISPUTE_ATTRIBUTE.CPTY_ORG]: 'Counterparty C',
+    [DISPUTE_ATTRIBUTE.CPTY_ENTITY]: 'Counterparty C',
+    [DISPUTE_ATTRIBUTE.AGREEMENT_NAME]: 'Acuo SG vs Counterparty C',
+    [DISPUTE_ATTRIBUTE.DISPUTE_ID]: '1234567890',
+    [DISPUTE_ATTRIBUTE.DAYS_OPENED]: '100',
+    [DISPUTE_ATTRIBUTE.LAST_UPDATED]: '2016-11-23T00:00:00.000Z',
+    [DISPUTE_ATTRIBUTE.STATUS]: 'Received'
   },
   {
-    role: 'P', legalEntity: 'Acuo SG', cptyOrg: 'Counterparty C',
-    cptyEntity: 'Counterparty C', agreementName: 'Acuo SG vs Counterparty C',
-    disputeId: '1234567890', daysOpened: '100', lastUpdated: '2016-11-23T00:00:00.000Z',
-    status: 'Sent'
+    [DISPUTE_ATTRIBUTE.ROLE]: 'P',
+    [DISPUTE_ATTRIBUTE.LEGAL_ENTITY]: 'Acuo SG',
+    [DISPUTE_ATTRIBUTE.CPTY_ORG]: 'Counterparty C',
+    [DISPUTE_ATTRIBUTE.CPTY_ENTITY]: 'Counterparty C',
+    [DISPUTE_ATTRIBUTE.AGREEMENT_NAME]: 'Acuo SG vs Counterparty C',
+    [DISPUTE_ATTRIBUTE.DISPUTE_ID]: '1234567890',
+    [DISPUTE_ATTRIBUTE.DAYS_OPENED]: '100',
+    [DISPUTE_ATTRIBUTE.LAST_UPDATED]: '2016-11-23T00:00:00.000Z',
+    [DISPUTE_ATTRIBUTE.STATUS]: 'Sent'
   },
   {
-    role: 'S', legalEntity: 'Acuo SG', cptyOrg: 'Counterparty A',
-    cptyEntity: 'Counterparty A', agreementName: 'Acuo SG vs Counterparty A',
-    disputeId: '1234567890', daysOpened: '100', lastUpdated: '2017-02-01T00:00:00.000Z',
-    status: 'Received'
+    [DISPUTE_ATTRIBUTE.ROLE]: 'S',
+    [DISPUTE_ATTRIBUTE.LEGAL_ENTITY]: 'Acuo SG',
+    [DISPUTE_ATTRIBUTE.CPTY_ORG]: 'Counterparty A',
+    [DISPUTE_ATTRIBUTE.CPTY_ENTITY]: 'Counterparty A',
+    [DISPUTE_ATTRIBUTE.AGREEMENT_NAME]: 'Acuo SG vs Counterparty A',
+    [DISPUTE_ATTRIBUTE.DISPUTE_ID]: '1234567890',
+    [DISPUTE_ATTRIBUTE.DAYS_OPENED]: '100',
+    [DISPUTE_ATTRIBUTE.LAST_UPDATED]: '2017-02-01T00:00:00.000Z',
+    [DISPUTE_ATTRIBUTE.STATUS]: 'Received'
   },
   {
-    role: 'S', legalEntity: 'Acuo SG', cptyOrg: 'Counterparty A',
-    cptyEntity: 'Counterparty A', agreementName: 'Acuo SG vs Counterparty A',
-    disputeId: '1234567890', daysOpened: '100', lastUpdated: '2016-08-20T00:00:00.000Z',
-    status: 'Received'
+    [DISPUTE_ATTRIBUTE.ROLE]: 'S',
+    [DISPUTE_ATTRIBUTE.LEGAL_ENTITY]: 'Acuo SG',
+    [DISPUTE_ATTRIBUTE.CPTY_ORG]: 'Counterparty A',
+    [DISPUTE_ATTRIBUTE.CPTY_ENTITY]: 'Counterparty A',
+    [DISPUTE_ATTRIBUTE.AGREEMENT_NAME]: 'Acuo SG vs Counterparty A',
+    [DISPUTE_ATTRIBUTE.DISPUTE_ID]: '1234567890',
+    [DISPUTE_ATTRIBUTE.DAYS_OPENED]: '100',
+    [DISPUTE_ATTRIBUTE.LAST_UPDATED]: '2016-08-20T00:00:00.000Z',
+    [DISPUTE_ATTRIBUTE.STATUS]: 'Received'
   },
   {
-    role: 'S', legalEntity: 'Acuo SG', cptyOrg: 'Counterparty A',
-    cptyEntity: 'Counterparty A', agreementName: 'Acuo SG vs Counterparty A',
-    disputeId: '1234567890', daysOpened: '100', lastUpdated: '2016-11-01T00:00:00.000Z',
-    status: 'Received'
+    [DISPUTE_ATTRIBUTE.ROLE]: 'S',
+    [DISPUTE_ATTRIBUTE.LEGAL_ENTITY]: 'Acuo SG',
+    [DISPUTE_ATTRIBUTE.CPTY_ORG]: 'Counterparty A',
+    [DISPUTE_ATTRIBUTE.CPTY_ENTITY]: 'Counterparty A',
+    [DISPUTE_ATTRIBUTE.AGREEMENT_NAME]: 'Acuo SG vs Counterparty A',
+    [DISPUTE_ATTRIBUTE.DISPUTE_ID]: '1234567890',
+    [DISPUTE_ATTRIBUTE.DAYS_OPENED]: '100',
+    [DISPUTE_ATTRIBUTE.LAST_UPDATED]: '2016-11-01T00:00:00.000Z',
+    [DISPUTE_ATTRIBUTE.STATUS]: 'Received'
   },
   {
-    role: 'P', legalEntity: 'Acuo SG', cptyOrg: 'Counterparty A',
-    cptyEntity: 'Counterparty A', agreementName: 'Acuo SG vs Counterparty A',
-    disputeId: '1234567890', daysOpened: '100', lastUpdated: '2017-02-20T00:00:00.000Z',
-    status: 'Received'
+    [DISPUTE_ATTRIBUTE.ROLE]: 'P',
+    [DISPUTE_ATTRIBUTE.LEGAL_ENTITY]: 'Acuo SG',
+    [DISPUTE_ATTRIBUTE.CPTY_ORG]: 'Counterparty A',
+    [DISPUTE_ATTRIBUTE.CPTY_ENTITY]: 'Counterparty A',
+    [DISPUTE_ATTRIBUTE.AGREEMENT_NAME]: 'Acuo SG vs Counterparty A',
+    [DISPUTE_ATTRIBUTE.DISPUTE_ID]: '1234567890',
+    [DISPUTE_ATTRIBUTE.DAYS_OPENED]: '100',
+    [DISPUTE_ATTRIBUTE.LAST_UPDATED]: '2017-02-20T00:00:00.000Z',
+    [DISPUTE_ATTRIBUTE.STATUS]: 'Received'
   }
 ]
 

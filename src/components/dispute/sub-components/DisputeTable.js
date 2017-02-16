@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react'
 import DisputeTableRow from './DisputeTableRow'
 import _ from 'lodash'
 import * as DISPUTE_FILTER from '../../../constants/DisputeFilters'
+import * as DISPUTE_ATTRIBUTE from '../../../constants/DisputeAttributes'
 import styles from './DisputeTable.css'
 
 
@@ -64,15 +65,15 @@ const DisputeTable = ({disputeData, dateFilter}) => {
         filterBySelectedRange(disputeData, dateFilter).map((dispute, index) =>
           <DisputeTableRow
             key={index}
-            propRole={dispute.role}
-            propLegalEntity={dispute.legalEntity}
-            propCptyOrg={dispute.cptyOrg}
-            propCptyEntity={dispute.cptyEntity}
-            propAgreementName={dispute.agreementName}
-            propId={dispute.disputeId}
-            propDaysOpened={dispute.daysOpened}
-            propLastUpdated={dispute.lastUpdated}
-            propStatus={dispute.status}/>
+            propRole={dispute[DISPUTE_ATTRIBUTE.ROLE]}
+            propLegalEntity={dispute[DISPUTE_ATTRIBUTE.LEGAL_ENTITY]}
+            propCptyOrg={dispute[DISPUTE_ATTRIBUTE.CPTY_ORG]}
+            propCptyEntity={dispute[DISPUTE_ATTRIBUTE.CPTY_ENTITY]}
+            propAgreementName={dispute[DISPUTE_ATTRIBUTE.AGREEMENT_NAME]}
+            propId={dispute[DISPUTE_ATTRIBUTE.DISPUTE_ID]}
+            propDaysOpened={dispute[DISPUTE_ATTRIBUTE.DAYS_OPENED]}
+            propLastUpdated={dispute[DISPUTE_ATTRIBUTE.LAST_UPDATED]}
+            propStatus={dispute[DISPUTE_ATTRIBUTE.STATUS]}/>
         )
       }
 
