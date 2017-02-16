@@ -2,7 +2,6 @@ import React from 'react'
 import TableItem from './TableItem'
 import styles from '../Table.css'
 
-
 class TableHead extends React.Component{
   constructor(props){
     super(props)
@@ -31,14 +30,15 @@ class TableHead extends React.Component{
   }
 
   render() {
+    const { onLineItemClick, deriv, redirect } = this.props
     return (
       <div className={styles.tableWrapper}>
-        <TableItem status={this.props.marginType}
-                   clicked={this.handleClick}
+        <TableItem clicked={this.handleClick}
                    toggle={this.state.class}
                    arrow={this.state.dropdown}
-                    deriv={this.props.deriv}
-                    redirect={this.props.redirect}/>
+                   deriv={deriv}
+                   redirect={redirect}
+                   onLineItemClick={onLineItemClick}/>
       </div>
     )
   }

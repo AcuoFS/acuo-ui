@@ -312,7 +312,7 @@ export const reconItem = (state, action) => {
 
 
 // main reducer function
-export default function mainReducer(state = Map({"data": Map(), "display": Map()}), action, store = 'data') {
+export default function mainReducer(state = Map({"data": Map({"derivatives": List()}), "display": Map({"derivatives": List()})}), action, store = 'data') {
 
   switch(action.type) {
     case 'INIT_STATE':

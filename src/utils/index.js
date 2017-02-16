@@ -7,6 +7,8 @@ import { jsonObjectToFlatArray } from './jsonObjectToFlatArray'
 import { maxLengthToEllipsis } from './maxLengthToEllipsis'
 import { numberWithCommas } from './numbersWithCommas'
 import { checkNegative } from './formatNegativeAmount'
+import { getDate } from './getDate'
+import clearTime from './clearTime'
 
 export {
   formatDate,
@@ -14,5 +16,7 @@ export {
   jsonObjectToFlatArray,
   maxLengthToEllipsis,
   numberWithCommas,
-  checkNegative
+  checkNegative,
+  getDate,
+  clearTime,
 }

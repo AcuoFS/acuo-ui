@@ -1,35 +1,49 @@
 .directionCont {
-    width: 35px;
-    padding: 4px;
+  width: 35px;
+  padding: 4px;
 }
 
 .directionOut {
-    background-color: #EEEEEE;
-    color: #000000;
+  background-color: #EEEEEE;
+  color: #000000;
 }
 
 .directionIn {
-    background-color: #55626F;
-    color: #FFFFFF;
+  background-color: #55626F;
+  color: #FFFFFF;
 }
 
 .statusCont {
-    border-radius: 5px;
-    width: 24px;
-    padding: 4px;
-    color: #FFFFFF;
+  border-radius: 5px;
+  width: 24px;
+  padding: 4px;
+  color: #FFFFFF;
 }
 
 .statusExpected {
-    background-color: #F7BD20;
+  background-color: #F7BD20;
 }
+
 .statusRecon {
-    background-color: #075544;
+  background-color: #075544;
 }
+
 .statusUnrecon {
-    background-color: #D45131;
+  background-color: #D45131;
 }
 
 .statusDispute {
-    background-color: #CE0B24;
+  background-color: #CE0B24;
+}
+
+.hoverable {
+  -webkit-transition: background-color 250ms linear;
+  -moz-transition: background-color 250ms linear;
+  -o-transition: background-color 250ms linear;
+  transition: background-color 250ms linear;
+}
+
+.hoverable:hover {
+  background-color: #e5e5e5;
+  cursor: pointer;
 }
