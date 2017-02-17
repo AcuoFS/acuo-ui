@@ -1,0 +1,42 @@
+.summaryTable {
+    display: table;
+    width: 630px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 1px solid #979797;
+}
+
+.rowStyle {
+    display: table-row;
+    font-size: 13px;
+    text-align: center;
+    line-height: 16px;
+    color: #272727;
+}
+
+.summaryTableRow {
+    composes: rowStyle;
+    background-color: #FFFFFF;
+}
+
+.summaryTableHeaderRow {
+    composes: rowStyle;
+    background-color: #D5DADF;
+}
+
+.summaryTableCell {
+    display: table-cell;
+    padding: 10px;
+}
+
+.summaryTableHeaderRow > .summaryTableCell:first-child {
+    border-top-left-radius: 10px;
+}
+
+.summaryTableHeaderRow > .summaryTableCell:last-child {
+    border-top-right-radius: 10px;
+}
+
+.summaryTableRow .summaryTableCell {
+    border-top: 1px solid #979797;
+}

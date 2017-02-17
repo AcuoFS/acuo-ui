@@ -7,3 +7,40 @@
 .compTitle {
     composes: compTitle from '../../static/commonStyles/common.css';
 }
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btnContainer {
+    text-align: right;
+    margin: 5px 0;
+}
+
+.agreementBtnStyle {
+    composes: agreementBtnStyle from '../../static/commonStyles/common.css';
+}
+
+.labelContainer {
+    margin: 20px 0 10px;
+}
+
+.statusLabel {
+    font-size: 14px;
+    composes: baseFontBold from '../../static/css-components/fonts.css';
+    line-height: 17px;
+    border-bottom: 2px solid #979797;
+    padding-bottom: 2px;
+    cursor: pointer;
+}
+
+.statusLabel.outLabel {
+    margin-right: 10px;
+    color: #589E9C;
+}
+
+.statusLabel.inLabel {
+    margin-left: 10px;
+    color: #587D9E;
+}
