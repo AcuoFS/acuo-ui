@@ -1,6 +1,7 @@
 import React from 'react'
 import {
-  NavigationBarContainer
+  NavigationBarContainer,
+  AgreementsContainer
 } from '../../containers'
 
 
@@ -14,7 +15,7 @@ class AgreementsPage extends React.Component {
     return (
       <div>
         <NavigationBarContainer curPage={this.props.location.pathname}/>
-        <div>AGREEMENTS</div>
+        <AgreementsContainer/>
       </div>
     )
   }

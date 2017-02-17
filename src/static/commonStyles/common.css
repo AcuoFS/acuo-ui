@@ -1,0 +1,14 @@
+.compContainer {
+    margin: 2% 2%;
+    background-color: #FFFFFF;
+    box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.compTitle {
+    font-size: 24px;
+    composes: baseFontBold from '../../static/css-components/fonts.css';
+    line-height: 29px;
+    color: #6389AD;
+}

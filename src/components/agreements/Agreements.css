@@ -1,0 +1,9 @@
+.compContainer {
+    min-width: 1363px;
+    min-height: 415px;
+    composes: compContainer from '../../static/commonStyles/common.css';
+}
+
+.compTitle {
+    composes: compTitle from '../../static/commonStyles/common.css';
+}

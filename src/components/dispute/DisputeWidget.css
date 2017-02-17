@@ -1,11 +1,7 @@
 .compContainer {
-    margin: 2% 2%;
     min-width: 1363px;
     min-height: 415px;
-    background-color: #FFFFFF;
-    box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
-    border-radius: 10px;
-    padding: 10px;
+    composes: compContainer from '../../static/commonStyles/common.css';
 }
 
 .compTitle {
