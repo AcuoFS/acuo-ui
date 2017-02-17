@@ -102,7 +102,7 @@ export default class GraphBody extends React.Component {
             "inAmount": y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
 
-              const amount = (Math.abs(parseFloat(xx.get('initialMargin'))) || 0) + (Math.abs(parseFloat(xx.get('variableMargin'))) || 0)
+              const amount = Math.abs((parseFloat(xx.get('initialMargin')) || 0.00) + (parseFloat(xx.get('variableMargin'))  || 0.00))
 
               return (xx.get('direction') == 'IN' ? parseFloat(a2) + parseFloat(amount) : a2)
             }, 0)
@@ -110,7 +110,8 @@ export default class GraphBody extends React.Component {
           , "outAmount": y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
 
-              const amount = (Math.abs(parseFloat(xx.get('initialMargin'))) || 0) + (Math.abs(parseFloat(xx.get('variableMargin'))) || 0)
+              //abs(IM + VM)
+              const amount = Math.abs((parseFloat(xx.get('initialMargin')) || 0.00) + (parseFloat(xx.get('variableMargin'))  || 0.00))
 
               return (xx.get('direction') == 'OUT' ? parseFloat(a2) + parseFloat(amount) : a2)
             }, 0)
