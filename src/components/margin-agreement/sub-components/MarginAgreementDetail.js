@@ -113,6 +113,7 @@ export default class MarginAgreementDetail extends React.Component {
     />
 
     return (
+
       <div className=''>
 
         <div className={ styles.packageRow + ' ' + (this.checkChildrenTolerance(secondLevel.toJS()) && !this.state.open ? styles.packageRowHighLight : '')}> {/* one row div*/}

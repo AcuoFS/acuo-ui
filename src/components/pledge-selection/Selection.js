@@ -212,7 +212,7 @@ export default class Selection extends React.Component {
                   <thead>
                   <tr className={styles.bold}>
                     <th></th>
-                    <th>Value(post <br/>haircut)</th>
+                    <th>Adjusted Value</th>
                     <th>CCY</th>
                     <th>Haircut</th>
                     <th>Value</th>

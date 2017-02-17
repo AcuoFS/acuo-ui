@@ -43,6 +43,11 @@ export default class MarginAgreementList extends React.Component {
     }))
   }
 
+  componentDidUpdate() {
+    if(this.props.recon.size <= 0)
+      this.props.resetFilters()
+  }
+
   render() {
     const {recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList,
       onSelectSecondLevelItem} = this.props

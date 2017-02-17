@@ -102,17 +102,17 @@ export default class GraphBody extends React.Component {
             "inAmount": y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
 
-              const amount = xx.get('initialMargin') || xx.get('variableMargin')
+              const amount = (Math.abs(parseFloat(xx.get('initialMargin'))) || 0) + (Math.abs(parseFloat(xx.get('variableMargin'))) || 0)
 
-              return (xx.get('direction') == 'IN' ? a2 + Math.abs(Number.parseFloat(amount)) : a2)
+              return (xx.get('direction') == 'IN' ? parseFloat(a2) + parseFloat(amount) : a2)
             }, 0)
           }, 0)
           , "outAmount": y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
 
-                const amount = xx.get('initialMargin') || xx.get('variableMargin')
+              const amount = (Math.abs(parseFloat(xx.get('initialMargin'))) || 0) + (Math.abs(parseFloat(xx.get('variableMargin'))) || 0)
 
-                return (xx.get('direction') == 'OUT' ? a2 + Math.abs(Number.parseFloat(amount)) : a2)
+              return (xx.get('direction') == 'OUT' ? parseFloat(a2) + parseFloat(amount) : a2)
             }, 0)
           }, 0)
           , "inNo":  y.get('actionsList').reduce((a, z) => {
@@ -152,11 +152,11 @@ export default class GraphBody extends React.Component {
             </circle>
             <g className={styles.toolTip} opacity="0.9">
 
-              <rect x={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7)
-                ? this.props.x - 110 + (timeDifference + 0.5) * 60
+              <rect x={(timeFrame.get('inAmount') > 100000000 || status.get('status').length >= 7)
+                ? this.props.x - 120 + (timeDifference + 0.5) * 60
                 : this.props.x - 90 + (timeDifference + 0.5) * 60}
                     y={colour[2] - 20} rx="4"
-                    width={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? 110 : 80}
+                    width={(timeFrame.get('inAmount') > 100000000 || status.get('status').length >= 7) ? 120 : 90}
                     height="45" strokeWidth="1" stroke={colour[0]} fill="#FFFFFF"></rect>
               <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] - 2.5}
                     fontSize="11"
@@ -171,7 +171,7 @@ export default class GraphBody extends React.Component {
                     fontFamily="helvetica"
                     fill="#010101"
                     textAnchor="end">
-                {checkNegative(timeFrame.get('inAmount'))}
+                {checkNegative(timeFrame.get('inAmount').toFixed(2))}
               </text>
             </g>
           </g>)
@@ -184,12 +184,12 @@ export default class GraphBody extends React.Component {
                       fill={colour[0]}>
               </circle>
               <g className={styles.toolTip} opacity="0.9">
-                <rect x={(timeFrame.get('outAmount') > 100000000 || status.get('status').length > 7)
-                  ? this.props.x - 110 + (timeDifference + 0.5) * 60
+                <rect x={(timeFrame.get('outAmount') > 100000000 || status.get('status').length >= 7)
+                  ? this.props.x - 120 + (timeDifference + 0.5) * 60
                   : this.props.x - 90 + (timeDifference + 0.5) * 60}
                       y={colour[1] - 20}
                       rx="4"
-                      width={(timeFrame.get('outAmount') > 100000000 || status.get('status').length > 7) ? 100 : 80}
+                      width={(timeFrame.get('outAmount') > 100000000 || status.get('status').length >= 7) ? 120 : 90}
                       height="45"
                       strokeWidth="1"
                       stroke={colour[0]}
@@ -209,7 +209,7 @@ export default class GraphBody extends React.Component {
                       fontFamily="helvetica"
                       fill="#010101"
                       textAnchor="end">
-                  {checkNegative(timeFrame.get('outAmount'))}
+                  {checkNegative(timeFrame.get('outAmount').toFixed(2))}
                 </text>
               </g>
             </g>)
