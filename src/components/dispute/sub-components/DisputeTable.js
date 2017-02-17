@@ -3,14 +3,13 @@ import DisputeTableRow from './DisputeTableRow'
 import _ from 'lodash'
 import * as DISPUTE_FILTER from '../../../constants/DisputeFilters'
 import * as DISPUTE_ATTRIBUTE from '../../../constants/DisputeAttributes'
+import {getDate} from '../../../utils'
 import styles from './DisputeTable.css'
 
 
 const filterBySelectedRange = (disputeData, dateFilter) => (
   _.filter(disputeData, (disputeRecord) => {
-    // const currentDate = new Date()
-    // TODO Using 15 Feb 2017 as reference date as calendar is not ready
-    const currentDate = new Date(2017, 1, 15)
+    const currentDate = getDate()
     const currentYear = currentDate.getFullYear()
     const currentMonth = currentDate.getMonth()
     const recordDate = new Date(disputeRecord.lastUpdated)
