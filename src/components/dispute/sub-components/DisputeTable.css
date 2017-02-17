@@ -5,18 +5,12 @@
 
 .disputeTableRow {
     display: table-row;
-    font-size: 13px;
-    line-height: 16px;
-    color: #272727;
+    composes: tableRow from '../../../static/commonStyles/common.css';
 }
 
 .disputeTableHeaderRow {
     display: table-row;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 17px;
-    color: #FFFFFF;
-    background-color: #2B3C4C;
+    composes: tableHeader from '../../../static/commonStyles/common.css';
 }
 
 .disputeTableCell {

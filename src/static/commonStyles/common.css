@@ -26,3 +26,29 @@
     margin: 0 10px;
     cursor: pointer;
 }
+
+.tableHeader {
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+    composes: baseFontBold from '../css-components/fonts.css';
+    background-color: #2B3C4C;
+}
+
+.tableRow {
+    font-size: 13px;
+    line-height: 16px;
+    color: #272727;
+}
+
+.tableRowBlue {
+    background-color: #DCEEFF;
+}
+
+.tableRowWhite {
+    background-color: #FFFFFF;
+}
+
+.tableRowGrey {
+    background-color: #EEEEEE;
+}

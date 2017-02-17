@@ -1,5 +1,6 @@
 import React from 'react'
 import AgreementsSummaryTable from './sub-components/AgreementsSummaryTable'
+import AgreementsTable from './sub-components/AgreementsTable'
 import styles from './Agreements.css'
 
 
@@ -14,14 +15,13 @@ export default class Agreements extends React.Component {
             <button className={styles.agreementBtnStyle}>Create</button>
           </div>
         </div>
-        <input type="text" placeholder="Search"/>
+        <input type="text" placeholder="Search" className={styles.searchInput}/>
         <div className={styles.labelContainer}>
-          <span className={styles.statusLabel + ' ' + styles.outLabel}>Incoming</span>
-          <span className={styles.statusLabel + ' ' + styles.inLabel}>Outgoing</span>
+          <span className={styles.statusLabel + ' ' + styles.outLabel}>Outgoing</span>
+          <span className={styles.statusLabel + ' ' + styles.inLabel}>Incoming</span>
         </div>
         <AgreementsSummaryTable/>
-        <div>details table</div>
-
+        <AgreementsTable/>
       </div>
     )
   }

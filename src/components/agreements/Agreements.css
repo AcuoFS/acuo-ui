@@ -44,3 +44,13 @@
     margin-left: 10px;
     color: #587D9E;
 }
+
+.searchInput {
+    width: 222px;
+    height: 25px;
+    background-color: #FFFFFF;
+    border: 1px solid #979797;
+    font-size: 13px;
+    line-height: 16px;
+
+}
