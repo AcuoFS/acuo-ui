@@ -47,7 +47,7 @@ const mapDispatchToProps = dispatch => ({
     else if(_.inRange(itemTime.getTime(), dPlusOne.getTime(), dPlusTwo.getTime()))
       dateText = 'tomorrow'
     else
-      dateText = 'failed'
+      dateText = 'not in range'
 
     return dispatch(updateReconFilter({
       attr: 'type',
