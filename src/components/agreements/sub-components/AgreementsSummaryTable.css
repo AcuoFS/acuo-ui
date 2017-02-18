@@ -79,13 +79,13 @@
 }
 
 /* Acuo SG */
-.summaryTableRow:nth-child(2) > .summaryTableCell:first-child {
+.clientDisplay {
     background-color: #589E9C;
     color: #FFFFFF;
 }
 
 /* Counterparty */
-.summaryTableRow:nth-child(3) > .summaryTableCell:first-child {
+.cptyDisplay {
     background-color: #587D9E;
     color: #FFFFFF;
 }

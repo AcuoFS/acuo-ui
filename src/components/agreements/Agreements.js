@@ -1,11 +1,28 @@
 import React from 'react'
 import AgreementsSummaryTable from './sub-components/AgreementsSummaryTable'
 import AgreementsTable from './sub-components/AgreementsTable'
+import mockAgreementsSummary from './sub-components/mockAgreementsSummary'
+import _ from 'lodash'
+import * as TYPES from '../../constants/AgreementsConstants'
 import styles from './Agreements.css'
 
 
 export default class Agreements extends React.Component {
+  componentWillMount() {
+    if (_.isEmpty(this.props.summaryData)) {
+      this.props.onInitAgreementSummary(mockAgreementsSummary)
+    }
+  }
+
   render() {
+    const {
+      summaryData,
+      isCptySummaryExpanded,
+      onSetCptySummaryExpanded,
+      typeSelected,
+      onSetAgreementTypeSelected
+    } = this.props
+
     return (
       <div className={styles.compContainer}>
         <div className={styles.headerContainer}>
@@ -17,10 +34,23 @@ export default class Agreements extends React.Component {
         </div>
         <input type="text" placeholder="Search" className={styles.searchInput}/>
         <div className={styles.labelContainer}>
-          <span className={styles.statusLabel + ' ' + styles.outLabel}>Outgoing</span>
-          <span className={styles.statusLabel + ' ' + styles.inLabel}>Incoming</span>
+          <span className={
+            styles.statusLabel + ' ' + ((typeSelected == TYPES.AGREEMENT_TYPE_SELECTED_INCOMING)
+              ? styles.unselected : styles.outLabel)}
+                onClick={() => onSetAgreementTypeSelected(TYPES.AGREEMENT_TYPE_SELECTED_OUTGOING)}>
+            Outgoing
+          </span>
+          <span className={
+            styles.statusLabel + ' ' + ((typeSelected == TYPES.AGREEMENT_TYPE_SELECTED_OUTGOING)
+              ? styles.unselected : styles.inLabel)}
+                onClick={() => onSetAgreementTypeSelected(TYPES.AGREEMENT_TYPE_SELECTED_INCOMING)}>
+            Incoming
+          </span>
         </div>
-        <AgreementsSummaryTable/>
+        <AgreementsSummaryTable propSummaryData={summaryData}
+                                propIsCptySummaryExpanded={isCptySummaryExpanded}
+                                propHandlerCptyExpand={onSetCptySummaryExpanded}
+                                propTypeSelected={typeSelected}/>
         <AgreementsTable/>
       </div>
     )

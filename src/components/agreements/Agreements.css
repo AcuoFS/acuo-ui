@@ -28,21 +28,26 @@
 
 .statusLabel {
     font-size: 14px;
-    composes: baseFontBold from '../../static/css-components/fonts.css';
     line-height: 17px;
-    border-bottom: 2px solid #979797;
     padding-bottom: 2px;
     cursor: pointer;
+    margin: 0px 5px;
 }
 
-.statusLabel.outLabel {
-    margin-right: 10px;
+.outLabel {
     color: #589E9C;
+    composes: baseFontBold from '../../static/css-components/fonts.css';
+    border-bottom: 2px solid #979797;
 }
 
-.statusLabel.inLabel {
-    margin-left: 10px;
+.inLabel {
     color: #587D9E;
+    composes: baseFontBold from '../../static/css-components/fonts.css';
+    border-bottom: 2px solid #979797;
+}
+
+.statusLabel.unselected {
+    color: #000000;
 }
 
 .searchInput {
