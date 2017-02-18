@@ -1,6 +1,6 @@
 .compContainer {
-    min-width: 1363px;
-    min-height: 415px;
+    min-width: 1000px;
+    min-height: 500px;
     composes: compContainer from '../../static/commonStyles/common.css';
 }
 
