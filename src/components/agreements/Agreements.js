@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import AgreementsSummaryTable from './sub-components/AgreementsSummaryTable'
 import AgreementsTable from './sub-components/AgreementsTable'
 import mockAgreementsSummary from './sub-components/mockAgreementsSummary'
@@ -9,8 +9,9 @@ import styles from './Agreements.css'
 
 export default class Agreements extends React.Component {
   componentWillMount() {
-    if (_.isEmpty(this.props.summaryData)) {
-      this.props.onInitAgreementSummary(mockAgreementsSummary)
+    const {summaryData, onInitAgreementSummary} = this.props
+    if (_.isEmpty(summaryData)) {
+      onInitAgreementSummary(mockAgreementsSummary)
     }
   }
 
@@ -55,4 +56,12 @@ export default class Agreements extends React.Component {
       </div>
     )
   }
+}
+
+Agreements.PropTypes = {
+  summaryData: PropTypes.object.isRequired,
+  isCptySummaryExpanded: PropTypes.bool.isRequired,
+  typeSelected: PropTypes.string.isRequired,
+  onSetCptySummaryExpanded: PropTypes.func.isRequired,
+  onSetAgreementTypeSelected: PropTypes.func.isRequired
 }

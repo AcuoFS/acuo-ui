@@ -1,20 +1,9 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import {plusBox, minuxBox} from '../../../../images/common'
 import * as CONSTANTS from '../../../constants/AgreementsConstants'
+import AgreementsSummaryRow from './AgreementsSummaryRow'
 import styles from './AgreementsSummaryTable.css'
 
-
-const createRowWithCommonProperties = (index, rowData, firstCellDom) => {
-  return <div className={styles.summaryTableRow} key={index}>
-    {firstCellDom}
-    <div className={styles.summaryTableCell}>{rowData.pendingNew}</div>
-    <div className={styles.summaryTableCell}>{rowData.pendingAssigned}</div>
-    <div className={styles.summaryTableCell}>{rowData.pendingRejected}</div>
-    <div className={styles.summaryTableCell}>{rowData.active}</div>
-    <div className={styles.summaryTableCell}>{rowData.changeRequest}</div>
-    <div className={styles.summaryTableCell}>{rowData.discontinuedReq}</div>
-  </div>
-}
 
 /**
  * Three different types of row: SUMMARY_ROW_CLIENT/SUMMARY_ROW_CPTY/SUMMARY_ROW_CPTY_DETAIL
@@ -34,13 +23,13 @@ const createSummaryTableRow = (rowData, rowType,
                                propHandlerCptyExpand, index) => {
   switch (rowType) {
     case CONSTANTS.SUMMARY_ROW_CLIENT:
-      return createRowWithCommonProperties(CONSTANTS.SUMMARY_ROW_CLIENT, rowData,
+      return <AgreementsSummaryRow rowData={rowData}>
         <div className={styles.summaryTableCell + ' ' + styles.clientDisplay}>
           {rowData.clientName}
         </div>
-      )
+      </AgreementsSummaryRow>
     case CONSTANTS.SUMMARY_ROW_CPTY:
-      return createRowWithCommonProperties(CONSTANTS.SUMMARY_ROW_CPTY, rowData,
+      return <AgreementsSummaryRow rowData={rowData}>
         <div className={styles.summaryTableCell + ' ' + styles.cptyDisplay}>
           <div className={styles.entityTypeContainer}>
             {rowData.clientName}
@@ -50,10 +39,12 @@ const createSummaryTableRow = (rowData, rowType,
                    propHandlerCptyExpand(!propIsCptySummaryExpanded)}/>
           </div>
         </div>
-      )
+
+      </AgreementsSummaryRow>
     default:
-      return createRowWithCommonProperties(index, rowData,
-        <div className={styles.summaryTableCell}>{rowData.clientName}</div>)
+      return <AgreementsSummaryRow rowData={rowData} key={index}>
+        <div className={styles.summaryTableCell}>{rowData.clientName}</div>
+      </AgreementsSummaryRow>
   }
 }
 
@@ -99,6 +90,13 @@ const AgreementsSummaryTable = ({
       }
     </div>
   )
+}
+
+AgreementsSummaryTable.PropTypes = {
+  propSummaryData: PropTypes.object.isRequired,
+  propIsCptySummaryExpanded: PropTypes.bool.isRequired,
+  propHandlerCptyExpand: PropTypes.func.isRequired,
+  propTypeSelected: PropTypes.string.isRequired
 }
 
 export default AgreementsSummaryTable
