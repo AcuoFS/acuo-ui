@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react'
 import CounterPartyAssets from './CounterPartyAssets'
 import ClientAsset from './ClientAsset'
+import MarginAgreementUpload from '../../margin-agreement-upload/MarginAgreementUpload'
 import styles from '../MarginAgreementList.css'
 
 
@@ -9,11 +10,13 @@ export default class MarginAgreementPortfolio extends React.Component {
     super(props)
 
     this.state = {
-      adjAmount: 0.0
+      adjAmount: 0.0,
+      isUploading: false
     }
 
     this.onUpdateAdjAmount = this.onUpdateAdjAmount.bind(this)
     this.isDisableReconButton = this.isDisableReconButton.bind(this)
+    this.onTogglePortfolioPopup = this.onTogglePortfolioPopup.bind(this)
   }
 
   displayTotalMargin(i, assetType) {
@@ -23,7 +26,7 @@ export default class MarginAgreementPortfolio extends React.Component {
             return data + parseFloat(y.getIn(['firstLevel', 'amount']))
           }, 0)
       }, 0)
-    }else
+    } else
       return 0
   }
 
@@ -55,7 +58,7 @@ export default class MarginAgreementPortfolio extends React.Component {
 
     const checkedFirstLevelLength = firstLevelList.filter((x) => x.get('GUID') == actionItem.get('GUID')).size
 
-    if(firstLevelLength > checkedFirstLevelLength)
+    if (firstLevelLength > checkedFirstLevelLength)
       return true
 
     // Need adjustment
@@ -85,22 +88,55 @@ export default class MarginAgreementPortfolio extends React.Component {
   getPercentage(actionItem) {
     if (actionItem.get('clientAssets') && actionItem.get('counterpartyAssets')) {
 
-        return (this.displayTotalMargin(actionItem, 'clientAssets') /
-        this.displayTotalMargin(actionItem, 'counterpartyAssets') * 100).toFixed(0)
+      return (this.displayTotalMargin(actionItem, 'clientAssets') /
+      this.displayTotalMargin(actionItem, 'counterpartyAssets') * 100).toFixed(0)
 
     } else {
       return 0.00
     }
   }
 
+  getTotalAmount(asset, checkedOrRecon) {
+    if (asset) {
+      return asset.reduce((sum, x) => {
+        return sum + x.get('data').reduce((sum, y) => {
+            return sum + parseFloat(y.get('amount'))
+          }, 0)
+      }, 0)
+    } else {
+      return 0
+    }
+  }
+
+  onTogglePortfolioPopup() {
+    this.setState({
+      isUploading: !this.state.isUploading
+    })
+  }
+
   render() {
 
-    const {onSelectFirstLevelItem, portfolioData, onReconItem, firstLevelList, secondLevelList, onSelectSecondLevelItem} = this.props
+    const {
+      onSelectFirstLevelItem, portfolioData, onReconItem, firstLevelList, secondLevelList,
+      onSelectSecondLevelItem
+    } = this.props
 
     let percentage = this.getPercentage(portfolioData)
 
     return (
-      (<div className={styles.actionWrap}>
+      <div className={styles.actionWrap}>
+
+        {this.state.isUploading && <MarginAgreementUpload
+          propPortfolioData={portfolioData}
+          propHandlerTotalMargin={this.displayTotalMargin}
+          propHandlerSelectedItem={onSelectFirstLevelItem}
+          propHandlerUpdateAdj={this.onUpdateAdjAmount}
+          propAdjAmt={this.state.adjAmount}
+          propFirstLevelList={firstLevelList}
+          propSecondLevelList={secondLevelList}
+          propOnSelectSecondLevelItem={onSelectSecondLevelItem}
+          propIsUploading={this.state.isUploading}
+          propOnTogglePortfolioPopup={this.onTogglePortfolioPopup}/>}
 
         <ClientAsset marginData={portfolioData}
                      actStyle={'act_L'}
@@ -135,9 +171,9 @@ export default class MarginAgreementPortfolio extends React.Component {
                             handlerSelectedItem={onSelectFirstLevelItem}
                             firstLevelList={firstLevelList}
                             secondLevelList={secondLevelList}
-                            onSelectSecondLevelItem={onSelectSecondLevelItem}/>
-      </div>)
-
+                            onSelectSecondLevelItem={onSelectSecondLevelItem}
+                            onTogglePortfolioPopup={this.onTogglePortfolioPopup}/>
+      </div>
     )
   }
 }

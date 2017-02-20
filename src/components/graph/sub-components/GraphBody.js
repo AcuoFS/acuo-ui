@@ -27,7 +27,7 @@ export default class GraphBody extends React.Component {
           onUnreconBubbleClick(
             bubbleTimeStart,
             (new Date(bubbleTimeStart).setHours((new Date(bubbleTimeStart).getHours()+1))),
-            this.getDay(new Date(Date.parse(lastUpdatedTime)).getHours() + timeDifference) + ': ' + (new Date(bubbleTimeStart).getHours()+1) + ':00 HRS'
+            this.getDay(new Date(Date.parse(lastUpdatedTime)).getHours() + timeDifference) + ': ' + (new Date(bubbleTimeStart).getHours()) + ':00 HRS'
           )
         }
       case 'reconciled':
@@ -124,15 +124,6 @@ export default class GraphBody extends React.Component {
         if (status.get('status') == 'pledge' && timeDifference < 0) {
           colour[0] = "#8CC5DD"
         }
-
-        /**
-         * DISCREPANCY zulu time to sgt conversion
-         * differs from recon 18:00 is supposed to be 19:00
-         */
-        timeDifference++
-        /**
-         * end
-         */
 
         const onClickFunc = this.whichClickFuncToRun(status.get('status').toLowerCase(), lastUpdatedTime, timeFrame.get('timeFrame'), timeDifference, onUnreconBubbleClick)
 

@@ -3,6 +3,7 @@ import {Map, List} from 'immutable'
 import MarginAgreementDetail from './MarginAgreementDetail'
 import {numberWithCommas} from '../../../utils/numbersWithCommas'
 import styles from '../MarginAgreementList.css'
+import CounterPartyUpload from './CounterPartyUpload'
 import selfStyles from './MarginAgreementAssets.css'
 
 
@@ -62,9 +63,9 @@ export default class MarginAgreementPortfolio extends React.Component {
 
   renderItem(marginData, assetsName, handlerSelectedItem, firstLevelList, secondLevelList, onSelectSecondLevelItem, party) {
     if (marginData.get(assetsName))
-      return marginData.get(assetsName).map((x) => {
+      return marginData.get(assetsName).sort().map((x) => {
         if (x.get('data')) {
-          return (<div key={x.get('groupName')}>{x.get('data').map((groupData) => {
+          return (<div key={x.get('groupName')}>{x.get('data').sort().map((groupData) => {
             const secondLevel = groupData.getIn(['firstLevel', 'secondLevel'])
 
             return <MarginAgreementDetail
@@ -94,7 +95,8 @@ export default class MarginAgreementPortfolio extends React.Component {
       marginData, orgName, assetsName,
       handlerTotalMargin, handlerSelectedItem, isHidePanel, adjAmt,
       firstLevelList, secondLevelList,
-      onSelectSecondLevelItem, party
+      onSelectSecondLevelItem, isUploading, onTogglePortfolioPopup,
+      party
     } = this.props
 
     let diff = this.getDifferencePortfolio(assetsName, marginData)
@@ -148,8 +150,36 @@ export default class MarginAgreementPortfolio extends React.Component {
       </div>
     }
 
-    return (
-      <div className={styles.panel + " " + (isHidePanel ? styles.hidePanel : "")}>
+    let displayAssets
+
+    if ('counterpartyAssets' == assetsName && !marginData.get(assetsName)) {
+      let findDom
+
+      // Display the upload widget when it's displayed on a popup
+      if(isUploading){
+        findDom =
+          <div>
+            <CounterPartyUpload/>
+            <div className={selfStyles.comment}>or select from the list below</div>
+          </div>
+      }else{
+        findDom =
+          <div className={selfStyles.findPortfolio}
+               onClick={() => onTogglePortfolioPopup()}>
+            Find portfolio
+          </div>
+      }
+
+      displayAssets =
+        <div className={styles.section + ' ' + styles.left}>
+          <div className={styles.legalEntityContainer}>
+            <div className={styles.legalEntity + ' ' + styles.noMatched}>No matched Portfolio</div>
+            {findDom}
+          </div>
+
+        </div>
+    } else {
+      displayAssets =
         <div className={styles.section + ' ' + styles.left}>
 
           <div className={styles.legalEntityContainer}>
@@ -187,7 +217,11 @@ export default class MarginAgreementPortfolio extends React.Component {
             {/*</div>*/}
           </div>
         </div>
+    }
 
+    return (
+      <div className={styles.panel + " " + (isHidePanel ? styles.hidePanel : "")}>
+        {displayAssets}
         <div className={styles.section + ' ' + styles.right}>
           <div className={styles.currency}>
             <div>CCY:{marginData.get('ccy')}</div>

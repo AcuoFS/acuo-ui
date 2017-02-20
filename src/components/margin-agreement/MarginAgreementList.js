@@ -3,6 +3,7 @@
  */
 import React, {PropTypes} from 'react'
 import MarginAgreementPortfolio from './sub-components/MarginAgreementPortfolio'
+import {UNMATCHED_PORTFOLIO_URL} from '../../constants/APIcalls'
 import styles from './MarginAgreementList.css'
 
 
@@ -23,7 +24,8 @@ export default class MarginAgreementList extends React.Component {
     // this.isDisableReconButton = this.isDisableReconButton.bind(this)
   }
 
-  displayLineItems(recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList, onSelectSecondLevelItem) {
+  displayLineItems(recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList,
+                   onSelectSecondLevelItem) {
     return (recon.map((x) => {
 
       if(x.get('direction') == 'OUT')
@@ -42,10 +44,12 @@ export default class MarginAgreementList extends React.Component {
   }
 
   render() {
-    const {recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList, onSelectSecondLevelItem } = this.props
+    const {recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList,
+      onSelectSecondLevelItem} = this.props
     return (
       <div className={styles.actionContainer}>
-        {this.displayLineItems(recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList, onSelectSecondLevelItem)}
+        {this.displayLineItems(recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList,
+          onSelectSecondLevelItem)}
       </div>
     )
   }

@@ -6,6 +6,7 @@ import {
   initSelection,
   togglePendingAllocation,
   toggleCheckall,
+  clearPendingAllocation,
   updateCollateral,
   removeAssetFromEarmark } from '../actions'
 import { List, fromJS } from 'immutable'
@@ -66,6 +67,9 @@ const mapDispatchToProps = dispatch => ({
   onToggleCheckall: () => {
     dispatch(toggleCheckall())
   },
+  onClearPendingAllocation: () => {
+    dispatch(clearPendingAllocation())
+  },
   // onAllocate_old: (guids, optimisationSetting) => {
   //   const data = {guids, optimisationSetting}
   //   fetch(ALLOCATE_COLLATERALS_URL, {
@@ -86,9 +90,12 @@ const mapDispatchToProps = dispatch => ({
         toBeAllocated: guids
       })
     }).then(response => {
+      console.log('Allocate response: ' + response)
       return response.json()
     }).then(obj => {
       dispatch(initSelection(fromJS(obj.items)))
+    }).catch(error => {
+      console.log('Error: ' + error)
     })
   },
   onRemoveFromEarmarked: (e, assetType, propAssetId, propAssetIdType) => {
@@ -119,16 +126,22 @@ const mapDispatchToProps = dispatch => ({
       method: 'POST',
       body: JSON.stringify(pledgeToSend)
     }).then(response => {
-      return response.json()
-    }).then(obj => {
-      console.log(obj)
-    }).then(() => {
-      // Refresh selections
-      fetch(MARGIN_SELECTION_URL).then(response => {
-        return response.json()
-      }).then(obj => {
-        dispatch(initSelection(obj.items))
-      })
+      console.log('Pledge response: ' + response)
+      if (response.status == 200) {
+        // TODO: To handle how to inform user that pledge data is sucessfully sent
+        alert('Sent to endpoint!' + JSON.stringify(pledgeToSend))
+        // Refresh selections
+        fetch(MARGIN_SELECTION_URL).then(response => {
+          return response.json()
+        }).then(obj => {
+          dispatch(initSelection(obj.items))
+          dispatch(clearPendingAllocation())
+        })
+      } else {
+        alert('Error sending pledge details')
+      }
+    }).catch(error => {
+      console.log('Error: ' + error)
     })
   }
 })

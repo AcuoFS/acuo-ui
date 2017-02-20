@@ -1,5 +1,5 @@
 import * as ActionTypes from '../constants/ActionTypes'
-import {Map, List, fromJS} from 'immutable'
+import { Map, List, fromJS } from 'immutable'
 import _ from 'lodash'
 
 const initState = Map({"items":   List(),
@@ -8,7 +8,7 @@ const initState = Map({"items":   List(),
 const initFilters = [
   {order: 1, attr: "legalEntity", label: "Legal Entity"},
   {order: 2, attr: "type",        label: "Deriv Type"},
-  {order: 3, attr: "time",        label: "Time Window", type: "time"},
+  {order: 3, attr: "notificationTime",        label: "Time Window", type: "time"},
   {order: 4, attr: "cptyOrg",     label: "CPTY Organisation"},
   {order: 5, attr: "cptyEntity",  label: "CPTY Entity", type: "multi"},
 ]
@@ -32,14 +32,14 @@ const updateSecondLevelListFromFirstLevel = (firstLevelList, list, listOfItems) 
     _.filter(listOfItems, (x) => _.find(firstLevelList, {"GUID": x.GUID})), (list, item) =>
       _.unionWith(
         _.concat(list, _.reduce(item.clientAssets, (list, group) =>
-          _.concat(list, _.reduce(group.data, (list, first) =>
-            _.concat(list, _.reduce(first.firstLevel.secondLevel, (list, second) =>
-              (_.find(firstLevelList, {"GUID": item.GUID, "id": second.parentIndex}) ?
-                _.concat(list, {"GUID": item.GUID, "parentIndex": second.parentIndex, "id": second.id}) :
-                [])
-            , []))
-          , []))
-        , [])),
+            _.concat(list, _.reduce(group.data, (list, first) =>
+                _.concat(list, _.reduce(first.firstLevel.secondLevel, (list, second) =>
+                    (_.find(firstLevelList, {"GUID": item.GUID, "id": second.parentIndex}) ?
+                      _.concat(list, {"GUID": item.GUID, "parentIndex": second.parentIndex, "id": second.id}) :
+                      [])
+                  , []))
+              , []))
+          , [])),
         _.concat(list, _.reduce(item.counterpartyAssets, (list, group) =>
             _.concat(list, _.reduce(group.data, (list, first) =>
                 _.concat(list, _.reduce(first.firstLevel.secondLevel, (list, second) =>
@@ -50,7 +50,7 @@ const updateSecondLevelListFromFirstLevel = (firstLevelList, list, listOfItems) 
               , []))
           , []))
         , _.isEqual)
-  , [])
+    , [])
 )
 
 const updateSecondLevelList = (list, guid, parentID, id) => (
@@ -59,8 +59,8 @@ const updateSecondLevelList = (list, guid, parentID, id) => (
     _.concat([], list, {"GUID": guid, "id": id, "parentIndex": parentID}))
 )
 
-const retrieveSecondLevelCount = (list, guid, id) => (
-  list.reduce((sum, group) => sum = _.find(group.data, {"firstLevel": {"id": id, "GUID": guid}}).firstLevel.secondLevelCount, 0)
+const retrieveSecondLevel = (list, guid, id) => (
+  list.reduce((sum, group) => sum = _.find(group.data, {"firstLevel": {"id": id, "GUID": guid}}).firstLevel.secondLevel, [])
 )
 
 const updateFirstlevelListFromSecondLevel = (secondLevelList, firstLevelList, items) => {
@@ -74,16 +74,16 @@ const updateFirstlevelListFromSecondLevel = (secondLevelList, firstLevelList, it
     const counterpartyAssetList = statement.counterpartyAssets  || []
 
     //number of second level items in this first lvl obj in the list
-    const noPresentInList = _.filter(secondLevelList, (y) => _.isMatch(y, {"GUID": x.GUID, "parentIndex": x.id})).length
+    const presentInList = _.filter(secondLevelList, (y) => _.isMatch(y, {"GUID": x.GUID, "parentIndex": x.id}))
 
-    const clientAll = retrieveSecondLevelCount(clientAssetFirstLevelList, x.GUID, x.id)
+    const clientAll = retrieveSecondLevel(clientAssetFirstLevelList, x.GUID, x.id)
 
-    const cptyAll = retrieveSecondLevelCount(counterpartyAssetList, x.GUID, x.id)
+    const cptyAll = retrieveSecondLevel(counterpartyAssetList, x.GUID, x.id)
 
     let parties = []
 
-    parties = (noPresentInList >= clientAll ? _.concat(parties, 'client') : parties)
-    parties = (noPresentInList >= cptyAll ? _.concat(parties, 'cpty') : parties)
+    parties = (_.remove(clientAll, (n) => _.some(presentInList, {"id": n.id, "parentIndex": n.parentIndex})).length >= clientAll ? _.concat(parties, 'client') : parties)
+    parties = (_.remove(cptyAll, (n) => _.some(presentInList, {"id": n.id, "parentIndex": n.parentIndex})).length >= cptyAll ? _.concat(parties, 'cpty') : parties)
 
     return {"GUID": x.GUID, "id": x.id, "parties": parties}
   })
@@ -101,7 +101,6 @@ export default function reconReducer(state = initState, action) {
                   .set('filters', fromJS(initFilters))
 
     case ActionTypes.RECON_FILTER_SET:
-      console.log(action.value)
       newFilter = action.value
       filters = state.get('filters').toJS()
       updatedFilters = updateFilters(filters, newFilter)

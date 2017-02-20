@@ -1,0 +1,36 @@
+.unmatchedTable {
+    display: table;
+    width: 100%;
+    margin: 5px -1px;
+    /*table-layout: fixed;*/
+    border: 1px solid #D5DADF;
+}
+
+.unmatchedTableHeader {
+    display: table-row;
+    font-size: 14px;
+    composes: baseFontBold from '../../../static/css-components/fonts.css';
+    line-height: 17px;
+    color: #6389AD;
+}
+
+.unmatchedTableRow {
+    display: table-row;
+    font-size: 13px;
+    line-height: 16px;
+    color: #4A4A4A;
+}
+
+.unmatchedTableCell {
+    display: table-cell;
+    padding: 5px;
+}
+
+.unmatchedTableHeader > .unmatchedTableCell {
+    border-bottom: 1px solid #D5DADF;
+}
+
+.unmatchedTableRow > .unmatchedTableCell {
+    background-color: #FFFFFF;
+}
+

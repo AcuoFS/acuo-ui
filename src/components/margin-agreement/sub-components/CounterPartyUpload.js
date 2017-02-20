@@ -1,7 +1,7 @@
 import React from 'react'
-import DzComponent from './DzComponent'
-import {UPLOAD_FILE_URL} from '../../constants/APIcalls'
-import styles from './UploadWidget.css'
+import DzComponent from '../../upload-portfolio/DzComponent'
+import {UPLOAD_FILE_URL} from '../../../constants/APIcalls'
+import styles from './CounterPartyUpload.css'
 
 
 export default class UploadWidget extends React.Component {
@@ -29,8 +29,6 @@ export default class UploadWidget extends React.Component {
     this.setState({
       isSendToBackend: true
     })
-
-    this.props.showMarginCall()
   }
 
   clearSend(){
@@ -48,7 +46,6 @@ export default class UploadWidget extends React.Component {
   templateForDz(){
     return <div className={"dz-preview dz-file-preview " + styles.alignFileIconLeft}>
       <div className="dz-details">
-        <img data-dz-thumbnail="true" src="./images/upload-portfolio/file_icon.png"/>
         <div className={"dz-filename " + styles.fileName}>
           <a href="#" data-dz-remove>
             <img src="./images/upload-portfolio/cross_cancel.png" alt="Click me to remove the file."/>
@@ -64,30 +61,21 @@ export default class UploadWidget extends React.Component {
   }
 
   render() {
-
+    // TODO: URL to be provided by backend. Using URL from current at the moment
     return (
-      /*<form id="uploadbanner" enctype="multipart/form-data" method="post" action="http://localhost:3000/">
-       <input type="file" id="myFile"/>
-       <input type="submit" value="Submit"/>
-       </form>*/
       <div className={styles.componentStyle}>
-        <div className={styles.widgetHeader}>Upload Portfolio</div>
-
         <DzComponent propHandlerFileAdded={this.handleFileAdded}
                      propHandlerRemove={this.handleRemove}
                      propIsSendToBackend={this.state.isSendToBackend}
                      propClearSendToBackend={this.clearSend}
                      propTemplate={this.templateForDz()}
-                     propNoOfFiles={5}
+                     propClassName={'filepickerRecon'}
+                     propNoOfFiles={1}
                      propPostUrl={UPLOAD_FILE_URL}/>
 
-        <div
-          className={this.state.isWidgetValidForSubmission ?
-            styles.buttonContainerEnabled : styles.buttonContainerDisabled}>
-          <button className={styles.textBold} type="button" onClick={this.onGenerate}
-                  disabled={!(this.state.isWidgetValidForSubmission)}>
-            Generate Margin Call Data
-          </button>
+        <div className={this.state.isWidgetValidForSubmission
+          ? styles.buttonContainer : styles.hide}>
+          <button onClick={this.onGenerate}>OK</button>
         </div>
       </div>
     )

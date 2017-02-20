@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { fromJS, List } from 'immutable'
 import { MarginAgreementsComponent } from '../components'
-import { selectedItems, initState, firstLeveSelect, secondLevelSelect } from '../actions'
+import { selectedItems, reconInitState, firstLeveSelect, secondLevelSelect } from '../actions'
 import { RECON_DATA_URL, RECON_URL, DASHBOARD_URL } from '../constants/APIcalls'
 import filterItems from '../utils/filterItems'
 
@@ -29,10 +29,11 @@ const mapDispatchToProps = dispatch => ({
     }).then(response => {
       return response
     }).then(obj => {
-      fetch(DASHBOARD_URL).then((response) => {
+      fetch(RECON_URL).then((response) => {
         return response.json()
       }).then((obj) => {
-        dispatch(initState(fromJS(obj)))
+        const {items} = obj
+        dispatch(reconInitState(items))
       })
     })
     //dispatch(reconItem(e.currentTarget.dataset.ref)) //old recon line by line
@@ -46,7 +47,6 @@ const mapDispatchToProps = dispatch => ({
   onSelectSecondLevelItem: (GUID, parentID, secondLevelID) => {
     dispatch(secondLevelSelect(GUID, parentID, secondLevelID))
   }
-
 })
 
 const MarginAgreementsContainer = connect(

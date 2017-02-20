@@ -85,6 +85,10 @@ export const toggleCheckall = () => ({
   type: ActionTypes.TOGGLE_CHECKALL
 })
 
+export const clearPendingAllocation = () => ({
+  type: ActionTypes.CLEAR_PENDING_ALLOCATION
+})
+
 export const removeAssetFromEarmark = (e, assetType, assetId, assetIdType) => ({
   type: ActionTypes.REMOVE_ASSET_FROM_EARMARK,
   asset : {

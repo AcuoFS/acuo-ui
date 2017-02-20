@@ -43,11 +43,11 @@ export default class CounterPartyAssets extends React.Component {
       marginData, actStyle, orgName,
       assetsName, handlerTotalMargin, handlerSelectedItem,
       firstLevelList, secondLevelList,
-      onSelectSecondLevelItem
+      onSelectSecondLevelItem, onTogglePortfolioPopup, isUploading
     } = this.props
 
     return (
-      <div className={styles.actPanel + ' ' + styles[actStyle]}>
+      <div className={styles.actPanel + ' ' + styles[actStyle] + ' ' + styles.counterPartyCont}>
         <ul className={styles.tabs14}>
           <li onClick={this.handleOnTabSelect} data-value={TAB_MARGIN_AGREEMENT_PORTFOLIO}
               className={styles.tabButton + ' ' + this.state.tabReconStyle}>
@@ -67,6 +67,8 @@ export default class CounterPartyAssets extends React.Component {
                                firstLevelList={firstLevelList}
                                secondLevelList={secondLevelList}
                                onSelectSecondLevelItem={onSelectSecondLevelItem}
+                               onTogglePortfolioPopup={onTogglePortfolioPopup}
+                               isUploading={isUploading}
                                party={'cpty'}/>
         <Dispute marginData={marginData}
                  actStyle={actStyle}

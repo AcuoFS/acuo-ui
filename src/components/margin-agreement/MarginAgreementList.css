@@ -148,7 +148,8 @@
 
 .legalEntity{
     color:#759BBB;
-    font: bold 18px Helvetica;
+    font-size: 18px;
+    composes: baseFontBold from '../../static/css-components/fonts.css';
 }
 
 .legalEntityDetails{
@@ -305,12 +306,13 @@
 /*- Menu Tabs 14--------------------------- */
 .tabs14 {
     display: inline-flex;
-    float:left;
-    width:40%;
+    /*float:left;*/
+    /*width:40%;*/
     font-size:93%;
     line-height:normal;
     position: absolute;
-    top: 18px;
+    /*top: 18px;*/
+    top: -33px;
 }
 @-moz-document url-prefix() {
     .tabs14 {
@@ -507,4 +509,12 @@
 
 .greyText {
     color: #c9c9c9;
+}
+
+.counterPartyCont {
+    position: relative;
+}
+
+.noMatched {
+    color: #D0021B;;
 }

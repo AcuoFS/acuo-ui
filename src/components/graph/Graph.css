@@ -18,6 +18,7 @@
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.5);
   border-radius: 8px;
   position: absolute;
+  /* To resolve bug where the drop-down options are covered */
   /*z-index: 50;*/
   composes: baseFontBold from './../../static/css-components/fonts.css';
   width: 35px;
