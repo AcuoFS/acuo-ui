@@ -2,6 +2,7 @@
     margin: 10px 0;
     display: table;
     width: 100%;
+    table-layout: fixed;
 }
 
 .agreeTableHeader {

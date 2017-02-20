@@ -18,9 +18,9 @@ export default class AgreementsTable extends React.Component {
           <div className={styles.agreeTableCell}>Category</div>
           <div className={styles.agreeTableCell}>Active Date</div>
           <div className={styles.agreeTableCell}>Status</div>
-          <div className={styles.agreeTableCell}></div>
-          <div className={styles.agreeTableCell}></div>
-          <div className={styles.agreeTableCell}></div>
+          <div className={styles.agreeTableCell + ' ' + styles.iconCell}></div>
+          <div className={styles.agreeTableCell + ' ' + styles.iconCell}></div>
+          <div className={styles.agreeTableCell + ' ' + styles.iconCell}></div>
         </div>
 
         {
