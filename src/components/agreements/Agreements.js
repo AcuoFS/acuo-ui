@@ -8,6 +8,14 @@ import styles from './Agreements.css'
 
 
 export default class Agreements extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      filterText: ''
+    }
+  }
+
   componentWillMount() {
     const {summaryData, onInitAgreementSummary} = this.props
     if (_.isEmpty(summaryData)) {
@@ -33,7 +41,9 @@ export default class Agreements extends React.Component {
             <button className={styles.agreementBtnStyle}>Create</button>
           </div>
         </div>
-        <input type="text" placeholder="Search" className={styles.searchInput}/>
+        <input type="text" placeholder="Search" className={styles.searchInput}
+               value={this.state.filterText}
+               onChange={(e) => this.setState({filterText: e.target.value})}/>
         <div className={styles.labelContainer}>
           <span className={
             styles.statusLabel + ' ' + ((typeSelected == TYPES.AGREEMENT_TYPE_SELECTED_INCOMING)
@@ -52,7 +62,7 @@ export default class Agreements extends React.Component {
                                 propIsCptySummaryExpanded={isCptySummaryExpanded}
                                 propHandlerCptyExpand={onSetCptySummaryExpanded}
                                 propTypeSelected={typeSelected}/>
-        <AgreementsTable/>
+        <AgreementsTable propFiltertext={this.state.filterText}/>
       </div>
     )
   }
