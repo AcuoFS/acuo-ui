@@ -45,7 +45,7 @@ export default class MarginAgreementPortfolio extends React.Component {
         this.getTotalAmount(marginData.get(assetsName))
 
     }
-    return diff
+    return diff.toFixed(2)
   }
 
   onAddAdjAmount() {
