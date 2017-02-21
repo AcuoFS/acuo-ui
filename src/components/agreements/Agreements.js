@@ -5,6 +5,7 @@ import mockAgreementsSummary from './mock/mockAgreementsSummary'
 import mockAgreements from './mock/mockAgreements'
 import _ from 'lodash'
 import * as TYPES from '../../constants/AgreementsConstants'
+import ImportAgreements from './sub-components/ImportAgreements'
 import styles from './Agreements.css'
 
 
@@ -13,8 +14,11 @@ export default class Agreements extends React.Component {
     super(props)
 
     this.state = {
-      filterText: ''
+      filterText: '',
+      isShowImportPopup: false
     }
+
+    this.handlerCloseImportPopup = this.handlerCloseImportPopup.bind(this)
   }
 
   componentWillMount() {
@@ -34,6 +38,12 @@ export default class Agreements extends React.Component {
     }
   }
 
+  handlerCloseImportPopup(){
+    this.setState({
+      isShowImportPopup: false
+    })
+  }
+
   render() {
     const {
       summaryData,
@@ -49,7 +59,17 @@ export default class Agreements extends React.Component {
         <div className={styles.headerContainer}>
           <div className={styles.compTitle}>Agreement</div>
           <div className={styles.btnContainer}>
-            <button className={styles.agreementBtnStyle}>Import</button>
+            <button className={styles.agreementBtnStyle}
+                    onClick={
+                      () => {
+                        this.setState({isShowImportPopup: true})
+                      }
+                    }>Import
+            </button>
+            {
+              this.state.isShowImportPopup &&
+              <ImportAgreements propHandlerCloseImportPopup={this.handlerCloseImportPopup}/>
+            }
             <button className={styles.agreementBtnStyle}>Create</button>
           </div>
         </div>
