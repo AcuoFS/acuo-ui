@@ -15,4 +15,14 @@
     text-align: right;
     font-size: 25px;
     cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.importBtnStyle {
+    composes: agreementBtnStyle from '../../../static/commonStyles/common.css';
+}
+
+.btnContainer {
+    margin: 10px 0;
+    text-align: right;
 }

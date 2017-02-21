@@ -56,6 +56,10 @@ export default class Agreements extends React.Component {
 
     return (
       <div className={styles.compContainer}>
+        {
+          this.state.isShowImportPopup &&
+          <ImportAgreements propHandlerCloseImportPopup={this.handlerCloseImportPopup}/>
+        }
         <div className={styles.headerContainer}>
           <div className={styles.compTitle}>Agreement</div>
           <div className={styles.btnContainer}>
@@ -66,10 +70,6 @@ export default class Agreements extends React.Component {
                       }
                     }>Import
             </button>
-            {
-              this.state.isShowImportPopup &&
-              <ImportAgreements propHandlerCloseImportPopup={this.handlerCloseImportPopup}/>
-            }
             <button className={styles.agreementBtnStyle}>Create</button>
           </div>
         </div>
