@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react'
 import AgreementsSummaryTable from './sub-components/AgreementsSummaryTable'
 import AgreementsTable from './sub-components/AgreementsTable'
-import mockAgreementsSummary from './sub-components/mockAgreementsSummary'
+import mockAgreementsSummary from './mock/mockAgreementsSummary'
+import mockAgreements from './mock/mockAgreements'
 import _ from 'lodash'
 import * as TYPES from '../../constants/AgreementsConstants'
 import styles from './Agreements.css'
@@ -17,9 +18,19 @@ export default class Agreements extends React.Component {
   }
 
   componentWillMount() {
-    const {summaryData, onInitAgreementSummary} = this.props
+    const {
+      summaryData, onInitAgreementSummary,
+      agreementsData, onInitAgreements
+    } = this.props
+
+    // TODO endpoint of agreement summary data goes here
     if (_.isEmpty(summaryData)) {
       onInitAgreementSummary(mockAgreementsSummary)
+    }
+
+    // TODO endpoint of agreement data goes here
+    if (_.isEmpty(agreementsData)) {
+      onInitAgreements(mockAgreements)
     }
   }
 
@@ -29,7 +40,8 @@ export default class Agreements extends React.Component {
       isCptySummaryExpanded,
       onSetCptySummaryExpanded,
       typeSelected,
-      onSetAgreementTypeSelected
+      onSetAgreementTypeSelected,
+      agreementsData
     } = this.props
 
     return (
@@ -62,7 +74,8 @@ export default class Agreements extends React.Component {
                                 propIsCptySummaryExpanded={isCptySummaryExpanded}
                                 propHandlerCptyExpand={onSetCptySummaryExpanded}
                                 propTypeSelected={typeSelected}/>
-        <AgreementsTable propFiltertext={this.state.filterText}/>
+        <AgreementsTable propFiltertext={this.state.filterText}
+                         propAgreements={agreementsData}/>
       </div>
     )
   }

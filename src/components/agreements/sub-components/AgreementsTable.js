@@ -1,13 +1,12 @@
 import React from 'react'
 import * as ICONS from '../../../../images/agreements'
-import mockAgreements from './mockAgreements'
 import {filterByAllPropertiesOfObj} from '../../../utils'
 import styles from './AgreementsTable.css'
 
 
 export default class AgreementsTable extends React.Component {
   render() {
-    const {propFiltertext} = this.props
+    const {propFiltertext, propAgreements} = this.props
     return (
       <div className={styles.agreeTable}>
         <div className={styles.agreeTableHeader}>
@@ -24,9 +23,9 @@ export default class AgreementsTable extends React.Component {
         </div>
 
         {
-          filterByAllPropertiesOfObj(mockAgreements, propFiltertext)
+          filterByAllPropertiesOfObj(propAgreements, propFiltertext)
             .map((agreement, index) => (
-              <div className={styles.agreeTableRow}>
+              <div className={styles.agreeTableRow} key={index}>
                 <div className={styles.agreeTableCell}>{agreement.agreementName}</div>
                 <div className={styles.agreeTableCell}>{agreement.legalEntity}</div>
                 <div className={styles.agreeTableCell}>{agreement.cptyOrg}</div>
