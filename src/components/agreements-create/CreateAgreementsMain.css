@@ -1,3 +1,86 @@
 .compTitle {
     composes: compTitle from '../../static/commonStyles/common.css';
+    margin: 0 0 8px;
+}
+
+.closeButton {
+    color: #585858;
+    float: right;
+    font-size: 25px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.popupBody {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+    /*width: 100%;*/
+}
+
+.createMenu {
+    overflow: hidden;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    background-color: #FAFAFA;
+}
+
+.createContent {
+    flex: 1;
+    padding: 50px 25px 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.menuItem {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 22px;
+    color: #4A4A4A;
+    margin: 8px 0;
+    cursor: pointer;
+}
+
+.menuItemSelected {
+    composes: baseFontBold from '../../static/css-components/fonts.css';
+    color: #4E83B5;
+}
+
+.btnContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.createBtnStyle {
+    composes: agreementBtnStyleDisabled from '../../static/commonStyles/common.css';
+    width: 156px;
+    height: 32px;
+    margin: 12px 0;
+}
+
+.resetBtnStyle {
+    composes: agreementBtnStyle from '../../static/commonStyles/common.css';
+    margin: 12px 0;
+}
+
+.line {
+    margin: 10px 0;
+}
+
+.rowGroup {
+    display: block;
+}
+
+.dropDownStyle {
+    width: 250px;
+    height: 25px;
+
+    font-size: 13px;
+    line-height: 16px;
+    color: #4A4A4A;
+    background-color: #FFFFFF;
+    border: 1px solid #979797;
 }

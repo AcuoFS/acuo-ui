@@ -61,21 +61,23 @@ export default class ImportAgreements extends React.Component {
     // TODO Update correct post URL with propPostUrl
     return (
       <SimpleCenteredPopup handlerClosePopup={propHandlerCloseImportPopup}>
-        <DzComponent propHandlerFileAdded={this.handleFileAdded}
-                     propHandlerRemove={this.handleRemove}
-                     propIsSendToBackend={this.state.isSendToBackend}
-                     propClearSendToBackend={this.clearSend}
-                     propTemplate={this.templateForDz()}
-                     propNoOfFiles={1}
-                     propPostUrl={UPLOAD_FILE_URL}
-                     propDisplayForBrowse={'Drag and drop agreement files, or '}/>
+        <div className={styles.container}>
+          <DzComponent propHandlerFileAdded={this.handleFileAdded}
+                       propHandlerRemove={this.handleRemove}
+                       propIsSendToBackend={this.state.isSendToBackend}
+                       propClearSendToBackend={this.clearSend}
+                       propTemplate={this.templateForDz()}
+                       propNoOfFiles={1}
+                       propPostUrl={UPLOAD_FILE_URL}
+                       propDisplayForBrowse={'Drag and drop agreement files, or '}/>
 
-        {
-          this.state.isWidgetValidForSubmission &&
-          <div className={styles.btnContainer}>
-            <button className={styles.importBtnStyle}>Import</button>
-          </div>
-        }
+          {
+            this.state.isWidgetValidForSubmission &&
+            <div className={styles.btnContainer}>
+              <button className={styles.importBtnStyle}>Import</button>
+            </div>
+          }
+        </div>
       </SimpleCenteredPopup>
     )
   }
