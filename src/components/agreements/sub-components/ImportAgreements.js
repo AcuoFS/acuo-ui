@@ -1,6 +1,7 @@
 import React from 'react'
 import DzComponent from '../../upload-portfolio/DzComponent'
 import {UPLOAD_FILE_URL} from '../../../constants/APIcalls'
+import {SimpleCenteredPopup} from '../../common/SimpleCenteredPopup'
 import styles from './ImportAgreements.css'
 
 
@@ -59,12 +60,7 @@ export default class ImportAgreements extends React.Component {
 
     // TODO Update correct post URL with propPostUrl
     return (
-      <div className={styles.popContainer}>
-        <div className={styles.closeButton}
-             onClick={() => propHandlerCloseImportPopup()}>
-          x
-        </div>
-
+      <SimpleCenteredPopup handlerClosePopup={propHandlerCloseImportPopup}>
         <DzComponent propHandlerFileAdded={this.handleFileAdded}
                      propHandlerRemove={this.handleRemove}
                      propIsSendToBackend={this.state.isSendToBackend}
@@ -80,7 +76,7 @@ export default class ImportAgreements extends React.Component {
             <button className={styles.importBtnStyle}>Import</button>
           </div>
         }
-      </div>
+      </SimpleCenteredPopup>
     )
   }
 
