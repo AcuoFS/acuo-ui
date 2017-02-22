@@ -6,6 +6,7 @@ import mockAgreements from './mock/mockAgreements'
 import _ from 'lodash'
 import * as TYPES from '../../constants/AgreementsConstants'
 import ImportAgreements from './sub-components/ImportAgreements'
+import {CreateAgreementsMain} from '../agreements-create/CreateAgreementsMain'
 import styles from './Agreements.css'
 
 
@@ -15,10 +16,10 @@ export default class Agreements extends React.Component {
 
     this.state = {
       filterText: '',
-      isShowImportPopup: false
+      activePopup: ''
     }
 
-    this.handlerCloseImportPopup = this.handlerCloseImportPopup.bind(this)
+    this.handlerClosePopup = this.handlerClosePopup.bind(this)
   }
 
   componentWillMount() {
@@ -38,9 +39,9 @@ export default class Agreements extends React.Component {
     }
   }
 
-  handlerCloseImportPopup(){
+  handlerClosePopup() {
     this.setState({
-      isShowImportPopup: false
+      activePopup: ''
     })
   }
 
@@ -57,8 +58,12 @@ export default class Agreements extends React.Component {
     return (
       <div className={styles.compContainer}>
         {
-          this.state.isShowImportPopup &&
-          <ImportAgreements propHandlerCloseImportPopup={this.handlerCloseImportPopup}/>
+          (this.state.activePopup == 'IMPORT') &&
+          <ImportAgreements propHandlerCloseImportPopup={this.handlerClosePopup}/>
+        }
+        {
+          (this.state.activePopup == 'CREATE') &&
+          <CreateAgreementsMain propHandlerClosePopup={this.handlerClosePopup}/>
         }
         <div className={styles.headerContainer}>
           <div className={styles.compTitle}>Agreement</div>
@@ -66,11 +71,17 @@ export default class Agreements extends React.Component {
             <button className={styles.agreementBtnStyle}
                     onClick={
                       () => {
-                        this.setState({isShowImportPopup: true})
-                      }
-                    }>Import
+                        (this.state.activePopup == '') &&
+                        this.setState({activePopup: 'IMPORT'})
+                      }}>Import
             </button>
-            <button className={styles.agreementBtnStyle}>Create</button>
+            <button className={styles.agreementBtnStyle}
+                    onClick={
+                      () => {
+                        (this.state.activePopup == '') &&
+                        this.setState({activePopup: 'CREATE'})
+                      }}>Create
+            </button>
           </div>
         </div>
         <input type="text" placeholder="Search" className={styles.searchInput}

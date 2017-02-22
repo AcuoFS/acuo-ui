@@ -2,8 +2,8 @@ import React, {PropTypes} from 'react'
 import styles from './SimpleCenteredPopup.css'
 
 
-const SimpleCenteredPopup = ({handlerClosePopup, children}) => (
-  <div className={styles.popContainer}>
+const SimpleCenteredPopup = ({handlerClosePopup, children, overridePopupStyle}) => (
+  <div className={styles.popContainer} style={overridePopupStyle}>
     <div className={styles.closeButton}
          onClick={() => handlerClosePopup()}>
       x

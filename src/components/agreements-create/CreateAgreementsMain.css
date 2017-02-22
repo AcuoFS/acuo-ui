@@ -1,0 +1,3 @@
+.compTitle {
+    composes: compTitle from '../../static/commonStyles/common.css';
+}
