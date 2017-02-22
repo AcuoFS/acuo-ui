@@ -12,7 +12,7 @@
 
 .closeButton {
     color: #585858;
-    text-align: right;
+    float: right;
     font-size: 25px;
     cursor: pointer;
     margin-bottom: 10px;
