@@ -3,14 +3,17 @@ import styles from './SimpleCenteredPopup.css'
 
 
 const SimpleCenteredPopup = ({handlerClosePopup, children, overridePopupStyle}) => (
-  <div className={styles.popContainer} style={overridePopupStyle}>
-    <div className={styles.closeButton}
-         onClick={() => handlerClosePopup()}>
-      x
+  <div>
+    <div className={styles.overlay} onClick={() => handlerClosePopup()}/>
+    <div className={styles.popContainer} style={overridePopupStyle}>
+      <div className={styles.closeButton}
+           onClick={() => handlerClosePopup()}>
+        x
+      </div>
+
+      {children}
+
     </div>
-
-    {children}
-
   </div>
 )
 
