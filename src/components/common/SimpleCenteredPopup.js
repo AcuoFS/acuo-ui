@@ -1,7 +1,14 @@
 import React, {PropTypes} from 'react'
 import styles from './SimpleCenteredPopup.css'
 
-
+/**
+ * Simple modal popup that renders child props and closes upon clicking out of popup
+ *
+ * @param handlerClosePopup
+ * @param children
+ * @param overridePopupStyle
+ * @constructor
+ */
 const SimpleCenteredPopup = ({handlerClosePopup, children, overridePopupStyle}) => (
   <div>
     <div className={styles.overlay} onClick={() => handlerClosePopup()}/>
