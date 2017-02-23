@@ -1,22 +1,9 @@
-.compTitle {
-    composes: compTitle from '../../static/commonStyles/common.css';
-    margin: 0 0 8px;
-}
-
-.closeButton {
-    color: #585858;
-    float: right;
-    font-size: 25px;
-    cursor: pointer;
-    margin: 5px;
-}
-
 .popupBody {
     display: flex;
     height: 100%;
 }
 
-.createMenu {
+.popupBody > .createMenu {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -24,14 +11,12 @@
     background-color: #FAFAFA;
 }
 
-.createContent {
-    flex: 1;
-    padding: 50px 25px 16px;
-    display: flex;
-    flex-direction: column;
+.compTitle {
+    composes: compTitle from '../../static/commonStyles/common.css';
+    margin: 0 0 8px;
 }
 
-.menuBody {
+.createMenu > .menuBody {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -39,12 +24,12 @@
     height: calc(100% - 29px - 8px);
 }
 
-.menuItemContainer {
+.menuBody > .menuItemContainer {
     display: flex;
     flex-direction: column;
 }
 
-.menuItem {
+.menuItemContainer > .menuItem {
     font-size: 18px;
     font-weight: bold;
     line-height: 22px;
@@ -58,7 +43,7 @@
     color: #4E83B5;
 }
 
-.btnContainer {
+.menuBody > .btnContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -76,27 +61,36 @@
     margin: 12px 0;
 }
 
-.line {
-    margin: 10px 0;
+.popupBody > .createContent {
+    flex: 1;
+    padding: 50px 25px 16px;
+    display: flex;
+    flex-direction: column;
 }
 
-.rowGroup {
+.createContent > .rowGroup {
     display: block;
 }
 
-/*.dropDownStyle {*/
-    /*width: 250px;*/
-    /*height: 25px;*/
+.rowGroup > .line {
+    margin: 10px 0;
+}
 
-    /*font-size: 13px;*/
-    /*line-height: 16px;*/
-    /*color: #4A4A4A;*/
-    /*background-color: #FFFFFF;*/
-    /*border: 1px solid #979797;*/
-/*}*/
-
-.dropDown {
+.line > .dropDown {
     width: 250px;
     height: 25px;
 }
+
+/*.dropDownStyle {*/
+/*width: 250px;*/
+/*height: 25px;*/
+
+/*font-size: 13px;*/
+/*line-height: 16px;*/
+/*color: #4A4A4A;*/
+/*background-color: #FFFFFF;*/
+/*border: 1px solid #979797;*/
+/*}*/
+
+
 
