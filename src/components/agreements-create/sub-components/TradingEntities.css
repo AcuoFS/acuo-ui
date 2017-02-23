@@ -1,0 +1,18 @@
+.createContent {
+    flex: 1;
+    padding: 50px 25px 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.createContent > .rowGroup {
+    display: block;
+}
+
+.rowGroup > .line {
+    margin: 10px 0;
+}
+
+.line > .dropDown {
+    width: 250px;
+}

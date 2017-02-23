@@ -1,18 +1,25 @@
 import React from 'react'
 import {SimpleCenteredPopup} from '../common/SimpleCenteredPopup'
-import Dropdown from '../Dropdown/Dropdown'
+import TradingEntities from './sub-components/TradingEntities'
 import styles from './CreateAgreementsMain.css'
 
 const bigStyle = {
-  width: '1000px',
-  height: '700px'
+  width: '850px',
+  height: '520px'
 }
 
 const smallStyle = {
-  width: '800px',
-  height: '600px'
+  width: '600px',
+  height: '500px'
 }
 
+const MENU_TRADING_ENTITIES = 'MENU_TRADING_ENTITIES'
+const MENU_IDENTIFIERS = 'MENU_IDENTIFIERS'
+const SUB_CSA = 'SUB_CSA'
+const SUB_REGULATORY = 'SUB_REGULATORY'
+const MENU_WORKFLOW_OPTIONS = 'MENU_WORKFLOW_OPTIONS'
+const MENU_OTHER_DETAILS = 'MENU_OTHER_DETAILS'
+const MENU_ASSIGNMENT_DETAILS = 'MENU_ASSIGNMENT_DETAILS'
 
 export class CreateAgreementsMain extends React.Component {
   constructor(props) {
@@ -20,84 +27,19 @@ export class CreateAgreementsMain extends React.Component {
 
     this.state = {
       sizeOfPopup: smallStyle,
-      isShowExtraDetails: false
+      isShowExtraDetails: false,
+      currentMenu: MENU_TRADING_ENTITIES
     }
 
-    this.testClick = this.testClick.bind(this)
+    this.handlerMenuItemClick = this.handlerMenuItemClick.bind(this)
   }
 
-  toggleDropDown(e) {
-  }
-
-  onDropdownItemChange(e) {
-  }
-
-  createTestForm() {
-    return <div className={styles.createContent}>
-      <div className={styles.rowGroup}>
-        <div className={styles.line}>Our Legal Entity</div>
-        <div className={styles.line}>
-          <div className={styles.dropDown}>
-            <Dropdown
-              handlerOnClick={this.toggleDropDown}
-              handleOnSelectedItemChange={this.onDropdownItemChange}
-              selectedOption={'Acuo'}
-              options={['Acuo', 'Palo IT']}
-              activateMouseLeaveEvent/>
-          </div>
-        </div>
-      </div>
-      <div className={styles.rowGroup}>
-        <div className={styles.line}>Counterparty Organization</div>
-        <div className={styles.line}>
-          <div className={styles.dropDown}>
-            <Dropdown
-              handlerOnClick={this.toggleDropDown}
-              handleOnSelectedItemChange={this.onDropdownItemChange}
-              selectedOption={'Counterparty A'}
-              options={['Counterparty A', 'Counterparty B']}
-              activateMouseLeaveEvent/>
-          </div>
-        </div>
-      </div>
-      <div className={styles.rowGroup}>
-        <div className={styles.line}>Counterparty Entity</div>
-        <div className={styles.line}>
-          <div className={styles.dropDown}>
-            <Dropdown
-              handlerOnClick={this.toggleDropDown}
-              handleOnSelectedItemChange={this.onDropdownItemChange}
-              selectedOption={'Counterparty A1'}
-              options={['Counterparty A1', 'Counterparty A7']}
-              activateMouseLeaveEvent/>
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.rowGroup}>
-        <div className={styles.line}>Agreement Type</div>
-        <div className={styles.line}>
-          <div className={styles.dropDown}>
-            <Dropdown
-              handlerOnClick={this.toggleDropDown}
-              handleOnSelectedItemChange={this.onDropdownItemChange}
-              selectedOption={'Select'}
-              options={['JP Morgan']}
-              activateMouseLeaveEvent/>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  }
-
-  testClick() {
+  handlerMenuItemClick(menu, windowStyle, showExtra) {
     this.setState({
-      sizeOfPopup: bigStyle,
-      isShowExtraDetails: true
+      sizeOfPopup: windowStyle,
+      isShowExtraDetails: showExtra,
+      currentMenu: menu
     })
-
   }
 
   render() {
@@ -105,19 +47,27 @@ export class CreateAgreementsMain extends React.Component {
     return (
       <SimpleCenteredPopup handlerClosePopup={propHandlerClosePopup}
                            overridePopupStyle={this.state.sizeOfPopup}>
-
         <div className={styles.popupBody}>
-
           <div className={styles.createMenu}>
             <div className={styles.compTitle}>Agreement Details</div>
-
-
             <div className={styles.menuBody}>
               <div className={styles.menuItemContainer}>
-                <div className={styles.menuItem + ' ' + styles.menuItemSelected}>Trading Entities</div>
-                <div className={styles.menuItem}
-                     onClick={() => this.testClick()}>Identifiers
+                <div className={styles.menuItem + ' ' +
+                ((this.state.currentMenu == MENU_TRADING_ENTITIES)
+                && styles.menuItemSelected)}
+                     onClick={() => this.handlerMenuItemClick(MENU_TRADING_ENTITIES, smallStyle, false)}>
+                  Trading Entities
                 </div>
+                <div className={styles.menuItem + ' ' +
+                ((this.state.currentMenu == MENU_IDENTIFIERS)
+                && styles.menuItemSelected)}
+                     onClick={() => this.handlerMenuItemClick(MENU_IDENTIFIERS, bigStyle, true)}>
+                  Identifiers
+                </div>
+
+                <div className={styles.subMenuItem}>CSA References</div>
+                <div className={styles.subMenuItem}>Regulatory References</div>
+
                 <div className={styles.menuItem}>Workflow Options</div>
                 <div className={styles.menuItem}>Other Details</div>
                 <div className={styles.menuItem}>Assignment Details</div>
@@ -133,12 +83,12 @@ export class CreateAgreementsMain extends React.Component {
           </div>
 
           {
-            this.createTestForm()
+            <TradingEntities/>
           }
 
           {
             this.state.isShowExtraDetails &&
-            this.createTestForm()
+            <TradingEntities/>
           }
 
         </div>

@@ -29,13 +29,24 @@
     flex-direction: column;
 }
 
-.menuItemContainer > .menuItem {
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 22px;
+.menuItemCommon {
     color: #4A4A4A;
     margin: 8px 0;
     cursor: pointer;
+}
+
+.menuItem {
+    composes: menuItemCommon;
+    composes: baseFontBold from '../../static/css-components/fonts.css';
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.subMenuItem {
+    composes: menuItemCommon;
+    font-size: 14px;
+    line-height: 17px;
+    padding: 0 8px;
 }
 
 .menuItemSelected {
@@ -60,37 +71,3 @@
     composes: agreementBtnStyle from '../../static/commonStyles/common.css';
     margin: 12px 0;
 }
-
-.popupBody > .createContent {
-    flex: 1;
-    padding: 50px 25px 16px;
-    display: flex;
-    flex-direction: column;
-}
-
-.createContent > .rowGroup {
-    display: block;
-}
-
-.rowGroup > .line {
-    margin: 10px 0;
-}
-
-.line > .dropDown {
-    width: 250px;
-    height: 25px;
-}
-
-/*.dropDownStyle {*/
-/*width: 250px;*/
-/*height: 25px;*/
-
-/*font-size: 13px;*/
-/*line-height: 16px;*/
-/*color: #4A4A4A;*/
-/*background-color: #FFFFFF;*/
-/*border: 1px solid #979797;*/
-/*}*/
-
-
-
