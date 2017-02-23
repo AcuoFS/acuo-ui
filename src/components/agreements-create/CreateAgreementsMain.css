@@ -14,12 +14,9 @@
 .popupBody {
     display: flex;
     height: 100%;
-    overflow: hidden;
-    /*width: 100%;*/
 }
 
 .createMenu {
-    overflow: hidden;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -30,6 +27,19 @@
 .createContent {
     flex: 1;
     padding: 50px 25px 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.menuBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* less total height of title */
+    height: calc(100% - 29px - 8px);
+}
+
+.menuItemContainer {
     display: flex;
     flex-direction: column;
 }
@@ -74,13 +84,19 @@
     display: block;
 }
 
-.dropDownStyle {
+/*.dropDownStyle {*/
+    /*width: 250px;*/
+    /*height: 25px;*/
+
+    /*font-size: 13px;*/
+    /*line-height: 16px;*/
+    /*color: #4A4A4A;*/
+    /*background-color: #FFFFFF;*/
+    /*border: 1px solid #979797;*/
+/*}*/
+
+.dropDown {
     width: 250px;
     height: 25px;
-
-    font-size: 13px;
-    line-height: 16px;
-    color: #4A4A4A;
-    background-color: #FFFFFF;
-    border: 1px solid #979797;
 }
+
