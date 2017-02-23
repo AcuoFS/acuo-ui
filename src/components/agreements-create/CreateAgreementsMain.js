@@ -3,9 +3,15 @@ import {SimpleCenteredPopup} from '../common/SimpleCenteredPopup'
 import TradingEntities from './sub-components/TradingEntities'
 import styles from './CreateAgreementsMain.css'
 
+
 const bigStyle = {
   width: '850px',
-  height: '520px'
+  height: '800px'
+}
+
+const mediumStyle = {
+  width: '850px',
+  height: '500px'
 }
 
 const smallStyle = {
@@ -61,14 +67,19 @@ export class CreateAgreementsMain extends React.Component {
                 <div className={styles.menuItem + ' ' +
                 ((this.state.currentMenu == MENU_IDENTIFIERS)
                 && styles.menuItemSelected)}
-                     onClick={() => this.handlerMenuItemClick(MENU_IDENTIFIERS, bigStyle, true)}>
+                     onClick={() => this.handlerMenuItemClick(MENU_IDENTIFIERS, mediumStyle, true)}>
                   Identifiers
                 </div>
 
                 <div className={styles.subMenuItem}>CSA References</div>
                 <div className={styles.subMenuItem}>Regulatory References</div>
 
-                <div className={styles.menuItem}>Workflow Options</div>
+                <div className={styles.menuItem + ' ' +
+                ((this.state.currentMenu == MENU_WORKFLOW_OPTIONS)
+                && styles.menuItemSelected)}
+                     onClick={() => this.handlerMenuItemClick(MENU_WORKFLOW_OPTIONS, bigStyle, true)}>
+                  Workflow Options
+                </div>
                 <div className={styles.menuItem}>Other Details</div>
                 <div className={styles.menuItem}>Assignment Details</div>
               </div>

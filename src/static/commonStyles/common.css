@@ -48,7 +48,6 @@
 }
 
 .popupContainer {
-    position: absolute;
     background-color: #FFFFFF;
     border: 1px solid #9B9B9B;
     box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.5);

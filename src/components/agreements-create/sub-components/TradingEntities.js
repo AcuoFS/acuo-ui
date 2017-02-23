@@ -1,5 +1,6 @@
 import React from 'react'
 import Dropdown from '../../Dropdown/Dropdown'
+import {formatDate} from '../../../utils'
 import styles from './TradingEntities.css'
 
 
@@ -66,7 +67,7 @@ const TradingEntities = (props) => (
     </div>
     <div className={styles.rowGroup}>
       <div className={styles.line}>Active Date</div>
-      <div className={styles.line}>23-01-2016</div>
+      <div className={styles.line}>{formatDate(new Date())}</div>
     </div>
 
   </div>
