@@ -34,10 +34,12 @@ export class CreateAgreementsMain extends React.Component {
     this.state = {
       sizeOfPopup: smallStyle,
       isShowExtraDetails: false,
-      currentMenu: MENU_TRADING_ENTITIES
+      currentMenu: MENU_TRADING_ENTITIES,
+      isAgreementTypeSelected: false
     }
 
     this.createMenuItemDom = this.createMenuItemDom.bind(this)
+    this.setAgreementType = this.setAgreementType.bind(this)
   }
 
   createMenuItemDom(menuDisplay, menu, styleOfPoppup, isShowExtra, isSelected) {
@@ -50,6 +52,12 @@ export class CreateAgreementsMain extends React.Component {
            })}>
         {menuDisplay}
       </div>)
+  }
+
+  setAgreementType() {
+    this.setState({
+      isAgreementTypeSelected: true
+    })
   }
 
   render() {
@@ -69,8 +77,10 @@ export class CreateAgreementsMain extends React.Component {
                 {this.createMenuItemDom('Identifiers', MENU_IDENTIFIERS,
                   mediumStyle, true, (this.state.currentMenu == MENU_IDENTIFIERS))}
 
-                <div className={styles.subMenuItem}>CSA References</div>
-                <div className={styles.subMenuItem}>Regulatory References</div>
+                {this.state.isAgreementTypeSelected && <div>
+                  <div className={styles.subMenuItem}>CSA References</div>
+                  <div className={styles.subMenuItem}>Regulatory References</div>
+                </div>}
 
                 {this.createMenuItemDom('Workflow Options', MENU_WORKFLOW_OPTIONS,
                   bigStyle, true, (this.state.currentMenu == MENU_WORKFLOW_OPTIONS))}
@@ -93,12 +103,12 @@ export class CreateAgreementsMain extends React.Component {
           </div>
 
           {
-            <TradingEntities/>
+            <TradingEntities propSetAgreementType={this.setAgreementType}/>
           }
 
           {
             this.state.isShowExtraDetails &&
-            <TradingEntities/>
+            <TradingEntities propSetAgreementType={this.setAgreementType}/>
           }
 
         </div>

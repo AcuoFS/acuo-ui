@@ -4,14 +4,18 @@ import {formatDate} from '../../../utils'
 import styles from './TradingEntities.css'
 
 
-const toggleDropDown = (e) => {
-}
+const TradingEntities = (props) => {
+  const toggleDropDown = (e) => {
+  }
 
-const onDropdownItemChange = (e) => {
-}
+  const onDropdownItemChange = (e) => {
+  }
 
-const TradingEntities = (props) => (
-  <div className={styles.createContent}>
+  const onAgreementTypeChange = (e) => {
+    props.propSetAgreementType()
+  }
+
+  return <div className={styles.createContent}>
     <div className={styles.rowGroup}>
       <div className={styles.line}>Our Legal Entity</div>
       <div className={styles.line}>
@@ -58,7 +62,7 @@ const TradingEntities = (props) => (
         <div className={styles.dropDown}>
           <Dropdown
             handlerOnClick={toggleDropDown}
-            handleOnSelectedItemChange={onDropdownItemChange}
+            handleOnSelectedItemChange={onAgreementTypeChange}
             selectedOption={'Select'}
             options={['Group']}
             activateMouseLeaveEvent/>
@@ -72,6 +76,6 @@ const TradingEntities = (props) => (
 
   </div>
 
-)
+}
 
 export default TradingEntities
