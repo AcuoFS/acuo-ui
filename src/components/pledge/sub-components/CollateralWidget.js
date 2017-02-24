@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import CollateralAssetGroup from './CollateralAssetGroup'
-import {COLLATERAL_URL} from '../../../constants/APIcalls'
+import {COLLATERAL_URL} from '../../../constants/APIcalls-dev'
 import _ from 'lodash'
 import {fromJS} from 'immutable'
 import {filterByAllPropertiesOfObj} from '../../../utils'

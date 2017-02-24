@@ -7,7 +7,7 @@ import OptItem from './sub-components/OptItem'
 import ChooseCalls from './sub-components/ChooseCalls'
 import Selection from '../pledge-selection/Selection'
 import CollateralWidgetContainer from '../../containers/CollateralWidgetContainer'
-import {OPTIMISATION_URL,MARGIN_SELECTION_URL} from '../../constants/APIcalls'
+import {OPTIMISATION_URL,MARGIN_SELECTION_URL} from '../../constants/APIcalls-dev'
 import styles from './Pledge.css'
 
 import { List } from 'immutable'
