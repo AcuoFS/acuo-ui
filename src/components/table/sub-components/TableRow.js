@@ -3,7 +3,8 @@ import TableCell from './TableCell'
 import * as DASHBOARD_CONSTANTS from '../../../constants/DashboardTable'
 import styles from '../Table.css'
 import selfStyles from './TableRow.css'
-
+import { numberWithCommas } from '../../../utils'
+import { hashHistory } from 'react-router'
 
 class TableRow extends React.Component {
   constructor(props) {
@@ -68,35 +69,49 @@ class TableRow extends React.Component {
     return statusCell
   }
 
+  getHoverbility(directionText, statusCode){
+    if ((statusCode == DASHBOARD_CONSTANTS.STATUS_CODE_EXPECTED || statusCode == DASHBOARD_CONSTANTS.STATUS_CODE_UNRECON) && (directionText == DASHBOARD_CONSTANTS.DIRECTION_OUT))
+      return true
+    else return false
+  }
+
+  lineItemClick(hoverbility, onLineItemClick, hashHistory, cptyEntity, status, notificationTime, type, legalEntity, cptyOrg){
+    if(hoverbility){
+      onLineItemClick(type, status, notificationTime, cptyEntity, legalEntity, cptyOrg)
+      hashHistory.push('recon')
+    }
+
+  }
 
   render() {
-    const { rowItems, numberWithCommas } = this.props
+    const { rowItems, onLineItemClick } = this.props
     const excess =
       (
-        Number.parseInt(rowItems.get('collateralBalance') ? rowItems.get('collateralBalance') : 0) +
-        Number.parseInt(rowItems.get('pendingCollateral') ? rowItems.get('pendingCollateral') : 0)
+        parseInt(rowItems.collateralBalance ? rowItems.collateralBalance : 0) +
+        parseInt(rowItems.pendingCollateral ? rowItems.pendingCollateral : 0)
       )
       -
       (
-        Number.parseInt(rowItems.get('variableMargin') ? rowItems.get('variableMargin') : 0) +
-        Number.parseInt(rowItems.get('initialMargin') ? rowItems.get('initialMargin') : 0)
+        parseInt(rowItems.variableMargin ? rowItems.variableMargin : 0) +
+        parseInt(rowItems.initialMargin ? rowItems.initialMargin : 0)
       )
 
-    const directionText = rowItems.get('direction')
+    const directionText = rowItems.direction
     // Get only first letter of status for display of color
-    const statusCode = rowItems.get('status').substring(0,1).toUpperCase()
+    const statusCode = rowItems.status.substring(0,1).toUpperCase()
 
     let directionCell = this.getDirectionCell(directionText)
     let statusCell = this.getStatusCell(statusCode)
+    let hoverbility = this.getHoverbility(directionText, statusCode)
 
     return (
-      <div className={styles.tableRow}>
-        <TableCell cellValue={rowItems.get('legalEntity')}/>
-        <TableCell cellValue={rowItems.get('cptyOrg')}/>
-        <TableCell cellValue={rowItems.get('cptyEntity')}/>
-        <TableCell cellValue={rowItems.get('ccy')}/>
-        <TableCell cellValue={this.checkNegative(rowItems.get('initialMargin'), numberWithCommas)}/>
-        <TableCell cellValue={this.checkNegative(rowItems.get('variableMargin'), numberWithCommas)}/>
+      <div className={styles.tableRow + ' ' + (hoverbility ? selfStyles.hoverable : '')} onClick={() => this.lineItemClick(hoverbility, onLineItemClick, hashHistory, rowItems.cptyEntity, rowItems.status, rowItems.notificationTime, rowItems.type, rowItems.legalEntity, rowItems.cptyOrg)}>
+        <TableCell cellValue={rowItems.legalEntity}/>
+        <TableCell cellValue={rowItems.cptyOrg}/>
+        <TableCell cellValue={rowItems.cptyEntity}/>
+        <TableCell cellValue={rowItems.ccy}/>
+        <TableCell cellValue={this.checkNegative(rowItems.initialMargin, numberWithCommas)}/>
+        <TableCell cellValue={this.checkNegative(rowItems.variableMargin, numberWithCommas)}/>
         <TableCell cellValue={this.checkNegative(excess, numberWithCommas)}/>
         <TableCell cellValue={directionCell}/>
         <TableCell cellValue={statusCell}/>

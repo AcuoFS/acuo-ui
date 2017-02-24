@@ -32,6 +32,7 @@
   text-transform: uppercase;
   color: #6389ad;
   position: relative;
+  display: flex;
 }
 
 .panelTitle img {
@@ -429,10 +430,10 @@ input[type=range]:focus::-ms-fill-upper {
 /*** Collateral Table ***/
 
 .collateralTable {
-  /*margin: 0 0 40px 0;*/
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   display: table;
   width: 100%;
+  table-layout: fixed;
 }
 
 .collateralRow {
@@ -525,15 +526,15 @@ div.collateralTableCollapse div:nth-child(7){
 
 /*Asset*/
 div.collateralTableExpanded div:nth-child(1){
-  width: 16%;
+  width: 19%;
 }
 /*Price*/
 div.collateralTableExpanded div:nth-child(2){
-  width: 10%;
+  width: 11%;
 }
 /*CCY*/
 div.collateralTableExpanded div:nth-child(3){
-  width: 6%;
+  width: 4%;
 }
 /*Delivery Time*/
 div.collateralTableExpanded div:nth-child(4){
@@ -549,7 +550,7 @@ div.collateralTableExpanded div:nth-child(6){
 }
 /*Maturity Date*/
 div.collateralTableExpanded div:nth-child(7){
-  width: 10%;
+  width: 6%;
 }
 /*Internal Cost*/
 div.collateralTableExpanded div:nth-child(8){
@@ -561,7 +562,7 @@ div.collateralTableExpanded div:nth-child(8){
 /*}*/
 /*Opportunity Cost*/
 div.collateralTableExpanded div:nth-child(9){
-  width: 7%;
+  width: 8%;
 }
 /*ISIN*/
 div.collateralTableExpanded div:nth-child(10){
@@ -569,11 +570,11 @@ div.collateralTableExpanded div:nth-child(10){
 }
 /*Venue*/
 div.collateralTableExpanded div:nth-child(11){
-  width: 4%;
+  width: 8%;
 }
 /*Acc ID*/
 div.collateralTableExpanded div:nth-child(12){
-  width: 10%;
+  width: 8%;
 }
 
 /* Center align for columns(not header or group header) */
@@ -929,4 +930,8 @@ div.collateralTableExpanded div:nth-child(12){
   border-right: 6px solid transparent;
   top: -8px;
   left: 7px;
+}
+
+.cursorPointer {
+  cursor: pointer;
 }

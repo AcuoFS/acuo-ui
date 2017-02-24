@@ -1,0 +1,61 @@
+.compContainer {
+    min-width: 1000px;
+    min-height: 500px;
+    composes: compContainer from '../../static/commonStyles/common.css';
+}
+
+.compTitle {
+    composes: compTitle from '../../static/commonStyles/common.css';
+}
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btnContainer {
+    text-align: right;
+    margin: 5px 0;
+}
+
+.agreementBtnStyle {
+    composes: agreementBtnStyle from '../../static/commonStyles/common.css';
+}
+
+.labelContainer {
+    margin: 20px 0 10px;
+}
+
+.statusLabel {
+    font-size: 14px;
+    line-height: 17px;
+    padding-bottom: 2px;
+    cursor: pointer;
+    margin: 0px 5px;
+}
+
+.outLabel {
+    color: #589E9C;
+    composes: baseFontBold from '../../static/css-components/fonts.css';
+    border-bottom: 2px solid #979797;
+}
+
+.inLabel {
+    color: #587D9E;
+    composes: baseFontBold from '../../static/css-components/fonts.css';
+    border-bottom: 2px solid #979797;
+}
+
+.statusLabel.unselected {
+    color: #000000;
+}
+
+.searchInput {
+    width: 222px;
+    height: 25px;
+    background-color: #FFFFFF;
+    border: 1px solid #979797;
+    font-size: 13px;
+    line-height: 16px;
+
+}

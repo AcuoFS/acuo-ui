@@ -8,7 +8,7 @@ export default class CollateralEarmarkAmendTab extends React.Component {
     super(props)
     this.state = {
       isAssetValidToAmend: false,
-      amendAmount: 0.00
+      amendAmount: '0.00'
     }
 
     this.amendAmount = null

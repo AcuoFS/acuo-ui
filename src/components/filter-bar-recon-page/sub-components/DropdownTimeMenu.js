@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import clearTime from '../../../utils/clearTime'
+import { clearTime, getDate } from '../../../utils'
 import styles from '../FilterBar.css'
 
 export default class DropdownTimeMenu extends React.Component {
@@ -12,7 +12,7 @@ export default class DropdownTimeMenu extends React.Component {
 
       // today's date can be hacked
       // during development, the data from backend is all 2017-01-13
-      today: new Date("2017-01-13T08:00:00.000Z"),
+      today: getDate(),
       // this should be the real config if backend data is correct
       // today: new Date(),
     }

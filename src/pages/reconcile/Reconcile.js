@@ -9,7 +9,9 @@ import filterItems from '../../utils/filterItems'
 import stylesG from '../../static/global.css'
 import styles from './Reconcile.css'
 import { connect } from 'react-redux'
-import { filterStateStatus } from '../../actions'
+import { reconInitState } from '../../actions'
+import { RECON_URL } from '../../constants/APIcalls'
+
 
 // =============================================================================
 // redux
@@ -30,6 +32,7 @@ const mapStateToProps = state => {
 class Reconcile extends React.Component {
   constructor(props) {
     super(props)
+    this.props.initRecon()
   }
 
   componentDidMount () {
@@ -55,9 +58,21 @@ class Reconcile extends React.Component {
 
 // =============================================================================
 // connect component with redux
+
+const mapDispatchToProps = dispatch => ({
+  initRecon: () => {
+    fetch(RECON_URL).then((response) => {
+      return response.json()
+    }).then((obj) => {
+      const {items} = obj
+      dispatch(reconInitState(items))
+    })
+  }
+})
+
 const ReconcileContainer = connect(
   mapStateToProps,
-  {}
+  mapDispatchToProps,
 )(Reconcile)
 
 export {ReconcileContainer}

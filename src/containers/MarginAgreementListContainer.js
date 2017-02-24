@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { fromJS, List } from 'immutable'
 import { MarginAgreementsComponent } from '../components'
-import { selectedItems, reconInitState, firstLeveSelect, secondLevelSelect } from '../actions'
+import { selectedItems, reconInitState, firstLeveSelect, secondLevelSelect, updateReconFilter } from '../actions'
 import { RECON_DATA_URL, RECON_URL, DASHBOARD_URL } from '../constants/APIcalls'
 import filterItems from '../utils/filterItems'
 
@@ -46,6 +46,50 @@ const mapDispatchToProps = dispatch => ({
   },
   onSelectSecondLevelItem: (GUID, parentID, secondLevelID) => {
     dispatch(secondLevelSelect(GUID, parentID, secondLevelID))
+  },
+  resetFilters: () => {
+    return dispatch(updateReconFilter({
+      attr: 'type',
+      selected: {
+        label: '',
+        value: ''
+      }
+    })),
+      dispatch(updateReconFilter({
+        attr: 'status',
+        selected: {
+          label: '',
+          value: ''
+        }
+      })),
+      dispatch(updateReconFilter({
+        attr: 'cptyEntity',
+        selected: {
+          label: '',
+          value: ''
+        }
+      })),
+      dispatch(updateReconFilter({
+        attr: 'notificationTime',
+        selected: {
+          label: '',
+          value: ''
+        }
+      })),
+      dispatch(updateReconFilter({
+        attr: 'legalEntity',
+        selected: {
+          label: '',
+          value: ''
+        }
+      })),
+      dispatch(updateReconFilter({
+        attr: 'cptyOrg',
+        selected: {
+          label: '',
+          value: ''
+        }
+      }))
   }
 })
 

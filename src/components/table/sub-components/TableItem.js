@@ -2,27 +2,23 @@ import React from 'react'
 import TableBody from './TableBody'
 import styles from '../Table.css'
 import { Link } from 'react-router'
-
+import _ from 'lodash'
 
 class TableItem extends React.Component {
   constructor(props) {
     super(props)
-    this.compute = this.compute.bind(this)
-    this.getMarginStatus = this.getMarginStatus.bind(this)
-    this.getNumberOfActions = this.getNumberOfActions.bind(this)
-
   }
 
   numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  compute(key) {
-    return this.getMarginStatus().reduce((sum, x) => {
-      if (x.get('timeFrames'))
-        return sum + x.get('timeFrames').reduce((sum, y) => {
-            return sum + y.get('actionsList').reduce((sum, z) => {
-                return sum + Number.parseInt(z.get(key) ? z.get(key) : 0)
+  compute(deriv, key) {
+    return _.reduce(this.getMarginStatus(deriv), (sum, x) => {
+      if (x.timeFrames)
+        return sum + _.reduce(x.timeFrames, (sum, y) => {
+            return sum + _.reduce(y.actionsList, (sum, z) => {
+                return sum + parseInt(_.get(z, key) ? _.get(z, key) : 0)
               }, 0)
           }, 0)
       else
@@ -30,20 +26,20 @@ class TableItem extends React.Component {
     }, 0)
   }
 
-  getNumberOfActions() {
+  getNumberOfActions(deriv) {
 
-    return this.numberWithCommas(this.getMarginStatus().reduce((sum, x) => {
-      if (x.get('timeFrames'))
-        return sum + x.get('timeFrames').reduce((sum, y) => {
-            return sum + y.get('actionsList').size
+    return this.numberWithCommas(_.reduce(this.getMarginStatus(deriv), (sum, x) => {
+      if (x.timeFrames)
+        return sum + _.reduce(x.timeFrames, (sum, y) => {
+            return sum + y.actionsList.length
           }, 0)
       else
         return sum + 0
     }, 0))
   }
 
-  getMarginStatus() {
-    return this.props.deriv.get('marginStatus') || []
+  getMarginStatus(deriv) {
+    return deriv.marginStatus || []
   }
 
   checkNegative(orgAmount, numbersWithCommas){
@@ -57,16 +53,16 @@ class TableItem extends React.Component {
 
   render() {
 
-    const {redirect} = this.props
+    const {redirect, deriv, clicked, arrow, toggle, onLineItemClick} = this.props
 
-    const excess = (this.compute('collateralBalance') + this.compute('pendingCollateral')) - (this.compute('variableMargin') + this.compute('initialMargin'))
+    const excess = (this.compute(deriv, 'collateralBalance') + this.compute(deriv, 'pendingCollateral')) - (this.compute(deriv, 'variableMargin') + this.compute(deriv, 'initialMargin'))
 
     return (
       <div>
         <div className={styles.table}>
           <div className={styles.derivItem}>
             <div className={styles.vertiCenter + " " + styles.derivType}>
-              <p className={styles.centerThis + " " + styles.derivTypeText}>{this.props.deriv.get('type')}</p>
+              <p className={styles.centerThis + " " + styles.derivTypeText}>{deriv.type}</p>
             </div>
           </div>
 
@@ -74,14 +70,14 @@ class TableItem extends React.Component {
             <div className={styles.margin}>
               <p className={styles.leftThis}>Initial Margin</p>
               <p
-                className={styles.fineFont}>{this.checkNegative(this.compute('initialMargin'), this.numberWithCommas)}</p>
+                className={styles.fineFont}>{this.checkNegative(this.compute(deriv, 'initialMargin'), this.numberWithCommas)}</p>
             </div>
           </div>
 
           <div className={styles.tableItem}>
             <div className={styles.margin}>
               <p className={styles.leftThis}>Variation Margin</p>
-              <p className={styles.fineFont}>{this.checkNegative(this.compute('variableMargin'), this.numberWithCommas)}</p>
+              <p className={styles.fineFont}>{this.checkNegative(this.compute(deriv, 'variableMargin'), this.numberWithCommas)}</p>
             </div>
           </div>
 
@@ -95,22 +91,22 @@ class TableItem extends React.Component {
           <div className={styles.tableItem}>
             <div className={styles.margin}>
               <p className={styles.leftThis}>Collateral Balance</p>
-              <p className={styles.fineFont}>{this.checkNegative(this.compute('balanceAmount'), this.numberWithCommas)}</p>
+              <p className={styles.fineFont}>{this.checkNegative(this.compute(deriv, 'balanceAmount'), this.numberWithCommas)}</p>
             </div>
           </div>
 
           <div className={styles.tableItem}>
             <div className={styles.margin}>
               <p className={styles.leftThis}>Pending Collateral</p>
-              <p className={styles.fineFont}>{this.numberWithCommas(this.compute('pendingCollateral'))}</p>
+              <p className={styles.fineFont}>{this.numberWithCommas(this.compute(deriv, 'pendingCollateral'))}</p>
             </div>
           </div>
 
           <div className={styles.actionItem}>
             <div className={styles.actionVertiCenter}>
               <Link to={'/recon'}>
-                <div className={styles.actions} onClick={redirect} data-ref={this.props.deriv.get('type')} to={'/recon'}>
-                  <div className={styles.text}>{this.getNumberOfActions()} ACTION ITEMS</div>
+                <div className={styles.actions} onClick={() => redirect(deriv.type)} to={'/recon'}>
+                  <div className={styles.text}>{this.getNumberOfActions(deriv)} ACTION ITEMS</div>
                   <div className={styles.arrow}></div>
                 </div>
               </Link>
@@ -119,14 +115,14 @@ class TableItem extends React.Component {
 
           <div className={styles.toggleItem}>
             <div className={styles.vertiCenter}>
-              <p className={styles.centerThis} onClick={this.props.clicked}>
-                <img src={this.props.arrow} alt=""/>
+              <p className={styles.centerThis} onClick={clicked}>
+                <img src={arrow} alt=""/>
               </p>
             </div>
           </div>
         </div>
-        <TableBody numberWithCommas={this.numberWithCommas} marginStatus={this.getMarginStatus()}
-                   open={this.props.toggle}/>
+        <TableBody numberWithCommas={this.numberWithCommas} marginStatus={this.getMarginStatus(deriv)}
+                   open={toggle} onLineItemClick={onLineItemClick}/>
       </div>
     )
   }

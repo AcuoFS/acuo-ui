@@ -286,3 +286,7 @@ td{
 .selTable tr td.notAlcText{
   text-align: center;
 }
+
+.cursorPointer {
+  cursor: pointer;
+}

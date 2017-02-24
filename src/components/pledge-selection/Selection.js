@@ -1,5 +1,5 @@
 import React from 'react'
-import {numberWithCommas} from '../../utils/numbersWithCommas'
+import {checkNegative} from '../../utils'
 import DeselectionPopup from './sub-components/DeselectionPopup'
 import {List, toJS} from 'immutable'
 import * as ASSET from '../../constants/AllocatedAssetAttributes'
@@ -32,7 +32,7 @@ export default class Selection extends React.Component {
                 {y.getIn(['firstLevel', 'name'])}
               </div>
               <div className={styles.amount}>
-                {numberWithCommas(y.getIn(['firstLevel', 'secondLevel']).reduce((sum, z) => {
+                {checkNegative(y.getIn(['firstLevel', 'secondLevel']).reduce((sum, z) => {
                   return sum + parseFloat(z.get('amount'))
                 }, 0))}
               </div>
@@ -47,11 +47,11 @@ export default class Selection extends React.Component {
     return (
       <tr key={asset.get(ASSET.A_ID)}>
         <td>{asset.get(ASSET.A_NAME)}</td>
-        <td>{numberWithCommas(asset.get(ASSET.A_NET_AMT))}</td>
+        <td>{checkNegative(asset.get(ASSET.A_NET_AMT))}</td>
         <td>{asset.get(ASSET.A_CCY)}</td>
         <td>{asset.get(ASSET.A_HAIRCUT_PCT)}%</td>
-        <td>{numberWithCommas(asset.get(ASSET.A_AMT))}</td>
-        <td>{numberWithCommas(asset.get(ASSET.A_FX))}</td>
+        <td>{checkNegative(asset.get(ASSET.A_AMT))}</td>
+        <td>{checkNegative(asset.get(ASSET.A_FX))}</td>
         <td>{asset.get(ASSET.A_VENUE)}</td>
         <td>
           <div className={styles.earmarkAssetButton}
@@ -169,7 +169,7 @@ export default class Selection extends React.Component {
                   Total
                 </div>
                 <div className={styles.amount}>
-                  {numberWithCommas(this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {
+                  {checkNegative(this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {
                     return sum + x.get('data').reduce((sum, y) => {
                         return sum + y.getIn(['firstLevel','secondLevel']).reduce((sum, z) => {
                             return sum + parseFloat(z.get('amount'))
@@ -190,7 +190,7 @@ export default class Selection extends React.Component {
                 <img src={sideways}
                      onClick={() => {
                        this.handlerChangeSideWaysClick(this.props)
-                     }} alt=""/>
+                     }} alt="" className={styles.cursorPointer}/>
               </div>
             </div>
 
@@ -212,7 +212,7 @@ export default class Selection extends React.Component {
                   <thead>
                   <tr className={styles.bold}>
                     <th></th>
-                    <th>Value(post <br/>haircut)</th>
+                    <th>Adjusted Value</th>
                     <th>CCY</th>
                     <th>Haircut</th>
                     <th>Value</th>
@@ -232,7 +232,7 @@ export default class Selection extends React.Component {
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
                     <td>
-                      {numberWithCommas((marginCall.getIn(['allocated', ALLOCATED.IM_TOTAL]) || 0).toFixed(2))}
+                      {checkNegative((marginCall.getIn(['allocated', ALLOCATED.IM_TOTAL]) || 0).toFixed(2))}
                     </td>
                     <td>USD</td>
                     <td></td>
@@ -274,7 +274,7 @@ export default class Selection extends React.Component {
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
                     <td>
-                      {numberWithCommas((marginCall.getIn(['allocated', ALLOCATED.VM_TOTAL]) || 0).toFixed(2))}
+                      {checkNegative((marginCall.getIn(['allocated', ALLOCATED.VM_TOTAL]) || 0).toFixed(2))}
                     </td>
                     <td>USD</td>
                     <td></td>
@@ -290,7 +290,7 @@ export default class Selection extends React.Component {
                   <tr className={styles.bold}>
                     <td>Total</td>
                     <td
-                      className={styles.totalTable1 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>{numberWithCommas((marginCall.getIn(['allocated', ALLOCATED.MGN_TOTAL]) || 0).toFixed(2))}</td>
+                      className={styles.totalTable1 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>{checkNegative((marginCall.getIn(['allocated', ALLOCATED.MGN_TOTAL]) || 0).toFixed(2))}</td>
                     <td className={styles.totalTable2 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>USD</td>
                     <td></td>
                     <td></td>

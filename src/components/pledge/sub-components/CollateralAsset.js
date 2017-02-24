@@ -31,6 +31,15 @@ class CollateralAsset extends React.Component {
     return statusClass
   }
 
+  checkAmountExceeding(total, amount) {
+    if (Number(amount) > Number(total))
+      return (
+        <div className={styles.errorPopUp}>
+          Amount entered is larger than available.
+        </div>
+      )
+  }
+
   render() {
     const {
       propAsset,
@@ -68,16 +77,18 @@ class CollateralAsset extends React.Component {
                                                      propStatus={propStatus}
                                                      propIsDisplayAll={propIsDisplayAll}
                                                      listOfMarginCallName={listOfMarginCallName}
-                                                     rawPrice={rawPrice}/>)
+                                                     rawPrice={rawPrice}
+                                                     checkAmountExceeding={this.checkAmountExceeding}/>)
     }else {
       statusDisplay = (<CollateralStatusPopup propCollateralType={propCollateralType}
-                                                     propAssetId={propAssetId}
-                                                     propAssetIdType={propAssetIdType}
-                                                     statusClass={statusClass}
-                                                     propStatus={propStatus}
-                                                     propIsDisplayAll={propIsDisplayAll}
-                                                     listOfMarginCallName={listOfMarginCallName}
-                                                     rawPrice={rawPrice}/>)
+                                              propAssetId={propAssetId}
+                                              propAssetIdType={propAssetIdType}
+                                              statusClass={statusClass}
+                                              propStatus={propStatus}
+                                              propIsDisplayAll={propIsDisplayAll}
+                                              listOfMarginCallName={listOfMarginCallName}
+                                              rawPrice={rawPrice}
+                                              checkAmountExceeding={this.checkAmountExceeding}/>)
     }
 
     if (propIsDisplayAll) {

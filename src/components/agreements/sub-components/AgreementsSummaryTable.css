@@ -1,0 +1,100 @@
+.summaryTable {
+    display: table;
+    width: 800px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-right: 1px solid #979797;
+    border-bottom: 1px solid #979797;
+}
+
+.rowStyle {
+    display: table-row;
+    font-size: 13px;
+    text-align: center;
+    line-height: 16px;
+    color: #272727;
+}
+
+.summaryTableRow {
+    composes: rowStyle;
+    background-color: #FFFFFF;
+}
+
+.summaryTableHeaderRow {
+    composes: rowStyle;
+    background-color: #D5DADF;
+}
+
+.summaryTableCell {
+    display: table-cell;
+    padding: 10px;
+}
+
+/*****************************************************************
+  Drawn from L to R (borders)
+*****************************************************************/
+
+/* border left for first cell of normal rows */
+.summaryTableRow > .summaryTableCell:first-child {
+    border-left: 1px solid #979797;
+}
+
+/* clear(white) bg for first column, first row */
+.summaryTableHeaderRow > .summaryTableCell:nth-child(1) {
+    background-color: #FFFFFF;
+}
+
+/* border left on second column, BOTH header and normal row*/
+.summaryTableCell:nth-child(2) {
+    border-left: 1px solid #979797;
+}
+
+/* border radius left */
+.summaryTableHeaderRow > .summaryTableCell:nth-child(2) {
+    border-top-left-radius: 10px;
+}
+
+/* border top for cells that are not first of header row */
+.summaryTableHeaderRow > .summaryTableCell:not(:first-child) {
+    border-top: 1px solid #979797;
+}
+
+/* border radius right */
+.summaryTableHeaderRow > .summaryTableCell:last-child {
+    border-top-right-radius: 10px;
+}
+
+/* For lines in the between normal rows */
+.summaryTableRow .summaryTableCell {
+    border-top: 1px solid #979797;
+}
+
+/*****************************************************************
+  Drawn from L to R (borders)
+*****************************************************************/
+
+.summaryTableCell:first-child {
+    width: 130px;
+    text-align: left;
+}
+
+/* Acuo SG */
+.clientDisplay {
+    background-color: #589E9C;
+    color: #FFFFFF;
+}
+
+/* Counterparty */
+.cptyDisplay {
+    background-color: #587D9E;
+    color: #FFFFFF;
+}
+
+.entityTypeContainer {
+    display: flex;
+}
+
+.plusMinusStyle {
+    margin: 0px 5px;
+    cursor: pointer;
+}

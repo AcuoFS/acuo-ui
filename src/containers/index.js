@@ -9,6 +9,10 @@ import CollateralAssetContainer from './CollateralAssetContainer'
 import FlightContainer from './FlightContainer'
 import MarginCallContainer from './MarginCallContainer'
 import UnmatchedTableContainer from './UnmatchedTableContainer'
+import CollateralWidgetContainer from './CollateralWidgetContainer'
+import DisputeWidgetContainer from './DisputeWidgetContainer'
+import AgreementsContainer from './AgreementsContainer'
+
 
 export {
   FilterContainer,
@@ -21,5 +25,8 @@ export {
   CollateralAssetContainer,
   FlightContainer,
   MarginCallContainer,
-  UnmatchedTableContainer
+  UnmatchedTableContainer,
+  CollateralWidgetContainer,
+  DisputeWidgetContainer,
+  AgreementsContainer
 }

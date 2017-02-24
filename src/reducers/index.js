@@ -5,13 +5,17 @@ import ReconReducer from './ReconReducer'
 import PledgeReducer from './PledgeReducer'
 import MarginUploadReducer from './MarginUploadReducer'
 import UnmatchedPortfolioReducer from './UnmatchedPortfolioReducer'
+import DisputeReducer from './DisputeReducer'
+import AgreementsReducer from './AgreementsReducer'
 
 const reducer = combineReducers({
   mainReducer,
   ReconReducer,
   PledgeReducer,
   MarginUploadReducer,
-  UnmatchedPortfolioReducer
+  UnmatchedPortfolioReducer,
+  DisputeReducer,
+  AgreementsReducer
 })
 
 export default reducer

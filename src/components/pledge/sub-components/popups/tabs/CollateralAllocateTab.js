@@ -12,7 +12,7 @@ export default class CollateralAllocate extends React.Component{
       isAssetValidToAllocate: false,
       isMgnAgreementDropDownSelected: false,
       isCallTypeDropDownSelected: false,
-      allocateAmount: 0.00
+      allocateAmount: '0.00'
     }
 
     // this.allocateCollateral = this.allocateCollateral.bind(this)

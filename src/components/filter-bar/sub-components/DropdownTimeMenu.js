@@ -110,7 +110,7 @@ export default class DropdownTimeMenu extends React.Component {
 
                 {option.times.map((time, index) => (
                   <li key={index}
-                      onClick={ e => this.onMenuOptionSelect(handleOnOptionChange, time.min, time.max, String((new Date(time.min)).getHours()+1 + ':00 Hrs').toUpperCase())}>
+                      onClick={ e => this.onMenuOptionSelect(handleOnOptionChange, time.min, time.max, String((new Date(time.min)).getHours() + ':00 Hrs').toUpperCase())}>
                     {String((new Date(time.min)).getHours() + ':00 Hrs').toUpperCase()}
                   </li>
                 ))}

@@ -4,7 +4,7 @@
 import React, {PropTypes} from 'react'
 import MarginAgreementDetailExpand from './MarginAgreementDetailExpand'
 import {List} from 'immutable'
-import {numberWithCommas} from '../../../utils/numbersWithCommas'
+import {checkNegative} from '../../../utils'
 import styles from '../MarginAgreementList.css'
 import _ from 'lodash'
 
@@ -46,10 +46,8 @@ export default class MarginAgreementDetail extends React.Component {
     if(secondLevel)
       return secondLevel.sort().map((x, index) => {
 
-        {/*<div className={ x.get('recon') ? styles.packageRowGrey : (discrepancy && highlightThis ? styles.packageRowHighLight : '')} key={index}>*/}
-
         return (
-          <div key={index}>
+          <div key={index} className={x.get('tolerance') ? styles.packageRowHighLight : ''}>
             <div className={styles.packageLvl2 + ' ' + this.state.pkgLvl2} key={Date.now() * Math.random()}>
               {/* have second level table rendering structure here */}
               <div className={styles.packageRow}>
@@ -61,7 +59,7 @@ export default class MarginAgreementDetail extends React.Component {
                   </div>
                   <div className={styles.secondLevelText}>{ x.get('name') }</div>
                 </div>
-                <div className={styles.packageRight}>{ numberWithCommas(x.get('amount')) }</div>
+                <div className={styles.packageRight}>{ checkNegative(x.get('amount')) }</div>
               </div>
             </div>
           </div>
@@ -96,6 +94,10 @@ export default class MarginAgreementDetail extends React.Component {
       return "./images/reconcile/checkbox.png"
   }
 
+  checkChildrenTolerance(secondLevel){
+    return _.some(secondLevel, {tolerance: true})
+  }
+
   render() {
 
     const {
@@ -111,9 +113,10 @@ export default class MarginAgreementDetail extends React.Component {
     />
 
     return (
+
       <div className=''>
 
-        <div className={ styles.packageRow }> {/* one row div*/}
+        <div className={ styles.packageRow + ' ' + (this.checkChildrenTolerance(secondLevel.toJS()) && !this.state.open ? styles.packageRowHighLight : '')}> {/* one row div*/}
           <div className={styles.packageLeft}>
             <div className={styles.packageCheckBox + ' ' + this.state.cbLvl1}
                  onClick={() => this.firstLevelSelect(GUID, firstLevelID, handlerSelectedItem)}>
@@ -125,7 +128,7 @@ export default class MarginAgreementDetail extends React.Component {
             {secondLevel && expand}
 
           </div>
-          <div className={styles.packageRight}>{numberWithCommas(totalAmount.toFixed(2))}</div>
+          <div className={styles.packageRight}>{checkNegative(totalAmount.toFixed(2))}</div>
         </div>
 
         {this.renderHidden(secondLevel, GUID, secondLevelList, id, onSelectSecondLevelItem)}

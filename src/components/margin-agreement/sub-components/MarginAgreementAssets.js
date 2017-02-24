@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import {Map, List} from 'immutable'
 import MarginAgreementDetail from './MarginAgreementDetail'
-import {numberWithCommas} from '../../../utils/numbersWithCommas'
+import {checkNegative} from '../../../utils'
 import styles from '../MarginAgreementList.css'
 import CounterPartyUpload from './CounterPartyUpload'
 import selfStyles from './MarginAgreementAssets.css'
@@ -45,7 +45,7 @@ export default class MarginAgreementPortfolio extends React.Component {
         this.getTotalAmount(marginData.get(assetsName))
 
     }
-    return diff
+    return diff.toFixed(2)
   }
 
   onAddAdjAmount() {
@@ -65,7 +65,7 @@ export default class MarginAgreementPortfolio extends React.Component {
     if (marginData.get(assetsName))
       return marginData.get(assetsName).sort().map((x) => {
         if (x.get('data')) {
-          return (<div key={x.get('groupName')}>{x.get('data').sort().map((groupData) => {
+          return (<div key={x.get('groupName')}>{x.get('data').sort((a, b) => a.getIn(['firstLevel', 'name']) > b.getIn(['firstLevel', 'name'])).map((groupData) => {
             const secondLevel = groupData.getIn(['firstLevel', 'secondLevel'])
 
             return <MarginAgreementDetail
@@ -100,7 +100,7 @@ export default class MarginAgreementPortfolio extends React.Component {
     } = this.props
 
     let diff = this.getDifferencePortfolio(assetsName, marginData)
-    diff = (diff < 0) ? "(" + (diff * -1) + ")" : diff
+    // diff = (diff < 0) ? "(" + (diff * -1) + ")" : diff
 
     let diffCal, adjCal
 
@@ -110,7 +110,7 @@ export default class MarginAgreementPortfolio extends React.Component {
           <div>Difference</div>
         </div>
         <div className={styles.packageRight}>
-          {numberWithCommas(diff)}
+          {checkNegative(diff)}
         </div>
       </div>
 
@@ -201,7 +201,7 @@ export default class MarginAgreementPortfolio extends React.Component {
                 <div>Total Amount</div>
               </div>
               <div className={styles.packageRight}>
-                {numberWithCommas(
+                {checkNegative(
                   this.getTotalAmount(marginData.get(assetsName)) +
                   (adjAmt ? Number.parseInt(adjAmt) : 0.0)
                 )}
@@ -236,7 +236,7 @@ export default class MarginAgreementPortfolio extends React.Component {
           <div className={styles.totalMargin}>
             <div className={styles.marginTitle}>Total Margin</div>
             <div className={styles.marginValue}>
-              {(handlerTotalMargin(marginData, assetsName)/ 1000000).toFixed(2)}
+              {checkNegative((handlerTotalMargin(marginData, assetsName)/ 1000000).toFixed(2))}
             </div>
             <div className={styles.marginUnit}>Millions</div>
           </div>

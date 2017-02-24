@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import {numberWithCommas} from '../../../utils/numbersWithCommas'
+import {checkNegative} from '../../../utils'
 import styles from './ChangeCallAmountPopup.css'
 
 
@@ -78,14 +78,14 @@ export default class ChangeCallAmountPopup extends React.Component {
             <div className={styles.formLabel}>Deliver Amount</div>
             <div className={styles.formInput}>
               <input disabled type="text" className={styles.inputStyle}
-                     value={numberWithCommas(this.state.deliverAmt)}/>
+                     value={checkNegative(this.state.deliverAmt)}/>
             </div>
           </div>
           <div className={styles.flexRow}>
             <div className={styles.formLabel}>Total Call Amount</div>
             <div className={styles.formInput}>
               <input disabled type="text" className={styles.inputStyle}
-                     value={numberWithCommas((Number(this.state.returnAmt)
+                     value={checkNegative((Number(this.state.returnAmt)
                      + Number(this.state.deliverAmt)))}/>
             </div>
           </div>

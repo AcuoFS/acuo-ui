@@ -1,0 +1,3 @@
+export const CURRENT_MONTH = 'CURRENT_MONTH'
+export const THREE_MONTHS = 'THREE_MONTHS'
+export const SIX_MONTHS = 'SIX_MONTHS'
