@@ -7,6 +7,11 @@ import CounterPartyUpload from './CounterPartyUpload'
 import selfStyles from './MarginAgreementAssets.css'
 
 
+export const isEmptyCounterparty = (counterpartyData) => {
+  return (counterpartyData.isEmpty() || !counterpartyData.first().get('data') ||
+  (counterpartyData.first().get('data').isEmpty()))
+}
+
 export default class MarginAgreementPortfolio extends React.Component {
   constructor(props) {
     super(props)
@@ -152,7 +157,7 @@ export default class MarginAgreementPortfolio extends React.Component {
 
     let displayAssets
 
-    if ('counterpartyAssets' == assetsName && !marginData.get(assetsName)) {
+    if ('counterpartyAssets' == assetsName && isEmptyCounterparty(marginData.get(assetsName))) {
       let findDom
 
       // Display the upload widget when it's displayed on a popup

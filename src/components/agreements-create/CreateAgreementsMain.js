@@ -37,15 +37,19 @@ export class CreateAgreementsMain extends React.Component {
       currentMenu: MENU_TRADING_ENTITIES
     }
 
-    this.handlerMenuItemClick = this.handlerMenuItemClick.bind(this)
+    this.createMenuItemDom = this.createMenuItemDom.bind(this)
   }
 
-  handlerMenuItemClick(menu, windowStyle, showExtra) {
-    this.setState({
-      sizeOfPopup: windowStyle,
-      isShowExtraDetails: showExtra,
-      currentMenu: menu
-    })
+  createMenuItemDom(menuDisplay, menu, styleOfPoppup, isShowExtra, isSelected) {
+    return (
+      <div className={styles.menuItem + ' ' + (isSelected && styles.menuItemSelected)}
+           onClick={() => this.setState({
+             sizeOfPopup: styleOfPoppup,
+             isShowExtraDetails: isShowExtra,
+             currentMenu: menu
+           })}>
+        {menuDisplay}
+      </div>)
   }
 
   render() {
@@ -58,30 +62,25 @@ export class CreateAgreementsMain extends React.Component {
             <div className={styles.compTitle}>Agreement Details</div>
             <div className={styles.menuBody}>
               <div className={styles.menuItemContainer}>
-                <div className={styles.menuItem + ' ' +
-                ((this.state.currentMenu == MENU_TRADING_ENTITIES)
-                && styles.menuItemSelected)}
-                     onClick={() => this.handlerMenuItemClick(MENU_TRADING_ENTITIES, smallStyle, false)}>
-                  Trading Entities
-                </div>
-                <div className={styles.menuItem + ' ' +
-                ((this.state.currentMenu == MENU_IDENTIFIERS)
-                && styles.menuItemSelected)}
-                     onClick={() => this.handlerMenuItemClick(MENU_IDENTIFIERS, mediumStyle, true)}>
-                  Identifiers
-                </div>
+
+                {this.createMenuItemDom('Trading Entities', MENU_TRADING_ENTITIES,
+                  smallStyle, false, (this.state.currentMenu == MENU_TRADING_ENTITIES))}
+
+                {this.createMenuItemDom('Identifiers', MENU_IDENTIFIERS,
+                  mediumStyle, true, (this.state.currentMenu == MENU_IDENTIFIERS))}
 
                 <div className={styles.subMenuItem}>CSA References</div>
                 <div className={styles.subMenuItem}>Regulatory References</div>
 
-                <div className={styles.menuItem + ' ' +
-                ((this.state.currentMenu == MENU_WORKFLOW_OPTIONS)
-                && styles.menuItemSelected)}
-                     onClick={() => this.handlerMenuItemClick(MENU_WORKFLOW_OPTIONS, bigStyle, true)}>
-                  Workflow Options
-                </div>
-                <div className={styles.menuItem}>Other Details</div>
-                <div className={styles.menuItem}>Assignment Details</div>
+                {this.createMenuItemDom('Workflow Options', MENU_WORKFLOW_OPTIONS,
+                  bigStyle, true, (this.state.currentMenu == MENU_WORKFLOW_OPTIONS))}
+
+                {this.createMenuItemDom('Other Details', MENU_OTHER_DETAILS,
+                  bigStyle, true, (this.state.currentMenu == MENU_OTHER_DETAILS))}
+
+                {this.createMenuItemDom('Assignment Details', MENU_ASSIGNMENT_DETAILS,
+                  bigStyle, true, (this.state.currentMenu == MENU_ASSIGNMENT_DETAILS))}
+
               </div>
 
               <div className={styles.btnContainer}>
