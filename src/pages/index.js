@@ -1,6 +1,6 @@
 export * from './dashboard/Dashboard'
 export * from './reconcile/Reconcile'
-export * from './pledge/PledgePage'
+export { PledgePage } from './pledge/PledgePage'
 export * from './upload-portfolio/UploadPortfolioPage'
 export * from './assets_deployed/DeployedPage'
 export * from './dispute/DisputePage'

@@ -5,6 +5,24 @@ import {COLLATERAL_EARMARKED} from '../../../constants/CollateralTypes'
 import { maxLengthToEllipsis } from '../../../utils'
 import styles from '../Pledge.css'
 
+import { DragSource } from 'react-dnd'
+import flow from 'lodash/flow'
+
+function sourceConnect(connect, monitor){
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  }
+}
+
+const recordSource = {
+  beginDrag(props) {
+    return {
+      assetId: props.propAssetId,
+      assetType: props.propAssetIdType
+    }
+  }
+}
 
 class CollateralAsset extends React.Component {
   onRemoveFromEarmarked(e, assetType, propAssetId, propAssetIdType, propHandleOnRemoveFromEarmarked) {
@@ -61,7 +79,9 @@ class CollateralAsset extends React.Component {
       propAssetId,
       propAssetIdType,
       propHandleOnRemoveFromEarmarked,
-      listOfMarginCallName
+      listOfMarginCallName,
+      connectDragSource,
+      connectDropTarget
     } = this.props
 
     let statusClass = this.getStatusColor(propStatus)
@@ -93,6 +113,7 @@ class CollateralAsset extends React.Component {
 
     if (propIsDisplayAll) {
       return (
+        connectDragSource(
         <div className={styles.collateralRow}>
           <div className={styles.collateralCell} title={propAsset}>{maxLengthToEllipsis(propAsset, 25)}</div>
           <div className={styles.collateralCell}>{propPrice}</div>
@@ -107,10 +128,12 @@ class CollateralAsset extends React.Component {
           <div className={styles.collateralCell} title={propVenue}>{maxLengthToEllipsis(propVenue, 10)}</div>
           <div className={styles.collateralCell} title={propAcctId}>{maxLengthToEllipsis(propAcctId, 10)}</div>
         </div>
+        )
       )
     }
     else {
       return (
+        connectDragSource(
         <div className={styles.collateralRow}>
           <div className={styles.collateralCell}>{propAsset}</div>
           <div className={styles.collateralCell}>{propPrice}</div>
@@ -120,13 +143,16 @@ class CollateralAsset extends React.Component {
           <div className={styles.collateralCell}>{propRating}</div>
           <div className={styles.collateralCell}>{propMaturityDate}</div>
         </div>
+        )
       )
     }
   }
 }
 
 
-export default CollateralAsset
+export const CollateralFlow = flow([
+  DragSource('record', recordSource, sourceConnect)
+])(CollateralAsset)
 
 CollateralAsset.PropTypes = {
   propAsset: PropTypes.string,

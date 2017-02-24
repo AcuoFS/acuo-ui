@@ -6,7 +6,29 @@ import * as ASSET from '../../constants/AllocatedAssetAttributes'
 import * as ALLOCATED from '../../constants/AllocatedAttributes'
 import styles from './Selection.css'
 
-export default class Selection extends React.Component {
+import { DropTarget } from 'react-dnd'
+import flow from 'lodash/flow'
+
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+
+
+function targetConnect(connect){
+  return {
+    connectDropTarget: connect.dropTarget()
+  }
+}
+
+const recordTarget = {
+  hover(props, monitor, component) {
+    const dragIndex = monitor.getItem().index;
+    const hoverIndex = props.index;
+
+    console.log(monitor.getItem())
+  }
+}
+
+class Selection extends React.Component {
   constructor(props) {
     super(props)
 
@@ -128,14 +150,16 @@ export default class Selection extends React.Component {
   render() {
     const {
       marginCall, pendingAllocationStore,
-      toggleL, toggleR, sideways
+      toggleL, toggleR, sideways,
+      connectDropTarget
     } = this.props
 
     let evlEmptyForIntMargin = this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).isEmpty()
     let evlEmptyForVariMargin = this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).isEmpty()
     let evlEmptyForMargin = !this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).isEmpty() || !this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).isEmpty()
 
-    return (
+    return connectDropTarget(
+
       <div className={styles.panel} key={marginCall.get('GUID')}>
         <DeselectionPopup propOpenedDeselectionPopup={this.state.openedDeselectionPopup}
                           propHandlerClearPopup={this.clearDeselectionPopup}
@@ -308,6 +332,11 @@ export default class Selection extends React.Component {
         </div>
 
       </div>
+
     )
   }
 }
+
+export const SelectionFlow = flow([
+  DropTarget('record', recordTarget, targetConnect)
+])(Selection)

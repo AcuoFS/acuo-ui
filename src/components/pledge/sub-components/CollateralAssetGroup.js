@@ -9,7 +9,7 @@ import styles from '../Pledge.css'
 import transitions from './CAGTransitions.css'
 
 
-export default class CollateralAssetGroup extends React.Component {
+class CollateralAssetGroup extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -51,6 +51,10 @@ export default class CollateralAssetGroup extends React.Component {
     return emptyCellList
   }
 
+  moveRecord(dragIndex, hoverIndex) {
+    console.log('dragging')
+  }
+
   render() {
     const {
       propCollateralType,
@@ -89,6 +93,7 @@ export default class CollateralAssetGroup extends React.Component {
           propAssetId={asset.assetId || '-'}
           propAssetIdType={asset.assetIdType || '-'}
           propHandleOnRemoveFromEarmarked={propHandleOnRemoveFromEarmarked}
+          moveRecord={this.moveRecord}
         />
       ))
     }
@@ -128,3 +133,5 @@ CollateralAssetGroup.PropTypes = {
 CollateralAssetGroup.defaultProps = {
   propCollateralAssetList: []
 }
+
+export default CollateralAssetGroup

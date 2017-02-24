@@ -4,9 +4,10 @@ import {
   NavigationBarContainer,
   PledgeContainer
 } from '../../containers'
+import { DragDropContext } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 
-
-class PledgePage extends React.Component{
+class PledgePage1 extends React.Component{
   componentDidMount () {
     window.scrollTo(0, 0)
   }
@@ -22,4 +23,4 @@ class PledgePage extends React.Component{
 }
 
 
-export { PledgePage }
+export const PledgePage = DragDropContext(HTML5Backend)(PledgePage1)

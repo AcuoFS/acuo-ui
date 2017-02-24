@@ -4,7 +4,7 @@
 
 import { connect } from 'react-redux'
 //import { PledgeSelectionComponent } from '../components'
-import PledgeSelectionComponent from '../components/pledge-selection/Selection'
+import { SelectionFlow } from '../components/pledge-selection/Selection'
 
 const mapStateToProps = (state, ownProps) => ({
   sideways: ownProps.sideways,
@@ -26,6 +26,6 @@ const mapDispatchToProps = dispatch => ({
 const PledgeSelectionContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(PledgeSelectionComponent)
+)(SelectionFlow)
 
 export default PledgeSelectionContainer

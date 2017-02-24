@@ -5,7 +5,7 @@ import React from 'react'
 import {render} from 'react-dom'
 import OptItem from './sub-components/OptItem'
 import ChooseCalls from './sub-components/ChooseCalls'
-import Selection from '../pledge-selection/Selection'
+import { SelectionFlow } from '../pledge-selection/Selection'
 import CollateralWidgetContainer from '../../containers/CollateralWidgetContainer'
 import {OPTIMISATION_URL,MARGIN_SELECTION_URL} from '../../constants/APIcalls'
 import styles from './Pledge.css'
@@ -86,7 +86,7 @@ class Pledge extends React.Component {
   }
 
   renderSelection(x, onTogglePendingAllocation, pendingAllocation, index){
-    return (<Selection  sideways={this.state.selectionSideway}
+    return (<SelectionFlow  sideways={this.state.selectionSideway}
                         clicked={this.changeSideways}
                         chkTick={this.chkTick}
                         toggleL={this.state.toggleShowHideL}

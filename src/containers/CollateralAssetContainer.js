@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import CollateralAssetComponent from './../components/pledge/sub-components/CollateralAsset'
+import { CollateralFlow } from './../components/pledge/sub-components/CollateralAsset'
 
 
 const mapStateToProps = state => ({
@@ -12,6 +12,6 @@ const mapStateToProps = state => ({
 
 const CollateralAssetContainer = connect(
   mapStateToProps
-)(CollateralAssetComponent)
+)(CollateralFlow)
 
 export default CollateralAssetContainer
