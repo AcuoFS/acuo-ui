@@ -74,7 +74,8 @@ export default class ImportAgreements extends React.Component {
           {
             this.state.isWidgetValidForSubmission &&
             <div className={styles.btnContainer}>
-              <button className={styles.importBtnStyle}>Import</button>
+              <button className={styles.importBtnStyle}
+                      onClick={()=> this.setState({isSendToBackend: true})}>Import</button>
             </div>
           }
         </div>
