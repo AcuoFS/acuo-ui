@@ -1,5 +1,6 @@
 import GraphComponent from './graph/Graph'
 import FilterBarComponent from './filter-bar/FilterBar'
+import FilterBarReconPageComponent from './filter-bar-recon-page/FilterBar'
 import MarginAgreementsComponent from './margin-agreement/MarginAgreementList'
 import NavigationBarComponent from './navigation-bar/NavigationBar'
 import TableComponent from './table/Table'
@@ -9,10 +10,13 @@ import UploadWidgetComponent from './upload-portfolio/UploadWidget'
 import PledgeComponent from './pledge/Pledge'
 import FlightComponent from './assets-deployed/Flight'
 import MarginCallComponent from './margin-call/MarginCall'
+import DisputeWidgetComponent from './dispute/DisputeWidget'
+import AgreementsComponent from './agreements/Agreements'
 
 export {
   GraphComponent,
   FilterBarComponent,
+  FilterBarReconPageComponent,
   MarginAgreementsComponent,
   NavigationBarComponent,
   TableComponent,
@@ -21,5 +25,7 @@ export {
   UploadPortfolioButton,
   UploadWidgetComponent,
   FlightComponent,
-  MarginCallComponent
+  MarginCallComponent,
+  DisputeWidgetComponent,
+  AgreementsComponent
 }

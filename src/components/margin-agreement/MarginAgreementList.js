@@ -2,8 +2,8 @@
  * Created by panyong on 4/11/16.
  */
 import React, {PropTypes} from 'react'
-import {List, Map} from 'immutable'
 import MarginAgreementPortfolio from './sub-components/MarginAgreementPortfolio'
+import {UNMATCHED_PORTFOLIO_URL} from '../../constants/APIcalls'
 import styles from './MarginAgreementList.css'
 
 
@@ -15,11 +15,8 @@ export default class MarginAgreementList extends React.Component {
     //   adjAmount: 0.0
     // }
 
-    const {recon, onLineItemInsertion} = this.props
+    const {recon} = this.props
     this.displayLineItems = this.displayLineItems.bind(this)
-    if (!recon.isEmpty()) {
-      onLineItemInsertion(recon)
-    }
     // this.getTotalAmount = this.getTotalAmount.bind(this)
     // this.getPercentage = this.getPercentage.bind(this)
     // this.getBtnColour = this.getBtnColour.bind(this)
@@ -27,42 +24,44 @@ export default class MarginAgreementList extends React.Component {
     // this.isDisableReconButton = this.isDisableReconButton.bind(this)
   }
 
-  displayLineItems(recon, onReconItem, onSelectedItem) {
+  displayLineItems(recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList,
+                   onSelectSecondLevelItem) {
     return (recon.map((x) => {
-      return x.get('marginStatus').map((y) => {
-        return y.get('timeFrames').map((z) => {
-          return z.get('actionsList').map((i) => {
 
-            if(i.get('direction') == 'OUT')
-              return (
-                <MarginAgreementPortfolio
-                  onSelectedItem={onSelectedItem}
-                  portfolioData={i}
-                  onReconItem={onReconItem}/>
-              )
-          })
-        })
-      })
+      if(x.get('direction') == 'OUT')
+      return (
+        <MarginAgreementPortfolio
+          key={x}
+          onSelectFirstLevelItem={onSelectFirstLevelItem}
+          portfolioData={x}
+          onReconItem={onReconItem}
+          firstLevelList={firstLevelList}
+          secondLevelList={secondLevelList}
+          onSelectSecondLevelItem={onSelectSecondLevelItem}/>
+      )
+
     }))
   }
 
+  componentDidUpdate() {
+    if(this.props.recon.size <= 0)
+      this.props.resetFilters()
+  }
+
   render() {
-    const {recon, onReconItem, onSelectedItem} = this.props
+    const {recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList,
+      onSelectSecondLevelItem} = this.props
     return (
       <div className={styles.actionContainer}>
-        {this.displayLineItems(recon, onReconItem, onSelectedItem)}
+        {this.displayLineItems(recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList,
+          onSelectSecondLevelItem)}
       </div>
     )
   }
 }
 
 MarginAgreementList.PropTypes = {
-  recon: PropTypes.instanceOf(List).isRequired,
-  onLineItemInsertion: PropTypes.func.isRequired,
+  recon: PropTypes.array.isRequired,
   onReconItem: PropTypes.func.isRequired,
   onSelectedItem: PropTypes.func.isRequired
-}
-
-MarginAgreementList.defaultProps = {
-  recon: List()
 }

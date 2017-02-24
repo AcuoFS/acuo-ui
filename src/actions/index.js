@@ -6,6 +6,11 @@ export const initState = (state) => ({
   state: state
 })
 
+export const reconInitState = (items) => ({
+  type: ActionTypes.RECON_INIT_STATE,
+  items,
+})
+
 export const filterStateDeriv = (derivType) => ({
   type: ActionTypes.FILTER_STATE_DERIV,
   filter: derivType
@@ -36,11 +41,6 @@ export const filterCptyOrg = (cptyOrg) => ({
 export const filterCptyEntity = (cptyEntity) => ({
   type: ActionTypes.FILTER_STATE_CPTYENTITY,
   filter: cptyEntity
-})
-
-export const lineItemInsertion = (lineItem) => ({
-  type: ActionTypes.LINE_ITEM_INSERTION,
-  addition: lineItem
 })
 
 export const updateCollateral = (collateralData) => ({
@@ -85,6 +85,10 @@ export const toggleCheckall = () => ({
   type: ActionTypes.TOGGLE_CHECKALL
 })
 
+export const clearPendingAllocation = () => ({
+  type: ActionTypes.CLEAR_PENDING_ALLOCATION
+})
+
 export const removeAssetFromEarmark = (e, assetType, assetId, assetIdType) => ({
   type: ActionTypes.REMOVE_ASSET_FROM_EARMARK,
   asset : {
@@ -92,4 +96,23 @@ export const removeAssetFromEarmark = (e, assetType, assetId, assetIdType) => ({
     assetId : assetId,
     assetIdType : assetIdType
   }
+})
+
+//recon
+export const firstLeveSelect = (GUID, firstLevelID) => ({
+  type: ActionTypes.FIRSTLEVEL_SELECT,
+  GUID: GUID,
+  firstLevelID: firstLevelID
+})
+
+export const secondLevelSelect = (GUID, parentID, secondLevelID) => ({
+  type: ActionTypes.SECONDLEVEL_SELECT,
+  GUID: GUID,
+  parentID: parentID,
+  secondLevelID: secondLevelID
+})
+
+export const updateReconFilter = (value) =>({
+  type: ActionTypes.RECON_FILTER_SET,
+  value: value
 })

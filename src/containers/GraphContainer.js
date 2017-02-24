@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { GraphComponent } from '../components'
-import { filterTimeWindowStatus } from '../actions'
+import { updateReconFilter } from '../actions'
 
 const mapStateToProps = state => ({
   currentTime: state.mainReducer.getIn(['display', 'timeUpdated']),
@@ -8,8 +8,21 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  onUnreconBubbleClick: (minTime, maxTime, timeRangeText) => {
-    dispatch(filterTimeWindowStatus(new Date(minTime).getTime(), new Date(maxTime).getTime(), timeRangeText))
+  onUnreconBubbleClick: (minTime, maxTime, timeRangeText, status) => {
+    return dispatch(updateReconFilter({
+      attr: 'notificationTime',
+      selected: {
+        label: timeRangeText.toUpperCase(),
+        value: new Date(minTime).getTime()
+      }
+    })),
+      dispatch(updateReconFilter({
+        attr: 'status',
+        selected: {
+          label: status.toUpperCase(),
+          value: status
+        }
+      }))
   }
 })
 

@@ -9,3 +9,17 @@
     width: 68px;
     font-size: 15px;
 }
+
+.comment {
+    margin-top: 10px;
+    color: #4A4A4A;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.findPortfolio {
+    color: #4A90E2;
+    cursor: pointer;
+    margin: 15px 0;
+    font-size: 16px;
+}

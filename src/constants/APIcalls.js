@@ -13,12 +13,17 @@ export const RECON_URL = 'http://52.74.186.112:8081/recon'
 // export const ALLOCATE_COLLATERALS_URL = 'http://52.74.186.112:8081/allocate-selection'
 
 export const OPTIMISATION_URL         = 'http://52.74.186.112:8081/pledge/optimization'
-export const COLLATERAL_URL           = 'http://52.74.186.112:8081/pledge/init-collateral'
+export const COLLATERAL_URL           = 'http://52.74.186.112:8081/pledge/init-new-collateral'
 export const MARGIN_SELECTION_URL     = 'http://52.74.186.112:8081/pledge/init-selection'
 export const ALLOCATE_COLLATERALS_URL = 'http://52.74.186.112:8081/pledge/allocate-selection'
+export const ALLOCATE_COLLATERALS_URL_NEW = 'http://52.74.186.112:8081/pledge/allocate-selection-new'
+export const PLEDGE_ALLOCATIONS = 'http://52.74.186.112:8081/pledge/pledge-allocation'
 
 // POST
 export const UPLOAD_FILE_URL = 'http://valuation.acuo.com/acuo/api/upload'
 export const RECON_DATA_URL  = 'http://margin.acuo.com/acuo/api/margin/reconcile/'
 
 export const REMOVE_ASSET_ALLOCATION_URL = 'url to remove(and earmark) asset from margin call'
+
+// UNMATCHED PORTFOLIO
+export const UNMATCHED_PORTFOLIO_URL = 'http://52.74.186.112:8081/unmatched'

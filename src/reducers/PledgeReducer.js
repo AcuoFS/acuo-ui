@@ -1,6 +1,13 @@
 import * as ActionTypes from '../constants/ActionTypes'
 import { Map, fromJS, List, toJS } from 'immutable'
 
+const initialState = Map({
+  pledgeData: Map({
+    optimisation: List(),
+    selection: List(),
+    collateral: Map()
+  })
+})
 
 const initOptimisationSettings = (state, settings) => {
   return state.setIn(['pledgeData', 'optimisation'], fromJS(settings))
@@ -57,7 +64,7 @@ export const removeAssetFromEarmark = (state, removingAsset) => {
   }
 }
 
-const PledgeReducer = (state = Map(), action) => {
+const PledgeReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.INIT_OPTIMISATION_SETTINGS:
       return initOptimisationSettings(state, action.settings)
@@ -76,6 +83,9 @@ const PledgeReducer = (state = Map(), action) => {
 
     case ActionTypes.TOGGLE_CHECKALL:
       return toggleCheckall(state)
+
+    case ActionTypes.CLEAR_PENDING_ALLOCATION:
+      return state.setIn(['pledgeData', 'pendingAllocation'], List())
 
     case ActionTypes.REMOVE_ASSET_FROM_EARMARK:
       return removeAssetFromEarmark(state, action.asset)

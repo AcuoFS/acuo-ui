@@ -1,7 +1,9 @@
 import React from 'react'
-import {numberWithCommas} from '../../utils/numbersWithCommas'
-import DeselectionPopup from './DeselectionPopup'
+import {checkNegative} from '../../utils'
+import DeselectionPopup from './sub-components/DeselectionPopup'
 import {List, toJS} from 'immutable'
+import * as ASSET from '../../constants/AllocatedAssetAttributes'
+import * as ALLOCATED from '../../constants/AllocatedAttributes'
 import styles from './Selection.css'
 
 export default class Selection extends React.Component {
@@ -27,10 +29,10 @@ export default class Selection extends React.Component {
           return (
             <div className={styles.firstLevel} key={index}>
               <div className={styles.assetName}>
-                {y.get('firstLevel')}
+                {y.getIn(['firstLevel', 'name'])}
               </div>
               <div className={styles.amount}>
-                {numberWithCommas(y.get('secondLevel').reduce((sum, z) => {
+                {checkNegative(y.getIn(['firstLevel', 'secondLevel']).reduce((sum, z) => {
                   return sum + parseFloat(z.get('amount'))
                 }, 0))}
               </div>
@@ -40,27 +42,26 @@ export default class Selection extends React.Component {
     )
   }
 
-  renderMargin(asset, mgnType) {
-    const popupID = asset.get('GUID') + mgnType + asset.get('assetName')
-
+  renderMargin(asset, mgnType, guid) {
+    const popupID = guid + mgnType + asset.get(ASSET.A_ID) + asset.get(ASSET.A_NAME)
     return (
-      <tr key={asset.get('assetName')}>
-        <td>{asset.get('assetName')}</td>
-        <td>{numberWithCommas(asset.get('valuePostHaircut'))}</td>
-        <td>{asset.get('CCY')}</td>
-        <td>{asset.get('haircut')}%</td>
-        <td>{asset.get('value')}</td>
-        <td>{numberWithCommas(asset.get('FX'))}</td>
-        <td>{asset.get('venue')}</td>
+      <tr key={asset.get(ASSET.A_ID)}>
+        <td>{asset.get(ASSET.A_NAME)}</td>
+        <td>{checkNegative(asset.get(ASSET.A_NET_AMT))}</td>
+        <td>{asset.get(ASSET.A_CCY)}</td>
+        <td>{asset.get(ASSET.A_HAIRCUT_PCT)}%</td>
+        <td>{checkNegative(asset.get(ASSET.A_AMT))}</td>
+        <td>{checkNegative(asset.get(ASSET.A_FX))}</td>
+        <td>{asset.get(ASSET.A_VENUE)}</td>
         <td>
           <div className={styles.earmarkAssetButton}
                onClick={() => {
                  this.setDeselectionPopup(popupID)
                }}>
             <img src="./images/pledge/cancel.png"></img>
-            <div className={styles.tooltip}>
-              Move to Earmarked
-            </div>
+            {/*<div className={styles.tooltip}>*/}
+              {/*Move to Earmarked*/}
+            {/*</div>*/}
           </div>
 
         </td>
@@ -130,9 +131,9 @@ export default class Selection extends React.Component {
       toggleL, toggleR, sideways
     } = this.props
 
-    let evlEmptyForIntMargin = this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).isEmpty()
-    let evlEmptyForVariMargin = this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).isEmpty()
-    let evlEmptyForMargin = !this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).isEmpty() || !this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).isEmpty()
+    let evlEmptyForIntMargin = this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).isEmpty()
+    let evlEmptyForVariMargin = this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).isEmpty()
+    let evlEmptyForMargin = !this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).isEmpty() || !this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).isEmpty()
 
     return (
       <div className={styles.panel} key={marginCall.get('GUID')}>
@@ -147,7 +148,7 @@ export default class Selection extends React.Component {
               <img
                 src={(this.checkIfExist(pendingAllocationStore).includes(marginCall.get('GUID')) ? "./images/pledge/checkboxwithtick.png" : "./images/pledge/checkbox.png")}
                 className={styles.selTick} onClick={this.togglePendingAllocation} data-ref={marginCall.get('GUID')}/>
-              <span className={styles.panelTitle}>{marginCall.get('GUID')}</span>
+              <span className={styles.panelTitle}>{marginCall.get('agreementName')}</span>
               <div className={styles.subtitle}>
                 {marginCall.get('legalEntity')} - {marginCall.get('GUID')}
               </div>
@@ -168,9 +169,9 @@ export default class Selection extends React.Component {
                   Total
                 </div>
                 <div className={styles.amount}>
-                  {numberWithCommas(this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {
+                  {checkNegative(this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {
                     return sum + x.get('data').reduce((sum, y) => {
-                        return sum + y.get('secondLevel').reduce((sum, z) => {
+                        return sum + y.getIn(['firstLevel','secondLevel']).reduce((sum, z) => {
                             return sum + parseFloat(z.get('amount'))
                           }, 0)
                       }, 0)
@@ -189,7 +190,7 @@ export default class Selection extends React.Component {
                 <img src={sideways}
                      onClick={() => {
                        this.handlerChangeSideWaysClick(this.props)
-                     }} alt=""/>
+                     }} alt="" className={styles.cursorPointer}/>
               </div>
             </div>
 
@@ -197,7 +198,7 @@ export default class Selection extends React.Component {
               <div className={styles.ttlMargin}>
                 <div>Total Allocated</div>
                 <div className={styles.bigFig + ' ' + styles.bold}>
-                  {Math.round((marginCall.getIn(['allocated', 'marginTotal']) || 0) / 10000) / 100}
+                  {Math.round((marginCall.getIn(['allocated', ALLOCATED.MGN_TOTAL]) || 0) / 10000) / 100}
                 </div>
                 <div className={styles.bold}>Million</div>
               </div>
@@ -211,7 +212,7 @@ export default class Selection extends React.Component {
                   <thead>
                   <tr className={styles.bold}>
                     <th></th>
-                    <th>Value(post <br/>haircut)</th>
+                    <th>Adjusted Value</th>
                     <th>CCY</th>
                     <th>Haircut</th>
                     <th>Value</th>
@@ -225,13 +226,13 @@ export default class Selection extends React.Component {
                     <tr>
                       <td colSpan="8" className={styles.notAlcText}>Collateral has not been allocated</td>
                     </tr> :
-                    this.checkIfExist(marginCall.getIn(['allocated', 'initialMargin'])).map(
-                      x => this.renderMargin(x, 'initialMargin'))
+                    this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).map(
+                      x => this.renderMargin(x, ASSET.A_LIST_IM, marginCall.get('GUID')))
                   }
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
                     <td>
-                      {numberWithCommas((marginCall.getIn(['allocated', 'initialMarginTotal']) || 0).toFixed(2))}
+                      {checkNegative((marginCall.getIn(['allocated', ALLOCATED.IM_TOTAL]) || 0).toFixed(2))}
                     </td>
                     <td>USD</td>
                     <td></td>
@@ -265,15 +266,15 @@ export default class Selection extends React.Component {
                     <tr>
                       <td colSpan="8" className={styles.notAlcText}>Collateral has not been allocated</td>
                     </tr> :
-                    this.checkIfExist(marginCall.getIn(['allocated', 'variationMargin'])).map(
-                      x => this.renderMargin(x, 'variationMargin'))
+                    this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).map(
+                      x => this.renderMargin(x, ASSET.A_LIST_VM, marginCall.get('GUID')))
                   }
 
 
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
                     <td>
-                      {numberWithCommas((marginCall.getIn(['allocated', 'variationMarginTotal']) || 0).toFixed(2))}
+                      {checkNegative((marginCall.getIn(['allocated', ALLOCATED.VM_TOTAL]) || 0).toFixed(2))}
                     </td>
                     <td>USD</td>
                     <td></td>
@@ -289,7 +290,7 @@ export default class Selection extends React.Component {
                   <tr className={styles.bold}>
                     <td>Total</td>
                     <td
-                      className={styles.totalTable1 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>{numberWithCommas((marginCall.getIn(['allocated', 'marginTotal']) || 0).toFixed(2))}</td>
+                      className={styles.totalTable1 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>{checkNegative((marginCall.getIn(['allocated', ALLOCATED.MGN_TOTAL]) || 0).toFixed(2))}</td>
                     <td className={styles.totalTable2 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>USD</td>
                     <td></td>
                     <td></td>
