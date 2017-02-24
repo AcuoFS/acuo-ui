@@ -1,0 +1,106 @@
+.disputeTable {
+    display: table;
+    width: 100%;
+}
+
+.disputeTableRow {
+    display: table-row;
+    composes: tableRow from '../../../static/commonStyles/common.css';
+}
+
+.disputeTableHeaderRow {
+    display: table-row;
+    composes: tableHeader from '../../../static/commonStyles/common.css';
+}
+
+.disputeTableCell {
+    display: table-cell;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.disputeTableRow:nth-child(odd) {
+    background-color: #EEEEEE;
+}
+
+.disputeTableRow:nth-child(even) {
+    background-color: #DCEEFF;
+}
+
+.downArrow,
+.upArrow {
+    position: relative;
+}
+
+.downArrow::before {
+    content: '';
+    position: absolute;
+    border-top: 12px solid #4A4A4A;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    top: 16px;
+    left: 4px;
+}
+
+.downArrow::after {
+    content: '';
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    top: 11px;
+    left: 4px;
+}
+
+.disputeTableRow:nth-child(odd) .downArrow::after {
+    border-top: 12px solid #EEEEEE;
+}
+
+.disputeTableRow:nth-child(even) .downArrow::after {
+    border-top: 12px solid #DCEEFF;
+}
+
+.upArrow::before {
+    content: '';
+    position: absolute;
+    border-bottom: 12px solid #4A4A4A;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    top: 15px;
+    left: 4px;
+}
+
+.upArrow::after {
+    content: '';
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    top: 20px;
+    left: 4px;
+}
+
+.disputeTableRow:nth-child(odd) .upArrow::after {
+    border-bottom: 12px solid #EEEEEE;
+}
+
+.disputeTableRow:nth-child(even) .upArrow::after {
+    border-bottom: 12px solid #DCEEFF;
+}
+
+/* Set width, height and line-height to same(center text vertically),
+   border-radius at 50%,
+   text alight center for horizontal*/
+.roleIcon {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 50%;
+    text-align: center;
+    background-color: #4A90E2;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    composes: baseFontBold from '../../../static/css-components/fonts.css';
+}
+
+.roleIconTwo {
+    background-color: #E29B49;
+}

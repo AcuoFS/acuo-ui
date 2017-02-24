@@ -2,28 +2,26 @@ import React from 'react'
 import TableRow from './TableRow'
 import TableCell from './TableCell'
 import styles from '../Table.css'
-
+import _ from 'lodash'
 
 class TableBody extends React.Component {
   constructor(props) {
     super(props)
-    this.renderRow = this.renderRow.bind(this)
   }
 
-  renderRow(status) {
-
-    if (status.get('timeFrames'))
-      return status.get('timeFrames').map((x) => {
-        if (x.get('actionsList'))
-          return x.get('actionsList').map((y) => {
-            return (<TableRow numberWithCommas={this.props.numberWithCommas} rowItems={y}/>)
-          })
-      })
+  renderRow(status, onLineItemClick) {
+    if (status.timeFrames)
+      return _.map(status.timeFrames, (x) =>
+        (x.actionsList ? _.map(x.actionsList, (y) =>
+          <TableRow rowItems={y} onLineItemClick={onLineItemClick}/>
+        ) : '')
+      )
   }
 
   render() {
+    const { marginStatus, open, onLineItemClick } = this.props
     return (
-      <div className={this.props.open}>
+      <div className={open}>
         <div className={styles.tableBody}>
           <TableCell cellValue={'LEGAL ENTITY'}/>
           <TableCell cellValue={'CPTY Org'}/>
@@ -35,7 +33,7 @@ class TableBody extends React.Component {
           <TableCell cellValue={'In / Out'}/>
           <TableCell cellValue={'Status'}/>
         </div>
-        {this.props.marginStatus.map(this.renderRow)}
+        {_.map(marginStatus, (status) => this.renderRow(status, onLineItemClick))}
       </div>
     )
   }

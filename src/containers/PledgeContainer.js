@@ -6,11 +6,15 @@ import {
   initSelection,
   togglePendingAllocation,
   toggleCheckall,
-  updateCollateral,
-  removeAssetFromEarmark } from '../actions'
+  clearPendingAllocation} from '../actions'
 import { List, fromJS } from 'immutable'
-
-import {ALLOCATE_COLLATERALS_URL} from '../constants/APIcalls'
+import {
+  ALLOCATE_COLLATERALS_URL_NEW,
+  PLEDGE_ALLOCATIONS,
+  MARGIN_SELECTION_URL
+} from '../constants/APIcalls'
+import * as ASSET from '../constants/AllocatedAssetAttributes'
+import * as P_ASSET from '../constants/PledgeAssetAttribute'
 
 const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
   if(pendingAllocationSize >= selectionSize)
@@ -23,8 +27,20 @@ const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
 
 const checkIfExist = (something) => something || List()
 
+const updatePledgeListToSend = (assetList, pledgeToSend, guid) => {
+  assetList.map((asset) => {
+    // Create obj and push into array to send
+    pledgeToSend = [...pledgeToSend, {
+      [P_ASSET.P_MGN_CALL_ID]: guid,
+      [ASSET.A_ID]: asset[ASSET.A_ID],
+      [ASSET.A_QTY]: asset[ASSET.A_QTY],
+      [ASSET.A_FROM_ACCT]: asset[ASSET.A_FROM_ACCT]
+    }]
+  })
+  return pledgeToSend
+}
+
 const mapStateToProps = state => ({
-  collateral : state.PledgeReducer.getIn(['pledgeData', 'collateral']),
   optimisation: state.PledgeReducer.getIn(['pledgeData', 'optimisation']),
   selection: state.PledgeReducer.getIn(['pledgeData', 'selection']),
   pendingAllocation: state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation']),
@@ -47,22 +63,78 @@ const mapDispatchToProps = dispatch => ({
   onToggleCheckall: () => {
     dispatch(toggleCheckall())
   },
+  onClearPendingAllocation: () => {
+    dispatch(clearPendingAllocation())
+  },
+  // onAllocate_old: (guids, optimisationSetting) => {
+  //   const data = {guids, optimisationSetting}
+  //   fetch(ALLOCATE_COLLATERALS_URL, {
+  //     method: 'POST',
+  //     body: JSON.stringify(data)
+  //   }).then(response => {
+  //     return response.json()
+  //   }).then(obj => {
+  //     // dispatch(updateCollateral(fromJS(obj.data.collateral)))
+  //     dispatch(initSelection(fromJS(obj.items)))
+  //   })
+  // },
   onAllocate: (guids, optimisationSetting) => {
-    const data = {guids, optimisationSetting}
-    fetch(ALLOCATE_COLLATERALS_URL, {
+    fetch(ALLOCATE_COLLATERALS_URL_NEW, {
       method: 'POST',
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        optimisationSettings: optimisationSetting,
+        toBeAllocated: guids
+      })
     }).then(response => {
+      console.log('Allocate response: ' + response)
       return response.json()
     }).then(obj => {
-      // dispatch(updateCollateral(fromJS(obj.data.collateral)))
       dispatch(initSelection(fromJS(obj.items)))
+    }).catch(error => {
+      console.log('Error: ' + error)
     })
   },
+  onPledge: (selectionList) => {
+    let pledgeToSend = []
+    selectionList.map((statement) => {
+      // Check statement w allocations
+      if (statement.allocated && statement.allocated[ASSET.A_LIST_IM]) {
+        pledgeToSend =
+          updatePledgeListToSend(
+            statement.allocated[ASSET.A_LIST_IM],
+            pledgeToSend,
+            statement.GUID)
+      }
+      if (statement.allocated && statement.allocated[ASSET.A_LIST_VM]) {
+        pledgeToSend =
+          updatePledgeListToSend(
+            statement.allocated[ASSET.A_LIST_VM],
+            pledgeToSend,
+            statement.GUID)
+      }
+    })
 
-  onRemoveFromEarmarked: (e, assetType, propAssetId, propAssetIdType) => {
-
-    dispatch(removeAssetFromEarmark(e, assetType, propAssetId, propAssetIdType))
+    fetch(PLEDGE_ALLOCATIONS, {
+      method: 'POST',
+      body: JSON.stringify(pledgeToSend)
+    }).then(response => {
+      console.log('Pledge response: ' + response)
+      if (response.status == 200) {
+        // TODO: To handle how to inform user that pledge data is sucessfully sent
+        alert('Sent to endpoint!' + JSON.stringify(pledgeToSend))
+        // Refresh selections
+        fetch(MARGIN_SELECTION_URL).then(response => {
+          return response.json()
+        }).then(obj => {
+          dispatch(initSelection(obj.items))
+          dispatch(clearPendingAllocation())
+        })
+      } else {
+        alert('Error sending pledge details')
+      }
+    }).catch(error => {
+      console.log('Error: ' + error)
+    })
   }
 })
 

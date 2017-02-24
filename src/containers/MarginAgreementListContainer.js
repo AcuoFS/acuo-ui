@@ -1,18 +1,26 @@
 import { connect } from 'react-redux'
-import { fromJS } from 'immutable'
+import { fromJS, List } from 'immutable'
 import { MarginAgreementsComponent } from '../components'
-import { lineItemInsertion, selectedItems, initState, filterStateStatus } from '../actions'
+import { selectedItems, reconInitState, firstLeveSelect, secondLevelSelect, updateReconFilter } from '../actions'
 import { RECON_DATA_URL, RECON_URL, DASHBOARD_URL } from '../constants/APIcalls'
+import filterItems from '../utils/filterItems'
 
+const mapStateToProps = state => {
+  const items = state.ReconReducer.get('items').toJS()
+  const filters = state.ReconReducer.get('filters').toJS()
+  const filteredItems = filterItems(items, filters)
 
-const mapStateToProps = state => ({
-  recon : state.mainReducer.getIn(['display', 'derivatives'])
-})
+  return {
+    recon : fromJS(filteredItems),
+    firstLevelList : state.ReconReducer.get('firstLevelList') || List(),
+    secondLevelList : state.ReconReducer.get('secondLevelList') || List(),
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
-  onLineItemInsertion: (lineItem) => {
-    dispatch(lineItemInsertion(lineItem))
-  },
+  // ************************************
+  // !!! THIS LOGIC PART NEED REVIEW !!!
+  // ************************************
   onReconItem : (e) => {
     //console.log(e.currentTarget.dataset.ref)
     //new recon entire margin call with one get api
@@ -21,22 +29,67 @@ const mapDispatchToProps = dispatch => ({
     }).then(response => {
       return response
     }).then(obj => {
-      fetch(DASHBOARD_URL).then((response) => {
+      fetch(RECON_URL).then((response) => {
         return response.json()
       }).then((obj) => {
-        dispatch(initState(fromJS(obj)))
-        fetch(RECON_URL).then((response) => {
-          return response.json()
-        }).then((obj) => {
-          dispatch(lineItemInsertion(fromJS(obj.items)))
-          dispatch(filterStateStatus('unrecon'))
-        })
+        const {items} = obj
+        dispatch(reconInitState(items))
       })
     })
     //dispatch(reconItem(e.currentTarget.dataset.ref)) //old recon line by line
   },
   onSelectedItem : (guid, assetID) => {
     dispatch(selectedItems(guid, assetID))
+  },
+  onSelectFirstLevelItem: (GUID, firstLevelID) => {
+    dispatch(firstLeveSelect(GUID, firstLevelID))
+  },
+  onSelectSecondLevelItem: (GUID, parentID, secondLevelID) => {
+    dispatch(secondLevelSelect(GUID, parentID, secondLevelID))
+  },
+  resetFilters: () => {
+    return dispatch(updateReconFilter({
+      attr: 'type',
+      selected: {
+        label: '',
+        value: ''
+      }
+    })),
+      dispatch(updateReconFilter({
+        attr: 'status',
+        selected: {
+          label: '',
+          value: ''
+        }
+      })),
+      dispatch(updateReconFilter({
+        attr: 'cptyEntity',
+        selected: {
+          label: '',
+          value: ''
+        }
+      })),
+      dispatch(updateReconFilter({
+        attr: 'notificationTime',
+        selected: {
+          label: '',
+          value: ''
+        }
+      })),
+      dispatch(updateReconFilter({
+        attr: 'legalEntity',
+        selected: {
+          label: '',
+          value: ''
+        }
+      })),
+      dispatch(updateReconFilter({
+        attr: 'cptyOrg',
+        selected: {
+          label: '',
+          value: ''
+        }
+      }))
   }
 })
 

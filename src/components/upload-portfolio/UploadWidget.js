@@ -1,6 +1,5 @@
 import React from 'react'
-import ReactDOMServer from 'react-dom/server'
-import DropzoneComponent from 'react-dropzone-component'
+import DzComponent from './DzComponent'
 import {UPLOAD_FILE_URL} from '../../constants/APIcalls'
 import styles from './UploadWidget.css'
 
@@ -10,113 +9,78 @@ export default class UploadWidget extends React.Component {
     super(props)
 
     this.state = {
-      isWidgetValidForSubmission: false
+      isWidgetValidForSubmission: false,
+      isSendToBackend: false
     }
 
-    this.djsConfig = {
-      // addRemoveLinks: true,
-      autoProcessQueue: false
-      , maxFiles: 5
-      , parallelUploads: 5
-      // Accept only XLSX files
-      , acceptedFiles: ".xlsx"
-      // Overriding the default HTML tags by DZ
-      , previewTemplate: ReactDOMServer.renderToStaticMarkup(
-        <div className={"dz-preview dz-file-preview " + styles.alignFileIconLeft}>
-          <div className="dz-details">
-            <img data-dz-thumbnail="true" src="./images/upload-portfolio/file_icon.png"/>
-            <div className={"dz-filename " + styles.fileName}>
-              <a href="#" data-dz-remove>
-                <img src="./images/upload-portfolio/cross_cancel.png" alt="Click me to remove the file."/>
-              </a>
-
-              <span data-dz-name="true" className={styles.fileNameText}></span>
-            </div>
-          </div>
-          <div className="dz-success-mark"><span>✔</span></div>
-          <div className="dz-error-mark"><span>✘</span></div>
-          <div className="dz-error-message"><span data-dz-errormessage="true"></span></div>
-        </div>
-      )
-      // Using css selector to define clickable element
-      , clickable: ".triggerFileSelection"
-    }
-
-    this.componentConfig = {
-      iconFiletypes: ['.xlsx'],
-      showFiletypeIcon: false,
-      // Change this param to the server's URL
-      postUrl: UPLOAD_FILE_URL
-    }
-
-    this.dropzone = null
     this.onGenerate = this.onGenerate.bind(this)
+    this.handleFileAdded = this.handleFileAdded.bind(this)
+    this.handleRemove = this.handleRemove.bind(this)
+    this.clearSend = this.clearSend.bind(this)
   }
 
-  handleFileAdded(file) {
-    console.log("handling file add " + file)
-
+  handleFileAdded(hasFiles) {
     this.setState({
-      isWidgetValidForSubmission: this.dropzone.files.length > 0
+      isWidgetValidForSubmission: hasFiles
     })
   }
 
-  success(file) {
-    console.log('uploaded', file)
-    // Wait for animation to complete before removing file from the widget
-    setTimeout((() => {
-      this.dropzone.removeFile(file)
-    }).bind(this), 1500)
-  }
-
   onGenerate() {
-    console.log(this.componentConfig.postUrl)
-    this.dropzone.processQueue()
+    this.setState({
+      isSendToBackend: true
+    })
 
     this.props.showMarginCall()
   }
 
-  handleError(file) {
-    if (!file.accepted) {
-      // Remove the accepted file
-      this.dropzone.removeFile(file)
-    }
-  }
-
-  handleRemove() {
+  clearSend(){
     this.setState({
-      isWidgetValidForSubmission: !(this.dropzone.files.length == 0)
+      isSendToBackend: false
     })
   }
 
-  render() {
-    const config = this.componentConfig
-    const djsConfig = this.djsConfig
+  handleRemove(isEmpty) {
+    this.setState({
+      isWidgetValidForSubmission: !isEmpty
+    })
+  }
 
-    const eventHandlers = {
-      init: dz => this.dropzone = dz,
-      addedfile: this.handleFileAdded.bind(this),
-      success: this.success.bind(this),
-      error: this.handleError.bind(this),
-      removedfile: this.handleRemove.bind(this)
-    }
+  templateForDz(){
+    return <div className={"dz-preview dz-file-preview " + styles.alignFileIconLeft}>
+      <div className="dz-details">
+        <img data-dz-thumbnail="true" src="./images/upload-portfolio/file_icon.png"/>
+        <div className={"dz-filename " + styles.fileName}>
+          <a href="#" data-dz-remove>
+            <img src="./images/upload-portfolio/cross_cancel.png" alt="Click me to remove the file."/>
+          </a>
+
+          <span data-dz-name="true" className={styles.fileNameText}></span>
+        </div>
+      </div>
+      <div className="dz-success-mark"><span>✔</span></div>
+      <div className="dz-error-mark"><span>✘</span></div>
+      <div className="dz-error-message"><span data-dz-errormessage="true"></span></div>
+    </div>
+  }
+
+  render() {
 
     return (
       /*<form id="uploadbanner" enctype="multipart/form-data" method="post" action="http://localhost:3000/">
-          <input type="file" id="myFile"/>
-          <input type="submit" value="Submit"/>
+       <input type="file" id="myFile"/>
+       <input type="submit" value="Submit"/>
        </form>*/
       <div className={styles.componentStyle}>
         <div className={styles.widgetHeader}>Upload Portfolio</div>
-        <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig}>
-          <div className="dz-message">
-            <span>
-              Drag and drop portfolio files, or&nbsp;
-              <a href="#" className="triggerFileSelection"
-                 onClick={(e)=> e.preventDefault()}>browse</a>.
-            </span>
-          </div>
-        </DropzoneComponent>
+
+        <DzComponent propHandlerFileAdded={this.handleFileAdded}
+                     propHandlerRemove={this.handleRemove}
+                     propIsSendToBackend={this.state.isSendToBackend}
+                     propClearSendToBackend={this.clearSend}
+                     propTemplate={this.templateForDz()}
+                     propNoOfFiles={5}
+                     propPostUrl={UPLOAD_FILE_URL}/>
+
         <div
           className={this.state.isWidgetValidForSubmission ?
             styles.buttonContainerEnabled : styles.buttonContainerDisabled}>

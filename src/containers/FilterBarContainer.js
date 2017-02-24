@@ -10,13 +10,14 @@ import {
 } from '../actions'
 import {FilterBarComponent} from '../components'
 import { Set, Map, List, fromJS } from 'immutable'
+import { getDate } from '../utils'
 
 
 const mapStateToProps = state => ({
   filters: state.mainReducer.getIn(['inputs', 'filters']),
   legalEntityList: computeLegalEntityList(state.mainReducer),
   derivativeType: computeDerivativeType(state.mainReducer),
-  timeWindowList: computeTimeWindowList(state.mainReducer),
+  timeWindowList: computeTimeWindowList(state.mainReducer, getDate()),
   statusList: computeStatusList(state.mainReducer),
   cptyOrganisation: computeCptyOrganisation(state.mainReducer),
   cptyEntity: computeCptyEntity(state.mainReducer)
@@ -81,7 +82,7 @@ const convertDate = (time, days) => {
   return new Date(new Date(new Date(time.setDate(time.getDate() + days))).setHours(0,0,0,0)).getTime()
 }
 
-const computeTimeWindowList = (state, currTime = '2017-01-13T08:00:00.000Z') => {
+const computeTimeWindowList = (state, currTime) => {
 
   //get current date, yesterday, tomorrow
   const yesterdayUnix = getYesterday(currTime)

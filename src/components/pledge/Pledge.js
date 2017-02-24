@@ -6,7 +6,7 @@ import {render} from 'react-dom'
 import OptItem from './sub-components/OptItem'
 import ChooseCalls from './sub-components/ChooseCalls'
 import Selection from '../pledge-selection/Selection'
-import CollateralAssetGroup from './sub-components/CollateralAssetGroup'
+import CollateralWidgetContainer from '../../containers/CollateralWidgetContainer'
 import {OPTIMISATION_URL,MARGIN_SELECTION_URL} from '../../constants/APIcalls'
 import styles from './Pledge.css'
 
@@ -116,40 +116,21 @@ class Pledge extends React.Component {
         : 0 )
   }
 
+  isShowPledgeBtn(selection) {
+    if (selection) {
+      for (const statement of selection) {
+        if (statement.get('allocated')) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
   render() {
     const { optimisation, selection, onUpdateOptimisationSettings, onTogglePendingAllocation,
-      pendingAllocation, sliderCheckbox, onToggleCheckall, onAllocate } = this.props
-
-    let collateralHeader = (
-      <div className={styles.collateralRow + ' ' + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
-        <div className={styles.collateralCell}>Asset</div>
-        <div className={styles.collateralCell}>Price</div>
-        <div className={styles.collateralCell}>CCY</div>
-        <div className={styles.collateralCell}>Delivery Time</div>
-        <div className={styles.collateralCell}>Status</div>
-        <div className={styles.collateralCell}>Rating</div>
-        <div className={styles.collateralCell}>Maturity Date</div>
-      </div>
-    )
-
-    if(this.state.open){
-      collateralHeader = (
-        <div className={styles.collateralRow + ' ' + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
-          <div className={styles.collateralCell}>Asset</div>
-          <div className={styles.collateralCell}>Price</div>
-          <div className={styles.collateralCell}>CCY</div>
-          <div className={styles.collateralCell}>Delivery Time</div>
-          <div className={styles.collateralCell}>Status</div>
-          <div className={styles.collateralCell}>Rating</div>
-          <div className={styles.collateralCell}>Maturity Date</div>
-          <div className={styles.collateralCell}>Internal Cost</div>
-          <div className={styles.collateralCell}>Opportunity Cost</div>
-          <div className={styles.collateralCell}>ISIN</div>
-          <div className={styles.collateralCell}>Venue</div>
-          <div className={styles.collateralCell}>Acc ID</div>
-        </div>
-      )
-    }
+      pendingAllocation, sliderCheckbox, onToggleCheckall, onAllocate,
+      onPledge} = this.props
 
     return (
 
@@ -170,12 +151,22 @@ class Pledge extends React.Component {
                   Allocate
                 </div>
 
+                {/*<div className={styles.optButton + ' ' +*/}
+                {/*(this.checkIfExist(selection).reduce(this.sumOfIMVM, 0) > 0*/}
+                  {/*? styles.optBtnPledge*/}
+                  {/*: styles.btnDisabled )}*/}
+                     {/*onClick={() => onPledge(selection.toJS())}>*/}
+                  {/*Pledge*/}
+                {/*</div>*/}
+
                 <div className={styles.optButton + ' ' +
-                (this.checkIfExist(selection).reduce(this.sumOfIMVM, 0) > 0
+                (this.isShowPledgeBtn(selection)
                   ? styles.optBtnPledge
-                  : styles.btnDisabled )}>
+                  : styles.btnDisabled )}
+                     onClick={() => onPledge(selection.toJS())}>
                   Pledge
                 </div>
+
 
               </div>
               {/* change btnEnabled to btnDisabled to disable the button*/}
@@ -198,62 +189,11 @@ class Pledge extends React.Component {
 
             </div>
 
-            <div className={styles.col_R + ' ' + this.state.toggleColwidthR}>
-              <div className={styles.panel}>
-                <div className={styles.panelTitle}>Collateral
-                  <img src={this.state.sideways} className={styles.imageRight} onClick={this.changeSideways}/>
-                </div>
-
-                <div className={styles.collateralTable}>
-
-                  {collateralHeader}
-
-                  <CollateralAssetGroup propCollateralType={"Earmarked"}
-                                        propCollateralAssetList={
-                                          this.props.collateral ? this.props.collateral.get('earmarked').toJS() : [] }
-                                        propIsExpanded={true}
-                                        propIsDisplayAll={this.state.open}
-                                        propHandleOnRemoveFromEarmarked={this.props.onRemoveFromEarmarked}/>
-
-                  <CollateralAssetGroup propCollateralType={"Cash"}
-                                        propCollateralAssetList={
-                                          this.props.collateral ? this.props.collateral.get('cash').toJS() : [] }
-                                        propIsExpanded={true}
-                                        propIsDisplayAll={this.state.open}/>
-
-                  <CollateralAssetGroup propCollateralType={"MM Instruments"}
-                                        propCollateralAssetList={
-                                          this.props.collateral ? this.props.collateral.get('mmInstruments').toJS() : [] }
-                                        propIsExpanded={true}
-                                        propIsDisplayAll={this.state.open}/>
-
-                  <CollateralAssetGroup propCollateralType={"Soverign Bonds"}
-                                        propCollateralAssetList={
-                                          this.props.collateral ? this.props.collateral.get('sovereignBonds').toJS() : [] }
-                                        propIsExpanded={true}
-                                        propIsDisplayAll={this.state.open}/>
-
-                  <CollateralAssetGroup propCollateralType={"Govt Agencies"}
-                                        propCollateralAssetList={
-                                          this.props.collateral ? this.props.collateral.get('govtAgencies').toJS() : [] }
-                                        propIsExpanded={false}
-                                        propIsDisplayAll={this.state.open}/>
-
-                  <CollateralAssetGroup propCollateralType={"Corporate Debt"}
-                                        propCollateralAssetList={
-                                          this.props.collateral ? this.props.collateral.get('corporateDebt').toJS() : [] }
-                                        propIsExpanded={false}
-                                        propIsDisplayAll={this.state.open}/>
-
-                  <CollateralAssetGroup propCollateralType={"Corporate Equity"}
-                                        propCollateralAssetList={
-                                          this.props.collateral ? this.props.collateral.get('corporateEquity').toJS() : [] }
-                                        propIsExpanded={true}
-                                        propIsDisplayAll={this.state.open}/>
-                </div>
-
-              </div>
-            </div>
+            <CollateralWidgetContainer
+              toggleColwidthR={this.state.toggleColwidthR}
+              sideways={this.state.sideways}
+              open={this.state.open}
+              changeSideways={this.changeSideways}/>
 
           </div>
         </div>

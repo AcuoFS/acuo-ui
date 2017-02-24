@@ -2,7 +2,7 @@ import React from 'react';
 import { List, Set, Map } from 'immutable'
 import styles from '../Graph.css'
 import { hashHistory } from 'react-router'
-import {numberWithCommas} from '../../../utils/numbersWithCommas'
+import {checkNegative} from '../../../utils'
 
 export default class GraphBody extends React.Component {
 
@@ -14,7 +14,21 @@ export default class GraphBody extends React.Component {
   whichClickFuncToRun(status, lastUpdatedTime, bubbleTimeStart, timeDifference, onUnreconBubbleClick){
     switch(status){
       case 'expected':
-        return () => 0
+        return () => {
+          hashHistory.push('/recon')
+
+          //1st param: time range start
+          //2nd param: time range start + 1 hour
+          //3rd param: getDay() returns 'today', 'tomorrow', 'yesterday' based on summation of
+          //           today's hours + the difference in time of the bubble, appends it with
+          //           the 'hours' portion of time start to form a string for dispatch use
+          onUnreconBubbleClick(
+            bubbleTimeStart,
+            (new Date(bubbleTimeStart).setHours((new Date(bubbleTimeStart).getHours()+1))),
+            this.getDay(new Date(Date.parse(lastUpdatedTime)).getHours() + timeDifference) + ': ' + (new Date(bubbleTimeStart).getHours()) + ':00 HRS',
+            'Expected'
+          )
+        }
       case 'unrecon':
         return () => {
           hashHistory.push('/recon')
@@ -27,7 +41,8 @@ export default class GraphBody extends React.Component {
           onUnreconBubbleClick(
             bubbleTimeStart,
             (new Date(bubbleTimeStart).setHours((new Date(bubbleTimeStart).getHours()+1))),
-            this.getDay(new Date(Date.parse(lastUpdatedTime)).getHours() + timeDifference) + ': ' + new Date(bubbleTimeStart).getHours() + ':00 HRS'
+            this.getDay(new Date(Date.parse(lastUpdatedTime)).getHours() + timeDifference) + ': ' + (new Date(bubbleTimeStart).getHours()) + ':00 HRS',
+            'Unrecon'
           )
         }
       case 'reconciled':
@@ -87,17 +102,18 @@ export default class GraphBody extends React.Component {
             "inAmount": y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
 
-              const amount = xx.get('initialMargin') || xx.get('variableMargin')
+              const amount = Math.abs((parseFloat(xx.get('initialMargin')) || 0.00) + (parseFloat(xx.get('variableMargin'))  || 0.00))
 
-              return (xx.get('direction') == 'IN' ? a2 + Math.abs(Number.parseFloat(amount)) : a2)
+              return (xx.get('direction') == 'IN' ? parseFloat(a2) + parseFloat(amount) : a2)
             }, 0)
           }, 0)
           , "outAmount": y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
 
-                const amount = xx.get('initialMargin') || xx.get('variableMargin')
+              //abs(IM + VM)
+              const amount = Math.abs((parseFloat(xx.get('initialMargin')) || 0.00) + (parseFloat(xx.get('variableMargin'))  || 0.00))
 
-                return (xx.get('direction') == 'OUT' ? a2 + Math.abs(Number.parseFloat(amount)) : a2)
+              return (xx.get('direction') == 'OUT' ? parseFloat(a2) + parseFloat(amount) : a2)
             }, 0)
           }, 0)
           , "inNo":  y.get('actionsList').reduce((a, z) => {
@@ -137,11 +153,11 @@ export default class GraphBody extends React.Component {
             </circle>
             <g className={styles.toolTip} opacity="0.9">
 
-              <rect x={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7)
-                ? this.props.x - 110 + (timeDifference + 0.5) * 60
+              <rect x={(timeFrame.get('inAmount') > 100000000 || status.get('status').length >= 7)
+                ? this.props.x - 120 + (timeDifference + 0.5) * 60
                 : this.props.x - 90 + (timeDifference + 0.5) * 60}
                     y={colour[2] - 20} rx="4"
-                    width={(timeFrame.get('inAmount') > 100000000 || status.get('status').length > 7) ? 110 : 80}
+                    width={(timeFrame.get('inAmount') > 100000000 || status.get('status').length >= 7) ? 120 : 90}
                     height="45" strokeWidth="1" stroke={colour[0]} fill="#FFFFFF"></rect>
               <text x={this.props.x - 12 + (timeDifference + 0.5) * 60} y={colour[2] - 2.5}
                     fontSize="11"
@@ -156,7 +172,7 @@ export default class GraphBody extends React.Component {
                     fontFamily="helvetica"
                     fill="#010101"
                     textAnchor="end">
-                {numberWithCommas(timeFrame.get('inAmount'))}
+                {checkNegative(timeFrame.get('inAmount').toFixed(2))}
               </text>
             </g>
           </g>)
@@ -169,12 +185,12 @@ export default class GraphBody extends React.Component {
                       fill={colour[0]}>
               </circle>
               <g className={styles.toolTip} opacity="0.9">
-                <rect x={(timeFrame.get('outAmount') > 100000000 || status.get('status').length > 7)
-                  ? this.props.x - 110 + (timeDifference + 0.5) * 60
+                <rect x={(timeFrame.get('outAmount') > 100000000 || status.get('status').length >= 7)
+                  ? this.props.x - 120 + (timeDifference + 0.5) * 60
                   : this.props.x - 90 + (timeDifference + 0.5) * 60}
                       y={colour[1] - 20}
                       rx="4"
-                      width={(timeFrame.get('outAmount') > 100000000 || status.get('status').length > 7) ? 100 : 80}
+                      width={(timeFrame.get('outAmount') > 100000000 || status.get('status').length >= 7) ? 120 : 90}
                       height="45"
                       strokeWidth="1"
                       stroke={colour[0]}
@@ -194,7 +210,7 @@ export default class GraphBody extends React.Component {
                       fontFamily="helvetica"
                       fill="#010101"
                       textAnchor="end">
-                  {numberWithCommas(timeFrame.get('outAmount'))}
+                  {checkNegative(timeFrame.get('outAmount').toFixed(2))}
                 </text>
               </g>
             </g>)

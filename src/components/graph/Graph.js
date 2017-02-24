@@ -4,11 +4,12 @@ import SubAxis from './sub-components/SubAxis'
 import GraphBody from './sub-components/GraphBody'
 import Pointer from './sub-components/Pointer'
 import styles from './Graph.css'
+import { getDate } from '../../utils'
 
 
 export default class Graph extends React.Component {
   static get defaultProps() {
-    const now = new Date("2017-01-13T08:00:00.000Z")
+    const now = getDate()
     const time = [now.getHours(), (now.getMinutes() <10 ? '0' : ' ')  + now.getMinutes()]
     const currentTime = time.join(":")
 

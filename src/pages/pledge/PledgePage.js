@@ -4,23 +4,9 @@ import {
   NavigationBarContainer,
   PledgeContainer
 } from '../../containers'
-import { updateCollateral } from '../../actions'
-import { connect } from 'react-redux'
-import { fromJS } from 'immutable'
-import {COLLATERAL_URL} from '../../constants/APIcalls'
 
 
 class PledgePage extends React.Component{
-  constructor(props){
-    super(props)
-
-      fetch(COLLATERAL_URL).then((response) => {
-      return response.json()
-    }).then((obj) => {
-      this.props.onCollateralDataAvailable(fromJS(obj.data))
-    })
-  }
-
   componentDidMount () {
     window.scrollTo(0, 0)
   }
@@ -36,17 +22,4 @@ class PledgePage extends React.Component{
 }
 
 
-const mapStateToProps = state => ({})
-
-const mapDispatchToProps = dispatch => ({
-  onCollateralDataAvailable: (collateralData) => {
-    dispatch(updateCollateral(collateralData))
-  }
-})
-
-const PledgePageContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PledgePage)
-
-export { PledgePageContainer }
+export { PledgePage }

@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react'
 import CollateralEarmarkStatusPopup from './popups/CollateralEarmarkStatusPopup'
 import CollateralStatusPopup from './popups/CollateralStatusPopup'
 import {COLLATERAL_EARMARKED} from '../../../constants/CollateralTypes'
+import { maxLengthToEllipsis } from '../../../utils'
 import styles from '../Pledge.css'
 
 
@@ -28,6 +29,15 @@ class CollateralAsset extends React.Component {
         break;
     }
     return statusClass
+  }
+
+  checkAmountExceeding(total, amount) {
+    if (Number(amount) > Number(total))
+      return (
+        <div className={styles.errorPopUp}>
+          Amount entered is larger than available.
+        </div>
+      )
   }
 
   render() {
@@ -67,22 +77,24 @@ class CollateralAsset extends React.Component {
                                                      propStatus={propStatus}
                                                      propIsDisplayAll={propIsDisplayAll}
                                                      listOfMarginCallName={listOfMarginCallName}
-                                                     rawPrice={rawPrice}/>)
+                                                     rawPrice={rawPrice}
+                                                     checkAmountExceeding={this.checkAmountExceeding}/>)
     }else {
       statusDisplay = (<CollateralStatusPopup propCollateralType={propCollateralType}
-                                                     propAssetId={propAssetId}
-                                                     propAssetIdType={propAssetIdType}
-                                                     statusClass={statusClass}
-                                                     propStatus={propStatus}
-                                                     propIsDisplayAll={propIsDisplayAll}
-                                                     listOfMarginCallName={listOfMarginCallName}
-                                                     rawPrice={rawPrice}/>)
+                                              propAssetId={propAssetId}
+                                              propAssetIdType={propAssetIdType}
+                                              statusClass={statusClass}
+                                              propStatus={propStatus}
+                                              propIsDisplayAll={propIsDisplayAll}
+                                              listOfMarginCallName={listOfMarginCallName}
+                                              rawPrice={rawPrice}
+                                              checkAmountExceeding={this.checkAmountExceeding}/>)
     }
 
     if (propIsDisplayAll) {
       return (
         <div className={styles.collateralRow}>
-          <div className={styles.collateralCell}>{propAsset}</div>
+          <div className={styles.collateralCell} title={propAsset}>{maxLengthToEllipsis(propAsset, 25)}</div>
           <div className={styles.collateralCell}>{propPrice}</div>
           <div className={styles.collateralCell}>{propCcy}</div>
           <div className={styles.collateralCell}>{propDeliveryTime}</div>
@@ -92,8 +104,8 @@ class CollateralAsset extends React.Component {
           <div className={styles.collateralCell}>{propInternalCost}</div>
           <div className={styles.collateralCell}>{propOppCost}</div>
           <div className={styles.collateralCell}>{propIsin}</div>
-          <div className={styles.collateralCell}>{propVenue}</div>
-          <div className={styles.collateralCell}>{propAcctId}</div>
+          <div className={styles.collateralCell} title={propVenue}>{maxLengthToEllipsis(propVenue, 10)}</div>
+          <div className={styles.collateralCell} title={propAcctId}>{maxLengthToEllipsis(propAcctId, 10)}</div>
         </div>
       )
     }

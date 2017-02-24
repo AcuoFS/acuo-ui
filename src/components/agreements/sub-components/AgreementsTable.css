@@ -1,0 +1,36 @@
+.agreeTable {
+    margin: 10px 0;
+    display: table;
+    width: 100%;
+}
+
+.agreeTableHeader {
+    display: table-row;
+    composes: tableHeader from '../../../static/commonStyles/common.css';
+}
+
+.agreeTableRow {
+    display: table-row;
+    composes: tableRow from '../../../static/commonStyles/common.css';
+}
+
+.agreeTableRow:nth-child(odd) {
+    background-color: #FFFFFF;
+}
+
+.agreeTableRow:nth-child(even) {
+    background-color: #DCEEFF;
+}
+
+.agreeTableCell {
+    display: table-cell;
+    padding: 10px;
+}
+
+.iconStyle {
+    cursor: pointer;
+}
+
+.iconCell {
+    width: 15px;
+}
