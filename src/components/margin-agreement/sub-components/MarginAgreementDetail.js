@@ -95,7 +95,7 @@ export default class MarginAgreementDetail extends React.Component {
   }
 
   checkChildrenTolerance(secondLevel){
-    _.some(secondLevel, {tolerance: true})
+    return _.some(secondLevel, {tolerance: true})
   }
 
   render() {
