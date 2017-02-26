@@ -1,6 +1,6 @@
 import React from 'react'
 import DzComponent from '../../upload-portfolio/DzComponent'
-import {UPLOAD_FILE_URL} from '../../../constants/APIcalls-dev'
+import {UPLOAD_FILE_URL} from '../../../constants/APIcalls'
 import {SimpleCenteredPopup} from '../../common/SimpleCenteredPopup'
 import styles from './ImportAgreements.css'
 

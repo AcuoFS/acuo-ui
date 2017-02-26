@@ -1,6 +1,6 @@
 import React from 'react'
 import DzComponent from './DzComponent'
-import {UPLOAD_FILE_URL} from '../../constants/APIcalls-dev'
+import {UPLOAD_FILE_URL} from '../../constants/APIcalls'
 import styles from './UploadWidget.css'
 
 

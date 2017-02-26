@@ -12,7 +12,7 @@ import {
   ALLOCATE_COLLATERALS_URL_NEW,
   PLEDGE_ALLOCATIONS,
   MARGIN_SELECTION_URL
-} from '../constants/APIcalls-dev'
+} from '../constants/APIcalls'
 import * as ASSET from '../constants/AllocatedAssetAttributes'
 import * as P_ASSET from '../constants/PledgeAssetAttribute'
 

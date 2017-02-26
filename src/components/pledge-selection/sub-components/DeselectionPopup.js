@@ -1,5 +1,5 @@
 import React from 'react'
-import {REMOVE_ASSET_ALLOCATION_URL} from '../../../constants/APIcalls-dev'
+import {REMOVE_ASSET_ALLOCATION_URL} from '../../../constants/APIcalls'
 import styles from './DeselectionPopup.css'
 
 

@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux'
 import styles from './Dashboard.css'
 import { initState } from '../../actions'
-import { DASHBOARD_URL } from '../../constants/APIcalls-dev'
+import { DASHBOARD_URL } from '../../constants/APIcalls'
 import { fromJS } from 'immutable'
 
 export class Dashboard extends React.Component {
