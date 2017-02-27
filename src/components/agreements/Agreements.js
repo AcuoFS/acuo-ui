@@ -4,7 +4,6 @@ import AgreementsTable from './sub-components/AgreementsTable'
 import mockAgreementsSummary from './mock/mockAgreementsSummary'
 import mockAgreements from './mock/mockAgreements'
 import _ from 'lodash'
-import * as TYPES from '../../constants/AgreementsConstants'
 import ImportAgreements from './sub-components/ImportAgreements'
 import {CreateAgreementsMain} from '../agreements-create/CreateAgreementsMain'
 import styles from './Agreements.css'
@@ -16,7 +15,9 @@ export default class Agreements extends React.Component {
 
     this.state = {
       filterText: '',
-      activePopup: ''
+      activePopup: '',
+      isIncomingSelected: true,
+      isOutgoingSelected: true
     }
 
     this.handlerClosePopup = this.handlerClosePopup.bind(this)
@@ -50,8 +51,6 @@ export default class Agreements extends React.Component {
       summaryData,
       isCptySummaryExpanded,
       onSetCptySummaryExpanded,
-      typeSelected,
-      onSetAgreementTypeSelected,
       agreementsData
     } = this.props
 
@@ -89,22 +88,23 @@ export default class Agreements extends React.Component {
                onChange={(e) => this.setState({filterText: e.target.value})}/>
         <div className={styles.labelContainer}>
           <span className={
-            styles.statusLabel + ' ' + ((typeSelected == TYPES.AGREEMENT_TYPE_SELECTED_INCOMING)
-              ? styles.unselected : styles.outLabel)}
-                onClick={() => onSetAgreementTypeSelected(TYPES.AGREEMENT_TYPE_SELECTED_OUTGOING)}>
+            styles.statusLabel + ' ' + ((this.state.isOutgoingSelected)
+              ? styles.outLabel : styles.unselected )}
+                onClick={() => this.setState({isOutgoingSelected: !this.state.isOutgoingSelected})}>
             Outgoing
           </span>
           <span className={
-            styles.statusLabel + ' ' + ((typeSelected == TYPES.AGREEMENT_TYPE_SELECTED_OUTGOING)
-              ? styles.unselected : styles.inLabel)}
-                onClick={() => onSetAgreementTypeSelected(TYPES.AGREEMENT_TYPE_SELECTED_INCOMING)}>
+            styles.statusLabel + ' ' + ((this.state.isIncomingSelected)
+              ? styles.inLabel : styles.unselected)}
+                onClick={() => this.setState({isIncomingSelected: !this.state.isIncomingSelected})}>
             Incoming
           </span>
         </div>
         <AgreementsSummaryTable propSummaryData={summaryData}
                                 propIsCptySummaryExpanded={isCptySummaryExpanded}
                                 propHandlerCptyExpand={onSetCptySummaryExpanded}
-                                propTypeSelected={typeSelected}/>
+                                propIsOutgoingSelected={this.state.isOutgoingSelected}
+                                propIsIncomingSelected={this.state.isIncomingSelected}/>
         <AgreementsTable propFiltertext={this.state.filterText}
                          propAgreements={agreementsData}/>
       </div>
