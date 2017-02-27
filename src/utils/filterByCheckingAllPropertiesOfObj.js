@@ -7,7 +7,9 @@ export const filterByAllPropertiesOfObj = (objList, filterText) => {
 
       // Check for all properties
       _.forOwn(o, (value) => {
-        isAnyPropertyMatches = _.toUpper(String(value)).match(new RegExp(_.toUpper(filterText)))
+        isAnyPropertyMatches = _.toUpper(String(value)).match(
+          new RegExp(_.toUpper(filterText.trim()))
+        )
 
         // Stop iteration if matches; return false to stop
         return !isAnyPropertyMatches

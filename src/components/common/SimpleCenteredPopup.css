@@ -16,7 +16,7 @@
 .popContainer {
     composes: popupContainer from '../../static/commonStyles/common.css';
     margin: auto;
-    height: 400px;
+    height: 405px;
     width: 800px;
     overflow: auto;
     position: relative;
