@@ -43,7 +43,8 @@ const OtherDetails = (props) => {
               handleOnSelectedItemChange={onDropdownItemChange}
               selectedOption={'GMT'}
               options={gmtTimezoneList}
-              isFixedOptionsHeight/>
+              isFixedOptionsHeight
+              activateMouseLeaveEvent/>
           </div>
         </div>
 
