@@ -1,5 +1,6 @@
 import React from 'react'
 import Dropdown from '../../Dropdown/Dropdown'
+import {gmtTimezoneList} from '../../../utils'
 import styles from './ContentBody.css'
 
 
@@ -41,8 +42,8 @@ const OtherDetails = (props) => {
               handlerOnClick={toggleDropDown}
               handleOnSelectedItemChange={onDropdownItemChange}
               selectedOption={'GMT'}
-              options={['WIP']}
-              activateMouseLeaveEvent/>
+              options={gmtTimezoneList}
+              isFixedOptionsHeight/>
           </div>
         </div>
 
