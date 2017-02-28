@@ -1,7 +1,9 @@
 import React from 'react'
 import {SimpleCenteredPopup} from '../common/SimpleCenteredPopup'
 import TradingEntities from './sub-components/TradingEntities'
+import OtherDetails from './sub-components/OtherDetails'
 import styles from './CreateAgreementsMain.css'
+import tempStyles from './sub-components/ContentBody.css'
 
 
 const bigStyle = {
@@ -62,6 +64,21 @@ export class CreateAgreementsMain extends React.Component {
 
   render() {
     const {propHandlerClosePopup} = this.props
+
+    let curCreationScreen
+
+    switch (this.state.currentMenu) {
+      case MENU_TRADING_ENTITIES:
+        curCreationScreen = <TradingEntities propSetAgreementType={this.setAgreementType}/>
+        break
+      case MENU_OTHER_DETAILS:
+        curCreationScreen = <OtherDetails/>
+        break
+      default:
+        curCreationScreen = <div className={tempStyles.createContent}>WIP</div>
+    }
+
+
     return (
       <SimpleCenteredPopup handlerClosePopup={propHandlerClosePopup}
                            overridePopupStyle={this.state.sizeOfPopup}>
@@ -103,13 +120,13 @@ export class CreateAgreementsMain extends React.Component {
           </div>
 
           {
-            <TradingEntities propSetAgreementType={this.setAgreementType}/>
+            curCreationScreen
           }
 
-          {
-            this.state.isShowExtraDetails &&
-            <TradingEntities propSetAgreementType={this.setAgreementType}/>
-          }
+          {/*{*/}
+          {/*this.state.isShowExtraDetails &&*/}
+          {/*<TradingEntities propSetAgreementType={this.setAgreementType}/>*/}
+          {/*}*/}
 
         </div>
 
