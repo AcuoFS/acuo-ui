@@ -1,0 +1,18 @@
+.listContainer {
+    width: 250px;
+    height: 80px;
+    border: 1px solid #AAAAAA;
+    overflow: auto;
+}
+
+.listContainer > .listItem:hover {
+    background-color: #eeeeee;
+}
+
+.listContainer > li:nth-child(odd) {
+    background-color: #FFFFFF;
+}
+
+.listContainer > li:nth-child(even) {
+    background-color: #DCEEFF;
+}

@@ -24,3 +24,7 @@
     font-size: 13px;
     line-height: 16px;
 }
+
+.btnStyleActive {
+    composes: agreementBtnStyle from '../../../static/commonStyles/common.css';
+}
