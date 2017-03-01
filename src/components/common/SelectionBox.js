@@ -8,9 +8,12 @@ const SelectionBox = ({propListOfItems, propOnRemoveItem}) => {
       {
         propListOfItems.map((item, index) => (
           <li key={index}
-              onClick={propOnRemoveItem && (() => propOnRemoveItem(item))}
               className={styles.listItem}>
             {item}
+            <button className={styles.removeBtnStyle}
+                    onClick={propOnRemoveItem && (() => propOnRemoveItem(item))}>
+              Remove
+            </button>
           </li>
         ))
       }

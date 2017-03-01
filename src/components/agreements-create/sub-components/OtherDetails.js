@@ -37,6 +37,10 @@ export default class OtherDetails extends React.Component {
     })
   }
 
+  isEmptyString(str) {
+    return str.trim() == ''
+  }
+
   render() {
     return (
       <div className={styles.createContent}>
@@ -141,12 +145,15 @@ export default class OtherDetails extends React.Component {
 
           <div className={styles.rowGroup}>
             <div className={styles.line}>
-              <button className={styles.btnStyleActive}
+              <button className={this.isEmptyString(this.state.otherJurisdictionInput)
+                ? styles.btnStyleInactive
+                : styles.btnStyleActive}
                       onClick={() => this.setState({
                         otherJurisdictionList: [...this.state.otherJurisdictionList,
                           this.state.otherJurisdictionInput],
                         otherJurisdictionInput: ''
-                      })}>Add
+                      })}
+                      disabled={this.isEmptyString(this.state.otherJurisdictionInput)}>Add
               </button>
             </div>
           </div>

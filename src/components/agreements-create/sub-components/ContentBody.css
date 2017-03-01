@@ -31,6 +31,12 @@
     margin: 0;
 }
 
+.btnStyleInactive {
+    composes: agreementBtnStyleDisabled from '../../../static/commonStyles/common.css';
+    /* Clear margin */
+    margin: 0;
+}
+
 .flexLine {
     display: flex;
     align-items: center;
