@@ -2,6 +2,7 @@ import React from 'react'
 import Dropdown from '../../Dropdown/Dropdown'
 import {gmtTimezoneList} from '../../../utils'
 import SelectionBox from '../../common/SelectionBox'
+import ToggleSwitch from '../../common/ToggleSwitch'
 import styles from './ContentBody.css'
 
 
@@ -11,9 +12,11 @@ export default class OtherDetails extends React.Component {
 
     this.state = {
       otherJurisdictionList: ['Click', 'To', 'Remove', 'Me'],
-      otherJurisdictionInput: ''
+      otherJurisdictionInput: '',
+      isSoleCalc: false
     }
     this.onRemoveOtherJurisdiction = this.onRemoveOtherJurisdiction.bind(this)
+    this.onToggleSoleCalc = this.onToggleSoleCalc.bind(this)
   }
 
   toggleDropDown(e) {
@@ -23,14 +26,16 @@ export default class OtherDetails extends React.Component {
   }
 
   onRemoveOtherJurisdiction(jur) {
-    // selectedRows: this.state.selectedRows.filter(row =>
-    // row.mgnCallUploadId != rowObj.mgnCallUploadId)
-
     this.setState({
       otherJurisdictionList: this.state.otherJurisdictionList.filter(item => item != jur)
     })
   }
 
+  onToggleSoleCalc() {
+    this.setState({
+      isSoleCalc: !this.state.isSoleCalc
+    })
+  }
 
   render() {
     return (
@@ -99,10 +104,9 @@ export default class OtherDetails extends React.Component {
           </div>
 
           <div className={styles.rowGroup}>
-            <div className={styles.line}>
-              <input type="radio" name="soleCalc" value="Off" defaultChecked/>Off
-              <input type="radio" name="soleCalc" value="On"/>On
-              Sole Calculation
+            <div className={styles.line + ' ' + styles.flexLine}>
+              <ToggleSwitch propIsOn={this.state.isSoleCalc}
+                            propOnToggle={this.onToggleSoleCalc}/> &nbsp;Sole Calculation
             </div>
           </div>
 
