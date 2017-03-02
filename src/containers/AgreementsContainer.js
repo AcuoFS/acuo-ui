@@ -6,8 +6,7 @@ import * as ACTIONS from '../actions/AgreementsActions'
 const mapStateToProps = state => ({
   summaryData: state.AgreementsReducer.get('summaryData').toJS(),
   agreementsData: state.AgreementsReducer.get('agreementsData').toJS(),
-  isCptySummaryExpanded: state.AgreementsReducer.get('isCptySummaryExpanded'),
-  typeSelected: state.AgreementsReducer.get('typeSelected'),
+  isCptySummaryExpanded: state.AgreementsReducer.get('isCptySummaryExpanded')
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -16,9 +15,6 @@ const mapDispatchToProps = dispatch => ({
   },
   onSetCptySummaryExpanded: (isCptySummaryExpanded) => {
     dispatch(ACTIONS.setCptySummaryExpanded(isCptySummaryExpanded))
-  },
-  onSetAgreementTypeSelected: (typeSelected) => {
-    dispatch(ACTIONS.setAgreementTypeSelected(typeSelected))
   },
   onInitAgreements: (agreementsData) => {
     dispatch(ACTIONS.initAgreements(agreementsData))
