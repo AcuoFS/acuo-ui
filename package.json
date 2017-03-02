@@ -4,7 +4,7 @@
   "description": "Acuo test bed",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --hot --inline",
+    "dev": "webpack-dev-server --hot",
     "test": "mocha --compilers js:babel-core/register --require mock-css-modules --harmony-proxies ./test/test_helper.js 'test/**/*.@(js)'",
     "test:watch": "npm run test -- --watch",
     "json-server": "node mock-api/server.js",
@@ -52,8 +52,8 @@
     "react-css-modules": "^3.7.10",
     "react-hot-loader": "^3.0.0-beta.5",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.2"
+    "webpack": "^2.0.0",
+    "webpack-dev-server": "^2.0.0"
   },
   "dependencies": {
     "immutable": "^3.8.1",
