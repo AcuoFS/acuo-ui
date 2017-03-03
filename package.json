@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --hot",
+    "fromDist": "webpack-dev-server --content-base dist/",
     "test": "mocha --compilers js:babel-core/register --require mock-css-modules --harmony-proxies ./test/test_helper.js 'test/**/*.@(js)'",
     "test:watch": "npm run test -- --watch",
     "json-server": "node mock-api/server.js",
