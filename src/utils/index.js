@@ -10,6 +10,7 @@ import { checkNegative } from './formatNegativeAmount'
 import { getDate } from './getDate'
 import clearTime from './clearTime'
 import {filterByAllPropertiesOfObj} from './filterByCheckingAllPropertiesOfObj'
+import {gmtTimezoneList} from './gmtTimezoneList'
 
 export {
   formatDate,
@@ -20,5 +21,6 @@ export {
   checkNegative,
   getDate,
   clearTime,
-  filterByAllPropertiesOfObj
+  filterByAllPropertiesOfObj,
+  gmtTimezoneList
 }

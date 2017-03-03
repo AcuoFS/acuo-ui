@@ -1,0 +1,43 @@
+.createContent {
+    flex: 1;
+    padding: 50px 25px 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.createContent > .rowGroup {
+    display: block;
+}
+
+.rowGroup > .line {
+    margin: 10px 0;
+}
+
+.line > .dropDown {
+    width: 250px;
+}
+
+.line > .inputTextBox {
+    width: 250px;
+    height: 25px;
+    border: 1px solid #979797;
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.btnStyleActive {
+    composes: agreementBtnStyle from '../../../static/commonStyles/common.css';
+    /* Clear margin */
+    margin: 0;
+}
+
+.btnStyleInactive {
+    composes: agreementBtnStyleDisabled from '../../../static/commonStyles/common.css';
+    /* Clear margin */
+    margin: 0;
+}
+
+.flexLine {
+    display: flex;
+    align-items: center;
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 import Dropdown from '../../Dropdown/Dropdown'
 import {formatDate} from '../../../utils'
-import styles from './TradingEntities.css'
+import styles from './ContentBody.css'
 
 
 const TradingEntities = (props) => {
