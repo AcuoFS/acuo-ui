@@ -9,6 +9,7 @@ import { numberWithCommas } from './numbersWithCommas'
 import { checkNegative } from './formatNegativeAmount'
 import { getDate } from './getDate'
 import clearTime from './clearTime'
+import {filterByAllPropertiesOfObj} from './filterByCheckingAllPropertiesOfObj'
 
 export {
   formatDate,
@@ -19,4 +20,5 @@ export {
   checkNegative,
   getDate,
   clearTime,
+  filterByAllPropertiesOfObj
 }

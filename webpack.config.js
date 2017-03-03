@@ -47,7 +47,10 @@ module.exports = {
       { from: './src/static/react-dropzone', to: './css/react-dropzone' },
       { from: './src/static/reset.css', to: './css/reset.css'},
       { from: './images', to: './images'}
-    ])
+    ]),
+    new webpack.DefinePlugin({
+      CONFIG: JSON.stringify(require('./src/constants/config').get(process.env.DOCKER_ENV))
+    })
   ],
   devServer: {
     colors: true,

@@ -19,7 +19,11 @@ const mapDispatchToProps = dispatch => ({
   },
   onSetAgreementTypeSelected: (typeSelected) => {
     dispatch(ACTIONS.setAgreementTypeSelected(typeSelected))
+  },
+  onInitAgreements: (agreementsData) => {
+    dispatch(ACTIONS.initAgreements(agreementsData))
   }
+
 })
 
 const AgreementsContainer = connect(
