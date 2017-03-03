@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 module.exports = {
@@ -21,15 +22,6 @@ module.exports = {
         options: {
           presets: [['es2015', {modules: false}], 'react']
         }
-      },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {name: '[name].[ext]'}
-          }
-        ]
       },
       {
         test: /\.css$/,
@@ -77,6 +69,11 @@ module.exports = {
     ]),
     new webpack.DefinePlugin({
       CONFIG: JSON.stringify(require('./src/constants/config').get(process.env.DOCKER_ENV))
+    }),
+    // Plugin will automatically create and inject any js(output.[hash].bundle.js) into index.html
+    new HtmlWebpackPlugin({
+      template: 'index.template.ejs',
+      inject: 'body',
     })
   ],
   devServer: {
