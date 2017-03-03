@@ -9,7 +9,8 @@ const config = {
     ALLOCATE_COLLATERALS_URL_NEW: 'http://52.74.186.112:8081/pledge/allocate-selection-new',
     PLEDGE_ALLOCATIONS: 'http://52.74.186.112:8081/pledge/pledge-allocation',
     UPLOAD_FILE_URL: 'http://valuation.acuo.com/acuo/api/upload',
-    RECON_DATA_URL: 'http://margin.acuo.com/acuo/api/margin/reconcile',
+    // Please add the trailing / for recon single item (ok button)
+    RECON_DATA_URL: 'http://margin.acuo.com/acuo/api/margin/reconcile/',
     REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
     UNMATCHED_PORTFOLIO_URL: 'http://52.74.186.112:8081/unmatched'
   },
