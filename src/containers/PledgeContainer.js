@@ -66,27 +66,17 @@ const mapDispatchToProps = dispatch => ({
   onClearPendingAllocation: () => {
     dispatch(clearPendingAllocation())
   },
-  // onAllocate_old: (guids, optimisationSetting) => {
-  //   const data = {guids, optimisationSetting}
-  //   fetch(ALLOCATE_COLLATERALS_URL, {
-  //     method: 'POST',
-  //     body: JSON.stringify(data)
-  //   }).then(response => {
-  //     return response.json()
-  //   }).then(obj => {
-  //     // dispatch(updateCollateral(fromJS(obj.data.collateral)))
-  //     dispatch(initSelection(fromJS(obj.items)))
-  //   })
-  // },
   onAllocate: (guids, optimisationSetting) => {
+    const reqObj = {
+      optimisationSettings: optimisationSetting,
+      toBeAllocated: guids
+    }
+    console.log('request obj: ' + JSON.stringify(reqObj))
     fetch(ALLOCATE_COLLATERALS_URL_NEW, {
       method: 'POST',
-      body: JSON.stringify({
-        optimisationSettings: optimisationSetting,
-        toBeAllocated: guids
-      })
+      body: JSON.stringify(reqObj)
     }).then(response => {
-      console.log('Allocate response: ' + response)
+      console.log('Allocate response: ' + JSON.stringify(response))
       return response.json()
     }).then(obj => {
       dispatch(initSelection(fromJS(obj.items)))

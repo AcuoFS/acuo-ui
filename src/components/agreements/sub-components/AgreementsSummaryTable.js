@@ -52,7 +52,8 @@ const AgreementsSummaryTable = ({
   propSummaryData,
   propIsCptySummaryExpanded,
   propHandlerCptyExpand,
-  propTypeSelected
+  propIsOutgoingSelected,
+  propIsIncomingSelected
 }) => {
   return (
     <div className={styles.summaryTable}>
@@ -67,26 +68,31 @@ const AgreementsSummaryTable = ({
       </div>
 
       {
-        (propTypeSelected == CONSTANTS.AGREEMENT_TYPE_SELECTED_BOTH
-        || propTypeSelected == CONSTANTS.AGREEMENT_TYPE_SELECTED_OUTGOING)
-        && propSummaryData.clientSummary &&
+        propIsOutgoingSelected && propSummaryData.clientSummary &&
         createSummaryTableRow(propSummaryData.clientSummary, CONSTANTS.SUMMARY_ROW_CLIENT, null, null, null)
       }
       {
-        (propTypeSelected == CONSTANTS.AGREEMENT_TYPE_SELECTED_BOTH
-        || propTypeSelected == CONSTANTS.AGREEMENT_TYPE_SELECTED_INCOMING)
-        && propSummaryData.cptySummary &&
+        propIsIncomingSelected && propSummaryData.cptySummary &&
         createSummaryTableRow(propSummaryData.cptySummary, CONSTANTS.SUMMARY_ROW_CPTY, propIsCptySummaryExpanded,
           propHandlerCptyExpand, null)
       }
       {
-        propIsCptySummaryExpanded &&
-        (propTypeSelected == CONSTANTS.AGREEMENT_TYPE_SELECTED_BOTH
-        || propTypeSelected == CONSTANTS.AGREEMENT_TYPE_SELECTED_INCOMING)
-        && propSummaryData.cptySummary &&
+        propIsCptySummaryExpanded && propIsIncomingSelected && propSummaryData.cptySummary &&
         propSummaryData.cptySummary.cptySummaryBreakdown.map((cptyRecord, index) => (
           createSummaryTableRow(cptyRecord, CONSTANTS.SUMMARY_ROW_CPTY_DETAIL, null, null, index)
         ))
+      }
+      {
+        (!propIsOutgoingSelected && !propIsIncomingSelected) &&
+        <div className={styles.summaryTableRow}>
+          <div className={styles.summaryTableCell}>No records selected</div>
+          <div className={styles.summaryTableCell}></div>
+          <div className={styles.summaryTableCell}></div>
+          <div className={styles.summaryTableCell}></div>
+          <div className={styles.summaryTableCell}></div>
+          <div className={styles.summaryTableCell}></div>
+          <div className={styles.summaryTableCell}></div>
+        </div>
       }
     </div>
   )
@@ -96,7 +102,8 @@ AgreementsSummaryTable.PropTypes = {
   propSummaryData: PropTypes.object.isRequired,
   propIsCptySummaryExpanded: PropTypes.bool.isRequired,
   propHandlerCptyExpand: PropTypes.func.isRequired,
-  propTypeSelected: PropTypes.string.isRequired
+  propIsOutgoingSelected: PropTypes.bool.isRequired,
+  propIsIncomingSelected: PropTypes.bool.isRequired
 }
 
 export default AgreementsSummaryTable

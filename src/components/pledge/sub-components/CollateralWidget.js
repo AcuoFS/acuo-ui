@@ -3,6 +3,7 @@ import CollateralAssetGroup from './CollateralAssetGroup'
 import {COLLATERAL_URL} from '../../../constants/APIcalls'
 import _ from 'lodash'
 import {fromJS} from 'immutable'
+import {filterByAllPropertiesOfObj} from '../../../utils'
 import styles from '../Pledge.css'
 import selfStyles from './CollateralWidget.css'
 
@@ -49,7 +50,7 @@ export default class CollateralWidget extends React.Component {
    * @param onRemoveFromEarmarked
    * @returns {*}
    */
-  createAssetGrpCompList(collateralJSList, open, onRemoveFromEarmarked) {
+  createAssetGrpCompList(collateralJSList, open, onRemoveFromEarmarked, filterText) {
     let collateralAssetGroupList = []
     let newCollateralObj = {}
 
@@ -57,7 +58,7 @@ export default class CollateralWidget extends React.Component {
       newCollateralObj = Object.assign(
         {},
         newCollateralObj,
-        {[key]: this.filterByAllProperties(value, this.state.filterText)}
+        {[key]: filterByAllPropertiesOfObj(value, filterText)}
       )
     })
 
@@ -94,23 +95,23 @@ export default class CollateralWidget extends React.Component {
    * @param collateralList
    * @param filterText
    */
-  filterByAllProperties(collateralList, filterText) {
-    return _.filter(collateralList,
-      o => {
-        let isAnyPropertyMatches = false
-
-        // Check for all properties
-        _.forOwn(o, (value) => {
-          isAnyPropertyMatches = _.toUpper(String(value)).match(new RegExp(_.toUpper(filterText)))
-
-          // Stop iteration if matches; return false to stop
-          return !isAnyPropertyMatches
-        })
-
-        // Include into filteredList when any property matches
-        return isAnyPropertyMatches
-      })
-  }
+  // filterByAllProperties(collateralList, filterText) {
+  //   return _.filter(collateralList,
+  //     o => {
+  //       let isAnyPropertyMatches = false
+  //
+  //       // Check for all properties
+  //       _.forOwn(o, (value) => {
+  //         isAnyPropertyMatches = _.toUpper(String(value)).match(new RegExp(_.toUpper(filterText)))
+  //
+  //         // Stop iteration if matches; return false to stop
+  //         return !isAnyPropertyMatches
+  //       })
+  //
+  //       // Include into filteredList when any property matches
+  //       return isAnyPropertyMatches
+  //     })
+  // }
 
   render() {
     const {
@@ -158,7 +159,7 @@ export default class CollateralWidget extends React.Component {
             {
               collateral &&
               this.createAssetGrpCompList(collateral,
-                open, onRemoveFromEarmarked)
+                open, onRemoveFromEarmarked, this.state.filterText)
             }
 
           </div>
