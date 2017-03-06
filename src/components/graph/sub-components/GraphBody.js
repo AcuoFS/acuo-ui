@@ -50,9 +50,9 @@ export default class GraphBody extends React.Component {
       case 'pledged':
         return () => hashHistory.push('/deployed')
       case 'dispute':
-        return () => hashHistory.push('/dispute')
+        return () => hashHistory.push('/disputes')
       case 'actiondispute':
-        return () => hashHistory.push('/dispute')
+        return () => hashHistory.push('/disputes')
     }
   }
 
