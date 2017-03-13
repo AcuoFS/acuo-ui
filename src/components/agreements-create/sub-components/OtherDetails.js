@@ -93,19 +93,19 @@ export default class OtherDetails extends React.Component {
             </div>
           </div>
 
-          <div className={styles.rowGroup}>
-            <div className={styles.line}>Product Codes</div>
-            <div className={styles.line}>
-              <div className={styles.dropDown}>
-                <Dropdown
-                  handlerOnClick={this.toggleDropDown}
-                  handleOnSelectedItemChange={this.onDropdownItemChange}
-                  selectedOption={'Select'}
-                  options={['WIP']}
-                  activateMouseLeaveEvent/>
-              </div>
-            </div>
-          </div>
+          {/*<div className={styles.rowGroup}>*/}
+            {/*<div className={styles.line}>Product Codes</div>*/}
+            {/*<div className={styles.line}>*/}
+              {/*<div className={styles.dropDown}>*/}
+                {/*<Dropdown*/}
+                  {/*handlerOnClick={this.toggleDropDown}*/}
+                  {/*handleOnSelectedItemChange={this.onDropdownItemChange}*/}
+                  {/*selectedOption={'Select'}*/}
+                  {/*options={['WIP']}*/}
+                  {/*activateMouseLeaveEvent/>*/}
+              {/*</div>*/}
+            {/*</div>*/}
+          {/*</div>*/}
 
           <div className={styles.rowGroup}>
             <div className={styles.line + ' ' + styles.flexLine}>
@@ -114,6 +114,7 @@ export default class OtherDetails extends React.Component {
             </div>
           </div>
 
+          {this.state.isSoleCalc ?
           <div className={styles.rowGroup}>
             <div className={styles.line}>Valuation Agent</div>
             <div className={styles.line}>
@@ -127,6 +128,7 @@ export default class OtherDetails extends React.Component {
               </div>
             </div>
           </div>
+            : ''}
 
           <div className={styles.rowGroup}>
             <div className={styles.line}>Regulatory Jurisdiction</div>
