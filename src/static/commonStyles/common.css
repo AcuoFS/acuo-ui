@@ -27,6 +27,12 @@
     cursor: pointer;
 }
 
+.agreementBtnStyleDisabled {
+    composes: agreementBtnStyle;
+    border: 1px solid #D5DADF;
+    color: #D5DADF;
+}
+
 .tableHeader {
     font-size: 14px;
     line-height: 17px;
@@ -41,14 +47,9 @@
     color: #272727;
 }
 
-.tableRowBlue {
-    background-color: #DCEEFF;
-}
-
-.tableRowWhite {
+.popupContainer {
     background-color: #FFFFFF;
-}
-
-.tableRowGrey {
-    background-color: #EEEEEE;
+    border: 1px solid #9B9B9B;
+    box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
 }

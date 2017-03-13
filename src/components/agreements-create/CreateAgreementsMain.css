@@ -1,0 +1,73 @@
+.popupBody {
+    display: flex;
+    height: 100%;
+}
+
+.popupBody > .createMenu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    background-color: #FAFAFA;
+}
+
+.compTitle {
+    composes: compTitle from '../../static/commonStyles/common.css';
+    margin: 0 0 8px;
+}
+
+.createMenu > .menuBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* less total height of title */
+    height: calc(100% - 29px - 8px);
+}
+
+.menuBody > .menuItemContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuItemCommon {
+    color: #4A4A4A;
+    margin: 8px 0;
+    cursor: pointer;
+}
+
+.menuItem {
+    composes: menuItemCommon;
+    composes: baseFontBold from '../../static/css-components/fonts.css';
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.subMenuItem {
+    composes: menuItemCommon;
+    font-size: 14px;
+    line-height: 17px;
+    padding: 0 8px;
+}
+
+.menuItemSelected {
+    composes: baseFontBold from '../../static/css-components/fonts.css';
+    color: #4E83B5;
+}
+
+.menuBody > .btnContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.createBtnStyle {
+    composes: agreementBtnStyleDisabled from '../../static/commonStyles/common.css';
+    width: 156px;
+    height: 32px;
+    margin: 12px 0;
+}
+
+.resetBtnStyle {
+    composes: agreementBtnStyle from '../../static/commonStyles/common.css';
+    margin: 12px 0;
+}

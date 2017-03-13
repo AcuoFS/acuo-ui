@@ -11,14 +11,15 @@ import {FILE_XLSX, FILE_CSV} from '../../constants/UploadFileTypes'
 export default class DzComponent extends React.Component {
   constructor(props) {
     super(props)
+    const {propNoOfFiles, propTemplate, propPostUrl} = props
 
     this.djsConfig = {
       autoProcessQueue: false
-      , maxFiles: props.propNoOfFiles
-      , parallelUploads: props.propNoOfFiles
+      , maxFiles: propNoOfFiles
+      , parallelUploads: propNoOfFiles
       , acceptedFiles: FILE_XLSX + "," + FILE_CSV
       // Overriding the default HTML tags by DZ
-      , previewTemplate: ReactDOMServer.renderToStaticMarkup(props.propTemplate)
+      , previewTemplate: ReactDOMServer.renderToStaticMarkup(propTemplate)
       // Using css selector to define clickable element
       , clickable: ".triggerFileSelection"
     }
@@ -27,7 +28,7 @@ export default class DzComponent extends React.Component {
       // iconFiletypes: ['.xlsx'],
       // showFiletypeIcon: false,
       // Change this param to the server's URL
-      postUrl: props.propPostUrl
+      postUrl: propPostUrl
     }
 
     this.dropzone = null
@@ -55,10 +56,11 @@ export default class DzComponent extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.propIsSendToBackend){
+    const {propIsSendToBackend, propClearSendToBackend} = nextProps
+    if (propIsSendToBackend) {
       // Send and clear the flag to send
       this.dropzone.processQueue()
-      this.props.propClearSendToBackend()
+      propClearSendToBackend()
     }
   }
 
@@ -74,6 +76,8 @@ export default class DzComponent extends React.Component {
   }
 
   render() {
+    const {propClassName, propDisplayForBrowse} = this.props
+
     const config = this.componentConfig
     const djsConfig = this.djsConfig
 
@@ -90,16 +94,21 @@ export default class DzComponent extends React.Component {
        <input type="file" id="myFile"/>
        <input type="submit" value="Submit"/>
        </form>*/
-        <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig}
-                           className={this.props.propClassName}>
-          <div className="dz-message">
+      <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig}
+                         className={propClassName}>
+        <div className="dz-message">
             <span>
-              Drag and drop portfolio files, or&nbsp;
+              {
+                propDisplayForBrowse
+                  ? propDisplayForBrowse
+                  : 'Drag and drop portfolio files, or '
+              }
+
               <a href="#" className="triggerFileSelection"
                  onClick={(e) => e.preventDefault()}>browse</a>.
             </span>
-          </div>
-        </DropzoneComponent>
+        </div>
+      </DropzoneComponent>
     )
   }
 }

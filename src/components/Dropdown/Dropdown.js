@@ -1,7 +1,12 @@
 import React, {PropTypes} from 'react'
 import styles from './Dropdown.css'
 
-
+/**
+ * Option list can be string or object(with display and value fields)
+ * ['Apple','Orange',...]
+ * or
+ * [{display: 'Apple', value: 'apple'}, {display: 'Orange', value: 'orange'},...]
+ */
 export default class Dropdown extends React.Component{
 
   constructor(props){
@@ -27,9 +32,9 @@ export default class Dropdown extends React.Component{
     })
   }
 
-  handleOnOptionChange(e){
+  handleOnOptionChange(e, option){
     this.setState({
-      selectedOption : e.currentTarget.textContent,
+      selectedOption : option,
       isOpen : false
     })
     this.props.handleOnSelectedItemChange(e)
@@ -37,27 +42,26 @@ export default class Dropdown extends React.Component{
 
   render(){
     // merge option 'ALL', with actual options
-    const {options, activateMouseLeaveEvent} = this.props
+    const {options, activateMouseLeaveEvent, isFixedOptionsHeight} = this.props
     let menu = null
     if(this.state.isOpen){
       menu = (
-        <ul className={styles.filtersList}>
-          {options.map(option => (
-            <li key={option}
-                data-ref={option}
-                onClick={this.handleOnOptionChange}>
-              {String(option).toUpperCase()}
+        <ul className={styles.filtersList + ' ' + (isFixedOptionsHeight && styles.maxHeightOptions)}>
+          {options.map((option, index) => (
+            <li key={index}
+                onClick={(e) => this.handleOnOptionChange(e, option)}>
+              {String(option.display || option).toUpperCase()}
             </li>
           ))}
         </ul>)
     }
 
     return(
-      <div className={styles.filterItem + ' ' + (this.state.isOpen ? styles.increaseZindex : '')}>
+      <div className={styles.filterItem + ' ' + (this.state.isOpen && styles.increaseZindex)}>
         <div className={styles.filters} onClick={this.handleToggleDropdown}
-             onMouseLeave={activateMouseLeaveEvent ? this.handleOnMouseLeave : null}>
+             onMouseLeave={activateMouseLeaveEvent && this.handleOnMouseLeave}>
           <div className={styles.selectedText}>
-            {( this.state.selectedOption ).toUpperCase()}
+            {( this.state.selectedOption.display || this.state.selectedOption).toUpperCase()}
           </div>
           {menu}
         </div>
@@ -70,15 +74,21 @@ export default class Dropdown extends React.Component{
 
 Dropdown.propTypes = {
   selectedOption : PropTypes.string,
-  options : PropTypes.arrayOf(PropTypes.string),
+  options : PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object
+    ])
+  ),
   handlerOnClick : PropTypes.func.isRequired,
   handleOnSelectedItemChange : PropTypes.func.isRequired,
-  activateMouseLeaveEvent: PropTypes.bool
+  activateMouseLeaveEvent: PropTypes.bool,
+  isFixedOptionsHeight: PropTypes.bool
 }
 
 Dropdown.defaultProps = {
-  title : '',
   selectedOption : '',
   options : [],
-  activateMouseLeaveEvent: false
+  activateMouseLeaveEvent: false,
+  isFixedOptionsHeight: false
 }
