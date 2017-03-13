@@ -109,8 +109,8 @@ export default class OtherDetails extends React.Component {
 
           <div className={styles.rowGroup}>
             <div className={styles.line + ' ' + styles.flexLine}>
-              <ToggleSwitch propIsOn={this.state.isSoleCalc}
-                            propOnToggle={this.onToggleSoleCalc}/> &nbsp;Sole Calculation
+              Off &nbsp; <ToggleSwitch propIsOn={this.state.isSoleCalc}
+                            propOnToggle={this.onToggleSoleCalc}/> &nbsp; On &nbsp;Sole Calculation
             </div>
           </div>
 
