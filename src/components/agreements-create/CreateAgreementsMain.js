@@ -1,7 +1,10 @@
 import React from 'react'
 import {SimpleCenteredPopup} from '../common/SimpleCenteredPopup'
-import TradingEntities from './sub-components/TradingEntities'
-import OtherDetails from './sub-components/OtherDetails'
+import {
+  TradingEntities,
+  OtherDetails,
+  Identifiers
+} from './sub-components'
 import styles from './CreateAgreementsMain.css'
 import tempStyles from './sub-components/ContentBody.css'
 
@@ -73,6 +76,9 @@ export class CreateAgreementsMain extends React.Component {
         break
       case MENU_OTHER_DETAILS:
         curCreationScreen = <OtherDetails/>
+        break
+      case MENU_IDENTIFIERS:
+        curCreationScreen = <Identifiers/>
         break
       default:
         curCreationScreen = <div className={tempStyles.createContent}>WIP</div>
