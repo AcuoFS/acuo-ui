@@ -20,11 +20,9 @@ function targetConnect(connect){
 }
 
 const recordTarget = {
-  hover(props, monitor, component) {
-    const dragIndex = monitor.getItem().index;
-    const hoverIndex = props.index;
-
-    console.log(monitor.getItem())
+  drop(props, monitor, component) {
+    console.log(monitor.getItem(), props.marginCall.get('GUID'))
+    alert('asset ' + monitor.getItem().assetId + ' is dropped into ' + props.marginCall.get('GUID'))
   }
 }
 
