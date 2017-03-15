@@ -15,7 +15,7 @@ const TradingEntities = (props) => {
     props.propSetAgreementType()
   }
 
-  return <div className={styles.createContent}>
+  return <div className={props.propIsDisplay ? styles.createContent : styles.hideForm}>
     <div className={styles.rowGroup}>
       <div className={styles.line}>Our Legal Entity</div>
       <div className={styles.line}>

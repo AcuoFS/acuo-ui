@@ -7,7 +7,6 @@ import {
   CSA
 } from './sub-components'
 import styles from './CreateAgreementsMain.css'
-import tempStyles from './sub-components/ContentBody.css'
 
 
 const bigStyle = {
@@ -43,12 +42,12 @@ export class CreateAgreementsMain extends React.Component {
       isAgreementTypeSelected: false,
       isCsa: false,
       isRegulatory: false,
-      curCreationScreen: ''
     }
 
     this.createMenuItemDom = this.createMenuItemDom.bind(this)
     this.setAgreementType = this.setAgreementType.bind(this)
     this.toggleCsa = this.toggleCsa.bind(this)
+    this.toggleRegulatory = this.toggleRegulatory.bind(this)
   }
 
   createMenuItemDom(menuDisplay, menu, styleOfPoppup, isSelected) {
@@ -77,32 +76,18 @@ export class CreateAgreementsMain extends React.Component {
     this.setState({isCsa: !this.state.isCsa})
   }
 
-  render() {
-    const {propHandlerClosePopup} = this.props
-
-    let curCreationScreen
-
-    switch (this.state.currentMenu) {
-      case MENU_TRADING_ENTITIES:
-        curCreationScreen = <TradingEntities propSetAgreementType={this.setAgreementType}/>
-        break
-      case MENU_OTHER_DETAILS:
-        curCreationScreen = <OtherDetails/>
-        break
-      case MENU_REFERENCES:
-        curCreationScreen = <References
-          propIsCsa={this.state.isCsa}
-          propIsRegulatory={this.state.isRegulatory}
-          propToggleCsa={this.toggleCsa}
-          propToggleRegulatory={() => this.setState({isRegulatory: !this.state.isRegulatory})}/>
-        break
-      case SUB_CSA:
-        curCreationScreen = <CSA/>
-        break
-      default:
-        curCreationScreen = <div className={tempStyles.createContent}>WIP</div>
+  toggleRegulatory() {
+    // Switch current menu to Regulatory
+    if (!this.state.isRegulatory) {
+      this.setState({currentMenu: SUB_REGULATORY})
     }
 
+    this.setState({isRegulatory: !this.state.isRegulatory})
+  }
+
+
+  render() {
+    const {propHandlerClosePopup} = this.props
 
     return (
       <SimpleCenteredPopup handlerClosePopup={propHandlerClosePopup}
@@ -126,6 +111,13 @@ export class CreateAgreementsMain extends React.Component {
                        onClick={() => this.setState({currentMenu: SUB_CSA})}>CSA References</div>
                 }
 
+                {
+                  this.state.isRegulatory &&
+                  <div className={(this.state.currentMenu == SUB_REGULATORY)
+                    ? styles.subMenuItemSelected : styles.subMenuItem}
+                       onClick={() => this.setState({currentMenu: SUB_REGULATORY})}>Regulatory References</div>
+                }
+
                 {this.createMenuItemDom('Workflow Options', MENU_WORKFLOW_OPTIONS,
                   bigStyle, (this.state.currentMenu == MENU_WORKFLOW_OPTIONS))}
 
@@ -146,9 +138,19 @@ export class CreateAgreementsMain extends React.Component {
 
           </div>
 
-          {
-            curCreationScreen
-          }
+          <TradingEntities propIsDisplay={this.state.currentMenu == MENU_TRADING_ENTITIES}
+                           propSetAgreementType={this.setAgreementType}/>
+
+          <OtherDetails propIsDisplay={this.state.currentMenu == MENU_OTHER_DETAILS}/>
+
+          <References
+            propIsCsa={this.state.isCsa}
+            propIsRegulatory={this.state.isRegulatory}
+            propToggleCsa={this.toggleCsa}
+            propToggleRegulatory={this.toggleRegulatory}
+            propIsDisplay={this.state.currentMenu == MENU_REFERENCES}/>
+
+          <CSA propIsDisplay={this.state.currentMenu == SUB_CSA}/>
 
         </div>
 

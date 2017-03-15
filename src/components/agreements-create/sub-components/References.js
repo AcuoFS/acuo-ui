@@ -25,11 +25,12 @@ export default class Identifiers extends React.Component {
       propIsCsa,
       propIsRegulatory,
       propToggleCsa,
-      propToggleRegulatory
+      propToggleRegulatory,
+      propIsDisplay
     } = this.props
 
     return (
-      <div className={styles.createContentFlexTwo}>
+      <div className={propIsDisplay ? styles.createContentFlexTwo: styles.hideForm}>
         <div className={styles.rowGroup}>
           <div className={styles.line}>Master Agreement Name</div>
           <div className={styles.line}>

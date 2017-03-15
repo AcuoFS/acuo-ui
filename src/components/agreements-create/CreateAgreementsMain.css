@@ -56,6 +56,7 @@
 
 .subMenuItemSelected {
     composes: subMenuItem;
+    composes: baseFontBold from '../../static/css-components/fonts.css';
     color: #4E83B5;
 }
 

@@ -42,8 +42,10 @@ export default class OtherDetails extends React.Component {
   }
 
   render() {
+    const {propIsDisplay} = this.props
+
     return (
-      <div className={styles.createContent}>
+      <div className={propIsDisplay ? styles.createContent : styles.hideForm}>
         <div className={styles.rowGroup}>
           <div className={styles.line}>Reference Identifier</div>
           <div className={styles.line}>

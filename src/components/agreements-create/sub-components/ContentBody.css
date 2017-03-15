@@ -1,3 +1,7 @@
+.hideForm {
+    display: none;
+}
+
 .createContent {
     flex: 1;
     padding: 50px 25px 16px;
