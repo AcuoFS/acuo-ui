@@ -33,7 +33,7 @@
   transition: .4s;
 }
 
-span {
+.on, .off {
   position: absolute;
   vertical-align: top;
   color: #91908F;
