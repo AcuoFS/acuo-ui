@@ -54,6 +54,11 @@
     color: #4E83B5;
 }
 
+.subMenuItemSelected {
+    composes: subMenuItem;
+    color: #4E83B5;
+}
+
 .menuBody > .btnContainer {
     display: flex;
     flex-direction: column;
