@@ -1,6 +1,7 @@
 import React from 'react'
 import Dropdown  from '../../Dropdown/Dropdown'
 import ToggleSwitch from '../../common/ToggleSwitch'
+import ReferencesCallDriver from './ReferencesCallDriver'
 import styles from './ContentBody.css'
 
 
@@ -9,9 +10,7 @@ export default class Identifiers extends React.Component {
     super(props)
 
     this.state = {
-      isCallDriverExpanded: false,
-      isCsa: false,
-      isRegulatory: false
+      isCallDriverExpanded: false
     }
   }
 
@@ -22,6 +21,13 @@ export default class Identifiers extends React.Component {
   }
 
   render() {
+    const {
+      propIsCsa,
+      propIsRegulatory,
+      propToggleCsa,
+      propToggleRegulatory
+    } = this.props
+
     return (
       <div className={styles.createContentFlexTwo}>
         <div className={styles.rowGroup}>
@@ -61,46 +67,24 @@ export default class Identifiers extends React.Component {
 
         <div className={styles.rowGroup}>
           <div className={styles.line + ' ' + styles.flexLine}>
-            <ToggleSwitch propIsOn={this.state.isCsa}
-                          propOnToggle={() => this.setState({isCsa: !this.state.isCsa})}/>
+            <ToggleSwitch propIsOn={propIsCsa}
+                          propOnToggle={() => propToggleCsa()}/>
             &nbsp;CSA References
           </div>
         </div>
 
         <div className={styles.rowGroup}>
           <div className={styles.line + ' ' + styles.flexLine}>
-            <ToggleSwitch propIsOn={this.state.isRegulatory}
-                          propOnToggle={() => this.setState({isRegulatory: !this.state.isRegulatory})}/>
+            <ToggleSwitch propIsOn={propIsRegulatory}
+                          propOnToggle={() => propToggleRegulatory()}/>
             &nbsp;Regulatory References
           </div>
         </div>
 
-        <div>
-          <div className={styles.rowGroup}>
-            <div className={styles.line}>
-              <span className={styles.agreementsSectionHeader}>Call Driver Details</span>
-              <span className={this.state.isCallDriverExpanded
-                ? styles.upArrow : styles.downArrow}
-                    onClick={() => this.setState({
-                      isCallDriverExpanded: !this.state.isCallDriverExpanded
-                    })}/>
-            </div>
-          </div>
-
-          {
-            this.state.isCallDriverExpanded &&
-            <div className={styles.agreementsSectionContainer}>
-              <div className={styles.agreementsSectionLeft}>
-                Shared Details
-                <hr/>
-              </div>
-              <div className={styles.agreementsSectionRight}>
-                Local Details
-                <hr/>
-              </div>
-            </div>
-          }
-        </div>
+        {
+          !propIsCsa && !propIsRegulatory &&
+          <ReferencesCallDriver/>
+        }
 
       </div>
     )

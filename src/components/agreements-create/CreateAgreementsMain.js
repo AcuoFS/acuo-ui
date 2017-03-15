@@ -3,7 +3,8 @@ import {SimpleCenteredPopup} from '../common/SimpleCenteredPopup'
 import {
   TradingEntities,
   OtherDetails,
-  References
+  References,
+  CSA
 } from './sub-components'
 import styles from './CreateAgreementsMain.css'
 import tempStyles from './sub-components/ContentBody.css'
@@ -39,11 +40,15 @@ export class CreateAgreementsMain extends React.Component {
     this.state = {
       sizeOfPopup: smallStyle,
       currentMenu: MENU_TRADING_ENTITIES,
-      isAgreementTypeSelected: false
+      isAgreementTypeSelected: false,
+      isCsa: false,
+      isRegulatory: false,
+      curCreationScreen: ''
     }
 
     this.createMenuItemDom = this.createMenuItemDom.bind(this)
     this.setAgreementType = this.setAgreementType.bind(this)
+    this.toggleCsa = this.toggleCsa.bind(this)
   }
 
   createMenuItemDom(menuDisplay, menu, styleOfPoppup, isSelected) {
@@ -63,6 +68,15 @@ export class CreateAgreementsMain extends React.Component {
     })
   }
 
+  toggleCsa() {
+    // Switch current menu to CSA
+    if (!this.state.isCsa) {
+      this.setState({currentMenu: SUB_CSA})
+    }
+
+    this.setState({isCsa: !this.state.isCsa})
+  }
+
   render() {
     const {propHandlerClosePopup} = this.props
 
@@ -76,7 +90,14 @@ export class CreateAgreementsMain extends React.Component {
         curCreationScreen = <OtherDetails/>
         break
       case MENU_REFERENCES:
-        curCreationScreen = <References/>
+        curCreationScreen = <References
+          propIsCsa={this.state.isCsa}
+          propIsRegulatory={this.state.isRegulatory}
+          propToggleCsa={this.toggleCsa}
+          propToggleRegulatory={() => this.setState({isRegulatory: !this.state.isRegulatory})}/>
+        break
+      case SUB_CSA:
+        curCreationScreen = <CSA/>
         break
       default:
         curCreationScreen = <div className={tempStyles.createContent}>WIP</div>
@@ -98,10 +119,12 @@ export class CreateAgreementsMain extends React.Component {
                 {this.createMenuItemDom('Agreement References', MENU_REFERENCES,
                   bigStyle, (this.state.currentMenu == MENU_REFERENCES))}
 
-                {this.state.isAgreementTypeSelected && <div>
-                  <div className={styles.subMenuItem}>CSA References</div>
-                  <div className={styles.subMenuItem}>Regulatory References</div>
-                </div>}
+                {
+                  this.state.isCsa &&
+                  <div className={(this.state.currentMenu == SUB_CSA)
+                    ? styles.subMenuItemSelected : styles.subMenuItem}
+                       onClick={() => this.setState({currentMenu: SUB_CSA})}>CSA References</div>
+                }
 
                 {this.createMenuItemDom('Workflow Options', MENU_WORKFLOW_OPTIONS,
                   bigStyle, (this.state.currentMenu == MENU_WORKFLOW_OPTIONS))}
