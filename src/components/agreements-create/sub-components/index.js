@@ -1,9 +1,9 @@
 import OtherDetails from './OtherDetails'
 import TradingEntities from './TradingEntities'
-import Identifiers from './Identifiers'
+import References from './References'
 
 export {
   OtherDetails,
   TradingEntities,
-  Identifiers
+  References
 }

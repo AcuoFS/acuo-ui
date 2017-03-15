@@ -5,6 +5,11 @@
     flex-direction: column;
 }
 
+.createContentFlexTwo {
+    composes: createContent;
+    flex: 2;
+}
+
 .createContent > .rowGroup {
     display: block;
 }
@@ -40,4 +45,65 @@
 .flexLine {
     display: flex;
     align-items: center;
+}
+
+.agreementsSectionContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.agreementsSectionHeader {
+    composes: baseFontBold from '../../../static/css-components/fonts.css';
+    color: #4A4A4A;
+}
+
+.agreementsSectionLeft {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.agreementsSectionRight {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.downArrow,
+.upArrow {
+    position: relative;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.downArrow::before {
+    content: '';
+    position: absolute;
+    border-top: 12px solid #4A4A4A;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+}
+
+.downArrow::after {
+    content: '';
+    position: absolute;
+    border-top: 12px solid #FFFFFF;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    top: -3px
+}
+
+.upArrow::before {
+    content: '';
+    position: absolute;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-bottom: 12px solid #4A4A4A;
+}
+
+.upArrow::after {
+    content: '';
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 12px solid #FFFFFF;
+    top: 6px
 }
