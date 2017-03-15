@@ -10,7 +10,7 @@ import styles from './CreateAgreementsMain.css'
 
 
 const bigStyle = {
-  width: '850px',
+  width: '900px',
   height: '800px'
 }
 
