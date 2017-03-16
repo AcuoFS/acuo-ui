@@ -34,6 +34,10 @@
     width: 250px;
 }
 
+.smallDropdown {
+    width: 70px;
+}
+
 .inputTextBox {
     width: 250px;
     height: 25px;

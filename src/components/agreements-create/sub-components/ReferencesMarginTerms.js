@@ -131,8 +131,27 @@ export default class ReferencesMarginTerms extends React.Component {
 
                 <div className={styles.minTransferAmtLine}>
                   <div className={styles.flexOne + ' ' + styles.minTransferLabel}>Rounding Method</div>
-                  <div className={styles.flexOne}><input type="number" className={styles.smallTextBox}/></div>
-                  <div className={styles.flexOne}><input type="number" className={styles.smallTextBox}/></div>
+                  <div className={styles.flexOne}>
+                    <div className={styles.smallDropdown}>
+                      <Dropdown
+                        handlerOnClick={this.toggleDropDown}
+                        handleOnSelectedItemChange={this.onDropdownItemChange}
+                        selectedOption={''}
+                        options={['Up', 'Down']}
+                        activateMouseLeaveEvent/>
+                    </div>
+                  </div>
+                  <div className={styles.flexOne}>
+                    <div className={styles.smallDropdown}>
+                      <Dropdown
+                        handlerOnClick={this.toggleDropDown}
+                        handleOnSelectedItemChange={this.onDropdownItemChange}
+                        selectedOption={''}
+                        options={['Up', 'Down']}
+                        activateMouseLeaveEvent/>
+                    </div>
+
+                  </div>
                 </div>
               </div>
             </div>
