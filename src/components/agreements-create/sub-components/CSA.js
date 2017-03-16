@@ -36,8 +36,8 @@ export default class CSA extends React.Component {
       </div>
 
       <ReferencesCallDriver propIsMenuCsa/>
-      <ReferencesCallIssuance propIsMenuCsa/>
       <ReferencesMarginTerms propIsMenuCsa/>
+      <ReferencesCallIssuance propIsMenuCsa/>
 
     </div>
   }
