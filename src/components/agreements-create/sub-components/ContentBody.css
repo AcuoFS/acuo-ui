@@ -9,6 +9,14 @@
     flex-direction: column;
 }
 
+/* Padding when there's overflow */
+.createContent::after {
+    content: '';
+    display: block;
+    padding-bottom: 16px;
+    width: 100%;
+}
+
 .createContentFlexTwo {
     composes: createContent;
     flex: 2;
