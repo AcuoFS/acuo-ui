@@ -111,8 +111,29 @@ export default class ReferencesMarginTerms extends React.Component {
             </div>
 
             <div className={styles.rowGroup}>
-              <div className={styles.line}>TODO Minimum Transfer amount etc</div>
               <div className={styles.line}>
+                <div className={styles.minTransferAmtLine}>
+                  <div className={styles.flexOne}></div>
+                  <div className={styles.flexOne + ' ' + styles.minTransferHeader}>Deliver</div>
+                  <div className={styles.flexOne + ' ' + styles.minTransferHeader}>Return</div>
+                </div>
+                <div className={styles.minTransferAmtLine}>
+                  <div className={styles.flexOne + ' ' + styles.minTransferLabel}>Minimum Transfer Amount</div>
+                  <div className={styles.flexOne}><input type="number" className={styles.smallTextBox}/></div>
+                  <div className={styles.flexOne}><input type="number" className={styles.smallTextBox}/></div>
+                </div>
+
+                <div className={styles.minTransferAmtLine}>
+                  <div className={styles.flexOne + ' ' + styles.minTransferLabel}>Rounding Amount</div>
+                  <div className={styles.flexOne}><input type="number" className={styles.smallTextBox}/></div>
+                  <div className={styles.flexOne}><input type="number" className={styles.smallTextBox}/></div>
+                </div>
+
+                <div className={styles.minTransferAmtLine}>
+                  <div className={styles.flexOne + ' ' + styles.minTransferLabel}>Rounding Method</div>
+                  <div className={styles.flexOne}><input type="number" className={styles.smallTextBox}/></div>
+                  <div className={styles.flexOne}><input type="number" className={styles.smallTextBox}/></div>
+                </div>
               </div>
             </div>
 

@@ -34,12 +34,17 @@
     width: 250px;
 }
 
-.line > .inputTextBox {
+.inputTextBox {
     width: 250px;
     height: 25px;
     border: 1px solid #979797;
     font-size: 13px;
     line-height: 16px;
+}
+
+.smallTextBox {
+    composes: inputTextBox;
+    width: 70px;
 }
 
 .btnStyleActive {
@@ -118,4 +123,30 @@
     border-right: 10px solid transparent;
     border-bottom: 12px solid #FFFFFF;
     top: 6px
+}
+
+.flexOne {
+    flex: 1;
+}
+
+.minTransferHeader {
+    color: #315271;
+}
+
+.minTransferLabel {
+    color: #4A4A4A;
+}
+
+.minTransferAmtLine {
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.minTransferAmtLine:nth-child(odd) {
+    background-color: #FFFFFF;
+}
+
+.minTransferAmtLine:nth-child(even) {
+    background-color: #EBF5FF;
 }
