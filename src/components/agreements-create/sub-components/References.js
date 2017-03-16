@@ -2,6 +2,7 @@ import React from 'react'
 import Dropdown  from '../../Dropdown/Dropdown'
 import ToggleSwitch from '../../common/ToggleSwitch'
 import ReferencesCallDriver from './ReferencesCallDriver'
+import ReferencesCallIssuance from './ReferencesCallIssuance'
 import styles from './ContentBody.css'
 
 
@@ -85,6 +86,11 @@ export default class Identifiers extends React.Component {
         {
           !propIsCsa && !propIsRegulatory &&
           <ReferencesCallDriver/>
+        }
+
+        {
+          !propIsCsa && !propIsRegulatory &&
+          <ReferencesCallIssuance/>
         }
 
       </div>
