@@ -29,11 +29,17 @@ export default class ReferencesCallDriver extends React.Component {
   }
 
   render() {
+    const {
+      propIsMenuCsa
+    } = this.props
+
     return (
       <div>
         <div className={styles.rowGroup}>
           <div className={styles.line}>
-            <span className={styles.agreementsSectionHeader}>Call Driver Details</span>
+            <span className={styles.agreementsSectionHeader}>
+              Call Driver Details{propIsMenuCsa && ' - CSA'}
+              </span>
             <span className={this.state.isCallDriverExpanded
               ? styles.upArrow : styles.downArrow}
                   onClick={() => this.setState({

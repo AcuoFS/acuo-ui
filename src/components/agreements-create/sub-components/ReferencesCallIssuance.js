@@ -23,11 +23,17 @@ export default class ReferencesCallIssuance extends React.Component {
   }
 
   render() {
+    const {
+      propIsMenuCsa
+    } = this.props
+
     return (
       <div>
         <div className={styles.rowGroup}>
           <div className={styles.line}>
-            <span className={styles.agreementsSectionHeader}>Call Issuance Settings</span>
+            <span className={styles.agreementsSectionHeader}>
+              Call Issuance Settings{propIsMenuCsa && ' - CSA'}
+              </span>
             <span className={this.state.isCallIssuanceExpanded
               ? styles.upArrow : styles.downArrow}
                   onClick={() => this.setState({

@@ -24,11 +24,17 @@ export default class ReferencesMarginTerms extends React.Component {
   }
 
   render() {
+    const {
+      propIsMenuCsa
+    } = this.props
+
     return (
       <div>
         <div className={styles.rowGroup}>
           <div className={styles.line}>
-            <span className={styles.agreementsSectionHeader}>Margin Terms</span>
+            <span className={styles.agreementsSectionHeader}>
+              Margin Terms{propIsMenuCsa && ' - CSA'}
+              </span>
             <span className={this.state.isSectionExpanded
               ? styles.upArrow : styles.downArrow}
                   onClick={() => this.setState({
