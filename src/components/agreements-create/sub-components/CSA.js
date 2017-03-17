@@ -16,9 +16,21 @@ export default class CSA extends React.Component {
   }
 
   render() {
-    const {propIsDisplay} = this.props
+    const {
+      propIsDisplay,
+      propIsCsa,
+      propToggleCsa
+    } = this.props
 
     return <div className={propIsDisplay ? styles.createContentFlexTwo : styles.hideForm}>
+
+      <div className={styles.rowGroup}>
+        <div className={styles.line + ' ' + styles.flexLine}>
+          <ToggleSwitch propIsOn={propIsCsa}
+                        propOnToggle={() => propToggleCsa()}/>
+          &nbsp;CSA References
+        </div>
+      </div>
 
       <div className={styles.rowGroup}>
         <div className={styles.line}>CSA References</div>

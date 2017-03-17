@@ -10,7 +10,7 @@ import styles from './CreateAgreementsMain.css'
 
 
 const bigStyle = {
-  width: '900px',
+  width: '1000px',
   height: '800px'
 }
 
@@ -69,11 +69,10 @@ export class CreateAgreementsMain extends React.Component {
 
   toggleCsa() {
     // Switch current menu to CSA
-    if (!this.state.isCsa) {
-      this.setState({currentMenu: SUB_CSA})
-    }
-
-    this.setState({isCsa: !this.state.isCsa})
+    this.setState({
+      currentMenu: (this.state.isCsa ? MENU_REFERENCES : SUB_CSA),
+      isCsa: !this.state.isCsa
+    })
   }
 
   toggleRegulatory() {
@@ -150,7 +149,9 @@ export class CreateAgreementsMain extends React.Component {
             propToggleRegulatory={this.toggleRegulatory}
             propIsDisplay={this.state.currentMenu == MENU_REFERENCES}/>
 
-          <CSA propIsDisplay={this.state.currentMenu == SUB_CSA}/>
+          <CSA propIsDisplay={this.state.currentMenu == SUB_CSA}
+               propIsCsa={this.state.isCsa}
+               propToggleCsa={this.toggleCsa}/>
 
         </div>
 
