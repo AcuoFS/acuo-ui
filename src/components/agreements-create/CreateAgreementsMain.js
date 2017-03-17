@@ -54,11 +54,11 @@ export class CreateAgreementsMain extends React.Component {
     this.toggleRegulatory = this.toggleRegulatory.bind(this)
   }
 
-  createMenuItemDom(menuDisplay, menu, styleOfPoppup, isSelected) {
+  createMenuItemDom(menuDisplay, menu, styleOfPopup, isSelected) {
     return (
       <div className={styles.menuItem + ' ' + (isSelected && styles.menuItemSelected)}
            onClick={() => this.setState({
-             sizeOfPopup: styleOfPoppup,
+             sizeOfPopup: styleOfPopup,
              currentMenu: menu
            })}>
         {menuDisplay}
@@ -108,22 +108,21 @@ export class CreateAgreementsMain extends React.Component {
                 {this.createMenuItemDom('Agreement References', MENU_REFERENCES,
                   bigStyle, (this.state.currentMenu == MENU_REFERENCES))}
 
-                {
-                  this.state.isCsa &&
-                  <div className={(this.state.currentMenu == SUB_CSA)
-                    ? styles.subMenuItemSelected : styles.subMenuItem}
-                       onClick={() => this.setState({
-                         currentMenu: SUB_CSA,
-                         sizeOfPopup: giantStyle
-                       })}>CSA References</div>
-                }
+                {(this.state.isCsa || this.state.isAgreementTypeSelected) &&
+                <div className={(this.state.currentMenu == SUB_CSA)
+                  ? styles.subMenuItemSelected : styles.subMenuItem}
+                     onClick={() => this.setState({
+                       currentMenu: SUB_CSA,
+                       sizeOfPopup: giantStyle
+                     })}>CSA References
+                </div>}
 
-                {
-                  this.state.isRegulatory &&
-                  <div className={(this.state.currentMenu == SUB_REGULATORY)
-                    ? styles.subMenuItemSelected : styles.subMenuItem}
-                       onClick={() => this.setState({currentMenu: SUB_REGULATORY})}>Regulatory References</div>
-                }
+                {(this.state.isRegulatory || this.state.isAgreementTypeSelected) &&
+                <div className={(this.state.currentMenu == SUB_REGULATORY)
+                  ? styles.subMenuItemSelected : styles.subMenuItem}
+                     onClick={() => this.setState({currentMenu: SUB_REGULATORY})}>
+                  Regulatory References
+                </div>}
 
                 {this.createMenuItemDom('Workflow Options', MENU_WORKFLOW_OPTIONS,
                   bigStyle, (this.state.currentMenu == MENU_WORKFLOW_OPTIONS))}
