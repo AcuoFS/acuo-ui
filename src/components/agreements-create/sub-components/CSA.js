@@ -22,7 +22,7 @@ export default class CSA extends React.Component {
       propToggleCsa
     } = this.props
 
-    return <div className={propIsDisplay ? styles.createContentFlexTwo : styles.hideForm}>
+    return <div className={propIsDisplay ? styles.createContentFlexFour : styles.hideForm}>
 
       <div className={styles.rowGroup}>
         <div className={styles.line + ' ' + styles.flexLine}>

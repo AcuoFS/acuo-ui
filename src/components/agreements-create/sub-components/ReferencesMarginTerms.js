@@ -199,6 +199,8 @@ export default class ReferencesMarginTerms extends React.Component {
 
           </div>
 
+          <div className={propIsMenuCsa && styles.agreementsSectionRight}/>
+
         </div>}
 
       </div>

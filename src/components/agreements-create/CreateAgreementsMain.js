@@ -8,6 +8,10 @@ import {
 } from './sub-components'
 import styles from './CreateAgreementsMain.css'
 
+const giantStyle = {
+  width: '1200px',
+  height: '800px'
+}
 
 const bigStyle = {
   width: '1000px',
@@ -71,6 +75,7 @@ export class CreateAgreementsMain extends React.Component {
     // Switch current menu to CSA
     this.setState({
       currentMenu: (this.state.isCsa ? MENU_REFERENCES : SUB_CSA),
+      sizeOfPopup: (this.state.isCsa ? bigStyle : giantStyle),
       isCsa: !this.state.isCsa
     })
   }
@@ -107,7 +112,10 @@ export class CreateAgreementsMain extends React.Component {
                   this.state.isCsa &&
                   <div className={(this.state.currentMenu == SUB_CSA)
                     ? styles.subMenuItemSelected : styles.subMenuItem}
-                       onClick={() => this.setState({currentMenu: SUB_CSA})}>CSA References</div>
+                       onClick={() => this.setState({
+                         currentMenu: SUB_CSA,
+                         sizeOfPopup: giantStyle
+                       })}>CSA References</div>
                 }
 
                 {

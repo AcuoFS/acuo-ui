@@ -22,6 +22,11 @@
     flex: 2;
 }
 
+.createContentFlexFour {
+    composes: createContent;
+    flex: 4;
+}
+
 .createContent > .rowGroup {
     display: block;
 }
@@ -86,6 +91,11 @@
 .agreementsSectionRight {
     flex: 1;
     margin-left: 10px;
+}
+
+.agreementsSectionRightFlexTwo {
+    composes: agreementsSectionRight;
+    flex: 2;
 }
 
 .downArrow,
@@ -153,4 +163,18 @@
 
 .minTransferAmtLine:nth-child(even) {
     background-color: #EBF5FF;
+}
+
+.stpTwoUnits {
+    display: flex;
+}
+
+.stpAutoOne {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.stpAutoTwo {
+    flex: 1;
+    margin-left: 10px;
 }

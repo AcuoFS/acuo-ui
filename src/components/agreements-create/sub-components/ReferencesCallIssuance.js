@@ -99,7 +99,8 @@ export default class ReferencesCallIssuance extends React.Component {
             </div>
 
           </div>
-          <div className={styles.agreementsSectionRight}/>
+          <div className={propIsMenuCsa ?
+            styles.agreementsSectionRightFlexTwo : styles.agreementsSectionRight}/>
         </div>}
 
       </div>
