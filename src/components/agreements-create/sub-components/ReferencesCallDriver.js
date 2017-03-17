@@ -55,6 +55,21 @@ export default class ReferencesCallDriver extends React.Component {
               Shared Details
               <hr/>
 
+              {propIsMenuCsa && <div className={styles.rowGroup}>
+                <div className={styles.line}>Exposure Treatment</div>
+                <div className={styles.line}>
+                  <div className={styles.dropDown}>
+                    <Dropdown
+                      handlerOnClick={this.toggleDropDown}
+                      handleOnSelectedItemChange={this.onDropdownItemChange}
+                      selectedOption={'Select'}
+                      options={['WIP']}
+                      activateMouseLeaveEvent/>
+                  </div>
+                </div>
+              </div>}
+
+
               <div className={styles.rowGroup}>
                 <div className={styles.line}>Account Base Currency</div>
                 <div className={styles.line}>
@@ -69,7 +84,7 @@ export default class ReferencesCallDriver extends React.Component {
                 </div>
               </div>
 
-              <div className={styles.rowGroup}>
+              {!propIsMenuCsa && <div className={styles.rowGroup}>
                 <div className={styles.line}>Eligible Currency</div>
                 <div className={styles.line}>
                   <div className={styles.dropDown}>
@@ -81,7 +96,7 @@ export default class ReferencesCallDriver extends React.Component {
                       activateMouseLeaveEvent/>
                   </div>
                 </div>
-              </div>
+              </div>}
 
             </div>
             <div className={styles.agreementsSectionRight}>

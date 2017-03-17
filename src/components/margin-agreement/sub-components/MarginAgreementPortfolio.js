@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react'
 import CounterPartyAssets from './CounterPartyAssets'
 import ClientAsset from './ClientAsset'
 import MarginAgreementUpload from '../../margin-agreement-upload/MarginAgreementUpload'
+import {isEmptyCounterparty} from '../../../utils'
 import styles from '../MarginAgreementList.css'
 
 
@@ -151,6 +152,7 @@ export default class MarginAgreementPortfolio extends React.Component {
                      onSelectSecondLevelItem={onSelectSecondLevelItem}/>
 
         <div className={styles.actPanel + ' ' + styles.act_C}>
+          {!isEmptyCounterparty(portfolioData.get('counterpartyAssets')) &&
           <div className={styles.btnWrap}>
             <div className={styles.actFig + ' ' + this.getTextColour(percentage)}>
               {percentage}%
@@ -160,7 +162,7 @@ export default class MarginAgreementPortfolio extends React.Component {
               styles.actBtnDisable : this.getBtnColour(percentage))}
                  onClick={onReconItem} data-ref={portfolioData.get('GUID') + "?amount=" + this.state.adjAmount}>OK
             </div>
-          </div>
+          </div>}
         </div>
 
         <CounterPartyAssets marginData={portfolioData}

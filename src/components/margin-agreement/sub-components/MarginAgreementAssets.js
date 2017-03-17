@@ -1,16 +1,11 @@
 import React, {PropTypes} from 'react'
 import {Map, List} from 'immutable'
 import MarginAgreementDetail from './MarginAgreementDetail'
-import {checkNegative} from '../../../utils'
+import {checkNegative, isEmptyCounterparty} from '../../../utils'
 import styles from '../MarginAgreementList.css'
 import CounterPartyUpload from './CounterPartyUpload'
 import selfStyles from './MarginAgreementAssets.css'
 
-
-export const isEmptyCounterparty = (counterpartyData) => {
-  return (counterpartyData.isEmpty() || !counterpartyData.first().get('data') ||
-  (counterpartyData.first().get('data').isEmpty()))
-}
 
 export default class MarginAgreementPortfolio extends React.Component {
   constructor(props) {
