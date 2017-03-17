@@ -9,7 +9,7 @@ export default class ReferencesCallDriver extends React.Component {
     super(props)
 
     this.state = {
-      isCallDriverExpanded: false,
+      isCallDriverExpanded: true,
       isStpAutoPledge: false,
       isStpTypeCurrency: false,
       isStpAutoPledgeAccept: false

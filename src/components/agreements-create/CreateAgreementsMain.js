@@ -15,12 +15,12 @@ const giantStyle = {
 
 const bigStyle = {
   width: '1000px',
-  height: '800px'
+  height: '900px'
 }
 
 const mediumStyle = {
-  width: '850px',
-  height: '500px'
+  width: '600px',
+  height: '720px'
 }
 
 const smallStyle = {
@@ -129,7 +129,7 @@ export class CreateAgreementsMain extends React.Component {
                   bigStyle, (this.state.currentMenu == MENU_WORKFLOW_OPTIONS))}
 
                 {this.createMenuItemDom('Other Details', MENU_OTHER_DETAILS,
-                  bigStyle, (this.state.currentMenu == MENU_OTHER_DETAILS))}
+                  mediumStyle, (this.state.currentMenu == MENU_OTHER_DETAILS))}
 
                 {this.createMenuItemDom('Assignment Details', MENU_ASSIGNMENT_DETAILS,
                   bigStyle, (this.state.currentMenu == MENU_ASSIGNMENT_DETAILS))}
