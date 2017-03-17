@@ -125,7 +125,7 @@ export default class MarginAgreementDetail extends React.Component {
             <div className={styles.packageText}>{topLevel}</div>
 
             {/*show only if second level exists*/}
-            {secondLevel && expand}
+            {secondLevel && !secondLevel.isEmpty() && expand}
 
           </div>
           <div className={styles.packageRight}>{checkNegative(totalAmount.toFixed(2))}</div>

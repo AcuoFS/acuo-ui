@@ -69,7 +69,7 @@ export default class MarginAgreementPortfolio extends React.Component {
   renderItem(marginData, assetsName, handlerSelectedItem, firstLevelList, secondLevelList, onSelectSecondLevelItem, party) {
     if (marginData.get(assetsName))
       return marginData.get(assetsName).sort().map((x) => {
-        if (x.get('data')) {
+        if (x.get('data') && !x.get('data').isEmpty()) {
           return (<div key={x.get('groupName')}>{x.get('data').sort((a, b) => a.getIn(['firstLevel', 'name']) > b.getIn(['firstLevel', 'name'])).map((groupData) => {
             const secondLevel = groupData.getIn(['firstLevel', 'secondLevel'])
 
