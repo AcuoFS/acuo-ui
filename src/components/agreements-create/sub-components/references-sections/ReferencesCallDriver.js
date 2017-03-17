@@ -1,7 +1,7 @@
 import React from 'react'
-import Dropdown from '../../Dropdown/Dropdown'
-import ToggleSwitch from '../../common/ToggleSwitch'
-import styles from './ContentBody.css'
+import Dropdown from '../../../Dropdown/Dropdown'
+import ToggleSwitch from '../../../common/ToggleSwitch'
+import styles from '../ContentBody.css'
 
 
 export default class ReferencesCallDriver extends React.Component {

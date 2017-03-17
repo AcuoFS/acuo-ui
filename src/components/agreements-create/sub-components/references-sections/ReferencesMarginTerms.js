@@ -1,8 +1,8 @@
 import React from 'react'
-import Dropdown from '../../Dropdown/Dropdown'
-import TImeSelector from '../../common/TimeSelector/TImeSelector'
-import {gmtTimezoneList} from '../../../utils'
-import styles from './ContentBody.css'
+import Dropdown from '../../../Dropdown/Dropdown'
+import TImeSelector from '../../../common/TimeSelector/TImeSelector'
+import {gmtTimezoneList} from '../../../../utils'
+import styles from '../ContentBody.css'
 
 
 export default class ReferencesMarginTerms extends React.Component {

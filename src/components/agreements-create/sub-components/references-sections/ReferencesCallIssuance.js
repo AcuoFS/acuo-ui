@@ -1,7 +1,7 @@
 import React from 'react'
-import ToggleSwitch from '../../common/ToggleSwitch'
-import Dropdown from '../../Dropdown/Dropdown'
-import styles from './ContentBody.css'
+import ToggleSwitch from '../../../common/ToggleSwitch'
+import Dropdown from '../../../Dropdown/Dropdown'
+import styles from '../ContentBody.css'
 
 
 export default class ReferencesCallIssuance extends React.Component {

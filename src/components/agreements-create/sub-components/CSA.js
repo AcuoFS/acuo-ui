@@ -1,7 +1,9 @@
 import React from 'react'
-import ReferencesCallDriver from './ReferencesCallDriver'
-import ReferencesCallIssuance from './ReferencesCallIssuance'
-import ReferencesMarginTerms from './ReferencesMarginTerms'
+import {
+  ReferencesCallDriver,
+  ReferencesCallIssuance,
+  ReferencesMarginTerms
+} from './references-sections'
 import ToggleSwitch from '../../common/ToggleSwitch'
 import styles from './ContentBody.css'
 
