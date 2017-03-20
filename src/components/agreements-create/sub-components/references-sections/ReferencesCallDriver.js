@@ -1,6 +1,7 @@
 import React from 'react'
 import Dropdown from '../../../Dropdown/Dropdown'
 import ToggleSwitch from '../../../common/ToggleSwitch'
+import MultipleSelection from '../../../MultipleSelection/MultipleSelection'
 import styles from '../ContentBody.css'
 
 
@@ -69,34 +70,37 @@ export default class ReferencesCallDriver extends React.Component {
                 </div>
               </div>}
 
-
               <div className={styles.rowGroup}>
                 <div className={styles.line}>Account Base Currency</div>
                 <div className={styles.line}>
                   <div className={styles.dropDown}>
-                    <Dropdown
+                    <MultipleSelection
                       handlerOnClick={this.toggleDropDown}
                       handleOnSelectedItemChange={this.onDropdownItemChange}
                       selectedOption={'Select'}
-                      options={['WIP']}
+                      options={['GBP', 'SGD', 'USD', 'CNY', 'TWD', 'HKD', 'JPY']}
                       activateMouseLeaveEvent/>
                   </div>
                 </div>
               </div>
 
-              {!propIsMenuCsa && <div className={styles.rowGroup}>
+
+              {!propIsMenuCsa &&
+              <div className={styles.rowGroup}>
                 <div className={styles.line}>Eligible Currency</div>
                 <div className={styles.line}>
                   <div className={styles.dropDown}>
-                    <Dropdown
+                    <MultipleSelection
                       handlerOnClick={this.toggleDropDown}
                       handleOnSelectedItemChange={this.onDropdownItemChange}
                       selectedOption={'Select'}
-                      options={['WIP']}
+                      options={['GBP', 'SGD', 'USD', 'CNY', 'TWD', 'HKD', 'JPY']}
                       activateMouseLeaveEvent/>
                   </div>
                 </div>
-              </div>}
+              </div>
+
+              }
 
             </div>
 
@@ -143,19 +147,22 @@ export default class ReferencesCallDriver extends React.Component {
                     </div>
                   </div>
 
-                  {this.state.isStpTypeCurrency && <div className={styles.rowGroup}>
+                  {this.state.isStpTypeCurrency &&
+                  <div className={styles.rowGroup}>
                     <div className={styles.line}>Pledge STP Currency</div>
                     <div className={styles.line}>
                       <div className={styles.dropDown}>
-                        <Dropdown
+                        <MultipleSelection
                           handlerOnClick={this.toggleDropDown}
                           handleOnSelectedItemChange={this.onDropdownItemChange}
                           selectedOption={'Select'}
-                          options={['WIP']}
+                          options={['GBP', 'SGD', 'USD', 'CNY', 'TWD', 'HKD', 'JPY']}
                           activateMouseLeaveEvent/>
                       </div>
                     </div>
-                  </div>}
+                  </div>
+
+                  }
                 </div>
 
                 <div className={propIsMenuCsa && styles.stpAutoTwo}>

@@ -2,6 +2,7 @@ import React from 'react'
 import Dropdown from '../../../Dropdown/Dropdown'
 import TImeSelector from '../../../common/TimeSelector/TImeSelector'
 import {gmtTimezoneList} from '../../../../utils'
+import MultipleSelection from '../../../MultipleSelection/MultipleSelection'
 import styles from '../ContentBody.css'
 
 
@@ -53,15 +54,16 @@ export default class ReferencesMarginTerms extends React.Component {
               <div className={styles.line}>Exposure Calculation Currency</div>
               <div className={styles.line}>
                 <div className={styles.dropDown}>
-                  <Dropdown
+                  <MultipleSelection
                     handlerOnClick={this.toggleDropDown}
                     handleOnSelectedItemChange={this.onDropdownItemChange}
                     selectedOption={'Select'}
-                    options={['WIP']}
+                    options={['GBP', 'SGD', 'USD', 'CNY', 'TWD', 'HKD', 'JPY']}
                     activateMouseLeaveEvent/>
                 </div>
               </div>
             </div>
+
 
             <div className={styles.rowGroup}>
               <div className={styles.line}>Notification Time</div>

@@ -104,7 +104,7 @@ export default class OtherDetails extends React.Component {
             </div>
           </div>
 
-          {this.state.isSoleCalc ?
+          {this.state.isSoleCalc &&
           <div className={styles.rowGroup}>
             <div className={styles.line}>Valuation Agent</div>
             <div className={styles.line}>
@@ -118,21 +118,7 @@ export default class OtherDetails extends React.Component {
               </div>
             </div>
           </div>
-            : ''}
-
-          <div className={styles.rowGroup}>
-            <div className={styles.line}>Multiple selection test</div>
-            <div className={styles.line}>
-              <div className={styles.dropDown}>
-                <MultipleSelection
-                  handlerOnClick={this.toggleDropDown}
-                  handleOnSelectedItemChange={this.onDropdownItemChange}
-                  selectedOption={'Select'}
-                  options={['GBP', 'SGD', 'USD', 'CNY', 'TWD', 'HKD', 'JPY', '']}
-                  activateMouseLeaveEvent/>
-              </div>
-            </div>
-          </div>
+          }
 
           <div className={styles.rowGroup}>
             <div className={styles.line}>Regulatory Jurisdiction</div>
