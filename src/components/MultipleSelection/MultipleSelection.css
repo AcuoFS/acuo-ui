@@ -5,7 +5,7 @@
   display: inline-block;
   color: #494949;
   width: 100%;
-  height: 30px;
+  min-height: 30px;
   margin: 0px 0px;
   position: relative;
   z-index: 20;
@@ -21,8 +21,7 @@
   color: #494949;
   background-color: #fff;
   width: 100%;
-  min-height: 16px;
-  height: 28px;
+  min-height: 28px;
   border: none;
   padding: 0 0px;
   border: 1px solid #AAAAAA;
@@ -31,7 +30,6 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  overflow: hidden;
 }
 
 .filterItem .filters:focus {
@@ -67,7 +65,7 @@
   border-width: 8px 8px 0 8px;
   border-color: #AAAAAA transparent transparent transparent;
   position: absolute;
-  top: 6px;
+  top: calc(50% - 4px);
   left: 2px;
 }
 
@@ -79,15 +77,15 @@
   border-width: 8px 8px 0 8px;
   border-color: #fff transparent transparent transparent;
   position: absolute;
-  top: 4px;
+  top: calc(50% - 6px);
   left: 2px;
 }
 
 .filtersList {
   position: absolute;
-  top: 30px;
-  left: 0;
-  width: 100%;
+  top: 100%;
+  left: -1px;
+  width: calc(100% + 33px);
   background-color: #fff;
   -webkit-box-shadow: 5px 5px 14px -2px rgba(166, 166, 166, 1);
   -moz-box-shadow: 5px 5px 14px -2px rgba(166, 166, 166, 1);
@@ -105,6 +103,17 @@
 .selectedText {
   padding: 0px 8px;
   line-height: 30px;
+  position: relative;
+  min-height: 30px;
+  width: calc(100% - 50px);
+}
+
+.selectedText div{
+  padding: 0px 5px;
+  margin: 5px 5px;
+  background-color: #e8e8e8;
+  display: inline-block;
+  border-radius: 5px;
 }
 
 .filtersList li:hover {
@@ -119,4 +128,29 @@
 .maxHeightOptions {
   max-height: 160px;
   overflow: auto;
+}
+
+.close {
+  position: relative;
+  display: inline-block;
+  width: 15px;
+  height: 12px;
+  opacity: 0.3;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 7px;
+  content: ' ';
+  height: 15px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
 }

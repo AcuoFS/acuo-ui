@@ -1,5 +1,7 @@
 import React from 'react'
 import Dropdown from '../../Dropdown/Dropdown'
+import MultipleSelection from '../../MultipleSelection/MultipleSelection'
+
 import {gmtTimezoneList} from '../../../utils'
 import SelectionBox from '../../common/SelectionBox'
 import ToggleSwitch from '../../common/ToggleSwitch'
@@ -117,6 +119,20 @@ export default class OtherDetails extends React.Component {
             </div>
           </div>
             : ''}
+
+          <div className={styles.rowGroup}>
+            <div className={styles.line}>Multiple selection test</div>
+            <div className={styles.line}>
+              <div className={styles.dropDown}>
+                <MultipleSelection
+                  handlerOnClick={this.toggleDropDown}
+                  handleOnSelectedItemChange={this.onDropdownItemChange}
+                  selectedOption={'Select'}
+                  options={['GBP', 'SGD', 'USD', 'CNY', 'TWD', 'HKD', 'JPY', '']}
+                  activateMouseLeaveEvent/>
+              </div>
+            </div>
+          </div>
 
           <div className={styles.rowGroup}>
             <div className={styles.line}>Regulatory Jurisdiction</div>
