@@ -74,22 +74,21 @@ export class CreateAgreementsMain extends React.Component {
 
   toggleCsa() {
     // Switch current menu to CSA
-    this.setState({
-      currentMenu: (this.state.isCsa ? MENU_REFERENCES : SUB_CSA),
-      sizeOfPopup: (this.state.isCsa ? bigStyle : giantStyle),
-      isCsa: !this.state.isCsa
-    })
+    this.toggleReferencesSub('isCsa', SUB_CSA)
   }
 
   toggleRegulatory() {
     // Switch current menu to Regulatory
-    this.setState({
-      currentMenu: (this.state.isRegulatory ? MENU_REFERENCES : SUB_REGULATORY),
-      sizeOfPopup: (this.state.isRegulatory ? bigStyle : giantStyle),
-      isRegulatory: !this.state.isRegulatory
-    })
+    this.toggleReferencesSub('isRegulatory', SUB_REGULATORY)
   }
 
+  toggleReferencesSub(type, menuConst) {
+    this.setState({
+      currentMenu: (this.state[type] ? MENU_REFERENCES : menuConst),
+      sizeOfPopup: (this.state[type] ? bigStyle : giantStyle),
+      [type]: !this.state[type]
+    })
+  }
 
   render() {
     const {propHandlerClosePopup} = this.props
