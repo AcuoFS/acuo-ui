@@ -49,9 +49,9 @@ export default class Regulatory extends React.Component {
         </div>
       </div>
 
-      <ReferencesCallDriver propIsMenuCsa/>
-      <ReferencesMarginTerms propIsMenuCsa/>
-      <ReferencesCallIssuance propIsMenuCsa/>
+      <ReferencesCallDriver propIsMenuRegulatory/>
+      <ReferencesMarginTerms propIsMenuRegulatory/>
+      <ReferencesCallIssuance propIsMenuRegulatory/>
 
     </div>
   }

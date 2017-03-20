@@ -26,7 +26,8 @@ export default class ReferencesMarginTerms extends React.Component {
 
   render() {
     const {
-      propIsMenuCsa
+      propIsMenuCsa,
+      propIsMenuRegulatory
     } = this.props
 
     return (
@@ -34,7 +35,9 @@ export default class ReferencesMarginTerms extends React.Component {
         <div className={styles.rowGroup}>
           <div className={styles.line}>
             <span className={styles.agreementsSectionHeader}>
-              Margin Terms{propIsMenuCsa && ' - CSA'}
+              Margin Terms
+              {propIsMenuCsa && ' - CSA'}
+              {propIsMenuRegulatory && ' - Regulatory CSA'}
               </span>
             <span className={this.state.isSectionExpanded
               ? styles.upArrow : styles.downArrow}
@@ -201,7 +204,8 @@ export default class ReferencesMarginTerms extends React.Component {
 
           </div>
 
-          <div className={propIsMenuCsa && styles.agreementsSectionRight}/>
+          <div className={(propIsMenuCsa || propIsMenuRegulatory ) &&
+          styles.agreementsSectionRight}/>
 
         </div>}
 
