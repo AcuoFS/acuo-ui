@@ -4,7 +4,8 @@ import {
   TradingEntities,
   OtherDetails,
   References,
-  CSA
+  CSA,
+  Regulatory
 } from './sub-components'
 import styles from './CreateAgreementsMain.css'
 
@@ -82,11 +83,11 @@ export class CreateAgreementsMain extends React.Component {
 
   toggleRegulatory() {
     // Switch current menu to Regulatory
-    if (!this.state.isRegulatory) {
-      this.setState({currentMenu: SUB_REGULATORY})
-    }
-
-    this.setState({isRegulatory: !this.state.isRegulatory})
+    this.setState({
+      currentMenu: (this.state.isRegulatory ? MENU_REFERENCES : SUB_REGULATORY),
+      sizeOfPopup: (this.state.isRegulatory ? bigStyle : giantStyle),
+      isRegulatory: !this.state.isRegulatory
+    })
   }
 
 
@@ -120,8 +121,10 @@ export class CreateAgreementsMain extends React.Component {
                 {(this.state.isRegulatory || this.state.isAgreementTypeSelected) &&
                 <div className={(this.state.currentMenu == SUB_REGULATORY)
                   ? styles.subMenuItemSelected : styles.subMenuItem}
-                     onClick={() => this.setState({currentMenu: SUB_REGULATORY})}>
-                  Regulatory References
+                     onClick={() => this.setState({
+                       currentMenu: SUB_REGULATORY,
+                       sizeOfPopup: giantStyle
+                     })}>Regulatory References
                 </div>}
 
                 {this.createMenuItemDom('Workflow Options', MENU_WORKFLOW_OPTIONS,
@@ -159,6 +162,10 @@ export class CreateAgreementsMain extends React.Component {
           <CSA propIsDisplay={this.state.currentMenu == SUB_CSA}
                propIsCsa={this.state.isCsa}
                propToggleCsa={this.toggleCsa}/>
+
+          <Regulatory propIsDisplay={this.state.currentMenu == SUB_REGULATORY}
+                      propIsRegulatory={this.state.isRegulatory}
+                      propToggleRegulatory={this.toggleRegulatory}/>
 
         </div>
 
