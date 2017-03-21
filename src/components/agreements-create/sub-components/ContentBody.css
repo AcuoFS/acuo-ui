@@ -40,6 +40,11 @@
     padding: 5px 30px;
 }
 
+.workflowGroup {
+    display: flex;
+    flex-direction: column;
+}
+
 .line > .dropDown {
     width: 250px;
 }

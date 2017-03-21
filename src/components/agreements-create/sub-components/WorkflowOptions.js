@@ -27,18 +27,18 @@ export default class WorkflowOptions extends React.Component {
 
     return <div className={propIsDisplay ? styles.createContentFlexTwo : styles.hideForm}>
 
-      <div className={styles.rowGroup}>
-        <div className={styles.workflowLine + ' ' + styles.flexLine}>
-          <ToggleSwitch propIsOn={this.state.isEnableMarginCall}
-                        propOnToggle={() =>
-                          this.setState({
-                            isEnableMarginCall: !this.state.isEnableMarginCall
-                          })}/>
-          &nbsp;Enable Margin Call
-        </div>
+      <div className={styles.workflowLine + ' ' + styles.flexLine}>
+        <ToggleSwitch propIsOn={this.state.isEnableMarginCall}
+                      propOnToggle={() =>
+                        this.setState({
+                          isEnableMarginCall: !this.state.isEnableMarginCall
+                        })}/>
+        &nbsp;Enable Margin Call
       </div>
 
-      <div className={styles.rowGroup}>
+      {this.state.isEnableMarginCall &&
+      <div className={styles.workflowGroup}>
+
         <div className={styles.workflowLine + ' ' + styles.flexLine}>
           <ToggleSwitch propIsOn={this.state.isAllowMultipleCalls}
                         propOnToggle={() =>
@@ -47,9 +47,8 @@ export default class WorkflowOptions extends React.Component {
                           })}/>
           &nbsp;Allow Multiple Calls per day
         </div>
-      </div>
 
-      <div className={styles.rowGroup}>
+
         <div className={styles.workflowLine + ' ' + styles.flexLine}>
           <ToggleSwitch propIsOn={this.state.isEnableVariation}
                         propOnToggle={() =>
@@ -58,10 +57,9 @@ export default class WorkflowOptions extends React.Component {
                           })}/>
           &nbsp;Enable Variation Calls
         </div>
-      </div>
 
-      {this.state.isEnableVariation &&
-      <div className={styles.rowGroup}>
+
+        {this.state.isEnableVariation &&
         <div className={styles.workflowLine + ' ' + styles.flexLine}>
           <ToggleSwitch propIsOn={this.state.isVariationByCurrency}
                         propOnToggle={() =>
@@ -69,10 +67,8 @@ export default class WorkflowOptions extends React.Component {
                             isVariationByCurrency: !this.state.isVariationByCurrency
                           })}/>
           &nbsp;Select Variation Calls by Currency
-        </div>
-      </div>}
+        </div>}
 
-      <div className={styles.rowGroup}>
         <div className={styles.workflowLine + ' ' + styles.flexLine}>
           <ToggleSwitch propIsOn={this.state.isEnableInitial}
                         propOnToggle={() =>
@@ -81,10 +77,8 @@ export default class WorkflowOptions extends React.Component {
                           })}/>
           &nbsp;Enable Initial Calls
         </div>
-      </div>
 
-      {this.state.isEnableInitial &&
-      <div className={styles.rowGroup}>
+        {this.state.isEnableInitial &&
         <div className={styles.workflowLine + ' ' + styles.flexLine}>
           <ToggleSwitch propIsOn={this.state.isInitialByCurrency}
                         propOnToggle={() =>
@@ -92,10 +86,8 @@ export default class WorkflowOptions extends React.Component {
                             isInitialByCurrency: !this.state.isInitialByCurrency
                           })}/>
           &nbsp;Select Initial Calls by Currency
-        </div>
-      </div>}
+        </div>}
 
-      <div className={styles.rowGroup}>
         <div className={styles.workflowLine + ' ' + styles.flexLine}>
           <ToggleSwitch propIsOn={this.state.isContingentRelease}
                         propOnToggle={() =>
@@ -104,9 +96,7 @@ export default class WorkflowOptions extends React.Component {
                           })}/>
           &nbsp;Contingent Release Pledge Accept
         </div>
-      </div>
 
-      <div className={styles.rowGroup}>
         <div className={styles.workflowLine + ' ' + styles.flexLine}>
           <ToggleSwitch propIsOn={this.state.isExpectedMatching}
                         propOnToggle={() =>
@@ -115,9 +105,7 @@ export default class WorkflowOptions extends React.Component {
                           })}/>
           &nbsp;Expected Call Type Matching
         </div>
-      </div>
 
-      <div className={styles.rowGroup}>
         <div className={styles.workflowLine + ' ' + styles.flexLine}>
           <ToggleSwitch propIsOn={this.state.isAllowNetting}
                         propOnToggle={() =>
@@ -126,10 +114,8 @@ export default class WorkflowOptions extends React.Component {
                           })}/>
           &nbsp;Allow Netting
         </div>
-      </div>
 
-      {this.state.isEnableVariation && this.state.isEnableInitial &&
-      <div className={styles.rowGroup}>
+        {this.state.isEnableVariation && this.state.isEnableInitial &&
         <div className={styles.workflowLine + ' ' + styles.flexLine}>
           <ToggleSwitch propIsOn={this.state.isAllowNettingInitialVariation}
                         propOnToggle={() =>
@@ -137,7 +123,8 @@ export default class WorkflowOptions extends React.Component {
                             isAllowNettingInitialVariation: !this.state.isAllowNettingInitialVariation
                           })}/>
           &nbsp;Allow Netting Initial/Variation
-        </div>
+        </div>}
+
       </div>}
 
     </div>
