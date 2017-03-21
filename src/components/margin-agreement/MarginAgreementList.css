@@ -33,6 +33,7 @@
 .actionWrap .actPanel{
     display: inline-flex;
     /*border: 1px dotted #2b3c4c;*/
+    background: #fff;
 }
 
 .actionWrap .actPanel.act_C{
@@ -40,6 +41,7 @@
     align-items: stretch;
     margin: auto;
     /*border: 1px dotted #2b3c4c;*/
+    background: transparent;
 }
 .actionWrap .actPanel.act_C .btnWrap{
     margin: 0 auto;
