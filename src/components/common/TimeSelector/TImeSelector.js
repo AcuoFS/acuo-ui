@@ -54,6 +54,15 @@ export default class TimeSelector extends React.Component{
     updateMin(mins)
   }
 
+  reset(){
+    const date = getDate()
+
+    this.setState({
+      hrs: date.getHours(),
+      mins: date.getMinutes()
+    })
+  }
+
   render(){
 
     const {
@@ -64,7 +73,7 @@ export default class TimeSelector extends React.Component{
     return (
       <div className={styles.timeSelector}>
         <input type="number" value={this.pad(this.state.hrs, 2)} onChange={(e) => this.hourChange(e.target.value, updateHour)} /> : <input type="number" value={this.pad(this.state.mins, 2)} onChange={(e) => this.minChange(e.target.value, updateMin)}/><br/>
-        <div className={styles.clear}>clear</div>
+        <div className={styles.clear} onClick={() => this.reset()}>clear</div>
       </div>
     )
   }
