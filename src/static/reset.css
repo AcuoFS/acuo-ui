@@ -46,3 +46,9 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+html,body { height:100%; }
+
+body {
+    background: url('../images/common/ACUO-watermark.svg') no-repeat 50% fixed;
+}
