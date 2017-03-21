@@ -50,7 +50,6 @@ export class CreateAgreementsMain extends React.Component {
     }
 
     this.createMenuItemDom = this.createMenuItemDom.bind(this)
-    this.setAgreementType = this.setAgreementType.bind(this)
     this.toggleCsa = this.toggleCsa.bind(this)
     this.toggleRegulatory = this.toggleRegulatory.bind(this)
   }
@@ -64,12 +63,6 @@ export class CreateAgreementsMain extends React.Component {
            })}>
         {menuDisplay}
       </div>)
-  }
-
-  setAgreementType() {
-    this.setState({
-      isAgreementTypeSelected: true
-    })
   }
 
   toggleCsa() {
@@ -108,7 +101,7 @@ export class CreateAgreementsMain extends React.Component {
                 {this.createMenuItemDom('Agreement References', MENU_REFERENCES,
                   bigStyle, (this.state.currentMenu == MENU_REFERENCES))}
 
-                {(this.state.isCsa || this.state.isAgreementTypeSelected) &&
+                {this.state.isCsa &&
                 <div className={(this.state.currentMenu == SUB_CSA)
                   ? styles.subMenuItemSelected : styles.subMenuItem}
                      onClick={() => this.setState({
@@ -117,7 +110,7 @@ export class CreateAgreementsMain extends React.Component {
                      })}>CSA References
                 </div>}
 
-                {(this.state.isRegulatory || this.state.isAgreementTypeSelected) &&
+                {this.state.isRegulatory &&
                 <div className={(this.state.currentMenu == SUB_REGULATORY)
                   ? styles.subMenuItemSelected : styles.subMenuItem}
                      onClick={() => this.setState({
@@ -146,8 +139,7 @@ export class CreateAgreementsMain extends React.Component {
 
           </div>
 
-          <TradingEntities propIsDisplay={this.state.currentMenu == MENU_TRADING_ENTITIES}
-                           propSetAgreementType={this.setAgreementType}/>
+          <TradingEntities propIsDisplay={this.state.currentMenu == MENU_TRADING_ENTITIES}/>
 
           <OtherDetails propIsDisplay={this.state.currentMenu == MENU_OTHER_DETAILS}/>
 

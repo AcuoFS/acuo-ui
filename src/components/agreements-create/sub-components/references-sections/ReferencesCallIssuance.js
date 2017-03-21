@@ -70,7 +70,7 @@ export default class ReferencesCallIssuance extends React.Component {
                     handlerOnClick={this.toggleDropDown}
                     handleOnSelectedItemChange={this.onDropdownItemChange}
                     selectedOption={'Select'}
-                    options={['WIP']}
+                    options={['Select', 'WIP']}
                     activateMouseLeaveEvent/>
                 </div>
               </div>
@@ -84,7 +84,7 @@ export default class ReferencesCallIssuance extends React.Component {
                     handlerOnClick={this.toggleDropDown}
                     handleOnSelectedItemChange={this.onDropdownItemChange}
                     selectedOption={'Select'}
-                    options={['WIP']}
+                    options={['Select', 'WIP']}
                     activateMouseLeaveEvent/>
                 </div>
               </div>

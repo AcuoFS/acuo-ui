@@ -34,7 +34,7 @@ export default class Identifiers extends React.Component {
     } = this.props
 
     return (
-      <div className={propIsDisplay ? styles.createContentFlexTwo: styles.hideForm}>
+      <div className={propIsDisplay ? styles.createContentFlexTwo : styles.hideForm}>
         <div className={styles.rowGroup}>
           <div className={styles.line}>Master Agreement Name</div>
           <div className={styles.line}>
@@ -43,7 +43,7 @@ export default class Identifiers extends React.Component {
                 handlerOnClick={this.toggleDropDown}
                 handleOnSelectedItemChange={this.onDropdownItemChange}
                 selectedOption={'Select'}
-                options={['WIP']}
+                options={['Select', 'WIP']}
                 activateMouseLeaveEvent/>
             </div>
           </div>
@@ -64,7 +64,7 @@ export default class Identifiers extends React.Component {
                 handlerOnClick={this.toggleDropDown}
                 handleOnSelectedItemChange={this.onDropdownItemChange}
                 selectedOption={'Select'}
-                options={['WIP']}
+                options={['Select', 'WIP']}
                 activateMouseLeaveEvent/>
             </div>
           </div>

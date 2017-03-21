@@ -67,7 +67,7 @@ export default class ReferencesCallDriver extends React.Component {
                       handlerOnClick={this.toggleDropDown}
                       handleOnSelectedItemChange={this.onDropdownItemChange}
                       selectedOption={'Select'}
-                      options={['WIP']}
+                      options={['Select', 'WIP']}
                       activateMouseLeaveEvent/>
                   </div>
                 </div>
@@ -130,7 +130,7 @@ export default class ReferencesCallDriver extends React.Component {
                           handlerOnClick={this.toggleDropDown}
                           handleOnSelectedItemChange={this.onDropdownItemChange}
                           selectedOption={'Select'}
-                          options={['WIP']}
+                          options={['Select', 'WIP']}
                           activateMouseLeaveEvent/>
                       </div>
                     </div>
@@ -144,7 +144,7 @@ export default class ReferencesCallDriver extends React.Component {
                           handlerOnClick={this.toggleDropDown}
                           handleOnSelectedItemChange={this.onDropdownPledgeStpType}
                           selectedOption={'Select'}
-                          options={['Currency', 'Tri-Party']}
+                          options={['Select', 'Currency', 'Tri-Party']}
                           activateMouseLeaveEvent/>
                       </div>
                     </div>
@@ -188,7 +188,7 @@ export default class ReferencesCallDriver extends React.Component {
                           handlerOnClick={this.toggleDropDown}
                           handleOnSelectedItemChange={this.onDropdownItemChange}
                           selectedOption={'Select'}
-                          options={['WIP']}
+                          options={['Select', 'WIP']}
                           activateMouseLeaveEvent/>
                       </div>
                     </div>
@@ -202,7 +202,7 @@ export default class ReferencesCallDriver extends React.Component {
                           handlerOnClick={this.toggleDropDown}
                           handleOnSelectedItemChange={this.onDropdownItemChange}
                           selectedOption={'Select'}
-                          options={['WIP']}
+                          options={['Select', 'WIP']}
                           activateMouseLeaveEvent/>
                       </div>
                     </div>
@@ -216,7 +216,7 @@ export default class ReferencesCallDriver extends React.Component {
                           handlerOnClick={this.toggleDropDown}
                           handleOnSelectedItemChange={this.onDropdownItemChange}
                           selectedOption={'Select'}
-                          options={['WIP']}
+                          options={['Select', 'WIP']}
                           activateMouseLeaveEvent/>
                       </div>
                     </div>

@@ -85,7 +85,7 @@ export default class ReferencesMarginTerms extends React.Component {
                     handlerOnClick={this.toggleDropDown}
                     handleOnSelectedItemChange={this.onDropdownItemChange}
                     selectedOption={'GMT'}
-                    options={gmtTimezoneList}
+                    options={['GMT', ...gmtTimezoneList]}
                     isFixedOptionsHeight
                     activateMouseLeaveEvent/>
                 </div>
@@ -101,7 +101,7 @@ export default class ReferencesMarginTerms extends React.Component {
                     handlerOnClick={this.toggleDropDown}
                     handleOnSelectedItemChange={this.onDropdownItemChange}
                     selectedOption={'Select'}
-                    options={['WIP']}
+                    options={['Select', 'WIP']}
                     activateMouseLeaveEvent/>
                 </div>
               </div>
@@ -115,7 +115,7 @@ export default class ReferencesMarginTerms extends React.Component {
                     handlerOnClick={this.toggleDropDown}
                     handleOnSelectedItemChange={this.onDropdownItemChange}
                     selectedOption={'Select'}
-                    options={['WIP']}
+                    options={['Select', 'WIP']}
                     activateMouseLeaveEvent/>
                 </div>
               </div>
@@ -148,7 +148,7 @@ export default class ReferencesMarginTerms extends React.Component {
                         handlerOnClick={this.toggleDropDown}
                         handleOnSelectedItemChange={this.onDropdownItemChange}
                         selectedOption={''}
-                        options={['Up', 'Down']}
+                        options={['', 'Up', 'Down']}
                         activateMouseLeaveEvent/>
                     </div>
                   </div>
@@ -158,7 +158,7 @@ export default class ReferencesMarginTerms extends React.Component {
                         handlerOnClick={this.toggleDropDown}
                         handleOnSelectedItemChange={this.onDropdownItemChange}
                         selectedOption={''}
-                        options={['Up', 'Down']}
+                        options={['', 'Up', 'Down']}
                         activateMouseLeaveEvent/>
                     </div>
 
@@ -181,7 +181,7 @@ export default class ReferencesMarginTerms extends React.Component {
                     handlerOnClick={this.toggleDropDown}
                     handleOnSelectedItemChange={this.onDropdownItemChange}
                     selectedOption={'Select'}
-                    options={['Delta', 'Net Exposure']}
+                    options={['Select', 'Delta', 'Net Exposure']}
                     activateMouseLeaveEvent/>
                 </div>
               </div>
@@ -195,7 +195,7 @@ export default class ReferencesMarginTerms extends React.Component {
                     handlerOnClick={this.toggleDropDown}
                     handleOnSelectedItemChange={this.onDropdownItemChange}
                     selectedOption={'Select'}
-                    options={['Local', 'Central']}
+                    options={['Select', 'Local', 'Central']}
                     activateMouseLeaveEvent/>
                 </div>
               </div>
