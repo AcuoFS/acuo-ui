@@ -5,7 +5,8 @@ import {
   OtherDetails,
   References,
   CSA,
-  Regulatory
+  Regulatory,
+  WorkflowOptions
 } from './sub-components'
 import styles from './CreateAgreementsMain.css'
 
@@ -157,6 +158,8 @@ export class CreateAgreementsMain extends React.Component {
           <Regulatory propIsDisplay={this.state.currentMenu == SUB_REGULATORY}
                       propIsRegulatory={this.state.isRegulatory}
                       propToggleRegulatory={this.toggleRegulatory}/>
+
+          <WorkflowOptions propIsDisplay={this.state.currentMenu == MENU_WORKFLOW_OPTIONS}/>
 
         </div>
 
