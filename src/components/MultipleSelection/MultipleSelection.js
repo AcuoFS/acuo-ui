@@ -73,7 +73,7 @@ export default class MultipleSelection extends React.Component{
           ))}
         </ul>)
     }
-
+    console.log(options)
     return(
       <div className={styles.filterItem + ' ' + (this.state.isOpen && styles.increaseZindex)}>
         <div className={styles.filters} onClick={this.handleToggleDropdown}>
