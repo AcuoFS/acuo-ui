@@ -119,7 +119,8 @@ export default class ReferencesCallDriver extends React.Component {
               <hr/>
 
               <div className={(propIsMenuCsa || propIsMenuRegulatory) && styles.stpTwoUnits}>
-                <div className={(propIsMenuCsa || propIsMenuRegulatory) && styles.stpAutoOne}>
+                <div className={styles.flexColumn + ' ' +
+                ((propIsMenuCsa || propIsMenuRegulatory) && styles.stpAutoOne)}>
                   <div className={styles.rowGroup}>
                     <div className={styles.line + ' ' + styles.flexLine}>
                       <ToggleSwitch propIsOn={this.state.isStpAutoPledge}
@@ -128,52 +129,56 @@ export default class ReferencesCallDriver extends React.Component {
                     </div>
                   </div>
 
-                  <div className={styles.rowGroup}>
-                    <div className={styles.line}>Pledge STP Call Type</div>
-                    <div className={styles.line}>
-                      <div className={styles.dropDown}>
-                        <Dropdown
-                          handlerOnClick={this.toggleDropDown}
-                          handleOnSelectedItemChange={this.onDropdownItemChange}
-                          selectedOption={'Select'}
-                          options={['Select', 'WIP']}
-                          activateMouseLeaveEvent/>
+                  {this.state.isStpAutoPledge &&
+                  <div className={styles.flexColumn}>
+                    <div className={styles.rowGroup}>
+                      <div className={styles.line}>Pledge STP Call Type</div>
+                      <div className={styles.line}>
+                        <div className={styles.dropDown}>
+                          <Dropdown
+                            handlerOnClick={this.toggleDropDown}
+                            handleOnSelectedItemChange={this.onDropdownItemChange}
+                            selectedOption={'Select'}
+                            options={['Select', 'WIP']}
+                            activateMouseLeaveEvent/>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className={styles.rowGroup}>
-                    <div className={styles.line}>Pledge STP Type</div>
-                    <div className={styles.line}>
-                      <div className={styles.dropDown}>
-                        <Dropdown
-                          handlerOnClick={this.toggleDropDown}
-                          handleOnSelectedItemChange={this.onDropdownPledgeStpType}
-                          selectedOption={'Select'}
-                          options={['Select', 'Currency', 'Tri-Party']}
-                          activateMouseLeaveEvent/>
+                    <div className={styles.rowGroup}>
+                      <div className={styles.line}>Pledge STP Type</div>
+                      <div className={styles.line}>
+                        <div className={styles.dropDown}>
+                          <Dropdown
+                            handlerOnClick={this.toggleDropDown}
+                            handleOnSelectedItemChange={this.onDropdownPledgeStpType}
+                            selectedOption={'Select'}
+                            options={['Select', 'Currency', 'Tri-Party']}
+                            activateMouseLeaveEvent/>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {this.state.isStpTypeCurrency &&
-                  <div className={styles.rowGroup}>
-                    <div className={styles.line}>Pledge STP Currency</div>
-                    <div className={styles.line}>
-                      <div className={styles.dropDown}>
-                        <MultipleSelection
-                          handlerOnClick={this.toggleDropDown}
-                          handleOnSelectedItemChange={this.onDropdownItemChange}
-                          selectedOption={'Select'}
-                          options={['GBP', 'SGD', 'USD', 'CNY', 'TWD', 'HKD', 'JPY']}
-                          activateMouseLeaveEvent/>
+                    {this.state.isStpTypeCurrency &&
+                    <div className={styles.rowGroup}>
+                      <div className={styles.line}>Pledge STP Currency</div>
+                      <div className={styles.line}>
+                        <div className={styles.dropDown}>
+                          <MultipleSelection
+                            handlerOnClick={this.toggleDropDown}
+                            handleOnSelectedItemChange={this.onDropdownItemChange}
+                            selectedOption={'Select'}
+                            options={['GBP', 'SGD', 'USD', 'CNY', 'TWD', 'HKD', 'JPY']}
+                            activateMouseLeaveEvent/>
+                        </div>
                       </div>
-                    </div>
+                    </div>}
                   </div>}
 
                 </div>
 
-                <div className={(propIsMenuCsa || propIsMenuRegulatory) && styles.stpAutoTwo}>
+                <div className={styles.flexColumn + ' ' +
+                ((propIsMenuCsa || propIsMenuRegulatory) && styles.stpAutoTwo)}>
                   <div className={styles.rowGroup}>
                     <div className={styles.line + ' ' + styles.flexLine}>
                       <ToggleSwitch propIsOn={this.state.isStpAutoPledgeAccept}
@@ -185,47 +190,53 @@ export default class ReferencesCallDriver extends React.Component {
                     </div>
                   </div>
 
-                  <div className={styles.rowGroup}>
-                    <div className={styles.line}>Pledge Accept STP Call Type</div>
-                    <div className={styles.line}>
-                      <div className={styles.dropDown}>
-                        <Dropdown
-                          handlerOnClick={this.toggleDropDown}
-                          handleOnSelectedItemChange={this.onDropdownItemChange}
-                          selectedOption={'Select'}
-                          options={['Select', 'WIP']}
-                          activateMouseLeaveEvent/>
+                  {this.state.isStpAutoPledgeAccept &&
+                  <div className={styles.flexColumn}>
+                    <div className={styles.rowGroup}>
+                      <div className={styles.line}>Pledge Accept STP Call Type</div>
+                      <div className={styles.line}>
+                        <div className={styles.dropDown}>
+                          <Dropdown
+                            handlerOnClick={this.toggleDropDown}
+                            handleOnSelectedItemChange={this.onDropdownItemChange}
+                            selectedOption={'Select'}
+                            options={['Select', 'WIP']}
+                            activateMouseLeaveEvent/>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className={styles.rowGroup}>
-                    <div className={styles.line}>Pledge Accept STP Type</div>
-                    <div className={styles.line}>
-                      <div className={styles.dropDown}>
-                        <Dropdown
-                          handlerOnClick={this.toggleDropDown}
-                          handleOnSelectedItemChange={this.onDropdownPledgeAcceptStpType}
-                          selectedOption={'Select'}
-                          options={['Select', 'Currency', 'Tri-Party']}
-                          activateMouseLeaveEvent/>
+                    <div className={styles.rowGroup}>
+                      <div className={styles.line}>Pledge Accept STP Type</div>
+                      <div className={styles.line}>
+                        <div className={styles.dropDown}>
+                          <Dropdown
+                            handlerOnClick={this.toggleDropDown}
+                            handleOnSelectedItemChange={this.onDropdownPledgeAcceptStpType}
+                            selectedOption={'Select'}
+                            options={['Select', 'Currency', 'Tri-Party']}
+                            activateMouseLeaveEvent/>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {this.state.isStpAcceptCurrency && <div className={styles.rowGroup}>
-                    <div className={styles.line}>Pledge Accept STP Currency</div>
-                    <div className={styles.line}>
-                      <div className={styles.dropDown}>
-                        <MultipleSelection
-                          handlerOnClick={this.toggleDropDown}
-                          handleOnSelectedItemChange={this.onDropdownItemChange}
-                          selectedOption={'Select'}
-                          options={['GBP', 'SGD', 'USD', 'CNY', 'TWD', 'HKD', 'JPY']}
-                          activateMouseLeaveEvent/>
+                    {this.state.isStpAcceptCurrency &&
+                    <div className={styles.rowGroup}>
+                      <div className={styles.line}>Pledge Accept STP Currency</div>
+                      <div className={styles.line}>
+                        <div className={styles.dropDown}>
+                          <MultipleSelection
+                            handlerOnClick={this.toggleDropDown}
+                            handleOnSelectedItemChange={this.onDropdownItemChange}
+                            selectedOption={'Select'}
+                            options={['GBP', 'SGD', 'USD', 'CNY', 'TWD', 'HKD', 'JPY']}
+                            activateMouseLeaveEvent/>
+                        </div>
                       </div>
-                    </div>
+                    </div>}
+
                   </div>}
+
                 </div>
 
               </div>
