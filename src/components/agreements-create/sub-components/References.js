@@ -1,5 +1,4 @@
 import React from 'react'
-import Dropdown  from '../../Dropdown/Dropdown'
 import ToggleSwitch from '../../common/ToggleSwitch'
 import {
   ReferencesCallDriver,
@@ -18,12 +17,6 @@ export default class Identifiers extends React.Component {
     }
   }
 
-  toggleDropDown(e) {
-  }
-
-  onDropdownItemChange(e) {
-  }
-
   render() {
     const {
       propIsCsa,
@@ -38,14 +31,7 @@ export default class Identifiers extends React.Component {
         <div className={styles.rowGroup}>
           <div className={styles.line}>Master Agreement Name</div>
           <div className={styles.line}>
-            <div className={styles.dropDown}>
-              <Dropdown
-                handlerOnClick={this.toggleDropDown}
-                handleOnSelectedItemChange={this.onDropdownItemChange}
-                selectedOption={'Select'}
-                options={['Select', 'WIP']}
-                activateMouseLeaveEvent/>
-            </div>
+            <input type="text" className={styles.inputTextBox}/>
           </div>
         </div>
 
@@ -59,14 +45,7 @@ export default class Identifiers extends React.Component {
         <div className={styles.rowGroup}>
           <div className={styles.line}>Unique Identifier</div>
           <div className={styles.line}>
-            <div className={styles.dropDown}>
-              <Dropdown
-                handlerOnClick={this.toggleDropDown}
-                handleOnSelectedItemChange={this.onDropdownItemChange}
-                selectedOption={'Select'}
-                options={['Select', 'WIP']}
-                activateMouseLeaveEvent/>
-            </div>
+            <input type="text" className={styles.inputTextBox}/>
           </div>
         </div>
 
