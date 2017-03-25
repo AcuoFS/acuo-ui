@@ -6,6 +6,8 @@
 // export const DASHBOARD_URL = 'http://margin.acuo.com/acuo/api/margin/dashboard'
 export const DASHBOARD_URL = CONFIG.DASHBOARD_URL
 
+console.log(CONFIG)
+
 // Recon
 // export const RECON_URL = 'http://margin.acuo.com/acuo/api/margin/items/all/999'
 export const RECON_URL = CONFIG.RECON_URL

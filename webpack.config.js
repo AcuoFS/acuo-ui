@@ -50,14 +50,14 @@ module.exports = {
               name: '[hash].[ext]'
             }
           },
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              bypassOnDebug: true,
-              optimizationLevel: 7,
-              interlaced: false
-            }
-          }
+          // {
+          //   loader: 'image-webpack-loader',
+          //   options: {
+          //     bypassOnDebug: true,
+          //     optimizationLevel: 7,
+          //     interlaced: false
+          //   }
+          // }
         ]
       }
     ]

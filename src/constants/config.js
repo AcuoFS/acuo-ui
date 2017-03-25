@@ -1,5 +1,21 @@
+
 const config = {
   dev: {
+    DASHBOARD_URL: 'http://dev.acuo.com:8181/dashboard',
+    RECON_URL: 'http://dev.acuo.com:8181/recon',
+    OPTIMISATION_URL: 'http://dev.acuo.com:8181/pledge/optimization',
+    COLLATERAL_URL: 'http://dev.acuo.com:8181/pledge/init-new-collateral',
+    MARGIN_SELECTION_URL: 'http://dev.acuo.com:8181/pledge/init-selection',
+    ALLOCATE_COLLATERALS_URL: 'http://dev.acuo.com:8181/pledge/allocate-selection',
+    ALLOCATE_COLLATERALS_URL_NEW: 'http://dev.acuo.com:8181/pledge/allocate-selection-new',
+    PLEDGE_ALLOCATIONS: 'http://dev.acuo.com:8181/pledge/pledge-allocation',
+    UPLOAD_FILE_URL: 'http://valuation.acuo.com/acuo/api/upload',
+    // Please add the trailing / for recon single item (ok button)
+    RECON_DATA_URL: 'http://margin.acuo.com/acuo/api/margin/reconcile/',
+    REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
+    UNMATCHED_PORTFOLIO_URL: 'http://dev.acuo.com:8181/unmatched'
+  },
+  local: {
     DASHBOARD_URL: 'http://52.74.186.112:8081/dashboard',
     RECON_URL: 'http://52.74.186.112:8081/recon',
     OPTIMISATION_URL: 'http://52.74.186.112:8081/pledge/optimization',
@@ -32,6 +48,6 @@ const config = {
 }
 
 exports.get = (env) => {
-  console.log('Current config environment accessed is ' + (env || 'dev'))
-  return config[env] || config.dev
+  console.log('Current config environment accessed is ' + (env || 'local'))
+  return config[env] || config.local
 }
