@@ -3,8 +3,6 @@ FROM node:latest
 COPY . /usr/src/app
 WORKDIR /usr/src/app
 
-ENV DOCKER_ENV dev
-
 RUN npm install
 RUN node_modules/.bin/webpack
 
