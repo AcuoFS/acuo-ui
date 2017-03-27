@@ -6,9 +6,10 @@ import config from './config'
 const env = process.env.DOCKER_ENV || ''
 const CONFIG = config.get(env)
 
-console.log(`api process: ${process}`)
-console.log(`api process env: ${process.env}`)
-console.log(`api docker env: ${process.env.DOCKER_ENV}`)
+console.log('api')
+console.log(process)
+console.log(process.env)
+console.log(process.env.DOCKER_ENV)
 
 // Dashboard
 // export const DASHBOARD_URL = 'http://margin.acuo.com/acuo/api/margin/dashboard'
