@@ -46,7 +46,7 @@ export default class ReferencesCallIssuance extends React.Component {
         </div>
 
         {this.state.isCallIssuanceExpanded &&
-        <div className={styles.agreementsSectionContainer}>
+        <div className={styles.flexCont}>
           <div className={styles.agreementsSectionLeft}>
             Local Details
             <hr/>

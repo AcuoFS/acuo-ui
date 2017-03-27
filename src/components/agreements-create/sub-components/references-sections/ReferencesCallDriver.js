@@ -60,7 +60,7 @@ export default class ReferencesCallDriver extends React.Component {
 
         {
           this.state.isCallDriverExpanded &&
-          <div className={styles.agreementsSectionContainer}>
+          <div className={styles.flexCont}>
             <div className={styles.agreementsSectionLeft}>
               Shared Details
               <hr/>

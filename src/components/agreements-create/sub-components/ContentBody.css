@@ -89,14 +89,14 @@
     align-items: center;
 }
 
+.flexCont {
+    display: flex;
+    flex-direction: row;
+}
+
 .flexColumn {
     display: flex;
     flex-direction: column;
-}
-
-.agreementsSectionContainer {
-    display: flex;
-    flex-direction: row;
 }
 
 .agreementsSectionHeader {

@@ -48,7 +48,7 @@ export default class ReferencesMarginTerms extends React.Component {
         </div>
 
         {this.state.isSectionExpanded &&
-        <div className={styles.agreementsSectionContainer}>
+        <div className={styles.flexCont}>
           <div className={styles.agreementsSectionLeft}>
             Shared Details
             <hr/>

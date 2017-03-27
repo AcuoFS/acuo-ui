@@ -53,7 +53,7 @@ export default class Regulatory extends React.Component {
         </div>
       </div>
 
-      {this.state.isSplit && <div className={styles.flexLine}>
+      {this.state.isSplit && <div className={styles.flexCont}>
         <div className={styles.agreementsSectionLeft}>
           <div className={styles.rowGroup}>
             <div className={styles.line}>Variable Reference</div>
@@ -70,6 +70,21 @@ export default class Regulatory extends React.Component {
             </div>
           </div>
 
+          {this.state.iSplitByRoleVariation && <div className={styles.flexColumn}>
+            <div className={styles.rowGroup}>
+              <div className={styles.line}>Variation Pledgor Reference</div>
+              <div className={styles.line}>
+                <input type="text" className={styles.inputTextBox}/>
+              </div>
+            </div>
+            <div className={styles.rowGroup}>
+              <div className={styles.line}>Variation Secured Reference</div>
+              <div className={styles.line}>
+                <input type="text" className={styles.inputTextBox}/>
+              </div>
+            </div>
+          </div>}
+          
         </div>
         <div className={styles.agreementsSectionMiddle}>
           <div className={styles.rowGroup}>
@@ -86,7 +101,24 @@ export default class Regulatory extends React.Component {
               &nbsp;Split by Role
             </div>
           </div>
+
+          {this.state.iSplitByRoleInitial && <div className={styles.flexColumn}>
+            <div className={styles.rowGroup}>
+              <div className={styles.line}>Initial Pledgor Reference</div>
+              <div className={styles.line}>
+                <input type="text" className={styles.inputTextBox}/>
+              </div>
+            </div>
+            <div className={styles.rowGroup}>
+              <div className={styles.line}>Initial Secured Reference</div>
+              <div className={styles.line}>
+                <input type="text" className={styles.inputTextBox}/>
+              </div>
+            </div>
+          </div>}
+
         </div>
+
         <div className={styles.agreementsSectionRight}>
           <div className={styles.rowGroup}>
             <div className={styles.line}>Netted Reference</div>
@@ -102,6 +134,21 @@ export default class Regulatory extends React.Component {
               &nbsp;Split by Role
             </div>
           </div>
+
+          {this.state.iSplitByRoleNetted && <div className={styles.flexColumn}>
+            <div className={styles.rowGroup}>
+              <div className={styles.line}>Netted Pledgor Reference</div>
+              <div className={styles.line}>
+                <input type="text" className={styles.inputTextBox}/>
+              </div>
+            </div>
+            <div className={styles.rowGroup}>
+              <div className={styles.line}>Netted Secured Reference</div>
+              <div className={styles.line}>
+                <input type="text" className={styles.inputTextBox}/>
+              </div>
+            </div>
+          </div>}
 
         </div>
 
