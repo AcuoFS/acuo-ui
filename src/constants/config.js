@@ -31,18 +31,19 @@ const config = {
     UNMATCHED_PORTFOLIO_URL: 'http://52.74.186.112:8081/unmatched'
   },
   qa: {
-    DASHBOARD_URL: 'qa',
-    RECON_URL: 'qa',
-    OPTIMISATION_URL: 'qa',
-    COLLATERAL_URL: 'qa',
-    MARGIN_SELECTION_URL: 'qa',
-    ALLOCATE_COLLATERALS_URL: '',
-    ALLOCATE_COLLATERALS_URL_NEW: 'qa',
-    PLEDGE_ALLOCATIONS: 'qa',
-    UPLOAD_FILE_URL: 'qa',
-    RECON_DATA_URL: 'qa',
-    REMOVE_ASSET_ALLOCATION_URL: 'qa',
-    UNMATCHED_PORTFOLIO_URL: 'qa'
+    DASHBOARD_URL: 'http://qa.acuo.com:8181/dashboard',
+    RECON_URL: 'http://qa.acuo.com:8181/recon',
+    OPTIMISATION_URL: 'http://qa.acuo.com:8181/pledge/optimization',
+    COLLATERAL_URL: 'http://qa.acuo.com:8181/pledge/init-new-collateral',
+    MARGIN_SELECTION_URL: 'http://qa.acuo.com:8181/pledge/init-selection',
+    ALLOCATE_COLLATERALS_URL: 'http://qa.acuo.com:8181/pledge/allocate-selection',
+    ALLOCATE_COLLATERALS_URL_NEW: 'http://qa.acuo.com:8181/pledge/allocate-selection-new',
+    PLEDGE_ALLOCATIONS: 'http://qa.acuo.com:8181/pledge/pledge-allocation',
+    UPLOAD_FILE_URL: 'http://qa.acuo.com:9090/acuo/api/upload',
+    // Please add the trailing / for recon single item (ok button)
+    RECON_DATA_URL: 'http://qa.acuo.com:7070/acuo/api/margin/reconcile/',
+    REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
+    UNMATCHED_PORTFOLIO_URL: 'http://qa.acuo.com:8181/unmatched'
   },
   prod: {}
 }
