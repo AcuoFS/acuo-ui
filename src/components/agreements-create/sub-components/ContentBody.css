@@ -35,6 +35,16 @@
     margin: 10px 0;
 }
 
+.workflowLine {
+    margin: 10px 0;
+    padding: 5px 30px;
+}
+
+.workflowGroup {
+    display: flex;
+    flex-direction: column;
+}
+
 .line > .dropDown {
     width: 250px;
 }
@@ -71,6 +81,11 @@
 .flexLine {
     display: flex;
     align-items: center;
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
 }
 
 .agreementsSectionContainer {
