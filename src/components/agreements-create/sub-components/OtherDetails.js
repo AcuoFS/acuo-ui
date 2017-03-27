@@ -1,7 +1,5 @@
 import React from 'react'
 import Dropdown from '../../Dropdown/Dropdown'
-import MultipleSelection from '../../MultipleSelection/MultipleSelection'
-
 import {gmtTimezoneList} from '../../../utils'
 import SelectionBox from '../../common/SelectionBox'
 import ToggleSwitch from '../../common/ToggleSwitch'
@@ -63,7 +61,7 @@ export default class OtherDetails extends React.Component {
                 handlerOnClick={this.toggleDropDown}
                 handleOnSelectedItemChange={this.onDropdownItemChange}
                 selectedOption={'Select'}
-                options={['WIP']}
+                options={['Select', 'WIP']}
                 activateMouseLeaveEvent/>
             </div>
           </div>
@@ -77,7 +75,7 @@ export default class OtherDetails extends React.Component {
                 handlerOnClick={this.toggleDropDown}
                 handleOnSelectedItemChange={this.onDropdownItemChange}
                 selectedOption={'GMT'}
-                options={gmtTimezoneList}
+                options={['GMT', ...gmtTimezoneList]}
                 isFixedOptionsHeight
                 activateMouseLeaveEvent/>
             </div>
@@ -91,7 +89,7 @@ export default class OtherDetails extends React.Component {
                   handlerOnClick={this.toggleDropDown}
                   handleOnSelectedItemChange={this.onDropdownItemChange}
                   selectedOption={''}
-                  options={['WIP']}
+                  options={['Select', 'WIP']}
                   activateMouseLeaveEvent/>
               </div>
             </div>
@@ -113,7 +111,7 @@ export default class OtherDetails extends React.Component {
                   handlerOnClick={this.toggleDropDown}
                   handleOnSelectedItemChange={this.onDropdownItemChange}
                   selectedOption={'Select'}
-                  options={['WIP']}
+                  options={['Select', 'WIP']}
                   activateMouseLeaveEvent/>
               </div>
             </div>

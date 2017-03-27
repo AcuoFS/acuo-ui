@@ -1,12 +1,14 @@
 /** @name CONFIG object from defineplugin of webpack on env-specific params
- *
+ *  FEATURE REMOVED, ENV NEEDS TO BE DEFINED AT RUNTIME INSTEAD OF BUILD TIME
  * */
+import config from './config'
+
+const env = process.env.DOCKER_ENV || ''
+const CONFIG = config.get(env)
 
 // Dashboard
 // export const DASHBOARD_URL = 'http://margin.acuo.com/acuo/api/margin/dashboard'
 export const DASHBOARD_URL = CONFIG.DASHBOARD_URL
-
-console.log(CONFIG)
 
 // Recon
 // export const RECON_URL = 'http://margin.acuo.com/acuo/api/margin/items/all/999'
