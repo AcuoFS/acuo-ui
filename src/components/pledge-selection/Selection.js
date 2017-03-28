@@ -32,9 +32,10 @@ export default class Selection extends React.Component {
                 {y.getIn(['firstLevel', 'name'])}
               </div>
               <div className={styles.amount}>
-                {checkNegative(y.getIn(['firstLevel', 'secondLevel']).reduce((sum, z) => {
-                  return sum + parseFloat(z.get('amount'))
-                }, 0))}
+                {/*{checkNegative(y.getIn(['firstLevel', 'secondLevel']).reduce((sum, z) => {*/}
+                  {/*return sum + parseFloat(z.get('amount'))*/}
+                {/*}, 0))}*/}
+                {checkNegative(parseFloat(y.getIn(['firstLevel', 'amount'])))}
               </div>
             </div>)
         })}
@@ -212,7 +213,7 @@ export default class Selection extends React.Component {
                   <thead>
                   <tr className={styles.bold}>
                     <th></th>
-                    <th>Adjusted Value</th>
+                    <th>Adj. value</th>
                     <th>CCY</th>
                     <th>Haircut</th>
                     <th>Value</th>
@@ -251,7 +252,7 @@ export default class Selection extends React.Component {
                   <thead>
                   <tr className={styles.bold}>
                     <th></th>
-                    <th>Value(post <br/>haircut)</th>
+                    <th>Adj. value</th>
                     <th>CCY</th>
                     <th>Haircut</th>
                     <th>Value</th>
