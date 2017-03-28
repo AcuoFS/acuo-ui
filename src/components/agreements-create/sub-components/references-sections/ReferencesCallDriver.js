@@ -39,7 +39,8 @@ export default class ReferencesCallDriver extends React.Component {
     const {
       propIsMenuCsa,
       propIsMenuRegulatory,
-      propPostfixLabel
+      propPostfixLabel,
+      propIsRemoveExposure
     } = this.props
 
     return (
@@ -65,7 +66,8 @@ export default class ReferencesCallDriver extends React.Component {
               Shared Details
               <hr/>
 
-              {(propIsMenuCsa || propIsMenuRegulatory) && <div className={styles.rowGroup}>
+              {(propIsMenuCsa || propIsMenuRegulatory) && !propIsRemoveExposure &&
+              <div className={styles.rowGroup}>
                 <div className={styles.line}>Exposure Treatment</div>
                 <div className={styles.line}>
                   <div className={styles.dropDown}>

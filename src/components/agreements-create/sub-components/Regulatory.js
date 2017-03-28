@@ -15,6 +15,9 @@ const VARIATION_SECURED_GROUP = 'VARIATION_SECURED_GROUP'
 const INITIAL_GROUP = 'INITIAL_GROUP'
 const INITIAL_PLEDGOR_GROUP = 'INITIAL_PLEDGOR_GROUP'
 const INITIAL_SECURED_GROUP = 'INITIAL_SECURED_GROUP'
+const NETTED_GROUP = 'NETTED_GROUP'
+const NETTED_PLEDGOR_GROUP = 'NETTED_PLEDGOR_GROUP'
+const NETTED_SECURED_GROUP = 'NETTED_SECURED_GROUP'
 
 const VARIATION_DOM = 'variableInput'
 const VARIATION_PLEDGOR_DOM = 'variationPledgorInput'
@@ -22,6 +25,9 @@ const VARIATION_SECURED_DOM = 'variationSecuredInput'
 const INITIAL_DOM = 'initialInput'
 const INITIAL_PLEDGOR_DOM = 'initialPledgorInput'
 const INITIAL_SECURED_DOM = 'initialSecuredInput'
+const NETTED_DOM = 'nettedInput'
+const NETTED_PLEDGOR_DOM = 'nettedPledgorInput'
+const NETTED_SECURED_DOM = 'nettedSecuredInput'
 
 
 export default class Regulatory extends React.Component {
@@ -67,6 +73,15 @@ export default class Regulatory extends React.Component {
         case INITIAL_SECURED_GROUP:
           this[INITIAL_SECURED_DOM].focus()
           break;
+        case NETTED_GROUP:
+          this[NETTED_DOM].focus()
+          break;
+        case NETTED_PLEDGOR_GROUP:
+          this[NETTED_PLEDGOR_DOM].focus()
+          break;
+        case NETTED_SECURED_GROUP:
+          this[NETTED_SECURED_DOM].focus()
+          break;
         default:
           this.regulatoryInput.focus()
       }
@@ -85,18 +100,18 @@ export default class Regulatory extends React.Component {
 
   }
 
-  getAfterSplitReference(contClass, splitByRoleState,
-                         baseGroup, baseDisplay, baseDom,
-                         pledgorGroup, pledgorDisplay, pledgorDom,
-                         securedGroup, securedDisplay, securedDom) {
+  getAfterSplitReferenceGroup(contClass, splitByRoleStateProperty,
+                              baseGroup, baseDisplay, baseDom,
+                              pledgorGroup, pledgorDisplay, pledgorDom,
+                              securedGroup, securedDisplay, securedDom) {
 
     return <div className={contClass}>
       <div className={styles.rowGroup}>
         <div className={styles.line}>{baseDisplay}</div>
         <div className={styles.line}>
-          <input type="text" className={this.state[splitByRoleState] ?
+          <input type="text" className={this.state[splitByRoleStateProperty] ?
             styles.inputTextBoxDisabled : styles.inputTextBox}
-                 disabled={this.state[splitByRoleState]}
+                 disabled={this.state[splitByRoleStateProperty]}
                  ref={(dom) => this[baseDom] = dom}
                  onFocus={() => this.setState({currentActiveGroup: baseGroup})}/>
 
@@ -104,17 +119,17 @@ export default class Regulatory extends React.Component {
       </div>
       <div className={styles.rowGroup}>
         <div className={styles.line + ' ' + styles.flexLine}>
-          <ToggleSwitch propIsOn={this.state[splitByRoleState]}
+          <ToggleSwitch propIsOn={this.state[splitByRoleStateProperty]}
                         propOnToggle={() => this.setState({
-                          [splitByRoleState]: !this.state[splitByRoleState],
-                          currentActiveGroup: this.state[splitByRoleState] ?
+                          [splitByRoleStateProperty]: !this.state[splitByRoleStateProperty],
+                          currentActiveGroup: this.state[splitByRoleStateProperty] ?
                             baseGroup : pledgorGroup
                         })}/>
           &nbsp;Split by Role
         </div>
       </div>
 
-      {this.state[splitByRoleState] && <div className={styles.flexColumn}>
+      {this.state[splitByRoleStateProperty] && <div className={styles.flexColumn}>
         <div className={styles.rowGroup}>
           <div className={styles.line}>{pledgorDisplay}</div>
           <div className={styles.line}>
@@ -179,50 +194,20 @@ export default class Regulatory extends React.Component {
 
       {this.state.isSplit && <div className={styles.flexCont}>
 
-        {this.getAfterSplitReference(styles.agreementsSectionLeft, 'iSplitByRoleVariation',
+        {this.getAfterSplitReferenceGroup(styles.agreementsSectionLeft, 'iSplitByRoleVariation',
           VARIATION_GROUP, 'Variable Reference', VARIATION_DOM,
           VARIATION_PLEDGOR_GROUP, 'Variation Pledgor Reference', VARIATION_PLEDGOR_DOM,
           VARIATION_SECURED_GROUP, 'Variation Secured Reference', VARIATION_SECURED_DOM)}
 
-        {this.getAfterSplitReference(styles.agreementsSectionMiddle, 'iSplitByRoleInitial',
+        {this.getAfterSplitReferenceGroup(styles.agreementsSectionMiddle, 'iSplitByRoleInitial',
           INITIAL_GROUP, 'Initial Reference', INITIAL_DOM,
           INITIAL_PLEDGOR_GROUP, 'Initial Pledgor Reference', INITIAL_PLEDGOR_DOM,
           INITIAL_SECURED_GROUP, 'Initial Secured Reference', INITIAL_SECURED_DOM)}
 
-        <div className={styles.agreementsSectionRight}>
-          <div className={styles.rowGroup}>
-            <div className={styles.line}>Netted Reference</div>
-            <div className={styles.line}>
-              <input type="text" className={this.state.iSplitByRoleNetted ? styles.inputTextBoxDisabled :
-                styles.inputTextBox} disabled={this.state.iSplitByRoleNetted}/>
-            </div>
-          </div>
-          <div className={styles.rowGroup}>
-            <div className={styles.line + ' ' + styles.flexLine}>
-              <ToggleSwitch propIsOn={this.state.iSplitByRoleNetted}
-                            propOnToggle={() => this.setState({
-                              iSplitByRoleNetted: !this.state.iSplitByRoleNetted
-                            })}/>
-              &nbsp;Split by Role
-            </div>
-          </div>
-
-          {this.state.iSplitByRoleNetted && <div className={styles.flexColumn}>
-            <div className={styles.rowGroup}>
-              <div className={styles.line}>Netted Pledgor Reference</div>
-              <div className={styles.line}>
-                <input type="text" className={styles.inputTextBox}/>
-              </div>
-            </div>
-            <div className={styles.rowGroup}>
-              <div className={styles.line}>Netted Secured Reference</div>
-              <div className={styles.line}>
-                <input type="text" className={styles.inputTextBox}/>
-              </div>
-            </div>
-          </div>}
-
-        </div>
+        {this.getAfterSplitReferenceGroup(styles.agreementsSectionRight, 'iSplitByRoleNetted',
+          NETTED_GROUP, 'Netted Reference', NETTED_DOM,
+          NETTED_PLEDGOR_GROUP, 'Netted Pledgor Reference', NETTED_PLEDGOR_DOM,
+          NETTED_SECURED_GROUP, 'Netted Secured Reference', NETTED_SECURED_DOM)}
 
       </div>}
 
@@ -232,9 +217,31 @@ export default class Regulatory extends React.Component {
       {this.getReferenceSectionGroup(VARIATION_PLEDGOR_GROUP, ' - Regulatory CSA Variation Pledgor')}
       {this.getReferenceSectionGroup(VARIATION_SECURED_GROUP, ' - Regulatory CSA Variation Secured')}
 
-      {this.getReferenceSectionGroup(INITIAL_GROUP, ' - Regulatory CSA Initial')}
+      {this.getReferenceSectionGroup(INITIAL_GROUP, ' - CSA Initial')}
       {this.getReferenceSectionGroup(INITIAL_PLEDGOR_GROUP, ' - Regulatory CSA Initial Pledgor')}
       {this.getReferenceSectionGroup(INITIAL_SECURED_GROUP, ' - Regulatory CSA Initial Secured')}
+
+      {this.getReferenceSectionGroup(NETTED_GROUP, ' - CSA Netted')}
+      <div className={(this.state.currentActiveGroup !== NETTED_PLEDGOR_GROUP) && styles.hideForm}>
+        <ReferencesCallDriver propIsMenuRegulatory
+                              propPostfixLabel={' - Regulatory CSA Netted Pledgor'}
+                              propIsRemoveExposure/>
+        <ReferencesMarginTerms propIsMenuRegulatory
+                               propPostfixLabel={' - CSA Netted Pledgor'}/>
+        <ReferencesCallIssuance propIsMenuRegulatory
+                                propPostfixLabel={' - CSA Netted Pledgor'}/>
+      </div>
+      <div className={(this.state.currentActiveGroup !== NETTED_SECURED_GROUP) && styles.hideForm}>
+        <ReferencesCallDriver propIsMenuRegulatory
+                              propPostfixLabel={' - CSA Netted Secured'}
+                              propIsRemoveExposure/>
+        <ReferencesMarginTerms propIsMenuRegulatory
+                               propPostfixLabel={' - Regulatory CSA Netted Secured'}/>
+        <ReferencesCallIssuance propIsMenuRegulatory
+                                propPostfixLabel={' - Regulatory CSA Netted Secured'}/>
+      </div>
+
+
 
     </div>
   }
