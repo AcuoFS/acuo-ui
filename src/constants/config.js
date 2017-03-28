@@ -49,6 +49,11 @@ const config = {
 }
 
 exports.get = (env) => {
+  // console.log('config')
+  // console.log(`config env: ${env}`)
+  // console.log(process)
+  // console.log(process.env)
+  // console.log(process.env.DOCKER_ENV)
   console.log('Current config environment accessed is ' + (env || 'local'))
   return config[env] || config.local
 }

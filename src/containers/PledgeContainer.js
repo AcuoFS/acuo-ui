@@ -71,12 +71,12 @@ const mapDispatchToProps = dispatch => ({
       optimisationSettings: optimisationSetting,
       toBeAllocated: guids
     }
-    console.log('request obj: ' + JSON.stringify(reqObj))
+    //console.log('request obj: ' + JSON.stringify(reqObj))
     fetch(ALLOCATE_COLLATERALS_URL_NEW, {
       method: 'POST',
       body: JSON.stringify(reqObj)
     }).then(response => {
-      console.log('Allocate response: ' + JSON.stringify(response))
+      //console.log('Allocate response: ' + JSON.stringify(response))
       return response.json()
     }).then(obj => {
       dispatch(initSelection(fromJS(obj.items)))
