@@ -17,7 +17,7 @@ export default class Regulatory extends React.Component {
       iSplitByRoleVariation: false,
       iSplitByRoleInitial: false,
       iSplitByRoleNetted: false,
-      isVariableReferenceGroup: false,
+      isVariableReferenceActive: false,
       isVariableReferencePledgorActive: false,
       isVariableReferenceSecuredActive: false
     }
@@ -61,10 +61,11 @@ export default class Regulatory extends React.Component {
           <div className={styles.rowGroup}>
             <div className={styles.line}>Variable Reference</div>
             <div className={styles.line}>
-              <input type="text" className={this.state.iSplitByRoleVariation ? styles.inputTextBoxDisabled :
-                styles.inputTextBox} disabled={this.state.iSplitByRoleVariation}
-                     onFocus={() => this.setState({isVariableReferenceGroup: true})}
-                     onBlur={() => this.setState({isVariableReferenceGroup: false})}/>
+              <input type="text" className={this.state.iSplitByRoleVariation ?
+                styles.inputTextBoxDisabled : styles.inputTextBox} disabled={this.state.iSplitByRoleVariation}
+                     onFocus={() => this.setState({isVariableReferenceActive: true})}
+                     onBlur={() => this.setState({isVariableReferenceActive: false})}/>
+
             </div>
           </div>
           <div className={styles.rowGroup}>
@@ -81,13 +82,19 @@ export default class Regulatory extends React.Component {
             <div className={styles.rowGroup}>
               <div className={styles.line}>Variation Pledgor Reference</div>
               <div className={styles.line}>
-                <input type="text" className={styles.inputTextBox}/>
+                <input type="text" className={styles.inputTextBox}
+                       onFocus={() => this.setState({isVariableReferencePledgorActive: true})}
+                       onBlur={() => this.setState({isVariableReferencePledgorActive: false})}/>
+
               </div>
             </div>
             <div className={styles.rowGroup}>
               <div className={styles.line}>Variation Secured Reference</div>
               <div className={styles.line}>
-                <input type="text" className={styles.inputTextBox}/>
+                <input type="text" className={styles.inputTextBox}
+                       onFocus={() => this.setState({isVariableReferenceSecuredActive: true})}
+                       onBlur={() => this.setState({isVariableReferenceSecuredActive: false})}/>
+
               </div>
             </div>
           </div>}
@@ -174,13 +181,31 @@ export default class Regulatory extends React.Component {
                                 propPostfixLabel={' - Regulatory CSA'}/>
       </div>
 
-      <div className={!this.state.isVariableReferenceGroup && styles.hideForm}>
+      <div className={!this.state.isVariableReferenceActive && styles.hideForm}>
+        <ReferencesCallDriver propIsMenuRegulatory
+                              propPostfixLabel={' - Regulatory CSA Variation'}/>
+        <ReferencesMarginTerms propIsMenuRegulatory
+                               propPostfixLabel={' - Regulatory CSA Variation'}/>
+        <ReferencesCallIssuance propIsMenuRegulatory
+                                propPostfixLabel={' - Regulatory CSA Variation'}/>
+      </div>
+
+      <div className={!this.state.isVariableReferencePledgorActive && styles.hideForm}>
         <ReferencesCallDriver propIsMenuRegulatory
                               propPostfixLabel={' - Regulatory CSA Variation Pledgor'}/>
         <ReferencesMarginTerms propIsMenuRegulatory
                                propPostfixLabel={' - Regulatory CSA Variation Pledgor'}/>
         <ReferencesCallIssuance propIsMenuRegulatory
                                 propPostfixLabel={' - Regulatory CSA Variation Pledgor'}/>
+      </div>
+
+      <div className={!this.state.isVariableReferenceSecuredActive && styles.hideForm}>
+        <ReferencesCallDriver propIsMenuRegulatory
+                              propPostfixLabel={' - Regulatory CSA Variation Secured'}/>
+        <ReferencesMarginTerms propIsMenuRegulatory
+                               propPostfixLabel={' - Regulatory CSA Variation Secured'}/>
+        <ReferencesCallIssuance propIsMenuRegulatory
+                                propPostfixLabel={' - Regulatory CSA Variation Secured'}/>
       </div>
 
     </div>
