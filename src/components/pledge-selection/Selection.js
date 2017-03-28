@@ -289,8 +289,9 @@ export default class Selection extends React.Component {
                   <tbody>
                   <tr className={styles.bold}>
                     <td>Total</td>
-                    <td
-                      className={styles.totalTable1 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>{checkNegative((marginCall.getIn(['allocated', ALLOCATED.MGN_TOTAL]) || 0).toFixed(2))}</td>
+                    <td className={styles.totalTable1 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>
+                      {checkNegative((marginCall.getIn(['allocated', ALLOCATED.MGN_TOTAL]) || 0).toFixed(2))}
+                    </td>
                     <td className={styles.totalTable2 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>USD</td>
                     <td></td>
                     <td></td>
