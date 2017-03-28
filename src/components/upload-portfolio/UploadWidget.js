@@ -84,6 +84,7 @@ export default class UploadWidget extends React.Component {
         <div
           className={this.state.isWidgetValidForSubmission ?
             styles.buttonContainerEnabled : styles.buttonContainerDisabled}>
+          <div className={styles.uploadStatus}>1,000 trades successfully uploaded</div>
           <button className={styles.textBold} type="button" onClick={this.onGenerate}
                   disabled={!(this.state.isWidgetValidForSubmission)}>
             Generate Margin Call Data
