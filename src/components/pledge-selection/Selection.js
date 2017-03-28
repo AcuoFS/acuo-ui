@@ -233,7 +233,7 @@ export default class Selection extends React.Component {
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
                     <td>
-                      {checkNegative((marginCall.getIn(['allocated', ALLOCATED.IM_TOTAL]) || 0).toFixed(2))}
+                      {checkNegative(parseFloat(marginCall.getIn(['allocated', ALLOCATED.IM_TOTAL]) || 0).toFixed(2))}
                     </td>
                     <td>USD</td>
                     <td></td>
@@ -275,7 +275,7 @@ export default class Selection extends React.Component {
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
                     <td>
-                      {checkNegative((marginCall.getIn(['allocated', ALLOCATED.VM_TOTAL]) || 0).toFixed(2))}
+                      {checkNegative(parseFloat(marginCall.getIn(['allocated', ALLOCATED.VM_TOTAL]) || 0).toFixed(2))}
                     </td>
                     <td>USD</td>
                     <td></td>
@@ -291,7 +291,7 @@ export default class Selection extends React.Component {
                   <tr className={styles.bold}>
                     <td>Total</td>
                     <td
-                      className={styles.totalTable1 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>{checkNegative((marginCall.getIn(['allocated', ALLOCATED.MGN_TOTAL]) || 0).toFixed(2))}</td>
+                      className={styles.totalTable1 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>{checkNegative(parseFloat(marginCall.getIn(['allocated', ALLOCATED.MGN_TOTAL]) || 0).toFixed(2))}</td>
                     <td className={styles.totalTable2 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>USD</td>
                     <td></td>
                     <td></td>
