@@ -38,7 +38,8 @@ export default class ReferencesCallDriver extends React.Component {
   render() {
     const {
       propIsMenuCsa,
-      propIsMenuRegulatory
+      propIsMenuRegulatory,
+      propPostfixLabel
     } = this.props
 
     return (
@@ -47,8 +48,7 @@ export default class ReferencesCallDriver extends React.Component {
           <div className={styles.line}>
             <span className={styles.agreementsSectionHeader}>
               Call Driver Details
-              {propIsMenuCsa && ' - CSA'}
-              {propIsMenuRegulatory && ' - Regulatory CSA'}
+              {propPostfixLabel}
               </span>
             <span className={this.state.isCallDriverExpanded
               ? styles.upArrow : styles.downArrow}

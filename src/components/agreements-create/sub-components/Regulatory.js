@@ -16,7 +16,10 @@ export default class Regulatory extends React.Component {
       isSplit: false,
       iSplitByRoleVariation: false,
       iSplitByRoleInitial: false,
-      iSplitByRoleNetted: false
+      iSplitByRoleNetted: false,
+      isVariableReferenceGroup: false,
+      isVariableReferencePledgorActive: false,
+      isVariableReferenceSecuredActive: false
     }
   }
 
@@ -59,13 +62,17 @@ export default class Regulatory extends React.Component {
             <div className={styles.line}>Variable Reference</div>
             <div className={styles.line}>
               <input type="text" className={this.state.iSplitByRoleVariation ? styles.inputTextBoxDisabled :
-                styles.inputTextBox} disabled={this.state.iSplitByRoleVariation}/>
+                styles.inputTextBox} disabled={this.state.iSplitByRoleVariation}
+                     onFocus={() => this.setState({isVariableReferenceGroup: true})}
+                     onBlur={() => this.setState({isVariableReferenceGroup: false})}/>
             </div>
           </div>
           <div className={styles.rowGroup}>
             <div className={styles.line + ' ' + styles.flexLine}>
               <ToggleSwitch propIsOn={this.state.iSplitByRoleVariation}
-                            propOnToggle={() => this.setState({iSplitByRoleVariation: !this.state.iSplitByRoleVariation})}/>
+                            propOnToggle={() => this.setState({
+                              iSplitByRoleVariation: !this.state.iSplitByRoleVariation
+                            })}/>
               &nbsp;Split by Role
             </div>
           </div>
@@ -84,7 +91,7 @@ export default class Regulatory extends React.Component {
               </div>
             </div>
           </div>}
-          
+
         </div>
         <div className={styles.agreementsSectionMiddle}>
           <div className={styles.rowGroup}>
@@ -97,7 +104,9 @@ export default class Regulatory extends React.Component {
           <div className={styles.rowGroup}>
             <div className={styles.line + ' ' + styles.flexLine}>
               <ToggleSwitch propIsOn={this.state.iSplitByRoleInitial}
-                            propOnToggle={() => this.setState({iSplitByRoleInitial: !this.state.iSplitByRoleInitial})}/>
+                            propOnToggle={() => this.setState({
+                              iSplitByRoleInitial: !this.state.iSplitByRoleInitial
+                            })}/>
               &nbsp;Split by Role
             </div>
           </div>
@@ -130,7 +139,9 @@ export default class Regulatory extends React.Component {
           <div className={styles.rowGroup}>
             <div className={styles.line + ' ' + styles.flexLine}>
               <ToggleSwitch propIsOn={this.state.iSplitByRoleNetted}
-                            propOnToggle={() => this.setState({iSplitByRoleNetted: !this.state.iSplitByRoleNetted})}/>
+                            propOnToggle={() => this.setState({
+                              iSplitByRoleNetted: !this.state.iSplitByRoleNetted
+                            })}/>
               &nbsp;Split by Role
             </div>
           </div>
@@ -154,9 +165,23 @@ export default class Regulatory extends React.Component {
 
       </div>}
 
-      <ReferencesCallDriver propIsMenuRegulatory/>
-      <ReferencesMarginTerms propIsMenuRegulatory/>
-      <ReferencesCallIssuance propIsMenuRegulatory/>
+      <div className={this.state.isSplit && styles.hideForm}>
+        <ReferencesCallDriver propIsMenuRegulatory
+                              propPostfixLabel={' - Regulatory CSA'}/>
+        <ReferencesMarginTerms propIsMenuRegulatory
+                               propPostfixLabel={' - Regulatory CSA'}/>
+        <ReferencesCallIssuance propIsMenuRegulatory
+                                propPostfixLabel={' - Regulatory CSA'}/>
+      </div>
+
+      <div className={!this.state.isVariableReferenceGroup && styles.hideForm}>
+        <ReferencesCallDriver propIsMenuRegulatory
+                              propPostfixLabel={' - Regulatory CSA Variation Pledgor'}/>
+        <ReferencesMarginTerms propIsMenuRegulatory
+                               propPostfixLabel={' - Regulatory CSA Variation Pledgor'}/>
+        <ReferencesCallIssuance propIsMenuRegulatory
+                                propPostfixLabel={' - Regulatory CSA Variation Pledgor'}/>
+      </div>
 
     </div>
   }

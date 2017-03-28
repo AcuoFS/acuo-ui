@@ -25,7 +25,8 @@ export default class ReferencesCallIssuance extends React.Component {
   render() {
     const {
       propIsMenuCsa,
-      propIsMenuRegulatory
+      propIsMenuRegulatory,
+      propPostfixLabel
     } = this.props
 
     return (
@@ -34,8 +35,7 @@ export default class ReferencesCallIssuance extends React.Component {
           <div className={styles.line}>
             <span className={styles.agreementsSectionHeader}>
               Call Issuance Settings
-              {propIsMenuCsa && ' - CSA'}
-              {propIsMenuRegulatory && ' - Regulatory CSA'}
+              {propPostfixLabel}
               </span>
             <span className={this.state.isCallIssuanceExpanded
               ? styles.upArrow : styles.downArrow}
