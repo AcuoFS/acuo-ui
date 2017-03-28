@@ -17,9 +17,7 @@ export default class Regulatory extends React.Component {
       iSplitByRoleVariation: false,
       iSplitByRoleInitial: false,
       iSplitByRoleNetted: false,
-      isVariableReferenceActive: false,
-      isVariableReferencePledgorActive: false,
-      isVariableReferenceSecuredActive: false
+      currentActiveGroup: 'BASIC'
     }
   }
 
@@ -51,7 +49,11 @@ export default class Regulatory extends React.Component {
       <div className={styles.rowGroup}>
         <div className={styles.line + ' ' + styles.flexLine}>
           <ToggleSwitch propIsOn={this.state.isSplit}
-                        propOnToggle={() => this.setState({isSplit: !this.state.isSplit})}/>
+                        propOnToggle={() =>
+                          this.setState({
+                            isSplit: !this.state.isSplit,
+                            currentActiveGroup: this.state.isSplit ? 'BASIC' : 'VARIATION_GROUP'
+                          })}/>
           &nbsp;Split by Call Type
         </div>
       </div>
@@ -62,9 +64,9 @@ export default class Regulatory extends React.Component {
             <div className={styles.line}>Variable Reference</div>
             <div className={styles.line}>
               <input type="text" className={this.state.iSplitByRoleVariation ?
-                styles.inputTextBoxDisabled : styles.inputTextBox} disabled={this.state.iSplitByRoleVariation}
-                     onFocus={() => this.setState({isVariableReferenceActive: true})}
-                     onBlur={() => this.setState({isVariableReferenceActive: false})}/>
+                styles.inputTextBoxDisabled : styles.inputTextBox}
+                     disabled={this.state.iSplitByRoleVariation}
+              onFocus={() => this.setState({currentActiveGroup: 'VARIATION_GROUP'})}/>
 
             </div>
           </div>
@@ -72,7 +74,9 @@ export default class Regulatory extends React.Component {
             <div className={styles.line + ' ' + styles.flexLine}>
               <ToggleSwitch propIsOn={this.state.iSplitByRoleVariation}
                             propOnToggle={() => this.setState({
-                              iSplitByRoleVariation: !this.state.iSplitByRoleVariation
+                              iSplitByRoleVariation: !this.state.iSplitByRoleVariation,
+                              currentActiveGroup: this.state.iSplitByRoleVariation ?
+                                'VARIATION_GROUP' : 'VARIATION_PLEDGOR_GROUP'
                             })}/>
               &nbsp;Split by Role
             </div>
@@ -83,8 +87,7 @@ export default class Regulatory extends React.Component {
               <div className={styles.line}>Variation Pledgor Reference</div>
               <div className={styles.line}>
                 <input type="text" className={styles.inputTextBox}
-                       onFocus={() => this.setState({isVariableReferencePledgorActive: true})}
-                       onBlur={() => this.setState({isVariableReferencePledgorActive: false})}/>
+                       onFocus={() => this.setState({currentActiveGroup: 'VARIATION_PLEDGOR_GROUP'})}/>
 
               </div>
             </div>
@@ -92,8 +95,7 @@ export default class Regulatory extends React.Component {
               <div className={styles.line}>Variation Secured Reference</div>
               <div className={styles.line}>
                 <input type="text" className={styles.inputTextBox}
-                       onFocus={() => this.setState({isVariableReferenceSecuredActive: true})}
-                       onBlur={() => this.setState({isVariableReferenceSecuredActive: false})}/>
+                       onFocus={() => this.setState({currentActiveGroup: 'VARIATION_SECURED_GROUP'})}/>
 
               </div>
             </div>
@@ -172,7 +174,7 @@ export default class Regulatory extends React.Component {
 
       </div>}
 
-      <div className={this.state.isSplit && styles.hideForm}>
+      <div className={(this.state.currentActiveGroup !== 'BASIC') && styles.hideForm}>
         <ReferencesCallDriver propIsMenuRegulatory
                               propPostfixLabel={' - Regulatory CSA'}/>
         <ReferencesMarginTerms propIsMenuRegulatory
@@ -181,7 +183,7 @@ export default class Regulatory extends React.Component {
                                 propPostfixLabel={' - Regulatory CSA'}/>
       </div>
 
-      <div className={!this.state.isVariableReferenceActive && styles.hideForm}>
+      <div className={(this.state.currentActiveGroup !== 'VARIATION_GROUP') && styles.hideForm}>
         <ReferencesCallDriver propIsMenuRegulatory
                               propPostfixLabel={' - Regulatory CSA Variation'}/>
         <ReferencesMarginTerms propIsMenuRegulatory
@@ -190,7 +192,7 @@ export default class Regulatory extends React.Component {
                                 propPostfixLabel={' - Regulatory CSA Variation'}/>
       </div>
 
-      <div className={!this.state.isVariableReferencePledgorActive && styles.hideForm}>
+      <div className={(this.state.currentActiveGroup !== 'VARIATION_PLEDGOR_GROUP') && styles.hideForm}>
         <ReferencesCallDriver propIsMenuRegulatory
                               propPostfixLabel={' - Regulatory CSA Variation Pledgor'}/>
         <ReferencesMarginTerms propIsMenuRegulatory
@@ -199,7 +201,7 @@ export default class Regulatory extends React.Component {
                                 propPostfixLabel={' - Regulatory CSA Variation Pledgor'}/>
       </div>
 
-      <div className={!this.state.isVariableReferenceSecuredActive && styles.hideForm}>
+      <div className={(this.state.currentActiveGroup !== 'VARIATION_SECURED_GROUP') && styles.hideForm}>
         <ReferencesCallDriver propIsMenuRegulatory
                               propPostfixLabel={' - Regulatory CSA Variation Secured'}/>
         <ReferencesMarginTerms propIsMenuRegulatory
