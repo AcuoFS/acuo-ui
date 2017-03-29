@@ -170,11 +170,16 @@ export default class Selection extends React.Component {
                   Total
                 </div>
                 <div className={styles.amount}>
+                  {/*{checkNegative(this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {*/}
+                    {/*return sum + x.get('data').reduce((sum, y) => {*/}
+                        {/*return sum + y.getIn(['firstLevel','secondLevel']).reduce((sum, z) => {*/}
+                            {/*return sum + parseFloat(z.get('amount'))*/}
+                          {/*}, 0)*/}
+                      {/*}, 0)*/}
+                  {/*}, 0))}*/}
                   {checkNegative(this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {
                     return sum + x.get('data').reduce((sum, y) => {
-                        return sum + y.getIn(['firstLevel','secondLevel']).reduce((sum, z) => {
-                            return sum + parseFloat(z.get('amount'))
-                          }, 0)
+                        return sum + parseFloat(y.getIn(['firstLevel','amount']))
                       }, 0)
                   }, 0))}
                 </div>
