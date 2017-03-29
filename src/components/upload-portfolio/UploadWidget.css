@@ -10,6 +10,7 @@ div.componentStyle {
   min-height: 410px;
   display: inline-block;
   width: 84%;
+  padding: 20px;
 }
 
 .uploadStatus {
@@ -24,16 +25,16 @@ div.componentStyle {
 
 .buttonContainerDisabled {
   width: 100%;
-  margin: 10px;
   text-align: right;
   display: flex;
+  padding-top: 20px;
 }
 
 .buttonContainerEnabled {
   width: 100%;
-  margin: 10px;
   text-align: right;
   display: flex;
+  padding-top: 20px;
 }
 
 .buttonContainerDisabled button {
@@ -44,7 +45,6 @@ div.componentStyle {
   text-align: center;
   -webkit-border-radius: 20px;
   border-radius: 20px;
-  margin: 0 20px;
   align-self: flex-end;
   padding: 10px 24px;
   flex: 1;
@@ -58,7 +58,6 @@ div.componentStyle {
   text-align: center;
   -webkit-border-radius: 20px;
   border-radius: 20px;
-  margin: 0 20px;
   align-self: flex-end;
   cursor: pointer;
   padding: 10px 24px;
@@ -76,9 +75,7 @@ div.componentStyle {
   composes: baseFontBold from '../../static/css-components/fonts.css';
   line-height: 29px;
   color: #6389AD;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
+  padding-bottom: 20px;
 }
 
 .fileName {
