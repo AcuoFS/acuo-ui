@@ -4,6 +4,7 @@ import {
   ReferencesCallIssuance,
   ReferencesMarginTerms
 } from './references-sections'
+import ReferenceSectionGroup from './sub-components/ReferenceSectionGroup'
 import ToggleSwitch from '../../common/ToggleSwitch'
 import styles from './ContentBody.css'
 
@@ -45,6 +46,8 @@ export default class Regulatory extends React.Component {
       [STATE_PROPERTY_SPLIT_NETTED]: false,
       currentActiveGroup: BASIC_GROUP
     }
+
+    this.updateBaseInstanceVariable = this.updateBaseInstanceVariable.bind(this)
   }
 
   /**
@@ -93,24 +96,13 @@ export default class Regulatory extends React.Component {
   }
 
   /**
-   * To create CallDriver, MarginTerms and CallIssuance sections with the same label
+   * To update the instance variable with dom reference
    *
-   * @param groupName
-   * @param label
-   * @param isRemoveExposureFromCallDriver
-   * @returns {XML}
+   * @param domConst
+   * @param dom
    */
-  getReferenceSectionGroup(groupName, label, isRemoveExposureFromCallDriver) {
-    return <div className={(this.state.currentActiveGroup !== groupName) && styles.hideForm}>
-      <ReferencesCallDriver propIsSubMenu
-                            propPostfixLabel={label}
-                            propIsRemoveExposure={isRemoveExposureFromCallDriver}/>
-      <ReferencesMarginTerms propIsSubMenu
-                             propPostfixLabel={label}/>
-      <ReferencesCallIssuance propIsSubMenu
-                              propPostfixLabel={label}/>
-    </div>
-
+  updateBaseInstanceVariable(domConst, dom) {
+    this[domConst] = dom
   }
 
   /**
@@ -132,8 +124,8 @@ export default class Regulatory extends React.Component {
   getAfterSplitReferenceGroup(contClass, splitByRoleStateProperty,
                               baseGroup, baseDisplay, baseDom,
                               pledgorGroup, pledgorDisplay, pledgorDom,
-                              securedGroup, securedDisplay, securedDom) {
-
+                              securedGroup, securedDisplay, securedDom,
+                              handlerUpdateInstanceVariable) {
     return <div className={contClass}>
       <div className={styles.rowGroup}>
         <div className={styles.line}>{baseDisplay}</div>
@@ -141,7 +133,7 @@ export default class Regulatory extends React.Component {
           <input type="text" className={this.state[splitByRoleStateProperty] ?
             styles.inputTextBoxDisabled : styles.inputTextBox}
                  disabled={this.state[splitByRoleStateProperty]}
-                 ref={(dom) => this[baseDom] = dom}
+                 ref={(dom) => handlerUpdateInstanceVariable(baseDom, dom)}
                  onFocus={() => this.setState({currentActiveGroup: baseGroup})}/>
 
         </div>
@@ -163,7 +155,7 @@ export default class Regulatory extends React.Component {
           <div className={styles.line}>{pledgorDisplay}</div>
           <div className={styles.line}>
             <input type="text" className={styles.inputTextBox}
-                   ref={(dom) => this[pledgorDom] = dom}
+                   ref={(dom) => handlerUpdateInstanceVariable(pledgorDom, dom)}
                    onFocus={() => this.setState({currentActiveGroup: pledgorGroup})}/>
 
           </div>
@@ -172,7 +164,7 @@ export default class Regulatory extends React.Component {
           <div className={styles.line}>{securedDisplay}</div>
           <div className={styles.line}>
             <input type="text" className={styles.inputTextBox}
-                   ref={(dom) => this[securedDom] = dom}
+                   ref={(dom) => handlerUpdateInstanceVariable(securedDom, dom)}
                    onFocus={() => this.setState({currentActiveGroup: securedGroup})}/>
 
           </div>
@@ -226,48 +218,65 @@ export default class Regulatory extends React.Component {
         {this.getAfterSplitReferenceGroup(styles.agreementsSectionLeft, STATE_PROPERTY_SPLIT_VARIATON,
           VARIATION_GROUP, 'Variable Reference', VARIATION_DOM,
           VARIATION_PLEDGOR_GROUP, 'Variation Pledgor Reference', VARIATION_PLEDGOR_DOM,
-          VARIATION_SECURED_GROUP, 'Variation Secured Reference', VARIATION_SECURED_DOM)}
+          VARIATION_SECURED_GROUP, 'Variation Secured Reference', VARIATION_SECURED_DOM,
+          this.updateBaseInstanceVariable)}
 
         {this.getAfterSplitReferenceGroup(styles.agreementsSectionMiddle, STATE_PROPERTY_SPLIT_INITIAL,
           INITIAL_GROUP, 'Initial Reference', INITIAL_DOM,
           INITIAL_PLEDGOR_GROUP, 'Initial Pledgor Reference', INITIAL_PLEDGOR_DOM,
-          INITIAL_SECURED_GROUP, 'Initial Secured Reference', INITIAL_SECURED_DOM)}
+          INITIAL_SECURED_GROUP, 'Initial Secured Reference', INITIAL_SECURED_DOM,
+          this.updateBaseInstanceVariable)}
 
         {this.getAfterSplitReferenceGroup(styles.agreementsSectionRight, STATE_PROPERTY_SPLIT_NETTED,
           NETTED_GROUP, 'Netted Reference', NETTED_DOM,
           NETTED_PLEDGOR_GROUP, 'Netted Pledgor Reference', NETTED_PLEDGOR_DOM,
-          NETTED_SECURED_GROUP, 'Netted Secured Reference', NETTED_SECURED_DOM)}
+          NETTED_SECURED_GROUP, 'Netted Secured Reference', NETTED_SECURED_DOM,
+          this.updateBaseInstanceVariable)}
 
       </div>}
 
-      {this.getReferenceSectionGroup(BASIC_GROUP, ' - Regulatory CSA', false)}
+      <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === BASIC_GROUP)}
+                             propLabel={' - Regulatory CSA'}/>
 
-      {this.getReferenceSectionGroup(VARIATION_GROUP, ' - Regulatory CSA Variation', false)}
-      {this.getReferenceSectionGroup(VARIATION_PLEDGOR_GROUP, ' - Regulatory CSA Variation Pledgor', false)}
-      {this.getReferenceSectionGroup(VARIATION_SECURED_GROUP, ' - Regulatory CSA Variation Secured', false)}
-
-      {this.getReferenceSectionGroup(INITIAL_GROUP, ' - CSA Initial', false)}
-      {this.getReferenceSectionGroup(INITIAL_PLEDGOR_GROUP, ' - Regulatory CSA Initial Pledgor', false)}
-      {this.getReferenceSectionGroup(INITIAL_SECURED_GROUP, ' - Regulatory CSA Initial Secured', false)}
-
-      {this.getReferenceSectionGroup(NETTED_GROUP, ' - CSA Netted', false)}
-      <div className={(this.state.currentActiveGroup !== NETTED_PLEDGOR_GROUP) && styles.hideForm}>
-        <ReferencesCallDriver propIsSubMenu
-                              propPostfixLabel={' - Regulatory CSA Netted Pledgor'}
-                              propIsRemoveExposure/>
-        <ReferencesMarginTerms propIsSubMenu
-                               propPostfixLabel={' - CSA Netted Pledgor'}/>
-        <ReferencesCallIssuance propIsSubMenu
-                                propPostfixLabel={' - CSA Netted Pledgor'}/>
+      <div>
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === VARIATION_GROUP)}
+                               propLabel={' - Regulatory CSA Variation'}/>
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === VARIATION_PLEDGOR_GROUP)}
+                               propLabel={' - Regulatory CSA Variation Pledgor'}/>
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === VARIATION_SECURED_GROUP)}
+                               propLabel={' - Regulatory CSA Variation Secured'}/>
       </div>
-      <div className={(this.state.currentActiveGroup !== NETTED_SECURED_GROUP) && styles.hideForm}>
-        <ReferencesCallDriver propIsSubMenu
-                              propPostfixLabel={' - CSA Netted Secured'}
-                              propIsRemoveExposure/>
-        <ReferencesMarginTerms propIsSubMenu
-                               propPostfixLabel={' - Regulatory CSA Netted Secured'}/>
-        <ReferencesCallIssuance propIsSubMenu
-                                propPostfixLabel={' - Regulatory CSA Netted Secured'}/>
+
+      <div>
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === INITIAL_GROUP)}
+                               propLabel={' - CSA Initial'}/>
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === INITIAL_PLEDGOR_GROUP)}
+                               propLabel={' - Regulatory CSA Initial Pledgor'}/>
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === INITIAL_SECURED_GROUP)}
+                               propLabel={' - Regulatory CSA Initial Secured'}/>
+      </div>
+
+      <div>
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === NETTED_GROUP)}
+                               propLabel={' - CSA Netted'}/>
+        <div className={(this.state.currentActiveGroup !== NETTED_PLEDGOR_GROUP) && styles.hideForm}>
+          <ReferencesCallDriver propIsSubMenu
+                                propPostfixLabel={' - Regulatory CSA Netted Pledgor'}
+                                propIsRemoveExposure/>
+          <ReferencesMarginTerms propIsSubMenu
+                                 propPostfixLabel={' - CSA Netted Pledgor'}/>
+          <ReferencesCallIssuance propIsSubMenu
+                                  propPostfixLabel={' - CSA Netted Pledgor'}/>
+        </div>
+        <div className={(this.state.currentActiveGroup !== NETTED_SECURED_GROUP) && styles.hideForm}>
+          <ReferencesCallDriver propIsSubMenu
+                                propPostfixLabel={' - CSA Netted Secured'}
+                                propIsRemoveExposure/>
+          <ReferencesMarginTerms propIsSubMenu
+                                 propPostfixLabel={' - Regulatory CSA Netted Secured'}/>
+          <ReferencesCallIssuance propIsSubMenu
+                                  propPostfixLabel={' - Regulatory CSA Netted Secured'}/>
+        </div>
       </div>
 
 
