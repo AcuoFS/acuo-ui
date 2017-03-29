@@ -18,18 +18,18 @@ import styles from '../ContentBody.css'
  * @param securedDisplay
  * @param securedDom
  * @param handlerUpdateInstanceVariable
- * @param handlerUpdateActiveGroup
+ * @param handlerUpdateActiveType
  * @param splitByRoleStateProperty
  * @param handlerUpdateSplitFlagAndActive
  * @constructor
  */
-const ReferenceCallTypeGroup = ({
+const ReferenceCallType = ({
                                   contClass, splitByRoleState,
                                   baseGroup, baseDisplay, baseDom,
                                   pledgorGroup, pledgorDisplay, pledgorDom,
                                   securedGroup, securedDisplay, securedDom,
                                   handlerUpdateInstanceVariable,
-                                  handlerUpdateActiveGroup,
+                                  handlerUpdateActiveType,
                                   splitByRoleStateProperty,
                                   handlerUpdateSplitFlagAndActive
                                 }) => (
@@ -41,7 +41,7 @@ const ReferenceCallTypeGroup = ({
           styles.inputTextBoxDisabled : styles.inputTextBox}
                disabled={splitByRoleState}
                ref={(dom) => handlerUpdateInstanceVariable(baseDom, dom)}
-               onFocus={() => handlerUpdateActiveGroup(baseGroup)}/>
+               onFocus={() => handlerUpdateActiveType(baseGroup)}/>
 
       </div>
     </div>
@@ -61,7 +61,7 @@ const ReferenceCallTypeGroup = ({
         <div className={styles.line}>
           <input type="text" className={styles.inputTextBox}
                  ref={(dom) => handlerUpdateInstanceVariable(pledgorDom, dom)}
-                 onFocus={() => handlerUpdateActiveGroup(pledgorGroup)}/>
+                 onFocus={() => handlerUpdateActiveType(pledgorGroup)}/>
 
         </div>
       </div>
@@ -70,7 +70,7 @@ const ReferenceCallTypeGroup = ({
         <div className={styles.line}>
           <input type="text" className={styles.inputTextBox}
                  ref={(dom) => handlerUpdateInstanceVariable(securedDom, dom)}
-                 onFocus={() => handlerUpdateActiveGroup(securedGroup)}/>
+                 onFocus={() => handlerUpdateActiveType(securedGroup)}/>
 
         </div>
       </div>
@@ -80,4 +80,4 @@ const ReferenceCallTypeGroup = ({
 
 )
 
-export default ReferenceCallTypeGroup
+export default ReferenceCallType

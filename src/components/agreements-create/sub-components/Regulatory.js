@@ -5,7 +5,7 @@ import {
   ReferencesMarginTerms
 } from './references-sections'
 import ReferenceSectionGroup from './sub-components/ReferenceSectionGroup'
-import ReferenceCallTypeGroup from './sub-components/ReferenceCallTypeGroup'
+import ReferenceCallType from './sub-components/ReferenceCallType'
 import ToggleSwitch from '../../common/ToggleSwitch'
 import styles from './ContentBody.css'
 
@@ -45,11 +45,11 @@ export default class Regulatory extends React.Component {
       [STATE_PROPERTY_SPLIT_VARIATON]: false,
       [STATE_PROPERTY_SPLIT_INITIAL]: false,
       [STATE_PROPERTY_SPLIT_NETTED]: false,
-      currentActiveGroup: BASIC_GROUP
+      currentActiveType: BASIC_GROUP
     }
 
     this.updateBaseInstanceVariable = this.updateBaseInstanceVariable.bind(this)
-    this.updateActiveGroup = this.updateActiveGroup.bind(this)
+    this.updateActiveType = this.updateActiveType.bind(this)
     this.updateSplitFlagAndActive = this.updateSplitFlagAndActive.bind(this)
   }
 
@@ -61,7 +61,7 @@ export default class Regulatory extends React.Component {
    */
   componentDidUpdate(prevProps, prevState) {
     if (this.props.propIsDisplay) {
-      switch (this.state.currentActiveGroup) {
+      switch (this.state.currentActiveType) {
         case BASIC_GROUP:
           this.regulatoryInput.focus()
           break;
@@ -108,15 +108,15 @@ export default class Regulatory extends React.Component {
     this[domConst] = dom
   }
 
-  updateActiveGroup(group) {
-    this.setState({currentActiveGroup: group})
+  updateActiveType(type) {
+    this.setState({currentActiveType: type})
   }
 
   updateSplitFlagAndActive(splitByRoleState, baseGroup, pledgorGroup,
                            splitByRoleStateProperty) {
     this.setState({
       [splitByRoleStateProperty]: !splitByRoleState,
-      currentActiveGroup: splitByRoleState ?
+      currentActiveType: splitByRoleState ?
         baseGroup : pledgorGroup
     })
   }
@@ -152,7 +152,7 @@ export default class Regulatory extends React.Component {
                         propOnToggle={() =>
                           this.setState({
                             isSplit: !this.state.isSplit,
-                            currentActiveGroup: this.state.isSplit ? BASIC_GROUP :
+                            currentActiveType: this.state.isSplit ? BASIC_GROUP :
                               (this.state.iSplitByRoleVariation ? VARIATION_PLEDGOR_GROUP : VARIATION_GROUP)
                           })}/>
           &nbsp;Split by Call Type
@@ -161,7 +161,7 @@ export default class Regulatory extends React.Component {
 
       {this.state.isSplit && <div className={styles.flexCont}>
 
-        <ReferenceCallTypeGroup
+        <ReferenceCallType
           contClass={styles.agreementsSectionLeft} splitByRoleState={this.state[STATE_PROPERTY_SPLIT_VARIATON]}
           baseGroup={VARIATION_GROUP} baseDisplay={'Variable Reference'} baseDom={VARIATION_DOM}
           pledgorGroup={VARIATION_PLEDGOR_GROUP} pledgorDisplay={'Variation Pledgor Reference'}
@@ -169,11 +169,11 @@ export default class Regulatory extends React.Component {
           securedGroup={VARIATION_SECURED_GROUP} securedDisplay={'Variation Secured Reference'}
           securedDom={VARIATION_SECURED_DOM}
           handlerUpdateInstanceVariable={this.updateBaseInstanceVariable}
-          handlerUpdateActiveGroup={this.updateActiveGroup}
+          handlerUpdateActiveType={this.updateActiveType}
           splitByRoleStateProperty={STATE_PROPERTY_SPLIT_VARIATON}
           handlerUpdateSplitFlagAndActive={this.updateSplitFlagAndActive}/>
 
-        <ReferenceCallTypeGroup
+        <ReferenceCallType
           contClass={styles.agreementsSectionMiddle} splitByRoleState={this.state[STATE_PROPERTY_SPLIT_INITIAL]}
           baseGroup={INITIAL_GROUP} baseDisplay={'Initial Reference'} baseDom={INITIAL_DOM}
           pledgorGroup={INITIAL_PLEDGOR_GROUP} pledgorDisplay={'Initial Pledgor Reference'}
@@ -181,11 +181,11 @@ export default class Regulatory extends React.Component {
           securedGroup={INITIAL_SECURED_GROUP} securedDisplay={'Initial Secured Reference'}
           securedDom={INITIAL_SECURED_DOM}
           handlerUpdateInstanceVariable={this.updateBaseInstanceVariable}
-          handlerUpdateActiveGroup={this.updateActiveGroup}
+          handlerUpdateActiveType={this.updateActiveType}
           splitByRoleStateProperty={STATE_PROPERTY_SPLIT_INITIAL}
           handlerUpdateSplitFlagAndActive={this.updateSplitFlagAndActive}/>
 
-        <ReferenceCallTypeGroup
+        <ReferenceCallType
           contClass={styles.agreementsSectionRight} splitByRoleState={this.state[STATE_PROPERTY_SPLIT_NETTED]}
           baseGroup={NETTED_GROUP} baseDisplay={'Netted Reference'} baseDom={NETTED_DOM}
           pledgorGroup={NETTED_PLEDGOR_GROUP} pledgorDisplay={'Netted Pledgor Reference'}
@@ -193,37 +193,37 @@ export default class Regulatory extends React.Component {
           securedGroup={NETTED_SECURED_GROUP} securedDisplay={'Netted Secured Reference'}
           securedDom={NETTED_SECURED_DOM}
           handlerUpdateInstanceVariable={this.updateBaseInstanceVariable}
-          handlerUpdateActiveGroup={this.updateActiveGroup}
+          handlerUpdateActiveType={this.updateActiveType}
           splitByRoleStateProperty={STATE_PROPERTY_SPLIT_NETTED}
           handlerUpdateSplitFlagAndActive={this.updateSplitFlagAndActive}/>
 
       </div>}
 
-      <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === BASIC_GROUP)}
+      <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === BASIC_GROUP)}
                              propLabel={' - Regulatory CSA'}/>
 
       <div>
-        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === VARIATION_GROUP)}
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === VARIATION_GROUP)}
                                propLabel={' - Regulatory CSA Variation'}/>
-        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === VARIATION_PLEDGOR_GROUP)}
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === VARIATION_PLEDGOR_GROUP)}
                                propLabel={' - Regulatory CSA Variation Pledgor'}/>
-        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === VARIATION_SECURED_GROUP)}
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === VARIATION_SECURED_GROUP)}
                                propLabel={' - Regulatory CSA Variation Secured'}/>
       </div>
 
       <div>
-        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === INITIAL_GROUP)}
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === INITIAL_GROUP)}
                                propLabel={' - CSA Initial'}/>
-        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === INITIAL_PLEDGOR_GROUP)}
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === INITIAL_PLEDGOR_GROUP)}
                                propLabel={' - Regulatory CSA Initial Pledgor'}/>
-        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === INITIAL_SECURED_GROUP)}
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === INITIAL_SECURED_GROUP)}
                                propLabel={' - Regulatory CSA Initial Secured'}/>
       </div>
 
       <div>
-        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === NETTED_GROUP)}
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === NETTED_GROUP)}
                                propLabel={' - CSA Netted'}/>
-        <div className={(this.state.currentActiveGroup !== NETTED_PLEDGOR_GROUP) && styles.hideForm}>
+        <div className={(this.state.currentActiveType !== NETTED_PLEDGOR_GROUP) && styles.hideForm}>
           <ReferencesCallDriver propIsSubMenu
                                 propPostfixLabel={' - Regulatory CSA Netted Pledgor'}
                                 propIsRemoveExposure/>
@@ -232,7 +232,7 @@ export default class Regulatory extends React.Component {
           <ReferencesCallIssuance propIsSubMenu
                                   propPostfixLabel={' - CSA Netted Pledgor'}/>
         </div>
-        <div className={(this.state.currentActiveGroup !== NETTED_SECURED_GROUP) && styles.hideForm}>
+        <div className={(this.state.currentActiveType !== NETTED_SECURED_GROUP) && styles.hideForm}>
           <ReferencesCallDriver propIsSubMenu
                                 propPostfixLabel={' - CSA Netted Secured'}
                                 propIsRemoveExposure/>
