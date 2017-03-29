@@ -4,12 +4,12 @@ import ReferenceSubCommon from './sub-components/ReferenceSubCommon'
 
 const CSA = ({
                propIsDisplay,
-               propIsCsa,
+               propIsReferenceSubOn,
                propToggleCsa
              }) => (
   <ReferenceSubCommon
     propIsDisplay={propIsDisplay}
-    propIsReferenceSubOn={propIsCsa}
+    propIsReferenceSubOn={propIsReferenceSubOn}
     propToggleReferenceSub={propToggleCsa}
     propIsCSA
     propMainToggleLabel={'CSA References'}

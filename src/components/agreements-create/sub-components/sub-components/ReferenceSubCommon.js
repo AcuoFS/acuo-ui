@@ -31,9 +31,9 @@ const NETTED_DOM = 'nettedInput'
 const NETTED_PLEDGOR_DOM = 'nettedPledgorInput'
 const NETTED_SECURED_DOM = 'nettedSecuredInput'
 
-const STATE_PROPERTY_SPLIT_VARIATON = 'iSplitByRoleVariation'
-const STATE_PROPERTY_SPLIT_INITIAL = 'iSplitByRoleInitial'
-const STATE_PROPERTY_SPLIT_NETTED = 'iSplitByRoleNetted'
+const STATE_PROPERTY_SPLIT_VARIATION = 'isSplitByRoleVariation'
+const STATE_PROPERTY_SPLIT_INITIAL = 'isSplitByRoleInitial'
+const STATE_PROPERTY_SPLIT_NETTED = 'isSplitByRoleNetted'
 
 
 export default class ReferenceSubCommon extends React.Component {
@@ -42,7 +42,7 @@ export default class ReferenceSubCommon extends React.Component {
 
     this.state = {
       isSplit: false,
-      [STATE_PROPERTY_SPLIT_VARIATON]: false,
+      [STATE_PROPERTY_SPLIT_VARIATION]: false,
       [STATE_PROPERTY_SPLIT_INITIAL]: false,
       [STATE_PROPERTY_SPLIT_NETTED]: false,
       currentActiveType: BASIC_GROUP
@@ -168,7 +168,7 @@ export default class ReferenceSubCommon extends React.Component {
       {this.state.isSplit && <div className={styles.flexCont}>
 
         <ReferenceCallType
-          contClass={styles.agreementsSectionLeft} splitByRoleState={this.state[STATE_PROPERTY_SPLIT_VARIATON]}
+          contClass={styles.agreementsSectionLeft} splitByRoleState={this.state[STATE_PROPERTY_SPLIT_VARIATION]}
           baseGroup={VARIATION_GROUP} baseDisplay={'Variable Reference'} baseDom={VARIATION_DOM}
           pledgorGroup={VARIATION_PLEDGOR_GROUP} pledgorDisplay={'Variation Pledgor Reference'}
           pledgorDom={VARIATION_PLEDGOR_DOM}
@@ -176,7 +176,7 @@ export default class ReferenceSubCommon extends React.Component {
           securedDom={VARIATION_SECURED_DOM}
           handlerUpdateInstanceVariable={this.updateBaseInstanceVariable}
           handlerUpdateActiveType={this.updateActiveType}
-          splitByRoleStateProperty={STATE_PROPERTY_SPLIT_VARIATON}
+          splitByRoleStateProperty={STATE_PROPERTY_SPLIT_VARIATION}
           handlerUpdateSplitFlagAndActive={this.updateSplitFlagAndActive}/>
 
         <ReferenceCallType

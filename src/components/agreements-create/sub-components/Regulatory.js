@@ -4,12 +4,12 @@ import ReferenceSubCommon from './sub-components/ReferenceSubCommon'
 
 const Regulatory = ({
                       propIsDisplay,
-                      propIsRegulatory,
+                      propIsReferenceSubOn,
                       propToggleRegulatory
                     }) => (
   <ReferenceSubCommon
     propIsDisplay={propIsDisplay}
-    propIsReferenceSubOn={propIsRegulatory}
+    propIsReferenceSubOn={propIsReferenceSubOn}
     propToggleReferenceSub={propToggleRegulatory}
     propIsRegulatory
     propMainToggleLabel={'Regulatory References'}

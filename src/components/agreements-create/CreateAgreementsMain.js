@@ -152,11 +152,11 @@ export class CreateAgreementsMain extends React.Component {
             propIsDisplay={this.state.currentMenu == MENU_REFERENCES}/>
 
           <CSA propIsDisplay={this.state.currentMenu == SUB_CSA}
-               propIsCsa={this.state.isCsa}
+               propIsReferenceSubOn={this.state.isCsa}
                propToggleCsa={this.toggleCsa}/>
 
           <Regulatory propIsDisplay={this.state.currentMenu == SUB_REGULATORY}
-                      propIsRegulatory={this.state.isRegulatory}
+                      propIsReferenceSubOn={this.state.isRegulatory}
                       propToggleRegulatory={this.toggleRegulatory}/>
 
           <WorkflowOptions propIsDisplay={this.state.currentMenu == MENU_WORKFLOW_OPTIONS}/>
