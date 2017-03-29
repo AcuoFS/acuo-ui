@@ -29,6 +29,10 @@ const NETTED_DOM = 'nettedInput'
 const NETTED_PLEDGOR_DOM = 'nettedPledgorInput'
 const NETTED_SECURED_DOM = 'nettedSecuredInput'
 
+const STATE_PROPERTY_SPLIT_VARIATON = 'iSplitByRoleVariation'
+const STATE_PROPERTY_SPLIT_INITIAL = 'iSplitByRoleInitial'
+const STATE_PROPERTY_SPLIT_NETTED = 'iSplitByRoleNetted'
+
 
 export default class Regulatory extends React.Component {
   constructor(props) {
@@ -36,9 +40,9 @@ export default class Regulatory extends React.Component {
 
     this.state = {
       isSplit: false,
-      iSplitByRoleVariation: false,
-      iSplitByRoleInitial: false,
-      iSplitByRoleNetted: false,
+      [STATE_PROPERTY_SPLIT_VARIATON]: false,
+      [STATE_PROPERTY_SPLIT_INITIAL]: false,
+      [STATE_PROPERTY_SPLIT_NETTED]: false,
       currentActiveGroup: BASIC_GROUP
     }
   }
@@ -88,6 +92,13 @@ export default class Regulatory extends React.Component {
     }
   }
 
+  /**
+   * To create CallDriver, MarginTerms and CallIssuance sections with the same label
+   *
+   * @param groupName
+   * @param label
+   * @returns {XML}
+   */
   getReferenceSectionGroup(groupName, label) {
     return <div className={(this.state.currentActiveGroup !== groupName) && styles.hideForm}>
       <ReferencesCallDriver propIsMenuRegulatory
@@ -100,6 +111,22 @@ export default class Regulatory extends React.Component {
 
   }
 
+  /**
+   * To create Variable, Initial and Netted textboxes(group)
+   *
+   * @param contClass
+   * @param splitByRoleStateProperty
+   * @param baseGroup
+   * @param baseDisplay
+   * @param baseDom
+   * @param pledgorGroup
+   * @param pledgorDisplay
+   * @param pledgorDom
+   * @param securedGroup
+   * @param securedDisplay
+   * @param securedDom
+   * @returns {XML}
+   */
   getAfterSplitReferenceGroup(contClass, splitByRoleStateProperty,
                               baseGroup, baseDisplay, baseDom,
                               pledgorGroup, pledgorDisplay, pledgorDom,
@@ -194,17 +221,17 @@ export default class Regulatory extends React.Component {
 
       {this.state.isSplit && <div className={styles.flexCont}>
 
-        {this.getAfterSplitReferenceGroup(styles.agreementsSectionLeft, 'iSplitByRoleVariation',
+        {this.getAfterSplitReferenceGroup(styles.agreementsSectionLeft, STATE_PROPERTY_SPLIT_VARIATON,
           VARIATION_GROUP, 'Variable Reference', VARIATION_DOM,
           VARIATION_PLEDGOR_GROUP, 'Variation Pledgor Reference', VARIATION_PLEDGOR_DOM,
           VARIATION_SECURED_GROUP, 'Variation Secured Reference', VARIATION_SECURED_DOM)}
 
-        {this.getAfterSplitReferenceGroup(styles.agreementsSectionMiddle, 'iSplitByRoleInitial',
+        {this.getAfterSplitReferenceGroup(styles.agreementsSectionMiddle, STATE_PROPERTY_SPLIT_INITIAL,
           INITIAL_GROUP, 'Initial Reference', INITIAL_DOM,
           INITIAL_PLEDGOR_GROUP, 'Initial Pledgor Reference', INITIAL_PLEDGOR_DOM,
           INITIAL_SECURED_GROUP, 'Initial Secured Reference', INITIAL_SECURED_DOM)}
 
-        {this.getAfterSplitReferenceGroup(styles.agreementsSectionRight, 'iSplitByRoleNetted',
+        {this.getAfterSplitReferenceGroup(styles.agreementsSectionRight, STATE_PROPERTY_SPLIT_NETTED,
           NETTED_GROUP, 'Netted Reference', NETTED_DOM,
           NETTED_PLEDGOR_GROUP, 'Netted Pledgor Reference', NETTED_PLEDGOR_DOM,
           NETTED_SECURED_GROUP, 'Netted Secured Reference', NETTED_SECURED_DOM)}
