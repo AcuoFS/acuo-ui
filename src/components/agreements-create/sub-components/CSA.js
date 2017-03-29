@@ -209,6 +209,27 @@ export default class CSA extends React.Component {
                                propIsRemoveExposureFromCallDriver/>
       </div>
 
+      <div>
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === INITIAL_GROUP)}
+                               propLabel={' - CSA Initial'}/>
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === INITIAL_PLEDGOR_GROUP)}
+                               propLabel={' - CSA Initial Pledgor'}
+                               propIsRemoveExposureFromCallDriver/>
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === INITIAL_SECURED_GROUP)}
+                               propLabel={' - CSA Initial Secured'}
+                               propIsRemoveExposureFromCallDriver/>
+      </div>
+
+      <div>
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === NETTED_GROUP)}
+                               propLabel={' - CSA Netted'}/>
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === NETTED_PLEDGOR_GROUP)}
+                               propLabel={' - CSA Netted Pledgor'}
+                               propIsRemoveExposureFromCallDriver/>
+        <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveGroup === NETTED_SECURED_GROUP)}
+                               propLabel={' - CSA Netted Secured'}
+                               propIsRemoveExposureFromCallDriver/>
+      </div>
 
     </div>
   }
