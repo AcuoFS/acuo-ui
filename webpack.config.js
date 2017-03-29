@@ -68,9 +68,9 @@ module.exports = {
       {from: './src/static/reset.css', to: './css/reset.css'},
       {from: './images', to: './images'}
     ]),
-    // new webpack.DefinePlugin({
-    //   CONFIG: JSON.stringify(require('./src/constants/config').get(process.env.DOCKER_ENV))
-    // }),
+    new webpack.DefinePlugin({
+      CONFIG: JSON.stringify(require('./src/constants/config').get(process.env.DOCKER_ENV))
+    }),
     // Plugin will automatically create and inject any js(output.[hash].bundle.js) into index.html
     new HtmlWebpackPlugin({
       template: 'index.template.ejs',
