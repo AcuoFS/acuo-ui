@@ -26,8 +26,7 @@ export default class ReferencesMarginTerms extends React.Component {
 
   render() {
     const {
-      propIsMenuCsa,
-      propIsMenuRegulatory,
+      propIsSubMenu,
       propPostfixLabel
     } = this.props
 
@@ -204,7 +203,7 @@ export default class ReferencesMarginTerms extends React.Component {
 
           </div>
 
-          <div className={(propIsMenuCsa || propIsMenuRegulatory ) &&
+          <div className={propIsSubMenu &&
           styles.agreementsSectionRight}/>
 
         </div>}

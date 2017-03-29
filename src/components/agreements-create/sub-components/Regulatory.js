@@ -97,15 +97,17 @@ export default class Regulatory extends React.Component {
    *
    * @param groupName
    * @param label
+   * @param isRemoveExposureFromCallDriver
    * @returns {XML}
    */
-  getReferenceSectionGroup(groupName, label) {
+  getReferenceSectionGroup(groupName, label, isRemoveExposureFromCallDriver) {
     return <div className={(this.state.currentActiveGroup !== groupName) && styles.hideForm}>
-      <ReferencesCallDriver propIsMenuRegulatory
-                            propPostfixLabel={label}/>
-      <ReferencesMarginTerms propIsMenuRegulatory
+      <ReferencesCallDriver propIsSubMenu
+                            propPostfixLabel={label}
+                            propIsRemoveExposure={isRemoveExposureFromCallDriver}/>
+      <ReferencesMarginTerms propIsSubMenu
                              propPostfixLabel={label}/>
-      <ReferencesCallIssuance propIsMenuRegulatory
+      <ReferencesCallIssuance propIsSubMenu
                               propPostfixLabel={label}/>
     </div>
 
@@ -238,36 +240,35 @@ export default class Regulatory extends React.Component {
 
       </div>}
 
-      {this.getReferenceSectionGroup(BASIC_GROUP, ' - Regulatory CSA')}
+      {this.getReferenceSectionGroup(BASIC_GROUP, ' - Regulatory CSA', false)}
 
-      {this.getReferenceSectionGroup(VARIATION_GROUP, ' - Regulatory CSA Variation')}
-      {this.getReferenceSectionGroup(VARIATION_PLEDGOR_GROUP, ' - Regulatory CSA Variation Pledgor')}
-      {this.getReferenceSectionGroup(VARIATION_SECURED_GROUP, ' - Regulatory CSA Variation Secured')}
+      {this.getReferenceSectionGroup(VARIATION_GROUP, ' - Regulatory CSA Variation', false)}
+      {this.getReferenceSectionGroup(VARIATION_PLEDGOR_GROUP, ' - Regulatory CSA Variation Pledgor', false)}
+      {this.getReferenceSectionGroup(VARIATION_SECURED_GROUP, ' - Regulatory CSA Variation Secured', false)}
 
-      {this.getReferenceSectionGroup(INITIAL_GROUP, ' - CSA Initial')}
-      {this.getReferenceSectionGroup(INITIAL_PLEDGOR_GROUP, ' - Regulatory CSA Initial Pledgor')}
-      {this.getReferenceSectionGroup(INITIAL_SECURED_GROUP, ' - Regulatory CSA Initial Secured')}
+      {this.getReferenceSectionGroup(INITIAL_GROUP, ' - CSA Initial', false)}
+      {this.getReferenceSectionGroup(INITIAL_PLEDGOR_GROUP, ' - Regulatory CSA Initial Pledgor', false)}
+      {this.getReferenceSectionGroup(INITIAL_SECURED_GROUP, ' - Regulatory CSA Initial Secured', false)}
 
-      {this.getReferenceSectionGroup(NETTED_GROUP, ' - CSA Netted')}
+      {this.getReferenceSectionGroup(NETTED_GROUP, ' - CSA Netted', false)}
       <div className={(this.state.currentActiveGroup !== NETTED_PLEDGOR_GROUP) && styles.hideForm}>
-        <ReferencesCallDriver propIsMenuRegulatory
+        <ReferencesCallDriver propIsSubMenu
                               propPostfixLabel={' - Regulatory CSA Netted Pledgor'}
                               propIsRemoveExposure/>
-        <ReferencesMarginTerms propIsMenuRegulatory
+        <ReferencesMarginTerms propIsSubMenu
                                propPostfixLabel={' - CSA Netted Pledgor'}/>
-        <ReferencesCallIssuance propIsMenuRegulatory
+        <ReferencesCallIssuance propIsSubMenu
                                 propPostfixLabel={' - CSA Netted Pledgor'}/>
       </div>
       <div className={(this.state.currentActiveGroup !== NETTED_SECURED_GROUP) && styles.hideForm}>
-        <ReferencesCallDriver propIsMenuRegulatory
+        <ReferencesCallDriver propIsSubMenu
                               propPostfixLabel={' - CSA Netted Secured'}
                               propIsRemoveExposure/>
-        <ReferencesMarginTerms propIsMenuRegulatory
+        <ReferencesMarginTerms propIsSubMenu
                                propPostfixLabel={' - Regulatory CSA Netted Secured'}/>
-        <ReferencesCallIssuance propIsMenuRegulatory
+        <ReferencesCallIssuance propIsSubMenu
                                 propPostfixLabel={' - Regulatory CSA Netted Secured'}/>
       </div>
-
 
 
     </div>

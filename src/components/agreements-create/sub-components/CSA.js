@@ -49,11 +49,11 @@ export default class CSA extends React.Component {
         </div>
       </div>
 
-      <ReferencesCallDriver propIsMenuCsa
+      <ReferencesCallDriver propIsSubMenu
                             propPostfixLabel={' - CSA'}/>
-      <ReferencesMarginTerms propIsMenuCsa
+      <ReferencesMarginTerms propIsSubMenu
                              propPostfixLabel={' - CSA'}/>
-      <ReferencesCallIssuance propIsMenuCsa
+      <ReferencesCallIssuance propIsSubMenu
                               propPostfixLabel={' - CSA'}/>
 
     </div>

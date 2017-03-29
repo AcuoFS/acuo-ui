@@ -37,8 +37,7 @@ export default class ReferencesCallDriver extends React.Component {
 
   render() {
     const {
-      propIsMenuCsa,
-      propIsMenuRegulatory,
+      propIsSubMenu,
       propPostfixLabel,
       propIsRemoveExposure
     } = this.props
@@ -66,7 +65,7 @@ export default class ReferencesCallDriver extends React.Component {
               Shared Details
               <hr/>
 
-              {(propIsMenuCsa || propIsMenuRegulatory) && !propIsRemoveExposure &&
+              {propIsSubMenu && !propIsRemoveExposure &&
               <div className={styles.rowGroup}>
                 <div className={styles.line}>Exposure Treatment</div>
                 <div className={styles.line}>
@@ -96,7 +95,7 @@ export default class ReferencesCallDriver extends React.Component {
               </div>
 
 
-              {!(propIsMenuCsa || propIsMenuRegulatory) &&
+              {!propIsSubMenu &&
               <div className={styles.rowGroup}>
                 <div className={styles.line}>Eligible Currency</div>
                 <div className={styles.line}>
@@ -115,14 +114,14 @@ export default class ReferencesCallDriver extends React.Component {
 
             </div>
 
-            <div className={(propIsMenuCsa || propIsMenuRegulatory)
+            <div className={propIsSubMenu
               ? styles.agreementsSectionRightFlexTwo : styles.agreementsSectionRight}>
               Local Details
               <hr/>
 
-              <div className={(propIsMenuCsa || propIsMenuRegulatory) && styles.stpTwoUnits}>
+              <div className={propIsSubMenu && styles.stpTwoUnits}>
                 <div className={styles.flexColumn + ' ' +
-                ((propIsMenuCsa || propIsMenuRegulatory) && styles.stpAutoOne)}>
+                (propIsSubMenu && styles.stpAutoOne)}>
                   <div className={styles.rowGroup}>
                     <div className={styles.line + ' ' + styles.flexLine}>
                       <ToggleSwitch propIsOn={this.state.isStpAutoPledge}
@@ -180,7 +179,7 @@ export default class ReferencesCallDriver extends React.Component {
                 </div>
 
                 <div className={styles.flexColumn + ' ' +
-                ((propIsMenuCsa || propIsMenuRegulatory) && styles.stpAutoTwo)}>
+                (propIsSubMenu && styles.stpAutoTwo)}>
                   <div className={styles.rowGroup}>
                     <div className={styles.line + ' ' + styles.flexLine}>
                       <ToggleSwitch propIsOn={this.state.isStpAutoPledgeAccept}

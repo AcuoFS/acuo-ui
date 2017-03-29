@@ -24,8 +24,7 @@ export default class ReferencesCallIssuance extends React.Component {
 
   render() {
     const {
-      propIsMenuCsa,
-      propIsMenuRegulatory,
+      propIsSubMenu,
       propPostfixLabel
     } = this.props
 
@@ -102,7 +101,7 @@ export default class ReferencesCallIssuance extends React.Component {
             </div>
 
           </div>
-          <div className={(propIsMenuCsa || propIsMenuRegulatory) ?
+          <div className={propIsSubMenu ?
             styles.agreementsSectionRightFlexTwo : styles.agreementsSectionRight}/>
         </div>}
 
