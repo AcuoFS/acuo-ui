@@ -5,6 +5,7 @@ import {
   ReferencesMarginTerms
 } from './references-sections'
 import ReferenceSectionGroup from './sub-components/ReferenceSectionGroup'
+import ReferenceCallTypeGroup from './sub-components/ReferenceCallTypeGroup'
 import ToggleSwitch from '../../common/ToggleSwitch'
 import styles from './ContentBody.css'
 
@@ -48,6 +49,8 @@ export default class Regulatory extends React.Component {
     }
 
     this.updateBaseInstanceVariable = this.updateBaseInstanceVariable.bind(this)
+    this.updateActiveGroup = this.updateActiveGroup.bind(this)
+    this.updateSplitFlagAndActive = this.updateSplitFlagAndActive.bind(this)
   }
 
   /**
@@ -105,74 +108,17 @@ export default class Regulatory extends React.Component {
     this[domConst] = dom
   }
 
-  /**
-   * To create Variable, Initial and Netted textboxes(group)
-   *
-   * @param contClass
-   * @param splitByRoleStateProperty
-   * @param baseGroup
-   * @param baseDisplay
-   * @param baseDom
-   * @param pledgorGroup
-   * @param pledgorDisplay
-   * @param pledgorDom
-   * @param securedGroup
-   * @param securedDisplay
-   * @param securedDom
-   * @returns {XML}
-   */
-  getAfterSplitReferenceGroup(contClass, splitByRoleStateProperty,
-                              baseGroup, baseDisplay, baseDom,
-                              pledgorGroup, pledgorDisplay, pledgorDom,
-                              securedGroup, securedDisplay, securedDom,
-                              handlerUpdateInstanceVariable) {
-    return <div className={contClass}>
-      <div className={styles.rowGroup}>
-        <div className={styles.line}>{baseDisplay}</div>
-        <div className={styles.line}>
-          <input type="text" className={this.state[splitByRoleStateProperty] ?
-            styles.inputTextBoxDisabled : styles.inputTextBox}
-                 disabled={this.state[splitByRoleStateProperty]}
-                 ref={(dom) => handlerUpdateInstanceVariable(baseDom, dom)}
-                 onFocus={() => this.setState({currentActiveGroup: baseGroup})}/>
+  updateActiveGroup(group) {
+    this.setState({currentActiveGroup: group})
+  }
 
-        </div>
-      </div>
-      <div className={styles.rowGroup}>
-        <div className={styles.line + ' ' + styles.flexLine}>
-          <ToggleSwitch propIsOn={this.state[splitByRoleStateProperty]}
-                        propOnToggle={() => this.setState({
-                          [splitByRoleStateProperty]: !this.state[splitByRoleStateProperty],
-                          currentActiveGroup: this.state[splitByRoleStateProperty] ?
-                            baseGroup : pledgorGroup
-                        })}/>
-          &nbsp;Split by Role
-        </div>
-      </div>
-
-      {this.state[splitByRoleStateProperty] && <div className={styles.flexColumn}>
-        <div className={styles.rowGroup}>
-          <div className={styles.line}>{pledgorDisplay}</div>
-          <div className={styles.line}>
-            <input type="text" className={styles.inputTextBox}
-                   ref={(dom) => handlerUpdateInstanceVariable(pledgorDom, dom)}
-                   onFocus={() => this.setState({currentActiveGroup: pledgorGroup})}/>
-
-          </div>
-        </div>
-        <div className={styles.rowGroup}>
-          <div className={styles.line}>{securedDisplay}</div>
-          <div className={styles.line}>
-            <input type="text" className={styles.inputTextBox}
-                   ref={(dom) => handlerUpdateInstanceVariable(securedDom, dom)}
-                   onFocus={() => this.setState({currentActiveGroup: securedGroup})}/>
-
-          </div>
-        </div>
-      </div>}
-
-    </div>
-
+  updateSplitFlagAndActive(splitByRoleState, baseGroup, pledgorGroup,
+                           splitByRoleStateProperty) {
+    this.setState({
+      [splitByRoleStateProperty]: !splitByRoleState,
+      currentActiveGroup: splitByRoleState ?
+        baseGroup : pledgorGroup
+    })
   }
 
   render() {
@@ -215,23 +161,41 @@ export default class Regulatory extends React.Component {
 
       {this.state.isSplit && <div className={styles.flexCont}>
 
-        {this.getAfterSplitReferenceGroup(styles.agreementsSectionLeft, STATE_PROPERTY_SPLIT_VARIATON,
-          VARIATION_GROUP, 'Variable Reference', VARIATION_DOM,
-          VARIATION_PLEDGOR_GROUP, 'Variation Pledgor Reference', VARIATION_PLEDGOR_DOM,
-          VARIATION_SECURED_GROUP, 'Variation Secured Reference', VARIATION_SECURED_DOM,
-          this.updateBaseInstanceVariable)}
+        <ReferenceCallTypeGroup
+          contClass={styles.agreementsSectionLeft} splitByRoleState={this.state[STATE_PROPERTY_SPLIT_VARIATON]}
+          baseGroup={VARIATION_GROUP} baseDisplay={'Variable Reference'} baseDom={VARIATION_DOM}
+          pledgorGroup={VARIATION_PLEDGOR_GROUP} pledgorDisplay={'Variation Pledgor Reference'}
+          pledgorDom={VARIATION_PLEDGOR_DOM}
+          securedGroup={VARIATION_SECURED_GROUP} securedDisplay={'Variation Secured Reference'}
+          securedDom={VARIATION_SECURED_DOM}
+          handlerUpdateInstanceVariable={this.updateBaseInstanceVariable}
+          handlerUpdateActiveGroup={this.updateActiveGroup}
+          splitByRoleStateProperty={STATE_PROPERTY_SPLIT_VARIATON}
+          handlerUpdateSplitFlagAndActive={this.updateSplitFlagAndActive}/>
 
-        {this.getAfterSplitReferenceGroup(styles.agreementsSectionMiddle, STATE_PROPERTY_SPLIT_INITIAL,
-          INITIAL_GROUP, 'Initial Reference', INITIAL_DOM,
-          INITIAL_PLEDGOR_GROUP, 'Initial Pledgor Reference', INITIAL_PLEDGOR_DOM,
-          INITIAL_SECURED_GROUP, 'Initial Secured Reference', INITIAL_SECURED_DOM,
-          this.updateBaseInstanceVariable)}
+        <ReferenceCallTypeGroup
+          contClass={styles.agreementsSectionMiddle} splitByRoleState={this.state[STATE_PROPERTY_SPLIT_INITIAL]}
+          baseGroup={INITIAL_GROUP} baseDisplay={'Initial Reference'} baseDom={INITIAL_DOM}
+          pledgorGroup={INITIAL_PLEDGOR_GROUP} pledgorDisplay={'Initial Pledgor Reference'}
+          pledgorDom={INITIAL_PLEDGOR_DOM}
+          securedGroup={INITIAL_SECURED_GROUP} securedDisplay={'Initial Secured Reference'}
+          securedDom={INITIAL_SECURED_DOM}
+          handlerUpdateInstanceVariable={this.updateBaseInstanceVariable}
+          handlerUpdateActiveGroup={this.updateActiveGroup}
+          splitByRoleStateProperty={STATE_PROPERTY_SPLIT_INITIAL}
+          handlerUpdateSplitFlagAndActive={this.updateSplitFlagAndActive}/>
 
-        {this.getAfterSplitReferenceGroup(styles.agreementsSectionRight, STATE_PROPERTY_SPLIT_NETTED,
-          NETTED_GROUP, 'Netted Reference', NETTED_DOM,
-          NETTED_PLEDGOR_GROUP, 'Netted Pledgor Reference', NETTED_PLEDGOR_DOM,
-          NETTED_SECURED_GROUP, 'Netted Secured Reference', NETTED_SECURED_DOM,
-          this.updateBaseInstanceVariable)}
+        <ReferenceCallTypeGroup
+          contClass={styles.agreementsSectionRight} splitByRoleState={this.state[STATE_PROPERTY_SPLIT_NETTED]}
+          baseGroup={NETTED_GROUP} baseDisplay={'Netted Reference'} baseDom={NETTED_DOM}
+          pledgorGroup={NETTED_PLEDGOR_GROUP} pledgorDisplay={'Netted Pledgor Reference'}
+          pledgorDom={NETTED_PLEDGOR_DOM}
+          securedGroup={NETTED_SECURED_GROUP} securedDisplay={'Netted Secured Reference'}
+          securedDom={NETTED_SECURED_DOM}
+          handlerUpdateInstanceVariable={this.updateBaseInstanceVariable}
+          handlerUpdateActiveGroup={this.updateActiveGroup}
+          splitByRoleStateProperty={STATE_PROPERTY_SPLIT_NETTED}
+          handlerUpdateSplitFlagAndActive={this.updateSplitFlagAndActive}/>
 
       </div>}
 
