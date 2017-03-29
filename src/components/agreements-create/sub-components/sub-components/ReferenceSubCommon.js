@@ -159,7 +159,8 @@ export default class ReferenceSubCommon extends React.Component {
                           this.setState({
                             isSplit: !this.state.isSplit,
                             currentActiveType: this.state.isSplit ? BASIC_GROUP :
-                              (this.state.iSplitByRoleVariation ? VARIATION_PLEDGOR_GROUP : VARIATION_GROUP)
+                              (this.state[STATE_PROPERTY_SPLIT_VARIATION] ?
+                                VARIATION_PLEDGOR_GROUP : VARIATION_GROUP)
                           })}/>
           &nbsp;Split by Call Type
         </div>
@@ -176,8 +177,8 @@ export default class ReferenceSubCommon extends React.Component {
           securedDom={VARIATION_SECURED_DOM}
           handlerUpdateInstanceVariable={this.updateBaseInstanceVariable}
           handlerUpdateActiveType={this.updateActiveType}
-          splitByRoleStateProperty={STATE_PROPERTY_SPLIT_VARIATION}
-          handlerUpdateSplitFlagAndActive={this.updateSplitFlagAndActive}/>
+          handlerUpdateSplitFlagAndActive={this.updateSplitFlagAndActive}
+          splitByRoleStateProperty={STATE_PROPERTY_SPLIT_VARIATION}/>
 
         <ReferenceCallType
           contClass={styles.agreementsSectionMiddle} splitByRoleState={this.state[STATE_PROPERTY_SPLIT_INITIAL]}
@@ -188,8 +189,8 @@ export default class ReferenceSubCommon extends React.Component {
           securedDom={INITIAL_SECURED_DOM}
           handlerUpdateInstanceVariable={this.updateBaseInstanceVariable}
           handlerUpdateActiveType={this.updateActiveType}
-          splitByRoleStateProperty={STATE_PROPERTY_SPLIT_INITIAL}
-          handlerUpdateSplitFlagAndActive={this.updateSplitFlagAndActive}/>
+          handlerUpdateSplitFlagAndActive={this.updateSplitFlagAndActive}
+          splitByRoleStateProperty={STATE_PROPERTY_SPLIT_INITIAL}/>
 
         <ReferenceCallType
           contClass={styles.agreementsSectionRight} splitByRoleState={this.state[STATE_PROPERTY_SPLIT_NETTED]}
@@ -200,8 +201,8 @@ export default class ReferenceSubCommon extends React.Component {
           securedDom={NETTED_SECURED_DOM}
           handlerUpdateInstanceVariable={this.updateBaseInstanceVariable}
           handlerUpdateActiveType={this.updateActiveType}
-          splitByRoleStateProperty={STATE_PROPERTY_SPLIT_NETTED}
-          handlerUpdateSplitFlagAndActive={this.updateSplitFlagAndActive}/>
+          handlerUpdateSplitFlagAndActive={this.updateSplitFlagAndActive}
+          splitByRoleStateProperty={STATE_PROPERTY_SPLIT_NETTED}/>
 
       </div>}
 
@@ -230,24 +231,12 @@ export default class ReferenceSubCommon extends React.Component {
         <div>
           <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === NETTED_GROUP)}
                                  propLabel={' - CSA Netted'}/>
-          <div className={(this.state.currentActiveType !== NETTED_PLEDGOR_GROUP) && styles.hideForm}>
-            <ReferencesCallDriver propIsSubMenu
-                                  propPostfixLabel={' - Regulatory CSA Netted Pledgor'}
-                                  propIsRemoveExposure/>
-            <ReferencesMarginTerms propIsSubMenu
-                                   propPostfixLabel={' - CSA Netted Pledgor'}/>
-            <ReferencesCallIssuance propIsSubMenu
-                                    propPostfixLabel={' - CSA Netted Pledgor'}/>
-          </div>
-          <div className={(this.state.currentActiveType !== NETTED_SECURED_GROUP) && styles.hideForm}>
-            <ReferencesCallDriver propIsSubMenu
-                                  propPostfixLabel={' - CSA Netted Secured'}
-                                  propIsRemoveExposure/>
-            <ReferencesMarginTerms propIsSubMenu
-                                   propPostfixLabel={' - Regulatory CSA Netted Secured'}/>
-            <ReferencesCallIssuance propIsSubMenu
-                                    propPostfixLabel={' - Regulatory CSA Netted Secured'}/>
-          </div>
+          <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === NETTED_PLEDGOR_GROUP)}
+                                 propLabel={' - CSA Netted Pledgor'}
+                                 propCallDriverLabel={' - Regulatory CSA Netted Pledgor'}/>
+          <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === NETTED_SECURED_GROUP)}
+                                 propLabel={' - Regulatory CSA Netted Secured'}
+                                 propCallDriverLabel={' - CSA Netted Secured'}/>
         </div>
       </div>}
 

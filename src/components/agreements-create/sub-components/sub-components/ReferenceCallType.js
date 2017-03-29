@@ -24,15 +24,15 @@ import styles from '../ContentBody.css'
  * @constructor
  */
 const ReferenceCallType = ({
-                                  contClass, splitByRoleState,
-                                  baseGroup, baseDisplay, baseDom,
-                                  pledgorGroup, pledgorDisplay, pledgorDom,
-                                  securedGroup, securedDisplay, securedDom,
-                                  handlerUpdateInstanceVariable,
-                                  handlerUpdateActiveType,
-                                  splitByRoleStateProperty,
-                                  handlerUpdateSplitFlagAndActive
-                                }) => (
+                             contClass, splitByRoleState,
+                             baseGroup, baseDisplay, baseDom,
+                             pledgorGroup, pledgorDisplay, pledgorDom,
+                             securedGroup, securedDisplay, securedDom,
+                             handlerUpdateInstanceVariable,
+                             handlerUpdateActiveType,
+                             handlerUpdateSplitFlagAndActive,
+                             splitByRoleStateProperty
+                           }) => (
   <div className={contClass}>
     <div className={styles.rowGroup}>
       <div className={styles.line}>{baseDisplay}</div>

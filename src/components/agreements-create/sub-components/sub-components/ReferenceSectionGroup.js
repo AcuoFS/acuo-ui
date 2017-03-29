@@ -12,21 +12,27 @@ import styles from '../ContentBody.css'
  * @param propIsActiveGroup
  * @param propLabel
  * @param propIsRemoveExposureFromCallDriver
+ * @param propCallDriverLabel
+ * @param propMarginTermsLabel
+ * @param propCallIssuanceLabel
  * @constructor
  */
 const ReferenceSectionGroup = ({
                                  propIsActiveGroup,
                                  propLabel,
-                                 propIsRemoveExposureFromCallDriver
+                                 propIsRemoveExposureFromCallDriver,
+                                 propCallDriverLabel,
+                                 propMarginTermsLabel,
+                                 propCallIssuanceLabel,
                                }) => (
   <div className={!propIsActiveGroup && styles.hideForm}>
     <ReferencesCallDriver propIsSubMenu
-                          propPostfixLabel={propLabel}
+                          propPostfixLabel={propCallDriverLabel || propLabel}
                           propIsRemoveExposure={propIsRemoveExposureFromCallDriver}/>
     <ReferencesMarginTerms propIsSubMenu
-                           propPostfixLabel={propLabel}/>
+                           propPostfixLabel={propMarginTermsLabel || propLabel}/>
     <ReferencesCallIssuance propIsSubMenu
-                            propPostfixLabel={propLabel}/>
+                            propPostfixLabel={propCallIssuanceLabel || propLabel}/>
   </div>
 )
 
