@@ -1,10 +1,10 @@
 /** @name CONFIG object from defineplugin of webpack on env-specific params
  *  FEATURE REMOVED, ENV NEEDS TO BE DEFINED AT RUNTIME INSTEAD OF BUILD TIME
  * */
-import config from './config'
-
-const env = process.env.DOCKER_ENV || ''
-const CONFIG = config.get(env)
+// import config from './config'
+//
+// const env = process.env.DOCKER_ENV || ''
+// const CONFIG = config.get(env)
 
 // console.log('api')
 // console.log(process)
