@@ -23,21 +23,14 @@ div.componentStyle {
   float: left;
 }
 
-.buttonContainerDisabled {
+.buttonContainer {
   width: 100%;
   text-align: right;
   display: flex;
   padding-top: 20px;
 }
 
-.buttonContainerEnabled {
-  width: 100%;
-  text-align: right;
-  display: flex;
-  padding-top: 20px;
-}
-
-.buttonContainerDisabled button {
+.buttonContainer button {
   color: #d7dce0;
   background-color: #FAFAFA;
   border: 1px solid #d7dce0;
@@ -47,21 +40,20 @@ div.componentStyle {
   border-radius: 20px;
   align-self: flex-end;
   padding: 10px 24px;
-  flex: 1;
+  flex: 5;
+  max-width: 400px;
 }
 
-.buttonContainerEnabled button {
+.buttonContainer button.enabled {
   color: #fff;
-  background-color: #00B9CC;
-  border: 1px solid #00B9CC;
-  font-size: 18px;
-  text-align: center;
-  -webkit-border-radius: 20px;
-  border-radius: 20px;
-  align-self: flex-end;
+  background-color: #118917;
+  border: 1px solid #118917;
   cursor: pointer;
-  padding: 10px 24px;
-  flex: 1;
+}
+
+.buttonContainer button.enabled:hover {
+  background-color: #096900;
+  border: 1px solid #118917;
 }
 
 .textBold {

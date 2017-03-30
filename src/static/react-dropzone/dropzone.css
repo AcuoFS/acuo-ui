@@ -341,6 +341,7 @@
     /* Max width for 5 files*/
     width: 170px;
     /*width: 190px;*/
+    margin-top: 10px;
 }
 
 .dropzone .dz-preview .dz-details .dz-filename:hover span {

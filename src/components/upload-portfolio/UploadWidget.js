@@ -50,11 +50,12 @@ export default class UploadWidget extends React.Component {
       <div className="dz-details">
         <img data-dz-thumbnail="true" src="./images/upload-portfolio/file_icon.png"/>
         <div className={"dz-filename " + styles.fileName}>
+
+          <span data-dz-name="true" className={styles.fileNameText}></span>
+
           <a href="#" data-dz-remove>
             <img src="./images/upload-portfolio/cross_cancel.png" alt="Click me to remove the file."/>
           </a>
-
-          <span data-dz-name="true" className={styles.fileNameText}></span>
         </div>
       </div>
       <div className="dz-success-mark"><span>✔</span></div>
@@ -82,12 +83,12 @@ export default class UploadWidget extends React.Component {
                      propPostUrl={UPLOAD_FILE_URL}/>
 
         <div
-          className={this.state.isWidgetValidForSubmission ?
-            styles.buttonContainerEnabled : styles.buttonContainerDisabled}>
+          className={styles.buttonContainer}>
           <div className={styles.uploadStatus}>1,000 trades successfully uploaded</div>
-          <button className={styles.textBold} type="button" onClick={this.onGenerate}
+          <button className={styles.textBold + ' ' + (this.state.isWidgetValidForSubmission ?
+            styles.enabled : '')} type="button" onClick={this.onGenerate}
                   disabled={!(this.state.isWidgetValidForSubmission)}>
-            Generate Margin Call Data
+            Upload
           </button>
         </div>
       </div>
