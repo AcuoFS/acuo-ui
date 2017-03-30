@@ -19,9 +19,6 @@ export default class CounterPartyAssets extends React.Component {
   }
 
   handleOnTabSelect(e) {
-
-    console.log(e.currentTarget.value)
-
     if (e.currentTarget.dataset.value == TAB_MARGIN_AGREEMENT_PORTFOLIO) {
 
       this.setState((prevState) => ({

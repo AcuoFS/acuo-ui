@@ -12,7 +12,8 @@ const config = {
     // Please add the trailing / for recon single item (ok button)
     RECON_DATA_URL: 'http://margin.acuo.com/acuo/api/margin/reconcile/',
     REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
-    UNMATCHED_PORTFOLIO_URL: 'http://dev.acuo.com:8181/unmatched'
+    UNMATCHED_PORTFOLIO_URL: 'http://dev.acuo.com:8181/unmatched',
+    SEND_RECON_DISPUTE_URL: 'http://margin.acuo.com/acuo/api/dispute/add'
   },
   local: {
     DASHBOARD_URL: 'http://52.74.186.112:8081/dashboard',
@@ -27,7 +28,8 @@ const config = {
     // Please add the trailing / for recon single item (ok button)
     RECON_DATA_URL: 'http://margin.acuo.com/acuo/api/margin/reconcile/',
     REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
-    UNMATCHED_PORTFOLIO_URL: 'http://52.74.186.112:8081/unmatched'
+    UNMATCHED_PORTFOLIO_URL: 'http://52.74.186.112:8081/unmatched',
+    SEND_RECON_DISPUTE_URL: 'http://margin.acuo.com/acuo/api/dispute/add'
   },
   qa: {
     DASHBOARD_URL: 'http://qa.acuo.com:8181/dashboard',
@@ -42,7 +44,8 @@ const config = {
     // Please add the trailing / for recon single item (ok button)
     RECON_DATA_URL: 'http://qa.acuo.com:7070/acuo/api/margin/reconcile/',
     REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
-    UNMATCHED_PORTFOLIO_URL: 'http://qa.acuo.com:8181/unmatched'
+    UNMATCHED_PORTFOLIO_URL: 'http://qa.acuo.com:8181/unmatched',
+    SEND_RECON_DISPUTE_URL: 'http://margin.acuo.com/acuo/api/dispute/add'
   },
   prod: {}
 }

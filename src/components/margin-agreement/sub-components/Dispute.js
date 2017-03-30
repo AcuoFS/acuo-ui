@@ -4,6 +4,7 @@ import Dropdown from '../../Dropdown/Dropdown'
 import {reconDisputeReasonCodes}from '../../../mappings'
 import {Map} from 'immutable'
 import _ from 'lodash'
+import {SEND_RECON_DISPUTE_URL} from '../../../constants/APIcalls'
 
 
 export default class Dispute extends React.Component {
@@ -12,12 +13,17 @@ export default class Dispute extends React.Component {
     super(props)
     this.toggleDropDown = this.toggleDropDown.bind(this)
     this.state = {
-      isDropDownSelected: false,
-      isValidForm: false
+      formDisputeAmt: '',
+      formAgreedAmt: '',
+      formReasonCode: '',
+      formComments: '',
+      formMtm: '',
+      formBalance: ''
     }
 
     this.onDropdownItemChange = this.onDropdownItemChange.bind(this)
-    this.validateForm = this.validateForm.bind(this)
+    this.isValidForm = this.isValidForm.bind(this)
+    this.submitDisputeForm = this.submitDisputeForm.bind(this)
   }
 
   toggleDropDown(e) {
@@ -35,26 +41,68 @@ export default class Dispute extends React.Component {
       return
   }
 
-  onDropdownItemChange(e) {
-    this.setState({
-      isDropDownSelected: true
-    }, this.validateForm)
+  onDropdownItemChange(e, optionCode) {
+    this.setState({formReasonCode: optionCode})
 
-    e.stopPropagation();
+    e.stopPropagation()
   }
 
-  validateForm() {
-    const isAllInputFilled =
-      !(this.disAmtInput.value.trim() == "") && !(this.agreeAmtInput.value.trim() == "") &&
-      this.state.isDropDownSelected && !(this.mtmInput.value.trim() == "") && !(this.collatBalInput.value.trim() == "")
+  isNotBlankText(str) {
+    return str.trim() !== ''
+  }
 
-    this.setState({
-      isValidForm: isAllInputFilled
-    })
+  isValidForm() {
+    return this.isNotBlankText(this.state.formDisputeAmt) && this.isNotBlankText(this.state.formAgreedAmt) &&
+      this.isNotBlankText(this.state.formReasonCode) && this.isNotBlankText(this.state.formMtm) &&
+      this.isNotBlankText(this.state.formBalance)
   }
 
   isDisputed(marginData) {
     return !_.isEmpty(marginData.get('disputeInfo').toJS())
+  }
+
+  getReasonCodesAsDropdown(reasonCodes) {
+    let dd = []
+
+    _.forOwn(reasonCodes, (value, key) => {
+      let ddItem = {}
+      _.set(ddItem, 'display', value)
+      _.set(ddItem, 'value', key)
+
+      dd = [...dd, ddItem]
+    })
+
+    return dd
+  }
+
+  submitDisputeForm() {
+    const disputeObjToSend = {
+      msId: this.props.marginData.get('GUID'),
+      disputedAmount: this.state.formDisputeAmt,
+      agreedAmount: this.state.formAgreedAmt,
+      reasonCode: this.state.formReasonCode,
+      comments: this.state.formComments,
+      mtm: this.state.formMtm,
+      balance: this.state.formBalance
+    }
+    console.log('disputeObjToSend: ' + JSON.stringify(disputeObjToSend))
+
+    fetch(SEND_RECON_DISPUTE_URL, {
+      method: 'POST',
+      headers: new Headers({'Content-Type': 'application/json'}),
+      body: JSON.stringify(disputeObjToSend)
+    }).then(response => {
+      console.log(response)
+      if (response.status === 200 || response.status === 201) {
+        alert('Sent dispute to backend successfully!')
+      } else {
+        alert('Unknown status code received: ' + response.status)
+      }
+
+    }).catch(error => {
+      console.log('Error: ' + error)
+    })
+
   }
 
   render() {
@@ -96,10 +144,11 @@ export default class Dispute extends React.Component {
               <div className={styles.columnleft}> Dispute Amount
               </div>
               <input type="text" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
-                     onChange={this.validateForm} ref={dom => this.disAmtInput = dom}
+                     onChange={(e) => this.setState({formDisputeAmt: e.target.value})}
+                     ref={dom => this.disAmtInput = dom}
                      disabled={this.isDisputed(marginData)}
                      value={this.isDisputed(marginData)
-                       ? marginData.getIn(['disputeInfo', 'disputedAmount']) : ''}/>
+                       ? marginData.getIn(['disputeInfo', 'disputedAmount']) : this.state.formDisputeAmt}/>
               <div className={styles.usd}>USD</div>
 
             </div>
@@ -107,10 +156,10 @@ export default class Dispute extends React.Component {
               <div className={styles.columnleft}> Agreed Amount
               </div>
               <input type="text" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
-                     onChange={this.validateForm} ref={dom => this.agreeAmtInput = dom}
+                     onChange={(e) => this.setState({formAgreedAmt: e.target.value})}
                      disabled={this.isDisputed(marginData)}
                      value={this.isDisputed(marginData)
-                       ? marginData.getIn(['disputeInfo', 'agreedAmount']) : ''}/>
+                       ? marginData.getIn(['disputeInfo', 'agreedAmount']) : this.state.formAgreedAmt}/>
 
               <div className={styles.usd}>USD</div>
             </div>
@@ -125,10 +174,9 @@ export default class Dispute extends React.Component {
                   <Dropdown
                     handlerOnClick={this.toggleDropDown}
                     handleOnSelectedItemChange={this.onDropdownItemChange}
-                    selectedOption='Select One'
-                    options={['Portfolio Discrepancy', 'Initial Margin/ Independent Amount Discrepancy', 'Collateral Discrepancy'
-                      , 'Agreement Discrepancy', 'Notification Time', 'Call Amount Discrepancy', 'MTM Discrepancy', 'Below Threshold Limit'
-                      , 'Two Way Call', 'UnKnown Business Error', 'Other']}/>
+                    selectedOption=''
+                    options={this.getReasonCodesAsDropdown(reconDisputeReasonCodes)}/>
+
                 </div>
               }
             </div>
@@ -136,19 +184,20 @@ export default class Dispute extends React.Component {
               <div className={styles.columnleft}> Comments
               </div>
               <input type="text" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
+                     onChange={(e) => this.setState({formComments: e.target.value})}
                      disabled={this.isDisputed(marginData)}
                      value={this.isDisputed(marginData)
-                       ? marginData.getIn(['disputeInfo', 'agreedAmount']) : ''}/>
+                       ? marginData.getIn(['disputeInfo', 'agreedAmount']) : this.state.formComments}/>
 
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> MTM
               </div>
               <input type="text" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
-                     onChange={this.validateForm} ref={dom => this.mtmInput = dom}
+                     onChange={(e) => this.setState({formMtm: e.target.value})}
                      disabled={this.isDisputed(marginData)}
                      value={this.isDisputed(marginData)
-                       ? marginData.getIn(['disputeInfo', 'mtm']) : ''}/>
+                       ? marginData.getIn(['disputeInfo', 'mtm']) : this.state.formMtm}/>
 
               <div className={styles.usd}>USD</div>
             </div>
@@ -156,21 +205,23 @@ export default class Dispute extends React.Component {
               <div className={styles.columnleft}> Collateral Balance
               </div>
               <input type="text" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
-                     onChange={this.validateForm} ref={dom => this.collatBalInput = dom}
+                     onChange={(e) => this.setState({formBalance: e.target.value})}
                      disabled={this.isDisputed(marginData)}
                      value={this.isDisputed(marginData)
-                       ? marginData.getIn(['disputeInfo', 'balance']) : ''}/>
+                       ? marginData.getIn(['disputeInfo', 'balance']) : this.state.formBalance}/>
 
               <div className={styles.usd}>USD</div>
             </div>
           </div>
 
-          <div className={this.state.isValidForm ? styles.buttonContainerEnabled : styles.buttonContainerDisabled}>
-            <button type="submit" disabled={true}>Dispute</button>
+          <div className={(!this.isValidForm() || this.isDisputed(marginData))
+            ? styles.buttonContainerDisabled : styles.buttonContainerEnabled}>
+            <button type="submit" onClick={this.submitDisputeForm}
+                    disabled={!this.isValidForm() || this.isDisputed(marginData)}>Dispute
+            </button>
           </div>
 
         </form>
-
 
       </div>
     )
