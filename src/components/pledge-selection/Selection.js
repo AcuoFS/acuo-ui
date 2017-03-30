@@ -32,9 +32,10 @@ export default class Selection extends React.Component {
                 {y.getIn(['firstLevel', 'name'])}
               </div>
               <div className={styles.amount}>
-                {checkNegative(y.getIn(['firstLevel', 'secondLevel']).reduce((sum, z) => {
-                  return sum + parseFloat(z.get('amount'))
-                }, 0))}
+                {/*{checkNegative(y.getIn(['firstLevel', 'secondLevel']).reduce((sum, z) => {*/}
+                  {/*return sum + parseFloat(z.get('amount'))*/}
+                {/*}, 0))}*/}
+                {checkNegative(parseFloat(y.getIn(['firstLevel', 'amount'])))}
               </div>
             </div>)
         })}
@@ -169,11 +170,16 @@ export default class Selection extends React.Component {
                   Total
                 </div>
                 <div className={styles.amount}>
+                  {/*{checkNegative(this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {*/}
+                    {/*return sum + x.get('data').reduce((sum, y) => {*/}
+                        {/*return sum + y.getIn(['firstLevel','secondLevel']).reduce((sum, z) => {*/}
+                            {/*return sum + parseFloat(z.get('amount'))*/}
+                          {/*}, 0)*/}
+                      {/*}, 0)*/}
+                  {/*}, 0))}*/}
                   {checkNegative(this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {
                     return sum + x.get('data').reduce((sum, y) => {
-                        return sum + y.getIn(['firstLevel','secondLevel']).reduce((sum, z) => {
-                            return sum + parseFloat(z.get('amount'))
-                          }, 0)
+                        return sum + parseFloat(y.getIn(['firstLevel','amount']))
                       }, 0)
                   }, 0))}
                 </div>
@@ -232,7 +238,7 @@ export default class Selection extends React.Component {
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
                     <td>
-                      {checkNegative((marginCall.getIn(['allocated', ALLOCATED.IM_TOTAL]) || 0).toFixed(2))}
+                      {checkNegative(parseFloat(marginCall.getIn(['allocated', ALLOCATED.IM_TOTAL]) || 0).toFixed(2))}
                     </td>
                     <td>USD</td>
                     <td></td>
@@ -274,7 +280,7 @@ export default class Selection extends React.Component {
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
                     <td>
-                      {checkNegative((marginCall.getIn(['allocated', ALLOCATED.VM_TOTAL]) || 0).toFixed(2))}
+                      {checkNegative(parseFloat(marginCall.getIn(['allocated', ALLOCATED.VM_TOTAL]) || 0).toFixed(2))}
                     </td>
                     <td>USD</td>
                     <td></td>
@@ -289,9 +295,8 @@ export default class Selection extends React.Component {
                   <tbody>
                   <tr className={styles.bold}>
                     <td>Total</td>
-                    <td className={styles.totalTable1 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>
-                      {checkNegative((marginCall.getIn(['allocated', ALLOCATED.MGN_TOTAL]) || 0).toFixed(2))}
-                    </td>
+                    <td
+                      className={styles.totalTable1 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>{checkNegative(parseFloat(marginCall.getIn(['allocated', ALLOCATED.MGN_TOTAL]) || 0).toFixed(2))}</td>
                     <td className={styles.totalTable2 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>USD</td>
                     <td></td>
                     <td></td>
