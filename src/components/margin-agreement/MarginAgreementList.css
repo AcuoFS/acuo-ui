@@ -315,11 +315,7 @@
     /*top: 18px;*/
     top: -33px;
 }
-@-moz-document url-prefix() {
-    .tabs14 {
-        top: 20px;
-    }
-}
+
 .tabs14 ul {
     margin:0;
     padding:0px 0px 0 0px;
