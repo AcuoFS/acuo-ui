@@ -1,7 +1,9 @@
 import React, {PropTypes} from 'react'
 import styles from '../MarginAgreementList.css'
 import Dropdown from '../../Dropdown/Dropdown'
+import {reconDisputeReasonCodes}from '../../../mappings'
 import {Map} from 'immutable'
+import _ from 'lodash'
 
 
 export default class Dispute extends React.Component {
@@ -51,6 +53,9 @@ export default class Dispute extends React.Component {
     })
   }
 
+  isDisputed(marginData) {
+    return !_.isEmpty(marginData.get('disputeInfo').toJS())
+  }
 
   render() {
     const {
@@ -90,48 +95,72 @@ export default class Dispute extends React.Component {
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Dispute Amount
               </div>
-              <input type="text" className={styles.inputBox} onChange={this.validateForm}
-                     ref={dom => this.disAmtInput = dom}/>
+              <input type="text" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
+                     onChange={this.validateForm} ref={dom => this.disAmtInput = dom}
+                     disabled={this.isDisputed(marginData)}
+                     value={this.isDisputed(marginData)
+                       ? marginData.getIn(['disputeInfo', 'disputedAmount']) : ''}/>
               <div className={styles.usd}>USD</div>
 
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Agreed Amount
               </div>
-              <input type="text" className={styles.inputBox} onChange={this.validateForm}
-                     ref={dom => this.agreeAmtInput = dom}/>
+              <input type="text" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
+                     onChange={this.validateForm} ref={dom => this.agreeAmtInput = dom}
+                     disabled={this.isDisputed(marginData)}
+                     value={this.isDisputed(marginData)
+                       ? marginData.getIn(['disputeInfo', 'agreedAmount']) : ''}/>
+
               <div className={styles.usd}>USD</div>
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Reason Code
               </div>
-              <div className={styles.inputBox}>
-                <Dropdown
-                  handlerOnClick={this.toggleDropDown}
-                  handleOnSelectedItemChange={this.onDropdownItemChange}
-                  selectedOption='Select One'
-                  options={['Portfolio Discrepancy', 'Initial Margin/ Independent Amount Discrepancy', 'Collateral Discrepancy'
-                    , 'Agreement Discrepancy', 'Notification Time', 'Call Amount Discrepancy', 'MTM Discrepancy', 'Below Threshold Limit'
-                    , 'Two Way Call', 'UnKnown Business Error', 'Other']}/>
-              </div>
+              {this.isDisputed(marginData)
+                ? <input type="text" className={styles.inputBoxDisabled}
+                         defaultValue={reconDisputeReasonCodes[marginData.getIn(['disputeInfo', 'reasonCode'])]}
+                         disabled/>
+                : <div className={styles.inputBox}>
+                  <Dropdown
+                    handlerOnClick={this.toggleDropDown}
+                    handleOnSelectedItemChange={this.onDropdownItemChange}
+                    selectedOption='Select One'
+                    options={['Portfolio Discrepancy', 'Initial Margin/ Independent Amount Discrepancy', 'Collateral Discrepancy'
+                      , 'Agreement Discrepancy', 'Notification Time', 'Call Amount Discrepancy', 'MTM Discrepancy', 'Below Threshold Limit'
+                      , 'Two Way Call', 'UnKnown Business Error', 'Other']}/>
+                </div>
+              }
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Comments
               </div>
-              <input type="text" className={styles.inputBox}/>
+              <input type="text" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
+                     disabled={this.isDisputed(marginData)}
+                     value={this.isDisputed(marginData)
+                       ? marginData.getIn(['disputeInfo', 'agreedAmount']) : ''}/>
+
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> MTM
               </div>
-              <input type="text" className={styles.inputBox} onChange={this.validateForm}
-                     ref={dom => this.mtmInput = dom}/>
+              <input type="text" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
+                     onChange={this.validateForm} ref={dom => this.mtmInput = dom}
+                     disabled={this.isDisputed(marginData)}
+                     value={this.isDisputed(marginData)
+                       ? marginData.getIn(['disputeInfo', 'mtm']) : ''}/>
+
               <div className={styles.usd}>USD</div>
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Collateral Balance
               </div>
-              <input type="text" className={styles.inputBox} onChange={this.validateForm}
-                     ref={dom => this.collatBalInput = dom}/>
+              <input type="text" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
+                     onChange={this.validateForm} ref={dom => this.collatBalInput = dom}
+                     disabled={this.isDisputed(marginData)}
+                     value={this.isDisputed(marginData)
+                       ? marginData.getIn(['disputeInfo', 'balance']) : ''}/>
+
               <div className={styles.usd}>USD</div>
             </div>
           </div>

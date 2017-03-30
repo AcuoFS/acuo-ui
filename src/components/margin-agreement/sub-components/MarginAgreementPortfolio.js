@@ -153,6 +153,7 @@ export default class MarginAgreementPortfolio extends React.Component {
 
         <div className={styles.actPanel + ' ' + styles.act_C}>
           {!isEmptyCounterparty(portfolioData.get('counterpartyAssets')) &&
+          !portfolioData.get('disputeInfo') &&
           <div className={styles.btnWrap}>
             <div className={styles.actFig + ' ' + this.getTextColour(percentage)}>
               {percentage}%

@@ -1,8 +1,7 @@
-
 const config = {
   dev: {
     DASHBOARD_URL: 'http://dev.acuo.com:8181/dashboard',
-    RECON_URL: 'http://dev.acuo.com:8181/recon',
+    RECON_URL: 'http://dev.acuo.com:8181/recon/new',
     OPTIMISATION_URL: 'http://dev.acuo.com:8181/pledge/optimization',
     COLLATERAL_URL: 'http://dev.acuo.com:8181/pledge/init-new-collateral',
     MARGIN_SELECTION_URL: 'http://dev.acuo.com:8181/pledge/init-selection',
@@ -17,7 +16,7 @@ const config = {
   },
   local: {
     DASHBOARD_URL: 'http://52.74.186.112:8081/dashboard',
-    RECON_URL: 'http://52.74.186.112:8081/recon',
+    RECON_URL: 'http://52.74.186.112:8081/recon/new',
     OPTIMISATION_URL: 'http://52.74.186.112:8081/pledge/optimization',
     COLLATERAL_URL: 'http://52.74.186.112:8081/pledge/init-new-collateral',
     MARGIN_SELECTION_URL: 'http://52.74.186.112:8081/pledge/init-selection',
@@ -32,7 +31,7 @@ const config = {
   },
   qa: {
     DASHBOARD_URL: 'http://qa.acuo.com:8181/dashboard',
-    RECON_URL: 'http://qa.acuo.com:8181/recon',
+    RECON_URL: 'http://qa.acuo.com:8181/recon/new',
     OPTIMISATION_URL: 'http://qa.acuo.com:8181/pledge/optimization',
     COLLATERAL_URL: 'http://qa.acuo.com:8181/pledge/init-new-collateral',
     MARGIN_SELECTION_URL: 'http://qa.acuo.com:8181/pledge/init-selection',
