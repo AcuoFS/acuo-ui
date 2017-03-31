@@ -1,14 +1,11 @@
 div.componentStyle {
-  margin-top: 1%;
-  margin-left: 8%;
-  margin-right: 8%;
+  margin: 1% auto;
   /*width: 1260px;*/
   /*height: 380px;*/
   background-color: #FFFFFF;
   box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.5);
   border-radius: 8px;
   min-height: 410px;
-  display: inline-block;
   width: 84%;
   padding: 20px;
 }
