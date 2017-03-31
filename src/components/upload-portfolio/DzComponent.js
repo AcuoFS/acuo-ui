@@ -40,8 +40,24 @@ export default class DzComponent extends React.Component {
     this.props.propHandlerFileAdded(this.dropzone.files.length > 0)
   }
 
-  success(file) {
-    console.log('uploaded', file)
+  success(file, response) {
+    //console.log('uploaded', file)
+    response = {
+      "txnID": "je9ewodk39diurnedwndj39473hcjsk",
+      "statuses": [
+        {
+          "status": "success",
+          "remarks": "1,000 lines successfully uploaded"
+        },
+        {
+          "status": "failure",
+          "remarks": "1,000 lines successfully uploaded"
+        }
+      ]
+    }
+
+    this.props.updateUploadStatus(response.statuses)
+
     // Wait for animation to complete before removing file from the widget
     setTimeout((() => {
       this.dropzone.removeFile(file)

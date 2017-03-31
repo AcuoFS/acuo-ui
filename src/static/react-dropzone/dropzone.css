@@ -223,8 +223,6 @@
     background-repeat: no-repeat;
     background-position: center;
     background-image: url('../../../images/upload-portfolio/cloud_icon.png');
-    margin-left: 1.5%;
-    margin-right: 1.5%;
 }
 
 .dropzone.dz-started {
@@ -343,6 +341,7 @@
     /* Max width for 5 files*/
     width: 170px;
     /*width: 190px;*/
+    margin-top: 10px;
 }
 
 .dropzone .dz-preview .dz-details .dz-filename:hover span {
