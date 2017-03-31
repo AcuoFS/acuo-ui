@@ -165,7 +165,7 @@ export default class Dispute extends React.Component {
                      onChange={(e) => this.setState({formComments: e.target.value})}
                      disabled={isDisputed}
                      value={isDisputed
-                       ? marginData.getIn(['disputeInfo', 'agreedAmount']) : this.state.formComments}/>
+                       ? marginData.getIn(['disputeInfo', 'comments']) : this.state.formComments}/>
 
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
