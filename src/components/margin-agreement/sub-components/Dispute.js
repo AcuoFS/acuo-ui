@@ -143,7 +143,7 @@ export default class Dispute extends React.Component {
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Dispute Amount
               </div>
-              <input type="text" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
+              <input type="number" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
                      onChange={(e) => this.setState({formDisputeAmt: e.target.value})}
                      ref={dom => this.disAmtInput = dom}
                      disabled={this.isDisputed(marginData)}
@@ -155,7 +155,7 @@ export default class Dispute extends React.Component {
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Agreed Amount
               </div>
-              <input type="text" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
+              <input type="number" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
                      onChange={(e) => this.setState({formAgreedAmt: e.target.value})}
                      disabled={this.isDisputed(marginData)}
                      value={this.isDisputed(marginData)
@@ -193,7 +193,7 @@ export default class Dispute extends React.Component {
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> MTM
               </div>
-              <input type="text" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
+              <input type="number" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
                      onChange={(e) => this.setState({formMtm: e.target.value})}
                      disabled={this.isDisputed(marginData)}
                      value={this.isDisputed(marginData)
@@ -204,7 +204,7 @@ export default class Dispute extends React.Component {
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Collateral Balance
               </div>
-              <input type="text" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
+              <input type="number" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
                      onChange={(e) => this.setState({formBalance: e.target.value})}
                      disabled={this.isDisputed(marginData)}
                      value={this.isDisputed(marginData)
