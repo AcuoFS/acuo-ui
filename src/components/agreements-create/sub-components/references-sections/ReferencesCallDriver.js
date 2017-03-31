@@ -37,8 +37,9 @@ export default class ReferencesCallDriver extends React.Component {
 
   render() {
     const {
-      propIsMenuCsa,
-      propIsMenuRegulatory
+      propIsSubMenu,
+      propPostfixLabel,
+      propIsRemoveExposure
     } = this.props
 
     return (
@@ -47,8 +48,7 @@ export default class ReferencesCallDriver extends React.Component {
           <div className={styles.line}>
             <span className={styles.agreementsSectionHeader}>
               Call Driver Details
-              {propIsMenuCsa && ' - CSA'}
-              {propIsMenuRegulatory && ' - Regulatory CSA'}
+              {propPostfixLabel}
               </span>
             <span className={this.state.isCallDriverExpanded
               ? styles.upArrow : styles.downArrow}
@@ -60,12 +60,13 @@ export default class ReferencesCallDriver extends React.Component {
 
         {
           this.state.isCallDriverExpanded &&
-          <div className={styles.agreementsSectionContainer}>
+          <div className={styles.flexCont}>
             <div className={styles.agreementsSectionLeft}>
               Shared Details
               <hr/>
 
-              {(propIsMenuCsa || propIsMenuRegulatory) && <div className={styles.rowGroup}>
+              {propIsSubMenu && !propIsRemoveExposure &&
+              <div className={styles.rowGroup}>
                 <div className={styles.line}>Exposure Treatment</div>
                 <div className={styles.line}>
                   <div className={styles.dropDown}>
@@ -94,7 +95,7 @@ export default class ReferencesCallDriver extends React.Component {
               </div>
 
 
-              {!(propIsMenuCsa || propIsMenuRegulatory) &&
+              {!propIsSubMenu &&
               <div className={styles.rowGroup}>
                 <div className={styles.line}>Eligible Currency</div>
                 <div className={styles.line}>
@@ -113,14 +114,14 @@ export default class ReferencesCallDriver extends React.Component {
 
             </div>
 
-            <div className={(propIsMenuCsa || propIsMenuRegulatory)
+            <div className={propIsSubMenu
               ? styles.agreementsSectionRightFlexTwo : styles.agreementsSectionRight}>
               Local Details
               <hr/>
 
-              <div className={(propIsMenuCsa || propIsMenuRegulatory) && styles.stpTwoUnits}>
+              <div className={propIsSubMenu && styles.stpTwoUnits}>
                 <div className={styles.flexColumn + ' ' +
-                ((propIsMenuCsa || propIsMenuRegulatory) && styles.stpAutoOne)}>
+                (propIsSubMenu && styles.stpAutoOne)}>
                   <div className={styles.rowGroup}>
                     <div className={styles.line + ' ' + styles.flexLine}>
                       <ToggleSwitch propIsOn={this.state.isStpAutoPledge}
@@ -178,7 +179,7 @@ export default class ReferencesCallDriver extends React.Component {
                 </div>
 
                 <div className={styles.flexColumn + ' ' +
-                ((propIsMenuCsa || propIsMenuRegulatory) && styles.stpAutoTwo)}>
+                (propIsSubMenu && styles.stpAutoTwo)}>
                   <div className={styles.rowGroup}>
                     <div className={styles.line + ' ' + styles.flexLine}>
                       <ToggleSwitch propIsOn={this.state.isStpAutoPledgeAccept}

@@ -26,8 +26,8 @@ export default class ReferencesMarginTerms extends React.Component {
 
   render() {
     const {
-      propIsMenuCsa,
-      propIsMenuRegulatory
+      propIsSubMenu,
+      propPostfixLabel
     } = this.props
 
     return (
@@ -36,8 +36,7 @@ export default class ReferencesMarginTerms extends React.Component {
           <div className={styles.line}>
             <span className={styles.agreementsSectionHeader}>
               Margin Terms
-              {propIsMenuCsa && ' - CSA'}
-              {propIsMenuRegulatory && ' - Regulatory CSA'}
+              {propPostfixLabel}
               </span>
             <span className={this.state.isSectionExpanded
               ? styles.upArrow : styles.downArrow}
@@ -48,7 +47,7 @@ export default class ReferencesMarginTerms extends React.Component {
         </div>
 
         {this.state.isSectionExpanded &&
-        <div className={styles.agreementsSectionContainer}>
+        <div className={styles.flexCont}>
           <div className={styles.agreementsSectionLeft}>
             Shared Details
             <hr/>
@@ -204,7 +203,7 @@ export default class ReferencesMarginTerms extends React.Component {
 
           </div>
 
-          <div className={(propIsMenuCsa || propIsMenuRegulatory ) &&
+          <div className={propIsSubMenu &&
           styles.agreementsSectionRight}/>
 
         </div>}

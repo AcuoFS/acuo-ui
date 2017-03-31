@@ -24,8 +24,8 @@ export default class ReferencesCallIssuance extends React.Component {
 
   render() {
     const {
-      propIsMenuCsa,
-      propIsMenuRegulatory
+      propIsSubMenu,
+      propPostfixLabel
     } = this.props
 
     return (
@@ -34,8 +34,7 @@ export default class ReferencesCallIssuance extends React.Component {
           <div className={styles.line}>
             <span className={styles.agreementsSectionHeader}>
               Call Issuance Settings
-              {propIsMenuCsa && ' - CSA'}
-              {propIsMenuRegulatory && ' - Regulatory CSA'}
+              {propPostfixLabel}
               </span>
             <span className={this.state.isCallIssuanceExpanded
               ? styles.upArrow : styles.downArrow}
@@ -46,7 +45,7 @@ export default class ReferencesCallIssuance extends React.Component {
         </div>
 
         {this.state.isCallIssuanceExpanded &&
-        <div className={styles.agreementsSectionContainer}>
+        <div className={styles.flexCont}>
           <div className={styles.agreementsSectionLeft}>
             Local Details
             <hr/>
@@ -102,7 +101,7 @@ export default class ReferencesCallIssuance extends React.Component {
             </div>
 
           </div>
-          <div className={(propIsMenuCsa || propIsMenuRegulatory) ?
+          <div className={propIsSubMenu ?
             styles.agreementsSectionRightFlexTwo : styles.agreementsSectionRight}/>
         </div>}
 

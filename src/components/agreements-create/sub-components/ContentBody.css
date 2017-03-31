@@ -61,6 +61,12 @@
     line-height: 16px;
 }
 
+.inputTextBoxDisabled {
+    composes: inputTextBox;
+    background-color: #EEEEEE;
+    border: none;
+}
+
 .smallTextBox {
     composes: inputTextBox;
     width: 70px;
@@ -83,14 +89,14 @@
     align-items: center;
 }
 
+.flexCont {
+    display: flex;
+    flex-direction: row;
+}
+
 .flexColumn {
     display: flex;
     flex-direction: column;
-}
-
-.agreementsSectionContainer {
-    display: flex;
-    flex-direction: row;
 }
 
 .agreementsSectionHeader {
@@ -101,6 +107,12 @@
 .agreementsSectionLeft {
     flex: 1;
     margin-right: 10px;
+}
+
+.agreementsSectionMiddle {
+    flex: 1;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .agreementsSectionRight {

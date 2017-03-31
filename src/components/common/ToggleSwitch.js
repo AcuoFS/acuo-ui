@@ -10,7 +10,7 @@ const ToggleSwitch = ({propIsOn, propOnToggle}) => {
   return (
       <label className={styles.switch}>
         <input type="checkbox" checked={propIsOn}
-               onClick={() => propOnToggle()}/>
+               onChange={() => propOnToggle()}/>
         <div className={styles.slider + ' ' + styles.round}></div>
         <span className={styles.on}>On</span>
         <span className={styles.off}>Off</span>
