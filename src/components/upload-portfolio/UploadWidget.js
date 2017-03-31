@@ -10,13 +10,15 @@ export default class UploadWidget extends React.Component {
 
     this.state = {
       isWidgetValidForSubmission: false,
-      isSendToBackend: false
+      isSendToBackend: false,
+      status: []
     }
 
     this.onGenerate = this.onGenerate.bind(this)
     this.handleFileAdded = this.handleFileAdded.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
     this.clearSend = this.clearSend.bind(this)
+    this.updateUploadStatus = this.updateUploadStatus.bind(this)
   }
 
   handleFileAdded(hasFiles) {
@@ -42,6 +44,12 @@ export default class UploadWidget extends React.Component {
   handleRemove(isEmpty) {
     this.setState({
       isWidgetValidForSubmission: !isEmpty
+    })
+  }
+
+  updateUploadStatus(statuses) {
+    this.setState({
+      status: statuses
     })
   }
 
@@ -80,14 +88,17 @@ export default class UploadWidget extends React.Component {
                      propClearSendToBackend={this.clearSend}
                      propTemplate={this.templateForDz()}
                      propNoOfFiles={5}
-                     propPostUrl={UPLOAD_FILE_URL}/>
+                     propPostUrl={UPLOAD_FILE_URL}
+                     updateUploadStatus={this.updateUploadStatus}/>
 
-        <div
-          className={styles.buttonContainer}>
-          <div className={styles.uploadStatus}>1,000 trades successfully uploaded</div>
+
+        <div className={styles.buttonContainer}>
+          <div className={styles.uploadStatus}>
+            {this.state.status.map((x, i) => <p key={i}>{x.remarks}</p>)}
+          </div>
           <button className={styles.textBold + ' ' + (this.state.isWidgetValidForSubmission ?
             styles.enabled : '')} type="button" onClick={this.onGenerate}
-                  disabled={!(this.state.isWidgetValidForSubmission)}>
+                  disabled={!this.state.isWidgetValidForSubmission}>
             Upload
           </button>
         </div>

@@ -42,19 +42,23 @@ export default class DzComponent extends React.Component {
 
   success(file, response) {
     //console.log('uploaded', file)
-    response = {
-      "txnID": "je9ewodk39diurnedwndj39473hcjsk",
-      "statuses": [
-        {
-          "status": "success",
-          "remarks": "1,000 lines successfully uploaded"
-        },
-        {
-          "status": "failure",
-          "remarks": "1,000 lines successfully uploaded"
-        }
-      ]
-    }
+    // response = {
+    //   "txnID": "je9ewodk39diurnedwndj39473hcjsk",
+    //   "statuses": [
+    //     {
+    //       "status": "success",
+    //       "remarks": "1,000 lines successfully uploaded"
+    //     },
+    //     {
+    //       "status": "failure",
+    //       "remarks": "1,000 lines successfully uploaded"
+    //     }
+    //   ]
+    // }
+
+    console.log(response)
+
+    //const statuses = response.statuses || []
 
     this.props.updateUploadStatus(response.statuses)
 
