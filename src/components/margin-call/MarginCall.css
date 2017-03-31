@@ -5,12 +5,11 @@
   background-color: #FFFFFF;
   box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
   border-radius: 8px;
-  min-height: 410px;
+  /*min-height: 410px;*/
   /*display: inline-block;*/
   /*width: 97%;*/
   min-width: 1400px;
   padding: 10px;
-
   position: relative;
 }
 
@@ -198,3 +197,61 @@
 }
 
 /************* Up triangle after expansion *************/
+
+/************* valuation in progress ************/
+
+.loadingContainer {
+  flex: 1;
+  align-self: center;
+  margin: 50px auto;
+}
+
+.loadingText {
+  text-align: center;
+  color: #8CA7C0;
+  font-size: 18px;
+}
+
+.loadingBar {
+  width: 220px;
+  overflow: hidden;
+  height: 7px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  background-color: #D5DADF;
+  position: relative;
+  margin: 10px auto;
+}
+
+.loadingBar .spinner {
+  background-color: #6589AB;
+  height: 7px;
+  width: 33px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  -webkit-animation: scroll-animation 1.2s ease-in-out 0s infinite; /* Safari 4+ */
+  -moz-animation:    scroll-animation 1.2s ease-in-out 0s infinite; /* Fx 5+ */
+  -o-animation:      scroll-animation 1.2s ease-in-out 0s infinite; /* Opera 12+ */
+  animation:         scroll-animation 1.2s ease-in-out 0s infinite; /* IE 10+, Fx 29+ */
+  position: absolute;
+  left: -33px;
+}a
+
+@-webkit-keyframes scroll-animation {
+  0%   { left: -33px; }
+  100% { left: 220px; }
+}
+@-moz-keyframes scroll-animation {
+  0%   { left: -33px; }
+  100% { left: 220px; }
+}
+@-o-keyframes scroll-animation {
+  0%   { left: -33px; }
+  100% { left: 220px; }
+}
+@keyframes scroll-animation {
+  0%   { left: -33px; }
+  100% { left: 220px; }
+}

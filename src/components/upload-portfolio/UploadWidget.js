@@ -10,7 +10,8 @@ export default class UploadWidget extends React.Component {
 
     this.state = {
       isWidgetValidForSubmission: false,
-      isSendToBackend: false
+      isSendToBackend: false,
+      status: []
     }
 
     this.onGenerate = this.onGenerate.bind(this)
@@ -22,6 +23,12 @@ export default class UploadWidget extends React.Component {
   handleFileAdded(hasFiles) {
     this.setState({
       isWidgetValidForSubmission: hasFiles
+    })
+  }
+
+  updateUploadStatus(status) {
+    this.setState({
+      status: status
     })
   }
 
@@ -79,12 +86,15 @@ export default class UploadWidget extends React.Component {
                      propClearSendToBackend={this.clearSend}
                      propTemplate={this.templateForDz()}
                      propNoOfFiles={5}
-                     propPostUrl={UPLOAD_FILE_URL}/>
+                     propPostUrl={UPLOAD_FILE_URL}
+                     updateUploadStatus={this.updateUploadStatus}/>
 
-        <div
-          className={this.state.isWidgetValidForSubmission ?
-            styles.buttonContainerEnabled : styles.buttonContainerDisabled}>
-          <button className={styles.textBold} type="button" onClick={this.onGenerate}
+        <div className={styles.buttonContainer}>
+          <div className={styles.uploadStatus}>
+            {this.state.status.map(x => <p>{x.remarks}</p>)}
+          </div>
+          <button className={styles.textBold + ' ' + (this.state.isWidgetValidForSubmission ?
+            styles.enabled : '')} type="button" onClick={this.onGenerate}
                   disabled={!(this.state.isWidgetValidForSubmission)}>
             Generate Margin Call Data
           </button>

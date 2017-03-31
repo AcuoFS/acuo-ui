@@ -144,12 +144,21 @@ export default class MarginCall extends React.Component {
             <div className={styles.cell}></div>
           </div>
 
-          <ContentRows spillContents={this.openRow} isChecked={this.state.isChecked}
-                       isOpen={this.state.openedRows.indexOf(1) > -1}
-                       propHandlerOnTotalMargin={this.onTotalCallAmt}
-                       propMarginCallUploadData={this.props.uploadData}
-                       propHandlerSingleRow={this.onSingleRow}/>
+          {/*<ContentRows spillContents={this.openRow} isChecked={this.state.isChecked}*/}
+                       {/*isOpen={this.state.openedRows.indexOf(1) > -1}*/}
+                       {/*propHandlerOnTotalMargin={this.onTotalCallAmt}*/}
+                       {/*propMarginCallUploadData={this.props.uploadData}*/}
+                       {/*propHandlerSingleRow={this.onSingleRow}/>*/}
           {/*<ContentRows spillContents={this.openRow} isChecked={this.state.isChecked} isOpen={this.state.openedRows.indexOf(2) > -1}/>*/}
+
+          <div className={styles.loadingContainer}>
+            <div className={styles.loadingText}>
+              Valuation in progress
+            </div>
+            <div className={styles.loadingBar}>
+              <div className={styles.spinner}></div>
+            </div>
+          </div>
         </div>
       </div>
     )
