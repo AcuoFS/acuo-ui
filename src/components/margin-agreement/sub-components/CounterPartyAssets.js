@@ -10,9 +10,10 @@ export default class CounterPartyAssets extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedTab: TAB_MARGIN_AGREEMENT_PORTFOLIO,
-      tabReconStyle: styles.tabActive,
-      tabDisputeStyle : styles.tabInactive
+      selectedTab: props.isDisputed ? TAB_MARGIN_AGREEMENT_DISPUTE :
+        TAB_MARGIN_AGREEMENT_PORTFOLIO,
+      tabReconStyle: props.isDisputed ? styles.tabInactive : styles.tabActive,
+      tabDisputeStyle: props.isDisputed ? styles.tabActive : styles.tabInactive
 
     }
     this.handleOnTabSelect = this.handleOnTabSelect.bind(this)
@@ -25,13 +26,13 @@ export default class CounterPartyAssets extends React.Component {
         selectedTab: TAB_MARGIN_AGREEMENT_PORTFOLIO,
         tabReconStyle: styles.tabActive,
         tabDisputeStyle: styles.tabInactive
-      }));
+      }))
     } else {
       this.setState((prevState) => ({
         selectedTab: TAB_MARGIN_AGREEMENT_DISPUTE,
         tabReconStyle: styles.tabInactive,
         tabDisputeStyle: styles.tabActive
-      }));
+      }))
     }
   }
 
@@ -40,7 +41,8 @@ export default class CounterPartyAssets extends React.Component {
       marginData, actStyle, orgName,
       assetsName, handlerTotalMargin, handlerSelectedItem,
       firstLevelList, secondLevelList,
-      onSelectSecondLevelItem, onTogglePortfolioPopup, isUploading
+      onSelectSecondLevelItem, onTogglePortfolioPopup, isUploading,
+      isDisputed
     } = this.props
 
     return (
@@ -74,6 +76,7 @@ export default class CounterPartyAssets extends React.Component {
                                handlerTotalMargin={handlerTotalMargin}
                                handlerSelectedItem={handlerSelectedItem}
                                isHidePanel={this.state.selectedTab == TAB_MARGIN_AGREEMENT_PORTFOLIO}
+                               isDisputed={isDisputed}
         />
       </div>
 

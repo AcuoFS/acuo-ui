@@ -10,7 +10,7 @@ export default class Dispute extends React.Component {
 
   constructor(props) {
     super(props)
-    this.toggleDropDown = this.toggleDropDown.bind(this)
+
     this.state = {
       formDisputeAmt: '',
       formAgreedAmt: '',
@@ -20,6 +20,7 @@ export default class Dispute extends React.Component {
       formBalance: ''
     }
 
+    this.toggleDropDown = this.toggleDropDown.bind(this)
     this.onDropdownItemChange = this.onDropdownItemChange.bind(this)
     this.isValidForm = this.isValidForm.bind(this)
     this.submitDisputeForm = this.submitDisputeForm.bind(this)
@@ -56,10 +57,6 @@ export default class Dispute extends React.Component {
       this.isNotBlankText(this.state.formBalance)
   }
 
-  isDisputed(marginData) {
-    return !_.isEmpty(marginData.get('disputeInfo').toJS())
-  }
-
   getReasonCodesAsDropdown(reasonCodes) {
     let dd = []
 
@@ -90,7 +87,7 @@ export default class Dispute extends React.Component {
 
   render() {
     const {
-      marginData, orgName, isHidePanel
+      marginData, orgName, isHidePanel, isDisputed
     } = this.props
 
     return (
@@ -126,11 +123,11 @@ export default class Dispute extends React.Component {
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Dispute Amount
               </div>
-              <input type="number" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
+              <input type="number" className={isDisputed ? styles.inputBoxDisabled : styles.inputBox}
                      onChange={(e) => this.setState({formDisputeAmt: e.target.value})}
                      ref={dom => this.disAmtInput = dom}
-                     disabled={this.isDisputed(marginData)}
-                     value={this.isDisputed(marginData)
+                     disabled={isDisputed}
+                     value={isDisputed
                        ? marginData.getIn(['disputeInfo', 'disputedAmount']) : this.state.formDisputeAmt}/>
               <div className={styles.usd}>USD</div>
 
@@ -138,10 +135,10 @@ export default class Dispute extends React.Component {
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Agreed Amount
               </div>
-              <input type="number" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
+              <input type="number" className={isDisputed ? styles.inputBoxDisabled : styles.inputBox}
                      onChange={(e) => this.setState({formAgreedAmt: e.target.value})}
-                     disabled={this.isDisputed(marginData)}
-                     value={this.isDisputed(marginData)
+                     disabled={isDisputed}
+                     value={isDisputed
                        ? marginData.getIn(['disputeInfo', 'agreedAmount']) : this.state.formAgreedAmt}/>
 
               <div className={styles.usd}>USD</div>
@@ -149,37 +146,35 @@ export default class Dispute extends React.Component {
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Reason Code
               </div>
-              {this.isDisputed(marginData)
+              {isDisputed
                 ? <input type="text" className={styles.inputBoxDisabled}
                          defaultValue={reconDisputeReasonCodes[marginData.getIn(['disputeInfo', 'reasonCode'])]}
                          disabled/>
-                : <div className={styles.inputBox}>
+                : <div className={styles.dropdownCont}>
                   <Dropdown
                     handlerOnClick={this.toggleDropDown}
                     handleOnSelectedItemChange={this.onDropdownItemChange}
                     selectedOption=''
                     options={this.getReasonCodesAsDropdown(reconDisputeReasonCodes)}/>
-
-                </div>
-              }
+                </div>}
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Comments
               </div>
-              <input type="text" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
+              <input type="text" className={isDisputed ? styles.inputBoxDisabled : styles.inputBox}
                      onChange={(e) => this.setState({formComments: e.target.value})}
-                     disabled={this.isDisputed(marginData)}
-                     value={this.isDisputed(marginData)
+                     disabled={isDisputed}
+                     value={isDisputed
                        ? marginData.getIn(['disputeInfo', 'agreedAmount']) : this.state.formComments}/>
 
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> MTM
               </div>
-              <input type="number" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
+              <input type="number" className={isDisputed ? styles.inputBoxDisabled : styles.inputBox}
                      onChange={(e) => this.setState({formMtm: e.target.value})}
-                     disabled={this.isDisputed(marginData)}
-                     value={this.isDisputed(marginData)
+                     disabled={isDisputed}
+                     value={isDisputed
                        ? marginData.getIn(['disputeInfo', 'mtm']) : this.state.formMtm}/>
 
               <div className={styles.usd}>USD</div>
@@ -187,20 +182,20 @@ export default class Dispute extends React.Component {
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Collateral Balance
               </div>
-              <input type="number" className={this.isDisputed(marginData) ? styles.inputBoxDisabled : styles.inputBox}
+              <input type="number" className={isDisputed ? styles.inputBoxDisabled : styles.inputBox}
                      onChange={(e) => this.setState({formBalance: e.target.value})}
-                     disabled={this.isDisputed(marginData)}
-                     value={this.isDisputed(marginData)
+                     disabled={isDisputed}
+                     value={isDisputed
                        ? marginData.getIn(['disputeInfo', 'balance']) : this.state.formBalance}/>
 
               <div className={styles.usd}>USD</div>
             </div>
           </div>
 
-          <div className={(!this.isValidForm() || this.isDisputed(marginData))
+          <div className={(!this.isValidForm() || isDisputed)
             ? styles.buttonContainerDisabled : styles.buttonContainerEnabled}>
             <button type="submit" onClick={this.submitDisputeForm}
-                    disabled={!this.isValidForm() || this.isDisputed(marginData)}>Dispute
+                    disabled={!this.isValidForm() || isDisputed}>Dispute
             </button>
           </div>
 

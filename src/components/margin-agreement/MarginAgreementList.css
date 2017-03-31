@@ -392,7 +392,12 @@
     width: 300px;
     height: 28px;
     display: inline-block;
-    /*flex:2;*/
+    text-indent: 5px;
+}
+
+.dropdownCont{
+    composes: inputBox;
+    text-indent: 0;
 }
 
 .inputBoxDisabled{

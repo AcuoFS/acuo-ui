@@ -3,6 +3,7 @@ import CounterPartyAssets from './CounterPartyAssets'
 import ClientAsset from './ClientAsset'
 import MarginAgreementUpload from '../../margin-agreement-upload/MarginAgreementUpload'
 import {isEmptyCounterparty} from '../../../utils'
+import _ from 'lodash'
 import styles from '../MarginAgreementList.css'
 
 
@@ -115,6 +116,10 @@ export default class MarginAgreementPortfolio extends React.Component {
     })
   }
 
+  isDisputed(marginData) {
+    return !_.isEmpty(marginData.get('disputeInfo').toJS())
+  }
+
   render() {
 
     const {
@@ -153,7 +158,7 @@ export default class MarginAgreementPortfolio extends React.Component {
 
         <div className={styles.actPanel + ' ' + styles.act_C}>
           {!isEmptyCounterparty(portfolioData.get('counterpartyAssets')) &&
-          !portfolioData.get('disputeInfo') &&
+          !this.isDisputed(portfolioData) &&
           <div className={styles.btnWrap}>
             <div className={styles.actFig + ' ' + this.getTextColour(percentage)}>
               {percentage}%
@@ -175,7 +180,8 @@ export default class MarginAgreementPortfolio extends React.Component {
                             firstLevelList={firstLevelList}
                             secondLevelList={secondLevelList}
                             onSelectSecondLevelItem={onSelectSecondLevelItem}
-                            onTogglePortfolioPopup={this.onTogglePortfolioPopup}/>
+                            onTogglePortfolioPopup={this.onTogglePortfolioPopup}
+                            isDisputed={this.isDisputed(portfolioData)}/>
       </div>
     )
   }
