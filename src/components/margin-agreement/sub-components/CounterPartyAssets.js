@@ -1,6 +1,6 @@
 import React from 'react'
 import MarginAgreementAssets from './MarginAgreementAssets'
-import Dispute from './Dispute'
+import ReconDisputeContainer from '../../../containers/ReconDisputeContainer'
 import {TAB_MARGIN_AGREEMENT_PORTFOLIO, TAB_MARGIN_AGREEMENT_DISPUTE} from '../../../constants/ComponentConstant'
 import styles from '../MarginAgreementList.css'
 
@@ -67,13 +67,13 @@ export default class CounterPartyAssets extends React.Component {
                                onTogglePortfolioPopup={onTogglePortfolioPopup}
                                isUploading={isUploading}
                                party={'cpty'}/>
-        <Dispute marginData={marginData}
-                 actStyle={actStyle}
-                 orgName={orgName}
-                 assetsName={assetsName}
-                 handlerTotalMargin={handlerTotalMargin}
-                 handlerSelectedItem={handlerSelectedItem}
-                 isHidePanel={this.state.selectedTab == TAB_MARGIN_AGREEMENT_PORTFOLIO}
+        <ReconDisputeContainer marginData={marginData}
+                               actStyle={actStyle}
+                               orgName={orgName}
+                               assetsName={assetsName}
+                               handlerTotalMargin={handlerTotalMargin}
+                               handlerSelectedItem={handlerSelectedItem}
+                               isHidePanel={this.state.selectedTab == TAB_MARGIN_AGREEMENT_PORTFOLIO}
         />
       </div>
 
