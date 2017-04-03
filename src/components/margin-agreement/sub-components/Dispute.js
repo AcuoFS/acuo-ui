@@ -27,7 +27,7 @@ export default class Dispute extends React.Component {
     this.isUpdatedForm = this.isUpdatedForm.bind(this)
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate() {
     if (!this.props.isHidePanel && !this.isUpdatedForm()) {
       this.disAmtInput.focus()
     }
