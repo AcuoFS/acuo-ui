@@ -392,7 +392,17 @@
     width: 300px;
     height: 28px;
     display: inline-block;
-    /*flex:2;*/
+    text-indent: 5px;
+}
+
+.dropdownCont{
+    composes: inputBox;
+    text-indent: 0;
+}
+
+.inputBoxDisabled{
+    composes: inputBox;
+    border: none;
 }
 
 .usd{
@@ -444,6 +454,7 @@
     border-radius: 20px;
     margin: 0 20px;
     align-self: center;
+    cursor: pointer;
 }
 
 

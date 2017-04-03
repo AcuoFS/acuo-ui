@@ -1,0 +1,13 @@
+{
+  "PD": "Portfolio Discrepancy",
+  "ID": "Initial Margin/ Independent Amount Discrepancy",
+  "CD": "Collateral Discrepancy",
+  "AD": "Agreement Discrepancy",
+  "NT": "Notification Time",
+  "CAD": "Call Amount Discrepancy",
+  "MD": "MTM Discrepancy",
+  "BTL": "Below Threshold Limit",
+  "TWC": "Two Way Call",
+  "UBE": "UnKnown Business Error",
+  "OTH": "Other"
+}
