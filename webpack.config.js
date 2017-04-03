@@ -6,8 +6,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [
-    'whatwg-fetch',
-    './src/index.js',
+    './src/index.js'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -63,6 +62,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
+    }),
     new CopyWebpackPlugin([
       {from: './src/static/react-dropzone', to: './css/react-dropzone'},
       {from: './src/static/reset.css', to: './css/reset.css'},
