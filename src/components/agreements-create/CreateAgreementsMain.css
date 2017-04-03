@@ -1,6 +1,6 @@
 .popupBody {
     display: flex;
-    height: 100%;
+    min-height: 100%;
 }
 
 .popupBody > .createMenu {
@@ -50,6 +50,12 @@
 }
 
 .menuItemSelected {
+    composes: baseFontBold from '../../static/css-components/fonts.css';
+    color: #4E83B5;
+}
+
+.subMenuItemSelected {
+    composes: subMenuItem;
     composes: baseFontBold from '../../static/css-components/fonts.css';
     color: #4E83B5;
 }

@@ -1,8 +1,30 @@
+.hideForm {
+    display: none;
+}
+
 .createContent {
     flex: 1;
     padding: 50px 25px 16px;
     display: flex;
     flex-direction: column;
+}
+
+/* Padding when there's overflow */
+/*.createContent::after {*/
+    /*content: '';*/
+    /*display: block;*/
+    /*padding-bottom: 16px;*/
+    /*width: 100%;*/
+/*}*/
+
+.createContentFlexTwo {
+    composes: createContent;
+    flex: 2;
+}
+
+.createContentFlexFour {
+    composes: createContent;
+    flex: 4;
 }
 
 .createContent > .rowGroup {
@@ -17,12 +39,21 @@
     width: 250px;
 }
 
-.line > .inputTextBox {
+.smallDropdown {
+    width: 70px;
+}
+
+.inputTextBox {
     width: 250px;
     height: 25px;
     border: 1px solid #979797;
     font-size: 13px;
     line-height: 16px;
+}
+
+.smallTextBox {
+    composes: inputTextBox;
+    width: 70px;
 }
 
 .btnStyleActive {
@@ -40,4 +71,110 @@
 .flexLine {
     display: flex;
     align-items: center;
+}
+
+.agreementsSectionContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.agreementsSectionHeader {
+    composes: baseFontBold from '../../../static/css-components/fonts.css';
+    color: #4A4A4A;
+}
+
+.agreementsSectionLeft {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.agreementsSectionRight {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.agreementsSectionRightFlexTwo {
+    composes: agreementsSectionRight;
+    flex: 2;
+}
+
+.downArrow,
+.upArrow {
+    position: relative;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.downArrow::before {
+    content: '';
+    position: absolute;
+    border-top: 12px solid #4A4A4A;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+}
+
+.downArrow::after {
+    content: '';
+    position: absolute;
+    border-top: 12px solid #FFFFFF;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    top: -3px
+}
+
+.upArrow::before {
+    content: '';
+    position: absolute;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-bottom: 12px solid #4A4A4A;
+}
+
+.upArrow::after {
+    content: '';
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 12px solid #FFFFFF;
+    top: 6px
+}
+
+.flexOne {
+    flex: 1;
+}
+
+.minTransferHeader {
+    color: #315271;
+}
+
+.minTransferLabel {
+    color: #4A4A4A;
+}
+
+.minTransferAmtLine {
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.minTransferAmtLine:nth-child(odd) {
+    background-color: #FFFFFF;
+}
+
+.minTransferAmtLine:nth-child(even) {
+    background-color: #EBF5FF;
+}
+
+.stpTwoUnits {
+    display: flex;
+}
+
+.stpAutoOne {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.stpAutoTwo {
+    flex: 1;
+    margin-left: 10px;
 }

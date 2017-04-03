@@ -11,6 +11,7 @@ import { getDate } from './getDate'
 import clearTime from './clearTime'
 import {filterByAllPropertiesOfObj} from './filterByCheckingAllPropertiesOfObj'
 import {gmtTimezoneList} from './gmtTimezoneList'
+import {isEmptyCounterparty} from './reconUtils'
 
 export {
   formatDate,
@@ -22,5 +23,6 @@ export {
   getDate,
   clearTime,
   filterByAllPropertiesOfObj,
-  gmtTimezoneList
+  gmtTimezoneList,
+  isEmptyCounterparty
 }

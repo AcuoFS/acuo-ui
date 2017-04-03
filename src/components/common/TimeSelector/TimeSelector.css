@@ -1,0 +1,23 @@
+.timeSelector{
+  text-align: center;
+}
+
+.timeSelector input {
+  width: 75px;
+  height: 30px;
+  text-align: center;
+  text-indent: 10px;
+}
+
+.timeSelector .clear {
+  background-color: #9A5C5F;
+  margin-top: 15px;
+  padding: 10px 25px;
+  text-transform: capitalize;
+  display: inline-block;
+  color: #fff;
+}
+
+.timeSelector .clear:hover {
+  background-color: #85474A;
+}

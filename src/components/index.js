@@ -12,6 +12,7 @@ import FlightComponent from './assets-deployed/Flight'
 import MarginCallComponent from './margin-call/MarginCall'
 import DisputeWidgetComponent from './dispute/DisputeWidget'
 import AgreementsComponent from './agreements/Agreements'
+import TimeSelectorComponent from './common/TimeSelector/TImeSelector'
 
 export {
   GraphComponent,
@@ -27,5 +28,6 @@ export {
   FlightComponent,
   MarginCallComponent,
   DisputeWidgetComponent,
-  AgreementsComponent
+  AgreementsComponent,
+  TimeSelectorComponent
 }

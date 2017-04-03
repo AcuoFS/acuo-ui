@@ -15,7 +15,6 @@ export default class CollateralAllocate extends React.Component{
       allocateAmount: '0.00'
     }
 
-    // this.allocateCollateral = this.allocateCollateral.bind(this)
     this.validateAllocateForm = this.validateAllocateForm.bind(this)
     this.onAgreementDropdownItemChange = this.onAgreementDropdownItemChange.bind(this)
     this.onCallTypeDropdownItemChange = this.onCallTypeDropdownItemChange.bind(this)

@@ -1,19 +1,26 @@
 import React from 'react'
 import {SimpleCenteredPopup} from '../common/SimpleCenteredPopup'
-import TradingEntities from './sub-components/TradingEntities'
-import OtherDetails from './sub-components/OtherDetails'
+import {
+  TradingEntities,
+  OtherDetails,
+  References,
+  CSA
+} from './sub-components'
 import styles from './CreateAgreementsMain.css'
-import tempStyles from './sub-components/ContentBody.css'
 
-
-const bigStyle = {
-  width: '850px',
+const giantStyle = {
+  width: '1200px',
   height: '800px'
 }
 
+const bigStyle = {
+  width: '1000px',
+  height: '900px'
+}
+
 const mediumStyle = {
-  width: '850px',
-  height: '500px'
+  width: '600px',
+  height: '720px'
 }
 
 const smallStyle = {
@@ -22,7 +29,7 @@ const smallStyle = {
 }
 
 const MENU_TRADING_ENTITIES = 'MENU_TRADING_ENTITIES'
-const MENU_IDENTIFIERS = 'MENU_IDENTIFIERS'
+const MENU_REFERENCES = 'MENU_IDENTIFIERS'
 const SUB_CSA = 'SUB_CSA'
 const SUB_REGULATORY = 'SUB_REGULATORY'
 const MENU_WORKFLOW_OPTIONS = 'MENU_WORKFLOW_OPTIONS'
@@ -35,21 +42,23 @@ export class CreateAgreementsMain extends React.Component {
 
     this.state = {
       sizeOfPopup: smallStyle,
-      isShowExtraDetails: false,
       currentMenu: MENU_TRADING_ENTITIES,
-      isAgreementTypeSelected: false
+      isAgreementTypeSelected: false,
+      isCsa: false,
+      isRegulatory: false,
     }
 
     this.createMenuItemDom = this.createMenuItemDom.bind(this)
     this.setAgreementType = this.setAgreementType.bind(this)
+    this.toggleCsa = this.toggleCsa.bind(this)
+    this.toggleRegulatory = this.toggleRegulatory.bind(this)
   }
 
-  createMenuItemDom(menuDisplay, menu, styleOfPoppup, isShowExtra, isSelected) {
+  createMenuItemDom(menuDisplay, menu, styleOfPopup, isSelected) {
     return (
       <div className={styles.menuItem + ' ' + (isSelected && styles.menuItemSelected)}
            onClick={() => this.setState({
-             sizeOfPopup: styleOfPoppup,
-             isShowExtraDetails: isShowExtra,
+             sizeOfPopup: styleOfPopup,
              currentMenu: menu
            })}>
         {menuDisplay}
@@ -62,22 +71,27 @@ export class CreateAgreementsMain extends React.Component {
     })
   }
 
-  render() {
-    const {propHandlerClosePopup} = this.props
+  toggleCsa() {
+    // Switch current menu to CSA
+    this.setState({
+      currentMenu: (this.state.isCsa ? MENU_REFERENCES : SUB_CSA),
+      sizeOfPopup: (this.state.isCsa ? bigStyle : giantStyle),
+      isCsa: !this.state.isCsa
+    })
+  }
 
-    let curCreationScreen
-
-    switch (this.state.currentMenu) {
-      case MENU_TRADING_ENTITIES:
-        curCreationScreen = <TradingEntities propSetAgreementType={this.setAgreementType}/>
-        break
-      case MENU_OTHER_DETAILS:
-        curCreationScreen = <OtherDetails/>
-        break
-      default:
-        curCreationScreen = <div className={tempStyles.createContent}>WIP</div>
+  toggleRegulatory() {
+    // Switch current menu to Regulatory
+    if (!this.state.isRegulatory) {
+      this.setState({currentMenu: SUB_REGULATORY})
     }
 
+    this.setState({isRegulatory: !this.state.isRegulatory})
+  }
+
+
+  render() {
+    const {propHandlerClosePopup} = this.props
 
     return (
       <SimpleCenteredPopup handlerClosePopup={propHandlerClosePopup}
@@ -89,24 +103,35 @@ export class CreateAgreementsMain extends React.Component {
               <div className={styles.menuItemContainer}>
 
                 {this.createMenuItemDom('Trading Entities', MENU_TRADING_ENTITIES,
-                  smallStyle, false, (this.state.currentMenu == MENU_TRADING_ENTITIES))}
+                  smallStyle, (this.state.currentMenu == MENU_TRADING_ENTITIES))}
 
-                {this.createMenuItemDom('Identifiers', MENU_IDENTIFIERS,
-                  mediumStyle, true, (this.state.currentMenu == MENU_IDENTIFIERS))}
+                {this.createMenuItemDom('Agreement References', MENU_REFERENCES,
+                  bigStyle, (this.state.currentMenu == MENU_REFERENCES))}
 
-                {this.state.isAgreementTypeSelected && <div>
-                  <div className={styles.subMenuItem}>CSA References</div>
-                  <div className={styles.subMenuItem}>Regulatory References</div>
+                {(this.state.isCsa || this.state.isAgreementTypeSelected) &&
+                <div className={(this.state.currentMenu == SUB_CSA)
+                  ? styles.subMenuItemSelected : styles.subMenuItem}
+                     onClick={() => this.setState({
+                       currentMenu: SUB_CSA,
+                       sizeOfPopup: giantStyle
+                     })}>CSA References
+                </div>}
+
+                {(this.state.isRegulatory || this.state.isAgreementTypeSelected) &&
+                <div className={(this.state.currentMenu == SUB_REGULATORY)
+                  ? styles.subMenuItemSelected : styles.subMenuItem}
+                     onClick={() => this.setState({currentMenu: SUB_REGULATORY})}>
+                  Regulatory References
                 </div>}
 
                 {this.createMenuItemDom('Workflow Options', MENU_WORKFLOW_OPTIONS,
-                  bigStyle, true, (this.state.currentMenu == MENU_WORKFLOW_OPTIONS))}
+                  bigStyle, (this.state.currentMenu == MENU_WORKFLOW_OPTIONS))}
 
                 {this.createMenuItemDom('Other Details', MENU_OTHER_DETAILS,
-                  bigStyle, true, (this.state.currentMenu == MENU_OTHER_DETAILS))}
+                  mediumStyle, (this.state.currentMenu == MENU_OTHER_DETAILS))}
 
                 {this.createMenuItemDom('Assignment Details', MENU_ASSIGNMENT_DETAILS,
-                  bigStyle, true, (this.state.currentMenu == MENU_ASSIGNMENT_DETAILS))}
+                  bigStyle, (this.state.currentMenu == MENU_ASSIGNMENT_DETAILS))}
 
               </div>
 
@@ -119,14 +144,21 @@ export class CreateAgreementsMain extends React.Component {
 
           </div>
 
-          {
-            curCreationScreen
-          }
+          <TradingEntities propIsDisplay={this.state.currentMenu == MENU_TRADING_ENTITIES}
+                           propSetAgreementType={this.setAgreementType}/>
 
-          {/*{*/}
-          {/*this.state.isShowExtraDetails &&*/}
-          {/*<TradingEntities propSetAgreementType={this.setAgreementType}/>*/}
-          {/*}*/}
+          <OtherDetails propIsDisplay={this.state.currentMenu == MENU_OTHER_DETAILS}/>
+
+          <References
+            propIsCsa={this.state.isCsa}
+            propIsRegulatory={this.state.isRegulatory}
+            propToggleCsa={this.toggleCsa}
+            propToggleRegulatory={this.toggleRegulatory}
+            propIsDisplay={this.state.currentMenu == MENU_REFERENCES}/>
+
+          <CSA propIsDisplay={this.state.currentMenu == SUB_CSA}
+               propIsCsa={this.state.isCsa}
+               propToggleCsa={this.toggleCsa}/>
 
         </div>
 

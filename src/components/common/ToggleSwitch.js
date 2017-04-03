@@ -8,11 +8,13 @@ import styles from './ToggleSwitch.css'
 
 const ToggleSwitch = ({propIsOn, propOnToggle}) => {
   return (
-    <label className={styles.switch}>
-      <input type="checkbox" defaultChecked={propIsOn}
-             onClick={() => propOnToggle()}/>
-      <div className={styles.slider + ' ' + styles.round}></div>
-    </label>
+      <label className={styles.switch}>
+        <input type="checkbox" checked={propIsOn}
+               onClick={() => propOnToggle()}/>
+        <div className={styles.slider + ' ' + styles.round}></div>
+        <span className={styles.on}>On</span>
+        <span className={styles.off}>Off</span>
+      </label>
   )
 }
 

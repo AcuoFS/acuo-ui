@@ -1,16 +1,11 @@
 import React, {PropTypes} from 'react'
 import {Map, List} from 'immutable'
 import MarginAgreementDetail from './MarginAgreementDetail'
-import {checkNegative} from '../../../utils'
+import {checkNegative, isEmptyCounterparty} from '../../../utils'
 import styles from '../MarginAgreementList.css'
 import CounterPartyUpload from './CounterPartyUpload'
 import selfStyles from './MarginAgreementAssets.css'
 
-
-export const isEmptyCounterparty = (counterpartyData) => {
-  return (counterpartyData.isEmpty() || !counterpartyData.first().get('data') ||
-  (counterpartyData.first().get('data').isEmpty()))
-}
 
 export default class MarginAgreementPortfolio extends React.Component {
   constructor(props) {
@@ -69,7 +64,7 @@ export default class MarginAgreementPortfolio extends React.Component {
   renderItem(marginData, assetsName, handlerSelectedItem, firstLevelList, secondLevelList, onSelectSecondLevelItem, party) {
     if (marginData.get(assetsName))
       return marginData.get(assetsName).sort().map((x) => {
-        if (x.get('data')) {
+        if (x.get('data') && !x.get('data').isEmpty()) {
           return (<div key={x.get('groupName')}>{x.get('data').sort((a, b) => a.getIn(['firstLevel', 'name']) > b.getIn(['firstLevel', 'name'])).map((groupData) => {
             const secondLevel = groupData.getIn(['firstLevel', 'secondLevel'])
 

@@ -1,5 +1,7 @@
 import React from 'react'
 import Dropdown from '../../Dropdown/Dropdown'
+import MultipleSelection from '../../MultipleSelection/MultipleSelection'
+
 import {gmtTimezoneList} from '../../../utils'
 import SelectionBox from '../../common/SelectionBox'
 import ToggleSwitch from '../../common/ToggleSwitch'
@@ -42,8 +44,10 @@ export default class OtherDetails extends React.Component {
   }
 
   render() {
+    const {propIsDisplay} = this.props
+
     return (
-      <div className={styles.createContent}>
+      <div className={propIsDisplay ? styles.createContent : styles.hideForm}>
         <div className={styles.rowGroup}>
           <div className={styles.line}>Reference Identifier</div>
           <div className={styles.line}>
@@ -93,28 +97,14 @@ export default class OtherDetails extends React.Component {
             </div>
           </div>
 
-          {/*<div className={styles.rowGroup}>*/}
-            {/*<div className={styles.line}>Product Codes</div>*/}
-            {/*<div className={styles.line}>*/}
-              {/*<div className={styles.dropDown}>*/}
-                {/*<Dropdown*/}
-                  {/*handlerOnClick={this.toggleDropDown}*/}
-                  {/*handleOnSelectedItemChange={this.onDropdownItemChange}*/}
-                  {/*selectedOption={'Select'}*/}
-                  {/*options={['WIP']}*/}
-                  {/*activateMouseLeaveEvent/>*/}
-              {/*</div>*/}
-            {/*</div>*/}
-          {/*</div>*/}
-
           <div className={styles.rowGroup}>
             <div className={styles.line + ' ' + styles.flexLine}>
-              Off &nbsp; <ToggleSwitch propIsOn={this.state.isSoleCalc}
-                            propOnToggle={this.onToggleSoleCalc}/> &nbsp; On &nbsp;Sole Calculation
+              <ToggleSwitch propIsOn={this.state.isSoleCalc}
+                            propOnToggle={this.onToggleSoleCalc}/> &nbsp;Sole Calculation
             </div>
           </div>
 
-          {this.state.isSoleCalc ?
+          {this.state.isSoleCalc &&
           <div className={styles.rowGroup}>
             <div className={styles.line}>Valuation Agent</div>
             <div className={styles.line}>
@@ -128,7 +118,7 @@ export default class OtherDetails extends React.Component {
               </div>
             </div>
           </div>
-            : ''}
+          }
 
           <div className={styles.rowGroup}>
             <div className={styles.line}>Regulatory Jurisdiction</div>
