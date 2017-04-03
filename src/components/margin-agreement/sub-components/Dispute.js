@@ -24,6 +24,13 @@ export default class Dispute extends React.Component {
     this.onDropdownItemChange = this.onDropdownItemChange.bind(this)
     this.isValidForm = this.isValidForm.bind(this)
     this.submitDisputeForm = this.submitDisputeForm.bind(this)
+    this.isUpdatedForm = this.isUpdatedForm.bind(this)
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.props.isHidePanel && !this.isUpdatedForm()) {
+      this.disAmtInput.focus()
+    }
   }
 
   toggleDropDown(e) {
@@ -49,6 +56,16 @@ export default class Dispute extends React.Component {
 
   isNotBlankText(str) {
     return str.trim() !== ''
+  }
+
+  isUpdatedText(str) {
+    return str !== ''
+  }
+
+  isUpdatedForm() {
+    return this.isUpdatedText(this.state.formDisputeAmt) || this.isUpdatedText(this.state.formAgreedAmt) ||
+      this.isUpdatedText(this.state.formReasonCode) || this.isUpdatedText(this.state.formMtm) ||
+      this.isUpdatedText(this.state.formBalance)
   }
 
   isValidForm() {
