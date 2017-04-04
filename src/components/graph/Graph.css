@@ -35,20 +35,23 @@
   left: 15px;
 }
 
-/*@media screen and (min-width: 768px) {*/
-  /*.svgGraph {*/
-    /*min-height: 245px;*/
-  /*}*/
-/*}*/
+@media screen and (min-width: 768px) {
+  .svgGraph {
+    min-height: 245px;
+    min-width: 768px;
+  }
+}
 
-/*@media screen and (min-width: 1024px) {*/
-  /*.svgGraph {*/
-    /*min-height: 328px;*/
-  /*}*/
-/*}*/
+@media screen and (min-width: 1024px) {
+  .svgGraph {
+    min-height: 328px;
+    min-width: 1024px
+  }
+}
 
-/*@media screen and (min-width: 1440px) {*/
-  /*.svgGraph {*/
-    /*min-height: 460px;*/
-  /*}*/
-/*}*/
+@media screen and (min-width: 1440px) {
+  .svgGraph {
+    min-height: 460px;
+    min-width: 1440px
+  }
+}
