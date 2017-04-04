@@ -35,23 +35,23 @@
   left: 15px;
 }
 
-@media screen\0 and (min-width: 768px) {
-  .svgGraph {
-    max-height: 245px;
-    max-width: 768px;
-  }
-}
+/*@media screen\0 and (min-width: 768px) {*/
+  /*.svgGraph {*/
+    /*max-height: 245px;*/
+    /*max-width: 768px;*/
+  /*}*/
+/*}*/
 
-@media screen\0 and (min-width: 1024px) {
-  .svgGraph {
-    max-height: 328px;
-    max-width: 1024px
-  }
-}
+/*@media screen\0 and (min-width: 1024px) {*/
+  /*.svgGraph {*/
+    /*max-height: 328px;*/
+    /*max-width: 1024px*/
+  /*}*/
+/*}*/
 
-@media screen\0 and (min-width: 1440px) {
-  .svgGraph {
-    max-height: 460px;
-    max-width: 1440px
-  }
-}
+/*@media screen\0 and (min-width: 1440px) {*/
+  /*.svgGraph {*/
+    /*max-height: 460px;*/
+    /*max-width: 1440px*/
+  /*}*/
+/*}*/
