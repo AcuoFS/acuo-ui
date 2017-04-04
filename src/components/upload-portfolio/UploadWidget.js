@@ -18,6 +18,7 @@ export default class UploadWidget extends React.Component {
     this.handleFileAdded = this.handleFileAdded.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
     this.clearSend = this.clearSend.bind(this)
+    this.updateUploadStatus = this.updateUploadStatus.bind(this)
   }
 
   handleFileAdded(hasFiles) {
@@ -36,8 +37,6 @@ export default class UploadWidget extends React.Component {
     this.setState({
       isSendToBackend: true
     })
-
-    this.props.showMarginCall()
   }
 
   clearSend(){
@@ -49,6 +48,12 @@ export default class UploadWidget extends React.Component {
   handleRemove(isEmpty) {
     this.setState({
       isWidgetValidForSubmission: !isEmpty
+    })
+  }
+
+  updateUploadStatus(statuses) {
+    this.setState({
+      status: statuses
     })
   }
 
@@ -73,6 +78,8 @@ export default class UploadWidget extends React.Component {
 
   render() {
 
+    const { onUpdateTxnID } = this.props
+
     return (
       /*<form id="uploadbanner" enctype="multipart/form-data" method="post" action="http://localhost:3000/">
        <input type="file" id="myFile"/>
@@ -88,17 +95,17 @@ export default class UploadWidget extends React.Component {
                      propTemplate={this.templateForDz()}
                      propNoOfFiles={5}
                      propPostUrl={UPLOAD_FILE_URL}
-                     updateUploadStatus={this.updateUploadStatus}/>
-
+                     updateUploadStatus={this.updateUploadStatus}
+                     onUpdateTxnID={onUpdateTxnID}/>
 
         <div className={styles.buttonContainer}>
           <div className={styles.uploadStatus}>
-            {this.state.status.map(x => <p>{x.remarks}</p>)}
+            {this.state.status.map((x, i) => <p key={i}>{x.remarks}</p>)}
           </div>
 
           <button className={styles.textBold + ' ' + (this.state.isWidgetValidForSubmission ?
             styles.enabled : '')} type="button" onClick={this.onGenerate}
-                  disabled={!(this.state.isWidgetValidForSubmission)}>
+                  disabled={!this.state.isWidgetValidForSubmission}>
             Upload
           </button>
         </div>

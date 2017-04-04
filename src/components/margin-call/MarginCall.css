@@ -13,6 +13,10 @@
   position: relative;
 }
 
+.hidden {
+  display: none;
+}
+
 .header{
   display: flex;
   margin-bottom: 10px;
@@ -203,7 +207,7 @@
 .loadingContainer {
   flex: 1;
   align-self: center;
-  margin: 50px auto;
+  margin: 100px auto;
 }
 
 .loadingText {

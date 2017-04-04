@@ -5,7 +5,8 @@ import *  as MarginCallUploadActions from  '../actions/MarginCallUploadActions'
 
 const mapStateToProps = state => ({
   uploadData: state.MarginUploadReducer.get('uploadData')
-    ? state.MarginUploadReducer.get('uploadData').toJS() : []
+    ? state.MarginUploadReducer.get('uploadData').toJS() : [],
+  txnID: state.MarginUploadReducer.get('txnID') || ''
 })
 
 const mapDispatchToProps = dispatch => ({

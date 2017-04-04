@@ -106,8 +106,11 @@ export default class MarginCall extends React.Component {
   }
 
   render() {
+
+    const { txnID } = this.props
+
     return (
-      <div className={styles.container}>
+      <div className={styles.container + ' ' + (txnID ? '' : styles.hidden)}>
         <ChangeCallAmountPopup propIsShow={this.state.isShowPopup}
                                propDeliverAmt=
                                  {Number.parseInt(this.state.totalCallAmount ? this.state.totalCallAmount : 0)}
@@ -117,7 +120,7 @@ export default class MarginCall extends React.Component {
 
         <div className={styles.header}>
           <div className={styles.title}>Margin Call</div>
-          <div className={styles.button} onClick={() => this.onSendButton(this.state.selectedRows)}>
+          <div className={styles.button} disabled={true} onClick={() => this.onSendButton(this.state.selectedRows)}>
             Send selected Margin Calls
           </div>
         </div>
