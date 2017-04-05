@@ -25,7 +25,7 @@ const config = {
     COLLATERAL_URL: UBUNTU_URL + '/pledge/init-new-collateral',
     MARGIN_SELECTION_URL: UBUNTU_URL + '/pledge/init-selection',
     ALLOCATE_COLLATERALS_URL: UBUNTU_URL + '/pledge/allocate-selection',
-    ALLOCATE_COLLATERALS_URL_NEW: '/pledge/allocate-selection-new',
+    ALLOCATE_COLLATERALS_URL_NEW: UBUNTU_URL + '/pledge/allocate-selection-new',
     PLEDGE_ALLOCATIONS: UBUNTU_URL + '/pledge/pledge-allocation',
     UPLOAD_FILE_URL: 'http://valuation.acuo.com/acuo/api/upload',
     // Please add the trailing / for recon single item (ok button)
@@ -48,7 +48,7 @@ const config = {
     RECON_DATA_URL: 'http://qa.acuo.com:7070/acuo/api/margin/reconcile/',
     REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
     UNMATCHED_PORTFOLIO_URL: 'http://qa.acuo.com:8181/unmatched',
-    SEND_RECON_DISPUTE_URL: 'New endpoint !!!'
+    SEND_RECON_DISPUTE_URL: 'http://qa.acuo.com:8181/recon/disputeStatement'
   },
   prod: {}
 }
