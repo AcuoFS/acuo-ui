@@ -346,3 +346,38 @@ input[type=range]:focus::-ms-fill-upper {
     /*font-family: "Arial Black";*/
     color: #9b9b9b;
 }
+
+.tabHolder {
+    position: relative;
+}
+
+.tab {
+    display: inline-block;
+    composes: baseFontBold from './../../static/css-components/fonts.css';
+    padding: 5px 0px 3px 0px;
+    margin: 0px 5px;
+    cursor: pointer;
+    color: #9B9B9B;
+}
+
+.selectedTab{
+    color: #587D9E;
+    border-bottom: 3px solid #979797;
+}
+
+.closeButton {
+    color: #585858;
+    float: right;
+    font-size: 15px;
+    padding: 0px 5px;
+    cursor: pointer;
+}
+
+.tabbedContent {
+    display: none;
+    padding: 5px;
+}
+
+.showContent {
+    display: block;
+}
