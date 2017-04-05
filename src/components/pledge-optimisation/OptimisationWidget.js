@@ -1,8 +1,9 @@
 import React from 'react'
-import OptItem from '../pledge/sub-components/OptItem'
+import OptItem from './sub-components/OptItem'
 import ChooseCalls from '../pledge/sub-components/ChooseCalls'
 import {List} from 'immutable'
-import styles from '../pledge/Pledge.css'
+import sharedStyles from '../pledge/Pledge.css'
+import styles from './OptimisationWidget.css'
 
 
 export default class OptimisationWidget extends React.Component {
@@ -30,8 +31,8 @@ export default class OptimisationWidget extends React.Component {
       onPledge
     } = this.props
 
-    return <div className={styles.panel} id={styles.optSetting}>
-      <div className={styles.panelTitle}>Optimization Setting <img src={'./images/pledge/locked.png'}/></div>
+    return <div className={sharedStyles.panel} id={styles.optSetting}>
+      <div className={sharedStyles.panelTitle}>Optimization Setting <img src={'./images/pledge/locked.png'}/></div>
       <div>tab bar</div>
       <div className={styles.optPnlWrap}>
         {optimisation && optimisation.map((x, index) => (

@@ -1,11 +1,8 @@
-/**
- * Created by panyong on 22/11/16.
- */
 import React from 'react'
-import {render} from 'react-dom'
-import styles from '../Pledge.css'
+import sharedStyles from '../../pledge/Pledge.css'
+import styles from '../OptimisationWidget.css'
 
-class OptItem extends React.Component {
+export default class OptItem extends React.Component {
   constructor(props) {
     super(props)
 
@@ -38,10 +35,11 @@ class OptItem extends React.Component {
     return (
       <div className={styles.optItem}>
 
-        <div className={styles.flexContainer}>
+        <div className={sharedStyles.flexContainer}>
           <div className={styles.optItemName}>{this.props.sldName}</div>
           <div className={styles.optItemSlider}>
-            <input type="range" step="1" max="100" min="0" onMouseUp={this.updateState} onChange={this.updateDisplay} value={this.state.allocation * 10}/>
+            <input type="range" step="1" max="100" min="0" onMouseUp={this.updateState}
+                   onChange={this.updateDisplay} value={this.state.allocation * 10}/>
             <div className={styles.markings}>
               <div className={styles.marking}>|</div>
               <div className={styles.miniMarking}>|</div>
@@ -78,5 +76,3 @@ class OptItem extends React.Component {
     )
   }
 }
-
-export default OptItem
