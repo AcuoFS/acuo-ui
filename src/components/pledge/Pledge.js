@@ -85,7 +85,7 @@ class Pledge extends React.Component {
     }
   }
 
-  renderSelection(x, onTogglePendingAllocation, pendingAllocation, index){
+  renderSelection(x, onTogglePendingAllocation, pendingAllocation, index, onRemoveAssetFromAllocate){
     return (<Selection  sideways={this.state.selectionSideway}
                         clicked={this.changeSideways}
                         chkTick={this.chkTick}
@@ -94,7 +94,8 @@ class Pledge extends React.Component {
                         marginCall={x}
                         key={index}
                         onTogglePendingAllocation={onTogglePendingAllocation}
-                        pendingAllocationStore={pendingAllocation}/>)
+                        pendingAllocationStore={pendingAllocation}
+                        onRemoveAssetFromAllocate={onRemoveAssetFromAllocate}/>)
   }
 
   //generic checker
@@ -130,7 +131,8 @@ class Pledge extends React.Component {
   render() {
     const { optimisation, selection, onUpdateOptimisationSettings, onTogglePendingAllocation,
       pendingAllocation, sliderCheckbox, onToggleCheckall, onAllocate,
-      onPledge} = this.props
+      onPledge,
+      onRemoveAssetFromAllocate} = this.props
 
     return (
 
@@ -185,7 +187,7 @@ class Pledge extends React.Component {
             <div className={styles.col_L + ' ' + this.state.toggleColwidthL}>
 
               {this.checkIfExist(selection)
-                .map((x, index) => this.renderSelection(x, onTogglePendingAllocation, pendingAllocation, index))}
+                .map((x, index) => this.renderSelection(x, onTogglePendingAllocation, pendingAllocation, index, onRemoveAssetFromAllocate))}
 
             </div>
 
