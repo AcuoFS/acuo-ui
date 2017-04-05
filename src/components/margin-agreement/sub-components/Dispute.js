@@ -148,7 +148,7 @@ export default class Dispute extends React.Component {
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Dispute Amount
               </div>
-              <input tabIndex={1} type="number"
+              <input type="number"
                      className={isDisputed ? styles.inputBoxDisabled : styles.inputBox}
                      onChange={(e) => this.setState({formDisputeAmt: e.target.value})}
                      ref={dom => this.disAmtInput = dom}
@@ -161,7 +161,7 @@ export default class Dispute extends React.Component {
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Agreed Amount
               </div>
-              <input tabIndex={2} type="number"
+              <input type="number"
                      className={isDisputed ? styles.inputBoxDisabled : styles.inputBox}
                      onChange={(e) => this.setState({formAgreedAmt: e.target.value})}
                      disabled={isDisputed}
@@ -187,13 +187,13 @@ export default class Dispute extends React.Component {
                   <Select
                     value={this.state.formReasonCode}
                     options={this.getReasonCodesAsDropdown(reconDisputeReasonCodes)}
-                    onChange={this.logChange} tabIndex={'3'}/>
+                    onChange={this.logChange} />
                 </div>}
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Comments
               </div>
-              <input tabIndex={4} type="text"
+              <input type="text"
                      className={isDisputed ? styles.inputBoxDisabled : styles.inputBox}
                      onChange={(e) => this.setState({formComments: e.target.value})}
                      disabled={isDisputed}
@@ -204,7 +204,7 @@ export default class Dispute extends React.Component {
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> MTM
               </div>
-              <input tabIndex={5} type="number"
+              <input type="number"
                      className={isDisputed ? styles.inputBoxDisabled : styles.inputBox}
                      onChange={(e) => this.setState({formMtm: e.target.value})}
                      disabled={isDisputed}
@@ -216,7 +216,7 @@ export default class Dispute extends React.Component {
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Collateral Balance
               </div>
-              <input tabIndex={6} type="number"
+              <input type="number"
                      className={isDisputed ? styles.inputBoxDisabled : styles.inputBox}
                      onChange={(e) => this.setState({formBalance: e.target.value})}
                      disabled={isDisputed}
@@ -229,7 +229,7 @@ export default class Dispute extends React.Component {
 
           <div className={(!this.isValidForm() || isDisputed)
             ? styles.buttonContainerDisabled : styles.buttonContainerEnabled}>
-            <button tabIndex={7} type="submit" onClick={this.submitDisputeForm}
+            <button type="submit" onClick={this.submitDisputeForm}
                     disabled={!this.isValidForm() || isDisputed}>Dispute
             </button>
           </div>
