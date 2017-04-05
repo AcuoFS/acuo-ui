@@ -81,7 +81,8 @@
   position: absolute;
   right: 0;
   top: 0;
-  max-width: 100%;
+  /*max-width: 100%;*/
+  max-width: calc(100% - 25px - 17px); /* less the widths for cross and arrow */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
