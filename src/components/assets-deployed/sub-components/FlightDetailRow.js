@@ -2,6 +2,8 @@ import React, {PropTypes} from 'react'
 import * as FLIGHT_STATUS from '../../../constants/FlightStatuses'
 import styles from './FlightItemTable.css'
 import {checkNegative} from '../../../utils'
+import _ from 'lodash'
+
 
 export default class FlightDetailRow extends React.Component {
   // Additional styling for status on header row
@@ -33,9 +35,13 @@ export default class FlightDetailRow extends React.Component {
     return statusCell
   }
 
-  renderSecondRow(value){
-    if(value)
+  renderSecondRow(value) {
+    if (value)
       return (<div className={styles.secondRow}>{value}</div>)
+  }
+
+  getTextFromObjectOrStr(property) {
+    return _.isObject(property) ? property.main : property
   }
 
   render() {
@@ -72,34 +78,37 @@ export default class FlightDetailRow extends React.Component {
                     onClick={propHandlerExpand}/>
     }
 
-    statusCell = propStatus.main
-    statusCell = this.getDomForStatus(propIsGroupHeader, propStatus.main, statusCell);
+    statusCell = this.getTextFromObjectOrStr(propStatus)
+    statusCell = this.getDomForStatus(propIsGroupHeader,
+      this.getTextFromObjectOrStr(propStatus), statusCell)
 
     return (
       <div className={rowStyle}>
         <div className={styles.flightItemTableCell}>
-          <div>{propTime.main}</div>
-          {this.renderSecondRow(propTime.secondary)}
+          <div>{this.getTextFromObjectOrStr(propTime)}</div>
         </div>
         <div className={styles.flightItemTableCell}>
-          <div>{propAgreement.main}</div>
+          <div>{this.getTextFromObjectOrStr(propAgreement)}</div>
           {this.renderSecondRow(propAgreement.secondary)}
         </div>
         <div className={styles.flightItemTableCell}>
-          <div>{propFrom.main}</div>
+          <div>{this.getTextFromObjectOrStr(propFrom)}</div>
           {this.renderSecondRow(propFrom.secondary)}
         </div>
         <div className={styles.flightItemTableCell}>
-          <div>{propTo.main}</div>
+          <div>{this.getTextFromObjectOrStr(propTo)}</div>
           {this.renderSecondRow(propTo.secondary)}
         </div>
         <div className={styles.flightItemTableCell}>
-          <div>{propRowStyle ? propValue.main
-            : checkNegative(parseFloat(propValue.main))}</div>
+          <div> {propRowStyle ? propValue :
+            checkNegative(parseFloat(this.getTextFromObjectOrStr(propValue)))}
+            {/*{propRowStyle ? propValue.main*/}
+            {/*: checkNegative(parseFloat(propValue.main))}*/}
+          </div>
           {this.renderSecondRow(propValue.secondary)}
         </div>
         <div className={styles.flightItemTableCell}>
-          <div>{propCcy.main}</div>
+          <div>{this.getTextFromObjectOrStr(propCcy)}</div>
           {this.renderSecondRow(propCcy.secondary)}
         </div>
         <div className={styles.flightItemTableCell}>
@@ -112,13 +121,13 @@ export default class FlightDetailRow extends React.Component {
 }
 
 FlightDetailRow.propTypes = {
-  propTime: PropTypes.object.isRequired,
-  propAgreement: PropTypes.object.isRequired,
-  propFrom: PropTypes.object.isRequired,
-  propTo: PropTypes.object.isRequired,
-  propValue: PropTypes.object.isRequired,
-  propCcy: PropTypes.object.isRequired,
-  propStatus: PropTypes.object.isRequired,
+  propTime: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  propAgreement: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
+  propFrom: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
+  propTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
+  propValue: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
+  propCcy: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
+  propStatus: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
   propIsGroupHeader: PropTypes.bool,
   propIsGroupExpanded: PropTypes.bool,
   propRowStyle: PropTypes.string
