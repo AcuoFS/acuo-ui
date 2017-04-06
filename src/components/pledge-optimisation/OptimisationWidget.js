@@ -14,7 +14,8 @@ export default class OptimisationWidget extends React.Component {
     super(props)
 
     this.state = {
-      currentTab: TAB_OBJECTIVE
+      currentTab: TAB_OBJECTIVE,
+      isShowObjectiveParams: false // TODO temp state just for static page before integration
     }
   }
 
@@ -71,13 +72,32 @@ export default class OptimisationWidget extends React.Component {
                      key={index}/>
           ))}
         </div>
+
+        <div className={styles.objectiveParamsBar}>
+          <div className={styles.objectiveParamCont}>
+            <div className={styles.objectiveTitle}>Daily Cost (USD)</div>
+            <div>{this.state.isShowObjectiveParams ? '123,456,789' : '-'}</div>
+          </div>
+          <div className={styles.objectiveParamCont}>
+            <div className={styles.objectiveTitle}>Monthly Cost (USD)</div>
+            <div>{this.state.isShowObjectiveParams ? '123,456,789' : '-'}</div>
+          </div>
+          <div className={styles.objectiveParamCont}>
+            <div className={styles.objectiveTitle}>Reserved Liquidity Ratio (%)</div>
+            <div>{this.state.isShowObjectiveParams ? '1.00' : '-'}</div>
+          </div>
+        </div>
+
         <div className={styles.buttonHolder}>
           <ChooseCalls tickImg={sliderCheckbox[0]} tickState={sliderCheckbox[1]}
                        tickClick={onToggleCheckall}/>
 
           <div className={styles.optButton + ' ' +
           (this.checkIfExist(pendingAllocation).size > 0 ? '' : styles.btnDisabled )}
-               onClick={() => onAllocate(pendingAllocation.toJS(), optimisation.toJS())}>
+               onClick={() => {
+                 onAllocate(pendingAllocation.toJS(), optimisation.toJS())
+                 this.setState({isShowObjectiveParams: true})
+               }}>
             Allocate
           </div>
 
@@ -101,7 +121,7 @@ export default class OptimisationWidget extends React.Component {
       </div>}
 
       {this.isConstraintsTab(this.state.currentTab) &&
-      <div>constraints</div>}
+      <div>constraints WIP</div>}
 
     </div>
 
