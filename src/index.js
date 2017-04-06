@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import { hashHistory, Router, Route } from 'react-router'
+import createSagaMiddleware from 'redux-saga'
+
+import root from './sagas'
 import reducer from './reducers'
 import styles from './static/global.css'
 import * as PAGES from './pages'
-import createSagaMiddleware from 'redux-saga'
-import root from './sagas'
 
 const sagaMiddleware = createSagaMiddleware()
 

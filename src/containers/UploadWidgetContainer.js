@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 import { UploadWidgetComponent } from '../components'
 import {
-  updateTxnID
+  updateTxnID,
+  pollMarginCall
 } from '../actions/MarginCallUploadActions'
 
 const mapStateToProps = state => ({
@@ -9,7 +10,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  onUpdateTxnID: (txnID) => dispatch(updateTxnID(txnID)).then((response) => dispatch('FETCH_MARGIN_CALL'))
+  onUpdateTxnID: (txnID) =>
+    Promise.resolve(dispatch(updateTxnID(txnID)))
+      .then(response => dispatch(pollMarginCall(txnID)))
 })
 
 const UploadWidgetContainer = connect(
