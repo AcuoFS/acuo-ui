@@ -1,6 +1,15 @@
 /** @name CONFIG object from defineplugin of webpack on env-specific params
- *
+ *  FEATURE REMOVED, ENV NEEDS TO BE DEFINED AT RUNTIME INSTEAD OF BUILD TIME
  * */
+// import config from './config'
+//
+// const env = process.env.DOCKER_ENV || ''
+// const CONFIG = config.get(env)
+
+// console.log('api')
+// console.log(process)
+// console.log(process.env)
+// console.log(process.env.DOCKER_ENV)
 
 // Dashboard
 // export const DASHBOARD_URL = 'http://margin.acuo.com/acuo/api/margin/dashboard'
@@ -31,3 +40,5 @@ export const REMOVE_ASSET_ALLOCATION_URL = CONFIG.REMOVE_ASSET_ALLOCATION_URL
 
 // UNMATCHED PORTFOLIO
 export const UNMATCHED_PORTFOLIO_URL = CONFIG.UNMATCHED_PORTFOLIO_URL
+
+export const SEND_RECON_DISPUTE_URL = CONFIG.SEND_RECON_DISPUTE_URL

@@ -26,7 +26,9 @@ export default class Graph extends React.Component {
   render() {
     return (
     <div className={styles.graphCont}>
-      <svg viewBox="0 0 1440 460" preserveAspectRatio="xMaxYMax meet">
+      <svg viewBox="0 0 1440 460" preserveAspectRatio="xMidYMin slice"
+           style={{'width': '100%', 'paddingBottom': '32%', 'height': '1px', 'overflow': 'visible'}}>
+        {/*<svg viewBox="0 0 1440 460" preserveAspectRatio="xMaxYMax meet">*/}
         <Axis
           x={0}
           y={this.props.height * 0.5}

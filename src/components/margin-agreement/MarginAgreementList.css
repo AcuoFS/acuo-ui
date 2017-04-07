@@ -33,6 +33,7 @@
 .actionWrap .actPanel{
     display: inline-flex;
     /*border: 1px dotted #2b3c4c;*/
+    background: #fff;
 }
 
 .actionWrap .actPanel.act_C{
@@ -40,6 +41,7 @@
     align-items: stretch;
     margin: auto;
     /*border: 1px dotted #2b3c4c;*/
+    background: transparent;
 }
 .actionWrap .actPanel.act_C .btnWrap{
     margin: 0 auto;
@@ -313,11 +315,7 @@
     /*top: 18px;*/
     top: -33px;
 }
-@-moz-document url-prefix() {
-    .tabs14 {
-        top: 20px;
-    }
-}
+
 .tabs14 ul {
     margin:0;
     padding:0px 0px 0 0px;
@@ -394,7 +392,17 @@
     width: 300px;
     height: 28px;
     display: inline-block;
-    /*flex:2;*/
+    text-indent: 5px;
+}
+
+.dropdownCont{
+    composes: inputBox;
+    text-indent: 0;
+}
+
+.inputBoxDisabled{
+    composes: inputBox;
+    border: none;
 }
 
 .usd{
@@ -446,6 +454,7 @@
     border-radius: 20px;
     margin: 0 20px;
     align-self: center;
+    cursor: pointer;
 }
 
 

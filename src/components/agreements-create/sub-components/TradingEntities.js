@@ -11,10 +11,6 @@ const TradingEntities = (props) => {
   const onDropdownItemChange = (e) => {
   }
 
-  const onAgreementTypeChange = (e) => {
-    props.propSetAgreementType()
-  }
-
   return <div className={props.propIsDisplay ? styles.createContent : styles.hideForm}>
     <div className={styles.rowGroup}>
       <div className={styles.line}>Our Legal Entity</div>
@@ -62,7 +58,7 @@ const TradingEntities = (props) => {
         <div className={styles.dropDown}>
           <Dropdown
             handlerOnClick={toggleDropDown}
-            handleOnSelectedItemChange={onAgreementTypeChange}
+            handleOnSelectedItemChange={onDropdownItemChange}
             selectedOption={'Select'}
             options={['Group']}
             activateMouseLeaveEvent/>

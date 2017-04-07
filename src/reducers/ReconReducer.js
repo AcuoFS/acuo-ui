@@ -61,7 +61,7 @@ const updateSecondLevelList = (list, guid, parentID, id) => (
 )
 
 const retrieveSecondLevel = (list, guid, id) => (
-  list.reduce((sum, group) => sum = (_.find(group.data, {"firstLevel": {"id": id, "GUID": guid}}) ? _.find(group.data, {"firstLevel": {"id": id, "GUID": guid}}).firstLevel.secondLevel : []), [])
+  list.reduce((sum, group) => sum = (_.find(group.data, {"firstLevel": {"id": id, "GUID": guid}}) ? _.find(group.data, {"firstLevel": {"id": id, "GUID": guid}}).firstLevel.secondLevel : sum), [])
 )
 
 const updateFirstlevelListFromSecondLevel = (secondLevelList, firstLevelList, items) => {

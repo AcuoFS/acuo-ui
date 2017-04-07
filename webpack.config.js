@@ -6,8 +6,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [
-    'whatwg-fetch',
-    './src/index.js',
+    "babel-polyfill",
+    './src/index.js'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -50,19 +50,23 @@ module.exports = {
               name: '[hash].[ext]'
             }
           },
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              bypassOnDebug: true,
-              optimizationLevel: 7,
-              interlaced: false
-            }
-          }
+          // {
+          //   loader: 'image-webpack-loader',
+          //   options: {
+          //     bypassOnDebug: true,
+          //     optimizationLevel: 7,
+          //     interlaced: false
+          //   }
+          // }
         ]
       }
     ]
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      Promise: 'imports-loader?this=>global!exports-loader?global.Promise!es6-promise',
+      fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
+    }),
     new CopyWebpackPlugin([
       {from: './src/static/react-dropzone', to: './css/react-dropzone'},
       {from: './src/static/reset.css', to: './css/reset.css'},

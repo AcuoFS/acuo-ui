@@ -35,6 +35,16 @@
     margin: 10px 0;
 }
 
+.workflowLine {
+    margin: 10px 0;
+    padding: 5px 30px;
+}
+
+.workflowGroup {
+    display: flex;
+    flex-direction: column;
+}
+
 .line > .dropDown {
     width: 250px;
 }
@@ -49,6 +59,12 @@
     border: 1px solid #979797;
     font-size: 13px;
     line-height: 16px;
+}
+
+.inputTextBoxDisabled {
+    composes: inputTextBox;
+    background-color: #EEEEEE;
+    border: none;
 }
 
 .smallTextBox {
@@ -73,9 +89,14 @@
     align-items: center;
 }
 
-.agreementsSectionContainer {
+.flexCont {
     display: flex;
     flex-direction: row;
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
 }
 
 .agreementsSectionHeader {
@@ -86,6 +107,12 @@
 .agreementsSectionLeft {
     flex: 1;
     margin-right: 10px;
+}
+
+.agreementsSectionMiddle {
+    flex: 1;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .agreementsSectionRight {

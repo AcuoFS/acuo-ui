@@ -26,7 +26,8 @@ export default class ReferencesMarginTerms extends React.Component {
 
   render() {
     const {
-      propIsMenuCsa
+      propIsSubMenu,
+      propPostfixLabel
     } = this.props
 
     return (
@@ -34,7 +35,8 @@ export default class ReferencesMarginTerms extends React.Component {
         <div className={styles.rowGroup}>
           <div className={styles.line}>
             <span className={styles.agreementsSectionHeader}>
-              Margin Terms{propIsMenuCsa && ' - CSA'}
+              Margin Terms
+              {propPostfixLabel}
               </span>
             <span className={this.state.isSectionExpanded
               ? styles.upArrow : styles.downArrow}
@@ -45,7 +47,7 @@ export default class ReferencesMarginTerms extends React.Component {
         </div>
 
         {this.state.isSectionExpanded &&
-        <div className={styles.agreementsSectionContainer}>
+        <div className={styles.flexCont}>
           <div className={styles.agreementsSectionLeft}>
             Shared Details
             <hr/>
@@ -82,7 +84,7 @@ export default class ReferencesMarginTerms extends React.Component {
                     handlerOnClick={this.toggleDropDown}
                     handleOnSelectedItemChange={this.onDropdownItemChange}
                     selectedOption={'GMT'}
-                    options={gmtTimezoneList}
+                    options={['GMT', ...gmtTimezoneList]}
                     isFixedOptionsHeight
                     activateMouseLeaveEvent/>
                 </div>
@@ -98,7 +100,7 @@ export default class ReferencesMarginTerms extends React.Component {
                     handlerOnClick={this.toggleDropDown}
                     handleOnSelectedItemChange={this.onDropdownItemChange}
                     selectedOption={'Select'}
-                    options={['WIP']}
+                    options={['Select', 'WIP']}
                     activateMouseLeaveEvent/>
                 </div>
               </div>
@@ -112,7 +114,7 @@ export default class ReferencesMarginTerms extends React.Component {
                     handlerOnClick={this.toggleDropDown}
                     handleOnSelectedItemChange={this.onDropdownItemChange}
                     selectedOption={'Select'}
-                    options={['WIP']}
+                    options={['Select', 'WIP']}
                     activateMouseLeaveEvent/>
                 </div>
               </div>
@@ -145,7 +147,7 @@ export default class ReferencesMarginTerms extends React.Component {
                         handlerOnClick={this.toggleDropDown}
                         handleOnSelectedItemChange={this.onDropdownItemChange}
                         selectedOption={''}
-                        options={['Up', 'Down']}
+                        options={['', 'Up', 'Down']}
                         activateMouseLeaveEvent/>
                     </div>
                   </div>
@@ -155,7 +157,7 @@ export default class ReferencesMarginTerms extends React.Component {
                         handlerOnClick={this.toggleDropDown}
                         handleOnSelectedItemChange={this.onDropdownItemChange}
                         selectedOption={''}
-                        options={['Up', 'Down']}
+                        options={['', 'Up', 'Down']}
                         activateMouseLeaveEvent/>
                     </div>
 
@@ -178,7 +180,7 @@ export default class ReferencesMarginTerms extends React.Component {
                     handlerOnClick={this.toggleDropDown}
                     handleOnSelectedItemChange={this.onDropdownItemChange}
                     selectedOption={'Select'}
-                    options={['Delta', 'Net Exposure']}
+                    options={['Select', 'Delta', 'Net Exposure']}
                     activateMouseLeaveEvent/>
                 </div>
               </div>
@@ -192,7 +194,7 @@ export default class ReferencesMarginTerms extends React.Component {
                     handlerOnClick={this.toggleDropDown}
                     handleOnSelectedItemChange={this.onDropdownItemChange}
                     selectedOption={'Select'}
-                    options={['Local', 'Central']}
+                    options={['Select', 'Local', 'Central']}
                     activateMouseLeaveEvent/>
                 </div>
               </div>
@@ -201,7 +203,8 @@ export default class ReferencesMarginTerms extends React.Component {
 
           </div>
 
-          <div className={propIsMenuCsa && styles.agreementsSectionRight}/>
+          <div className={propIsSubMenu &&
+          styles.agreementsSectionRight}/>
 
         </div>}
 
