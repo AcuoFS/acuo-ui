@@ -46,13 +46,15 @@ export default class Constraints extends React.Component {
 
   render() {
     return <div className={styles.componentWrap}>
-      <div>
+      <div className={styles.constraintsSection}>
         <div className={styles.flexWrap}>
 
-          {this.createInputWithPlusMinus(STATE_MAX_MOVEMENTS)}
+          <div className={styles.lineWithoutFlex}>
+            {this.createInputWithPlusMinus(STATE_MAX_MOVEMENTS)}
+          </div>
 
           <div className={styles.flexColumnWrap}>
-            <div className={styles.textWrap}>Maximum movements for each statement</div>
+            <div className={styles.line + ' ' + styles.textWrap}>Maximum movements for each statement</div>
             <div className={styles.line}><img src={this.state.isFungible ? checkBoxWithTick : checkBox}
                                               className={styles.checkboxWrap}
                                               onClick={() => this.setState({isFungible: !this.state.isFungible})}/>
@@ -61,10 +63,11 @@ export default class Constraints extends React.Component {
           </div>
 
         </div>
-        <hr/>
+
 
       </div>
-      <div>
+      <hr/>
+      <div className={styles.constraintsSection}>
         <div className={styles.line}>
           <div className={styles.textWrap}>Exclude assets with corporate actions within the next</div>
         </div>
@@ -75,17 +78,19 @@ export default class Constraints extends React.Component {
 
           <div className={styles.textWrap}>days</div>
         </div>
-        <hr/>
+
       </div>
-      <div>
+      <hr/>
+      <div className={styles.constraintsSection}>
         <div className={styles.line}>
           <div className={styles.plusMinusWrap}/>
           <input type="number" className={styles.constraintsNumberBoxDisabled} readOnly value={76}/>
           <div className={styles.plusMinusWrap}/>
           <div className={styles.textWrap}>Movements based on Optimization</div>
         </div>
-        <hr/>
+
       </div>
+      <hr/>
     </div>
   }
 }
