@@ -19,11 +19,11 @@ class Pledge extends React.Component {
       open: true,
       dropdown: "./images/common/minusbox.png",
 
-      toggleColwidthL: styles.minDivL, 
+      toggleColwidthL: styles.minDivL,
       toggleColwidthR: styles.expandDivR,
 
       toggleHideCol: styles.showCol,
-      toggleShowHideL : false, 
+      toggleShowHideL : false,
       toggleShowHideR : true,
       sideways: "./images/pledge/sideways-min.png",
       selectionSideway: "./images/pledge/sideways-max.png",
@@ -134,69 +134,69 @@ class Pledge extends React.Component {
 
     return (
 
-        <div className={styles.pledgeContainer}>
-          <div className={styles.sliderAndStatus}>
-            <div className={styles.panel} id={styles.optSetting}>
-              <div className={styles.panelTitle}>Optimization Setting <img src={'./images/pledge/locked.png'} /></div>
-              <div className={styles.optPnlWrap}>
-                {this.renderOptItems(optimisation, onUpdateOptimisationSettings)}
-              </div>
-              <div className={styles.buttonHolder}>
-                <ChooseCalls tickImg={sliderCheckbox[0]} tickState={sliderCheckbox[1]}
-                             tickClick={onToggleCheckall}/>
-
-                <div className={styles.optButton + ' ' +
-                (this.checkIfExist(pendingAllocation).size > 0 ? '' : styles.btnDisabled )}
-                     onClick={() => onAllocate(pendingAllocation.toJS(), optimisation.toJS())}>
-                  Allocate
-                </div>
-
-                {/*<div className={styles.optButton + ' ' +*/}
-                {/*(this.checkIfExist(selection).reduce(this.sumOfIMVM, 0) > 0*/}
-                  {/*? styles.optBtnPledge*/}
-                  {/*: styles.btnDisabled )}*/}
-                     {/*onClick={() => onPledge(selection.toJS())}>*/}
-                  {/*Pledge*/}
-                {/*</div>*/}
-
-                <div className={styles.optButton + ' ' +
-                (this.isShowPledgeBtn(selection)
-                  ? styles.optBtnPledge
-                  : styles.btnDisabled )}
-                     onClick={() => onPledge(selection.toJS())}>
-                  Pledge
-                </div>
-
-
-              </div>
-              {/* change btnEnabled to btnDisabled to disable the button*/}
+      <div className={styles.pledgeContainer}>
+        <div className={styles.sliderAndStatus}>
+          <div className={styles.panel} id={styles.optSetting}>
+            <div className={styles.panelTitle}>Optimization Setting <img src={'./images/pledge/locked.png'} /></div>
+            <div className={styles.optPnlWrap}>
+              {this.renderOptItems(optimisation, onUpdateOptimisationSettings)}
             </div>
+            <div className={styles.buttonHolder}>
+              <ChooseCalls tickImg={sliderCheckbox[0]} tickState={sliderCheckbox[1]}
+                           tickClick={onToggleCheckall}/>
 
-            <div className={styles.panel} id={styles.pleStatus}>
-              {/*<div className={styles.panelTitle}>Pledge Status</div>*/}
-              <img src="./images/pledge/Pledge-status-widget.png"/>
+              <div className={styles.optButton + ' ' +
+              (this.checkIfExist(pendingAllocation).size > 0 ? '' : styles.btnDisabled )}
+                   onClick={() => onAllocate(pendingAllocation.toJS(), optimisation.toJS())}>
+                Allocate
+              </div>
+
+              {/*<div className={styles.optButton + ' ' +*/}
+              {/*(this.checkIfExist(selection).reduce(this.sumOfIMVM, 0) > 0*/}
+              {/*? styles.optBtnPledge*/}
+              {/*: styles.btnDisabled )}*/}
+              {/*onClick={() => onPledge(selection.toJS())}>*/}
+              {/*Pledge*/}
+              {/*</div>*/}
+
+              <div className={styles.optButton + ' ' +
+              (this.isShowPledgeBtn(selection)
+                ? styles.optBtnPledge
+                : styles.btnDisabled )}
+                   onClick={() => onPledge(selection.toJS())}>
+                Pledge
+              </div>
+
+
             </div>
+            {/* change btnEnabled to btnDisabled to disable the button*/}
           </div>
 
-          <div className={styles.secDivider}></div>
-
-          <div className={styles.flexContainer}>
-
-            <div className={styles.col_L + ' ' + this.state.toggleColwidthL}>
-
-              {this.checkIfExist(selection)
-                .map((x, index) => this.renderSelection(x, onTogglePendingAllocation, pendingAllocation, index))}
-
-            </div>
-
-            <CollateralWidgetContainer
-              toggleColwidthR={this.state.toggleColwidthR}
-              sideways={this.state.sideways}
-              open={this.state.open}
-              changeSideways={this.changeSideways}/>
-
+          <div className={styles.panel} id={styles.pleStatus}>
+            {/*<div className={styles.panelTitle}>Pledge Status</div>*/}
+            <img src="./images/pledge/Pledge-status-widget.png"/>
           </div>
         </div>
+
+        <div className={styles.secDivider}></div>
+
+        <div className={styles.flexContainer}>
+
+          <div className={styles.col_L + ' ' + this.state.toggleColwidthL}>
+
+            {this.checkIfExist(selection)
+              .map((x, index) => this.renderSelection(x, onTogglePendingAllocation, pendingAllocation, index))}
+
+          </div>
+
+          <CollateralWidgetContainer
+            toggleColwidthR={this.state.toggleColwidthR}
+            sideways={this.state.sideways}
+            open={this.state.open}
+            changeSideways={this.changeSideways}/>
+
+        </div>
+      </div>
 
     )
   }

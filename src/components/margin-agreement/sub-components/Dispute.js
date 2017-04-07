@@ -1,21 +1,44 @@
 import React, {PropTypes} from 'react'
 import styles from '../MarginAgreementList.css'
-import Dropdown from '../../Dropdown/Dropdown'
+// import Dropdown from '../../Dropdown/Dropdown'
+import {reconDisputeReasonCodes}from '../../../mappings'
 import {Map} from 'immutable'
+import _ from 'lodash'
+import Select from 'react-select'// react-select using styles from src/static/react-select/react-select.css
 
 
 export default class Dispute extends React.Component {
 
   constructor(props) {
     super(props)
-    this.toggleDropDown = this.toggleDropDown.bind(this)
+
     this.state = {
-      isDropDownSelected: false,
-      isValidForm: false
+      formDisputeAmt: '',
+      formAgreedAmt: '',
+      formReasonCode: '',
+      formComments: '',
+      formMtm: '',
+      formBalance: ''
     }
 
+    this.toggleDropDown = this.toggleDropDown.bind(this)
     this.onDropdownItemChange = this.onDropdownItemChange.bind(this)
-    this.validateForm = this.validateForm.bind(this)
+    this.isValidForm = this.isValidForm.bind(this)
+    this.submitDisputeForm = this.submitDisputeForm.bind(this)
+    this.isUpdatedForm = this.isUpdatedForm.bind(this)
+    this.logChange = this.logChange.bind(this)
+  }
+
+  logChange(val) {
+    this.setState({
+      formReasonCode: val ? val.value : ''
+    })
+  }
+
+  componentDidUpdate() {
+    if (!this.props.isHidePanel && !this.isUpdatedForm()) {
+      this.disAmtInput.focus()
+    }
   }
 
   toggleDropDown(e) {
@@ -33,28 +56,63 @@ export default class Dispute extends React.Component {
       return
   }
 
-  onDropdownItemChange(e) {
-    this.setState({
-      isDropDownSelected: true
-    }, this.validateForm)
+  onDropdownItemChange(e, optionCode) {
+    this.setState({formReasonCode: optionCode})
 
-    e.stopPropagation();
+    e.stopPropagation()
   }
 
-  validateForm() {
-    const isAllInputFilled =
-      !(this.disAmtInput.value.trim() == "") && !(this.agreeAmtInput.value.trim() == "") &&
-      this.state.isDropDownSelected && !(this.mtmInput.value.trim() == "") && !(this.collatBalInput.value.trim() == "")
+  isNotBlankText(str) {
+    return str.trim() !== ''
+  }
 
-    this.setState({
-      isValidForm: isAllInputFilled
+  isUpdatedText(str) {
+    return str !== ''
+  }
+
+  isUpdatedForm() {
+    return this.isUpdatedText(this.state.formDisputeAmt) || this.isUpdatedText(this.state.formAgreedAmt) ||
+      this.isUpdatedText(this.state.formReasonCode) || this.isUpdatedText(this.state.formMtm) ||
+      this.isUpdatedText(this.state.formBalance)
+  }
+
+  isValidForm() {
+    return this.isNotBlankText(this.state.formDisputeAmt) && this.isNotBlankText(this.state.formAgreedAmt) &&
+      this.isNotBlankText(this.state.formReasonCode) && this.isNotBlankText(this.state.formMtm) &&
+      this.isNotBlankText(this.state.formBalance)
+  }
+
+  getReasonCodesAsDropdown(reasonCodes) {
+    let dd = []
+
+    _.forOwn(reasonCodes, (value, key) => {
+      let ddItem = {}
+      _.set(ddItem, 'label', value)
+      _.set(ddItem, 'value', key)
+
+      dd = [...dd, ddItem]
     })
+
+    return dd
   }
 
+  submitDisputeForm() {
+    const disputeObjToSend = {
+      msId: this.props.marginData.get('GUID'),
+      disputedAmount: this.state.formDisputeAmt,
+      agreedAmount: this.state.formAgreedAmt,
+      reasonCode: this.state.formReasonCode,
+      comments: this.state.formComments,
+      mtm: this.state.formMtm,
+      balance: this.state.formBalance
+    }
+
+    this.props.sendDisputeToBack(disputeObjToSend)
+  }
 
   render() {
     const {
-      marginData, orgName, isHidePanel
+      marginData, orgName, isHidePanel, isDisputed
     } = this.props
 
     return (
@@ -90,58 +148,93 @@ export default class Dispute extends React.Component {
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Dispute Amount
               </div>
-              <input type="text" className={styles.inputBox} onChange={this.validateForm}
-                     ref={dom => this.disAmtInput = dom}/>
+              <input type="number"
+                     className={isDisputed ? styles.inputBoxDisabled : styles.inputBox}
+                     onChange={(e) => this.setState({formDisputeAmt: e.target.value})}
+                     ref={dom => this.disAmtInput = dom}
+                     disabled={isDisputed}
+                     value={isDisputed
+                       ? marginData.getIn(['disputeInfo', 'disputedAmount']) : this.state.formDisputeAmt}/>
               <div className={styles.usd}>USD</div>
 
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Agreed Amount
               </div>
-              <input type="text" className={styles.inputBox} onChange={this.validateForm}
-                     ref={dom => this.agreeAmtInput = dom}/>
+              <input type="number"
+                     className={isDisputed ? styles.inputBoxDisabled : styles.inputBox}
+                     onChange={(e) => this.setState({formAgreedAmt: e.target.value})}
+                     disabled={isDisputed}
+                     value={isDisputed
+                       ? marginData.getIn(['disputeInfo', 'agreedAmount']) : this.state.formAgreedAmt}/>
+
               <div className={styles.usd}>USD</div>
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Reason Code
               </div>
-              <div className={styles.inputBox}>
-                <Dropdown
-                  handlerOnClick={this.toggleDropDown}
-                  handleOnSelectedItemChange={this.onDropdownItemChange}
-                  selectedOption='Select One'
-                  options={['Portfolio Discrepancy', 'Initial Margin/ Independent Amount Discrepancy', 'Collateral Discrepancy'
-                    , 'Agreement Discrepancy', 'Notification Time', 'Call Amount Discrepancy', 'MTM Discrepancy', 'Below Threshold Limit'
-                    , 'Two Way Call', 'UnKnown Business Error', 'Other']}/>
-              </div>
+              {isDisputed
+                ? <input type="text" className={styles.inputBoxDisabled}
+                         defaultValue={reconDisputeReasonCodes[marginData.getIn(['disputeInfo', 'reasonCode'])]}
+                         disabled/>
+                : <div className={styles.dropdownCont}>
+                  {/*<Dropdown*/}
+                  {/*handlerOnClick={this.toggleDropDown}*/}
+                  {/*handleOnSelectedItemChange={this.onDropdownItemChange}*/}
+                  {/*selectedOption=''*/}
+                  {/*options={this.getReasonCodesAsDropdown(reconDisputeReasonCodes)}*/}
+                  {/*nextTabIndex={this.generateNextTabIndex()}/>*/}
+                  <Select
+                    value={this.state.formReasonCode}
+                    options={this.getReasonCodesAsDropdown(reconDisputeReasonCodes)}
+                    onChange={this.logChange} />
+                </div>}
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Comments
               </div>
-              <input type="text" className={styles.inputBox}/>
+              <input type="text"
+                     className={isDisputed ? styles.inputBoxDisabled : styles.inputBox}
+                     onChange={(e) => this.setState({formComments: e.target.value})}
+                     disabled={isDisputed}
+                     value={isDisputed
+                       ? marginData.getIn(['disputeInfo', 'comments']) : this.state.formComments}/>
+
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> MTM
               </div>
-              <input type="text" className={styles.inputBox} onChange={this.validateForm}
-                     ref={dom => this.mtmInput = dom}/>
+              <input type="number"
+                     className={isDisputed ? styles.inputBoxDisabled : styles.inputBox}
+                     onChange={(e) => this.setState({formMtm: e.target.value})}
+                     disabled={isDisputed}
+                     value={isDisputed
+                       ? marginData.getIn(['disputeInfo', 'mtm']) : this.state.formMtm}/>
+
               <div className={styles.usd}>USD</div>
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Collateral Balance
               </div>
-              <input type="text" className={styles.inputBox} onChange={this.validateForm}
-                     ref={dom => this.collatBalInput = dom}/>
+              <input type="number"
+                     className={isDisputed ? styles.inputBoxDisabled : styles.inputBox}
+                     onChange={(e) => this.setState({formBalance: e.target.value})}
+                     disabled={isDisputed}
+                     value={isDisputed
+                       ? marginData.getIn(['disputeInfo', 'balance']) : this.state.formBalance}/>
+
               <div className={styles.usd}>USD</div>
             </div>
           </div>
 
-          <div className={this.state.isValidForm ? styles.buttonContainerEnabled : styles.buttonContainerDisabled}>
-            <button type="submit" disabled={true}>Dispute</button>
+          <div className={(!this.isValidForm() || isDisputed)
+            ? styles.buttonContainerDisabled : styles.buttonContainerEnabled}>
+            <button type="submit" onClick={this.submitDisputeForm}
+                    disabled={!this.isValidForm() || isDisputed}>Dispute
+            </button>
           </div>
 
         </form>
-
 
       </div>
     )
@@ -151,7 +244,8 @@ export default class Dispute extends React.Component {
 Dispute.propTypes = {
   marginData: PropTypes.instanceOf(Map).isRequired,
   orgName: PropTypes.string.isRequired,
-  isHidePanel: PropTypes.bool
+  isHidePanel: PropTypes.bool,
+  sendDisputeToBack: PropTypes.func.isRequired
 }
 
 Dispute.defaultProps = {

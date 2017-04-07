@@ -8,7 +8,7 @@ module.exports = {
   entry: [
     'babel-polyfill',
     'whatwg-fetch',
-    './src/index.js',
+    './src/index.js'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -64,8 +64,13 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      Promise: 'imports-loader?this=>global!exports-loader?global.Promise!es6-promise',
+      fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
+    }),
     new CopyWebpackPlugin([
       {from: './src/static/react-dropzone', to: './css/react-dropzone'},
+      {from: './src/static/react-select', to: './css/react-select'},
       {from: './src/static/reset.css', to: './css/reset.css'},
       {from: './images', to: './images'}
     ]),

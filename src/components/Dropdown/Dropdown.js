@@ -37,7 +37,7 @@ export default class Dropdown extends React.Component{
       selectedOption : option,
       isOpen : false
     })
-    this.props.handleOnSelectedItemChange(e)
+    this.props.handleOnSelectedItemChange(e, option.value)
   }
 
   render(){

@@ -31,6 +31,7 @@
     composes: agreementBtnStyle;
     border: 1px solid #D5DADF;
     color: #D5DADF;
+    cursor: default;
 }
 
 .tableHeader {

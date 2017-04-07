@@ -1,6 +1,6 @@
 import React from 'react'
 import MarginAgreementAssets from './MarginAgreementAssets'
-import Dispute from './Dispute'
+import ReconDisputeContainer from '../../../containers/ReconDisputeContainer'
 import {TAB_MARGIN_AGREEMENT_PORTFOLIO, TAB_MARGIN_AGREEMENT_DISPUTE} from '../../../constants/ComponentConstant'
 import styles from '../MarginAgreementList.css'
 
@@ -10,31 +10,29 @@ export default class CounterPartyAssets extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedTab: TAB_MARGIN_AGREEMENT_PORTFOLIO,
-      tabReconStyle: styles.tabActive,
-      tabDisputeStyle : styles.tabInactive
+      selectedTab: props.isDisputed ? TAB_MARGIN_AGREEMENT_DISPUTE :
+        TAB_MARGIN_AGREEMENT_PORTFOLIO,
+      tabReconStyle: props.isDisputed ? styles.tabInactive : styles.tabActive,
+      tabDisputeStyle: props.isDisputed ? styles.tabActive : styles.tabInactive
 
     }
     this.handleOnTabSelect = this.handleOnTabSelect.bind(this)
   }
 
   handleOnTabSelect(e) {
-
-    console.log(e.currentTarget.value)
-
     if (e.currentTarget.dataset.value == TAB_MARGIN_AGREEMENT_PORTFOLIO) {
 
       this.setState((prevState) => ({
         selectedTab: TAB_MARGIN_AGREEMENT_PORTFOLIO,
         tabReconStyle: styles.tabActive,
         tabDisputeStyle: styles.tabInactive
-      }));
+      }))
     } else {
       this.setState((prevState) => ({
         selectedTab: TAB_MARGIN_AGREEMENT_DISPUTE,
         tabReconStyle: styles.tabInactive,
         tabDisputeStyle: styles.tabActive
-      }));
+      }))
     }
   }
 
@@ -43,7 +41,8 @@ export default class CounterPartyAssets extends React.Component {
       marginData, actStyle, orgName,
       assetsName, handlerTotalMargin, handlerSelectedItem,
       firstLevelList, secondLevelList,
-      onSelectSecondLevelItem, onTogglePortfolioPopup, isUploading
+      onSelectSecondLevelItem, onTogglePortfolioPopup, isUploading,
+      isDisputed
     } = this.props
 
     return (
@@ -70,13 +69,14 @@ export default class CounterPartyAssets extends React.Component {
                                onTogglePortfolioPopup={onTogglePortfolioPopup}
                                isUploading={isUploading}
                                party={'cpty'}/>
-        <Dispute marginData={marginData}
-                 actStyle={actStyle}
-                 orgName={orgName}
-                 assetsName={assetsName}
-                 handlerTotalMargin={handlerTotalMargin}
-                 handlerSelectedItem={handlerSelectedItem}
-                 isHidePanel={this.state.selectedTab == TAB_MARGIN_AGREEMENT_PORTFOLIO}
+        <ReconDisputeContainer marginData={marginData}
+                               actStyle={actStyle}
+                               orgName={orgName}
+                               assetsName={assetsName}
+                               handlerTotalMargin={handlerTotalMargin}
+                               handlerSelectedItem={handlerSelectedItem}
+                               isHidePanel={this.state.selectedTab == TAB_MARGIN_AGREEMENT_PORTFOLIO}
+                               isDisputed={isDisputed}
         />
       </div>
 
