@@ -6,7 +6,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [
-    "babel-polyfill",
+    'babel-polyfill',
+    'whatwg-fetch',
     './src/index.js'
   ],
   output: {
@@ -21,7 +22,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         options: {
-          presets: [['es2015', {modules: false}], 'react']
+          presets: [['es2015', {modules: false}], 'react', "stage-0"]
         }
       },
       {

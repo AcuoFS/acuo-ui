@@ -10,13 +10,15 @@ export default class UploadWidget extends React.Component {
 
     this.state = {
       isWidgetValidForSubmission: false,
-      isSendToBackend: false
+      isSendToBackend: false,
+      status: []
     }
 
     this.onGenerate = this.onGenerate.bind(this)
     this.handleFileAdded = this.handleFileAdded.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
     this.clearSend = this.clearSend.bind(this)
+    this.updateUploadStatus = this.updateUploadStatus.bind(this)
   }
 
   handleFileAdded(hasFiles) {
@@ -25,12 +27,16 @@ export default class UploadWidget extends React.Component {
     })
   }
 
+  updateUploadStatus(status) {
+    this.setState({
+      status: status
+    })
+  }
+
   onGenerate() {
     this.setState({
       isSendToBackend: true
     })
-
-    this.props.showMarginCall()
   }
 
   clearSend(){
@@ -45,16 +51,23 @@ export default class UploadWidget extends React.Component {
     })
   }
 
+  updateUploadStatus(statuses) {
+    this.setState({
+      status: statuses
+    })
+  }
+
   templateForDz(){
     return <div className={"dz-preview dz-file-preview " + styles.alignFileIconLeft}>
       <div className="dz-details">
         <img data-dz-thumbnail="true" src="./images/upload-portfolio/file_icon.png"/>
         <div className={"dz-filename " + styles.fileName}>
+
+          <span data-dz-name="true" className={styles.fileNameText}></span>
+
           <a href="#" data-dz-remove>
             <img src="./images/upload-portfolio/cross_cancel.png" alt="Click me to remove the file."/>
           </a>
-
-          <span data-dz-name="true" className={styles.fileNameText}></span>
         </div>
       </div>
       <div className="dz-success-mark"><span>✔</span></div>
@@ -64,6 +77,8 @@ export default class UploadWidget extends React.Component {
   }
 
   render() {
+
+    const { onUpdateTxnID } = this.props
 
     return (
       /*<form id="uploadbanner" enctype="multipart/form-data" method="post" action="http://localhost:3000/">
@@ -79,14 +94,19 @@ export default class UploadWidget extends React.Component {
                      propClearSendToBackend={this.clearSend}
                      propTemplate={this.templateForDz()}
                      propNoOfFiles={5}
-                     propPostUrl={UPLOAD_FILE_URL}/>
+                     propPostUrl={UPLOAD_FILE_URL}
+                     updateUploadStatus={this.updateUploadStatus}
+                     onUpdateTxnID={onUpdateTxnID}/>
 
-        <div
-          className={this.state.isWidgetValidForSubmission ?
-            styles.buttonContainerEnabled : styles.buttonContainerDisabled}>
-          <button className={styles.textBold} type="button" onClick={this.onGenerate}
-                  disabled={!(this.state.isWidgetValidForSubmission)}>
-            Generate Margin Call Data
+        <div className={styles.buttonContainer}>
+          <div className={styles.uploadStatus}>
+            {this.state.status.map((x, i) => <p key={i}>{x.remarks}</p>)}
+          </div>
+
+          <button className={styles.textBold + ' ' + (this.state.isWidgetValidForSubmission ?
+            styles.enabled : '')} type="button" onClick={this.onGenerate}
+                  disabled={!this.state.isWidgetValidForSubmission}>
+            Upload
           </button>
         </div>
       </div>

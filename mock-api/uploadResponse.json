@@ -1,0 +1,13 @@
+{
+  "txnID": "je9ewodk39diurnedwndj39473hcjsk",
+  "statuses": [
+    {
+      "status": "success",
+      "remarks": "1,000 lines successfully uploaded"
+    },
+    {
+      "status": "failure",
+      "remarks": "1,000 lines successfully uploaded"
+    }
+  ]
+}

@@ -30,13 +30,13 @@ export default class DeselectionPopup extends React.Component {
     }
   }
 
-  onConfirm(radioAllDom, radioCurDom, propOpenedDeselectionPopup) {
+  onConfirm(radioAllDom, radioCurDom, propOpenedDeselectionPopup, propDeselectAsset, onRemoveAssetFromAllocate, GUID) {
     let checkMsg = ''
     if (radioAllDom.checked) {
-      checkMsg = 'All calls is selected'
+      onRemoveAssetFromAllocate(propDeselectAsset)
     }
     if (radioCurDom.checked) {
-      checkMsg = 'Current call is selected'
+      onRemoveAssetFromAllocate(propDeselectAsset, [GUID])
     }
 
     // todo: fetch request goes here REMOVE_ASSET_ALLOCATION_URL
@@ -61,8 +61,11 @@ export default class DeselectionPopup extends React.Component {
     const {
       propOpenedDeselectionPopup,
       propHandlerClearPopup,
+      propDeselectAsset,
       propIsValidFlag,
-      propHandlerSetFormValidity
+      propHandlerSetFormValidity,
+      onRemoveAssetFromAllocate,
+      GUID
     } = this.props
 
     return (
@@ -101,7 +104,7 @@ export default class DeselectionPopup extends React.Component {
             (propIsValidFlag ? styles.buttonEnabled : '')}
                     disabled={!propIsValidFlag}
                     onClick={() => {
-                      this.onConfirm(this.radioAllDom, this.radioCurDom, propOpenedDeselectionPopup)
+                      this.onConfirm(this.radioAllDom, this.radioCurDom, propOpenedDeselectionPopup, propDeselectAsset, onRemoveAssetFromAllocate, GUID)
                     }}>
               Confirm
             </button>
