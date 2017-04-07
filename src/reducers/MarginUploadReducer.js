@@ -13,7 +13,10 @@ const initialState = Map({
 const MarginUploadReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_MARGIN_CALL_UPLOAD:
-      return state.set('uploadData', fromJS(action.uploadData))
+      // console.log(action.uploadData)
+      // console.log(fromJS(action.uploadData))
+
+      return state.set('uploadData', fromJS(action.uploadData).toList())
     case UPDATE_MARGIN_CALL_UPLOAD:
       return state.set('uploadData',
         state.get('uploadData').map(

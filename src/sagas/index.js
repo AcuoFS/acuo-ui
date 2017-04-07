@@ -3,19 +3,27 @@ import { fork, call, put, take, race } from 'redux-saga/effects'
 
 import { FetchMarginCall } from './FetchMarginCall'
 import { pollMarginCall } from '../actions/MarginCallUploadActions'
-import { POLL_MARGIN_CALL, STOP_MARGIN_POLL } from '../constants/ActionTypes'
+import {
+  POLL_MARGIN_CALL,
+  STOP_MARGIN_POLL
+} from '../constants/ActionTypes'
+import { getMarginCallUpload } from  '../actions/MarginCallUploadActions'
+
 
 function* poll(txnID) {
-  console.log('poll')
+  // console.log('poll')
   try {
     yield call(delay, 10000)
-    const response = yield call(FetchMarginCall, txnID)
+    const result = yield call(FetchMarginCall, txnID)
 
-    console.log(response)
-    response.then((res) => console.log(res))
+    // console.log(result)
 
-    yield put(pollMarginCall(txnID))
-    //put is for actions, call for functions
+    if(result[0] === 'failed')
+      yield put(pollMarginCall(txnID))
+    else
+      yield put(getMarginCallUpload(result[1]))
+
+
   } catch (error) {
     // cancellation error -- can handle this if you wish
     return
@@ -23,19 +31,19 @@ function* poll(txnID) {
 }
 
 function* watchMarginCall() {
-  console.log('watch margin call')
+  // console.log('watch margin call')
   while (true) {
     const { txnID } = yield take(POLL_MARGIN_CALL)
     yield race([
       fork(poll, txnID),
       take(STOP_MARGIN_POLL)
     ])
-    console.log('loop')
+    // console.log('loop')
   }
 }
 
 export default function* root() {
-  console.log('root')
+  // console.log('root')
   yield [
     fork(watchMarginCall)
   ]

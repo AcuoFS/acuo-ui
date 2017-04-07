@@ -9,6 +9,8 @@ const mapStateToProps = state => ({
   txnID: state.MarginUploadReducer.get('txnID') || ''
 })
 
+const checkUploadData = (data) => (data.length)
+
 const mapDispatchToProps = dispatch => ({
   onGetMarginUploadData: (uploadData) => {
     dispatch(MarginCallUploadActions.getMarginCallUpload(uploadData))
@@ -18,9 +20,15 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
+const mergeProps = (stateProps, dispatchProps) => ({
+  uploadDataFlag: checkUploadData(stateProps.uploadData),
+  ...stateProps, ...dispatchProps
+})
+
 const MarginCallContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
+  mergeProps
 )(MarginCallComponent)
 
 export default MarginCallContainer

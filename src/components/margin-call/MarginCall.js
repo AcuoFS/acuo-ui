@@ -26,7 +26,7 @@ export default class MarginCall extends React.Component {
     this.onSingleRow = this.onSingleRow.bind(this)
 
     // TODO: should be fetched from endpoint. This is the interim mock data
-    props.onGetMarginUploadData(marginCallData)
+    // props.onGetMarginUploadData(marginCallData)
   }
 
   toggleIsChecked() {
@@ -107,7 +107,9 @@ export default class MarginCall extends React.Component {
 
   render() {
 
-    const { txnID } = this.props
+    const { txnID, uploadDataFlag } = this.props
+
+
 
     return (
       <div className={styles.container + ' ' + (txnID ? '' : styles.hidden)}>
@@ -147,21 +149,24 @@ export default class MarginCall extends React.Component {
             <div className={styles.cell}></div>
           </div>
 
-          {/*<ContentRows spillContents={this.openRow} isChecked={this.state.isChecked}*/}
-                       {/*isOpen={this.state.openedRows.indexOf(1) > -1}*/}
-                       {/*propHandlerOnTotalMargin={this.onTotalCallAmt}*/}
-                       {/*propMarginCallUploadData={this.props.uploadData}*/}
-                       {/*propHandlerSingleRow={this.onSingleRow}/>*/}
-          {/*<ContentRows spillContents={this.openRow} isChecked={this.state.isChecked} isOpen={this.state.openedRows.indexOf(2) > -1}/>*/}
+          { uploadDataFlag ?
+              <ContentRows spillContents={this.openRow} isChecked={this.state.isChecked}
+                           isOpen={this.state.openedRows.indexOf(1) > -1}
+                           propHandlerOnTotalMargin={this.onTotalCallAmt}
+                           propMarginCallUploadData={this.props.uploadData}
+                           propHandlerSingleRow={this.onSingleRow}/>
+            :
 
-          <div className={styles.loadingContainer}>
-            <div className={styles.loadingText}>
-              Valuation in progress
+            <div className={styles.loadingContainer}>
+              <div className={styles.loadingText}>
+                Valuation in progress
+              </div>
+              <div className={styles.loadingBar}>
+                <div className={styles.spinner}></div>
+              </div>
             </div>
-            <div className={styles.loadingBar}>
-              <div className={styles.spinner}></div>
-            </div>
-          </div>
+
+          }
         </div>
       </div>
     )
