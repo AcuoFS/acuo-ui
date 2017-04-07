@@ -2,6 +2,7 @@ import React from 'react'
 import OptItem from './sub-components/OptItem'
 import ChooseCalls from '../pledge/sub-components/ChooseCalls'
 import {List} from 'immutable'
+import Constraints from './sub-components/Constraints'
 import sharedStyles from '../pledge/Pledge.css'
 import styles from './OptimisationWidget.css'
 
@@ -121,7 +122,7 @@ export default class OptimisationWidget extends React.Component {
       </div>}
 
       {this.isConstraintsTab(this.state.currentTab) &&
-      <div>constraints WIP</div>}
+      <Constraints/>}
 
     </div>
 

@@ -1,0 +1,58 @@
+.componentWrap {
+    margin: 15px 0;
+
+}
+
+.line {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.textWrap {
+    color: #4A4A4A;
+    /*font-size: 13px;*/
+    /*line-height: 16px;*/
+    font-size: 15px;
+    line-height: 16px;
+}
+
+.plusMinusWrap {
+    margin: 0 3px;
+    cursor: pointer;
+    min-width: 5px;
+}
+
+.constraintsNumberBox {
+    box-sizing: border-box;
+    height: 17px;
+    width: 38px;
+    border: 1px solid #979797;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    text-align: center;
+}
+
+.constraintsNumberBoxDisabled {
+    composes: constraintsNumberBox;
+    border: 1px solid #EEEEEE;
+}
+
+.constraintsNumberBox::-webkit-inner-spin-button,
+.constraintsNumberBox::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.flexWrap {
+    display: flex;
+}
+
+.flexColumnWrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkboxWrap {
+    composes: plusMinusWrap;
+}

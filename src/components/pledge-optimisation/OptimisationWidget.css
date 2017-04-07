@@ -6,7 +6,7 @@
     /*height: 345px;*/
     margin: 20px 20px 30px 20px;
     flex: 1;
-    min-height: 385px;
+    min-height: 391px;
 }
 
 #optSetting .panelTitle {
@@ -374,8 +374,6 @@ input[type=range]:focus::-ms-fill-upper {
 
 .objectiveParamCont {
     flex: 1;
-    display: flex;
-    flex-direction: column;
 }
 
 .objectiveTitle {
