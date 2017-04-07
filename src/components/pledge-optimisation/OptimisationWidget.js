@@ -134,7 +134,8 @@ export default class OptimisationWidget extends React.Component {
                      this.setState({isFungible: !this.state.isFungible})}
                    propGetStateProperty={(stateProperty) => this.state[stateProperty]}
                    propSetStatePropertyWithValue={(stateProperty, newValue) =>
-                     this.setState({[stateProperty]: newValue})}/>}
+                     this.setState({[stateProperty]: newValue})}
+                   propIsAllocateClicked={this.state.isAllocateButtonClicked}/>}
 
     </div>
 

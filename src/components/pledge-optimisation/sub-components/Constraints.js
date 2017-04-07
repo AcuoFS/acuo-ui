@@ -45,56 +45,66 @@ export default class Constraints extends React.Component {
       propIsFungible,
       propHandlerToggleFungible,
       propGetStateProperty,
-      propSetStatePropertyWithValue
+      propSetStatePropertyWithValue,
+      propIsAllocateClicked
     } = this.props
     return <div className={styles.componentWrap}>
-      <div className={styles.constraintsSection}>
-        <div className={styles.flexWrap}>
+      <div>
+        <div className={styles.constraintsSection}>
+          <div className={styles.flexWrap}>
 
-          <div className={styles.lineWithoutFlex}>
-            {this.createInputWithPlusMinus(STATE_MAX_MOVEMENTS, propGetStateProperty,
-              propSetStatePropertyWithValue)}
-          </div>
-
-          <div className={styles.flexColumnWrap}>
-            <div className={styles.line + ' ' + styles.textWrap}>Maximum movements for each statement</div>
-            <div className={styles.line}><img src={propIsFungible ? checkBoxWithTick : checkBox}
-                                              className={styles.checkboxWrap}
-                                              onClick={() => propHandlerToggleFungible()}/>
-              <div className={styles.textWrap}>Fungible</div>
+            <div className={styles.lineWithoutFlex}>
+              {this.createInputWithPlusMinus(STATE_MAX_MOVEMENTS, propGetStateProperty,
+                propSetStatePropertyWithValue)}
             </div>
+
+            <div className={styles.flexColumnWrap}>
+              <div className={styles.line + ' ' + styles.textWrap}>Maximum movements for each statement</div>
+              <div className={styles.line + ' ' + styles.textWrap}>
+                <img src={propIsFungible ? checkBoxWithTick : checkBox}
+                     className={styles.checkboxWrap}
+                     onClick={() => propHandlerToggleFungible()}/>
+                <div>Fungible</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div className={styles.horizontalLine}/>
+      </div>
+
+      <div>
+        <div className={styles.constraintsSection}>
+          <div className={styles.line}>
+            <div className={styles.textWrap}>Exclude assets with corporate actions within the next</div>
+          </div>
+
+          <div className={styles.line}>
+
+            {this.createInputWithPlusMinus(STATE_EXCLUDE_DAYS, propGetStateProperty,
+              propSetStatePropertyWithValue)}
+
+            <div className={styles.textWrap}>days</div>
           </div>
 
         </div>
 
-
+        <div className={styles.horizontalLine}/>
       </div>
-      <hr/>
-      <div className={styles.constraintsSection}>
-        <div className={styles.line}>
-          <div className={styles.textWrap}>Exclude assets with corporate actions within the next</div>
+
+      <div>
+        <div className={styles.constraintsSection}>
+          <div className={styles.line}>
+            <div className={styles.plusMinusWrap}/>
+            <input type="number" className={styles.constraintsNumberBoxDisabled} readOnly
+                   value={propIsAllocateClicked ? 76 : ''}/>
+            <div className={styles.plusMinusWrap}/>
+            <div className={styles.textWrap}>Movements based on Optimization</div>
+          </div>
         </div>
-
-        <div className={styles.line}>
-
-          {this.createInputWithPlusMinus(STATE_EXCLUDE_DAYS, propGetStateProperty,
-            propSetStatePropertyWithValue)}
-
-          <div className={styles.textWrap}>days</div>
-        </div>
-
+        <div className={styles.horizontalLine}/>
       </div>
-      <hr/>
-      <div className={styles.constraintsSection}>
-        <div className={styles.line}>
-          <div className={styles.plusMinusWrap}/>
-          <input type="number" className={styles.constraintsNumberBoxDisabled} readOnly value={76}/>
-          <div className={styles.plusMinusWrap}/>
-          <div className={styles.textWrap}>Movements based on Optimization</div>
-        </div>
 
-      </div>
-      <hr/>
     </div>
   }
 }
