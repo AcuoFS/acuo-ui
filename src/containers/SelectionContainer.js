@@ -14,7 +14,8 @@ const mapStateToProps = (state, ownProps) => ({
   toggleR: ownProps.toggleR,
   marginCall: ownProps.marginCall,
   onTogglePendingAllocation: ownProps.onTogglePendingAllocation,
-  pendingAllocationStore: ownProps.pendingAllocationStore
+  pendingAllocationStore: ownProps.pendingAllocationStore,
+  onRemoveAssetFromAllocate: ownProps.onRemoveAssetFromAllocate
 })
 
 const mapDispatchToProps = dispatch => ({
