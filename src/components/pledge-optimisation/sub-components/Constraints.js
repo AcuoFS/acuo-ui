@@ -9,13 +9,12 @@ import {
 import styles from './Constraints.css'
 
 
-const isWithinRange = (number) => {
-  return (number <= CONSTRAINTS_MAX) && (number >= CONSTRAINTS_MIN)
+const isWithinRange = (number, max, min) => {
+  return (number <= max) && (number >= min)
 }
 
-const createInputWithPlusMinus = (stateProperty,
-                                  propGetStateProperty,
-                                  propSetStatePropertyWithValue) => {
+const createInputWithPlusMinus = (stateProperty, propGetStateProperty,
+                                  propSetStatePropertyWithValue, max, min) => {
 
   const numberMinusOne = Number(propGetStateProperty(stateProperty)) - 1
   const numberPlusOne = Number(propGetStateProperty(stateProperty)) + 1
@@ -23,15 +22,15 @@ const createInputWithPlusMinus = (stateProperty,
   return <div className={styles.flexColumnWrap}>
     <div className={styles.flexWrap}>
       <div className={styles.plusMinusWrap}
-           onClick={() => isWithinRange(numberMinusOne) &&
+           onClick={() => isWithinRange(numberMinusOne, max, min) &&
            propSetStatePropertyWithValue(stateProperty, numberMinusOne)}> -
       </div>
       <input type="number" min={CONSTRAINTS_MIN} max={CONSTRAINTS_MAX}
              className={styles.constraintsNumberBox} value={propGetStateProperty(stateProperty)}
-             onChange={(e) => isWithinRange(e.target.value) &&
+             onChange={(e) => isWithinRange(e.target.value, max, min) &&
              propSetStatePropertyWithValue(stateProperty, e.target.value)}/>
       <div className={styles.plusMinusWrap}
-           onClick={() => isWithinRange(numberPlusOne) &&
+           onClick={() => isWithinRange(numberPlusOne, max, min) &&
            propSetStatePropertyWithValue(stateProperty, numberPlusOne)}> +
       </div>
     </div>
@@ -44,7 +43,8 @@ const Constraints = ({
                        propHandlerToggleFungible,
                        propGetStateProperty,
                        propSetStatePropertyWithValue,
-                       propIsAllocateClicked
+                       propIsAllocateClicked,
+                       propMovementsFromOpt
                      }) => (
   <div className={styles.componentWrap}>
     <div>
@@ -53,7 +53,7 @@ const Constraints = ({
 
           <div className={styles.lineWithoutFlex}>
             {createInputWithPlusMinus(STATE_MAX_MOVEMENTS, propGetStateProperty,
-              propSetStatePropertyWithValue)}
+              propSetStatePropertyWithValue, CONSTRAINTS_MAX, CONSTRAINTS_MIN)}
           </div>
 
           <div className={styles.flexColumnWrap}>
@@ -80,7 +80,7 @@ const Constraints = ({
         <div className={styles.line}>
 
           {createInputWithPlusMinus(STATE_EXCLUDE_DAYS, propGetStateProperty,
-            propSetStatePropertyWithValue)}
+            propSetStatePropertyWithValue, CONSTRAINTS_MAX, CONSTRAINTS_MIN)}
 
           <div className={styles.textWrap}>days</div>
         </div>
@@ -95,7 +95,7 @@ const Constraints = ({
         <div className={styles.line}>
           <div className={styles.plusMinusWrap}/>
           <input type="number" className={styles.constraintsNumberBoxDisabled} readOnly
-                 value={propIsAllocateClicked ? 76 : ''}/>
+                 value={propMovementsFromOpt}/>
           <div className={styles.plusMinusWrap}/>
           <div className={styles.textWrap}>Movements based on Optimization</div>
         </div>

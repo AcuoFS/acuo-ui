@@ -128,6 +128,7 @@ export default class OptimisationWidget extends React.Component {
         </div>
       </div>}
 
+      {/*TODO propMovementsFromOpt should be set to a value from the endpoint*/}
       {this.isConstraintsTab(this.state.currentTab) &&
       <Constraints propIsFungible={this.state.isFungible}
                    propHandlerToggleFungible={() =>
@@ -135,7 +136,8 @@ export default class OptimisationWidget extends React.Component {
                    propGetStateProperty={(stateProperty) => this.state[stateProperty]}
                    propSetStatePropertyWithValue={(stateProperty, newValue) =>
                      this.setState({[stateProperty]: newValue})}
-                   propIsAllocateClicked={this.state.isAllocateButtonClicked}/>}
+                   propIsAllocateClicked={this.state.isAllocateButtonClicked}
+                   propMovementsFromOpt={this.state.isAllocateButtonClicked ? 76 : ''}/>}
 
     </div>
 
