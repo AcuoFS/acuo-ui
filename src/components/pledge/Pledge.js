@@ -4,11 +4,11 @@
 import React from 'react'
 import Selection from '../pledge-selection/Selection'
 import CollateralWidgetContainer from '../../containers/CollateralWidgetContainer'
-import {OPTIMISATION_URL,MARGIN_SELECTION_URL} from '../../constants/APIcalls'
+import {OPTIMISATION_URL, MARGIN_SELECTION_URL} from '../../constants/APIcalls'
 import OptimisationWidget from '../pledge-optimisation/OptimisationWidget'
 import styles from './Pledge.css'
 
-import { List } from 'immutable'
+import {List} from 'immutable'
 
 class Pledge extends React.Component {
   constructor(props) {
@@ -17,12 +17,12 @@ class Pledge extends React.Component {
       open: true,
       dropdown: "./images/common/minusbox.png",
 
-      toggleColwidthL: styles.minDivL, 
+      toggleColwidthL: styles.minDivL,
       toggleColwidthR: styles.expandDivR,
 
       toggleHideCol: styles.showCol,
-      toggleShowHideL : false, 
-      toggleShowHideR : true,
+      toggleShowHideL: false,
+      toggleShowHideR: true,
       sideways: "./images/pledge/sideways-min.png",
       selectionSideway: "./images/pledge/sideways-max.png",
       chsCallsTickState: 'None',
@@ -49,8 +49,8 @@ class Pledge extends React.Component {
     if (this.state.open) {
       this.setState({
         open: false,
-        toggleShowHideL : true,
-        toggleShowHideR : false,
+        toggleShowHideL: true,
+        toggleShowHideR: false,
         toggleColwidthL: styles.expandDivL,
         toggleColwidthR: styles.minDivR,
         toggleHideCol: styles.hideCol,
@@ -63,33 +63,33 @@ class Pledge extends React.Component {
         toggleColwidthL: styles.minDivL,
         toggleColwidthR: styles.expandDivR,
         toggleHideCol: styles.showCol,
-        toggleShowHideL : false,
-        toggleShowHideR : true,
+        toggleShowHideL: false,
+        toggleShowHideR: true,
         sideways: "./images/pledge/sideways-min.png",
         selectionSideway: "./images/pledge/sideways-max.png",
       })
     }
   }
 
-  renderSelection(x, onTogglePendingAllocation, pendingAllocation, index){
-    return (<Selection  sideways={this.state.selectionSideway}
-                        clicked={this.changeSideways}
-                        chkTick={this.chkTick}
-                        toggleL={this.state.toggleShowHideL}
-                        toggleR={this.state.toggleShowHideR}
-                        marginCall={x}
-                        key={index}
-                        onTogglePendingAllocation={onTogglePendingAllocation}
-                        pendingAllocationStore={pendingAllocation}/>)
+  renderSelection(x, onTogglePendingAllocation, pendingAllocation, index) {
+    return (<Selection sideways={this.state.selectionSideway}
+                       clicked={this.changeSideways}
+                       chkTick={this.chkTick}
+                       toggleL={this.state.toggleShowHideL}
+                       toggleR={this.state.toggleShowHideR}
+                       marginCall={x}
+                       key={index}
+                       onTogglePendingAllocation={onTogglePendingAllocation}
+                       pendingAllocationStore={pendingAllocation}/>)
   }
 
   //generic checker
-  checkIfExist(something){
+  checkIfExist(something) {
     return something || List()
   }
 
 
-  onPledgeButtonClick(e){
+  onPledgeButtonClick(e) {
 
 
     alert('Pledge Button Click')
@@ -109,37 +109,38 @@ class Pledge extends React.Component {
     } = this.props
 
     return (
+      <div className={styles.pledgeContainer}>
+        <div className={styles.sliderAndStatus}>
 
-        <div className={styles.pledgeContainer}>
-          <div className={styles.sliderAndStatus}>
+          <OptimisationWidget {...this.props}/>
 
-            <OptimisationWidget {...this.props}/>
-
-            <div className={styles.panel} id={styles.pleStatus}>
-              {/*<div className={styles.panelTitle}>Pledge Status</div>*/}
-              <img src="./images/pledge/Pledge-status-widget.png"/>
-            </div>
-          </div>
-
-          <div className={styles.secDivider}/>
-
-          <div className={styles.flexContainer}>
-
-            <div className={styles.col_L + ' ' + this.state.toggleColwidthL}>
-
-              {this.checkIfExist(selection)
-                .map((x, index) => this.renderSelection(x, onTogglePendingAllocation, pendingAllocation, index))}
-
-            </div>
-
-            <CollateralWidgetContainer
-              toggleColwidthR={this.state.toggleColwidthR}
-              sideways={this.state.sideways}
-              open={this.state.open}
-              changeSideways={this.changeSideways}/>
-
+          <div className={styles.panel} id={styles.pleStatus}>
+            {/*<div className={styles.panelTitle}>Pledge Status</div>*/}
+            <img src="./images/pledge/Pledge-status-widget.png"/>
           </div>
         </div>
+
+        <div className={styles.secDivider}/>
+
+        <div className={styles.flexContainer}>
+
+          <div className={styles.col_L + ' ' + this.state.toggleColwidthL}>
+
+            {this.checkIfExist(selection)
+              .map((x, index) => this.renderSelection(x, onTogglePendingAllocation, pendingAllocation, index))}
+
+          </div>
+
+          <CollateralWidgetContainer
+            toggleColwidthR={this.state.toggleColwidthR}
+            sideways={this.state.sideways}
+            open={this.state.open}
+            changeSideways={this.changeSideways}/>
+
+        </div>
+      </div>
+
+
 
     )
   }

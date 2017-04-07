@@ -1,166 +1,108 @@
 export default [
   {
-  header: {
-    time: {
-      main: "14:00",
-      secondary: ""
-    },
-    agreement: {
-      main: "ACUO SG - Counterparty A1",
-      secondary: ""
-    },
-    from: {
-      main: "ACUO SG",
-      secondary: ""
-    },
-    to: {
-      main: "Counterparty A1",
-      secondary: ""
-    },
-    value: {
-      main: "738981.6",
-      secondary: ""
-    },
-    ccy: {
-      main: "USD",
-      secondary: ""
-    },
-    status: {
-      main: "In-Flight",
-      secondary: ""
-    }
-  },
-  flightDetailList: [
-    {
-      time: {
-        main: "",
-        secondary: ""
-      },
-      agreement: {
-        main: "US Dollar",
-        secondary: ""
-      },
-      from: {
-        main: "Custodian 1",
-        secondary: "CustAcct1D"
-      },
-      to: {
-        main: "Custodian 3",
-        secondary: "CustAcct3D"
-      },
-      value: {
-        main: "100000",
-        secondary: ""
-      },
-      ccy: {
-        main: "USD",
-        secondary: ""
-      },
-      status: {
-        main: "",
-        secondary: ""
-      }
-    },
-    {
-      time: {
-        main: "",
-        secondary: ""
-      },
-      agreement: {
-        main: "TREASURY BILL",
-        secondary: ""
-      },
-      from: {
-        main: "Custodian 1",
-        secondary: "CustAcct1A"
-      },
-      to: {
-        main: "Custodian 3",
-        secondary: "CustAcct3D"
-      },
-      value: {
-        main: "200000",
-        secondary: ""
-      },
-      ccy: {
-        main: "USD",
-        secondary: ""
-      },
-      status: {
-        main: "",
-        secondary: ""
-      }
-    },
-    {
-      time: {
-        main: "",
-        secondary: ""
-      },
-      agreement: {
-        main: "JAPAN (5 YEAR ISSUE)",
-        secondary: ""
-      },
-      from: {
-        main: "Custodian 1",
-        secondary: "CustAcct1A"
-      },
-      to: {
-        main: "Custodian 3",
-        secondary: "CustAcct3E"
-      },
-      value: {
-        main: "50000000",
-        secondary: ""
-      },
-      ccy: {
-        main: "JPY",
-        secondary: ""
-      },
-      status: {
-        main: "",
-        secondary: ""
-      }
-    }
-
-  ]
-},
-  {
     header: {
-      time: {
-        main: "15:00",
-        secondary: ""
-      },
-      agreement: {
-        main: "ACUO SG - Counterparty B1",
-        secondary: ""
-      },
-      from: {
-        main: "ACUO SG",
-        secondary: ""
-      },
-      to: {
-        main: "Counterparty B1",
-        secondary: ""
-      },
-      value: {
-        main: "141473.6",
-        secondary: ""
-      },
-      ccy: {
-        main: "USD",
-        secondary: ""
-      },
-      status: {
-        main: "Delayed",
-        secondary: ""
-      }
+      time: "14:00",
+      agreement: "Acuo SG - Counterparty A",
+      from: "Acuo SG",
+      to: "Counterparty A",
+      value: "738981.6",
+      ccy: "USD",
+      status: "In-Flight"
     },
     flightDetailList: [
       {
-        time: {
-          main: "",
+        agreement: {
+          main: "US Dollar",
           secondary: ""
         },
+        from: {
+          main: "Custodian 1",
+          secondary: "CustAcct1D"
+        },
+        to: {
+          main: "Custodian 3",
+          secondary: "CustAcct3D"
+        },
+        value: {
+          main: "100000",
+          secondary: ""
+        },
+        ccy: {
+          main: "USD",
+          secondary: ""
+        },
+        status: {
+          main: "est. 16:00",
+          secondary: ""
+        }
+      },
+      {
+        agreement: {
+          main: "TREASURY BILL",
+          secondary: ""
+        },
+        from: {
+          main: "Custodian 1",
+          secondary: "CustAcct1A"
+        },
+        to: {
+          main: "Custodian 3",
+          secondary: "CustAcct3D"
+        },
+        value: {
+          main: "200000",
+          secondary: ""
+        },
+        ccy: {
+          main: "USD",
+          secondary: ""
+        },
+        status: {
+          main: "est. 16:00",
+          secondary: ""
+        }
+      },
+      {
+        agreement: {
+          main: "JAPAN (5 YEAR ISSUE)",
+          secondary: ""
+        },
+        from: {
+          main: "Custodian 1",
+          secondary: "CustAcct1A"
+        },
+        to: {
+          main: "Custodian 3",
+          secondary: "CustAcct3E"
+        },
+        value: {
+          main: "50000000",
+          secondary: ""
+        },
+        ccy: {
+          main: "JPY",
+          secondary: ""
+        },
+        status: {
+          main: "",
+          secondary: ""
+        }
+      }
+
+    ]
+  },
+  {
+    header: {
+      time: "15:00",
+      agreement: "ACUO SG - Counterparty B1",
+      from: "ACUO SG",
+      to: "Counterparty B1",
+      value: "141473.6",
+      ccy: "USD",
+      status: "Delayed"
+    },
+    flightDetailList: [
+      {
         agreement: {
           main: "Euro",
           secondary: ""
@@ -187,10 +129,6 @@ export default [
         }
       },
       {
-        time: {
-          main: "",
-          secondary: ""
-        },
         agreement: {
           main: "BUNDESOBLIGATION",
           secondary: ""
@@ -217,10 +155,6 @@ export default [
         }
       },
       {
-        time: {
-          main: "",
-          secondary: ""
-        },
         agreement: {
           main: "Singapore Dollar",
           secondary: ""
@@ -251,41 +185,16 @@ export default [
   },
   {
     header: {
-      time: {
-        main: "17:00",
-        secondary: ""
-      },
-      agreement: {
-        main: "ACUO SG - Counterparty C1",
-        secondary: ""
-      },
-      from: {
-        main: "ACUO SG",
-        secondary: ""
-      },
-      to: {
-        main: "Counterparty C1",
-        secondary: ""
-      },
-      value: {
-        main: "707910.7",
-        secondary: ""
-      },
-      ccy: {
-        main: "USD",
-        secondary: ""
-      },
-      status: {
-        main: "Cancelled",
-        secondary: ""
-      }
+      time: "17:00",
+      agreement: "ACUO SG - Counterparty C1",
+      from: "ACUO SG",
+      to: "Counterparty C1",
+      value: "707910.7",
+      ccy: "USD",
+      status: "Cancelled"
     },
     flightDetailList: [
       {
-        time: {
-          main: "",
-          secondary: ""
-        },
         agreement: {
           main: "Singapore Dollar",
           secondary: ""
@@ -312,10 +221,6 @@ export default [
         }
       },
       {
-        time: {
-          main: "",
-          secondary: ""
-        },
         agreement: {
           main: "MCDONALD'S CORP EQUITY",
           secondary: ""
@@ -342,10 +247,6 @@ export default [
         }
       },
       {
-        time: {
-          main: "",
-          secondary: ""
-        },
         agreement: {
           main: "EXXON MOBIL CORP EQUITY",
           secondary: ""
