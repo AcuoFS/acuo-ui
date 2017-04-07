@@ -1,6 +1,8 @@
-import * as ActionTypes from '../constants/ActionTypes'
 import { Map, List, fromJS } from 'immutable'
 import _ from 'lodash'
+
+import { clearTime, getDate } from '../utils'
+import * as ActionTypes from '../constants/ActionTypes'
 
 const initFilters = [
   {order: 1, attr: "legalEntity", label: "Legal Entity"},
@@ -21,6 +23,20 @@ const updateFilters = (filters, newFilter) => (
     : filter
     ))
 )
+
+const plusMinusThreeDays = (json) => {
+
+  const today = getDate()
+  const oneDayDuration = 24 * 60 * 60 * 1000
+  const d = clearTime(today)
+  const dPlusOne = new Date(d.getTime() + oneDayDuration)
+  const dMinusTwo = new Date(d.getTime() - (oneDayDuration * 2))
+
+  return _.filter(json, item => (
+    _.inRange((new Date(item.notificationTime)).getTime(), dMinusTwo.getTime(), dPlusOne.getTime())
+  ))
+
+}
 
 const updateFirstLevelList = (list, guid, id) => (
   (_.some(list, {"GUID": guid, "id": id}) ?
@@ -98,7 +114,7 @@ export default function reconReducer(state = initState, action) {
   switch(action.type) {
     case ActionTypes.RECON_INIT_STATE:
       items = action.items
-      return state.set('items', fromJS(items))
+      return state.set('items', fromJS(plusMinusThreeDays(items)))
 
     case ActionTypes.RECON_FILTER_SET:
       newFilter = action.value

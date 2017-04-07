@@ -1,9 +1,35 @@
 import {Map, List, fromJS} from 'immutable'
+import _ from 'lodash'
+
+import { clearTime, getDate } from '../utils'
 import * as ActionTypes from '../constants/ActionTypes'
 
+const INITIAL_STATE = Map({"data": Map({"derivatives": List()}), "display": Map({"derivatives": List()})})
+
 export function initState(state = Map(), newJSON){
-  return state.set('data', fromJS(newJSON)).set('display', fromJS(newJSON))
+
+  let json = plusMinusThreeDays(newJSON.toJS()) || []
+
+  return state.set('data', fromJS(json)).set('display', fromJS(json))
   //pushed into two separate nodes, data(for retention of persistent data), display(for rendering the UI)
+}
+
+const plusMinusThreeDays = (json) => {
+
+  const today = getDate()
+  const oneDayDuration = 24 * 60 * 60 * 1000
+  const d = clearTime(today)
+  const dPlusOne = new Date(d.getTime() + oneDayDuration)
+  const dMinusTwo = new Date(d.getTime() - (oneDayDuration * 2))
+
+  return {derivatives: _.filter(json.derivatives, deriv => (
+    _.filter(deriv.marginStatus, status => (
+      _.filter(status.timeFrames, timeFrame => (
+        _.inRange((new Date(timeFrame.timeRangeStart)).getTime(), dMinusTwo.getTime(), dPlusOne.getTime())
+      ))
+    ))
+  ))}
+
 }
 
 function applyFilter(derivatives, type){
@@ -312,7 +338,7 @@ export const reconItem = (state, action) => {
 
 
 // main reducer function
-export default function mainReducer(state = Map({"data": Map({"derivatives": List()}), "display": Map({"derivatives": List()})}), action, store = 'data') {
+export default function mainReducer(state = INITIAL_STATE, action, store = 'data') {
 
   switch(action.type) {
     case 'INIT_STATE':
