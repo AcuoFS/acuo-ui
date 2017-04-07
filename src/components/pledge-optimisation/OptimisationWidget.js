@@ -9,6 +9,10 @@ import styles from './OptimisationWidget.css'
 
 const TAB_OBJECTIVE = 'TAB_OBJECTIVE'
 const TAB_CONSTRAINTS = 'TAB_CONSTRAINTS'
+export const CONSTRAINTS_MIN = 0
+export const CONSTRAINTS_MAX = 999
+export const STATE_MAX_MOVEMENTS = 'maxMovements'
+export const STATE_EXCLUDE_DAYS = 'excludeDays'
 
 export default class OptimisationWidget extends React.Component {
   constructor(props) {
@@ -16,7 +20,10 @@ export default class OptimisationWidget extends React.Component {
 
     this.state = {
       currentTab: TAB_OBJECTIVE,
-      isShowObjectiveParams: false // TODO temp state just for static page before integration
+      isAllocateButtonClicked: false, // TODO temp state just for static page before integration
+      isFungible: false,
+      [STATE_MAX_MOVEMENTS]: CONSTRAINTS_MAX,
+      [STATE_EXCLUDE_DAYS]: CONSTRAINTS_MIN
     }
   }
 
@@ -77,15 +84,15 @@ export default class OptimisationWidget extends React.Component {
         <div className={styles.objectiveParamsBar}>
           <div className={styles.objectiveParamCont}>
             <div className={styles.objectiveTitle}>Daily Cost (USD)</div>
-            <div>{this.state.isShowObjectiveParams ? '123,456,789' : '-'}</div>
+            <div>{this.state.isAllocateButtonClicked ? '123,456,789' : '-'}</div>
           </div>
           <div className={styles.objectiveParamCont}>
             <div className={styles.objectiveTitle}>Monthly Cost (USD)</div>
-            <div>{this.state.isShowObjectiveParams ? '123,456,789' : '-'}</div>
+            <div>{this.state.isAllocateButtonClicked ? '123,456,789' : '-'}</div>
           </div>
           <div className={styles.objectiveParamCont}>
             <div className={styles.objectiveTitle}>Reserved Liquidity Ratio (%)</div>
-            <div>{this.state.isShowObjectiveParams ? '1.00' : '-'}</div>
+            <div>{this.state.isAllocateButtonClicked ? '1.00' : '-'}</div>
           </div>
         </div>
 
@@ -97,7 +104,7 @@ export default class OptimisationWidget extends React.Component {
           (this.checkIfExist(pendingAllocation).size > 0 ? '' : styles.btnDisabled )}
                onClick={() => {
                  onAllocate(pendingAllocation.toJS(), optimisation.toJS())
-                 this.setState({isShowObjectiveParams: true})
+                 this.setState({isAllocateButtonClicked: true})
                }}>
             Allocate
           </div>
@@ -122,7 +129,12 @@ export default class OptimisationWidget extends React.Component {
       </div>}
 
       {this.isConstraintsTab(this.state.currentTab) &&
-      <Constraints/>}
+      <Constraints propIsFungible={this.state.isFungible}
+                   propHandlerToggleFungible={() =>
+                     this.setState({isFungible: !this.state.isFungible})}
+                   propGetStateProperty={(stateProperty) => this.state[stateProperty]}
+                   propSetStatePropertyWithValue={(stateProperty, newValue) =>
+                     this.setState({[stateProperty]: newValue})}/>}
 
     </div>
 

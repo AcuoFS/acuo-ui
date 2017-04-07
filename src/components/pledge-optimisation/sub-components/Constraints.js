@@ -1,63 +1,66 @@
 import React from 'react'
 import {checkBox, checkBoxWithTick} from '../../../../images/common'
+import {
+  CONSTRAINTS_MIN,
+  CONSTRAINTS_MAX,
+  STATE_MAX_MOVEMENTS,
+  STATE_EXCLUDE_DAYS
+} from'../OptimisationWidget'
 import styles from './Constraints.css'
 
 
-const CONSTRAINTS_MIN = 0
-const CONSTRAINTS_MAX = 999
-const STATE_MAX_MOVEMENTS = 'maxMovements'
-const STATE_EXCLUDE_DAYS = 'excludeDays'
-
 export default class Constraints extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      [STATE_MAX_MOVEMENTS]: CONSTRAINTS_MAX,
-      [STATE_EXCLUDE_DAYS]: CONSTRAINTS_MIN,
-      isFungible: false
-    }
-  }
-
   isWithinRange(number) {
     return (number <= CONSTRAINTS_MAX) && (number >= CONSTRAINTS_MIN)
   }
 
-  createInputWithPlusMinus(stateProperty) {
+  createInputWithPlusMinus(stateProperty,
+                           propGetStateProperty,
+                           propSetStatePropertyWithValue) {
+
+    const numberMinusOne = Number(propGetStateProperty(stateProperty)) - 1
+    const numberPlusOne = Number(propGetStateProperty(stateProperty)) + 1
+
     return <div className={styles.flexColumnWrap}>
       <div className={styles.flexWrap}>
         <div className={styles.plusMinusWrap}
-             onClick={() => this.isWithinRange(--this.state[stateProperty]) &&
-             this.setState({[stateProperty]: --this.state[stateProperty]})}> -
+             onClick={() => this.isWithinRange(numberMinusOne) &&
+             propSetStatePropertyWithValue(stateProperty, numberMinusOne)}> -
         </div>
         <input type="number" min={CONSTRAINTS_MIN} max={CONSTRAINTS_MAX}
-               className={styles.constraintsNumberBox} value={this.state[stateProperty]}
+               className={styles.constraintsNumberBox} value={propGetStateProperty(stateProperty)}
                onChange={(e) => this.isWithinRange(e.target.value) &&
-               this.setState({[stateProperty]: e.target.value})}/>
+               propSetStatePropertyWithValue(stateProperty, e.target.value)}/>
         <div className={styles.plusMinusWrap}
-             onClick={() => this.isWithinRange(++this.state[stateProperty]) &&
-             this.setState({[stateProperty]: ++this.state[stateProperty]})}> +
+             onClick={() => this.isWithinRange(numberPlusOne) &&
+             propSetStatePropertyWithValue(stateProperty, numberPlusOne)}> +
         </div>
       </div>
       <div/>
     </div>
-
   }
 
   render() {
+    const {
+      propIsFungible,
+      propHandlerToggleFungible,
+      propGetStateProperty,
+      propSetStatePropertyWithValue
+    } = this.props
     return <div className={styles.componentWrap}>
       <div className={styles.constraintsSection}>
         <div className={styles.flexWrap}>
 
           <div className={styles.lineWithoutFlex}>
-            {this.createInputWithPlusMinus(STATE_MAX_MOVEMENTS)}
+            {this.createInputWithPlusMinus(STATE_MAX_MOVEMENTS, propGetStateProperty,
+              propSetStatePropertyWithValue)}
           </div>
 
           <div className={styles.flexColumnWrap}>
             <div className={styles.line + ' ' + styles.textWrap}>Maximum movements for each statement</div>
-            <div className={styles.line}><img src={this.state.isFungible ? checkBoxWithTick : checkBox}
+            <div className={styles.line}><img src={propIsFungible ? checkBoxWithTick : checkBox}
                                               className={styles.checkboxWrap}
-                                              onClick={() => this.setState({isFungible: !this.state.isFungible})}/>
+                                              onClick={() => propHandlerToggleFungible()}/>
               <div className={styles.textWrap}>Fungible</div>
             </div>
           </div>
@@ -74,7 +77,8 @@ export default class Constraints extends React.Component {
 
         <div className={styles.line}>
 
-          {this.createInputWithPlusMinus(STATE_EXCLUDE_DAYS)}
+          {this.createInputWithPlusMinus(STATE_EXCLUDE_DAYS, propGetStateProperty,
+            propSetStatePropertyWithValue)}
 
           <div className={styles.textWrap}>days</div>
         </div>
