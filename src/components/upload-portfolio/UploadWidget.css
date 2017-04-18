@@ -1,85 +1,80 @@
 div.componentStyle {
-    margin-top: 1%;
-    margin-left: 8%;
-    margin-right: 8%;
-    /*width: 1260px;*/
-    /*height: 380px;*/
-    background-color: #FFFFFF;
-    box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
-    border-radius: 8px;
-    min-height: 410px;
-    display: inline-block;
-    width: 84%;
+  margin: 1% auto;
+  /*width: 1260px;*/
+  /*height: 380px;*/
+  background-color: #FFFFFF;
+  box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  min-height: 410px;
+  width: 84%;
+  padding: 20px;
+}
+
+.uploadStatus {
+  flex: 5;
+  align-self: flex-start;
+  text-align: left;
 }
 
 .alignFileIconLeft {
-    float: left;
+  float: left;
 }
 
-.buttonContainerDisabled{
-    width: 100%;
-    margin: 10px;
-    text-align: right;
+.buttonContainer {
+  width: 100%;
+  text-align: right;
+  display: flex;
+  padding-top: 20px;
 }
 
-.buttonContainerEnabled{
-    width: 100%;
-    margin: 10px;
-    text-align: right;
+.buttonContainer button {
+  color: #d7dce0;
+  background-color: #FAFAFA;
+  border: 1px solid #d7dce0;
+  font-size: 18px;
+  text-align: center;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  align-self: flex-end;
+  padding: 10px 24px;
+  flex: 5;
+  max-width: 400px;
 }
 
-.buttonContainerDisabled button {
-    color: #d7dce0 ;
-    background-color: #FAFAFA ;
-    border: 1px solid #d7dce0 ;
-    font-size: 18px;
-    text-align: center;
-    -webkit-border-radius: 20px;
-    border-radius: 20px;
-    margin: 0 20px;
-    align-self: center;
-    padding: 10px 24px;
+.buttonContainer button.enabled {
+  color: #fff;
+  background-color: #118917;
+  border: 1px solid #118917;
+  cursor: pointer;
 }
 
-.buttonContainerEnabled button {
-    color: #fff ;
-    background-color: #00B9CC ;
-    border: 1px solid #00B9CC ;
-    font-size: 18px;
-    text-align: center;
-    -webkit-border-radius: 20px;
-    border-radius: 20px;
-    margin: 0 20px;
-    align-self: center;
-    cursor: pointer;
-    padding: 10px 24px;
+.buttonContainer button.enabled:hover {
+  background-color: #096900;
+  border: 1px solid #118917;
 }
 
 .textBold {
-    composes: baseFontBold from '../../static/css-components/fonts.css';
+  composes: baseFontBold from '../../static/css-components/fonts.css';
 }
 
-.widgetHeader{
-    width: 187px;
-    height: 29px;
-    font-size: 24px;
-    composes: baseFontBold from '../../static/css-components/fonts.css';
-    line-height: 29px;
-    color: #6389AD;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
+.widgetHeader {
+  width: 187px;
+  height: 29px;
+  font-size: 24px;
+  composes: baseFontBold from '../../static/css-components/fonts.css';
+  line-height: 29px;
+  color: #6389AD;
+  padding-bottom: 20px;
 }
-
 
 .fileName {
-    background-color: #FAFAFA;
-    border: 1px solid #979797;
-    border-radius: 8px;
+  background-color: #FAFAFA;
+  border: 1px solid #979797;
+  border-radius: 8px;
 }
 
-.fileNameText{
-    font-family: Helvetica;
-    font-size: 14px;
-    color: #4A4A4A;
+.fileNameText {
+  font-family: Helvetica;
+  font-size: 14px;
+  color: #4A4A4A;
 }

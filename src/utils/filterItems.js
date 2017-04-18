@@ -38,7 +38,7 @@ export default (items, filterArray) => {
       const selectedDatetime = new Date(selectedValue)
 
       if(selectedType === 'sameDay'){
-      // with selected type of 'sameDay': sameDay inRange match
+        // with selected type of 'sameDay': sameDay inRange match
         const oneDayDuration = 24 * 60 * 60 * 1000
         const d = clearTime(selectedDatetime)
         const dPlusOne = new Date(d.getTime() + oneDayDuration)

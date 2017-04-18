@@ -3,6 +3,7 @@ import { TableComponent } from '../components'
 import { updateReconFilter } from '../actions'
 import { clearTime, getDate } from '../utils'
 import _ from 'lodash'
+import { List } from 'immutable'
 
 
 const mapStateToProps = state => ({

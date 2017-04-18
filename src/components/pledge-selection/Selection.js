@@ -12,7 +12,8 @@ export default class Selection extends React.Component {
 
     this.state = {
       openedDeselectionPopup: "",
-      isValidPopupForm: false
+      isValidPopupForm: false,
+      currentAsset: {}
     }
 
     this.togglePendingAllocation = this.togglePendingAllocation.bind(this)
@@ -57,7 +58,7 @@ export default class Selection extends React.Component {
         <td>
           <div className={styles.earmarkAssetButton}
                onClick={() => {
-                 this.setDeselectionPopup(popupID)
+                 this.setDeselectionPopup(popupID, asset.toJS())
                }}>
             <img src="./images/pledge/cancel.png"></img>
             {/*<div className={styles.tooltip}>*/}
@@ -92,9 +93,10 @@ export default class Selection extends React.Component {
     return this.calSubTotal(a, i) + this.calSubTotal(a, j)
   }
 
-  setDeselectionPopup(popupID) {
+  setDeselectionPopup(popupID, asset) {
     this.setState({
-      openedDeselectionPopup: popupID
+      openedDeselectionPopup: popupID,
+      currentAsset: asset
     })
   }
 
@@ -129,7 +131,8 @@ export default class Selection extends React.Component {
   render() {
     const {
       marginCall, pendingAllocationStore,
-      toggleL, toggleR, sideways
+      toggleL, toggleR, sideways,
+      onRemoveAssetFromAllocate
     } = this.props
 
     let evlEmptyForIntMargin = this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).isEmpty()
@@ -141,7 +144,10 @@ export default class Selection extends React.Component {
         <DeselectionPopup propOpenedDeselectionPopup={this.state.openedDeselectionPopup}
                           propHandlerClearPopup={this.clearDeselectionPopup}
                           propIsValidFlag={this.state.isValidPopupForm}
-                          propHandlerSetFormValidity={this.setPopupFormValidity}/>
+                          propDeselectAsset={this.state.currentAsset}
+                          GUID={marginCall.get('GUID')}
+                          propHandlerSetFormValidity={this.setPopupFormValidity}
+                          onRemoveAssetFromAllocate={onRemoveAssetFromAllocate}/>
 
         <div className={styles.columnContainer}>
           <div className={styles.leftColumn + ' ' + (!toggleL ? styles.bigger : '')}>

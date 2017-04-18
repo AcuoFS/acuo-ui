@@ -6,7 +6,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [
-    "babel-polyfill",
+    'babel-polyfill',
+    'whatwg-fetch',
     './src/index.js'
   ],
   output: {
@@ -21,7 +22,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         options: {
-          presets: [['es2015', {modules: false}], 'react']
+          presets: [['es2015', {modules: false}], 'react', "stage-0"]
         }
       },
       {
@@ -69,6 +70,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {from: './src/static/react-dropzone', to: './css/react-dropzone'},
+      {from: './src/static/react-select', to: './css/react-select'},
       {from: './src/static/reset.css', to: './css/reset.css'},
       {from: './images', to: './images'}
     ]),

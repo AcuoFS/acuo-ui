@@ -12,6 +12,7 @@ import UnmatchedTableContainer from './UnmatchedTableContainer'
 import CollateralWidgetContainer from './CollateralWidgetContainer'
 import DisputeWidgetContainer from './DisputeWidgetContainer'
 import AgreementsContainer from './AgreementsContainer'
+import UploadWidgetContainer from './UploadWidgetContainer'
 import ReconDisputeContainer from'./ReconDisputeContainer'
 
 
@@ -30,5 +31,6 @@ export {
   CollateralWidgetContainer,
   DisputeWidgetContainer,
   AgreementsContainer,
+  UploadWidgetContainer,
   ReconDisputeContainer
 }

@@ -125,12 +125,36 @@ const mapDispatchToProps = dispatch => ({
     }).catch(error => {
       console.log('Error: ' + error)
     })
+  },
+  onDispatchRemoveAssetFromAllocate: (obj) => {
+    //TODO: implement fetch to send this obj to backend
+    console.log(obj)
   }
 })
 
+const checkAllocated = (selection) => {
+  if(!checkIfExist(selection).isEmpty()){
+    return selection.filter((item) => item.has('allocated')).toJS()
+  }else
+    return []
+}
+
+const mergeProps = (stateProps, dispatchProps) => ({
+  onRemoveAssetFromAllocate: ( toBeExcluded, toBeRemovedFrom = checkAllocated(stateProps.selection).map((item) => item.GUID)) => (
+    dispatchProps.onDispatchRemoveAssetFromAllocate({
+      currentItems: checkAllocated(stateProps.selection),
+      toBeRemoved: toBeExcluded,
+      toBeRemovedFrom: toBeRemovedFrom,
+      optimisationSettings: stateProps.optimisation.toJS()
+    })
+  ), ...stateProps, ...dispatchProps
+})
+
+
 const PledgeContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
+  mergeProps
 )(PledgeComponent)
 
 export default PledgeContainer
