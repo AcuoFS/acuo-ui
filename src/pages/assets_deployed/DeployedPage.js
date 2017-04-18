@@ -1,7 +1,8 @@
 import React from 'react'
 import {
   NavigationBarContainer,
-  FlightContainer
+  FlightContainer,
+  AssetsContainer
 } from '../../containers'
 
 
@@ -14,7 +15,7 @@ class DeployedPage extends React.Component {
       <div>
         <NavigationBarContainer curPage={this.props.location.pathname}/>
         <FlightContainer/>
-        
+        <AssetsContainer/>
       </div>
     )
   }
