@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
 import { PledgeComponent } from '../components'
+import _ from 'lodash'
+
 import {
   initOptimisationSettings,
   updateOptimisationSettings,
@@ -128,23 +130,37 @@ const mapDispatchToProps = dispatch => ({
   },
   onDispatchRemoveAssetFromAllocate: (obj) => {
     //TODO: implement fetch to send this obj to backend
-    console.log(obj)
+    console.log(JSON.stringify(obj))
   }
 })
 
-const checkAllocated = (selection) => {
-  if(!checkIfExist(selection).isEmpty()){
-    return selection.filter((item) => item.has('allocated')).toJS()
-  }else
-    return []
-}
+const checkAllocated = (selection) => (
+  (!checkIfExist(selection).isEmpty() ?
+    selection.filter((item) => item.has('allocated')).toJS() :
+    [])
+)
+
+const constructToBeRemovedFrom = (pending, selection) => (
+  _.concat(
+    _.reduce(
+      _.filter(selection,
+        x => _.includes(pending, x.GUID)),
+      (sum, x) => (_.has(x, ["allocated", "initialMargin"]) ?
+        _.concat(sum ,{"msId": x.GUID, "marginType": "initial"}) :
+        sum), []),
+    _.reduce(
+      _.filter(selection, x => _.includes(pending, x.GUID)),
+      (sum, x) => (_.has(x, ["allocated", "variationMargin"]) ?
+        _.concat(sum ,{"msId": x.GUID, "marginType": "variation"}) :
+        sum), []))
+)
 
 const mergeProps = (stateProps, dispatchProps) => ({
-  onRemoveAssetFromAllocate: ( toBeExcluded, toBeRemovedFrom = checkAllocated(stateProps.selection).map((item) => item.GUID)) => (
+  onRemoveAssetFromAllocate: ( toBeExcluded, toBeRemovedFrom = stateProps.pendingAllocation.toJS()) => (
     dispatchProps.onDispatchRemoveAssetFromAllocate({
       currentItems: checkAllocated(stateProps.selection),
       toBeRemoved: toBeExcluded,
-      toBeRemovedFrom: toBeRemovedFrom,
+      toBeRemovedFrom: constructToBeRemovedFrom(toBeRemovedFrom, stateProps.selection.toJS()),
       optimisationSettings: stateProps.optimisation.toJS()
     })
   ), ...stateProps, ...dispatchProps
