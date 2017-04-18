@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class assets extends React.Component {
+export default class AssetsComponent extends React.Component {
   render(){
    <div>
     <div>Deployed</div>
