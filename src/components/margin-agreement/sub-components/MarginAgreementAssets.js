@@ -82,6 +82,7 @@ export default class MarginAgreementPortfolio extends React.Component {
               id={groupData.getIn(['firstLevel', 'id'])}
               onSelectSecondLevelItem={onSelectSecondLevelItem}
               party={party}
+              firstLevelTolerance={groupData.getIn(['firstLevel', 'tolerance'])}
             />
           })}
             <hr/>

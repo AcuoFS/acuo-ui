@@ -104,7 +104,8 @@ export default class MarginAgreementDetail extends React.Component {
       topLevel, secondLevel, GUID,
       totalAmount, firstLevelID, handlerSelectedItem,
       firstLevelList, secondLevelList, id,
-      onSelectSecondLevelItem, party
+      onSelectSecondLevelItem, party,
+      firstLevelTolerance
     } = this.props
 
     const expand = <MarginAgreementDetailExpand
@@ -116,7 +117,7 @@ export default class MarginAgreementDetail extends React.Component {
 
       <div className=''>
 
-        <div className={ styles.packageRow + ' ' + (this.checkChildrenTolerance(secondLevel.toJS()) && !this.state.open ? styles.packageRowHighLight : '')}> {/* one row div*/}
+        <div className={ styles.packageRow + ' ' + ((this.checkChildrenTolerance(secondLevel.toJS()) && !this.state.open) || (secondLevel.isEmpty() && firstLevelTolerance) ? styles.packageRowHighLight : '')}> {/* one row div*/}
           <div className={styles.packageLeft}>
             <div className={styles.packageCheckBox + ' ' + this.state.cbLvl1}
                  onClick={() => this.firstLevelSelect(GUID, firstLevelID, handlerSelectedItem)}>
