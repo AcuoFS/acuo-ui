@@ -14,7 +14,7 @@ class DeployedPage extends React.Component {
       <div>
         <NavigationBarContainer curPage={this.props.location.pathname}/>
         <FlightContainer/>
-        <div>Deployed</div>
+        
       </div>
     )
   }
