@@ -419,6 +419,9 @@ input[type=range]:focus::-ms-fill-upper {
 #scenAnalysis .row.header .cell:last-child {
   border-bottom: none;
 }
+#scenAnalysis form .row:last-child {
+  margin-bottom: 3px;
+}
 
 #scenAnalysis .row {
   width: 100%;
@@ -437,9 +440,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 #scenAnalysis .row .cell {
   padding: 4px;
-  /*display: table-cell;*/
-  vertical-align: middle;
-  /*height: 16px;*/
+  align-self: center;
   color: #4A4A4A;
 }
 

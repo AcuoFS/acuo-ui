@@ -3,6 +3,7 @@ import OptItem from './sub-components/OptItem'
 import ChooseCalls from '../pledge/sub-components/ChooseCalls'
 import {List} from 'immutable'
 import Constraints from './sub-components/Constraints'
+import AnalysisWidget from './sub-components/Analysis'
 import sharedStyles from '../pledge/Pledge.css'
 import styles from './OptimisationWidget.css'
 
@@ -14,35 +15,6 @@ export const CONSTRAINTS_MAX = 999
 export const STATE_MAX_MOVEMENTS = 'maxMovements'
 export const STATE_EXCLUDE_DAYS = 'excludeDays'
 
-class AnalysisWidget extends React.Component {
-  render() {
-    return (
-      <div className={styles.row + ' ' + (this.props.isActive ? styles.active : styles.inactive) } onClick={(e) => this.props.toggle(this.props.name)}>
-          <label>
-            <div className={styles.cell}>
-                <input type="radio" value={this.props.name} name="settings" className={styles.radioButton}/>
-                <span className={styles.indicator}></span>
-            </div>
-            <div className={styles.cell}>
-              {this.props.name}
-            </div>
-            <div className={styles.cell}>
-              {this.props.cost}
-            </div>
-            <div className={styles.cell}>
-              {this.props.savings}
-            </div>
-            <div className={styles.cell}>
-              {this.props.ratio}
-            </div>
-            <div className={styles.cell}>
-              &nbsp;
-            </div>
-          </label>
-      </div>
-    )
-  }
-}
 
 export default class OptimisationWidget extends React.Component {
   constructor(props) {
