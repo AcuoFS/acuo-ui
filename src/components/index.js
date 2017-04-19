@@ -9,11 +9,11 @@ import UploadPortfolioButton from './upload-portfolio/UploadPortfolioButton'
 import UploadWidgetComponent from './upload-portfolio/UploadWidget'
 import PledgeComponent from './pledge/Pledge'
 import FlightComponent from './assets-flight/Flight'
-import AssetsComponent from './assets/Assets.js'
 import MarginCallComponent from './margin-call/MarginCall'
 import DisputeWidgetComponent from './dispute/DisputeWidget'
 import AgreementsComponent from './agreements/Agreements'
 import TimeSelectorComponent from './common/TimeSelector/TImeSelector'
+import AssetsComponent from './assets/Assets.js'
 
 export {
   GraphComponent,
@@ -27,9 +27,9 @@ export {
   UploadPortfolioButton,
   UploadWidgetComponent,
   FlightComponent,
-  AssetsComponent,
   MarginCallComponent,
   DisputeWidgetComponent,
   AgreementsComponent,
-  TimeSelectorComponent
+  TimeSelectorComponent,
+  AssetsComponent,
 }

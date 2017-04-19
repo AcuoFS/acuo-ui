@@ -1,0 +1,46 @@
+.assetsPanelFrame{
+  background-color: #FFFFFF;
+  box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
+  border: 1px solid #EEEEEE;
+  border-radius: 8px;
+  margin: 0% 2%;
+  padding: 1%;
+  /*height: 500px;*/
+  position: relative;
+}
+
+.assetsPanelTitle{
+   display: flex;
+}
+
+.assetsPanelTitleText{
+  font-size: 24px;
+  composes: baseFontBold from '../../../static/css-components/fonts.css';
+  line-height: 29px;
+  color: #4E83B5;
+  align-self: center;
+}
+
+.panelResizeHandle{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  height: 14px;
+  bottom: 10px;
+  width: 98%;
+
+
+  background-color: #2b3c4c;
+  color: white;
+}
+
+.panelResizeHandle:hover{
+ cursor: grab;
+}
+.panelResizeHandle:active{
+ cursor: grabbing;
+ background-color: red;
+}

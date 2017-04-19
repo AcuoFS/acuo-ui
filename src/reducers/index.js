@@ -7,6 +7,7 @@ import MarginUploadReducer from './MarginUploadReducer'
 import UnmatchedPortfolioReducer from './UnmatchedPortfolioReducer'
 import DisputeReducer from './DisputeReducer'
 import AgreementsReducer from './AgreementsReducer'
+import AssetsReducer from './AssetsReducer'
 
 const reducer = combineReducers({
   mainReducer,
@@ -15,7 +16,8 @@ const reducer = combineReducers({
   MarginUploadReducer,
   UnmatchedPortfolioReducer,
   DisputeReducer,
-  AgreementsReducer
+  AgreementsReducer,
+  AssetsReducer
 })
 
 export default reducer
