@@ -14,6 +14,36 @@ export const CONSTRAINTS_MAX = 999
 export const STATE_MAX_MOVEMENTS = 'maxMovements'
 export const STATE_EXCLUDE_DAYS = 'excludeDays'
 
+class AnalysisWidget extends React.Component {
+  render() {
+    return (
+      <div className={styles.row + ' ' + (this.props.isActive ? styles.active : styles.inactive) } onClick={(e) => this.props.toggle(this.props.name)}>
+          <label>
+            <div className={styles.cell}>
+                <input type="radio" value={this.props.name} name="settings" className={styles.radioButton}/>
+                <span className={styles.indicator}></span>
+            </div>
+            <div className={styles.cell}>
+              {this.props.name}
+            </div>
+            <div className={styles.cell}>
+              {this.props.cost}
+            </div>
+            <div className={styles.cell}>
+              {this.props.savings}
+            </div>
+            <div className={styles.cell}>
+              {this.props.ratio}
+            </div>
+            <div className={styles.cell}>
+              &nbsp;
+            </div>
+          </label>
+      </div>
+    )
+  }
+}
+
 export default class OptimisationWidget extends React.Component {
   constructor(props) {
     super(props)
@@ -23,10 +53,43 @@ export default class OptimisationWidget extends React.Component {
       isAllocateButtonClicked: false, // TODO temp state just for static page before integration
       isFungible: false,
       [STATE_MAX_MOVEMENTS]: CONSTRAINTS_MAX,
-      [STATE_EXCLUDE_DAYS]: CONSTRAINTS_MIN
+      [STATE_EXCLUDE_DAYS]: CONSTRAINTS_MIN,
+      isShow: false,
+      activeRow: ' '
     }
+    this.selectActiveRow = this.selectActiveRow.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
+  selectActiveRow(name) {
+    this.setState({
+        activeRow: name
+      }
+    );
+  }
+
+  contentClass(isShow) {
+    if(isShow) {
+      return (styles.show);
+    }
+    return (styles.invisible);
+  }
+
+  arrowClass(arrow) {
+    if(arrow) {
+      return (styles.down);
+    }
+    return (styles.up);
+  }
+
+  handleToggle() {
+    this.setState(function(prevState) {
+      return {
+        isShow: !prevState.isShow,
+        arrow: !prevState.arrow
+      };
+    });
+  }
   //generic checker
   checkIfExist(something) {
     return something || List()
@@ -55,10 +118,12 @@ export default class OptimisationWidget extends React.Component {
     const {
       optimisation, selection, onUpdateOptimisationSettings,
       pendingAllocation, sliderCheckbox, onToggleCheckall, onAllocate,
-      onPledge
+      onPledge,
+      scenarioAnalysis
     } = this.props
 
-    return <div className={sharedStyles.panel} id={styles.optSetting}>
+    return <div>
+    <div className={sharedStyles.panel} id={styles.optSetting}>
       <div className={sharedStyles.panelTitle}>Optimization Setting <img src={'./images/pledge/locked.png'}/></div>
       <div className={styles.tabHolder}>
         <div className={styles.tab + ' ' + (this.isObjectiveTab(this.state.currentTab) && styles.selectedTab)}
@@ -140,6 +205,53 @@ export default class OptimisationWidget extends React.Component {
                    propMovementsFromOpt={this.state.isAllocateButtonClicked ? 76 : ''}/>}
 
     </div>
+    <div className={styles.panel} id={styles.scenAnalysis}>
+      <div className={styles.row + ' ' + styles.header}>
+        <div className={styles.cell}>
+          Apply
+        </div>
+        <div className={styles.cell}>
+          Scenario Analysis
+        </div>
+        <div className={styles.cell}>
+          Cost (USD)
+        </div>
+        <div className={styles.cell}>
+          Cost Savings (USD)
+        </div>
+        <div className={styles.cell}>
+          Reserved Liq. Ratio(%)
+        </div>
+        <div className={styles.cell}>
+          <div className={styles.arrowContainer} onClick={this.handleToggle}>
+            <div className={this.arrowClass(this.state.arrow)}>
+              <div className={styles.switchArrow}>
+                <div className={styles.arrowLine} id={styles.line1}></div>
+                <div className={styles.arrowLine} id={styles.line2}></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className={this.contentClass(this.state.isShow)} id={styles.innerContent}>
+        <form action="">
+          {scenarioAnalysis
+            .map((x,index) =>
+            <AnalysisWidget
+              key={index}
+              name={x.name}
+              cost={x.cost}
+              savings={x.savings}
+              ratio={x.ratio}
+              isActive={x.name === this.state.activeRow}
+              toggle={this.selectActiveRow}
+            />)
+          }
+        </form>
+      </div>
+    </div>
+  </div>
 
   }
 }
