@@ -156,7 +156,7 @@ const constructToBeRemovedFrom = (pending, selection) => (
 )
 
 const mergeProps = (stateProps, dispatchProps) => ({
-  onRemoveAssetFromAllocate: ( toBeExcluded, toBeRemovedFrom = stateProps.pendingAllocation.toJS()) => (
+  onRemoveAssetFromAllocate: (toBeExcluded, toBeRemovedFrom = checkAllocated(stateProps.selection).map((item) => item.GUID)) => (
     dispatchProps.onDispatchRemoveAssetFromAllocate({
       currentItems: checkAllocated(stateProps.selection),
       toBeRemoved: toBeExcluded,

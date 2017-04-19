@@ -16,7 +16,7 @@ export default class Dispute extends React.Component {
       formDisputeAmt: '',
       formAgreedAmt: '',
       formReasonCode: '',
-      formComments: '',
+      formComments: _.reduce(this.disputeComments(this.props.marginData), (sum, x) => (x + '; ' + sum), ''),
       formMtm: '',
       formBalance: ''
     }
@@ -37,7 +37,7 @@ export default class Dispute extends React.Component {
 
   componentDidUpdate() {
     if (!this.props.isHidePanel && !this.isUpdatedForm()) {
-      this.disAmtInput.focus()
+      // this.disAmtInput.focus()
     }
   }
 
@@ -108,6 +108,28 @@ export default class Dispute extends React.Component {
     }
 
     this.props.sendDisputeToBack(disputeObjToSend)
+  }
+
+  disputeComments(marginData) {
+    const data = marginData.toJS()
+
+    return _.unionWith(
+      _.reduce(data.clientAssets, (sum, x) =>
+        _.concat(sum,
+          _.reduce(x.data, (sum, y) =>
+            _.concat(sum, (y.firstLevel.secondLevelCount ?
+              _.reduce(y.firstLevel.secondLevel, (sum, z) =>
+                _.concat(sum, (z.tolerance ? z.name : [])), []) :
+              (y.firstLevel.tolerance ? y.firstLevel.name : []))), [])), []),
+      _.reduce(data.counterpartyAssets, (sum, x) =>
+        _.concat(
+          _.reduce(x.data, (sum, y) =>
+            _.concat(sum, (y.firstLevel.secondLevelCount ?
+              _.reduce(y.firstLevel.secondLevel, (sum, z) =>
+                _.concat(sum, (z.tolerance ? z.name : [])), []) :
+              (y.firstLevel.tolerance ? y.firstLevel.name : []))), [])), [])
+      , _.isEqual)
+
   }
 
   render() {
@@ -193,12 +215,16 @@ export default class Dispute extends React.Component {
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Comments
               </div>
-              <input type="text"
+              {console.log(marginData.get('GUID'))}
+              {console.log(isDisputed)}
+              {console.log(this.state.formComments)}
+              <textarea type="text"
                      className={isDisputed ? styles.inputBoxDisabled : styles.inputBox}
                      onChange={(e) => this.setState({formComments: e.target.value})}
                      disabled={isDisputed}
                      value={isDisputed
-                       ? marginData.getIn(['disputeInfo', 'comments']) : this.state.formComments}/>
+                       ? marginData.getIn(['disputeInfo', 'comments']) : this.state.formComments}>
+              </textarea>
 
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
