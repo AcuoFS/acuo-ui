@@ -117,7 +117,7 @@ export default class MarginAgreementPortfolio extends React.Component {
   }
 
   isDisputed(marginData) {
-    return (!_.isEmpty(marginData.get('disputeInfo')) ? marginData.get('disputeInfo').toJS() : false)
+    return (!_.isEmpty(marginData.get('disputeInfo').toJS()) ? marginData.get('disputeInfo').toJS() : false)
   }
 
   render() {
