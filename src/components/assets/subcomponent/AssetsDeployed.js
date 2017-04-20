@@ -7,43 +7,46 @@ export default class AssetsDeployedComponent extends React.Component {
   }
 
   componentDidMount(){
-    console.log("Deployed Panel Frame Mounted!")
-    console.log(this.props)
-    // this.deployedFrame.style.height = this.props.ui.panelHeight
+    // console.log("Deployed Panel Frame Mounted!")
+    let panelHeight =  this.props.ui.deployedPanel.panelHeight.toString() + "px"
+    this.deployedFrame.style.height = panelHeight
    }
 
   componentDidUpdate(){
     // console.log("Deployed Panel Frame Updated!");
     // console.log(this.props);
-    // console.log("Updated panelHeight: " + this.props.ui);
-    // this.deployedFrame.style.height = this.props.ui.panelHeight
+    let handleActive = this.props.ui.deployedPanel.resizeHandleActive
+    let isMouseDown = this.props.ui.deployedPanel.resizeHandleMouseDown
+    console.log(handleActive + "/" + isMouseDown);
+
+    let panelHeight =  this.props.ui.deployedPanel.panelHeight.toString() + "px"
+    this.deployedFrame.style.height = panelHeight
    }
 
-
   render(){
+   let resizeHandleActive = this.props.ui.deployedPanel.resizeHandleActive
+   let isMouseDown = this.props.ui.deployedPanel.resizeHandleMouseDown
     return(
-     <div className={ styles.assetsPanelFrame }
-          ref={ (node)=> this.deployedFrame = node}>
+    <div className={ styles.assetsPanelFrame }
+          ref={ (node)=> this.deployedFrame = node}
+          onMouseUp={ (e)=>{e.stopPropagation(); if(isMouseDown){ this.props.dispatch.MouseDownOnResize(false) } }}
+          onMouseMove={ (e)=>{e.stopPropagation(); if(resizeHandleActive || isMouseDown) { this.props.dispatch.GetNewPanelHeight(e.clientY) }}}
+          >
        <div  className={ styles.assetsPanelTitle} >
         <span  className={ styles.assetsPanelTitleText }> Deployed </span>
        </div>
        <div className={styles.panelResizeHandle}
-            onClick={ (e)=>{ this.props.store.ResizeToggle(!this.props.ui.resizeHandleActive)} }
-            onMouseDown={ (e)=>{ this.props.store.OnClickY(e.clientY) }}
-            onMouseMove={ (e)=>{ if(this.props.ui.resizeHandleActive){
-                                   this.props.store.newPanelHeight(e.clientY)
-                                  }
-                              }}   >
+            onMouseDown={ (e)=>{ if(!resizeHandleActive) {
+                                   this.props.dispatch.ResizeToggle(true)
+                                   this.props.dispatch.MouseDownOnResize(true)
+                                   this.props.dispatch.NewCursorY(e.clientY) } }}
+            onMouseUp={ (e)=>{e.stopPropagation(); if(resizeHandleActive) { this.props.dispatch.MouseDownOnResize(false) } }}
+            onMouseLeave={ ()=>{ if(resizeHandleActive) { this.props.dispatch.ResizeToggle(false) } } }
+            onMouseMove={ (e)=>{e.stopPropagation(); if(resizeHandleActive || isMouseDown) { this.props.dispatch.GetNewPanelHeight(e.clientY) }}}
+             >
          ooo
        </div>
      </div>
     )
   }
 }
-
-
-
-// onMouseDown={ (e)=>{ console.log(e.clientY) }
-// onMouseUp={ (e)=>{
-//  console.log(e.target.getBoundingClientRect())
-//  console.log(e.target.parentNode.style.height = "100px");

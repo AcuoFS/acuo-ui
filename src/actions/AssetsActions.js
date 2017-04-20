@@ -7,11 +7,14 @@
 
 export const AssetsPanel = {
   ResizeToggle: (handleStatus)=>{ return { type: "PANEL_RESIZE_TOGGLE",
-                                           payload: handleStatus }},
+                                           payload: handleStatus  }},
 
-  onClickY: (cursorY)=>{ return { type: "CURSOR_Y_POSITION",
-                                  payload: cursorY }},
+  MouseDownOnResize: (downOrNot)=>{ return { type: "PANEL_RESIZE_MOUSE_DOWN",
+                                           payload: downOrNot  }},
 
-  newPanelHeight: (newHeight)=>{ return { type: "UPDATE_PANEL_HEIGHT",
-                                       payload: newHeight  }}
+  NewCursorY: (cursorY)=>{ return { type: "CURSOR_Y_POSITION",
+                                    payload: cursorY  }},
+
+  NewPanelHeight: (newHeight)=>{ return { type: "UPDATE_PANEL_HEIGHT",
+                                          payload: newHeight  }}
 }

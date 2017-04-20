@@ -12,27 +12,26 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 
-  let _ = {
-   test: ()=>{ console.log("test123") }
-  }
-
   return {
    ResizeToggle: (handleStatus)=>{ dispatch( AssetsPanel.ResizeToggle(handleStatus) ) },
-   OnClickY: (cursorY)=>{ dispatch( AssetsPanel.onClickY(cursorY) ) },
-   ApplyNewPanelHeight: (newHeight)=>{ dispatch( AssetsPanel.newPanelHeight(newHeight) ) }
+   MouseDownOnResize: (downOrNot)=>{ dispatch(AssetsPanel.MouseDownOnResize(downOrNot)) },
+   NewCursorY: (cursorY)=>{ dispatch( AssetsPanel.NewCursorY(cursorY) ) },
+   ApplyNewPanelHeight: (newHeight)=>{ dispatch( AssetsPanel.NewPanelHeight(newHeight) ) }
   }
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
- // console.log(stateProps)
- // console.log(dispatchProps)
- // console.log(ownProps)
-
  let _higherOrderActions = {
   GetNewPanelHeight: (newCursorY)=>{ let currentHeight = stateProps.state.AssetsReducer.ui.deployedPanel.panelHeight;
-                                     let onClickY = stateProps.state.AssetsReducer.ui.deployedPanel.onClickY;
-                                     let newHeight = currentHeight + (onClickY - newCursorY)
-                                     return dispatchProps.ApplyNewPanelHeight(newHeight) },
+                                     let currentCursorY = stateProps.state.AssetsReducer.ui.deployedPanel.currentCursorY;
+                                     let newHeight = currentHeight + (newCursorY - currentCursorY)
+                                     if(newHeight >= 400) { dispatchProps.ApplyNewPanelHeight(newHeight)
+                                                            dispatchProps.NewCursorY(newCursorY) }
+                                     else { dispatchProps.ApplyNewPanelHeight(400)
+                                            dispatchProps.ResizeToggle(false)
+                                            dispatchProps.MouseDownOnResize(false) }
+
+                                    },
  }
 
  return {
