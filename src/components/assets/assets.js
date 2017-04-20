@@ -3,8 +3,6 @@ import styles from './Assets.css'
 import AssetsDeployedComponent from './subcomponent/AssetsDeployed.js'
 import AssetsHomeComponent from './subcomponent/AssetsHome.js'
 
-
-
 export default class AssetsComponent extends React.Component {
   componentDidMount(){
    // console.log("AssetsComponent Mounted");

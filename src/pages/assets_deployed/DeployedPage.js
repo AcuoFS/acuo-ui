@@ -5,6 +5,7 @@ import {
   FlightContainer,
   AssetsContainer
 } from '../../containers'
+import Copyright from '../../components/copyright/Copyright.js'
 import { AssetsPanel } from '../../actions/AssetsActions.js'
 
 
@@ -22,6 +23,7 @@ class DeployedPageComponent extends React.Component {
         <NavigationBarContainer curPage={this.props.location.pathname}/>
         <FlightContainer/>
         <AssetsContainer/>
+        <Copyright/>
       </div>
     )
   }

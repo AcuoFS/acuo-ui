@@ -1,0 +1,11 @@
+.footer{
+ position: fixed;
+ bottom: 0;
+ width: 100%;
+ border: 1px black dotted;
+ margin-top: 110px;
+}
+
+.copyright{
+  text-align: center;
+}
