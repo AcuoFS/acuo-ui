@@ -63,7 +63,7 @@ export default class Dispute extends React.Component {
   }
 
   isNotBlankText(str) {
-    return str.trim() !== ''
+    return String(str).trim() !== ''
   }
 
   isUpdatedText(str) {
