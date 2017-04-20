@@ -1,0 +1,8 @@
+.header{
+ display: inline-block;
+ width: calc(100%/3);
+
+ background-color: #2b3c4c;
+ color: white;
+ text-align: center;
+}

@@ -4,7 +4,7 @@ import _ from 'lodash'
 const INITIAL_STATE = {
   ui: { deployedPanel: { resizeHandleActive: false,
                          resizeHandleMouseDown: false,
-                         panelHeight: 400,
+                         panelHeight: 500,
                          currentCursorY: null }, },
   data: {}
 }
