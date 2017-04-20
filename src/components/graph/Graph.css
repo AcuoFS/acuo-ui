@@ -9,6 +9,9 @@
 
 .graphCont {
   position: relative;
+  overflow-x: scroll;
+  width: 100%;
+  height: 480px;
 }
 
 .moneyIcon {

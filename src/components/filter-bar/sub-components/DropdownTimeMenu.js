@@ -116,6 +116,20 @@ export default class DropdownTimeMenu extends React.Component {
                 ))}
 
               </ul>)
+          else
+            return (
+              <ul key={index}
+                  className={styles.filtersList + ' ' + styles.timeSlot + ' ' + this.checkShow(option.day, this.state.timeWindowTitle)}>
+
+                <li className={styles.timeTitle} onClick={this.preventClose}>
+                  <div className={styles.timeArrowLeft + ' ' + this.checkTimesList(optionList[index - 1])}
+                       onClick={this.renderPrevDay}></div>
+                  <span>{this.state.timeWindowTitle}</span>
+                  <div className={styles.timeArrowRight + ' ' + this.checkTimesList(optionList[index + 1])}
+                       onClick={this.renderNextDay}></div>
+                </li>
+
+              </ul>)
         })}
       </div>
     )
