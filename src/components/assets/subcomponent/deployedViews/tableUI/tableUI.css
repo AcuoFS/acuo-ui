@@ -1,8 +1,25 @@
-.header{
- display: inline-block;
- width: calc(100%/3);
+.header, .row, .cell{
+ display:flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: center;
+ font-size: 13px;
+}
 
+.header{
  background-color: #2b3c4c;
  color: white;
- text-align: center;
+}
+/*.row{ border: 1px #444444 dotted; }*/
+.cell{
+ height:auto;
+ background-color: inherit;
+ border-collapse: collapse;
+ padding-left: 7px;
+}
+
+.header > .cell { justify-content: flex-start;; }
+.row > .cell {
+ justify-content: flex-start;
+ color: #4a4a4a;
 }
