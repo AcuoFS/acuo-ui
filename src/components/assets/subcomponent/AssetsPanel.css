@@ -24,8 +24,14 @@
 
 }
 
-.assetsPanelTitle{
+.assetsPanelHeader{
    display: flex;
+   flex-direction: row;
+   /*flex: 1 0 auto;*/
+   flex-shrink: 0;
+
+   margin-bottom: 1em;
+   /*border: 1px black dotted;*/
 }
 
 .assetsPanelTitleText{
@@ -34,7 +40,33 @@
   line-height: 29px;
   color: #4E83B5;
   align-self: center;
+  flex: 10 0 auto
 }
+
+.assetsPanelHeaderInput{
+  flex: 2 0 auto;
+  height: 25px;
+  margin-right: 1em;
+
+  font-size: 14px;
+}
+
+.assetsPanelHeaderSideExpandBtn{
+ height: 20px;
+ width: 20px;
+ align-self: center;
+  /*flex: 1 0 0;*/
+}
+
+.assetsPanelHeaderSideExpandBtn:hover{
+  cursor: pointer
+}
+
+.assetsPanelHeaderSideExpandBtn:active{
+ height: 22px;
+ width: 22px;
+}
+
 
 .panelResizeHandle{
   bottom: 5px;
@@ -60,7 +92,7 @@
  background-color: red;
 }
 
-
+/*Code for resizable handles*/
 /*.panelResizeHandle{
   position:absolute;
   bottom: 5px;

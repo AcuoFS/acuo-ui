@@ -8,7 +8,7 @@ export default class AssetsHomeComponent extends React.Component {
    render(){
      return(
        <div className={ styles.assetsPanelFrame } >
-         <div  className={ styles.assetsPanelTitle} >
+         <div  className={ styles.assetsPanelHeader} >
           <span  className={ styles.assetsPanelTitleText }> At Home </span>
          </div>
        </div>
