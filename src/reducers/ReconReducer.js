@@ -46,12 +46,12 @@ const updateFirstLevelList = (list, guid, id) => (
 
 const updateSecondLevelListFromFirstLevel = (firstLevelList, list, listOfItems) => (
   _.reduce(
-    _.filter(listOfItems, (x) => _.find(firstLevelList, {"GUID": x.GUID})), (list, item) =>
+    _.filter(listOfItems, (x) => _.some(firstLevelList, {"GUID": x.GUID})), (list, item) =>
       _.unionWith(
         _.concat(list, _.reduce(item.clientAssets, (list, group) =>
             _.concat(list, _.reduce(group.data, (list, first) =>
                 _.concat(list, _.reduce(first.firstLevel.secondLevel, (list, second) =>
-                    (_.find(firstLevelList, {"GUID": item.GUID, "id": second.parentIndex}) ?
+                    (_.some(firstLevelList, {"GUID": item.GUID, "id": second.parentIndex}) ?
                       _.concat(list, {"GUID": item.GUID, "parentIndex": second.parentIndex, "id": second.id}) :
                       [])
                   , []))
@@ -60,7 +60,7 @@ const updateSecondLevelListFromFirstLevel = (firstLevelList, list, listOfItems) 
         _.concat(list, _.reduce(item.counterpartyAssets, (list, group) =>
             _.concat(list, _.reduce(group.data, (list, first) =>
                 _.concat(list, _.reduce(first.firstLevel.secondLevel, (list, second) =>
-                    (_.find(firstLevelList, {"GUID": item.GUID, "id": second.parentIndex}) ?
+                    (_.some(firstLevelList, {"GUID": item.GUID, "id": second.parentIndex}) ?
                       _.concat(list, {"GUID": item.GUID, "parentIndex": second.parentIndex, "id": second.id}) :
                       [])
                   , []))
@@ -108,13 +108,49 @@ const updateFirstlevelListFromSecondLevel = (secondLevelList, firstLevelList, it
   return newFirstLevel
 }
 
+const secondLevelChecks = (items) => (
+  _.reduce(
+    _.filter(items,
+      item => (item.counterpartyAssets.length && item.clientAssets.length) && (item.counterpartyAssets.length === item.clientAssets.length) ),
+    (sum, item) =>
+      (_.concat(sum, _.reduce(item.clientAssets, (sum, group) =>
+          _.concat(sum, _.reduce(group.data, (sum, firstLevel) =>
+            _.concat(sum, _.reduce(firstLevel.firstLevel.secondLevel, (sum, secondLevel) =>
+              !secondLevel.tolerance ? _.concat(sum, [{"GUID": item.GUID, "id": secondLevel.id, "parentIndex": firstLevel.firstLevel.id}]) : sum, [])), [])), []))), [])
+)
+
+const autoCheckFirstLevelOnly = (items) => {
+
+  return _.reduce(
+    _.filter(items,
+      item => (item.counterpartyAssets.length && item.clientAssets.length) && (item.counterpartyAssets.length === item.clientAssets.length) ),
+    (sum, item) =>
+      (_.concat(sum, _.reduce(item.clientAssets, (sum, group) =>
+        _.concat(sum, _.reduce(group.data, (sum, firstLevel) =>
+          !firstLevel.firstLevel.secondLevelCount && !firstLevel.firstLevel.tolerance ? _.concat(sum, [{"GUID": item.GUID, "id": firstLevel.firstLevel.id, 'parties': ['cpty', 'client']}]) : sum
+          , [])), []))), [])
+}
+
 export default function reconReducer(state = initState, action) {
   let items, filters, newFilter, updatedFilters
 
   switch(action.type) {
     case ActionTypes.RECON_INIT_STATE:
-      items = action.items
-      return state.set('items', fromJS(plusMinusThreeDays(items)))
+
+      /*****
+      * const does not mean variable is immutable, only the binding between the obj and variable is immutable
+      * obj can still be mutated
+       *
+      * hence the deep cloning
+      * ****/
+
+      const items = plusMinusThreeDays(action.items)
+
+      const secondLevelList1 = secondLevelChecks(_.cloneDeep(items))
+
+      const firstLevelList1 = updateFirstlevelListFromSecondLevel(secondLevelList1, [], _.cloneDeep(items))
+
+      return state.set('items', fromJS(items)).set('secondLevelList', fromJS(secondLevelList1)).set('firstLevelList', fromJS(_.concat(firstLevelList1, autoCheckFirstLevelOnly(_.cloneDeep(items)))))
 
     case ActionTypes.RECON_FILTER_SET:
       newFilter = action.value
@@ -135,6 +171,12 @@ export default function reconReducer(state = initState, action) {
 
       const secondLevelList = state.get('secondLevelList') || List()
       const updatedSecondLevelList2 = updateSecondLevelList(secondLevelList.toJS(), action.GUID, action.parentID, action.secondLevelID)
+
+      //
+      // console.log(secondLevelList.toJS())
+      // console.log(updatedSecondLevelList2)
+      // const test = _.difference(secondLevelList.toJS(), updatedSecondLevelList2)
+      // console.log(test)
 
       const firstLevelList = state.get('firstLevelList') || List()
       const updatedFirstLevelList2 = updateFirstlevelListFromSecondLevel(updatedSecondLevelList2, firstLevelList.toJS(), state.get('items').toJS())

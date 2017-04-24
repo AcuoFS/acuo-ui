@@ -96,7 +96,7 @@ export default class DeselectionPopup extends React.Component {
                        this.validateForm(this.radioAllDom, propHandlerSetFormValidity)
                      }}/>
             </div>
-            <div className={styles.rowText}>All margin calls</div>
+            <div className={styles.rowText}>All margin statements</div>
           </label>
 
           <div>
