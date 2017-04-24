@@ -2,23 +2,30 @@
 .ColGroup{
  border-collapse: collapse;
  display: flex;
+ flex: 0 0 auto;
+
  flex-direction: column;
  }
 
 .RowGroup{
  border-collapse: collapse;
  display: flex;
+ flex: 0 0 auto;
+
  flex-direction: row;
  }
 
 .Row{
  display: flex;
  flex-direction: row;
+ flex: 0 0 auto;
+
 }
 
 .DataRowCell{
  display: flex;
  flex-direction: row;
+ flex: 0 0 auto;
  align-items: center;
  justify-content: center;
 }
@@ -41,41 +48,4 @@
 .VarMarginHead{
    background-color: #4e83b5;
    color: white;
-   /*border-left: 1px solid white*/
 }
-
-
-/*---Default---*/
-/*.ColGroup{
-  border: 1px dotted blue;
-}*/
-/*.header, .row, .cell{
- display:flex;
- flex-direction: row;
- align-items: center;
- justify-content: center;
- font-size: 13px;
- padding: 0;
- margin: 0;
-}*/
-/*.cell{
- height:auto;
- background-color: inherit;
- border-collapse: collapse;
- padding-left: 7px;
-}*/
-/*.header > .cell { justify-content: flex-start}*/
-/*.row > .cell { justify-content: flex-start }*/
-
-/*.hLine {
- margin-top:2px;
- margin-bottom: 2px;
- border-bottom: 1px solid #2b3c4c;
-}*/
-/*---------------------------------------------------------*/
-
-
-/*.VarMarginRow{
-  border-bottom: 1px solid #979797;
-  margin-bottom: 2px;
-}*/

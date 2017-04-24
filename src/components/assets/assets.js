@@ -12,12 +12,15 @@ export default class AssetsComponent extends React.Component {
   render(){
     return(
       <div className={styles.assetsComponent}>
+
         <div className={styles.assetsPanels}>
-          <AssetsDeployedComponent ui={this.props.AssetsUi}
-                                   data={this.props.AssetsData}
-                                   dispatch={this.props.Dispatch}  />
+          <AssetsDeployedComponent ui={this.props.AssetsUi} data={this.props.AssetsData} dispatch={this.props.Dispatch}  />
         </div>
-        <div className={styles.assetsPanels}> <AssetsHomeComponent/> </div>
+
+        <div className={styles.assetsPanels}>
+          <AssetsHomeComponent/>
+        </div>
+
       </div>
     )
   }
