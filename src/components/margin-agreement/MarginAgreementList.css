@@ -397,7 +397,7 @@
 
 .inputBox {
   width: 300px;
-  height: 28px;
+  min-height: 28px;
   display: inline-block;
   text-indent: 5px;
 }
