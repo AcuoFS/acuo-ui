@@ -79,26 +79,11 @@ const DataRowCell = (props)=>{
    </div> )
 }
 
-const Line = (props)=>{
- let className = props.style.className
- let height = `${(props.style.height || 0).toString()}px`
- // console.log(height);
- return(
-  <div className={className}
-       ref={ (node)=>{
-        // console.log(node);
-        // console.log(node.getBoundingClientRect());
-        node.style.height = height} }
-   ></div>
- )
-}
-
 
 const Table = {
   ColGroup,
   RowGroup,
   DataRow,
-  Line
 }
 
 
