@@ -215,9 +215,7 @@ export default class Dispute extends React.Component {
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Comments
               </div>
-              {console.log(marginData.get('GUID'))}
-              {console.log(isDisputed)}
-              {console.log(this.state.formComments)}
+
               <textarea type="text"
                      className={isDisputed ? styles.inputBoxDisabled : styles.inputBox}
                      onChange={(e) => this.setState({formComments: e.target.value})}
