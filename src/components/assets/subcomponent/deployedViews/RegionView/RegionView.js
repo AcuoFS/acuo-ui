@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux'
 import styles from './RegionView.css'
 import NavBar from "../Navbar.js"
-import Table from '../tableUI/tableUI.js'
-import tableStyle from '../tableUI/tableUI.css'
+import Table from '../tableUI/TableUI.js'
+import tableStyle from '../tableUI/TableUI.css'
 
 
 /*  RegionView shall hold only the view when user selects 'Region' from the navbar
