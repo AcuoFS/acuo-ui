@@ -1,0 +1,13 @@
+.regionView{
+ border: 1px black dashed;
+ height: calc(100% - 50px);
+ display: flex;
+ flex-direction: column;
+}
+
+.colLeft{
+ width: calc(100% * 0.38)
+}
+.colRight{
+ width: calc(100% * 0.62);
+}

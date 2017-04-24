@@ -1,25 +1,81 @@
-.header, .row, .cell{
+/*---Default---*/
+.ColGroup{
+ border-collapse: collapse;
+ display: flex;
+ flex-direction: column;
+ }
+
+.RowGroup{
+ border-collapse: collapse;
+ display: flex;
+ flex-direction: row;
+ }
+
+.Row{
+ display: flex;
+ flex-direction: row;
+}
+
+.DataRowCell{
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: center;
+}
+/*---------------------------------------------*/
+.DataBlock{
+ padding-bottom: 2px;
+ border-bottom: 1px solid #979797;
+}
+
+.DataRow{
+ border-bottom: 1px solid #979797;
+ margin-bottom: 2px;
+}
+
+.RegCptyHead{
+   background-color: #2b3c4c;
+   color: white;
+   border-right: 1px solid white
+}
+.VarMarginHead{
+   background-color: #4e83b5;
+   color: white;
+   /*border-left: 1px solid white*/
+}
+
+
+/*---Default---*/
+/*.ColGroup{
+  border: 1px dotted blue;
+}*/
+/*.header, .row, .cell{
  display:flex;
  flex-direction: row;
  align-items: center;
  justify-content: center;
  font-size: 13px;
-}
-
-.header{
- background-color: #2b3c4c;
- color: white;
-}
-/*.row{ border: 1px #444444 dotted; }*/
-.cell{
+ padding: 0;
+ margin: 0;
+}*/
+/*.cell{
  height:auto;
  background-color: inherit;
  border-collapse: collapse;
  padding-left: 7px;
-}
+}*/
+/*.header > .cell { justify-content: flex-start}*/
+/*.row > .cell { justify-content: flex-start }*/
 
-.header > .cell { justify-content: flex-start;; }
-.row > .cell {
- justify-content: flex-start;
- color: #4a4a4a;
-}
+/*.hLine {
+ margin-top:2px;
+ margin-bottom: 2px;
+ border-bottom: 1px solid #2b3c4c;
+}*/
+/*---------------------------------------------------------*/
+
+
+/*.VarMarginRow{
+  border-bottom: 1px solid #979797;
+  margin-bottom: 2px;
+}*/

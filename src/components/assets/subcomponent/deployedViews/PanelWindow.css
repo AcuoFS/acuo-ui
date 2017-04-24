@@ -1,11 +1,1 @@
-.panelScreen{
- border: 1px black dashed;
- height: calc(100% - 50px);
- display: flex;
- flex-direction: row;
-}
 
-.colLeft, .colRight{
- border: 1px green dashed;
- width: 50%;
-}
