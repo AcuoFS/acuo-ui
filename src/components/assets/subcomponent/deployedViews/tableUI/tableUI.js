@@ -5,11 +5,10 @@ import { connect } from 'react-redux'
 const ColGroup = (props)=>{
  if(!props.style){throw "ColGroup's style is not passed in through props!"}
  let width =  `${(props.style.width || 100).toString()}%`
- // console.log(width)
 
  return(
   <div className={ props.style.className }
-       ref={ (node)=>{node.style.width = width }}  >
+       ref={ (node)=>{ if(node){node.style.width = width} }}  >
    {props.children}
   </div>
  )
@@ -22,7 +21,7 @@ const RowGroup = (props)=>{
 
  return(
   <div className={ props.style.className }
-       ref={ (node)=>{node.style.width = width }}  >
+       ref={ (node)=>{ if(node){node.style.width = width} }}  >
    {props.children}
   </div>
  )
@@ -45,7 +44,7 @@ const DataRow = (props)=>{
 
   return(
     <div className={className}
-         ref={ (node)=>{ node.style.height = height(); node.style.width = width  }}
+         ref={ (node)=>{ if(node){node.style.height = height(); node.style.width = width}  }}
          draggable={true}
          onDragStart={(node)=>{console.log("Drag Started")}}   >
 
@@ -59,7 +58,7 @@ const DataRow = (props)=>{
 const DataRowCell = (props)=>{
   return(
    <div className={styles.DataRowCell}
-         ref={ (node)=>{ node.style.width = `${(100 / props.siblings).toString()}%` } } >
+         ref={ (node)=>{ if(node){node.style.width = `${(100 / props.siblings).toString()}%`} } } >
 
      {props.content || "---No Content---"}
    </div> )
