@@ -127,7 +127,7 @@
 }
 
 .section.left {
-  flex: 4;
+  flex: 4 4 auto;
 }
 
 .sectionText {
@@ -244,7 +244,7 @@
 
 .section.right {
   color: #4a4a4a;
-  flex: 1;
+  flex: 1 1 auto;
   border-left: 1px solid #9B9B9B;
   display: flex;
   flex-direction: column;
@@ -539,5 +539,5 @@ textarea.inputBox {
 }
 
 .noMatched {
-  color: #D0021B;;
+  color: #D0021B;
 }
