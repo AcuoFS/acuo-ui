@@ -15,7 +15,7 @@ export default class Dispute extends React.Component {
     this.state = {
       formDisputeAmt: '',
       formAgreedAmt: '',
-      formReasonCode: '',
+      formReasonCodes: [],
       formComments: _.reduce(this.disputeComments(this.props.marginData), (sum, x) => (x + '; ' + sum), ''),
       formMtm: '',
       formBalance: ''
@@ -31,7 +31,7 @@ export default class Dispute extends React.Component {
 
   logChange(val) {
     this.setState({
-      formReasonCode: val ? val.value : ''
+      formReasonCodes: val
     })
   }
 
@@ -57,13 +57,13 @@ export default class Dispute extends React.Component {
   }
 
   onDropdownItemChange(e, optionCode) {
-    this.setState({formReasonCode: optionCode})
+    this.setState({formReasonCodes: optionCode})
 
     e.stopPropagation()
   }
 
   isNotBlankText(str) {
-    return str.trim() !== ''
+    return String(str).trim() !== ''
   }
 
   isUpdatedText(str) {
@@ -72,13 +72,13 @@ export default class Dispute extends React.Component {
 
   isUpdatedForm() {
     return this.isUpdatedText(this.state.formDisputeAmt) || this.isUpdatedText(this.state.formAgreedAmt) ||
-      this.isUpdatedText(this.state.formReasonCode) || this.isUpdatedText(this.state.formMtm) ||
+      this.isUpdatedText(this.state.formReasonCodes) || this.isUpdatedText(this.state.formMtm) ||
       this.isUpdatedText(this.state.formBalance)
   }
 
   isValidForm() {
     return this.isNotBlankText(this.state.formDisputeAmt) && this.isNotBlankText(this.state.formAgreedAmt) &&
-      this.isNotBlankText(this.state.formReasonCode) && this.isNotBlankText(this.state.formMtm) &&
+      this.isNotBlankText(this.state.formReasonCodes) && this.isNotBlankText(this.state.formMtm) &&
       this.isNotBlankText(this.state.formBalance)
   }
 
@@ -101,7 +101,7 @@ export default class Dispute extends React.Component {
       msId: this.props.marginData.get('GUID'),
       disputedAmount: this.state.formDisputeAmt,
       agreedAmount: this.state.formAgreedAmt,
-      reasonCode: this.state.formReasonCode,
+      reasonCodes: this.state.formReasonCodes,
       comments: this.state.formComments,
       mtm: this.state.formMtm,
       balance: this.state.formBalance
@@ -193,11 +193,11 @@ export default class Dispute extends React.Component {
               <div className={styles.usd}>USD</div>
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}
-              <div className={styles.columnleft}> Reason Code
+              <div className={styles.columnleft}> Reason Codes
               </div>
               {isDisputed
                 ? <input type="text" className={styles.inputBoxDisabled}
-                         defaultValue={reconDisputeReasonCodes[marginData.getIn(['disputeInfo', 'reasonCode'])]}
+                         defaultValue={reconDisputeReasonCodes[marginData.getIn(['disputeInfo', 'reasonCodes'])]}
                          disabled/>
                 : <div className={styles.dropdownCont}>
                   {/*<Dropdown*/}
@@ -207,9 +207,10 @@ export default class Dispute extends React.Component {
                   {/*options={this.getReasonCodesAsDropdown(reconDisputeReasonCodes)}*/}
                   {/*nextTabIndex={this.generateNextTabIndex()}/>*/}
                   <Select
-                    value={this.state.formReasonCode}
+                    value={this.state.formReasonCodes}
                     options={this.getReasonCodesAsDropdown(reconDisputeReasonCodes)}
-                    onChange={this.logChange} />
+                    onChange={this.logChange}
+                    multi={true}/>
                 </div>}
             </div>
             <div className={styles.sectionRowDispute}> {/* one row div*/}

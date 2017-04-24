@@ -302,7 +302,7 @@
   /* Fallback color for IE 8 */
   border: 1px solid rgba(0, 126, 255, 0.24);
   color: #007eff;
-  display: inline-block;
+  display: inline-flex;
   font-size: 0.9em;
   line-height: 1.4;
   margin-left: 5px;
@@ -313,6 +313,7 @@
 .Select--multi .Select-value-label {
   display: inline-block;
   vertical-align: middle;
+  align-self: center;
 }
 .Select--multi .Select-value-label {
   border-bottom-right-radius: 2px;
