@@ -78,8 +78,6 @@ export default Table
   Allow user to pass styling DataRowCell styling through DataRow's props.
 */
 
-
-
 //-----Further Development-----
 /*
 + DataCol
@@ -90,7 +88,6 @@ export default Table
    const DataCol = (props)=>{return()}
    const DataColCell = (props)=>{return()}
 */
-
 /*
 + Cell
    Unlike DataRowCell and DataColCell, the cell component should allow user to

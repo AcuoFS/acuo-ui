@@ -4,7 +4,10 @@
   border-radius: 8px;
   margin: 0% 2%;
   padding: 1%;
-  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
 }
 
 .assetsPanelTitle{
@@ -20,6 +23,30 @@
 }
 
 .panelResizeHandle{
+  bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 10px;
+  height: 15px;
+  width: 100%;
+
+  background-color: #2b3c4c;
+  color: white;
+}
+
+.panelResizeHandle:hover{
+ cursor: grab;
+}
+.panelResizeHandle:active{
+ cursor: grabbing;
+ background-color: red;
+}
+
+
+/*.panelResizeHandle{
   position:absolute;
   bottom: 5px;
   display: flex;
@@ -41,4 +68,4 @@
 .panelResizeHandle:active{
  cursor: grabbing;
  background-color: red;
-}
+}*/
