@@ -124,6 +124,56 @@ const RegionView = (props)=>{
       </Table.ColGroup>
     </Table.RowGroup>
 
+    <Table.RowGroup style={DataBlock}>
+      <Table.DataRow content={RowContent1} style={RowStyle1} />
+      <Table.ColGroup style={InnerColGroupStyle}>
+        <Table.DataRow content={RowContent2} style={RowStyle2} />
+        <Table.DataRow content={RowContent2} style={RowStyle2} />
+        <Table.DataRow content={RowContentPledge} style={RowStylePledgeExcess} />
+        <Table.DataRow content={RowContentExcess} style={RowStylePledgeExcess} />
+      </Table.ColGroup>
+    </Table.RowGroup>
+
+    <Table.RowGroup style={DataBlock}>
+      <Table.DataRow content={RowContent1} style={RowStyle1} />
+      <Table.ColGroup style={InnerColGroupStyle}>
+        <Table.DataRow content={RowContent2} style={RowStyle2} />
+        <Table.DataRow content={RowContent2} style={RowStyle2} />
+        <Table.DataRow content={RowContentPledge} style={RowStylePledgeExcess} />
+        <Table.DataRow content={RowContentExcess} style={RowStylePledgeExcess} />
+      </Table.ColGroup>
+    </Table.RowGroup>
+
+    <Table.RowGroup style={DataBlock}>
+      <Table.DataRow content={RowContent1} style={RowStyle1} />
+      <Table.ColGroup style={InnerColGroupStyle}>
+        <Table.DataRow content={RowContent2} style={RowStyle2} />
+        <Table.DataRow content={RowContent2} style={RowStyle2} />
+        <Table.DataRow content={RowContentPledge} style={RowStylePledgeExcess} />
+        <Table.DataRow content={RowContentExcess} style={RowStylePledgeExcess} />
+      </Table.ColGroup>
+    </Table.RowGroup>
+
+    <Table.RowGroup style={DataBlock}>
+      <Table.DataRow content={RowContent1} style={RowStyle1} />
+      <Table.ColGroup style={InnerColGroupStyle}>
+        <Table.DataRow content={RowContent2} style={RowStyle2} />
+        <Table.DataRow content={RowContent2} style={RowStyle2} />
+        <Table.DataRow content={RowContentPledge} style={RowStylePledgeExcess} />
+        <Table.DataRow content={RowContentExcess} style={RowStylePledgeExcess} />
+      </Table.ColGroup>
+    </Table.RowGroup>
+
+    <Table.RowGroup style={DataBlock}>
+      <Table.DataRow content={RowContent1} style={RowStyle1} />
+      <Table.ColGroup style={InnerColGroupStyle}>
+        <Table.DataRow content={RowContent2} style={RowStyle2} />
+        <Table.DataRow content={RowContent2} style={RowStyle2} />
+        <Table.DataRow content={RowContentPledge} style={RowStylePledgeExcess} />
+        <Table.DataRow content={RowContentExcess} style={RowStylePledgeExcess} />
+      </Table.ColGroup>
+    </Table.RowGroup>
+
   </div>
  )
 }
