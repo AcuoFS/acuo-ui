@@ -1,4 +1,4 @@
-.regionView{
+.tableView{
  /*border: 1px blue dashed;*/
  display: flex;
  flex-direction: column;
@@ -7,9 +7,9 @@
  overflow-y: hidden;
 }
 
-.colLeft{
+/*.colLeft{
  width: calc(100% * 0.38)
 }
 .colRight{
  width: calc(100% * 0.62);
-}
+}*/

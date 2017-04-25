@@ -1,12 +1,9 @@
 import React from 'react';
 import styles from './AssetsPanel.css'
 import PanelWindow from './deployedViews/PanelWindow.js'
-
+import AssetsHomeTableView from './deployedViews/TableView/AssetsHomeTableView.js'
 
 export default class AssetsHomeComponent extends React.Component {
-   constructor(props){
-     super(props)
-   }
    componentDidMount(){
    }
 
@@ -18,10 +15,12 @@ export default class AssetsHomeComponent extends React.Component {
            <img className={styles.assetsPanelHeaderSideExpandBtn}
                 src="images/assets_deployed/minimize-sideways.svg"
                 onClick={ ()=>{ console.log(this.state) }}/>
-           <PanelWindow>
+         </div>
+         
+         <PanelWindow>
+           <AssetsHomeTableView />
+         </PanelWindow>
 
-           </PanelWindow>
-        </div>
        </div>
      )
    }

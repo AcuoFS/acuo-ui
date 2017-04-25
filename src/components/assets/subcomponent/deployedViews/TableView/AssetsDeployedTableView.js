@@ -57,7 +57,7 @@ const RowStylePledgeExcess = {
 
 const AssetsDeployedTableView = (props)=>{
  return (
-  <div className={styles.regionView}>
+  <div className={styles.tableView}>
 
     <Table.RowGroup style={RowGroupStyle}>
       <NavBar />
