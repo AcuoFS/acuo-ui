@@ -9,12 +9,12 @@
 }
 
 .assetsPanelDeployed{
- flex: 2 0 auto  ;
-  /*flex: 2 0 68%  ;*/
+ /*flex: 2 0 auto  ;*/
+  flex: 2 0 68%  ;
   /*flex: 2 0 0  ;*/
 }
 .assetsPanelHome{
- flex: 1 0 auto  ;
-  /*flex: 1 0 28%  ;*/
+ /*flex: 1 0 auto  ;*/
+  flex: 1 0 28%  ;
   /*flex: 1 0 0  ;*/
 }

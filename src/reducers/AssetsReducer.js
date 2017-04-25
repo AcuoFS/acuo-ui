@@ -2,12 +2,21 @@ import {Map, List, fromJS} from 'immutable'
 import _ from 'lodash'
 
 const INITIAL_STATE = {
-  ui: { IsDeployedPanelExpanded: false },
+  ui: { 'IsDeployedPanelExpandedSideways': false,
+        'IsVarMarginSelected': true },
   data: {}
 }
 
 const AssetsReducer = (state = INITIAL_STATE , action)=>{
+  let newState = {}
   switch (action.type){
+    case "@DEPLOYED_PANEL__TOGGLE_SIDE_EXPAND":
+      newState = _.set(_.cloneDeep(state), ['ui', 'IsDeployedPanelExpandedSideways'], action.payload)
+      return newState
+    case "@DEPLOYED__TOGGLE_INIT_VAR_MARGIN":
+      newState = _.set(_.cloneDeep(state), ['ui', 'IsVarMarginSelected'], action.payload)
+      console.log(newState)
+      return newState
     default:
       return state
   }

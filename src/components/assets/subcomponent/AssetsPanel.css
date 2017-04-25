@@ -67,14 +67,13 @@
  width: 25px;
 }
 
-
 .panelResizeHandle{
   bottom: 5px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  flex: 1 0 auto;
+  flex: 0 0 auto;
 
   margin-top: 10px;
   height: 24px;

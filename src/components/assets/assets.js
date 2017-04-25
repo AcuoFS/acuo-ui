@@ -4,18 +4,22 @@ import AssetsDeployedContainer from './subcomponent/AssetsDeployed.js'
 import AssetsHomeComponent from './subcomponent/AssetsHome.js'
 
 export default class AssetsComponent extends React.Component {
+  constructor(props){
+   super(props)
+  }
   componentDidMount(){
   }
 
   render(){
+   let IsDeployedPanelExpandedSideways = this.props.state.ui.IsDeployedPanelExpandedSideways
     return(
       <div className={styles.assetsComponent}>
 
-        <div className={styles.assetsPanels}>
-          <AssetsDeployedContainer ui={this.props.AssetsUi} data={this.props.AssetsData} dispatch={this.props.Dispatch}  />
+        <div className={IsDeployedPanelExpandedSideways? styles.assetsPanelDeployed : styles.assetsPanels}>
+          <AssetsDeployedContainer />
         </div>
 
-        <div className={styles.assetsPanels}>
+        <div className={IsDeployedPanelExpandedSideways? styles.assetsPanelHome : styles.assetsPanels}>
           <AssetsHomeComponent/>
         </div>
 
@@ -23,6 +27,9 @@ export default class AssetsComponent extends React.Component {
     )
   }
 }
+
+
+
 
 //   render(){
 //     return(
