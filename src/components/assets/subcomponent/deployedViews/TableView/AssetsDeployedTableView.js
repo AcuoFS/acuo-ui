@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import styles from './RegionView.css'
+import styles from './AssetsDeployedTableView.css'
 import NavBar from "../Navbar.js"
 import Table from '../tableUI/TableUI.js'
 import tableStyle from '../tableUI/TableUI.css'
 
-
-/*  RegionView shall hold only the view when user selects 'Region' from the navbar
+/*  AssetsDeployedTableView shall hold only the view when user selects 'Region' from the navbar
       - NavBar should not reside within this component and placed in panelWindow instead.
       - All table components should come from tableUi.js  */
 
@@ -56,9 +55,7 @@ const RowStylePledgeExcess = {
   rowSpan: 1,
 }
 
-
-
-const RegionView = (props)=>{
+const AssetsDeployedTableView = (props)=>{
  return (
   <div className={styles.regionView}>
 
@@ -178,4 +175,4 @@ const RegionView = (props)=>{
  )
 }
 
-export default RegionView
+export default AssetsDeployedTableView

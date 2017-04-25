@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Assets.css'
-import AssetsDeployedComponent from './subcomponent/AssetsDeployed.js'
+import AssetsDeployedContainer from './subcomponent/AssetsDeployed.js'
 import AssetsHomeComponent from './subcomponent/AssetsHome.js'
 
 export default class AssetsComponent extends React.Component {
@@ -12,7 +12,7 @@ export default class AssetsComponent extends React.Component {
       <div className={styles.assetsComponent}>
 
         <div className={styles.assetsPanels}>
-          <AssetsDeployedComponent ui={this.props.AssetsUi} data={this.props.AssetsData} dispatch={this.props.Dispatch}  />
+          <AssetsDeployedContainer ui={this.props.AssetsUi} data={this.props.AssetsData} dispatch={this.props.Dispatch}  />
         </div>
 
         <div className={styles.assetsPanels}>

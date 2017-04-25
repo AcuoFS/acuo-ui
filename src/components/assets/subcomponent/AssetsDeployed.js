@@ -1,28 +1,21 @@
-import React from 'react';
+import React from 'react'
+import { connect } from "react-redux"
 import styles from './AssetsPanel.css'
 import _ from 'lodash'
 
 /*Components*/
 import PanelWindow from './deployedViews/PanelWindow.js'
+import AssetsDeployedTableView from './deployedViews/TableView/AssetsDeployedTableView.js'
 
-export default class AssetsDeployedComponent extends React.Component {
+class AssetsDeployedComponent extends React.Component {
   constructor(props){
-    super(props);
-    this.state={
-     ExpandVertical: false,
-     ExpandSideways: false
-    }
+    super(props)
+    this.state={ ExpandVertical: false}
   }
 
-  componentDidMount(){
-   }
+  componentDidMount(){}
 
-  componentDidUpdate(){
-   }
-
-   // onClick={ ()=>{ console.log(this.state)
-   //                 let newState = _.set(_.cloneDeep(this.state), ['ExpandSideways'], !this.state.ExpandSideways)
-   //                 this.setState(newState)
+  componentDidUpdate(){}
 
    render(){
     let resizeHandleActive = this.props.ui.deployedPanel.resizeHandleActive
@@ -32,26 +25,22 @@ export default class AssetsDeployedComponent extends React.Component {
           ref={ (node)=> this.deployedFrame = node}  >
         <div className={ styles.assetsPanelHeader} >
            <span className={ styles.assetsPanelTitleText }> Deployed </span>
-           <input className={styles.assetsPanelHeaderInput} type={"text"}></input>
+           <input className={styles.assetsPanelHeaderInput} type={"text"} placeholder={"Dummy Input Field"}/>
            <img className={styles.assetsPanelHeaderSideExpandBtn}
                 src="images/assets_deployed/expand-sideways.svg"
-                onClick={ ()=>{ console.log(this.state)
-
-                }}
-                />
+                onClick={ ()=>{ console.log(this.state) }} />
         </div>
-        <PanelWindow />
+        <PanelWindow>
+          <AssetsDeployedTableView />
+        </PanelWindow>
         <div className={styles.panelResizeHandle}
-             onClick={ (e)=>{ this.setState( (prevState)=> ({ExpandVertical: !this.state.ExpandVertical})) }}
+             onClick={ ()=>{ this.setState( (prevState)=> ({ExpandVertical: !this.state.ExpandVertical}) ) }}
               >
-          ooo
+          &#9650;  &#9660;
         </div>
      </div>
      )
    }
-
-
-
   // Code for resizable panels using mouse drag (buggy!!!)
   // render(){
   //  let resizeHandleActive = this.props.ui.deployedPanel.resizeHandleActive
@@ -79,3 +68,9 @@ export default class AssetsDeployedComponent extends React.Component {
   //   )
   // }
 }
+
+//--------------------------------------AssetsDeployedContainer------------------------------------------
+
+
+const AssetsDeployedContainer = connect( )(AssetsDeployedComponent)
+export default AssetsDeployedContainer
