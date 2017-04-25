@@ -29,10 +29,8 @@
  align-items: center;
  justify-content: center;
 }
-/*---------------------------------------------*/
 
 /* ----- AssetsDeployedTableView ----- */
-
 .DataBlock{
  padding-bottom: 2px;
  border-bottom: 1px solid #979797;
@@ -54,7 +52,6 @@
 }
 
 /* ----- AssetsHomeTableView ----- */
-
 .PrincipalPledgeHead{
  background-color: #2b3c4c;
  color: white;

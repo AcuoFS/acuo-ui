@@ -18,8 +18,6 @@ class AssetsDeployedComponent extends React.Component {
   componentDidUpdate(){}
 
    render(){
-    let resizeHandleActive = this.props.ui.deployedPanel.resizeHandleActive
-    let isMouseDown = this.props.ui.deployedPanel.resizeHandleMouseDown
      return(
      <div className={ this.state.ExpandVertical? (styles.assetsPanelFrameExpanded) : (styles.assetsPanelFrame) }
           ref={ (node)=> this.deployedFrame = node}  >

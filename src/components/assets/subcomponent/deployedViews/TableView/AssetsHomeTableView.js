@@ -7,7 +7,7 @@ import tableStyle from '../tableUI/TableUI.css'
 const RowGroupStyle = { className: `${tableStyle.RowGroup}`}
 const PrincipalHeadContent = ['Asset', 'Firm', 'Quantity', 'Value', 'Rating', 'Maturity Date', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region']
 const PrincipalPledgeHeadStyle_Expand = {
- className: `${tableStyle.Row} ${tableStyle.PrincipalPledgeHead}`, //${tableStyle.RegCptyHead}
+ className: `${tableStyle.Row} ${tableStyle.PrincipalPledgeHead}`,
  width: null,
  height: 24,
  rowSpan: 1
