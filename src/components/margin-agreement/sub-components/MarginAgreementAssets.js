@@ -29,9 +29,9 @@ export default class MarginAgreementPortfolio extends React.Component {
 
   getCurrencyInfo(ccy, baseCCY) {
     if (ccy)
-      return ccy.map((x) => {
+      return ccy.map((x, index) => {
         return (
-          <div key={Math.random()}>{x.get('ccy') + '/' + baseCCY + "=" + x.get('exchangeRate')}</div>
+          <div key={index}>{x.get('ccy') + '/USD=' + x.get('exchangeRate').toFixed(4)}</div>
         )
       })
     else
