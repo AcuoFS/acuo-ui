@@ -124,7 +124,7 @@ export default class MarginAgreementPortfolio extends React.Component {
 
     const {
       onSelectFirstLevelItem, portfolioData, onReconItem, firstLevelList, secondLevelList,
-      onSelectSecondLevelItem
+      onSelectSecondLevelItem, currencyInfo
     } = this.props
 
     let percentage = this.getPercentage(portfolioData)
@@ -154,7 +154,8 @@ export default class MarginAgreementPortfolio extends React.Component {
                      adjAmt={this.state.adjAmount}
                      firstLevelList={firstLevelList}
                      secondLevelList={secondLevelList}
-                     onSelectSecondLevelItem={onSelectSecondLevelItem}/>
+                     onSelectSecondLevelItem={onSelectSecondLevelItem}
+                     currencyInfo={currencyInfo}/>
 
         <div className={styles.actPanel + ' ' + styles.act_C}>
           {!isEmptyCounterparty(portfolioData.get('counterpartyAssets')) &&
@@ -181,7 +182,8 @@ export default class MarginAgreementPortfolio extends React.Component {
                             secondLevelList={secondLevelList}
                             onSelectSecondLevelItem={onSelectSecondLevelItem}
                             onTogglePortfolioPopup={this.onTogglePortfolioPopup}
-                            isDisputed={this.isDisputed(portfolioData)}/>
+                            isDisputed={this.isDisputed(portfolioData)}
+                            currencyInfo={currencyInfo}/>
       </div>
     )
   }

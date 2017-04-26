@@ -229,7 +229,7 @@ export default class MarginAgreementPortfolio extends React.Component {
             <div className={styles.viewFxRate}> View FX rate
               <div className={styles.viewFxRateImage}>
                 <div>
-                  {this.getCurrencyInfo(marginData.get('currencyInfo'), marginData.get('ccy'))}
+                  {this.getCurrencyInfo(this.props.currencyInfo, marginData.get('ccy'))}
                 </div>
               </div>
             </div>

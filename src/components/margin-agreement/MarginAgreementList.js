@@ -25,7 +25,7 @@ export default class MarginAgreementList extends React.Component {
   }
 
   displayLineItems(recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList,
-                   onSelectSecondLevelItem) {
+                   onSelectSecondLevelItem, currencyInfo) {
     return (recon.map((x) => {
 
       if(x.get('direction') == 'OUT')
@@ -37,7 +37,8 @@ export default class MarginAgreementList extends React.Component {
           onReconItem={onReconItem}
           firstLevelList={firstLevelList}
           secondLevelList={secondLevelList}
-          onSelectSecondLevelItem={onSelectSecondLevelItem}/>
+          onSelectSecondLevelItem={onSelectSecondLevelItem}
+          currencyInfo={currencyInfo}/>
       )
 
     }))
@@ -50,11 +51,11 @@ export default class MarginAgreementList extends React.Component {
 
   render() {
     const {recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList,
-      onSelectSecondLevelItem} = this.props
+      onSelectSecondLevelItem, currencyInfo} = this.props
     return (
       <div className={styles.actionContainer}>
         {this.displayLineItems(recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList,
-          onSelectSecondLevelItem)}
+          onSelectSecondLevelItem, currencyInfo)}
       </div>
     )
   }

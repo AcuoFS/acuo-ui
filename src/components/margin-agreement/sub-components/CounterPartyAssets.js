@@ -42,7 +42,7 @@ export default class CounterPartyAssets extends React.Component {
       assetsName, handlerTotalMargin, handlerSelectedItem,
       firstLevelList, secondLevelList,
       onSelectSecondLevelItem, onTogglePortfolioPopup, isUploading,
-      isDisputed
+      isDisputed, currencyInfo
     } = this.props
 
     return (
@@ -68,7 +68,8 @@ export default class CounterPartyAssets extends React.Component {
                                onSelectSecondLevelItem={onSelectSecondLevelItem}
                                onTogglePortfolioPopup={onTogglePortfolioPopup}
                                isUploading={isUploading}
-                               party={'cpty'}/>
+                               party={'cpty'}
+                               currencyInfo={currencyInfo}/>
         <ReconDisputeContainer marginData={marginData}
                                actStyle={actStyle}
                                orgName={orgName}
