@@ -27,6 +27,16 @@ const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
     return ["./images/common/minusbox.png", "Selected"]
 }
 
+const fetchAnalysisData = () => (
+  // TODO: fetch statement
+  [
+    { name: 'All Cash Settlement (CCY)', cost: 123456789, savings: 123456789, ratio: '1.00'},
+    { name: 'Algorithm Suggestion', cost: 123456789, savings: 123456789, ratio: '1.00' },
+    { name: 'Least Liquid Assets', cost: 123456789, savings: 123456789, ratio: '1.00' }
+
+  ]
+)
+
 const checkIfExist = (something) => something || List()
 
 const updatePledgeListToSend = (assetList, pledgeToSend, guid) => {
@@ -46,7 +56,8 @@ const mapStateToProps = state => ({
   optimisation: state.PledgeReducer.getIn(['pledgeData', 'optimisation']),
   selection: state.PledgeReducer.getIn(['pledgeData', 'selection']),
   pendingAllocation: state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation']),
-  sliderCheckbox: determineCheckboxStatus(checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'selection'])).size, checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation'])).size )
+  sliderCheckbox: determineCheckboxStatus(checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'selection'])).size, checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation'])).size ),
+  scenarioAnalysis: fetchAnalysisData()
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -156,7 +167,7 @@ const constructToBeRemovedFrom = (pending, selection) => (
 )
 
 const mergeProps = (stateProps, dispatchProps) => ({
-  onRemoveAssetFromAllocate: ( toBeExcluded, toBeRemovedFrom = stateProps.pendingAllocation.toJS()) => (
+  onRemoveAssetFromAllocate: (toBeExcluded, toBeRemovedFrom = checkAllocated(stateProps.selection).map((item) => item.GUID)) => (
     dispatchProps.onDispatchRemoveAssetFromAllocate({
       currentItems: checkAllocated(stateProps.selection),
       toBeRemoved: toBeExcluded,

@@ -130,6 +130,7 @@ export default class DropdownTimeMenu extends React.Component {
                 </li>
 
               </ul>)
+
         })}
       </div>
     )

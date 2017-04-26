@@ -12,6 +12,7 @@
   overflow-x: scroll;
   width: 100%;
   height: 480px;
+  padding: 40px 0;
 }
 
 .moneyIcon {
