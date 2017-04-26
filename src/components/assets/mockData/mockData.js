@@ -1,34 +1,29 @@
 import TableStyle from '../subcomponent/deployedViews/TableUI/TableUI.css'
 
+export const categoryHeader = ["Region" , "Agreement", "Counterparty"]
+export const dataHeader_minView = ["Asset", "Quantity", "Adj. Value", "Value", "Haircut"]
+export const dataHeader_expandedView = ["Asset", "Quantity", "Adj. Value", "Value", "Rating", "Haircut", "Maturity Date", "ISIN"]
 
 export const VarMarginApiResponse = {
-       "RegCptyHead" : ["Region" , "Agreement", "Counterparty"],
-     "VarMarginHead" : ["Asset", "Quantity", "Adj. Value", "Value", "Haircut"],
        "RowContent1" : ["Americas", "Acuo SG Pte Ltd v Counterparty B4", "Counterparty" ],
        "RowContent2" : ["British America", "12,345", "12,345,678 USD", "12,345,678 USD", "1%"],
   "RowContentPledge" : ["Pledge", " ", "12,345,678 USD", "12,345,678 USD", " "],
   "RowContentExcess" : ["Excess", " ", "12,345,678 USD", "12,345,678 USD", " "]
 }
 export const VarMarginApiResponse_Expanded = {
-       "RegCptyHead" : ["Region" , "Agreement", "Counterparty"],
        "RowContent1" : ["Americas", "Acuo SG Pte Ltd v Counterparty B4", "Counterparty" ],
-     "VarMarginHead" : ["Asset", "Quantity", "Adj. Value", "Value", "Rating", "Haircut", "Maturity Date", "ISIN"],
        "RowContent2" : ["British America", "12,345", "12,345,678 USD", "12,345,678 USD", "AAA", "1%", "DD-MM-YYYY", "AB123456789"],
   "RowContentPledge" : ["Pledge", " ", "12,345,678 USD", "12,345,678 USD", " ", " ", " ", " "],
   "RowContentExcess" : ["Excess", " ", "12,345,678 USD", "12,345,678 USD", " ", " ", " ", " "]
 }
 export const InitMarginApiResponse = {
-       "RegCptyHead" : ["Region" , "Agreement", "Counterparty"],
-     "VarMarginHead" : ["Asset", "Quantity", "Adj. Value", "Value", "Haircut"],
        "RowContent1" : ["EURO", "Acuo SG Pte Ltd v Counterparty B4", "Counterparty" ],
        "RowContent2" : ["Germany-Berlin", "12,345", "12,345,678 USD", "12,345,678 USD", "1%"],
   "RowContentPledge" : ["Pledge", " ", "12,345,678 USD", "12,345,678 USD", " "],
   "RowContentExcess" : ["Excess", " ", "12,345,678 USD", "12,345,678 USD", " "]
 }
 export const InitMarginApiResponse_Expanded = {
-       "RegCptyHead" : ["Region" , "Agreement", "Counterparty"],
        "RowContent1" : ["EURO", "Acuo SG Pte Ltd v Counterparty B4", "Counterparty" ],
-     "VarMarginHead" : ["Asset", "Quantity", "Adj. Value", "Value", "Rating", "Haircut", "Maturity Date", "ISIN"],
        "RowContent2" : ["Germany-Berlin", "12,345", "12,345,678 USD", "12,345,678 USD", "AAA", "1%", "DD-MM-YYYY", "AB123456789"],
   "RowContentPledge" : ["Pledge", " ", "12,345,678 USD", "12,345,678 USD", " ", " ", " ", " "],
   "RowContentExcess" : ["Excess", " ", "12,345,678 USD", "12,345,678 USD", " ", " ", " ", " "]

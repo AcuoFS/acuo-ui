@@ -7,6 +7,7 @@ import {
 } from '../../containers'
 import Copyright from '../../components/copyright/Copyright.js'
 import { AssetsPanel } from '../../actions/AssetsActions.js'
+import Styles from "./DeployedPage.css"
 
 
 class DeployedPage extends React.Component {
@@ -15,11 +16,10 @@ class DeployedPage extends React.Component {
   }
   render() {
     return (
-     <div >
+     <div className={Styles.page}>
         <NavigationBarContainer curPage={this.props.location.pathname}/>
         <FlightContainer/>
         <AssetsContainer/>
-        <Copyright/>
       </div>
     )
   }

@@ -10,6 +10,12 @@ const mapStateToProps = (stateProps, ownProps) => {
   }
  }
 
+const AssetsContainer =  connect(
+  mapStateToProps
+)( AssetsComponent )
+
+export default AssetsContainer;
+
 // const mapDispatchToProps = (dispatch, ownProps) => {
 //
 //   return {
@@ -41,10 +47,3 @@ const mapStateToProps = (stateProps, ownProps) => {
 //   ownProps
 //  }
 // }
-
-
-const AssetsContainer =  connect(
-  mapStateToProps
-)( AssetsComponent )
-
-export default AssetsContainer;

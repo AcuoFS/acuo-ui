@@ -8,7 +8,7 @@ import AssetsDeployedTableView from './deployedViews/TableView/AssetsDeployedTab
 /*Actions*/
 import {AssetsPanel} from '../../../actions/AssetsActions.js'
 //Mock Data
-import { VarMarginApiResponse, VarMarginApiResponse_Expanded, InitMarginApiResponse, InitMarginApiResponse_Expanded, VarMarginTableStyle, InitMarginTableStyle } from "../mockData/mockData.js"
+import { categoryHeader, dataHeader_minView, dataHeader_expandedView, VarMarginApiResponse, VarMarginApiResponse_Expanded, InitMarginApiResponse, InitMarginApiResponse_Expanded, VarMarginTableStyle, InitMarginTableStyle } from "../mockData/mockData.js"
 
 class AssetsDeployedComponent extends React.Component {
   constructor(props){
@@ -24,6 +24,8 @@ class AssetsDeployedComponent extends React.Component {
      let state = this.props.state
      let IsDeployedPanelExpandedSideways = state.ui.IsDeployedPanelExpandedSideways;
      let IsVarMarginSelected = this.props.state.ui.IsVarMarginSelected;
+     let dataHeader = (IsDeployedPanelExpandedSideways?  dataHeader_expandedView :  dataHeader_minView)
+     let tableStyle = (IsVarMarginSelected? VarMarginTableStyle :  InitMarginTableStyle)
      let content = ()=>{
       if (IsVarMarginSelected){
         if (IsDeployedPanelExpandedSideways){return VarMarginApiResponse_Expanded}
@@ -34,8 +36,8 @@ class AssetsDeployedComponent extends React.Component {
        else {return InitMarginApiResponse}
       }
      }
-     console.log( "IsDeployedPanelExpandedSideways : " + IsDeployedPanelExpandedSideways );
-     console.log( "IsVarMarginSelected : " + IsVarMarginSelected );
+     // console.log( "IsDeployedPanelExpandedSideways : " + IsDeployedPanelExpandedSideways );
+     // console.log( "IsVarMarginSelected : " + IsVarMarginSelected );
 
 
      return(
@@ -49,9 +51,11 @@ class AssetsDeployedComponent extends React.Component {
                   onClick={ ()=>{ this.props.DeployedViewToggleSideExpand(!state.ui.IsDeployedPanelExpandedSideways) }} />
           </div>
           <PanelWindow>
-            <AssetsDeployedTableView state={state}
-                                     tableContent={content()}
-                                     tableStyle={ IsVarMarginSelected? VarMarginTableStyle :  InitMarginTableStyle}/>
+            <AssetsDeployedTableView state={ state }
+                                     categoryHeader={ categoryHeader }
+                                     dataHeader={ dataHeader }
+                                     tableContent={ content() }
+                                     tableStyle={ tableStyle }/>
           </PanelWindow>
           <div className={styles.panelResizeHandle}
                onClick={ ()=>{ this.setState( (prevState)=> ({ExpandVertical: !this.state.ExpandVertical}) ) }} >
