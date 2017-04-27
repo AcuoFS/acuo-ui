@@ -135,7 +135,7 @@ const computeTimeWindowList = (state, currTime) => {
     }, Set()).toList().sort())
   })
 
-  console.log(something.toJS())
+  // console.log(something.toJS())
 
   return something.toJS()
 }

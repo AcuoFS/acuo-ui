@@ -22,15 +22,17 @@ export default class Graph extends React.Component {
   }
   constructor(props){
     super(props)
+
   }
 
   componentDidUpdate() {
-    this.container.scrollLeft = window.innerWidth / 2;
   }
 
   render() {
     return (
-    <div className={styles.graphCont} ref={(container) => this.container = container}>
+    <div className={styles.graphCont} ref={
+      (container) =>
+        container && (container.scrollLeft = 1440 - ((container.getBoundingClientRect().width - 1440) / 2))}>
       <svg viewBox="0 0 4320 460" preserveAspectRatio="xMidYMin slice"
            style={{'width': '4320px', 'paddingBottom': '455px', 'height': '1px', 'overflow': 'visible'}}>
         {/*<svg viewBox="0 0 1440 460" preserveAspectRatio="xMaxYMax meet">*/}
