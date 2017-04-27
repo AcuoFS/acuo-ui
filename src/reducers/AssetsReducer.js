@@ -3,7 +3,8 @@ import _ from 'lodash'
 
 const INITIAL_STATE = {
   ui: { 'IsDeployedPanelExpandedSideways': false,
-        'IsVarMarginSelected': true },
+        'IsVarMarginSelected': true,
+        'IsRegionSelected': true },
   data: {}
 }
 
@@ -15,7 +16,9 @@ const AssetsReducer = (state = INITIAL_STATE , action)=>{
       return newState
     case "@DEPLOYED__TOGGLE_INIT_VAR_MARGIN":
       newState = _.set(_.cloneDeep(state), ['ui', 'IsVarMarginSelected'], action.payload)
-      console.log(newState)
+      return newState
+    case "@DEPLOYED__TOGGLE_CATEGORY":
+      newState = _.set(_.cloneDeep(state), ['ui', 'IsRegionSelected'], action.payload)
       return newState
     default:
       return state

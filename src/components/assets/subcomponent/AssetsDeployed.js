@@ -8,7 +8,7 @@ import AssetsDeployedTableView from './deployedViews/TableView/AssetsDeployedTab
 /*Actions*/
 import {AssetsPanel} from '../../../actions/AssetsActions.js'
 //Mock Data
-import { categoryHeader, dataHeader_minView, dataHeader_expandedView, VarMarginApiResponse, VarMarginApiResponse_Expanded, InitMarginApiResponse, InitMarginApiResponse_Expanded, VarMarginTableStyle, InitMarginTableStyle } from "../mockData/mockData.js"
+import { categoryHeader, dataHeader_minView, dataHeader_expandedView, ApiVarMarginResponse, VarMarginTableStyle, InitMarginTableStyle } from "../mockData/mockData.js"
 
 class AssetsDeployedComponent extends React.Component {
   constructor(props){
@@ -20,25 +20,42 @@ class AssetsDeployedComponent extends React.Component {
 
   componentDidUpdate(){}
 
+  sortContent = ()=>{console.log("hello")}
+
    render(){
      let state = this.props.state
      let IsDeployedPanelExpandedSideways = state.ui.IsDeployedPanelExpandedSideways;
+     let IsRegionSelected = state.ui.IsRegionSelected;
      let IsVarMarginSelected = this.props.state.ui.IsVarMarginSelected;
      let dataHeader = (IsDeployedPanelExpandedSideways?  dataHeader_expandedView :  dataHeader_minView)
      let tableStyle = (IsVarMarginSelected? VarMarginTableStyle :  InitMarginTableStyle)
-     let content = ()=>{
-      if (IsVarMarginSelected){
-        if (IsDeployedPanelExpandedSideways){return VarMarginApiResponse_Expanded}
-        else {return VarMarginApiResponse}
-      }
-      else{
-       if(IsDeployedPanelExpandedSideways) {return InitMarginApiResponse_Expanded}
-       else {return InitMarginApiResponse}
-      }
+     let sortedContent = IsRegionSelected?  _.sortBy(ApiVarMarginResponse, ["region"]) :  _.sortBy(ApiVarMarginResponse, ["counterparty"])
+     let content = (sortedContent)=>{
+       if(!IsDeployedPanelExpandedSideways){
+        return sortedContent.map((row)=>{
+                       return{
+                        CategoryContent: [ row.region, row.agreement, row.counterparty ],
+                        RowContent:  row.data.map((block)=>{
+                          return [ block.asset, block.quantity, block.adjValue, block.value, block.haircut ]
+                        }),
+                        PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " "],
+                        ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " "]
+                       }
+                      })
+       }
+       else {
+        return sortedContent.map((row)=>{
+                  return{
+                   CategoryContent: [ row.region, row.agreement, row.counterparty ],
+                   RowContent:  row.data.map((block)=>{
+                     return [ block.asset, block.quantity, block.adjValue, block.value, block.rating, block.haircut, block.maturityDate, block.isin ]
+                   }),
+                   PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " ", " ", " ", " "],
+                   ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " ", " ", " ", " "]
+                  }
+                 })
+       }
      }
-     // console.log( "IsDeployedPanelExpandedSideways : " + IsDeployedPanelExpandedSideways );
-     // console.log( "IsVarMarginSelected : " + IsVarMarginSelected );
-
 
      return(
        <div className={ this.state.ExpandVertical? (styles.assetsPanelFrameExpanded) : (styles.assetsPanelFrame) }
@@ -51,10 +68,11 @@ class AssetsDeployedComponent extends React.Component {
                   onClick={ ()=>{ this.props.DeployedViewToggleSideExpand(!state.ui.IsDeployedPanelExpandedSideways) }} />
           </div>
           <PanelWindow>
+           {console.log(content)}
             <AssetsDeployedTableView state={ state }
                                      categoryHeader={ categoryHeader }
                                      dataHeader={ dataHeader }
-                                     tableContent={ content() }
+                                     tableContent={ content(sortedContent) }
                                      tableStyle={ tableStyle }/>
           </PanelWindow>
           <div className={styles.panelResizeHandle}
@@ -83,38 +101,3 @@ const AssetsDeployedContainer = connect(
   mapDispatchToProps
 )(AssetsDeployedComponent)
 export default AssetsDeployedContainer
-
-
-
-
-
-
-//----- Older Code
-
-// Render() Code for resizable panels using mouse drag (buggy!!!)
-//
-// render(){
-//  let resizeHandleActive = this.props.ui.deployedPanel.resizeHandleActive
-//  let isMouseDown = this.props.ui.deployedPanel.resizeHandleMouseDown
-//   return(
-//   <div className={ styles.assetsPanelFrame }
-//        ref={ (node)=> this.deployedFrame = node}
-//        onMouseUp={ (e)=>{e.stopPropagation(); if(isMouseDown){ this.props.dispatch.MouseDownOnResize(false) } }}
-//        onMouseMove={ (e)=>{e.stopPropagation(); if(resizeHandleActive || isMouseDown) { this.props.dispatch.GetNewPanelHeight(e.clientY) }}}
-//         >
-//      <div  className={ styles.assetsPanelTitle} > <span className={ styles.assetsPanelTitleText }> Deployed </span> </div>
-//      <PanelWindow />
-//      <div className={styles.panelResizeHandle}
-//           onMouseDown={ (e)=>{ if(!resizeHandleActive) {
-//                                  this.props.dispatch.ResizeToggle(true)
-//                                  this.props.dispatch.MouseDownOnResize(true)
-//                                  this.props.dispatch.NewCursorY(e.clientY) } }}
-//           onMouseUp={ (e)=>{e.stopPropagation(); if(resizeHandleActive) { this.props.dispatch.MouseDownOnResize(false) } }}
-//           onMouseLeave={ ()=>{ if(resizeHandleActive) { this.props.dispatch.ResizeToggle(false) } } }
-//           onMouseMove={ (e)=>{e.stopPropagation(); if(resizeHandleActive || isMouseDown) { this.props.dispatch.GetNewPanelHeight(e.clientY) }}}
-//            >
-//        ooo
-//      </div>
-//   </div>
-//   )
-// }
