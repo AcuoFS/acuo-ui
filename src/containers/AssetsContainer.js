@@ -6,7 +6,7 @@ import { AssetsPanel } from '../actions/AssetsActions.js'
 
 const mapStateToProps = (stateProps, ownProps) => {
   return {
-   state: stateProps.AssetsReducer,
+   state: stateProps.AssetsReducer
    // ui: stateProps.AssetsReducer.ui,
    // data: stateProps.AssetsReducer.data
   }
@@ -15,14 +15,14 @@ const mapStateToProps = (stateProps, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps)=>{
  return {
   DeployedPanel_ToggleVerticalExpand: (isExpanded)=>{dispatch( AssetsPanel.DeployedPanel_ToggleVerticalExpand(isExpanded) )},
-  DeployedPanel_ToggleSideExpand: (isExpanded)=>{dispatch( AssetsPanel.DeployedPanel_ToggleSideExpand(isExpanded) )}
+  DeployedPanel_ToggleSideExpand: (isExpanded)=>{dispatch( AssetsPanel.DeployedPanel_ToggleSideExpand(isExpanded) )},
+  DeployedPanel_ToggleInitVarMargin: (IsVarMarginSelected)=>{dispatch(AssetsPanel.DeployedPanel_ToggleInitVarMargin(IsVarMarginSelected))},
+  DeployedPanel_ToggleRegionCounterparty: (IsRegionSelected)=>{dispatch(AssetsPanel.DeployedPanel_ToggleRegionCounterparty(IsRegionSelected))}
+
  }
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps)=>{
- console.log(stateProps);
- console.log(dispatchProps);
- console.log(ownProps);
  return{
   state: stateProps.state,
   actions: {...dispatchProps}
