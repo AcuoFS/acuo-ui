@@ -5,19 +5,30 @@ import {
   pollMarginCall
 } from '../actions/MarginCallUploadActions'
 
-const mapStateToProps = state => ({
+const _default = ''
 
+const mapStateToProps = state => ({
+  tnxID: state.MarginUploadReducer.get('tnxID') || _default
 })
 
 const mapDispatchToProps = dispatch => ({
   onUpdateTxnID: (txnID) =>
-    Promise.resolve(dispatch(updateTxnID(txnID)))
-      .then(response => dispatch(pollMarginCall(txnID)))
+    dispatch(updateTxnID(txnID))
+  ,
+  requestValuation: (txnID) =>
+    dispatch(pollMarginCall(txnID))
+})
+
+const mergeProps = (stateProps, dispatchProps) => ({
+  onRequestValuation: () =>
+    dispatchProps.requestValuation(stateProps.txnID)
+  , ...stateProps, ...dispatchProps
 })
 
 const UploadWidgetContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
+  mergeProps
 )(UploadWidgetComponent)
 
 export default UploadWidgetContainer

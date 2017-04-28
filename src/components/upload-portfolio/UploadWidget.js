@@ -78,7 +78,7 @@ export default class UploadWidget extends React.Component {
 
   render() {
 
-    const { onUpdateTxnID } = this.props
+    const { onUpdateTxnID, txnID } = this.props
 
     return (
       /*<form id="uploadbanner" enctype="multipart/form-data" method="post" action="http://localhost:3000/">
@@ -103,11 +103,17 @@ export default class UploadWidget extends React.Component {
             {this.state.status.map((x, i) => <p key={i}>{x.remarks}</p>)}
           </div>
 
+          {(txnID ?
+          <button className={styles.textBold} type="button" onClick={this.onRequestValuation}>
+            Request Valuation
+          </button>
+          :
           <button className={styles.textBold + ' ' + (this.state.isWidgetValidForSubmission ?
             styles.enabled : '')} type="button" onClick={this.onGenerate}
                   disabled={!this.state.isWidgetValidForSubmission}>
             Upload
           </button>
+          )}
         </div>
       </div>
     )
