@@ -143,7 +143,10 @@ const mapDispatchToProps = dispatch => ({
     //TODO: implement fetch to send this obj to backend
     fetch('http://collateral.acuo.com/acuo/api/optimization/update', {
       method: 'POST',
-      body: JSON.stringify(obj)
+      body: JSON.stringify(obj),
+      headers: {'content-type': 'application/json'},
+      json: true,
+      resolveWithFullResponse: true
     }).then(response => {
       console.log('remove allocation response: ')
       console.log(response)
