@@ -1,8 +1,10 @@
 export const AssetsPanel = {
-  DeployedViewToggleSideExpand: (isExpanded)=>{ return { type: "@DEPLOYED_PANEL__TOGGLE_SIDE_EXPAND",
+  DeployedPanel_ToggleSideExpand: (isExpanded)=>{ return { type: "@DEPLOYED_PANEL__TOGGLE_SIDE_EXPAND",
                                                          payload: isExpanded  }},
-  InitVarMarginToggle: (IsVarMarginSelected)=>{ return{ type:"@DEPLOYED__TOGGLE_INIT_VAR_MARGIN",
+  DeployedPanel_ToggleVerticalExpand: (isExpanded)=>{ return { type: "@DEPLOYED_PANEL__TOGGLE_Y_EXPAND",
+                                                               payload: isExpanded  }},
+  DeployedPanel_ToggleInitVarMargin: (IsVarMarginSelected)=>{ return{ type:"@DEPLOYED__TOGGLE_INIT_VAR_MARGIN",
                                                         payload: IsVarMarginSelected }},
-  ToggleRegionCounterparty: (IsRegionSelected)=>{ return{ type:"@DEPLOYED__TOGGLE_CATEGORY",
+  DeployedPanel_ToggleRegionCounterparty: (IsRegionSelected)=>{ return{ type:"@DEPLOYED__TOGGLE_CATEGORY",
                                                           payload: IsRegionSelected }}
 }

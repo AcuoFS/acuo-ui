@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Assets.css'
-import AssetsDeployedContainer from './subcomponent/AssetsDeployed.js'
+import AssetsDeployedComponent from './subcomponent/AssetsDeployed.js'
 import AssetsHomeComponent from './subcomponent/AssetsHome.js'
 
 export default class AssetsComponent extends React.Component {
@@ -11,15 +11,17 @@ export default class AssetsComponent extends React.Component {
   }
 
   render(){
-   let IsDeployedPanelExpandedSideways = this.props.state.ui.IsDeployedPanelExpandedSideways
+   // console.log("@----AssetsContainer:");
+   // console.log(this.props);
+   let DeployedPanel_ExpandedSideways = this.props.state.ui.DeployedPanel_ExpandedSideways;
     return(
       <div className={styles.assetsComponent}>
 
-        <div className={IsDeployedPanelExpandedSideways? styles.assetsPanelDeployed : styles.assetsPanels}>
-          <AssetsDeployedContainer />
+        <div className={DeployedPanel_ExpandedSideways? styles.assetsPanelDeployed : styles.assetsPanels}>
+          <AssetsDeployedComponent state={this.props.state} actions={this.props.actions} />
         </div>
 
-        <div className={IsDeployedPanelExpandedSideways? styles.assetsPanelHome : styles.assetsPanels}>
+        <div className={DeployedPanel_ExpandedSideways? styles.assetsPanelHome : styles.assetsPanels}>
           <AssetsHomeComponent/>
         </div>
 

@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import TableStyle from '../subcomponent/deployedViews/TableUI/TableUI.css'
 
 export const categoryHeader = ["Region" , "Agreement", "Counterparty"]
@@ -49,30 +48,23 @@ export const ApiVarMarginResponse = [
    data: [ block_1, block_2 ],
    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
-  }
-]
-
-export const sortedByRegion = _.sortBy(ApiVarMarginResponse, ["region"])
-export const tableContent = sortedByRegion.map((row)=>{
-        return{
-         CategoryContent: [ row.region, row.agreement, row.counterparty ],
-         RowContent:  row.data.map((block)=>{
-           return [ block.asset, block.quantity, block.adjValue, block.value, block.haircut ]
-         }),
-         PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " "],
-         ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " "]
-        }
-       })
-export const tableContentExpandSide = sortedByRegion.map((row)=>{
-        return{
-         CategoryContent: [ row.region, row.agreement, row.counterparty ],
-         RowContent:  row.data.map((block)=>{
-           return [ block.asset, block.quantity, block.adjValue, block.value, block.rating, block.haircut, block.maturityDate, block.isin ]
-         }),
-         PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " ", " ", " ", " "],
-         ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " ", " ", " ", " "]
-        }
-       })
+  },
+  {
+   region: "ADa Americas",
+   agreement: "Acuo SG Pte Ltd v Counterparty B4",
+   counterparty: "HUA Counterparty",
+   data: [ block_1, block_2 ],
+   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+  },
+  {
+   region: "BAD Americas",
+   agreement: "Acuo SG Pte Ltd v Counterparty B4",
+   counterparty: "BBA Counterparty",
+   data: [ block_1, block_2 ],
+   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+  } ]
 
 export const InitMarginTableStyle = {
            "RowGroupStyle" : { className: `${TableStyle.RowGroup}`},
@@ -133,28 +125,10572 @@ export const VarMarginTableStyle = {
                                  rowSpan: 1 }
 }
 
-
 // export const VarMarginApiResponse = {
-//        "RowContent1" : ["Americas", "Acuo SG Pte Ltd v Counterparty B4", "Counterparty" ],
-//        "RowContent2" : ["British America", "12,345", "12,345,678 USD", "12,345,678 USD", "1%"],
+//    "CategoryContent" : ["Americas", "Acuo SG Pte Ltd v Counterparty B4", "Counterparty" ],
+//         "RowContent" : ["British America", "12,345", "12,345,678 USD", "12,345,678 USD", "1%"],
 //   "RowContentPledge" : ["Pledge", " ", "12,345,678 USD", "12,345,678 USD", " "],
 //   "RowContentExcess" : ["Excess", " ", "12,345,678 USD", "12,345,678 USD", " "]
 // }
-// export const VarMarginApiResponse_Expanded = {
-//        "RowContent1" : ["Americas", "Acuo SG Pte Ltd v Counterparty B4", "Counterparty" ],
-//        "RowContent2" : ["British America", "12,345", "12,345,678 USD", "12,345,678 USD", "AAA", "1%", "DD-MM-YYYY", "AB123456789"],
-//   "RowContentPledge" : ["Pledge", " ", "12,345,678 USD", "12,345,678 USD", " ", " ", " ", " "],
-//   "RowContentExcess" : ["Excess", " ", "12,345,678 USD", "12,345,678 USD", " ", " ", " ", " "]
-// }
-// export const InitMarginApiResponse = {
-//        "RowContent1" : ["EURO", "Acuo SG Pte Ltd v Counterparty B4", "Counterparty" ],
-//        "RowContent2" : ["Germany-Berlin", "12,345", "12,345,678 USD", "12,345,678 USD", "1%"],
-//   "RowContentPledge" : ["Pledge", " ", "12,345,678 USD", "12,345,678 USD", " "],
-//   "RowContentExcess" : ["Excess", " ", "12,345,678 USD", "12,345,678 USD", " "]
-// }
-// export const InitMarginApiResponse_Expanded = {
-//        "RowContent1" : ["EURO", "Acuo SG Pte Ltd v Counterparty B4", "Counterparty" ],
-//        "RowContent2" : ["Germany-Berlin", "12,345", "12,345,678 USD", "12,345,678 USD", "AAA", "1%", "DD-MM-YYYY", "AB123456789"],
-//   "RowContentPledge" : ["Pledge", " ", "12,345,678 USD", "12,345,678 USD", " ", " ", " ", " "],
-//   "RowContentExcess" : ["Excess", " ", "12,345,678 USD", "12,345,678 USD", " ", " ", " ", " "]
-// }
+
+// export const ApiVarMarginResponse = [
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "AAA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "CCC Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "CCC Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "ABA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ABA Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "AAA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "ADa Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "HUA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   },
+//   {
+//    region: "BAD Americas",
+//    agreement: "Acuo SG Pte Ltd v Counterparty B4",
+//    counterparty: "BBA Counterparty",
+//    data: [ block_1, block_2 ],
+//    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+//    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+//   }
+// ]

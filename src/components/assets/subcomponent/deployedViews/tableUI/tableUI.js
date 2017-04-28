@@ -48,7 +48,7 @@ const DataRow = (props)=>{
          draggable={true}
          onDragStart={(node)=>{console.log("Drag Started")}}   >
 
-      { content.map( (content, idx)=>{ return <DataRowCell key={idx}
+      { _.map(content, (content, idx)=>{ return <DataRowCell key={idx}
                                                            content={content}
                                                            siblings={siblings}/>} ) }
     </div>

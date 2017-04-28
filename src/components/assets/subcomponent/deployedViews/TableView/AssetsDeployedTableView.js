@@ -15,7 +15,7 @@ class AssetsDeployedTable extends React.Component{
  }
 
  toggleCategory = (bool)=>{
-  this.props.ToggleRegionCounterparty(bool)
+  this.props.DeployedPanel_ToggleRegionCounterparty(bool)
  }
 
  render(){
@@ -34,12 +34,12 @@ class AssetsDeployedTable extends React.Component{
       <Table.ColGroup style={TableStyle.RegCptyColGroupStyle}>
        <NavBar>
         <div className={ (IsRegionSelected? NavBarStyle.tabs + " " + NavBarStyle.selected : NavBarStyle.tabs ) }
-             onClick={()=>{this.props.ToggleRegionCounterparty(!IsRegionSelected)}}
+             onClick={()=>{this.props.DeployedPanel_ToggleRegionCounterparty(!IsRegionSelected)}}
          >
           Region
         </div>
         <div className={(IsRegionSelected? NavBarStyle.tabs : NavBarStyle.tabs + " " + NavBarStyle.selected)}
-             onClick={()=>{this.props.ToggleRegionCounterparty(!IsRegionSelected)}}
+             onClick={()=>{this.props.DeployedPanel_ToggleRegionCounterparty(!IsRegionSelected)}}
          >
           Counterparty
         </div>
@@ -50,11 +50,11 @@ class AssetsDeployedTable extends React.Component{
       <Table.ColGroup style={TableStyle.VarMarginColGroupStyle}>
        <NavBar>
         <div className={IsVarMarginSelected? NavBarStyle.tabs : NavBarStyle.tabs + " " + NavBarStyle.selected }
-             onClick={()=>{this.props.InitVarMarginToggle( !IsVarMarginSelected ) }} >
+             onClick={()=>{this.props.DeployedPanel_ToggleInitVarMargin( !IsVarMarginSelected ) }} >
           Initial Margin
         </div>
         <div className={IsVarMarginSelected? NavBarStyle.tabs + " " + NavBarStyle.selected : NavBarStyle.tabs  }
-             onClick={()=>{ this.props.InitVarMarginToggle( !IsVarMarginSelected )  }}  >
+             onClick={()=>{ this.props.DeployedPanel_ToggleInitVarMargin( !IsVarMarginSelected )  }}  >
           Variation Margin
         </div>
        </NavBar>
@@ -92,8 +92,8 @@ let mapStateToProps = (stateProps, ownProps)=>{
 }
 let mapDispatchToProps = (dispatch, ownProps)=>{
   return{
-   InitVarMarginToggle: (IsVarMarginSelected)=>{dispatch(AssetsPanel.InitVarMarginToggle(IsVarMarginSelected))},
-   ToggleRegionCounterparty: (IsRegionSelected)=>{dispatch(AssetsPanel.ToggleRegionCounterparty(IsRegionSelected))}
+   DeployedPanel_ToggleInitVarMargin: (IsVarMarginSelected)=>{dispatch(AssetsPanel.DeployedPanel_ToggleInitVarMargin(IsVarMarginSelected))},
+   DeployedPanel_ToggleRegionCounterparty: (IsRegionSelected)=>{dispatch(AssetsPanel.DeployedPanel_ToggleRegionCounterparty(IsRegionSelected))}
   }
 }
 let AssetsDeployedTableView = connect(null,mapDispatchToProps)(AssetsDeployedTable)
