@@ -2,12 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styles from "./NavBar.css"
 
-export default class NavBar extends React.Component{
-  render(){
+const NavBar = (props)=>{
    return(
     <div className={styles.navbar}>
-      {this.props.children}
+      {props.children}
     </div>
    )
-  }
 }
+
+export default NavBar
