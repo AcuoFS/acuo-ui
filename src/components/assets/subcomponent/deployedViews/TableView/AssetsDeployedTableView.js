@@ -9,75 +9,65 @@ import { AssetsPanel } from '../../../../../actions/AssetsActions.js'
 /*  AssetsDeployedTableView shall contain only presentational components to form the tableUI
       - All table components should come from tableUi.js  */
 
-export default class AssetsDeployedTableView extends React.Component{
- constructor(props){
-  super(props)
- }
+const AssetsDeployedTableView = (props)=>{
 
- render(){
-  let actions = this.props.actions
+  let actions = props.actions
 
-  let IsVarMarginSelected = this.props.state.ui.IsVarMarginSelected
-  let IsRegionSelected = this.props.state.ui.IsRegionSelected
+  let IsVarMarginSelected = props.state.ui.IsVarMarginSelected
+  let IsRegionSelected = props.state.ui.IsRegionSelected
 
-  let categoryHeader = this.props.categoryHeader
-  let dataHeader = this.props.dataHeader
+  let categoryHeader = props.categoryHeader
+  let dataHeader = props.dataHeader
 
-  let Content = this.props.tableContent
-  let TableStyle = this.props.tableStyle
+  let Content = props.tableContent
+  let TableStyle = props.tableStyle
 
   return (
     <div className={styles.tableView}>
-     <Table.RowGroup style={TableStyle.RowGroupStyle}>
-      <Table.ColGroup style={TableStyle.RegCptyColGroupStyle}>
-       <NavBar>
-        <div className={ (IsRegionSelected? NavBarStyle.tabs + " " + NavBarStyle.selected : NavBarStyle.tabs ) }
-             onClick={()=>{actions.DeployedPanel_ToggleRegionCounterparty(!IsRegionSelected)}}
-         >
-          Region
-        </div>
-        <div className={(IsRegionSelected? NavBarStyle.tabs : NavBarStyle.tabs + " " + NavBarStyle.selected)}
-             onClick={()=>{actions.DeployedPanel_ToggleRegionCounterparty(!IsRegionSelected)}}
-         >
-          Counterparty
-        </div>
-       </NavBar>
-       <Table.DataRow content={categoryHeader} style={TableStyle.RegCptyHeadStyle} />
+      <Table.RowGroup style={TableStyle.RowGroupStyle}>
+        <Table.ColGroup style={TableStyle.RegCptyColGroupStyle}>
+          <NavBar>
+            <div className={ (IsRegionSelected? NavBarStyle.tabs + " " + NavBarStyle.selected : NavBarStyle.tabs ) }
+                 onClick={()=>{actions.DeployedPanel_ToggleRegionCounterparty(!IsRegionSelected)}} >
+              Region
+            </div>
+            <div className={(IsRegionSelected? NavBarStyle.tabs : NavBarStyle.tabs + " " + NavBarStyle.selected)}
+                 onClick={()=>{actions.DeployedPanel_ToggleRegionCounterparty(!IsRegionSelected)}} >
+              Counterparty
+            </div>
+          </NavBar>
+         <Table.DataRow content={categoryHeader} style={TableStyle.RegCptyHeadStyle} />
 
-      </Table.ColGroup>
-      <Table.ColGroup style={TableStyle.VarMarginColGroupStyle}>
-       <NavBar>
-        <div className={IsVarMarginSelected? NavBarStyle.tabs : NavBarStyle.tabs + " " + NavBarStyle.selected }
-             onClick={()=>{actions.DeployedPanel_ToggleInitVarMargin( !IsVarMarginSelected ) }} >
-          Initial Margin
-        </div>
-        <div className={IsVarMarginSelected? NavBarStyle.tabs + " " + NavBarStyle.selected : NavBarStyle.tabs  }
-             onClick={()=>{actions.DeployedPanel_ToggleInitVarMargin( !IsVarMarginSelected )  }}  >
-          Variation Margin
-        </div>
-       </NavBar>
-       <Table.DataRow content={dataHeader} style={TableStyle.VarMarginHeadStyle} />
-      </Table.ColGroup>
-     </Table.RowGroup>
+        </Table.ColGroup>
+        <Table.ColGroup style={TableStyle.VarMarginColGroupStyle}>
+          <NavBar>
+           <div className={IsVarMarginSelected? NavBarStyle.tabs : NavBarStyle.tabs + " " + NavBarStyle.selected }
+                onClick={()=>{actions.DeployedPanel_ToggleInitVarMargin( !IsVarMarginSelected ) }} >
+             Initial Margin
+           </div>
+           <div className={IsVarMarginSelected? NavBarStyle.tabs + " " + NavBarStyle.selected : NavBarStyle.tabs  }
+                onClick={()=>{actions.DeployedPanel_ToggleInitVarMargin( !IsVarMarginSelected )  }}  >
+             Variation Margin
+           </div>
+          </NavBar>
+          <Table.DataRow content={dataHeader} style={TableStyle.VarMarginHeadStyle} />
+        </Table.ColGroup>
+      </Table.RowGroup>
 
      {Content.map((rowBlock, idx)=>{
       return(
        <Table.RowGroup style={TableStyle.DataBlockStyle} key={idx}>
          <Table.DataRow content={rowBlock.CategoryContent} style={TableStyle.RowStyle1} />
          <Table.ColGroup style={TableStyle.InnerColGroupStyle}>
-          {rowBlock.RowContent.map((rowData,idy)=>{
-            return(
-             <Table.DataRow content={rowData} style={TableStyle.RowStyle2} key={idy}/>
-            )
-          })}
+           { rowBlock.RowContent.map( (rowData,idy)=>(<Table.DataRow content={rowData} style={TableStyle.RowStyle2} key={idy}/>) ) }
          <Table.DataRow content={rowBlock.PledgeContent} style={TableStyle.RowPledgeExcessStyle} />
          <Table.DataRow content={rowBlock.ExcessContent} style={TableStyle.RowPledgeExcessStyle} />
          </Table.ColGroup>
        </Table.RowGroup>
       )
      })}
-
     </div>
    )
- }
 }
+
+export default AssetsDeployedTableView

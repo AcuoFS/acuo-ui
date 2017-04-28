@@ -3,22 +3,14 @@ import styles from './Assets.css'
 import AssetsDeployedComponent from './subcomponent/AssetsDeployed.js'
 import AssetsHomeComponent from './subcomponent/AssetsHome.js'
 
-export default class AssetsComponent extends React.Component {
-  constructor(props){
-   super(props)
-  }
-  componentDidMount(){
-  }
+const AssetsComponent = (props)=>{
+   let DeployedPanel_ExpandedSideways = props.state.ui.DeployedPanel_ExpandedSideways;
 
-  render(){
-   // console.log("@----AssetsContainer:");
-   // console.log(this.props);
-   let DeployedPanel_ExpandedSideways = this.props.state.ui.DeployedPanel_ExpandedSideways;
     return(
       <div className={styles.assetsComponent}>
 
         <div className={DeployedPanel_ExpandedSideways? styles.assetsPanelDeployed : styles.assetsPanels}>
-          <AssetsDeployedComponent state={this.props.state} actions={this.props.actions} />
+          <AssetsDeployedComponent state={props.state} actions={props.actions} />
         </div>
 
         <div className={DeployedPanel_ExpandedSideways? styles.assetsPanelHome : styles.assetsPanels}>
@@ -27,5 +19,6 @@ export default class AssetsComponent extends React.Component {
 
       </div>
     )
-  }
 }
+
+export default AssetsComponent
