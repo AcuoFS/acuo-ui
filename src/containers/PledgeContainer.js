@@ -141,7 +141,27 @@ const mapDispatchToProps = dispatch => ({
   },
   onDispatchRemoveAssetFromAllocate: (obj) => {
     //TODO: implement fetch to send this obj to backend
-    console.log(JSON.stringify(obj))
+    fetch('http://collateral.acuo.com/acuo/api/optimization/update', {
+      method: 'POST',
+      body: JSON.stringify(obj)
+    }).then(response => {
+      console.log('remove allocation response: ')
+      console.log(response)
+      if (response.status == 200) {
+        // TODO: To handle how to inform user that pledge data is sucessfully sent
+        alert('Sent to endpoint!' + JSON.stringify(obj))
+        // Refresh selections
+        // fetch(MARGIN_SELECTION_URL).then(response => {
+        //   return response.json()
+        // }).then(obj => {
+        //   dispatch(initSelection(obj.items))
+        // })
+      } else {
+        alert('Error sending pledge details')
+      }
+    }).catch(error => {
+      console.log('Error: ' + error)
+    })
   }
 })
 
