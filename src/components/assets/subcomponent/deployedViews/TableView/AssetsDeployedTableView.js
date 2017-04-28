@@ -1,13 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux'
 import styles from './AssetsDeployedTableView.css'
 import NavBar from "../Navbar.js"
 import NavBarStyle from "../NavBar.css"
 import Table from '../TableUI/TableUI.js'
 import { AssetsPanel } from '../../../../../actions/AssetsActions.js'
-
-/*  AssetsDeployedTableView shall contain only presentational components to form the tableUI
-      - All table components should come from tableUi.js  */
 
 const AssetsDeployedTableView = (props)=>{
 

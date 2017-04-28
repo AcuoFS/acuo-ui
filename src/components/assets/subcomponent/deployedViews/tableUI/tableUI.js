@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './TableUI.css'
-import { connect } from 'react-redux'
 
 const ColGroup = (props)=>{
  if(!props.style){throw "ColGroup's style is not passed in through props!"}
