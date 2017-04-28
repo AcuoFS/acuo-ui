@@ -29,10 +29,19 @@ export default class AssetsDeployedContainer extends React.Component {
      let rightContent = (IsVarMarginSelected? ApiVarMargResponse : ApiInitMargResponse)
      let sortedContent = (IsRegionSelected?  _.sortBy(rightContent, ["region"]) :  _.sortBy(rightContent, ["counterparty"]))
      let tableContent = (sortedContent)=>{
-                     return _.map(sortedContent, (row)=>{ return{ CategoryContent: [ row.region, row.agreement, row.counterparty ],
-                                                                  RowContent:  _.map( row.data ,(block)=>{ return (ExpandedSideways? [ block.asset, block.quantity, block.adjValue, block.value, block.rating, block.haircut, block.maturityDate, block.isin ] : [ block.asset, block.quantity, block.adjValue, block.value, block.haircut ]) } ),
-                                                                  PledgeContent: ( ExpandedSideways? ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " ", " ", " ", " "] : ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " "] ),
-                                                                  ExcessContent: ( ExpandedSideways? ["Excess", " ", row.excess.adjValue, row.excess.value, " ", " ", " ", " "] : ["Excess", " ", row.excess.adjValue, row.excess.value, " "] )  }})}
+          if(ExpandedSideways){
+            return _.map(sortedContent, (row)=>{ return{ CategoryContent: [ row.region, row.agreement, row.counterparty ],
+                                                         RowContent:  _.map( row.data , (block)=>{ return [ block.asset, block.quantity, block.adjValue, block.value, block.rating, block.haircut, block.maturityDate, block.isin ]}),
+                                                         PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " ", " ", " ", " "],
+                                                         ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " ", " ", " ", " "]  }})
+            } 
+           else {
+             return _.map(sortedContent, (row)=>{ return{ CategoryContent: [ row.region, row.agreement, row.counterparty ],
+                                                          RowContent:  _.map( row.data , (block)=>{ return [ block.asset, block.quantity, block.adjValue, block.value, block.haircut ]}),
+                                                          PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " "],
+                                                          ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " "] }})
+           }
+       }
 
      return(
        <div className={ ExpandedVertically? (styles.assetsPanelFrameExpanded) : (styles.assetsPanelFrame) }
