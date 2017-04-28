@@ -116,12 +116,21 @@ const mapDispatchToProps = dispatch => ({
             statement.GUID)
       }
     })
+    console.log('========== PLEDGE =========')
+    console.log('JS obj :')
+    console.log(pledgeToSend)
+    console.log('JSON string :')
+    console.log(JSON.stringify(pledgeToSend))
 
     fetch(PLEDGE_ALLOCATIONS, {
       method: 'POST',
-      body: JSON.stringify(pledgeToSend)
+      body: JSON.stringify(pledgeToSend),
+      headers: {'content-type': 'application/json'},
+      json: true,
+      resolveWithFullResponse: true
     }).then(response => {
-      console.log('Pledge response: ' + response)
+      console.log('Pledge response: ')
+      console.log(response)
       if (response.status == 200) {
         // TODO: To handle how to inform user that pledge data is sucessfully sent
         alert('Sent to endpoint!' + JSON.stringify(pledgeToSend))
@@ -141,6 +150,7 @@ const mapDispatchToProps = dispatch => ({
   },
   onDispatchRemoveAssetFromAllocate: (obj) => {
     //TODO: implement fetch to send this obj to backend
+    console.log('========== REMOVE ALLOCATED =========')
     console.log('JS obj :')
     console.log(obj)
     console.log('JSON string :')
