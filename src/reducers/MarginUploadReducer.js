@@ -18,7 +18,7 @@ const MarginUploadReducer = (state = initialState, action) => {
       // console.log(action.uploadData)
       // console.log(fromJS(action.uploadData))
 
-      return state.set('uploadData', fromJS(action.uploadData).toList())
+      return state.set('uploadData', fromJS(action.uploadData).toList()).set('txnID', '')
 
     case UPDATE_MARGIN_CALL_UPLOAD:
       return state.set('uploadData',
@@ -30,7 +30,7 @@ const MarginUploadReducer = (state = initialState, action) => {
               return uploadRecord
             }
           }
-        )).set('requestingValuation', false)
+        ))
 
     case UPDATE_TXN_ID:
       return state.set('txnID', fromJS(action.txnID))

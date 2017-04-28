@@ -8,7 +8,6 @@ const _defaultArray = []
 const mapStateToProps = state => ({
   uploadData: state.MarginUploadReducer.get('uploadData')
     ? state.MarginUploadReducer.get('uploadData').toJS() : _defaultArray,
-  txnID: state.MarginUploadReducer.get('txnID') || _default,
   requestingValuation: state.MarginUploadReducer.get('requestingValuation') || _default
 })
 

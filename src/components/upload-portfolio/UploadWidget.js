@@ -78,7 +78,7 @@ export default class UploadWidget extends React.Component {
 
   render() {
 
-    const { onUpdateTxnID, txnID } = this.props
+    const { onUpdateTxnID, txnID, onRequestValuation } = this.props
 
     return (
       /*<form id="uploadbanner" enctype="multipart/form-data" method="post" action="http://localhost:3000/">
@@ -104,7 +104,7 @@ export default class UploadWidget extends React.Component {
           </div>
 
           {(txnID ?
-          <button className={styles.textBold} type="button" onClick={this.onRequestValuation}>
+          <button className={styles.textBold + ' ' + styles.enabled} type="button" onClick={onRequestValuation}>
             Request Valuation
           </button>
           :
