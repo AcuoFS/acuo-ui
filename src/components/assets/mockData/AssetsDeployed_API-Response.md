@@ -1,4 +1,4 @@
-# Initial Margin & Variation Margin Response Object
+# [Assets Deployed] Initial Margin & Variation Margin Response Object
 
  Response object for both _Initial Margins_ and _Variation Margins_ should be structured as: Arrays of Objects. Each Object represents an _Agreeement_, later to be displayed as a _Group Of Rows_, which may be referred to as a `rowBlock` in this document.
 
