@@ -34,7 +34,7 @@ export default class AssetsDeployedContainer extends React.Component {
                                                          RowContent:  _.map( row.data , (block)=>{ return [ block.asset, block.quantity, block.adjValue, block.value, block.rating, block.haircut, block.maturityDate, block.isin ]}),
                                                          PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " ", " ", " ", " "],
                                                          ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " ", " ", " ", " "]  }})
-            } 
+            }
            else {
              return _.map(sortedContent, (row)=>{ return{ CategoryContent: [ row.region, row.agreement, row.counterparty ],
                                                           RowContent:  _.map( row.data , (block)=>{ return [ block.asset, block.quantity, block.adjValue, block.value, block.haircut ]}),
@@ -48,7 +48,10 @@ export default class AssetsDeployedContainer extends React.Component {
             ref={ (node)=> this.deployedFrame = node}  >
           <div className={ styles.assetsPanelHeader} >
              <span className={ styles.assetsPanelTitleText }> Deployed </span>
-             <input className={styles.assetsPanelHeaderInput} type={"text"} placeholder={"Dummy Input Field"}/>
+             <input className={styles.assetsPanelHeaderInput}
+                    type={"text"}
+                    placeholder={"Search"}
+                    onChange={()=>{console.log("Change");}}/>
              <img className={styles.assetsPanelHeaderSideExpandBtn}
                   src="images/assets_deployed/expand-sideways.svg"
                   onClick={ ()=>{ actions.DeployedPanel_ToggleSideExpand(!ExpandedSideways) }} />
