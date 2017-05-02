@@ -3,6 +3,7 @@ import _ from 'lodash'
 export const filterByAllPropertiesOfObj = (objList, filterText) => {
   return _.filter(objList,
     o => {
+      console.log(o);
       let isAnyPropertyMatches = false
 
       // Check for all properties

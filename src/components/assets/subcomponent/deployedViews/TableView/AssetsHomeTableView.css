@@ -1,0 +1,8 @@
+.tableView{
+ /*border: 1px blue dashed;*/
+ display: flex;
+ flex-direction: column;
+ flex: 0 0 auto;
+ height: 100%;
+ overflow-y: hidden;
+}

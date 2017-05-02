@@ -1,0 +1,32 @@
+.navbar{
+ display: flex;
+ flex-direction: row;
+ justify-content: space-around;
+ align-items: center;
+ flex: 0 0 1;
+ margin-bottom: 10px;
+ color: #587d9e;
+ font-weight: bold;
+ font-size: 15px;
+}
+
+.tabs{
+ color: #4a4a4a;
+ cursor: pointer;
+}
+.tabs:hover{
+ color: #587d9e;
+}
+.tabs:active{
+ font-size: 16px;
+}
+
+.selected{
+ color: #587d9e;
+ text-decoration: underline;
+ font-size: 17px;
+}
+
+.selected:active{
+ font-size: 17px;
+}

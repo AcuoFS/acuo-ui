@@ -7,6 +7,7 @@ import TableContainer from './TableContainer'
 import PledgeContainer from './PledgeContainer'
 import CollateralAssetContainer from './CollateralAssetContainer'
 import FlightContainer from './FlightContainer'
+import AssetsContainer from './AssetsContainer'
 import MarginCallContainer from './MarginCallContainer'
 import UnmatchedTableContainer from './UnmatchedTableContainer'
 import CollateralWidgetContainer from './CollateralWidgetContainer'
@@ -26,6 +27,7 @@ export {
   PledgeContainer,
   CollateralAssetContainer,
   FlightContainer,
+  AssetsContainer,
   MarginCallContainer,
   UnmatchedTableContainer,
   CollateralWidgetContainer,
