@@ -23,11 +23,11 @@ const plusMinusThreeDays = (json) => {
   const dMinusTwo = new Date(d.getTime() - (oneDayDuration * 2))
 
   return {derivatives: _.filter(json.derivatives, deriv => (
-    _.filter(deriv.marginStatus, status => (
-      _.filter(status.timeFrames, timeFrame => (
+    !_.isEmpty(_.filter(deriv.marginStatus, status => (
+      !_.isEmpty(_.filter(status.timeFrames, timeFrame => (
         _.inRange((new Date(timeFrame.timeRangeStart)).getTime(), dMinusTwo.getTime(), dPlusOne.getTime())
-      ))
-    ))
+      )))
+    )))
   ))}
 
 }

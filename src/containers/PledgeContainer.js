@@ -27,6 +27,16 @@ const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
     return ["./images/common/minusbox.png", "Selected"]
 }
 
+const fetchAnalysisData = () => (
+  // TODO: fetch statement
+  [
+    { name: 'All Cash Settlement (CCY)', cost: 123456789, savings: 123456789, ratio: '1.00'},
+    { name: 'Algorithm Suggestion', cost: 123456789, savings: 123456789, ratio: '1.00' },
+    { name: 'Least Liquid Assets', cost: 123456789, savings: 123456789, ratio: '1.00' }
+
+  ]
+)
+
 const checkIfExist = (something) => something || List()
 
 const updatePledgeListToSend = (assetList, pledgeToSend, guid) => {
@@ -46,7 +56,8 @@ const mapStateToProps = state => ({
   optimisation: state.PledgeReducer.getIn(['pledgeData', 'optimisation']),
   selection: state.PledgeReducer.getIn(['pledgeData', 'selection']),
   pendingAllocation: state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation']),
-  sliderCheckbox: determineCheckboxStatus(checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'selection'])).size, checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation'])).size )
+  sliderCheckbox: determineCheckboxStatus(checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'selection'])).size, checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation'])).size ),
+  scenarioAnalysis: fetchAnalysisData()
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -105,12 +116,21 @@ const mapDispatchToProps = dispatch => ({
             statement.GUID)
       }
     })
+    console.log('========== PLEDGE =========')
+    console.log('JS obj :')
+    console.log(pledgeToSend)
+    console.log('JSON string :')
+    console.log(JSON.stringify(pledgeToSend))
 
     fetch(PLEDGE_ALLOCATIONS, {
       method: 'POST',
-      body: JSON.stringify(pledgeToSend)
+      body: JSON.stringify(pledgeToSend),
+      headers: {'content-type': 'application/json'},
+      json: true,
+      resolveWithFullResponse: true
     }).then(response => {
-      console.log('Pledge response: ' + response)
+      console.log('Pledge response: ')
+      console.log(response)
       if (response.status == 200) {
         // TODO: To handle how to inform user that pledge data is sucessfully sent
         alert('Sent to endpoint!' + JSON.stringify(pledgeToSend))
@@ -130,7 +150,35 @@ const mapDispatchToProps = dispatch => ({
   },
   onDispatchRemoveAssetFromAllocate: (obj) => {
     //TODO: implement fetch to send this obj to backend
+    console.log('========== REMOVE ALLOCATED =========')
+    console.log('JS obj :')
+    console.log(obj)
+    console.log('JSON string :')
     console.log(JSON.stringify(obj))
+    fetch('http://collateral.acuo.com/acuo/api/optimization/update', {
+      method: 'POST',
+      body: JSON.stringify(obj),
+      headers: {'content-type': 'application/json'},
+      json: true,
+      resolveWithFullResponse: true
+    }).then(response => {
+      console.log('remove allocation response: ')
+      console.log(response)
+      if (response.status == 200) {
+        // TODO: To handle how to inform user that pledge data is sucessfully sent
+        alert('Sent to endpoint!' + JSON.stringify(obj))
+        // Refresh selections
+        // fetch(MARGIN_SELECTION_URL).then(response => {
+        //   return response.json()
+        // }).then(obj => {
+        //   dispatch(initSelection(obj.items))
+        // })
+      } else {
+        alert('Error sending pledge details')
+      }
+    }).catch(error => {
+      console.log('Error: ' + error)
+    })
   }
 })
 
@@ -156,7 +204,7 @@ const constructToBeRemovedFrom = (pending, selection) => (
 )
 
 const mergeProps = (stateProps, dispatchProps) => ({
-  onRemoveAssetFromAllocate: ( toBeExcluded, toBeRemovedFrom = stateProps.pendingAllocation.toJS()) => (
+  onRemoveAssetFromAllocate: (toBeExcluded, toBeRemovedFrom = checkAllocated(stateProps.selection).map((item) => item.GUID)) => (
     dispatchProps.onDispatchRemoveAssetFromAllocate({
       currentItems: checkAllocated(stateProps.selection),
       toBeRemoved: toBeExcluded,

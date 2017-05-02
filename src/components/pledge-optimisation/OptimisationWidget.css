@@ -380,3 +380,207 @@ input[type=range]:focus::-ms-fill-upper {
     composes: baseFontBold from './../../static/css-components/fonts.css';
     margin-bottom: 5px;
 }
+
+#scenAnalysis {
+  margin: 20px 20px 30px 20px;
+  flex: 1;
+}
+
+#scenAnalysis.panel {
+  position: relative;
+  padding: 10px 0 0;
+  background-color: #fff;
+  border: 1px solid #dedede;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 2px 4px 0 #c9c9c9;
+  box-shadow: 2px 2px 4px 0 #c9c9c9;
+}
+
+#scenAnalysis .row.header {
+  font-weight: bold;
+  padding-bottom: 0;
+  padding-left: 3px;
+}
+
+#scenAnalysis .row.header .cell {
+  color: #6389ad;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  height: 32px;
+}
+
+#scenAnalysis .row .cell:first-child, #scenAnalysis .row .cell:last-child,
+#scenAnalysis .row.header .cell:first-child, #scenAnalysis .row.header .cell:last-child {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#scenAnalysis .row.header .cell:last-child {
+  border-bottom: none;
+}
+#scenAnalysis form .row:last-child {
+  margin-bottom: 3px;
+}
+
+#scenAnalysis .row {
+  width: 100%;
+  vertical-align: middle;
+  padding-bottom: 5px;
+  display: -webkit-flex; /* Safari */
+  -webkit-align-items: center; /* Safari 7.0+ */
+  display: flex;
+  align-items: center;
+
+}
+#scenAnalysis .row label {
+  width: 100%;
+  display: inline-flex;
+}
+
+#scenAnalysis .row .cell {
+  padding: 4px;
+  align-self: center;
+  color: #4A4A4A;
+}
+
+#scenAnalysis .row .cell:nth-child(1){
+  width: 8%;
+}
+#scenAnalysis .row .cell:nth-child(2) {
+  width: 29%
+}
+
+#scenAnalysis .row .cell:nth-child(4){
+  width: 26%;
+}
+
+#scenAnalysis .row .cell:nth-child(3), #scenAnalysis .row .cell:nth-child(5){
+  width: 17%;
+}
+
+#scenAnalysis .row .cell:nth-child(6) {
+  width: 3%;
+}
+
+#scenAnalysis form .row:first-child {
+  padding-top: 5px;
+}
+
+#scenAnalysis form .row .cell {
+  vertical-align: top;
+}
+
+#scenAnalysis .arrowContainer {
+  margin-top: 8px;
+}
+#scenAnalysis .arrowContainer:hover {
+  cursor: pointer;
+}
+
+.show#innerContent {
+  display: block;
+}
+
+.invisible#innerContent  {
+  display: none;
+}
+
+.arrowContainer span{
+    display: inline-block;
+    position: relative;
+    margin-right: 6px;
+}
+.arrowContainer .switchArrow{
+    display: inline-block;
+    position: relative;
+    width: 16px;
+    height: 12px;
+    top: 0px;
+}
+.arrowContainer .down .switchArrow{
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    top: 0px;
+}
+.arrowContainer .up .switchArrow{
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    top: -2px;
+}
+
+.arrowContainer .switchArrow .arrowLine#line1,
+.arrowContainer .switchArrow .arrowLine#line2{
+    display: inline-block;
+    position: absolute;
+    width:10px;
+    height: 2px;
+    background-color: acuoGrey;
+    top:4px;
+}
+.arrowContainer .switchArrow .arrowLine#line1{
+    -moz-transform: rotate(-40deg);
+    -webkit-transform: rotate(-40deg);
+    -o-transform: rotate(-40deg);
+    -ms-transform: rotate(-40deg);
+    transform: rotate(-40deg);
+
+}
+.arrowContainer .switchArrow .arrowLine#line2{
+    -moz-transform: rotate(40deg);
+    -webkit-transform: rotate(40deg);
+    -o-transform: rotate(40deg);
+    -ms-transform: rotate(40deg);
+    transform: rotate(40deg);
+    left: 6px;
+}
+
+/*#scenAnalysis input[type="radio"] {
+  background-color: #bbb;
+}*/
+
+#scenAnalysis label input[type="radio"] {
+    opacity:0;
+}
+
+#scenAnalysis label input[type="radio"] ~ .indicator {
+    background-color: #FFFFFF;
+    border: 2px solid #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: -10px;
+    padding: 10px;
+    position: relative;
+    top: 0 ;
+}
+
+/*#scenAnalysis label input[type="radio"]:checked ~ .indicator {
+    border: 1px solid #009688;
+}*/
+
+#scenAnalysis label input[type="radio"]:checked ~ .indicator:after {
+    background-color: #6389ad;
+    border-radius: 50%;
+    content: " ";
+    font-size: 33px;
+    height: 14px;
+    left: 3px;
+    position: absolute;
+    top: 3px;
+    width: 14px;
+
+}
+
+#scenAnalysis .active {
+  background-color: #b0ceeb;
+}
+
+#scenAnalysis .inactive {
+  background-color: none;
+}

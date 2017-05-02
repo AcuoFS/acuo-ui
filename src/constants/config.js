@@ -53,7 +53,7 @@ const config = {
   prod: {},
   test: {
     DASHBOARD_URL: 'http://localhost:8081/dashboard',
-    RECON_URL: 'http://localhost:8081/recon',
+    RECON_URL: 'http://localhost:8081/recon/new',
     OPTIMISATION_URL: 'http://localhost:8081/pledge/optimization',
     COLLATERAL_URL: 'http://localhost:8081/pledge/init-new-collateral',
     MARGIN_SELECTION_URL: 'http://localhost:8081/pledge/init-selection',
