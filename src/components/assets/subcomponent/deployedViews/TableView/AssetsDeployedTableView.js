@@ -1,9 +1,8 @@
 import React from 'react'
 import styles from './AssetsDeployedTableView.css'
-import NavBar from "./../Navbar.js"
-import NavBarStyle from "./../NavBar.css"
+import NavBar from './../Navbar.js'
+import NavBarStyle from './../NavBar.css'
 import Table from './../tableUI/tableUI'
-import { AssetsPanel } from '../../../../../actions/AssetsActions.js'
 
 const AssetsDeployedTableView = (props)=>{
 
