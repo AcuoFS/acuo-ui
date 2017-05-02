@@ -10,7 +10,7 @@ export default class ClientAsset extends React.Component {
       assetsName, handlerTotalMargin, handlerSelectedItem,
       handlerUpdateAdj, adjAmt,
       firstLevelList, secondLevelList,
-      onSelectSecondLevelItem
+      onSelectSecondLevelItem, currencyInfo
     } = this.props
 
     return (
@@ -25,7 +25,8 @@ export default class ClientAsset extends React.Component {
                                firstLevelList={firstLevelList}
                                secondLevelList={secondLevelList}
                                onSelectSecondLevelItem={onSelectSecondLevelItem}
-                               party={'client'}/>
+                               party={'client'}
+                               currencyInfo={currencyInfo}/>
 
       </div>
     )

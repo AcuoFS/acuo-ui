@@ -152,6 +152,9 @@ export default function reconReducer(state = initState, action) {
 
       return state.set('items', fromJS(items)).set('secondLevelList', fromJS(secondLevelList1)).set('firstLevelList', fromJS(_.concat(firstLevelList1, autoCheckFirstLevelOnly(_.cloneDeep(items)))))
 
+    case ActionTypes.INIT_CURRENCY_INFO:
+      return state.set('currencyInfo', fromJS(action.currencyInfo))
+
     case ActionTypes.RECON_FILTER_SET:
       newFilter = action.value
       filters = state.get('filters').toJS()
