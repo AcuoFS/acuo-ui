@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './AssetsHomeTableView.css'
-import NavBar from "../NavBar.js"
+import NavBar from '../NavBar.js'
 import Table from '../tableUI/tableUI.js'
 
 
