@@ -1,4 +1,4 @@
-import TableStyle from '../subcomponent/deployedViews/TableUI/TableUI.css'
+import TableStyle from '../subcomponent/deployedViews/tableUI/tableUI.css'
 
 export const categoryHeader = ["Region" , "Agreement", "Counterparty"]
 export const dataHeader_minView = ["Asset", "Quantity", "Adj. Value", "Value", "Haircut"]
