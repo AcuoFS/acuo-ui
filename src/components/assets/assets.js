@@ -14,7 +14,7 @@ const AssetsComponent = (props)=>{
         </div>
 
         <div className={DeployedPanel_ExpandedSideways? styles.assetsPanelHome : styles.assetsPanels}>
-          <AssetsHomeComponent/>
+          <AssetsHomeComponent state={props.state} actions={props.actions} />
         </div>
 
       </div>

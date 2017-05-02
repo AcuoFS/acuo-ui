@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from "react-redux"
 import styles from './AssetsPanel.css'
 import PanelWindow from './deployedViews/PanelWindow.js'
 import AssetsHomeTableView from './deployedViews/TableView/AssetsHomeTableView.js'
@@ -9,7 +8,12 @@ import {AssetsPanel} from '../../../actions/AssetsActions.js'
 import { VarMarginTableStyle, InitMarginTableStyle } from "../mockData/mockData.js"
 
 
-const AssetsHome = ()=>{
+const AssetsHomeComponent = (props)=>{
+ console.log(props)
+ let state = props.state
+ let actions = props.actions
+ let ExpandedSideways = state.ui.DeployedPanel_ExpandedSideways;
+
 
    return(
      <div className={ styles.assetsPanelFrame } >
@@ -17,7 +21,7 @@ const AssetsHome = ()=>{
          <span  className={ styles.assetsPanelTitleText }> At Home </span>
          <img className={styles.assetsPanelHeaderSideExpandBtn}
               src="images/assets_deployed/minimize-sideways.svg"
-              onClick={ ()=>{}}/>
+              onClick={ ()=>{actions.DeployedPanel_ToggleSideExpand(!ExpandedSideways)} }/>
        </div>
 
        <PanelWindow>
@@ -27,9 +31,5 @@ const AssetsHome = ()=>{
      </div>
    )
 }
-/*----------------------------------------------------------------------------*/
-const AssetsHomeComponent = connect(
- mapDispatchToProps
-)(AssetsHome)
 
 export default AssetsHomeComponent
