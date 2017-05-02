@@ -5,7 +5,7 @@ import AssetsHomeTableView from './deployedViews/TableView/AssetsHomeTableView.j
 /*Actions*/
 import {AssetsPanel} from '../../../actions/AssetsActions.js'
 //Mock Data
-import { HomeTableStyle, HomeContent } from "../mockData/mockData.js"
+import { HomeTableStyle, HomeContent } from '../mockData/mockData.js'
 
 
 const AssetsHomeComponent = (props)=>{
