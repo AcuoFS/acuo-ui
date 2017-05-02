@@ -5,11 +5,10 @@ import AssetsHomeTableView from './deployedViews/TableView/AssetsHomeTableView.j
 /*Actions*/
 import {AssetsPanel} from '../../../actions/AssetsActions.js'
 //Mock Data
-import { VarMarginTableStyle, InitMarginTableStyle } from "../mockData/mockData.js"
+import { HomeTableStyle, HomeContent } from "../mockData/mockData.js"
 
 
 const AssetsHomeComponent = (props)=>{
- console.log(props)
  let state = props.state
  let actions = props.actions
  let ExpandedSideways = state.ui.DeployedPanel_ExpandedSideways;
@@ -25,7 +24,10 @@ const AssetsHomeComponent = (props)=>{
        </div>
 
        <PanelWindow>
-         <AssetsHomeTableView />
+         <AssetsHomeTableView state={ state }
+                              actions = { actions }
+                              Content = { HomeContent }
+                              TableStyle={ HomeTableStyle } />
        </PanelWindow>
 
      </div>

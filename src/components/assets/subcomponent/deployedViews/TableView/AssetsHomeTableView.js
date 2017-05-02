@@ -2,40 +2,32 @@ import React from 'react';
 import styles from './AssetsHomeTableView.css'
 import NavBar from "../Navbar.js"
 import Table from '../TableUI/TableUI.js'
-// import tableStyle from '../TableUI/TableUI.css'
 
-// const RowGroupStyle = { className: `${tableStyle.RowGroup}`}
-// const PrincipalHeadContent = ['Asset', 'Firm', 'Quantity', 'Value', 'Rating', 'Maturity Date', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region']
-// const PrincipalPledgeHeadStyle_Expand = {
-//  className: `${tableStyle.Row} ${tableStyle.PrincipalPledgeHead}`,
-//  width: null,
-//  height: 24,
-//  rowSpan: 1
-// }
+// export default class AssetsHomeTableView extends React.Component{
+const AssetsHomeTableView = (props)=>{
 
-export default class AssetsHomeTableView extends React.Component{
-  render(){
+  // render(){
+   console.log(props)
+   let {Content, TableStyle} = props
+   console.log(Content);
+   console.log(TableStyle);
+
    return(
     <div className={styles.tableView}>
+      <Table.RowGroup style={ TableStyle.RowGroupStyle } >
+        <NavBar>
+          Blah
+        </NavBar>
+      </Table.RowGroup>
+
+      <Table.RowGroup style={ TableStyle.RowGroupStyle }>
+        <Table.DataRow content={Content.Header} style={TableStyle.HeaderRow} />
+      </Table.RowGroup>
 
 
     </div>
    )
-  }
+  // }
 }
-// export default class AssetsHomeTableView extends React.Component{
-//   render(){
-//    return(
-//     <div className={styles.tableView}>
-//      <Table.RowGroup style={RowGroupStyle}>
-//        <NavBar />
-//      </Table.RowGroup>
-//
-//      <Table.RowGroup style={RowGroupStyle}>
-//        <Table.DataRow content={PrincipalHeadContent} style={PrincipalPledgeHeadStyle_Expand} />
-//      </Table.RowGroup>
-//
-//     </div>
-//    )
-//   }
-// }
+
+export default AssetsHomeTableView
