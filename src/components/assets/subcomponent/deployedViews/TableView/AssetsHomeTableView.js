@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './AssetsHomeTableView.css'
-import NavBar from "../Navbar.js"
-import Table from '../tableUI/tableUI.js'
+import NavBar from "./../Navbar.js"
+import Table from './../tableUI/tableUI.js'
 // import tableStyle from '../TableUI/TableUI.css'
 
 // const RowGroupStyle = { className: `${tableStyle.RowGroup}`}
