@@ -29,9 +29,9 @@ export default class MarginAgreementPortfolio extends React.Component {
 
   getCurrencyInfo(ccy, baseCCY) {
     if (ccy)
-      return ccy.map((x) => {
+      return ccy.map((x, index) => {
         return (
-          <div key={Math.random()}>{x.get('ccy') + '/' + baseCCY + "=" + x.get('exchangeRate')}</div>
+          <div key={index}>{x.get('ccy') + '/USD=' + x.get('exchangeRate').toFixed(4)}</div>
         )
       })
     else
@@ -229,7 +229,7 @@ export default class MarginAgreementPortfolio extends React.Component {
             <div className={styles.viewFxRate}> View FX rate
               <div className={styles.viewFxRateImage}>
                 <div>
-                  {this.getCurrencyInfo(marginData.get('currencyInfo'), marginData.get('ccy'))}
+                  {this.getCurrencyInfo(this.props.currencyInfo, marginData.get('ccy'))}
                 </div>
               </div>
             </div>

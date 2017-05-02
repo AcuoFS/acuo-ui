@@ -1,7 +1,13 @@
 import { connect } from 'react-redux'
 import { fromJS, List } from 'immutable'
 import { MarginAgreementsComponent } from '../components'
-import { selectedItems, reconInitState, firstLeveSelect, secondLevelSelect, updateReconFilter } from '../actions'
+import {
+  selectedItems,
+  reconInitState,
+  firstLeveSelect,
+  secondLevelSelect,
+  updateReconFilter
+} from '../actions'
 import { RECON_DATA_URL, RECON_URL, DASHBOARD_URL } from '../constants/APIcalls'
 import filterItems from '../utils/filterItems'
 
@@ -14,6 +20,7 @@ const mapStateToProps = state => {
     recon : fromJS(filteredItems),
     firstLevelList : state.ReconReducer.get('firstLevelList') || List(),
     secondLevelList : state.ReconReducer.get('secondLevelList') || List(),
+    currencyInfo: state.ReconReducer.get('currencyInfo') || List()
   }
 }
 

@@ -107,12 +107,12 @@ export default class MarginCall extends React.Component {
 
   render() {
 
-    const { txnID, uploadDataFlag } = this.props
+    const { uploadDataFlag, requestingValuation } = this.props
 
 
 
     return (
-      <div className={styles.container + ' ' + (txnID ? '' : styles.hidden)}>
+      <div className={styles.container + ' ' + (requestingValuation ? '' : styles.hidden)}>
         <ChangeCallAmountPopup propIsShow={this.state.isShowPopup}
                                propDeliverAmt=
                                  {Number.parseInt(this.state.totalCallAmount ? this.state.totalCallAmount : 0)}

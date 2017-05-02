@@ -11,12 +11,12 @@ export default class SubAxis extends React.Component {
 
     const then = getDate()
 
-    for(let i = -12; i <= 12; i++) {
+    for(let i = -36; i <= 36; i++) {
       Time.push(new Date(Date.parse(then) + 3.6e+6 * i))
     }
     const Hours = Time.map((time) => time.getHours())
 
-    for(let i = 0; i<=24; i++){
+    for(let i = 0; i<=72; i++){
       let coords = {
         x1: this.props.x + 60 * i - 1 * then.getMinutes()
       }
@@ -37,6 +37,7 @@ export default class SubAxis extends React.Component {
   </text>)
 
     }
+
     return <svg>{random}{texts}</svg>
   }
   render() {
