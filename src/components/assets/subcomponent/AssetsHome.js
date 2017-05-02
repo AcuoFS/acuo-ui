@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import styles from './AssetsPanel.css'
 import PanelWindow from './deployedViews/PanelWindow.js'
 import AssetsHomeTableView from './deployedViews/TableView/AssetsHomeTableView.js'

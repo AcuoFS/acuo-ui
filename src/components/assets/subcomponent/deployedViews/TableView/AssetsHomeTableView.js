@@ -1,17 +1,14 @@
-import React from 'react';
+import React from 'react'
 import styles from './AssetsHomeTableView.css'
-import NavBar from "../Navbar.js"
-import Table from '../TableUI/TableUI.js'
+import NavBar from "../NavBar.js"
+import Table from '../tableUI/tableUI.js'
 
 
 // export default class AssetsHomeTableView extends React.Component{
 const AssetsHomeTableView = (props)=>{
-
-  // render(){
+   console.log("@---AssetsHomeTableView");
    console.log(props)
    let {Content, TableStyle} = props
-   console.log(Content);
-   console.log(TableStyle);
 
    return(
     <div className={styles.tableView}>
@@ -25,19 +22,13 @@ const AssetsHomeTableView = (props)=>{
         <Table.DataRow content={Content.Header} style={TableStyle.HeaderRow} />
 
         {
-         Content.RowData.map((row,idx)=>{
-            console.log(row)
-            return(
-             <Table.DataRow content={row} style={TableStyle.DataRow} key={idx} />
-            )
-          })
+         Content.RowData.map((row,idx)=>( <Table.DataRow content={row} style={TableStyle.DataRow} key={idx} /> ) )
         }
 
       </Table.ColGroup>
 
     </div>
    )
-  // }
 }
 
 export default AssetsHomeTableView

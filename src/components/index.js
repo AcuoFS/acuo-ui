@@ -13,8 +13,8 @@ import MarginCallComponent from './margin-call/MarginCall'
 import DisputeWidgetComponent from './dispute/DisputeWidget'
 import AgreementsComponent from './agreements/Agreements'
 import TimeSelectorComponent from './common/TimeSelector/TImeSelector'
-import AssetsComponent from './assets/Assets.js'
-import Copyright from './copyright/Copyright.js'
+import AssetsComponent from './assets/assets'
+import Copyright from './copyright/Copyright'
 
 export {
   GraphComponent,

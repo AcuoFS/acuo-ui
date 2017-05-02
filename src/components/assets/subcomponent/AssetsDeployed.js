@@ -6,9 +6,9 @@ import _ from 'lodash'
 import PanelWindow from './deployedViews/PanelWindow.js'
 import AssetsDeployedTableView from './deployedViews/TableView/AssetsDeployedTableView.js'
 /*Actions*/
-import {AssetsPanel} from '../../../actions/AssetsActions.js'
+import {AssetsPanel} from './../../../actions/AssetsActions.js'
 //Mock Data
-import { categoryHeader, dataHeader_minView, dataHeader_expandedView, ApiInitMargResponse, ApiVarMargResponse, VarMarginTableStyle, InitMarginTableStyle } from "../mockData/mockData.js"
+import { categoryHeader, dataHeader_minView, dataHeader_expandedView, ApiInitMargResponse, ApiVarMargResponse, VarMarginTableStyle, InitMarginTableStyle } from "./../mockData/mockData.js"
 
 export default class AssetsDeployedContainer extends React.Component {
   constructor(props){
