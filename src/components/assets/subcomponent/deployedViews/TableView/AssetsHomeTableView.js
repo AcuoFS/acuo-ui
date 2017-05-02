@@ -3,6 +3,7 @@ import styles from './AssetsHomeTableView.css'
 import NavBar from "../Navbar.js"
 import Table from '../TableUI/TableUI.js'
 
+
 // export default class AssetsHomeTableView extends React.Component{
 const AssetsHomeTableView = (props)=>{
 
@@ -20,10 +21,19 @@ const AssetsHomeTableView = (props)=>{
         </NavBar>
       </Table.RowGroup>
 
-      <Table.RowGroup style={ TableStyle.RowGroupStyle }>
+      <Table.ColGroup style={ TableStyle.RowGroupStyle }>
         <Table.DataRow content={Content.Header} style={TableStyle.HeaderRow} />
-      </Table.RowGroup>
 
+        {
+         Content.RowData.map((row,idx)=>{
+            console.log(row)
+            return(
+             <Table.DataRow content={row} style={TableStyle.DataRow} key={idx} />
+            )
+          })
+        }
+
+      </Table.ColGroup>
 
     </div>
    )

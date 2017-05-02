@@ -190,12 +190,17 @@ export const InitMarginTableStyle = {
 
 
 // AssetsHomePanel
+const rowHomeData = [ "British America", "Acuo", "12,345", "12.345.678", "AAA", "DD-MM-YY", "2", "3", "Custodian1A", "SG"]
 export const HomeContent = {
- Header: ['Asset', 'Firm', 'Quantity', 'Value', 'Rating', 'Maturity Date', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region']
+ Header: ['Asset', 'Firm', 'Quantity', 'Value', 'Rating', 'Maturity Date', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region'],
+ RowData: [ rowHomeData, rowHomeData, rowHomeData ]
 }
 export const HomeTableStyle={
-  "RowGroupStyle": { className: `${TableStyle.RowGroup}`  },
+  "RowGroupStyle": { className: `${TableStyle.ColGroup}`  },
   "HeaderRow": { className: `${TableStyle.Row} ${TableStyle.InitMarginHead}`,
                  height: 24,
-                 rowSpan: 1 }
+                 rowSpan: 1 },
+  "DataRow": { className: TableStyle.Row + ' ' + TableStyle.DataRow,
+                 height: 24,
+                 rowSpan: 1 },
 }
