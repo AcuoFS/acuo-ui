@@ -44,10 +44,14 @@
 .DataRow{
  border-bottom: 1px solid #979797;
  margin-bottom: 2px;
+ -webkit-transition: background-color 250ms linear;
+ -moz-transition: background-color 250ms linear;
+ -o-transition: background-color 250ms linear;
+ transition: background-color 250ms linear;
+
 }
 .DataRow:hover{
- font-size: 17px;
- cursor: grab;
+ background-color: #e5e5e5;
 }
 
 .RegCptyHead{
