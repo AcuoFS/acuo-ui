@@ -116,11 +116,11 @@ const mapDispatchToProps = dispatch => ({
             statement.GUID)
       }
     })
-    console.log('========== PLEDGE =========')
-    console.log('JS obj :')
-    console.log(pledgeToSend)
-    console.log('JSON string :')
-    console.log(JSON.stringify(pledgeToSend))
+    // console.log('========== PLEDGE =========')
+    // console.log('JS obj :')
+    // console.log(pledgeToSend)
+    // console.log('JSON string :')
+    // console.log(JSON.stringify(pledgeToSend))
 
     fetch(PLEDGE_ALLOCATIONS, {
       method: 'POST',
@@ -133,7 +133,7 @@ const mapDispatchToProps = dispatch => ({
       console.log(response)
       if (response.status == 200) {
         // TODO: To handle how to inform user that pledge data is sucessfully sent
-        alert('Sent to endpoint!' + JSON.stringify(pledgeToSend))
+        //alert('Sent to endpoint!' + JSON.stringify(pledgeToSend))
         // Refresh selections
         fetch(MARGIN_SELECTION_URL).then(response => {
           return response.json()
@@ -150,11 +150,11 @@ const mapDispatchToProps = dispatch => ({
   },
   onDispatchRemoveAssetFromAllocate: (obj) => {
     //TODO: implement fetch to send this obj to backend
-    console.log('========== REMOVE ALLOCATED =========')
-    console.log('JS obj :')
-    console.log(obj)
-    console.log('JSON string :')
-    console.log(JSON.stringify(obj))
+    // console.log('========== REMOVE ALLOCATED =========')
+    // console.log('JS obj :')
+    // console.log(obj)
+    // console.log('JSON string :')
+    // console.log(JSON.stringify(obj))
     fetch('http://collateral.acuo.com/acuo/api/optimization/update', {
       method: 'POST',
       body: JSON.stringify(obj),
@@ -166,13 +166,13 @@ const mapDispatchToProps = dispatch => ({
       console.log(response)
       if (response.status == 200) {
         // TODO: To handle how to inform user that pledge data is sucessfully sent
-        alert('Sent to endpoint!' + JSON.stringify(obj))
-        // Refresh selections
-        // fetch(MARGIN_SELECTION_URL).then(response => {
-        //   return response.json()
-        // }).then(obj => {
-        //   dispatch(initSelection(obj.items))
-        // })
+        //alert('Sent to endpoint!' + JSON.stringify(obj))
+        //Refresh selections
+        fetch(MARGIN_SELECTION_URL).then(response => {
+          return response.json()
+        }).then(obj => {
+          dispatch(initSelection(obj.items))
+        })
       } else {
         alert('Error sending pledge details')
       }
