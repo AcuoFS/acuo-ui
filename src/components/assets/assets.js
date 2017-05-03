@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import styles from './Assets.css'
 import AssetsDeployedComponent from './subcomponent/AssetsDeployed.js'
 import AssetsHomeComponent from './subcomponent/AssetsHome.js'
@@ -14,7 +14,7 @@ const AssetsComponent = (props)=>{
         </div>
 
         <div className={DeployedPanel_ExpandedSideways? styles.assetsPanelHome : styles.assetsPanels}>
-          <AssetsHomeComponent/>
+          <AssetsHomeComponent state={props.state} actions={props.actions} />
         </div>
 
       </div>
