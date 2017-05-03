@@ -16,7 +16,7 @@ export default class AssetsHomeComponent extends React.Component {
                 src="images/assets_deployed/minimize-sideways.svg"
                 onClick={ ()=>{ console.log(this.state) }}/>
          </div>
-         
+
          <PanelWindow>
            <AssetsHomeTableView />
          </PanelWindow>
@@ -25,3 +25,6 @@ export default class AssetsHomeComponent extends React.Component {
      )
    }
 }
+
+
+//testline
