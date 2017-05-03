@@ -30,7 +30,7 @@ const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
 const fetchAnalysisData = () => (
   // TODO: fetch statement
   [
-    { name: 'All Cash Settlement (CCY)', cost: 123456789, savings: 123456789, ratio: '1.00'},
+    { name: 'Cash Only (Settlement CCY)', cost: 123456789, savings: 123456789, ratio: '1.00'},
     { name: 'Algorithm Suggestion', cost: 123456789, savings: 123456789, ratio: '1.00' },
     { name: 'Least Liquid Assets', cost: 123456789, savings: 123456789, ratio: '1.00' }
 
