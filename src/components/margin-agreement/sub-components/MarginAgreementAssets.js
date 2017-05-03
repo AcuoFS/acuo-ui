@@ -29,7 +29,7 @@ export default class MarginAgreementPortfolio extends React.Component {
 
   getCurrencyInfo(ccy, baseCCY) {
     if (ccy)
-      return ccy.map((x, index) => {
+      return ccy.filter(x => x.includes(baseCCY)).map((x, index) => {
         return (
           <div key={index}>{x.get('ccy') + '/USD=' + x.get('exchangeRate').toFixed(4)}</div>
         )
