@@ -194,12 +194,12 @@ const constructToBeRemovedFrom = (pending, selection) => (
       _.filter(selection,
         x => _.includes(pending, x.GUID)),
       (sum, x) => (_.has(x, ["allocated", "initialMargin"]) ?
-        _.concat(sum ,{"msId": x.GUID, "marginType": "initial"}) :
+        _.concat(sum ,{"msId": x.GUID, "marginType": "initialMargin"}) :
         sum), []),
     _.reduce(
       _.filter(selection, x => _.includes(pending, x.GUID)),
       (sum, x) => (_.has(x, ["allocated", "variationMargin"]) ?
-        _.concat(sum ,{"msId": x.GUID, "marginType": "variation"}) :
+        _.concat(sum ,{"msId": x.GUID, "marginType": "variationMargin"}) :
         sum), []))
 )
 
