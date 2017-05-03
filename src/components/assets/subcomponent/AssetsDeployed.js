@@ -8,7 +8,7 @@ import AssetsDeployedTableView from './deployedViews/TableView/AssetsDeployedTab
 /*Actions*/
 import {AssetsPanel} from './../../../actions/AssetsActions.js'
 //Mock Data
-import { categoryHeader, dataHeader_minView, dataHeader_expandedView, ApiInitMargResponse, ApiVarMargResponse, VarMarginTableStyle, InitMarginTableStyle } from "./../mockData/mockData.js"
+import { categoryHeader, dataHeader_minView, dataHeader_expandedView, ApiInitMargResponse, ApiVarMargResponse, VarMarginTableStyle, VarMarginTableStyleExpanded, InitMarginTableStyle, InitMarginTableStyleExpanded } from "./../mockData/mockData.js"
 
 
 
@@ -23,7 +23,8 @@ const AssetsDeployedComponent = (props)=>{
    let IsVarMarginSelected = state.ui.IsVarMarginSelected;
 
    let dataHeader = (ExpandedSideways?  dataHeader_expandedView :  dataHeader_minView)
-   let tableStyle = (IsVarMarginSelected? VarMarginTableStyle :  InitMarginTableStyle)
+   let tableStyle = (IsVarMarginSelected? (ExpandedSideways? VarMarginTableStyleExpanded : VarMarginTableStyle) :  (ExpandedSideways? InitMarginTableStyleExpanded: InitMarginTableStyle))
+   let cellWidth = (ExpandedSideways? [ 17, 10, 18, 18, 7, 7, 10, 13] : [ 20, 16, 27, 27, 10] )
    let rightContent = (IsVarMarginSelected? ApiVarMargResponse : ApiInitMargResponse)
    let sortedContent = (IsRegionSelected?  _.sortBy(rightContent, ["region"]) :  _.sortBy(rightContent, ["counterparty"]))
    let tableContent = (sortedContent)=>{
@@ -59,6 +60,7 @@ const AssetsDeployedComponent = (props)=>{
                                    categoryHeader={ categoryHeader }
                                    dataHeader={ dataHeader }
                                    tableContent={ tableContent(sortedContent) }
+                                   cellWidth = { cellWidth }
                                    tableStyle={ tableStyle }/>
         </PanelWindow>
         <div className={styles.panelResizeHandle}

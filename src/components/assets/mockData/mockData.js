@@ -74,7 +74,7 @@ const block_3 = {
  "value":"12,345,678 USD",
  "rating": "AAA",
  "haircut": "1%",
- "maturityDate": "DD-MM-YYYY",
+ "maturityDate": "DD-MM-YY",
  "isin": "AB123456789",
 }
 const block_4 = {
@@ -84,16 +84,16 @@ const block_4 = {
  "value":"12,345,678 USD",
  "rating": "AAA",
  "haircut": "1%",
- "maturityDate": "DD-MM-YYYY",
+ "maturityDate": "DD-MM-YY",
  "isin": "AB123456789"
 }
 export const ApiVarMargResponse = [
   {
    region: "AAA Americas",
-   agreement: "Acuo SG Pte Ltd v Counterparty B4",
+   agreement: "Acuo SG Pte Ltd v Counterparty B4 XXXX XXX XXXXX XXXX XXXXX XXXX",
    counterparty: "CCC Counterparty",
    data: [ block_3, block_4 ],
-   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+   pledge: {  "adjValue": "123,456,789,012 USD", "value":"123,456,789,012 USD"},
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
   },
   {
@@ -158,6 +158,36 @@ export const VarMarginTableStyle = {
                                   height: 24,
                                  rowSpan: 1 }
 }
+export const VarMarginTableStyleExpanded = {
+           "RowGroupStyle" : { className: `${TableStyle.RowGroup}`},
+    "RegCptyColGroupStyle" : { className: `${TableStyle.ColGroup} ${TableStyle.RegCptyColGroupStyle}`,
+                                   width: 30 },
+  "VarMarginColGroupStyle" : { className: `${TableStyle.ColGroup}`, width: 100-30 },
+        "RegCptyHeadStyle" : { className: `${TableStyle.Row} ${TableStyle.RegCptyHead}`,
+                                   width: null,
+                                  height: 24,
+                                 rowSpan: 1},
+      "VarMarginHeadStyle" : { className: `${TableStyle.Row} ${TableStyle.VarMarginHead}`, //${TableStyle.RegCptyHead}
+                                   width: null,
+                                  height: 24,
+                                 rowSpan: 1 },
+               "RowStyle1" : { className: TableStyle.Row,
+                                   width: 30,
+                                  height: 24,
+                                 rowSpan: 4,
+                                 bgColor: undefined },
+          "DataBlockStyle" : { className: `${TableStyle.RowGroup} ${TableStyle.DataBlock}`},
+      "InnerColGroupStyle" : { className: `${TableStyle.ColGroup}`,
+                                   width: 100-30 },
+               "RowStyle2" : { className: TableStyle.Row + ' ' + TableStyle.DataRow,
+                                  height: 24,
+                                 rowSpan: 1,
+                                 bgColor: undefined },
+    "RowPledgeExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.VarMarginHead}`,
+                                  height: 24,
+                                 rowSpan: 1 }
+}
+
 export const InitMarginTableStyle = {
            "RowGroupStyle" : { className: `${TableStyle.RowGroup}`},
     "RegCptyColGroupStyle" : { className: `${TableStyle.ColGroup} ${TableStyle.RegCptyColGroupStyle}`,
@@ -187,7 +217,35 @@ export const InitMarginTableStyle = {
                                   height: 24,
                                  rowSpan: 1 }
 }
-
+export const InitMarginTableStyleExpanded = {
+           "RowGroupStyle" : { className: `${TableStyle.RowGroup}`},
+    "RegCptyColGroupStyle" : { className: `${TableStyle.ColGroup} ${TableStyle.RegCptyColGroupStyle}`,
+                                   width: 30 },
+  "VarMarginColGroupStyle" : { className: `${TableStyle.ColGroup}`, width: 100-30 },
+        "RegCptyHeadStyle" : { className: `${TableStyle.Row} ${TableStyle.RegCptyHead}`,
+                                   width: null,
+                                  height: 24,
+                                 rowSpan: 1},
+      "VarMarginHeadStyle" : { className: `${TableStyle.Row} ${TableStyle.InitMarginHead}`,
+                                   width: null,
+                                  height: 24,
+                                 rowSpan: 1 },
+               "RowStyle1" : { className: TableStyle.Row,
+                                   width: 30,
+                                  height: 24,
+                                 rowSpan: 4,
+                                 bgColor: undefined },
+          "DataBlockStyle" : { className: `${TableStyle.RowGroup} ${TableStyle.DataBlock}`},
+      "InnerColGroupStyle" : { className: `${TableStyle.ColGroup}`,
+                                   width: 100-30 },
+               "RowStyle2" : { className: TableStyle.Row + ' ' + TableStyle.DataRow,
+                                  height: 24,
+                                 rowSpan: 1,
+                                 bgColor: undefined },
+    "RowPledgeExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.InitMarginHead}`,
+                                  height: 24,
+                                 rowSpan: 1 }
+}
 
 // AssetsHomePanel
 const rowHomeData = [ "British America", "Acuo", "12,345", "12.345.678", "AAA", "DD-MM-YY", "2", "3", "Custodian1A", "SG"]

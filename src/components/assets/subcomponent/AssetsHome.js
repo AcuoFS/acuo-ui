@@ -13,7 +13,6 @@ const AssetsHomeComponent = (props)=>{
  let actions = props.actions
  let ExpandedSideways = state.ui.DeployedPanel_ExpandedSideways;
 
-
    return(
      <div className={ styles.assetsPanelFrame } >
        <div  className={ styles.assetsPanelHeader} >
@@ -24,11 +23,12 @@ const AssetsHomeComponent = (props)=>{
        </div>
        <PanelWindow>
           {/*
-             <AssetsHomeTableView state={ state }
-                                  actions = { actions }
-                                  Content = { HomeContent }
-                                  TableStyle={ HomeTableStyle } />
-                                                                      */}
+           <AssetsHomeTableView state={ state }
+                                actions = { actions }
+                                Content = { HomeContent }
+                                TableStyle={ HomeTableStyle } />
+           */}
+
        </PanelWindow>
 
      </div>
