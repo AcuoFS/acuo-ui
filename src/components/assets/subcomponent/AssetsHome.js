@@ -23,11 +23,12 @@ const AssetsHomeComponent = (props)=>{
        </div>
        <PanelWindow>
           {/*
-             <AssetsHomeTableView state={ state }
-                                  actions = { actions }
-                                  Content = { HomeContent }
-                                  TableStyle={ HomeTableStyle } />
-                                                                      */}
+           <AssetsHomeTableView state={ state }
+                                actions = { actions }
+                                Content = { HomeContent }
+                                TableStyle={ HomeTableStyle } />
+           */}
+
        </PanelWindow>
 
      </div>

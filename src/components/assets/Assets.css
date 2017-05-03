@@ -5,16 +5,19 @@
 }
 
 .assetsPanels{
- flex: 1 0 0  ;
+ /*flex: 1 0 0  ;*/
+ width: calc(100% / 2)
 }
 
 .assetsPanelDeployed{
  /*flex: 2 0 auto  ;*/
-  flex: 2 0 68%  ;
+  /*flex: 2 0 68%  ;*/
   /*flex: 2 0 0  ;*/
+  width: 75%
 }
 .assetsPanelHome{
  /*flex: 1 0 auto  ;*/
-  flex: 1 0 28%  ;
+  /*flex: 1 0 28%  ;*/
   /*flex: 1 0 0  ;*/
+  width: 25%
 }
