@@ -80,6 +80,8 @@ export default class GraphBody extends React.Component {
 
     let graphXY = status.map(x => Map({"status": x, "timeFrames": possibleTimes.map(y => Map({"timeFrame": y, "actionsLists": List()}))}))
 
+    console.log(graphXY.toJS())
+
     return graphXY.map(X => {
       return Map({"status": X.get('status'), "timeFrames":
         X.get('timeFrames').map(Y => {
@@ -123,13 +125,16 @@ export default class GraphBody extends React.Component {
             }, 0)
           }, 0)
           , "outNo":  y.get('actionsList').reduce((a, z) => {
+          // console.log('a ' + a)
             return a + z.get('actionsList').reduce((a2, xx) => {
-
+              // console.log(xx.get('direction'))
               return (xx.get('direction') == 'OUT' ? a2+1 : a2)
             }, 0)
           }, 0)
         })
       }))
+    }).map(x => {
+      return  x.set('timeFrames', x.reduce(), Map({}))
     }).map((status) => {
       return status.get('timeFrames').map(timeFrame => {
 

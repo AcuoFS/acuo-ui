@@ -155,9 +155,10 @@ export default class Selection extends React.Component {
               <img
                 src={(this.checkIfExist(pendingAllocationStore).includes(marginCall.get('GUID')) ? "./images/pledge/checkboxwithtick.png" : "./images/pledge/checkbox.png")}
                 className={styles.selTick} onClick={this.togglePendingAllocation} data-ref={marginCall.get('GUID')}/>
-              <span className={styles.panelTitle}>{marginCall.get('agreementName')}</span>
+              <span className={styles.panelTitle}>{marginCall.get('legalEntity')}</span>
               <div className={styles.subtitle}>
-                {marginCall.get('legalEntity')} - {marginCall.get('GUID')}
+                {marginCall.get('agreementName')}
+                {/*- {marginCall.get('GUID')}*/}
               </div>
             </div>
             <div className={styles.callTitle}>
