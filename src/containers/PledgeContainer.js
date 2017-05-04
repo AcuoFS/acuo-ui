@@ -13,7 +13,8 @@ import { List, fromJS } from 'immutable'
 import {
   ALLOCATE_COLLATERALS_URL_NEW,
   PLEDGE_ALLOCATIONS,
-  MARGIN_SELECTION_URL
+  MARGIN_SELECTION_URL,
+  PLEDGE_REMOVE_ALLOCATED_ASSET
 } from '../constants/APIcalls'
 import * as ASSET from '../constants/AllocatedAssetAttributes'
 import * as P_ASSET from '../constants/PledgeAssetAttribute'
@@ -155,27 +156,23 @@ const mapDispatchToProps = dispatch => ({
     // console.log(obj)
     // console.log('JSON string :')
     // console.log(JSON.stringify(obj))
-    fetch('http://collateral.acuo.com/acuo/api/optimization/update', {
+    fetch(PLEDGE_REMOVE_ALLOCATED_ASSET, {
       method: 'POST',
       body: JSON.stringify(obj),
       headers: {'content-type': 'application/json'},
       json: true,
       resolveWithFullResponse: true
     }).then(response => {
-      console.log('remove allocation response: ')
-      console.log(response)
+      // console.log('remove allocation response: ')
+      // console.log(response)
       if (response.status == 200) {
         // TODO: To handle how to inform user that pledge data is sucessfully sent
-        //alert('Sent to endpoint!' + JSON.stringify(obj))
-        //Refresh selections
-        fetch(MARGIN_SELECTION_URL).then(response => {
-          return response.json()
-        }).then(obj => {
-          dispatch(initSelection(obj.items))
-        })
+        return response.json()
       } else {
-        alert('Error sending pledge details')
+        console.log('Error sending pledge details')
       }
+    }).then(obj => {
+      dispatch(initSelection(obj.items))
     }).catch(error => {
       console.log('Error: ' + error)
     })

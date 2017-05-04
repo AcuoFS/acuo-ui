@@ -11,6 +11,8 @@ import {
 import { RECON_DATA_URL, RECON_URL, DASHBOARD_URL } from '../constants/APIcalls'
 import filterItems from '../utils/filterItems'
 
+const defaultList = List()
+
 const mapStateToProps = state => {
   const items = state.ReconReducer.get('items').toJS()
   const filters = state.ReconReducer.get('filters').toJS()
@@ -18,9 +20,9 @@ const mapStateToProps = state => {
 
   return {
     recon : fromJS(filteredItems),
-    firstLevelList : state.ReconReducer.get('firstLevelList') || List(),
-    secondLevelList : state.ReconReducer.get('secondLevelList') || List(),
-    currencyInfo: state.ReconReducer.get('currencyInfo') || List()
+    firstLevelList : state.ReconReducer.get('firstLevelList') || defaultList,
+    secondLevelList : state.ReconReducer.get('secondLevelList') || defaultList,
+    currencyInfo: state.ReconReducer.get('currencyInfo') || defaultList
   }
 }
 
