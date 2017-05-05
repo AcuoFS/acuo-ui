@@ -17,10 +17,10 @@ export function initState(state = Map(), newJSON){
 const plusMinusThreeDays = (json) => {
 
   const today = getDate()
-  const oneDayDuration = 24 * 60 * 60 * 1000
+  const thirtySixHrDuration = 36 * 60 * 60 * 1000
   const d = clearTime(today)
-  const dPlusOne = new Date(d.getTime() + oneDayDuration)
-  const dMinusTwo = new Date(d.getTime() - (oneDayDuration * 2))
+  const dPlusOne = new Date(d.getTime() + thirtySixHrDuration)
+  const dMinusTwo = new Date(d.getTime() - thirtySixHrDuration)
 
   return {
     derivatives: _.map(json.derivatives, deriv => (
