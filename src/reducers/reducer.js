@@ -9,8 +9,33 @@ const INITIAL_STATE = Map({"data": Map({"derivatives": List()}), "display": Map(
 export function initState(state = Map(), newJSON){
 
   let json = plusMinusThreeDays(newJSON.toJS()) || []
+  let lol = json
 
-  return state.set('data', fromJS(json)).set('display', fromJS(json))
+  if(state.getIn(['inputs', 'filters']) && !state.getIn(['inputs', 'filters']).isEmpty())
+    lol = state.getIn(['inputs', 'filters']).reduce((json, x) => {
+        switch(x.get('type')){
+          case 'FILTER_STATE_DERIV':
+            return updateStateDeriv(json, x, 'display')
+
+          case 'FILTER_STATE_LEGAL':
+            return updateStateLegal(json, x, 'display')
+
+          case 'FILTER_STATE_STATUS':
+            return updateStateStatus(json, x, 'display')
+
+          case 'FILTER_STATE_TIMEWINDOW':
+            return updateTimeWindow(json, x.get('minTime'), x.get('maxTime'), 'display')
+
+          case 'FILTER_STATE_CPTYORG':
+            return updateStateCptyOrg(json, x, 'display')
+
+          case 'FILTER_STATE_CPTYENTITY':
+            return updateStateCptyEntity(json, x, 'display')
+        }
+      }
+      , fromJS({"display": json})).get('display').toJS()
+
+  return state.set('data', fromJS(json)).set('display', fromJS(lol))
   //pushed into two separate nodes, data(for retention of persistent data), display(for rendering the UI)
 }
 
@@ -182,7 +207,6 @@ export function multifilters(state, action){
 
       case 'FILTER_STATE_CPTYENTITY':
         return updateStateCptyEntity(newState, filter, 'display')
-
     }
   }, attachFilter(initState(state, state.get('data')), action))
 
