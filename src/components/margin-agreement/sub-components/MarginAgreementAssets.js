@@ -18,9 +18,9 @@ export default class MarginAgreementPortfolio extends React.Component {
   getTotalAmount(asset) {
     if (asset) {
       return asset.reduce((sum, x) => {
-        return sum + x.get('data').reduce((sum, y) => {
+        return parseFloat(sum) + parseFloat(x.get('data').reduce((sum, y) => {
             return sum + parseFloat(y.getIn(['firstLevel', 'amount']))
-          }, 0)
+          }, 0))
       }, 0)
     } else {
       return 0
