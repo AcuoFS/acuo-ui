@@ -24,7 +24,8 @@ const AssetsDeployedComponent = (props)=>{
 
    let dataHeader = (ExpandedSideways?  dataHeader_expandedView :  dataHeader_minView)
    let tableStyle = (IsVarMarginSelected? (ExpandedSideways? VarMarginTableStyleExpanded : VarMarginTableStyle) :  (ExpandedSideways? InitMarginTableStyleExpanded: InitMarginTableStyle))
-   let cellWidth = (ExpandedSideways? [ 17, 10, 18, 18, 7, 7, 10, 13] : [ 20, 16, 27, 27, 10] )
+   let cellWidth = (ExpandedSideways? { category: [26, 37, 37], data: [ 17, 10, 18, 18, 7, 7, 10, 13] } : { category: [26, 37, 37], data: [ 20, 16, 27, 27, 10] } )
+
    let rightContent = (IsVarMarginSelected? ApiVarMargResponse : ApiInitMargResponse)
    let sortedContent = (IsRegionSelected?  _.sortBy(rightContent, ["region"]) :  _.sortBy(rightContent, ["counterparty"]))
    let tableContent = (sortedContent)=>{

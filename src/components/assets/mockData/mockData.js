@@ -3,7 +3,7 @@ import TableStyle from '../subcomponent/deployedViews/tableUI/tableUI.css'
 // AssetsDeployedPanel
 export const categoryHeader = ["Region" , "Agreement", "Counterparty"]
 export const dataHeader_minView = ["Asset", "Quantity", "Adj. Value", "Value", "Haircut"]
-export const dataHeader_expandedView = ["Asset", "Quantity", "Adj. Value", "Value", "Rating", "Haircut", "Maturity Date", "ISIN"]
+export const dataHeader_expandedView = ["Asset", "Quantity", "Adj. Value", "Value", "Rating", "Haircut", "Maturity", "ISIN"]
 
 const block_1 = {
  "asset": "Initial Asset 1",
@@ -132,8 +132,8 @@ export const ApiVarMargResponse = [
 export const VarMarginTableStyle = {
            "RowGroupStyle" : { className: `${TableStyle.RowGroup}`},
     "RegCptyColGroupStyle" : { className: `${TableStyle.ColGroup} ${TableStyle.RegCptyColGroupStyle}`,
-                                   width: 38 },
-  "VarMarginColGroupStyle" : { className: `${TableStyle.ColGroup}`, width: 100-38 },
+                                   width: 33 },
+  "VarMarginColGroupStyle" : { className: `${TableStyle.ColGroup}`, width: 100-33 },
         "RegCptyHeadStyle" : { className: `${TableStyle.Row} ${TableStyle.RegCptyHead}`,
                                    width: null,
                                   height: 24,
@@ -143,13 +143,13 @@ export const VarMarginTableStyle = {
                                   height: 24,
                                  rowSpan: 1 },
                "RowStyle1" : { className: TableStyle.Row,
-                                   width: 38,
+                                   width: 33,
                                   height: 24,
                                  rowSpan: 4,
                                  bgColor: undefined },
           "DataBlockStyle" : { className: `${TableStyle.RowGroup} ${TableStyle.DataBlock}`},
       "InnerColGroupStyle" : { className: `${TableStyle.ColGroup}`,
-                                   width: 100-38 },
+                                   width: 100-33 },
                "RowStyle2" : { className: TableStyle.Row + ' ' + TableStyle.DataRow,
                                   height: 24,
                                  rowSpan: 1,
@@ -191,8 +191,8 @@ export const VarMarginTableStyleExpanded = {
 export const InitMarginTableStyle = {
            "RowGroupStyle" : { className: `${TableStyle.RowGroup}`},
     "RegCptyColGroupStyle" : { className: `${TableStyle.ColGroup} ${TableStyle.RegCptyColGroupStyle}`,
-                                   width: 38 },
-  "VarMarginColGroupStyle" : { className: `${TableStyle.ColGroup}`, width: 100-38 },
+                                   width: 33 },
+  "VarMarginColGroupStyle" : { className: `${TableStyle.ColGroup}`, width: 100-33 },
         "RegCptyHeadStyle" : { className: `${TableStyle.Row} ${TableStyle.RegCptyHead}`,
                                    width: null,
                                   height: 24,
@@ -202,13 +202,13 @@ export const InitMarginTableStyle = {
                                   height: 24,
                                  rowSpan: 1 },
                "RowStyle1" : { className: TableStyle.Row,
-                                   width: 38,
+                                   width: 33,
                                   height: 24,
                                  rowSpan: 4,
                                  bgColor: undefined },
           "DataBlockStyle" : { className: `${TableStyle.RowGroup} ${TableStyle.DataBlock}`},
       "InnerColGroupStyle" : { className: `${TableStyle.ColGroup}`,
-                                   width: 100-38 },
+                                   width: 100-33 },
                "RowStyle2" : { className: TableStyle.Row + ' ' + TableStyle.DataRow,
                                   height: 24,
                                  rowSpan: 1,
@@ -250,7 +250,7 @@ export const InitMarginTableStyleExpanded = {
 // AssetsHomePanel
 const rowHomeData = [ "British America", "Acuo", "12,345", "12.345.678", "AAA", "DD-MM-YY", "2", "3", "Custodian1A", "SG"]
 export const HomeContent = {
- Header: ['Asset', 'Firm', 'Quantity', 'Value', 'Rating', 'Maturity Date', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region'],
+ Header: ['Asset', 'Firm', 'Quantity', 'Value', 'Rating', 'Maturity', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region'],
  RowData: [ rowHomeData, rowHomeData, rowHomeData ]
 }
 export const HomeTableStyle={

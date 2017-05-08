@@ -22,12 +22,12 @@ const AssetsHomeComponent = (props)=>{
               onClick={ ()=>{actions.DeployedPanel_ToggleSideExpand(!ExpandedSideways)} }/>
        </div>
        <PanelWindow>
-          {
+          {/*
              <AssetsHomeTableView state={ state }
                                   actions = { actions }
                                   Content = { HomeContent }
                                   TableStyle={ HomeTableStyle } />
-           }
+           */}
 
        </PanelWindow>
 

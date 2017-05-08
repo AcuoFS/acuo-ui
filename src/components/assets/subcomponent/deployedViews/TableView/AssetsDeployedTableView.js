@@ -16,7 +16,8 @@ const AssetsDeployedTableView = (props)=>{
 
   let Content = props.tableContent
   let TableStyle = props.tableStyle
-  let CellWidth = props.cellWidth
+  let CatCellWidth = props.cellWidth.category
+  let DataCellWidth = props.cellWidth.data
 
   return (
     <div className={styles.tableView}>
@@ -32,7 +33,7 @@ const AssetsDeployedTableView = (props)=>{
               Counterparty
             </div>
           </NavBar>
-         <Table.DataRow content={categoryHeader} style={TableStyle.RegCptyHeadStyle} />
+         <Table.DataRow content={categoryHeader} style={TableStyle.RegCptyHeadStyle} cellWidth={CatCellWidth}/>
 
         </Table.ColGroup>
         <Table.ColGroup style={TableStyle.VarMarginColGroupStyle}>
@@ -46,18 +47,18 @@ const AssetsDeployedTableView = (props)=>{
              Variation Margin
            </div>
           </NavBar>
-          <Table.DataRow content={dataHeader} style={TableStyle.VarMarginHeadStyle} cellWidth={CellWidth} />
+          <Table.DataRow content={dataHeader} style={TableStyle.VarMarginHeadStyle} cellWidth={DataCellWidth} />
         </Table.ColGroup>
       </Table.RowGroup>
 
      {Content.map((rowBlock, idx)=>{
       return(
        <Table.RowGroup style={TableStyle.DataBlockStyle} key={idx}>
-         <Table.DataRow content={rowBlock.CategoryContent} style={TableStyle.RowStyle1} />
+         <Table.DataRow content={rowBlock.CategoryContent} style={TableStyle.RowStyle1} cellWidth={CatCellWidth}/>
          <Table.ColGroup style={TableStyle.InnerColGroupStyle}>
-           { rowBlock.RowContent.map( (rowData,idy)=>(<Table.DataRow content={rowData} style={TableStyle.RowStyle2} cellWidth={CellWidth} key={idy}/>) ) }
-         <Table.DataRow content={rowBlock.PledgeContent} style={TableStyle.RowPledgeExcessStyle} cellWidth={CellWidth} />
-         <Table.DataRow content={rowBlock.ExcessContent} style={TableStyle.RowPledgeExcessStyle} cellWidth={CellWidth} />
+           { rowBlock.RowContent.map( (rowData,idy)=>(<Table.DataRow content={rowData} style={TableStyle.RowStyle2} cellWidth={DataCellWidth} key={idy}/>) ) }
+         <Table.DataRow content={rowBlock.PledgeContent} style={TableStyle.RowPledgeExcessStyle} cellWidth={DataCellWidth} />
+         <Table.DataRow content={rowBlock.ExcessContent} style={TableStyle.RowPledgeExcessStyle} cellWidth={DataCellWidth} />
          </Table.ColGroup>
        </Table.RowGroup>
       )
