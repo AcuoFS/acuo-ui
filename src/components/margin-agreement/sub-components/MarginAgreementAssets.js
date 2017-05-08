@@ -204,7 +204,7 @@ export default class MarginAgreementPortfolio extends React.Component {
               <div className={styles.packageRight}>
                 {checkNegative(
                   this.getTotalAmount(marginData.get(assetsName)) +
-                  (adjAmt ? Number.parseInt(adjAmt) : 0.0)
+                  (adjAmt ? parseFloat(adjAmt) : 0.0)
                 )}
               </div>
             </div>
