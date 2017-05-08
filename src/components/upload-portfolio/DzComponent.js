@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import DropzoneComponent from 'react-dropzone-component'
 import {FILE_XLSX, FILE_CSV} from '../../constants/UploadFileTypes'
+import LoadingBarSpinner from './../common/LoadingBarSpinner/LoadingBarSpinner'
+import styles from './UploadWidget.css'
 
 /**
  * React component from:
@@ -35,7 +37,7 @@ export default class DzComponent extends React.Component {
   }
 
   handleFileAdded(file) {
-    console.log("handling file add " + file)
+    //console.log("handling file add " + file)
 
     this.props.propHandlerFileAdded(this.dropzone.files.length > 0)
   }
@@ -51,7 +53,7 @@ export default class DzComponent extends React.Component {
   }
 
   onGenerate() {
-    console.log(this.componentConfig.postUrl)
+    //console.log(this.componentConfig.postUrl)
     this.dropzone.processQueue()
   }
 
@@ -76,7 +78,7 @@ export default class DzComponent extends React.Component {
   }
 
   render() {
-    const {propClassName, propDisplayForBrowse} = this.props
+    const {propClassName, propDisplayForBrowse, uploading} = this.props
 
     const config = this.componentConfig
     const djsConfig = this.djsConfig
@@ -97,16 +99,21 @@ export default class DzComponent extends React.Component {
       <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig}
                          className={propClassName}>
         <div className="dz-message">
-            <span>
+
+          <div className={(uploading ? '' : styles.displayHide)}>
+            <LoadingBarSpinner text={'Uploading to server...'}/>
+          </div>
+
+          <span className={(uploading ? styles.displayHide : '')}>
               {
                 propDisplayForBrowse
                   ? propDisplayForBrowse
                   : 'Drag and drop portfolio files, or '
               }
+            <a href="#" className="triggerFileSelection"
+               onClick={(e) => e.preventDefault()}>browse</a>.
+          </span>
 
-              <a href="#" className="triggerFileSelection"
-                 onClick={(e) => e.preventDefault()}>browse</a>.
-            </span>
         </div>
       </DropzoneComponent>
     )

@@ -78,3 +78,7 @@ div.componentStyle {
   font-size: 14px;
   color: #4A4A4A;
 }
+
+.displayHide {
+  display: none;
+}

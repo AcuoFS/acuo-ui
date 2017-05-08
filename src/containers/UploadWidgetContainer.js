@@ -3,13 +3,16 @@ import { UploadWidgetComponent } from '../components'
 import {
   updateTxnID,
   pollMarginCall,
-  requestingValuationFlag
+  requestingValuationFlag,
+  uploadingPortfolioFlag
 } from '../actions/MarginCallUploadActions'
 
 const _default = ''
 
 const mapStateToProps = state => ({
-  txnID: state.MarginUploadReducer.get('txnID') || _default
+  txnID: state.MarginUploadReducer.get('txnID') || _default,
+  uploading: state.MarginUploadReducer.get('uploading'),
+  requestingValuation: state.MarginUploadReducer.get('requestingValuation'),
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -17,15 +20,15 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateTxnID(txnID))
   ,
   requestValuation: (txnID) =>{
-    console.log('fired')
     dispatch(pollMarginCall(txnID))
     dispatch(requestingValuationFlag())
-  }
+  },
+  flagUploading: () =>
+    dispatch(uploadingPortfolioFlag())
 })
 
 const mergeProps = (stateProps, dispatchProps) => ({
   onRequestValuation: () => {
-    console.log('fire')
     dispatchProps.requestValuation(stateProps.txnID)
   }
   , ...stateProps, ...dispatchProps

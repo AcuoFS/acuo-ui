@@ -3,7 +3,8 @@ import {
   UPDATE_MARGIN_CALL_UPLOAD,
   UPDATE_TXN_ID,
   POLL_MARGIN_CALL,
-  REQUESTING_VALUATION
+  REQUESTING_VALUATION,
+  UPLOADING_PORTFOLIO
 } from '../constants/ActionTypes'
 
 export const getMarginCallUpload = (uploadData) => ({
@@ -29,4 +30,8 @@ export const pollMarginCall = (txnID) => ({
 
 export const requestingValuationFlag = () => ({
   type: REQUESTING_VALUATION
+})
+
+export const uploadingPortfolioFlag = () => ({
+  type: UPLOADING_PORTFOLIO
 })
