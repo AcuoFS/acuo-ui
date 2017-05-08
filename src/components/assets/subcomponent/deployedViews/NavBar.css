@@ -17,16 +17,8 @@
 .tabs:hover{
  color: #587d9e;
 }
-.tabs:active{
- font-size: 16px;
-}
 
 .selected{
  color: #587d9e;
  text-decoration: underline;
- font-size: 17px;
-}
-
-.selected:active{
- font-size: 17px;
 }

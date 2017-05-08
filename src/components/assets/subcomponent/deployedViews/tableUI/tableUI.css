@@ -79,10 +79,12 @@
 .VarMarginHead{
    background-color: #4e83b5;
    color: white;
+   font-weight: bold;
 }
 .InitMarginHead{
    background-color: #315271;
    color: white;
+   font-weight: bold;
 }
 
 /* ----- AssetsHomeTableView ----- */
