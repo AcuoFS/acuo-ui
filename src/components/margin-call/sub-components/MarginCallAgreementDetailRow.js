@@ -10,8 +10,10 @@ const MarginCallAgreementDetailRow = ({propAgreementDetailObj}) => (
       <div>Min Transfer</div>
       <div>Rounding</div>
       <div>Net Required</div>
-      <div>Rate</div>
-      <div>Trade Count</div>
+      <div>FX rate</div>
+      <div>Total Trade Count</div>
+      <div>Trades Valued</div>
+      <div>Px Source</div>
       <div></div>
     </div>
     <div className={styles.agreeRow}>
@@ -22,6 +24,8 @@ const MarginCallAgreementDetailRow = ({propAgreementDetailObj}) => (
       <div>{propAgreementDetailObj.netRequired}</div>
       <div>{propAgreementDetailObj.rate}</div>
       <div className={styles.boldText}>{propAgreementDetailObj.tradeCount}</div>
+      <div>Trades Valued placeholder</div>
+      <div>Px Source placeholder</div>
       <div></div>
     </div>
   </div>

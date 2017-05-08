@@ -3,7 +3,6 @@ import DzComponent from './DzComponent'
 import {UPLOAD_FILE_URL} from '../../constants/APIcalls'
 import styles from './UploadWidget.css'
 
-
 export default class UploadWidget extends React.Component {
   constructor(props) {
     super(props)
@@ -33,7 +32,8 @@ export default class UploadWidget extends React.Component {
     })
   }
 
-  onGenerate() {
+  onGenerate(flagUploading) {
+    flagUploading()
     this.setState({
       isSendToBackend: true
     })
@@ -78,7 +78,7 @@ export default class UploadWidget extends React.Component {
 
   render() {
 
-    const { onUpdateTxnID, txnID, onRequestValuation } = this.props
+    const { onUpdateTxnID, txnID, onRequestValuation, uploading, flagUploading, requestingValuation } = this.props
 
     return (
       /*<form id="uploadbanner" enctype="multipart/form-data" method="post" action="http://localhost:3000/">
@@ -96,7 +96,8 @@ export default class UploadWidget extends React.Component {
                      propNoOfFiles={5}
                      propPostUrl={UPLOAD_FILE_URL}
                      updateUploadStatus={this.updateUploadStatus}
-                     onUpdateTxnID={onUpdateTxnID}/>
+                     onUpdateTxnID={onUpdateTxnID}
+                     uploading={uploading}/>
 
         <div className={styles.buttonContainer}>
           <div className={styles.uploadStatus}>
@@ -104,15 +105,16 @@ export default class UploadWidget extends React.Component {
           </div>
 
           {(txnID ?
-          <button className={styles.textBold + ' ' + styles.enabled} type="button" onClick={onRequestValuation}>
-            Request Valuation
-          </button>
-          :
-          <button className={styles.textBold + ' ' + (this.state.isWidgetValidForSubmission ?
-            styles.enabled : '')} type="button" onClick={this.onGenerate}
-                  disabled={!this.state.isWidgetValidForSubmission}>
-            Upload
-          </button>
+            <button className={styles.textBold + ' ' + (!requestingValuation ? styles.enabled : '')} type="button" onClick={onRequestValuation} disabled={requestingValuation}>
+              Request Valuation
+            </button>
+            :
+            <button className={styles.textBold + ' ' + (this.state.isWidgetValidForSubmission && !uploading ?
+              styles.enabled : '')} type="button" onClick={() => this.onGenerate(flagUploading)}
+                    disabled={!this.state.isWidgetValidForSubmission && uploading}>
+              Upload
+            </button>
+
           )}
         </div>
       </div>
