@@ -90,10 +90,10 @@ const block_4 = {
 export const ApiVarMargResponse = [
   {
    region: "AAA Americas",
-   agreement: "Acuo SG Pte Ltd v Counterparty B4 XXXX XXX XXXXX XXXX XXXXX XXXX",
+   agreement: "Acuo SG Pte Ltd v Counterparty B4",
    counterparty: "CCC Counterparty",
    data: [ block_3, block_4 ],
-   pledge: {  "adjValue": "123,456,789,012 USD", "value":"123,456,789,012 USD"},
+   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
   },
   {
