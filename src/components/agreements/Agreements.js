@@ -83,6 +83,7 @@ export default class Agreements extends React.Component {
             </button>
           </div>
         </div>
+        {/*#Search*/}
         <input type="text" placeholder="Search" className={styles.searchInput}
                value={this.state.filterText}
                onChange={(e) => this.setState({filterText: e.target.value})}/>

@@ -30,18 +30,22 @@ export default class DeselectionPopup extends React.Component {
     }
   }
 
-  onConfirm(radioAllDom, radioCurDom, propOpenedDeselectionPopup, propDeselectAsset, onRemoveAssetFromAllocate, GUID) {
+  onConfirm(radioAllDom, radioCurDom, propOpenedDeselectionPopup, propDeselectAsset, onRemoveAssetFromAllocate, GUID, closePopup) {
     let checkMsg = ''
     if (radioAllDom.checked) {
       onRemoveAssetFromAllocate(propDeselectAsset)
+      closePopup()
     }
     if (radioCurDom.checked) {
       onRemoveAssetFromAllocate(propDeselectAsset, [GUID])
+      closePopup()
     }
+
+
 
     // todo: fetch request goes here REMOVE_ASSET_ALLOCATION_URL
 
-    alert('Confirm button clicked. id: ' + propOpenedDeselectionPopup + ', ' + checkMsg)
+    //alert('Confirm button clicked. id: ' + propOpenedDeselectionPopup + ', ' + checkMsg)
   }
 
   // Before change of props
@@ -104,7 +108,7 @@ export default class DeselectionPopup extends React.Component {
             (propIsValidFlag ? styles.buttonEnabled : '')}
                     disabled={!propIsValidFlag}
                     onClick={() => {
-                      this.onConfirm(this.radioAllDom, this.radioCurDom, propOpenedDeselectionPopup, propDeselectAsset, onRemoveAssetFromAllocate, GUID)
+                      this.onConfirm(this.radioAllDom, this.radioCurDom, propOpenedDeselectionPopup, propDeselectAsset, onRemoveAssetFromAllocate, GUID, propHandlerClearPopup)
                     }}>
               Confirm
             </button>

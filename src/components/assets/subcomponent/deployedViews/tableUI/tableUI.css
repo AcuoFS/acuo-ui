@@ -1,0 +1,76 @@
+/*---Default---*/
+.ColGroup{
+ border-collapse: collapse;
+ display: flex;
+ flex: 0 0 auto;
+
+ flex-direction: column;
+ }
+
+.RowGroup{
+ border-collapse: collapse;
+ display: flex;
+ flex: 0 0 auto;
+
+ flex-direction: row;
+ }
+
+.Row{
+ display: flex;
+ flex-direction: row;
+ flex: 0 0 auto;
+
+}
+
+.DataRowCell{
+ display: flex;
+ flex-direction: row;
+ flex: 0 0 auto;
+ align-items: center;
+ justify-content: center;
+}
+
+/* ----- AssetsDeployedTableView ----- */
+/*Navbars*/
+.RegCptyColGroupStyle{
+ border-right: 1px white solid;
+}
+
+.DataBlock{
+ padding-bottom: 2px;
+ border-bottom: 1px solid #979797;
+}
+
+.DataRow{
+ border-bottom: 1px solid #979797;
+ margin-bottom: 2px;
+ -webkit-transition: background-color 250ms linear;
+ -moz-transition: background-color 250ms linear;
+ -o-transition: background-color 250ms linear;
+ transition: background-color 250ms linear;
+
+}
+.DataRow:hover{
+ background-color: #e5e5e5;
+}
+
+.RegCptyHead{
+   background-color: #2b3c4c;
+   color: white;
+   border-right: 1px solid white
+}
+.VarMarginHead{
+   background-color: #4e83b5;
+   color: white;
+}
+.InitMarginHead{
+   background-color: #315271;
+   color: white;
+}
+
+/* ----- AssetsHomeTableView ----- */
+.PrincipalPledgeHead{
+ background-color: #2b3c4c;
+ color: white;
+ border-right: 1px solid white
+}

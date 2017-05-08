@@ -1,0 +1,12 @@
+.footer{
+ /*align-self: baseline;*/
+ bottom: 0;
+ width: 100%;
+ border: 1px black dotted;
+ margin-top: 20px;
+ padding: 10px 0 10px 0;
+}
+
+.copyright{
+  text-align: center;
+}

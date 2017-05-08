@@ -1,0 +1,15 @@
+.tableView{
+ /*border: 1px blue dashed;*/
+ display: flex;
+ flex-direction: column;
+ flex-grow: 1;
+ height: inherit;
+ overflow: hidden;
+}
+
+/*.colLeft{
+ width: calc(100% * 0.38)
+}
+.colRight{
+ width: calc(100% * 0.62);
+}*/

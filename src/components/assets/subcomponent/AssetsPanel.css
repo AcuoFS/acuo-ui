@@ -1,0 +1,117 @@
+.assetsPanelFrame{
+  background-color: #FFFFFF;
+  box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
+  border-radius: 8px;
+  margin: 0% 2%;
+  padding: 1%;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+
+  height: 518px;
+}
+.assetsPanelFrameExpanded{
+  background-color: #FFFFFF;
+  box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
+  border-radius: 8px;
+  margin: 0% 2%;
+  padding: 1%;
+
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+
+}
+
+.assetsPanelHeader{
+   display: flex;
+   flex-direction: row;
+   /*flex: 1 0 auto;*/
+   flex-shrink: 0;
+
+   margin-bottom: 1em;
+   /*border: 1px black dotted;*/
+}
+
+.assetsPanelTitleText{
+  font-size: 24px;
+  composes: baseFontBold from '../../../static/css-components/fonts.css';
+  line-height: 29px;
+  color: #4E83B5;
+  align-self: center;
+  flex: 10 0 auto
+}
+
+.assetsPanelHeaderInput{
+  flex: 2 0 auto;
+  height: 25px;
+  margin-right: 1em;
+
+  font-size: 14px;
+}
+
+.assetsPanelHeaderSideExpandBtn{
+ height: 24px;
+ width: 24px;
+ align-self: center;
+  /*flex: 1 0 0;*/
+}
+
+.assetsPanelHeaderSideExpandBtn:hover{
+  cursor: pointer
+}
+
+.assetsPanelHeaderSideExpandBtn:active{
+ height: 25px;
+ width: 25px;
+}
+
+.panelResizeHandle{
+  bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto;
+
+  margin-top: 10px;
+  height: 24px;
+  width: 100%;
+
+  background-color: #2b3c4c;
+  color: white;
+}
+
+.panelResizeHandle:hover{
+ cursor: grab;
+}
+.panelResizeHandle:active{
+ cursor: grabbing;
+ background-color: red;
+}
+
+/*Code for resizable handles*/
+/*.panelResizeHandle{
+  position:absolute;
+  bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 10px;
+  height: 15px;
+  width: 98%;
+
+  background-color: #2b3c4c;
+  color: white;
+}
+
+.panelResizeHandle:hover{
+ cursor: grab;
+}
+.panelResizeHandle:active{
+ cursor: grabbing;
+ background-color: red;
+}*/

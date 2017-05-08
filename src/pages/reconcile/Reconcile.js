@@ -9,7 +9,7 @@ import filterItems from '../../utils/filterItems'
 import stylesG from '../../static/global.css'
 import styles from './Reconcile.css'
 import { connect } from 'react-redux'
-import { reconInitState } from '../../actions'
+import { reconInitState, initCurrencyInfo } from '../../actions'
 import { RECON_URL } from '../../constants/APIcalls'
 
 
@@ -64,8 +64,9 @@ const mapDispatchToProps = dispatch => ({
     fetch(RECON_URL).then((response) => {
       return response.json()
     }).then((obj) => {
-      const {items} = obj
+      const {items, currencyInfo} = obj
       dispatch(reconInitState(items))
+      dispatch(initCurrencyInfo(currencyInfo))
     })
   }
 })

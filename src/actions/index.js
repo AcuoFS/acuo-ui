@@ -10,6 +10,11 @@ export const reconInitState = (items) => ({
   items,
 })
 
+export const initCurrencyInfo = (currencyInfo) => ({
+  type: ActionTypes.INIT_CURRENCY_INFO,
+  currencyInfo
+})
+
 export const filterStateDeriv = (derivType) => ({
   type: ActionTypes.FILTER_STATE_DERIV,
   filter: derivType
