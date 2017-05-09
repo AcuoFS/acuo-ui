@@ -20,7 +20,10 @@ const AssetsHomeComponent = (props)=>{
  let AssetsDeployedPanelExpandedSideways = state.ui.DeployedPanel_ExpandedSideways;
  let IsPledgeSelected = state.ui.HomePanel_IsPledgeSelected; //console.log(IsPledgeSelected);
 
- let cellWidth = [ 12, 11, 9, 14, 7, 11, 6, 6, 11, 10 ]
+ let cellWidth = {
+  expanded: [ 12, 11, 9, 14, 7, 11, 6, 6, 11, 10 ],
+  minimized: [ 18, 23, 16, 29, 13 ]
+ }
 
  let content = ()=>{ if(IsPledgeSelected) { return (AssetsDeployedPanelExpandedSideways? HomePledgeContentMin : HomePledgeContent) }
                      else { return (AssetsDeployedPanelExpandedSideways? HomePrincipalContentMin : HomePrincipalContent) }  }

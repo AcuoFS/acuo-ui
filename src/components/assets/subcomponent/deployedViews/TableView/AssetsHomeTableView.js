@@ -9,7 +9,9 @@ import Table from '../tableUI/tableUI.js'
 const AssetsHomeTableView = (props)=>{
    // console.log("@---AssetsHomeTableView");
    let IsPledgeSelected = props.state.ui.HomePanel_IsPledgeSelected
-   let {Content, actions, TableStyle, cellWidth} = props
+   let IsExpanded = props.state.ui.DeployedPanel_ExpandedSideways
+   let {Content, actions, TableStyle} = props
+   let cellWidth = (IsExpanded?  props.cellWidth.minimized : props.cellWidth.expanded )
 
    return(
     <div className={styles.tableView}>
@@ -30,10 +32,10 @@ const AssetsHomeTableView = (props)=>{
       </Table.RowGroup>
 
       <Table.ColGroup style={ TableStyle.RowGroupStyle }>
-        <Table.DataRow content={Content.Header} style={TableStyle.HeaderRow } cellWidth={cellWidth} />
+        <Table.DataRow content={Content.Header} style={TableStyle.HeaderRow } cellWidth={ cellWidth } />
 
         {
-           Content.RowData.map((row,idx)=>( <Table.DataRow content={row} style={TableStyle.DataRow} key={idx} cellWidth={cellWidth} /> ) )
+           Content.RowData.map((row,idx)=>( <Table.DataRow content={row} style={TableStyle.DataRow} key={idx} cellWidth={ cellWidth } /> ) )
         }
 
       </Table.ColGroup>
