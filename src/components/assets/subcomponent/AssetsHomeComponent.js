@@ -1,3 +1,7 @@
+/* ReadMe
+
+*/
+
 import React from 'react'
 import styles from './AssetsPanel.css'
 import PanelWindow from './deployedViews/PanelWindow.js'
@@ -5,13 +9,14 @@ import AssetsHomeTableView from './deployedViews/TableView/AssetsHomeTableView.j
 /*Actions*/
 import {AssetsPanel} from '../../../actions/AssetsActions.js'
 //Mock Data
-import { HomeTableStyle, HomeContent } from '../mockData/mockData.js'
+import { HomeTableStyle, HomeContent, HomeContentMin } from '../mockData/mockData.js'
 
 
 const AssetsHomeComponent = (props)=>{
  let state = props.state
  let actions = props.actions
- let ExpandedSideways = state.ui.DeployedPanel_ExpandedSideways;
+ let AssetsDeployedPanelExpandedSideways = state.ui.DeployedPanel_ExpandedSideways;
+ console.log(AssetsDeployedPanelExpandedSideways);
 
    return(
      <div className={ styles.assetsPanelFrame } >
@@ -22,14 +27,18 @@ const AssetsHomeComponent = (props)=>{
               onClick={ ()=>{actions.DeployedPanel_ToggleSideExpand(!ExpandedSideways)} }/>
        </div>
        <PanelWindow>
-          {/*
+          {
              <AssetsHomeTableView state={ state }
                                   actions = { actions }
-                                  Content = { HomeContent }
+                                  Content = { (AssetsDeployedPanelExpandedSideways? HomeContentMin : HomeContent ) }
                                   TableStyle={ HomeTableStyle } />
-           */}
+           }
 
        </PanelWindow>
+       <div className={styles.panelResizeHandle}
+            onClick={ ()=>{actions.DeployedPanel_ToggleVerticalExpand(!ExpandedVertically)}} >
+         &#9650;  &#9660;
+       </div>
 
      </div>
    )

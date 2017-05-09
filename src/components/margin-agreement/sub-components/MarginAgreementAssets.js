@@ -18,9 +18,9 @@ export default class MarginAgreementPortfolio extends React.Component {
   getTotalAmount(asset) {
     if (asset) {
       return asset.reduce((sum, x) => {
-        return sum + x.get('data').reduce((sum, y) => {
+        return parseFloat(sum) + parseFloat(x.get('data').reduce((sum, y) => {
             return sum + parseFloat(y.getIn(['firstLevel', 'amount']))
-          }, 0)
+          }, 0))
       }, 0)
     } else {
       return 0
@@ -29,7 +29,7 @@ export default class MarginAgreementPortfolio extends React.Component {
 
   getCurrencyInfo(ccy, baseCCY) {
     if (ccy)
-      return ccy.map((x, index) => {
+      return ccy.filter(x => x.includes(baseCCY)).map((x, index) => {
         return (
           <div key={index}>{x.get('ccy') + '/USD=' + x.get('exchangeRate').toFixed(4)}</div>
         )
@@ -204,7 +204,7 @@ export default class MarginAgreementPortfolio extends React.Component {
               <div className={styles.packageRight}>
                 {checkNegative(
                   this.getTotalAmount(marginData.get(assetsName)) +
-                  (adjAmt ? Number.parseInt(adjAmt) : 0.0)
+                  (adjAmt ? parseFloat(adjAmt) : 0.0)
                 )}
               </div>
             </div>

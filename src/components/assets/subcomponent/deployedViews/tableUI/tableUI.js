@@ -50,6 +50,7 @@ const DataRow = (props)=>{
 
       { _.map(content, (content, idx)=>{
        return <DataRowCell key={idx}
+                           id={idx}
                            content={content}
                            siblings={siblings}
                            cellWidth={ cellWidth? cellWidth[idx] : null }  />} )}
@@ -67,7 +68,14 @@ const DataRowCell = (props)=>{
     let text = props.content.substring(0,41) + " ..."
     return (<div className={styles.CellVisible} title={props.content}> {text || "---No Content---"} </div>)
    }
-   else{ return <div className={styles.CellVisible}> {props.content || "---No Content---"} </div> }
+   else{
+     if(props.id===0 && props.content.length > 12){
+      let text = props.content.substring(0,12) + " ..."
+      return <div className={styles.CellVisible} title={props.content}> {text || "---No Content---"} </div>
+     } else {
+      return <div className={styles.CellVisible} title={props.content}> {props.content || "---No Content---"} </div>
+     }
+   }
   }
 
   return(
