@@ -7,10 +7,9 @@ import Table from '../tableUI/tableUI.js'
 
 // export default class AssetsHomeTableView extends React.Component{
 const AssetsHomeTableView = (props)=>{
-   console.log("@---AssetsHomeTableView");
+   // console.log("@---AssetsHomeTableView");
    let IsPledgeSelected = props.state.ui.HomePanel_IsPledgeSelected
    let {Content, actions, TableStyle} = props
-   // console.log(props.actions);
 
    return(
     <div className={styles.tableView}>

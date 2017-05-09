@@ -18,13 +18,12 @@ const AssetsHomeComponent = (props)=>{
 
  let ExpandedVertically = state.ui.HomePanel_ExpandedVertically; //console.log(ExpandedVertically);
  let AssetsDeployedPanelExpandedSideways = state.ui.DeployedPanel_ExpandedSideways;
- let IsPledgeSelected = state.ui.HomePanel_IsPledgeSelected; console.log(IsPledgeSelected);
+ let IsPledgeSelected = state.ui.HomePanel_IsPledgeSelected; //console.log(IsPledgeSelected);
 
  let content = ()=>{
                if(IsPledgeSelected) { return (AssetsDeployedPanelExpandedSideways? HomePledgeContentMin : HomePledgeContent) }
                else { return (AssetsDeployedPanelExpandedSideways? HomePrincipalContentMin : HomePrincipalContent) }
               }
- console.log("Hi",content());
 
    return(
      <div className={ ExpandedVertically? (styles.assetsPanelFrameExpanded) : (styles.assetsPanelFrame) }>
