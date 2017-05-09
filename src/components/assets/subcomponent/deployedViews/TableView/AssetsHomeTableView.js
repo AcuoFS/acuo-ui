@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './AssetsHomeTableView.css'
-import NavBar from '../NavBar.js'
+import { NavBarHome } from '../NavBar.js'
 import NavBarStyle from './../NavBar.css'
 import Table from '../tableUI/tableUI.js'
 
@@ -9,12 +9,12 @@ import Table from '../tableUI/tableUI.js'
 const AssetsHomeTableView = (props)=>{
    // console.log("@---AssetsHomeTableView");
    let IsPledgeSelected = props.state.ui.HomePanel_IsPledgeSelected
-   let {Content, actions, TableStyle} = props
+   let {Content, actions, TableStyle, cellWidth} = props
 
    return(
     <div className={styles.tableView}>
       <Table.RowGroup style={ TableStyle.RowGroupStyle } >
-        <NavBar>
+        <NavBarHome>
 
           <div className={NavBarStyle.tabs + " " + (IsPledgeSelected ? null :  NavBarStyle.selected)}
                onClick={()=>{actions.HomePanel_ToggleCategory(!IsPledgeSelected)}}  >
@@ -26,14 +26,14 @@ const AssetsHomeTableView = (props)=>{
             Pledge
           </div>
 
-        </NavBar>
+        </NavBarHome>
       </Table.RowGroup>
 
       <Table.ColGroup style={ TableStyle.RowGroupStyle }>
-        <Table.DataRow content={Content.Header} style={TableStyle.HeaderRow} />
+        <Table.DataRow content={Content.Header} style={TableStyle.HeaderRow } cellWidth={cellWidth} />
 
         {
-           Content.RowData.map((row,idx)=>( <Table.DataRow content={row} style={TableStyle.DataRow} key={idx} /> ) )
+           Content.RowData.map((row,idx)=>( <Table.DataRow content={row} style={TableStyle.DataRow} key={idx} cellWidth={cellWidth} /> ) )
         }
 
       </Table.ColGroup>

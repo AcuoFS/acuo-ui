@@ -20,10 +20,10 @@ const AssetsHomeComponent = (props)=>{
  let AssetsDeployedPanelExpandedSideways = state.ui.DeployedPanel_ExpandedSideways;
  let IsPledgeSelected = state.ui.HomePanel_IsPledgeSelected; //console.log(IsPledgeSelected);
 
- let content = ()=>{
-               if(IsPledgeSelected) { return (AssetsDeployedPanelExpandedSideways? HomePledgeContentMin : HomePledgeContent) }
-               else { return (AssetsDeployedPanelExpandedSideways? HomePrincipalContentMin : HomePrincipalContent) }
-              }
+ let cellWidth = [ 12, 11, 9, 14, 7, 11, 6, 6, 11, 10 ]
+
+ let content = ()=>{ if(IsPledgeSelected) { return (AssetsDeployedPanelExpandedSideways? HomePledgeContentMin : HomePledgeContent) }
+                     else { return (AssetsDeployedPanelExpandedSideways? HomePrincipalContentMin : HomePrincipalContent) }  }
 
    return(
      <div className={ ExpandedVertically? (styles.assetsPanelFrameExpanded) : (styles.assetsPanelFrame) }>
@@ -41,6 +41,7 @@ const AssetsHomeComponent = (props)=>{
              <AssetsHomeTableView state={ state }
                                   actions={ actions }
                                   Content={ content() }
+                                  cellWidth = { cellWidth }
                                   TableStyle={ HomeTableStyle } />
            }
 

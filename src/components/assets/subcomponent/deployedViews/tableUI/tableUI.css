@@ -76,6 +76,7 @@
    color: white;
    border-right: 1px solid white;
    padding: 0;
+   font-weight: bold;
    /*text-indent: 3px;*/
 }
 .VarMarginHead{

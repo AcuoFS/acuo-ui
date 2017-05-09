@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './NavBar.css'
 
-const NavBar = (props)=>{
+export const NavBarDeployed = (props)=>{
    return(
     <div className={styles.navbar}>
       {props.children}
@@ -9,4 +9,12 @@ const NavBar = (props)=>{
    )
 }
 
-export default NavBar
+export const NavBarHome = (props)=>{
+   return(
+    <div className={styles.navbarHome}>
+      {props.children}
+    </div>
+   )
+}
+
+// export default NavBar

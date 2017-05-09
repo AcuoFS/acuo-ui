@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './AssetsDeployedTableView.css'
-import NavBar from './../NavBar'
+import { NavBarDeployed } from './../NavBar'
 import NavBarStyle from './../NavBar.css'
 import Table from './../tableUI/tableUI'
 
@@ -23,7 +23,7 @@ const AssetsDeployedTableView = (props)=>{
     <div className={styles.tableView}>
       <Table.RowGroup style={TableStyle.RowGroupStyle}>
         <Table.ColGroup style={TableStyle.RegCptyColGroupStyle}>
-          <NavBar>
+          <NavBarDeployed>
             <div className={ (IsRegionSelected? NavBarStyle.tabs + " " + NavBarStyle.selected : NavBarStyle.tabs ) }
                  onClick={()=>{actions.DeployedPanel_ToggleRegionCounterparty(!IsRegionSelected)}} >
               Region
@@ -32,12 +32,12 @@ const AssetsDeployedTableView = (props)=>{
                  onClick={()=>{actions.DeployedPanel_ToggleRegionCounterparty(!IsRegionSelected)}} >
               Counterparty
             </div>
-          </NavBar>
+          </NavBarDeployed>
          <Table.DataRow content={categoryHeader} style={TableStyle.RegCptyHeadStyle} cellWidth={CatCellWidth}/>
 
         </Table.ColGroup>
         <Table.ColGroup style={TableStyle.VarMarginColGroupStyle}>
-          <NavBar>
+          <NavBarDeployed>
            <div className={IsVarMarginSelected? NavBarStyle.tabs : NavBarStyle.tabs + " " + NavBarStyle.selected }
                 onClick={()=>{actions.DeployedPanel_ToggleInitVarMargin( !IsVarMarginSelected ) }} >
              Initial Margin
@@ -46,7 +46,7 @@ const AssetsDeployedTableView = (props)=>{
                 onClick={()=>{actions.DeployedPanel_ToggleInitVarMargin( !IsVarMarginSelected )  }}  >
              Variation Margin
            </div>
-          </NavBar>
+          </NavBarDeployed>
           <Table.DataRow content={dataHeader} style={TableStyle.VarMarginHeadStyle} cellWidth={DataCellWidth} />
         </Table.ColGroup>
       </Table.RowGroup>
