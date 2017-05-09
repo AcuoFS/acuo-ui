@@ -27,7 +27,7 @@ const block_2 = {
 }
 export const ApiInitMargResponse = [
   {
-   region: "AAA Americas",
+   region: "Americas",
    agreement: "Acuo SG Pte Ltd v Counterparty B4",
    counterparty: "CCC Counterparty",
    data: [ block_1, block_2 ],
@@ -35,7 +35,7 @@ export const ApiInitMargResponse = [
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
   },
   {
-   region: "CCC Americas",
+   region: "Europe",
    agreement: "Acuo SG Pte Ltd v Counterparty B4",
    counterparty: "ABA Counterparty",
    data: [ block_1, block_2 ],
@@ -43,7 +43,7 @@ export const ApiInitMargResponse = [
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
   },
   {
-   region: "ABA Americas",
+   region: "Asia",
    agreement: "Acuo SG Pte Ltd v Counterparty B4",
    counterparty: "AAA Counterparty",
    data: [ block_1, block_2 ],
@@ -51,7 +51,7 @@ export const ApiInitMargResponse = [
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
   },
   {
-   region: "ADa Americas",
+   region: "Australia",
    agreement: "Acuo SG Pte Ltd v Counterparty B4",
    counterparty: "HUA Counterparty",
    data: [ block_1, block_2 ],
@@ -59,13 +59,14 @@ export const ApiInitMargResponse = [
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
   },
   {
-   region: "BAD Americas",
+   region: "Africa",
    agreement: "Acuo SG Pte Ltd v Counterparty B4",
    counterparty: "BBA Counterparty",
    data: [ block_1, block_2 ],
    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
-  } ]
+  }
+ ]
 
 const block_3 = {
  "asset": "Varied Asset 1",
@@ -88,46 +89,47 @@ const block_4 = {
  "isin": "AB123456789"
 }
 export const ApiVarMargResponse = [
-  {
-   region: "AAA Americas",
-   agreement: "Acuo SG Pte Ltd v Counterparty B4",
-   counterparty: "CCC Counterparty",
-   data: [ block_3, block_4 ],
-   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
-  },
-  {
-   region: "CCC Americas",
-   agreement: "Acuo SG Pte Ltd v Counterparty B4",
-   counterparty: "ABA Counterparty",
-   data: [ block_3, block_4 ],
-   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
-  },
-  {
-   region: "ABA Americas",
-   agreement: "Acuo SG Pte Ltd v Counterparty B4",
-   counterparty: "AAA Counterparty",
-   data: [ block_3, block_4 ],
-   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
-  },
-  {
-   region: "ADa Americas",
-   agreement: "Acuo SG Pte Ltd v Counterparty B4",
-   counterparty: "HUA Counterparty",
-   data: [ block_3, block_4 ],
-   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
-  },
-  {
-   region: "BAD Americas",
-   agreement: "Acuo SG Pte Ltd v Counterparty B4",
-   counterparty: "BBA Counterparty",
-   data: [ block_3, block_4 ],
-   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
-  } ]
+ {
+  region: "Americas",
+  agreement: "Acuo SG Pte Ltd v Counterparty B4",
+  counterparty: "CCC Counterparty",
+  data: [ block_1, block_2 ],
+  pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+  excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+ },
+ {
+  region: "Europe",
+  agreement: "Acuo SG Pte Ltd v Counterparty B4",
+  counterparty: "ABA Counterparty",
+  data: [ block_1, block_2 ],
+  pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+  excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+ },
+ {
+  region: "Asia",
+  agreement: "Acuo SG Pte Ltd v Counterparty B4",
+  counterparty: "AAA Counterparty",
+  data: [ block_1, block_2 ],
+  pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+  excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+ },
+ {
+  region: "Australia",
+  agreement: "Acuo SG Pte Ltd v Counterparty B4",
+  counterparty: "HUA Counterparty",
+  data: [ block_1, block_2 ],
+  pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+  excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+ },
+ {
+  region: "Africa",
+  agreement: "Acuo SG Pte Ltd v Counterparty B4",
+  counterparty: "BBA Counterparty",
+  data: [ block_1, block_2 ],
+  pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+  excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+ } 
+ ]
 
 export const VarMarginTableStyle = {
            "RowGroupStyle" : { className: `${TableStyle.RowGroup}`},

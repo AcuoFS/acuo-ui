@@ -52,7 +52,7 @@ const AssetsDeployedComponent = (props)=>{
                   placeholder={"Search"}
                   onChange={()=>{console.log("Change");}}/>
            <img className={styles.assetsPanelHeaderSideExpandBtn}
-                src="images/assets_deployed/expand-sideways.svg"
+                src={(ExpandedSideways? "images/assets_deployed/expand-sideways.svg" : "images/assets_deployed/minimize-sideways.svg")}
                 onClick={ ()=>{ actions.DeployedPanel_ToggleSideExpand(!ExpandedSideways) }} />
         </div>
         <PanelWindow>

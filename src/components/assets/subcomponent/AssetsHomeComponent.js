@@ -16,15 +16,17 @@ const AssetsHomeComponent = (props)=>{
  let state = props.state
  let actions = props.actions
  let AssetsDeployedPanelExpandedSideways = state.ui.DeployedPanel_ExpandedSideways;
- console.log(AssetsDeployedPanelExpandedSideways);
 
    return(
      <div className={ styles.assetsPanelFrame } >
        <div  className={ styles.assetsPanelHeader} >
          <span  className={ styles.assetsPanelTitleText }> At Home </span>
-         <img className={styles.assetsPanelHeaderSideExpandBtn}
-              src="images/assets_deployed/minimize-sideways.svg"
-              onClick={ ()=>{actions.DeployedPanel_ToggleSideExpand(!ExpandedSideways)} }/>
+         {
+          <img className={styles.assetsPanelHeaderSideExpandBtn}
+               src={(AssetsDeployedPanelExpandedSideways? "images/assets_deployed/minimize-sideways.svg" : "images/assets_deployed/expand-sideways.svg")}
+               onClick={ ()=>{actions.DeployedPanel_ToggleSideExpand(!AssetsDeployedPanelExpandedSideways)} }/>
+         }
+
        </div>
        <PanelWindow>
           {
