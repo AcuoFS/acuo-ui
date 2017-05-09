@@ -60,17 +60,14 @@ const DataRow = (props)=>{
 
 const DataRowCell = (props)=>{
   let cellWidth = props.cellWidth
-  // content.length > 40, Trim to the first 40 chrars, append '...', mouseOver displays full content
-  // content.length < 40, Shows full content, text wraps on overflow
-
   let cellType = (props, styles)=>{
    if(props.content.length > 40){
-    let text = props.content.substring(0,41) + " ..."
+    let text = props.content.substring(0,41) + "..."
     return (<div className={styles.CellVisible} title={props.content}> {text || "---No Content---"} </div>)
    }
    else{
      if(props.id===0 && props.content.length > 12){
-      let text = props.content.substring(0,12) + " ..."
+      let text = props.content.substring(0,12) + "..."
       return <div className={styles.CellVisible} title={props.content}> {text || "---No Content---"} </div>
      } else {
       return <div className={styles.CellVisible} title={props.content}> {props.content || "---No Content---"} </div>

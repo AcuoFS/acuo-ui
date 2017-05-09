@@ -33,8 +33,8 @@ const AssetsHomeComponent = (props)=>{
        <PanelWindow>
           {
              <AssetsHomeTableView state={ state }
-                                  actions = { actions }
-                                  Content = { (AssetsDeployedPanelExpandedSideways? HomeContentMin : HomeContent ) }
+                                  actions={ actions }
+                                  Content={ (AssetsDeployedPanelExpandedSideways? HomeContentMin : HomeContent ) }
                                   TableStyle={ HomeTableStyle } />
            }
 

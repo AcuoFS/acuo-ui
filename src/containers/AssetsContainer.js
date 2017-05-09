@@ -11,12 +11,14 @@ const mapStateToProps = (stateProps, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps)=>{
  return {
-  DeployedPanel_ToggleVerticalExpand: (isExpanded)=>{dispatch( AssetsPanel.DeployedPanel_ToggleVerticalExpand(isExpanded) )},
-  DeployedPanel_ToggleSideExpand: (isExpanded)=>{dispatch( AssetsPanel.DeployedPanel_ToggleSideExpand(isExpanded) )},
+  //AssetsDeployedPanel
+  DeployedPanel_ToggleVerticalExpand: (IsExpanded)=>{dispatch( AssetsPanel.DeployedPanel_ToggleVerticalExpand(IsExpanded) )},
+  DeployedPanel_ToggleSideExpand: (IsExpanded)=>{dispatch( AssetsPanel.DeployedPanel_ToggleSideExpand(IsExpanded) )},
   DeployedPanel_ToggleInitVarMargin: (IsVarMarginSelected)=>{dispatch(AssetsPanel.DeployedPanel_ToggleInitVarMargin(IsVarMarginSelected))},
   DeployedPanel_ToggleRegionCounterparty: (IsRegionSelected)=>{dispatch(AssetsPanel.DeployedPanel_ToggleRegionCounterparty(IsRegionSelected))},
-  
-  HomePanel_ToggleVerticalExpand: (isExpanded)=>{dispatch( AssetsPanel.HomePanel_ToggleVerticalExpand(isExpanded) )}
+  //AssetsHomePanel
+  HomePanel_ToggleVerticalExpand: (IsExpanded)=>{dispatch( AssetsPanel.HomePanel_ToggleVerticalExpand(IsExpanded) )},
+  HomePanel_ToggleCategory: (IsPledgeSelected)=>{dispatch( AssetsPanel.HomePanel_ToggleCategory(IsPledgeSelected) )}
 
  }
 }

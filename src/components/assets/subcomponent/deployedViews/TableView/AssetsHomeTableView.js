@@ -8,15 +8,25 @@ import Table from '../tableUI/tableUI.js'
 // export default class AssetsHomeTableView extends React.Component{
 const AssetsHomeTableView = (props)=>{
    console.log("@---AssetsHomeTableView");
-   console.log(props)
-   let {Content, TableStyle} = props
+   let IsPledgeSelected = props.state.ui.HomePanel_IsPledgeSelected
+   let {Content, actions, TableStyle} = props
+   // console.log(props.actions);
 
    return(
     <div className={styles.tableView}>
       <Table.RowGroup style={ TableStyle.RowGroupStyle } >
         <NavBar>
-          <div className={NavBarStyle.tabs}>Principal</div>
-          <div className={NavBarStyle.tabs + " " + NavBarStyle.selected}>Pledge</div>
+
+          <div className={NavBarStyle.tabs + " " + (IsPledgeSelected ? null :  NavBarStyle.selected)}
+               onClick={()=>{actions.HomePanel_ToggleCategory(!IsPledgeSelected)}}  >
+            Principal
+          </div>
+
+          <div className={NavBarStyle.tabs + " " + (IsPledgeSelected ? NavBarStyle.selected : null)}
+               onClick={()=>{actions.HomePanel_ToggleCategory(!IsPledgeSelected)}}  >
+            Pledge
+          </div>
+
         </NavBar>
       </Table.RowGroup>
 
