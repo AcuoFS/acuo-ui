@@ -250,16 +250,26 @@ export const InitMarginTableStyleExpanded = {
 }
 
 // AssetsHomePanel
-const rowHomeData = [ "British America", "Acuo", "12,345", "12.345.678", "AAA", "DD-MM-YY", "2", "3", "Custodian1A", "SG"]
-const rowHomeDataMin = [ "British America", "Acuo", "12,345", "12.345.678", "AAA"]
+const rowHomePledgeData = [ "British America", "Acuo", "12,345", "12.345.678", "AAA", "DD-MM-YY", "2", "3", "Custodian1A", "SG"]
+const rowHomePledgeDataMin = [ "British America", "Acuo", "12,345", "12.345.678", "AAA"]
+const rowHomePrincipalData = [ "British America", "Counterparty", "12,345", "12.345.678", "AAA", "DD-MM-YY", "2", "3", "Custodian1A", "SG"]
+const rowHomePrincipalDataMin = [ "British America", "Counterparty", "12,345", "12.345.678", "AAA"]
 
-export const HomeContent = {
+export const HomePledgeContent = {
  Header: ['Asset', 'Firm', 'Quantity', 'Value', 'Rating', 'Maturity', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region'],
- RowData: [ rowHomeData, rowHomeData, rowHomeData ]
+ RowData: [ rowHomePledgeData, rowHomePledgeData, rowHomePledgeData ]
 }
-export const HomeContentMin = {
+export const HomePledgeContentMin = {
  Header: ['Asset', 'Firm', 'Quantity', 'Value', 'Rating'],
- RowData: [ rowHomeDataMin, rowHomeDataMin, rowHomeDataMin ]
+ RowData: [ rowHomePledgeDataMin, rowHomePledgeDataMin, rowHomePledgeDataMin ]
+}
+export const HomePrincipalContent = {
+ Header: ['Asset', 'Firm', 'Quantity', 'Value', 'Rating', 'Maturity', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region'],
+ RowData: [ rowHomePrincipalData, rowHomePrincipalData, rowHomePrincipalData ]
+}
+export const HomePrincipalContentMin = {
+ Header: ['Asset', 'Firm', 'Quantity', 'Value', 'Rating'],
+ RowData: [ rowHomePrincipalDataMin, rowHomePrincipalDataMin, rowHomePrincipalDataMin ]
 }
 export const HomeTableStyle={
   "RowGroupStyle": { className: `${TableStyle.ColGroup}`  },

@@ -9,7 +9,7 @@ import AssetsHomeTableView from './deployedViews/TableView/AssetsHomeTableView.j
 /*Actions*/
 import {AssetsPanel} from '../../../actions/AssetsActions.js'
 //Mock Data
-import { HomeTableStyle, HomeContent, HomeContentMin } from '../mockData/mockData.js'
+import { HomeTableStyle, HomePledgeContent, HomePledgeContentMin, HomePrincipalContent, HomePrincipalContentMin } from '../mockData/mockData.js'
 
 
 const AssetsHomeComponent = (props)=>{
@@ -18,6 +18,13 @@ const AssetsHomeComponent = (props)=>{
 
  let ExpandedVertically = state.ui.HomePanel_ExpandedVertically; //console.log(ExpandedVertically);
  let AssetsDeployedPanelExpandedSideways = state.ui.DeployedPanel_ExpandedSideways;
+ let IsPledgeSelected = state.ui.HomePanel_IsPledgeSelected; console.log(IsPledgeSelected);
+
+ let content = ()=>{
+               if(IsPledgeSelected) { return (AssetsDeployedPanelExpandedSideways? HomePledgeContentMin : HomePledgeContent) }
+               else { return (AssetsDeployedPanelExpandedSideways? HomePrincipalContentMin : HomePrincipalContent) }
+              }
+ console.log("Hi",content());
 
    return(
      <div className={ ExpandedVertically? (styles.assetsPanelFrameExpanded) : (styles.assetsPanelFrame) }>
@@ -34,7 +41,7 @@ const AssetsHomeComponent = (props)=>{
           {
              <AssetsHomeTableView state={ state }
                                   actions={ actions }
-                                  Content={ (AssetsDeployedPanelExpandedSideways? HomeContentMin : HomeContent ) }
+                                  Content={ content() }
                                   TableStyle={ HomeTableStyle } />
            }
 
