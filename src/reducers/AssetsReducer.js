@@ -4,6 +4,7 @@ import _ from 'lodash'
 const INITIAL_STATE = {
   ui: { 'DeployedPanel_ExpandedSideways': false,
         'DeployedPanel_ExpandedVertically': false,
+        'HomePanel_ExpandedVertically': false,
         'IsVarMarginSelected': true,
         'IsRegionSelected': true },
   data: {}
@@ -17,6 +18,9 @@ const AssetsReducer = (state = INITIAL_STATE , action)=>{
       return newState
     case "@DEPLOYED_PANEL__TOGGLE_Y_EXPAND":
       newState = _.set(_.cloneDeep(state), ['ui', 'DeployedPanel_ExpandedVertically'], action.payload)
+      return newState
+    case "@HOME_PANEL__TOGGLE_Y_EXPAND":
+      newState = _.set(_.cloneDeep(state), ['ui', 'HomePanel_ExpandedVertically'], action.payload)
       return newState
     case "@DEPLOYED__TOGGLE_INIT_VAR_MARGIN":
       newState = _.set(_.cloneDeep(state), ['ui', 'IsVarMarginSelected'], action.payload)

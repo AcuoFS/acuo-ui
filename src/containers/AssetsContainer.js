@@ -14,7 +14,9 @@ const mapDispatchToProps = (dispatch, ownProps)=>{
   DeployedPanel_ToggleVerticalExpand: (isExpanded)=>{dispatch( AssetsPanel.DeployedPanel_ToggleVerticalExpand(isExpanded) )},
   DeployedPanel_ToggleSideExpand: (isExpanded)=>{dispatch( AssetsPanel.DeployedPanel_ToggleSideExpand(isExpanded) )},
   DeployedPanel_ToggleInitVarMargin: (IsVarMarginSelected)=>{dispatch(AssetsPanel.DeployedPanel_ToggleInitVarMargin(IsVarMarginSelected))},
-  DeployedPanel_ToggleRegionCounterparty: (IsRegionSelected)=>{dispatch(AssetsPanel.DeployedPanel_ToggleRegionCounterparty(IsRegionSelected))}
+  DeployedPanel_ToggleRegionCounterparty: (IsRegionSelected)=>{dispatch(AssetsPanel.DeployedPanel_ToggleRegionCounterparty(IsRegionSelected))},
+  
+  HomePanel_ToggleVerticalExpand: (isExpanded)=>{dispatch( AssetsPanel.HomePanel_ToggleVerticalExpand(isExpanded) )}
 
  }
 }

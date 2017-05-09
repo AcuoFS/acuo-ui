@@ -14,11 +14,13 @@ import { HomeTableStyle, HomeContent, HomeContentMin } from '../mockData/mockDat
 
 const AssetsHomeComponent = (props)=>{
  let state = props.state
- let actions = props.actions
+ let actions = props.actions; //console.log(actions);
+
+ let ExpandedVertically = state.ui.HomePanel_ExpandedVertically; //console.log(ExpandedVertically);
  let AssetsDeployedPanelExpandedSideways = state.ui.DeployedPanel_ExpandedSideways;
 
    return(
-     <div className={ styles.assetsPanelFrame } >
+     <div className={ ExpandedVertically? (styles.assetsPanelFrameExpanded) : (styles.assetsPanelFrame) }>
        <div  className={ styles.assetsPanelHeader} >
          <span  className={ styles.assetsPanelTitleText }> At Home </span>
          {
@@ -38,7 +40,7 @@ const AssetsHomeComponent = (props)=>{
 
        </PanelWindow>
        <div className={styles.panelResizeHandle}
-            onClick={ ()=>{actions.DeployedPanel_ToggleVerticalExpand(!ExpandedVertically)}} >
+            onClick={ ()=>{actions.HomePanel_ToggleVerticalExpand(!ExpandedVertically)}} >
          &#9650;  &#9660;
        </div>
 
