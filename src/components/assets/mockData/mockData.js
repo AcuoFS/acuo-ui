@@ -249,9 +249,15 @@ export const InitMarginTableStyleExpanded = {
 
 // AssetsHomePanel
 const rowHomeData = [ "British America", "Acuo", "12,345", "12.345.678", "AAA", "DD-MM-YY", "2", "3", "Custodian1A", "SG"]
+const rowHomeDataMin = [ "British America", "Acuo", "12,345", "12.345.678", "AAA"]
+
 export const HomeContent = {
  Header: ['Asset', 'Firm', 'Quantity', 'Value', 'Rating', 'Maturity Date', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region'],
  RowData: [ rowHomeData, rowHomeData, rowHomeData ]
+}
+export const HomeContentMin = {
+ Header: ['Asset', 'Firm', 'Quantity', 'Value', 'Rating'],
+ RowData: [ rowHomeDataMin, rowHomeDataMin, rowHomeDataMin ]
 }
 export const HomeTableStyle={
   "RowGroupStyle": { className: `${TableStyle.ColGroup}`  },
