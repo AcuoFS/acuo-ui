@@ -2,10 +2,11 @@ import { connect } from 'react-redux';
 import { AssetsComponent } from '../components'
 import { AssetsReducer } from '../reducers'
 import { AssetsPanel } from '../actions/AssetsActions.js'
+import {toJS} from 'immutable'
 
 const mapStateToProps = (stateProps, ownProps) => {
   return {
-   state: stateProps.AssetsReducer
+   state: (stateProps.AssetsReducer).toJS()
   }
  }
 

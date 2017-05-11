@@ -11,13 +11,13 @@
 
 .assetsPanelDeployed{
  /*flex: 2 0 auto  ;*/
-  /*flex: 2 0 68%  ;*/
+  flex: 2 0 75%  ;
   /*flex: 2 0 0  ;*/
-  width: 75%
+  /*width: 75%*/
 }
 .assetsPanelHome{
  /*flex: 1 0 auto  ;*/
-  /*flex: 1 0 28%  ;*/
+  flex: 1 0 25%  ;
   /*flex: 1 0 0  ;*/
-  width: 25%
+  /*width: 25%*/
 }
