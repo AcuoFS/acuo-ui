@@ -1,7 +1,7 @@
 import {Map, List, fromJS} from 'immutable'
 import _ from 'lodash'
 
-const INITIAL_STATE_JS = {
+const INITIAL_STATE = fromJS({
   ui: { 'DeployedPanel_ExpandedSideways': false,
         'DeployedPanel_ExpandedVertically': false,
         'IsVarMarginSelected': true,
@@ -9,10 +9,7 @@ const INITIAL_STATE_JS = {
         'HomePanel_ExpandedVertically': false,
         'HomePanel_IsPledgeSelected': true },
   data: {}
-}
-
-const INITIAL_STATE = fromJS(INITIAL_STATE_JS); //console.log(Map.isMap(INITIAL_STATE));
-
+})
 
 const AssetsReducer = (state = INITIAL_STATE , action)=>{
   let newState = {}
