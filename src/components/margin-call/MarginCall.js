@@ -101,14 +101,12 @@ export default class MarginCall extends React.Component {
 
   onSendButton(selectedRows) {
     // todo: API call to endpoint should be here
-    alert('selected ids: ' + selectedRows.map(row => row.mgnCallUploadId))
+    alert('selected ids: ' + selectedRows.map(row => row.referenceIdentifier))
   }
 
   render() {
 
     const { uploadDataFlag, requestingValuation } = this.props
-
-
 
     return (
       <div className={styles.container + ' ' + (requestingValuation || uploadDataFlag ? '' : styles.hidden)}>
