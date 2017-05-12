@@ -14,6 +14,7 @@ export const CONSTRAINTS_MIN = 0
 export const CONSTRAINTS_MAX = 999
 export const STATE_MAX_MOVEMENTS = 'maxMovements'
 export const STATE_EXCLUDE_DAYS = 'excludeDays'
+export const DEFAULT_MOVEMENTS = 'defaultMovements'
 
 
 export default class OptimisationWidget extends React.Component {
@@ -27,7 +28,8 @@ export default class OptimisationWidget extends React.Component {
       [STATE_MAX_MOVEMENTS]: CONSTRAINTS_MAX,
       [STATE_EXCLUDE_DAYS]: CONSTRAINTS_MIN,
       isShow: false,
-      activeRow: ' '
+      activeRow: ' ',
+      [DEFAULT_MOVEMENTS]: 10
     }
     this.selectActiveRow = this.selectActiveRow.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
