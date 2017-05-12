@@ -10,8 +10,6 @@ import {AssetsPanel} from './../../../actions/AssetsActions.js'
 //Mock Data
 import { categoryHeader, dataHeader_minView, dataHeader_expandedView, ApiInitMargResponse, ApiVarMargResponse, VarMarginTableStyle, VarMarginTableStyleExpanded, InitMarginTableStyle, InitMarginTableStyleExpanded } from "./../mockData/mockData.js"
 
-
-
 const AssetsDeployedComponent = (props)=>{
 
    let state = props.state

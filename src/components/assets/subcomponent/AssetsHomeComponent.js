@@ -10,11 +10,11 @@ import { HomeTableStyle, HomePledgeContent, HomePledgeContentMin, HomePrincipalC
 
 const AssetsHomeComponent = (props)=>{
  let state = props.state
- let actions = props.actions; //console.log(actions);
+ let actions = props.actions;
 
- let ExpandedVertically = state.ui.HomePanel_ExpandedVertically; //console.log(ExpandedVertically);
+ let ExpandedVertically = state.ui.HomePanel_ExpandedVertically;
  let AssetsDeployedPanelExpandedSideways = state.ui.DeployedPanel_ExpandedSideways;
- let IsPledgeSelected = state.ui.HomePanel_IsPledgeSelected; //console.log(IsPledgeSelected);
+ let IsPledgeSelected = state.ui.HomePanel_IsPledgeSelected; 
 
  let cellWidth = {
   expanded: [ 12, 11, 9, 14, 7, 11, 6, 6, 11, 10 ],
