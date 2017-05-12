@@ -645,4 +645,4 @@ const countries = [
   }
 ]
 
-exports.get = () => countries
+exports.get = () => countries.map(x => ({"value": x.value, "label": x.value}))
