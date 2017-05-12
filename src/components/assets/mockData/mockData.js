@@ -188,9 +188,12 @@ export const VarMarginTableStyleExpanded = {
                                   height: 30,
                                  rowSpan: 1,
                                  bgColor: undefined },
-    "RowPledgeExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.VarMarginHead}`,
-                                  height: 30,
-                                 rowSpan: 1 }
+          "RowPledgeStyle" : { className: `${TableStyle.Row} ${TableStyle.PledgeRow}`,
+                                        height: 30,
+                                       rowSpan: 1 },
+          "RowExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.ExcessRow}`,
+                                        height: 30,
+                                       rowSpan: 1 }
 }
 
 export const InitMarginTableStyle = {
@@ -218,9 +221,12 @@ export const InitMarginTableStyle = {
                                   height: 30,
                                  rowSpan: 1,
                                  bgColor: undefined },
-    "RowPledgeExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.InitMarginHead}`,
-                                  height: 30,
-                                 rowSpan: 1 }
+          "RowPledgeStyle" : { className: `${TableStyle.Row} ${TableStyle.PledgeRow}`,
+                                        height: 30,
+                                       rowSpan: 1 },
+          "RowExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.ExcessRow}`,
+                                        height: 30,
+                                       rowSpan: 1 }
 }
 export const InitMarginTableStyleExpanded = {
            "RowGroupStyle" : { className: `${TableStyle.RowGroup}`},
@@ -247,9 +253,12 @@ export const InitMarginTableStyleExpanded = {
                                   height: 30,
                                  rowSpan: 1,
                                  bgColor: undefined },
-    "RowPledgeExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.InitMarginHead}`,
-                                  height: 30,
-                                 rowSpan: 1 }
+          "RowPledgeStyle" : { className: `${TableStyle.Row} ${TableStyle.PledgeRow}`,
+                                        height: 30,
+                                       rowSpan: 1 },
+          "RowExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.ExcessRow}`,
+                                        height: 30,
+                                       rowSpan: 1 }
 }
 
 // AssetsHomePanel
