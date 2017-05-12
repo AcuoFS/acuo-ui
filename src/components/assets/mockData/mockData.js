@@ -268,19 +268,19 @@ const rowHomePrincipalData = [ "British America", "Counterparty", "12,345", "12,
 const rowHomePrincipalDataMin = [ "British America", "Counterparty", "12,345", "12,345.678 USD", "AAA"]
 
 export const HomePledgeContent = {
- Header: ['Asset', 'Firm', 'Quantity', 'Value', 'Rating', 'Maturity', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region'],
+ Header: ['Asset', 'Counterparty', 'Quantity', 'Value', 'Rating', 'Maturity', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region'],
  RowData: [ rowHomePledgeData, rowHomePledgeData, rowHomePledgeData ]
 }
 export const HomePledgeContentMin = {
- Header: ['Asset', 'Firm', 'Quantity', 'Value', 'Rating'],
+ Header: ['Asset', 'Counterparty', 'Quantity', 'Value', 'Rating'],
  RowData: [ rowHomePledgeDataMin, rowHomePledgeDataMin, rowHomePledgeDataMin ]
 }
 export const HomePrincipalContent = {
- Header: ['Asset', 'Firm', 'Quantity', 'Value', 'Rating', 'Maturity', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region'],
+ Header: ['Asset', 'Legal Entity', 'Quantity', 'Value', 'Rating', 'Maturity', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region'],
  RowData: [ rowHomePrincipalData, rowHomePrincipalData, rowHomePrincipalData ]
 }
 export const HomePrincipalContentMin = {
- Header: ['Asset', 'Firm', 'Quantity', 'Value', 'Rating'],
+ Header: ['Asset', 'Legal Entity', 'Quantity', 'Value', 'Rating'],
  RowData: [ rowHomePrincipalDataMin, rowHomePrincipalDataMin, rowHomePrincipalDataMin ]
 }
 export const HomeTableStyle={
