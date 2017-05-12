@@ -65,10 +65,6 @@ const DataRowCell = (props)=>{
   let IsDeployedPanelSideExpanded = props.IsDeployedPanelExpandedSideways;
   let cellType = (props, styles, IsDeployedPanelExpandedSideways)=>{
 
-   // console.log(props);
-   // console.log("IsDeployedPanelExpandedSideways: ", IsDeployedPanelSideExpanded);
-   // console.log( "->" , (props.id===0) && (props.content.length > 12) && IsDeployedPanelExpandedSideways);
-
    if(props.content.length > 40){
     let text = props.content.substring(0,41) + "..."
     return (<div className={styles.CellVisible} title={props.content}> {text || "---No Content---"} </div>)
