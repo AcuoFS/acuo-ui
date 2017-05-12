@@ -3,8 +3,7 @@ import styles from './MarginCall.css'
 import ContentRows from './MarginCallRows'
 import {checkBox, checkBoxWithTick} from '../../../images/common'
 import ChangeCallAmountPopup from './sub-components/ChangeCallAmountPopup'
-import marginCallData from '../../data/data'
-
+import LoadingBarSpinner from './../common/LoadingBarSpinner/LoadingBarSpinner'
 
 export default class MarginCall extends React.Component {
   constructor(props) {
@@ -112,7 +111,7 @@ export default class MarginCall extends React.Component {
 
 
     return (
-      <div className={styles.container + ' ' + (requestingValuation ? '' : styles.hidden)}>
+      <div className={styles.container + ' ' + (requestingValuation || uploadDataFlag ? '' : styles.hidden)}>
         <ChangeCallAmountPopup propIsShow={this.state.isShowPopup}
                                propDeliverAmt=
                                  {Number.parseInt(this.state.totalCallAmount ? this.state.totalCallAmount : 0)}
@@ -156,14 +155,8 @@ export default class MarginCall extends React.Component {
                            propMarginCallUploadData={this.props.uploadData}
                            propHandlerSingleRow={this.onSingleRow}/>
             :
-
             <div className={styles.loadingContainer}>
-              <div className={styles.loadingText}>
-                Valuation in progress
-              </div>
-              <div className={styles.loadingBar}>
-                <div className={styles.spinner}></div>
-              </div>
+              <LoadingBarSpinner text={'Valuation in progress'} />
             </div>
 
           }

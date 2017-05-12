@@ -16,7 +16,8 @@ const config = {
     RECON_DATA_URL: 'http://margin.acuo.com/acuo/api/margin/reconcile/',
     REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
     UNMATCHED_PORTFOLIO_URL: DEV_URL + '/unmatched',
-    SEND_RECON_DISPUTE_URL: DEV_URL + '/recon/disputeStatement'
+    SEND_RECON_DISPUTE_URL: DEV_URL + '/recon/disputeStatement',
+    PLEDGE_REMOVE_ALLOCATED_ASSET: DEV_URL + '/pledge/remove-allocated-asset'
   },
   local: {
     DASHBOARD_URL: UBUNTU_URL + '/dashboard',
@@ -32,7 +33,8 @@ const config = {
     RECON_DATA_URL: 'http://margin.acuo.com/acuo/api/margin/reconcile/',
     REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
     UNMATCHED_PORTFOLIO_URL: UBUNTU_URL + '/unmatched',
-    SEND_RECON_DISPUTE_URL: UBUNTU_URL + '/recon/disputeStatement'
+    SEND_RECON_DISPUTE_URL: UBUNTU_URL + '/recon/disputeStatement',
+    PLEDGE_REMOVE_ALLOCATED_ASSET: UBUNTU_URL + '/pledge/remove-allocated-asset'
   },
   qa: {
     DASHBOARD_URL: 'http://qa.acuo.com:8181/dashboard',
@@ -48,7 +50,9 @@ const config = {
     RECON_DATA_URL: 'http://qa.acuo.com:7070/acuo/api/margin/reconcile/',
     REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
     UNMATCHED_PORTFOLIO_URL: 'http://qa.acuo.com:8181/unmatched',
-    SEND_RECON_DISPUTE_URL: 'http://qa.acuo.com:8181/recon/disputeStatement'
+    SEND_RECON_DISPUTE_URL: 'http://qa.acuo.com:8181/recon/disputeStatement',
+    PLEDGE_REMOVE_ALLOCATED_ASSET: 'tbc'
+
   },
   prod: {},
   test: {
@@ -64,7 +68,8 @@ const config = {
     // Please add the trailing / for recon single item (ok button)
     RECON_DATA_URL: 'http://margin.acuo.com/acuo/api/margin/reconcile/',
     REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
-    UNMATCHED_PORTFOLIO_URL: 'http://localhost:8081/unmatched'
+    UNMATCHED_PORTFOLIO_URL: 'http://localhost:8081/unmatched',
+    PLEDGE_REMOVE_ALLOCATED_ASSET: 'http://localhost:8081/pledge/remove-allocated-asset'
   }
 }
 
@@ -74,6 +79,6 @@ exports.get = (env) => {
   // console.log(process)
   // console.log(process.env)
   // console.log(process.env.DOCKER_ENV)
-  console.log('Current config environment accessed is ' + (env || 'local'))
-  return config[env] || config.local
+  console.log('Current config environment accessed is ' + (env || 'test'))
+  return config[env] || config.test
 }

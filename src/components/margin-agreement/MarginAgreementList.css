@@ -267,6 +267,7 @@
   font-size: 12px;
   margin-top: 4px;
   cursor: pointer;
+  position: relative;
 }
 
 .viewFxRate .viewFxRateImage {
@@ -281,7 +282,7 @@
   border-radius: 10px 0 10px 10px;
   border: 1px solid #c9c9c9;
   background-color: #ffffff;
-  top: 50px;
+  top: 20px;
 }
 
 .viewFxRate:hover .viewFxRateImage {

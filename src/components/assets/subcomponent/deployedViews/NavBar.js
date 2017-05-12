@@ -1,6 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import styles from "./NavBar.css"
+import styles from './NavBar.css'
 
 const NavBar = (props)=>{
    return(

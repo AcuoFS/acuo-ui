@@ -16,6 +16,7 @@ const AssetsDeployedTableView = (props)=>{
 
   let Content = props.tableContent
   let TableStyle = props.tableStyle
+  let CellWidth = props.cellWidth
 
   return (
     <div className={styles.tableView}>
@@ -45,7 +46,7 @@ const AssetsDeployedTableView = (props)=>{
              Variation Margin
            </div>
           </NavBar>
-          <Table.DataRow content={dataHeader} style={TableStyle.VarMarginHeadStyle} />
+          <Table.DataRow content={dataHeader} style={TableStyle.VarMarginHeadStyle} cellWidth={CellWidth} />
         </Table.ColGroup>
       </Table.RowGroup>
 
@@ -54,9 +55,9 @@ const AssetsDeployedTableView = (props)=>{
        <Table.RowGroup style={TableStyle.DataBlockStyle} key={idx}>
          <Table.DataRow content={rowBlock.CategoryContent} style={TableStyle.RowStyle1} />
          <Table.ColGroup style={TableStyle.InnerColGroupStyle}>
-           { rowBlock.RowContent.map( (rowData,idy)=>(<Table.DataRow content={rowData} style={TableStyle.RowStyle2} key={idy}/>) ) }
-         <Table.DataRow content={rowBlock.PledgeContent} style={TableStyle.RowPledgeExcessStyle} />
-         <Table.DataRow content={rowBlock.ExcessContent} style={TableStyle.RowPledgeExcessStyle} />
+           { rowBlock.RowContent.map( (rowData,idy)=>(<Table.DataRow content={rowData} style={TableStyle.RowStyle2} cellWidth={CellWidth} key={idy}/>) ) }
+         <Table.DataRow content={rowBlock.PledgeContent} style={TableStyle.RowPledgeExcessStyle} cellWidth={CellWidth} />
+         <Table.DataRow content={rowBlock.ExcessContent} style={TableStyle.RowPledgeExcessStyle} cellWidth={CellWidth} />
          </Table.ColGroup>
        </Table.RowGroup>
       )

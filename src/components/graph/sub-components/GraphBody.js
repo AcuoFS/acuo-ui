@@ -78,7 +78,8 @@ export default class GraphBody extends React.Component {
       }, Set()))
     }, Set()).toList()
 
-    let graphXY = status.map(x => Map({"status": x, "timeFrames": possibleTimes.map(y => Map({"timeFrame": y, "actionsLists": List()}))}))
+
+    let graphXY = status.map(x => Map({"status": x, "timeFrames": possibleTimes.sort().map(y => Map({"timeFrame": y, "actionsLists": List()}))}))
 
     return graphXY.map(X => {
       return Map({"status": X.get('status'), "timeFrames":
@@ -102,7 +103,7 @@ export default class GraphBody extends React.Component {
             "inAmount": y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
 
-              const amount = Math.abs((parseFloat(xx.get('initialMargin')) || 0.00) + (parseFloat(xx.get('variableMargin'))  || 0.00))
+              const amount = Math.abs((parseFloat(xx.get('totalVM'))  || 0.00))
 
               return (xx.get('direction') == 'IN' ? parseFloat(a2) + parseFloat(amount) : a2)
             }, 0)
@@ -111,7 +112,7 @@ export default class GraphBody extends React.Component {
             return a + z.get('actionsList').reduce((a2, xx) => {
 
               //abs(IM + VM)
-              const amount = Math.abs((parseFloat(xx.get('initialMargin')) || 0.00) + (parseFloat(xx.get('variableMargin'))  || 0.00))
+              const amount = Math.abs((parseFloat(xx.get('totalVM'))  || 0.00))
 
               return (xx.get('direction') == 'OUT' ? parseFloat(a2) + parseFloat(amount) : a2)
             }, 0)
@@ -123,8 +124,9 @@ export default class GraphBody extends React.Component {
             }, 0)
           }, 0)
           , "outNo":  y.get('actionsList').reduce((a, z) => {
+          // console.log('a ' + a)
             return a + z.get('actionsList').reduce((a2, xx) => {
-
+              // console.log(xx.get('direction'))
               return (xx.get('direction') == 'OUT' ? a2+1 : a2)
             }, 0)
           }, 0)

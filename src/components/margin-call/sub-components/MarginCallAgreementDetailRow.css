@@ -1,45 +1,37 @@
-.agreeRow{
-    color: #272727;
-    background-color: #FFFFFF;
-    display: flex;
-    font-size: 14px;
-    line-height: 17px;
+.agreeRow {
+  color: #272727;
+  background-color: #FFFFFF;
+  display: flex;
+  font-size: 14px;
+  line-height: 17px;
 }
 
-.agreeHeaderRow{
-    color: #FFFFFF;
-    background-color: #4E83B5;
+.agreeHeaderRow {
+  color: #FFFFFF;
+  background-color: #4E83B5;
 }
 
-.agreeRow div{
-    padding: 5px;
+.agreeRow div {
+  padding: 5px;
 }
 
 .agreeRow div:nth-child(1) {
-    flex-basis: 38.5%;
+  flex-basis: 22.5%;
 }
-.agreeRow div:nth-child(2) {
-    flex-basis: 10%;
+
+.agreeRow div {
+  flex-basis: 10%;
 }
-.agreeRow div:nth-child(3) {
-    flex-basis: 10%;
+
+.agreeRow div:nth-child(6),
+.agreeRow div:nth-child(7){
+  flex-basis: 7%;
 }
-.agreeRow div:nth-child(4) {
-    flex-basis: 10%;
-}
-.agreeRow div:nth-child(5) {
-    flex-basis: 10%;
-}
-.agreeRow div:nth-child(6) {
-    flex-basis: 10%;
-}
-.agreeRow div:nth-child(7) {
-    flex-basis: 10%;
-}
-.agreeRow div:nth-child(8) {
-    flex-basis: 1.5%;
+
+.agreeRow div:last-child {
+  flex-basis: 1.5%;
 }
 
 .boldText {
-    composes: baseFontBold from '../../../static/css-components/fonts.css';
+  composes: baseFontBold from '../../../static/css-components/fonts.css';
 }
