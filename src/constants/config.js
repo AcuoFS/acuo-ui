@@ -79,6 +79,6 @@ exports.get = (env) => {
   // console.log(process)
   // console.log(process.env)
   // console.log(process.env.DOCKER_ENV)
-  console.log('Current config environment accessed is ' + (env || 'test'))
-  return config[env] || config.test
+  console.log('Current config environment accessed is ' + (env || 'dev'))
+  return config[env] || config.dev
 }

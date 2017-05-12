@@ -94,7 +94,7 @@ class CollateralAsset extends React.Component {
     if (propIsDisplayAll) {
       return (
         <div className={styles.collateralRow}>
-          <div className={styles.collateralCell} title={propAsset}>{maxLengthToEllipsis(propAsset, 25)}</div>
+          <div className={styles.collateralCell} title={propAsset}>{maxLengthToEllipsis(propAsset, 17)}</div>
           <div className={styles.collateralCell}>{propPrice}</div>
           <div className={styles.collateralCell}>{propCcy}</div>
           <div className={styles.collateralCell}>{propDeliveryTime}</div>

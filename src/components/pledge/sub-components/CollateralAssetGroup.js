@@ -59,9 +59,7 @@ export default class CollateralAssetGroup extends React.Component {
       propHandleOnRemoveFromEarmarked
     } = this.props
 
-    const groupHeaderStyle = (propCollateralType == COLLATERAL_EARMARKED)
-      ? styles.collateralExpandEarmarkedRow
-      : styles.collateralExpandRow
+    const groupHeaderStyle = (propCollateralType == COLLATERAL_EARMARKED) ? styles.collateralExpandEarmarkedRow : styles.collateralExpandRow
 
     // []list of CollateralAsset components
     let componentList
