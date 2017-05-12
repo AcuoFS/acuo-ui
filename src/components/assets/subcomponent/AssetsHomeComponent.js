@@ -1,7 +1,3 @@
-/* ReadMe
-
-*/
-
 import React from 'react'
 import styles from './AssetsPanel.css'
 import PanelWindow from './deployedViews/PanelWindow.js'
@@ -29,7 +25,7 @@ const AssetsHomeComponent = (props)=>{
                      else { return (AssetsDeployedPanelExpandedSideways? HomePrincipalContentMin : HomePrincipalContent) }  }
 
    return(
-     <div className={ ExpandedVertically? (styles.assetsPanelFrameExpanded) : (styles.assetsPanelFrame) }>
+     <div className={ ExpandedVertically? (styles.assetsPanelFrameExpandedVertically) : (styles.assetsPanelFrame) }>
        <div  className={ styles.assetsPanelHeader} >
          <span  className={ styles.assetsPanelTitleText }> At Home </span>
          {
