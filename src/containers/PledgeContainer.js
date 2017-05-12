@@ -44,10 +44,12 @@ const updatePledgeListToSend = (assetList, pledgeToSend, guid) => {
   assetList.map((asset) => {
     // Create obj and push into array to send
     pledgeToSend = [...pledgeToSend, {
-      [P_ASSET.P_MGN_CALL_ID]: guid,
+      [P_ASSET.P_MGN_STMT_ID]: guid,
       [ASSET.A_ID]: asset[ASSET.A_ID],
       [ASSET.A_QTY]: asset[ASSET.A_QTY],
-      [ASSET.A_FROM_ACCT]: asset[ASSET.A_FROM_ACCT]
+      [ASSET.A_FROM_ACCT]: asset[ASSET.A_FROM_ACCT],
+      "toAccount": asset.toAccount,
+      "marginCallId": asset.callId
     }]
   })
   return pledgeToSend

@@ -59,7 +59,7 @@ export default class MarginAgreementDetail extends React.Component {
                   </div>
                   <div className={styles.secondLevelText}>{ x.get('name') }</div>
                 </div>
-                <div className={styles.packageRight}>{ checkNegative(x.get('amount')) }</div>
+                <div className={styles.packageRight}>{ checkNegative(Math.round(parseFloat(x.get('amount')).toFixed(2)))}</div>
               </div>
             </div>
           </div>
@@ -129,7 +129,7 @@ export default class MarginAgreementDetail extends React.Component {
             {secondLevel && !secondLevel.isEmpty() && expand}
 
           </div>
-          <div className={styles.packageRight}>{checkNegative(totalAmount.toFixed(2))}</div>
+          <div className={styles.packageRight}>{checkNegative(Math.round(totalAmount.toFixed(2)))}</div>
         </div>
 
         {this.renderHidden(secondLevel, GUID, secondLevelList, id, onSelectSecondLevelItem)}
