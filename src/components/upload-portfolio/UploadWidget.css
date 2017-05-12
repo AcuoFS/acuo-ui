@@ -53,6 +53,10 @@ div.componentStyle {
   border: 1px solid #118917;
 }
 
+.buttonContainer button:focus {
+  outline: 0;
+}
+
 .textBold {
   composes: baseFontBold from '../../static/css-components/fonts.css';
 }

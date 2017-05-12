@@ -24,8 +24,6 @@ export default class MarginCall extends React.Component {
     this.clearPopup = this.clearPopup.bind(this)
     this.onSingleRow = this.onSingleRow.bind(this)
 
-    // TODO: should be fetched from endpoint. This is the interim mock data
-    // props.onGetMarginUploadData(marginCallData)
   }
 
   toggleIsChecked() {
