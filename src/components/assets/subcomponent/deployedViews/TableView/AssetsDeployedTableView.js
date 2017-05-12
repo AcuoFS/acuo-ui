@@ -52,7 +52,6 @@ const AssetsDeployedTableView = (props)=>{
       </Table.RowGroup>
 
      {Content.map((rowBlock, idx)=>{
-      console.log(TableStyle)
       return(
        <Table.RowGroup style={TableStyle.DataBlockStyle} key={idx}>
          <Table.DataRow content={rowBlock.CategoryContent} style={TableStyle.RowStyle1} cellWidth={CatCellWidth}/>
