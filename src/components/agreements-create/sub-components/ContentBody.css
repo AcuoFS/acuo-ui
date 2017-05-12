@@ -1,207 +1,208 @@
 .hideForm {
-    display: none;
+  display: none;
 }
 
 .createContent {
-    flex: 1;
-    padding: 50px 25px 16px;
-    display: flex;
-    flex-direction: column;
+  flex: 1;
+  padding: 50px 25px 16px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Padding when there's overflow */
 /*.createContent::after {*/
-    /*content: '';*/
-    /*display: block;*/
-    /*padding-bottom: 16px;*/
-    /*width: 100%;*/
+/*content: '';*/
+/*display: block;*/
+/*padding-bottom: 16px;*/
+/*width: 100%;*/
 /*}*/
 
 .createContentFlexTwo {
-    composes: createContent;
-    flex: 2;
+  composes: createContent;
+  flex: 2;
 }
 
 .createContentFlexFour {
-    composes: createContent;
-    flex: 4;
+  composes: createContent;
+  flex: 4;
 }
 
 .createContent > .rowGroup {
-    display: block;
+  display: block;
 }
 
 .rowGroup > .line {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 .workflowLine {
-    margin: 10px 0;
-    padding: 5px 30px;
+  margin: 10px 0;
+  padding: 5px 30px;
 }
 
 .workflowGroup {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .line > .dropDown {
-    width: 250px;
+  width: 250px;
+  display: inline-block;
 }
 
 .smallDropdown {
-    width: 70px;
+  width: 70px;
 }
 
 .inputTextBox {
-    width: 250px;
-    height: 25px;
-    border: 1px solid #979797;
-    font-size: 13px;
-    line-height: 16px;
+  width: 250px;
+  height: 25px;
+  border: 1px solid #979797;
+  font-size: 13px;
+  line-height: 16px;
 }
 
 .inputTextBoxDisabled {
-    composes: inputTextBox;
-    background-color: #EEEEEE;
-    border: none;
+  composes: inputTextBox;
+  background-color: #EEEEEE;
+  border: none;
 }
 
 .smallTextBox {
-    composes: inputTextBox;
-    width: 70px;
+  composes: inputTextBox;
+  width: 70px;
 }
 
 .btnStyleActive {
-    composes: agreementBtnStyle from '../../../static/commonStyles/common.css';
-    /* Clear margin */
-    margin: 0;
+  composes: agreementBtnStyle from '../../../static/commonStyles/common.css';
+  /* Clear margin */
+  margin: 0;
 }
 
 .btnStyleInactive {
-    composes: agreementBtnStyleDisabled from '../../../static/commonStyles/common.css';
-    /* Clear margin */
-    margin: 0;
+  composes: agreementBtnStyleDisabled from '../../../static/commonStyles/common.css';
+  /* Clear margin */
+  margin: 0;
 }
 
 .flexLine {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .flexCont {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .flexColumn {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .agreementsSectionHeader {
-    composes: baseFontBold from '../../../static/css-components/fonts.css';
-    color: #4A4A4A;
+  composes: baseFontBold from '../../../static/css-components/fonts.css';
+  color: #4A4A4A;
 }
 
 .agreementsSectionLeft {
-    flex: 1;
-    margin-right: 10px;
+  flex: 1;
+  margin-right: 10px;
 }
 
 .agreementsSectionMiddle {
-    flex: 1;
-    margin-right: 10px;
-    margin-left: 10px;
+  flex: 1;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .agreementsSectionRight {
-    flex: 1;
-    margin-left: 10px;
+  flex: 1;
+  margin-left: 10px;
 }
 
 .agreementsSectionRightFlexTwo {
-    composes: agreementsSectionRight;
-    flex: 2;
+  composes: agreementsSectionRight;
+  flex: 2;
 }
 
 .downArrow,
 .upArrow {
-    position: relative;
-    margin-left: 8px;
-    cursor: pointer;
+  position: relative;
+  margin-left: 8px;
+  cursor: pointer;
 }
 
 .downArrow::before {
-    content: '';
-    position: absolute;
-    border-top: 12px solid #4A4A4A;
-    border-right: 10px solid transparent;
-    border-left: 10px solid transparent;
+  content: '';
+  position: absolute;
+  border-top: 12px solid #4A4A4A;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
 }
 
 .downArrow::after {
-    content: '';
-    position: absolute;
-    border-top: 12px solid #FFFFFF;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    top: -3px
+  content: '';
+  position: absolute;
+  border-top: 12px solid #FFFFFF;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  top: -3px
 }
 
 .upArrow::before {
-    content: '';
-    position: absolute;
-    border-right: 10px solid transparent;
-    border-left: 10px solid transparent;
-    border-bottom: 12px solid #4A4A4A;
+  content: '';
+  position: absolute;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  border-bottom: 12px solid #4A4A4A;
 }
 
 .upArrow::after {
-    content: '';
-    position: absolute;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 12px solid #FFFFFF;
-    top: 6px
+  content: '';
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 12px solid #FFFFFF;
+  top: 6px
 }
 
 .flexOne {
-    flex: 1;
+  flex: 1;
 }
 
 .minTransferHeader {
-    color: #315271;
+  color: #315271;
 }
 
 .minTransferLabel {
-    color: #4A4A4A;
+  color: #4A4A4A;
 }
 
 .minTransferAmtLine {
-    padding: 5px 0;
-    display: flex;
-    align-items: center;
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
 }
 
 .minTransferAmtLine:nth-child(odd) {
-    background-color: #FFFFFF;
+  background-color: #FFFFFF;
 }
 
 .minTransferAmtLine:nth-child(even) {
-    background-color: #EBF5FF;
+  background-color: #EBF5FF;
 }
 
 .stpTwoUnits {
-    display: flex;
+  display: flex;
 }
 
 .stpAutoOne {
-    flex: 1;
-    margin-right: 10px;
+  flex: 1;
+  margin-right: 10px;
 }
 
 .stpAutoTwo {
-    flex: 1;
-    margin-left: 10px;
+  flex: 1;
+  margin-left: 10px;
 }

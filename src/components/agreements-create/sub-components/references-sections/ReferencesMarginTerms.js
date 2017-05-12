@@ -4,6 +4,8 @@ import TImeSelector from '../../../common/TimeSelector/TImeSelector'
 import {gmtTimezoneList} from '../../../../utils'
 import MultipleSelection from '../../../MultipleSelection/MultipleSelection'
 import styles from '../ContentBody.css'
+import Select from 'react-select'// react-select using styles from src/static/react-select/react-select.css
+import countryList from './../../../../constants/Countries'
 
 
 export default class ReferencesMarginTerms extends React.Component {
@@ -14,8 +16,15 @@ export default class ReferencesMarginTerms extends React.Component {
       isSectionExpanded: false,
       notiHour: '',
       notiMin: '',
+      exposureCalculationCurrency: []
     }
 
+  }
+
+  exposureCalculationCurrencyChange(val) {
+    this.setState({
+      exposureCalculationCurrency: val
+    })
   }
 
   toggleDropDown(e) {
@@ -56,12 +65,11 @@ export default class ReferencesMarginTerms extends React.Component {
               <div className={styles.line}>Exposure Calculation Currency</div>
               <div className={styles.line}>
                 <div className={styles.dropDown}>
-                  <MultipleSelection
-                    handlerOnClick={this.toggleDropDown}
-                    handleOnSelectedItemChange={this.onDropdownItemChange}
-                    selectedOption={'Select'}
-                    options={['GBP', 'SGD', 'USD', 'CNY', 'TWD', 'HKD', 'JPY']}
-                    activateMouseLeaveEvent/>
+                  <Select
+                    value={this.state.exposureCalculationCurrency}
+                    options={countryList.get()}
+                    onChange={this.exposureCalculationCurrencyChange}
+                    multi={true}/>
                 </div>
               </div>
             </div>
