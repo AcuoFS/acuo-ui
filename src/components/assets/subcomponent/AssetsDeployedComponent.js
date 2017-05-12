@@ -44,7 +44,7 @@ const AssetsDeployedComponent = (props)=>{
      }
 
    return(
-     <div className={ ExpandedVertically? (styles.assetsPanelFrameExpanded) : (styles.assetsPanelFrame) } >
+     <div className={ ExpandedVertically? (styles.assetsPanelFrameExpandedVertically) : (styles.assetsPanelFrame) } >
         <div className={ styles.assetsPanelHeader} >
            <span className={ styles.assetsPanelTitleText }> Deployed </span>
            <input className={styles.assetsPanelHeaderInput}

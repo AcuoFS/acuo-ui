@@ -1,9 +1,10 @@
 .assetsPanelFrame{
   background-color: #FFFFFF;
   box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
+  border: 1px solid #EEEEEE;
   border-radius: 8px;
-  margin: 0% 2%;
-  padding: 1%;
+  /*margin: 0% 2%;*/
+  padding: 10px;
 
   display: flex;
   flex-direction: column;
@@ -11,17 +12,16 @@
 
   height: 518px;
 }
-.assetsPanelFrameExpanded{
+.assetsPanelFrameExpandedVertically{
   background-color: #FFFFFF;
   box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
   border-radius: 8px;
-  margin: 0% 2%;
-  padding: 1%;
+  /*margin: 0% 2%;*/
+  padding: 10px;
 
   display: flex;
   flex-direction: column;
   flex: 0 0 auto;
-
 }
 
 .assetsPanelHeader{
