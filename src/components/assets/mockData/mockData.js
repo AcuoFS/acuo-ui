@@ -156,7 +156,10 @@ export const VarMarginTableStyle = {
                                   height: 30,
                                  rowSpan: 1,
                                  bgColor: undefined },
-    "RowPledgeExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.VarMarginHead}`,
+    "RowPledgeStyle" : { className: `${TableStyle.Row} ${TableStyle.PledgeRow}`,
+                                  height: 30,
+                                 rowSpan: 1 },
+    "RowExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.ExcessRow}`,
                                   height: 30,
                                  rowSpan: 1 }
 }

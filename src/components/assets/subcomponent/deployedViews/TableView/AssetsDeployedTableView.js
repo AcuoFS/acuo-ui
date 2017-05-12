@@ -52,13 +52,14 @@ const AssetsDeployedTableView = (props)=>{
       </Table.RowGroup>
 
      {Content.map((rowBlock, idx)=>{
+      console.log(TableStyle)
       return(
        <Table.RowGroup style={TableStyle.DataBlockStyle} key={idx}>
          <Table.DataRow content={rowBlock.CategoryContent} style={TableStyle.RowStyle1} cellWidth={CatCellWidth}/>
          <Table.ColGroup style={TableStyle.InnerColGroupStyle}>
            { rowBlock.RowContent.map( (rowData,idy)=>(<Table.DataRow content={rowData} style={TableStyle.RowStyle2} cellWidth={DataCellWidth} key={idy}/>) ) }
-         <Table.DataRow content={rowBlock.PledgeContent} style={TableStyle.RowPledgeExcessStyle} cellWidth={DataCellWidth} />
-         <Table.DataRow content={rowBlock.ExcessContent} style={TableStyle.RowPledgeExcessStyle} cellWidth={DataCellWidth} />
+         <Table.DataRow content={rowBlock.PledgeContent} style={TableStyle.RowPledgeStyle} cellWidth={DataCellWidth} />
+         <Table.DataRow content={rowBlock.ExcessContent} style={TableStyle.RowExcessStyle} cellWidth={DataCellWidth} />
          </Table.ColGroup>
        </Table.RowGroup>
       )
