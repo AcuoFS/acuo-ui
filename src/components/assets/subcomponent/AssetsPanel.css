@@ -3,7 +3,6 @@
   box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
   border: 1px solid #EEEEEE;
   border-radius: 8px;
-  /*margin: 0% 2%;*/
   padding: 10px;
 
   display: flex;
@@ -15,23 +14,22 @@
 .assetsPanelFrameExpandedVertically{
   background-color: #FFFFFF;
   box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
+  border: 1px solid #EEEEEE;
   border-radius: 8px;
-  /*margin: 0% 2%;*/
   padding: 10px;
 
   display: flex;
   flex-direction: column;
-  flex: 0 0 auto;
+  flex: 1 0 auto;
 }
 
 .assetsPanelHeader{
    display: flex;
    flex-direction: row;
-   /*flex: 1 0 auto;*/
    flex-shrink: 0;
+   height: 31px;
 
    margin-bottom: 1em;
-   /*border: 1px black dotted;*/
 }
 
 .assetsPanelTitleText{
@@ -84,7 +82,7 @@
 }
 
 .panelResizeHandle:hover{
- cursor: grab;
+ cursor: pointer;
 }
 .panelResizeHandle:active{
  cursor: grabbing;

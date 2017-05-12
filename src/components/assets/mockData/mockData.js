@@ -12,7 +12,7 @@ const block_1 = {
  "value":"12,345,678 USD",
  "rating": "AAA",
  "haircut": "1%",
- "maturityDate": "DD-MM-YYYY",
+ "maturityDate": "DD-MM-YY",
  "isin": "AB123456789",
 }
 const block_2 = {
@@ -22,7 +22,7 @@ const block_2 = {
  "value":"12,345,678 USD",
  "rating": "AAA",
  "haircut": "1%",
- "maturityDate": "DD-MM-YYYY",
+ "maturityDate": "DD-MM-YY",
  "isin": "AB123456789"
 }
 export const ApiInitMargResponse = [
@@ -156,10 +156,10 @@ export const VarMarginTableStyle = {
                                   height: 30,
                                  rowSpan: 1,
                                  bgColor: undefined },
-          "RowPledgeStyle" : { className: `${TableStyle.Row} ${TableStyle.PledgeRow}`,
+          "RowPledgeStyle" : { className: `${TableStyle.Row} ${TableStyle.VarMarginPledgeRow}`,
                                   height: 30,
                                  rowSpan: 1 },
-          "RowExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.ExcessRow}`,
+          "RowExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.VarMarginExcessRow}`,
                                   height: 30,
                                  rowSpan: 1 }
 }
@@ -188,10 +188,10 @@ export const VarMarginTableStyleExpanded = {
                                   height: 30,
                                  rowSpan: 1,
                                  bgColor: undefined },
-          "RowPledgeStyle" : { className: `${TableStyle.Row} ${TableStyle.PledgeRow}`,
+          "RowPledgeStyle" : { className: `${TableStyle.Row} ${TableStyle.VarMarginPledgeRow}`,
                                   height: 30,
                                  rowSpan: 1 },
-          "RowExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.ExcessRow}`,
+          "RowExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.VarMarginExcessRow}`,
                                   height: 30,
                                  rowSpan: 1 }
 }
@@ -221,10 +221,10 @@ export const InitMarginTableStyle = {
                                   height: 30,
                                  rowSpan: 1,
                                  bgColor: undefined },
-          "RowPledgeStyle" : { className: `${TableStyle.Row} ${TableStyle.PledgeRow}`,
+          "RowPledgeStyle" : { className: `${TableStyle.Row} ${TableStyle.InitMarginPledgeRow}`,
                                   height: 30,
                                  rowSpan: 1 },
-          "RowExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.ExcessRow}`,
+          "RowExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.InitMarginExcessRow}`,
                                   height: 30,
                                  rowSpan: 1 }
 }
@@ -253,10 +253,10 @@ export const InitMarginTableStyleExpanded = {
                                   height: 30,
                                  rowSpan: 1,
                                  bgColor: undefined },
-          "RowPledgeStyle" : { className: `${TableStyle.Row} ${TableStyle.PledgeRow}`,
+          "RowPledgeStyle" : { className: `${TableStyle.Row} ${TableStyle.InitMarginPledgeRow}`,
                                   height: 30,
                                  rowSpan: 1 },
-          "RowExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.ExcessRow}`,
+          "RowExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.InitMarginExcessRow}`,
                                   height: 30,
                                  rowSpan: 1 }
 }

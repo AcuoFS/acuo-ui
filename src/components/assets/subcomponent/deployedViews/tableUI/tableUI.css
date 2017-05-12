@@ -85,13 +85,13 @@
    color: white;
    font-weight: bold;
 }
-.PledgeRow{
+.VarMarginPledgeRow{
    background-color: #4e83b5;
    color: white;
    font-weight: bold;
-   margin-top: 1px;
+   margin-top: 2px;
 }
-.ExcessRow{
+.VarMarginExcessRow{
    background-color: #4e83b5;
    color: white;
    font-weight: bold;
@@ -100,6 +100,17 @@
    background-color: #315271;
    color: white;
    font-weight: bold;
+}
+.InitMarginPledgeRow{
+ background-color: #315271;
+ color: white;
+ font-weight: bold;
+ margin-top: 2px;
+}
+.InitMarginExcessRow{
+ background-color: #315271;
+ color: white;
+ font-weight: bold;
 }
 
 /* ----- AssetsHomeTableView ----- */

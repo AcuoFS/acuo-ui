@@ -10,6 +10,7 @@ const AssetsDeployedTableView = (props)=>{
 
   let IsVarMarginSelected = props.state.ui.IsVarMarginSelected
   let IsRegionSelected = props.state.ui.IsRegionSelected
+  let IsDeployedPanelExpandedSideways = props.state.ui.DeployedPanel_ExpandedSideways
 
   let categoryHeader = props.categoryHeader
   let dataHeader = props.dataHeader
@@ -56,7 +57,7 @@ const AssetsDeployedTableView = (props)=>{
        <Table.RowGroup style={TableStyle.DataBlockStyle} key={idx}>
          <Table.DataRow content={rowBlock.CategoryContent} style={TableStyle.RowStyle1} cellWidth={CatCellWidth}/>
          <Table.ColGroup style={TableStyle.InnerColGroupStyle}>
-           { rowBlock.RowContent.map( (rowData,idy)=>(<Table.DataRow content={rowData} style={TableStyle.RowStyle2} cellWidth={DataCellWidth} key={idy}/>) ) }
+           { rowBlock.RowContent.map( (rowData,idy)=>(<Table.DataRow key={idy} content={rowData} style={TableStyle.RowStyle2} cellWidth={DataCellWidth} IsDeployedPanelExpandedSideways={IsDeployedPanelExpandedSideways} />) ) }
          <Table.DataRow content={rowBlock.PledgeContent} style={TableStyle.RowPledgeStyle} cellWidth={DataCellWidth} />
          <Table.DataRow content={rowBlock.ExcessContent} style={TableStyle.RowExcessStyle} cellWidth={DataCellWidth} />
          </Table.ColGroup>
