@@ -95,15 +95,15 @@ class CollateralAsset extends React.Component {
       return (
         <div className={styles.collateralRow}>
           <div className={styles.collateralCell} title={propAsset}>{maxLengthToEllipsis(propAsset, 17)}</div>
-          <div className={styles.collateralCell}>{propPrice}</div>
-          <div className={styles.collateralCell}>{propCcy}</div>
-          <div className={styles.collateralCell}>{propDeliveryTime}</div>
+          <div className={styles.collateralCell} title={propPrice}>{propPrice}</div>
+          <div className={styles.collateralCell} title={propCcy}>{propCcy}</div>
+          <div className={styles.collateralCell} title={propDeliveryTime}>{propDeliveryTime}</div>
           {statusDisplay}
-          <div className={styles.collateralCell}>{propRating}</div>
-          <div className={styles.collateralCell}>{propMaturityDate}</div>
-          <div className={styles.collateralCell}>{propInternalCost}</div>
-          <div className={styles.collateralCell}>{propOppCost}</div>
-          <div className={styles.collateralCell}>{propIsin}</div>
+          <div className={styles.collateralCell} title={propRating}>{propRating}</div>
+          <div className={styles.collateralCell} title={propMaturityDate}>{propMaturityDate}</div>
+          <div className={styles.collateralCell} title={propInternalCost}>{propInternalCost}</div>
+          <div className={styles.collateralCell} title={propOppCost}>{propOppCost}</div>
+          <div className={styles.collateralCell} title={propIsin}>{propIsin}</div>
           <div className={styles.collateralCell} title={propVenue}>{maxLengthToEllipsis(propVenue, 10)}</div>
           <div className={styles.collateralCell} title={propAcctId}>{maxLengthToEllipsis(propAcctId, 10)}</div>
         </div>
@@ -112,13 +112,13 @@ class CollateralAsset extends React.Component {
     else {
       return (
         <div className={styles.collateralRow}>
-          <div className={styles.collateralCell}>{propAsset}</div>
-          <div className={styles.collateralCell}>{propPrice}</div>
-          <div className={styles.collateralCell}>{propCcy}</div>
-          <div className={styles.collateralCell}>{propDeliveryTime}</div>
+          <div className={styles.collateralCell} title={propAsset}>{maxLengthToEllipsis(propAsset, 17)}</div>
+          <div className={styles.collateralCell} title={propPrice}>{propPrice}</div>
+          <div className={styles.collateralCell} title={propCcy}>{propCcy}</div>
+          <div className={styles.collateralCell} title={propDeliveryTime}>{propDeliveryTime}</div>
           {statusDisplay}
-          <div className={styles.collateralCell}>{propRating}</div>
-          <div className={styles.collateralCell}>{propMaturityDate}</div>
+          <div className={styles.collateralCell} title={propRating}>{propRating}</div>
+          <div className={styles.collateralCell} title={propMaturityDate}>{propMaturityDate}</div>
         </div>
       )
     }

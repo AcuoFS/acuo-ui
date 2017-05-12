@@ -72,7 +72,6 @@ export default class CollateralWidget extends React.Component {
                               propHandleOnRemoveFromEarmarked={onRemoveFromEarmarked}/>
       ]
     })
-    console.log(collateralAssetGroupList);
     return collateralAssetGroupList
   }
 
