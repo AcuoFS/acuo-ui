@@ -19,7 +19,7 @@ export default class MarginAgreementPortfolio extends React.Component {
     if (asset) {
       return asset.reduce((sum, x) => {
         return parseFloat(sum) + parseFloat(x.get('data').reduce((sum, y) => {
-            return sum + parseFloat(y.getIn(['firstLevel', 'amount']))
+            return parseFloat(sum) + parseFloat(y.getIn(['firstLevel', 'amount']))
           }, 0))
       }, 0)
     } else {
@@ -53,7 +53,7 @@ export default class MarginAgreementPortfolio extends React.Component {
     const differencePortfolio = this.getDifferencePortfolio(assetsName, marginData)
 
     handlerUpdateAdj(differencePortfolio)
-    this.adjInput.value = differencePortfolio
+    this.adjInput.value = Math.round(differencePortfolio)
   }
 
   onChangeAdjInput(){
@@ -111,7 +111,7 @@ export default class MarginAgreementPortfolio extends React.Component {
           <div>Difference</div>
         </div>
         <div className={styles.packageRight}>
-          {checkNegative(diff)}
+          {checkNegative(Math.round(diff))}
         </div>
       </div>
 
@@ -203,8 +203,8 @@ export default class MarginAgreementPortfolio extends React.Component {
               </div>
               <div className={styles.packageRight}>
                 {checkNegative(
-                  this.getTotalAmount(marginData.get(assetsName)) +
-                  (adjAmt ? parseFloat(adjAmt) : 0.0)
+                  Math.round((this.getTotalAmount(marginData.get(assetsName)) +
+                  (adjAmt ? parseFloat(adjAmt) : 0.0)).toFixed(2))
                 )}
               </div>
             </div>
