@@ -4,7 +4,8 @@ import {
   CONSTRAINTS_MIN,
   CONSTRAINTS_MAX,
   STATE_MAX_MOVEMENTS,
-  STATE_EXCLUDE_DAYS
+  STATE_EXCLUDE_DAYS,
+  DEFAULT_MOVEMENTS
 } from'../OptimisationWidget'
 import styles from './Constraints.css'
 
@@ -52,7 +53,7 @@ const Constraints = ({
         <div className={styles.flexWrap}>
 
           <div className={styles.lineWithoutFlex}>
-            {createInputWithPlusMinus(STATE_MAX_MOVEMENTS, propGetStateProperty,
+            {createInputWithPlusMinus(DEFAULT_MOVEMENTS, propGetStateProperty,
               propSetStatePropertyWithValue, CONSTRAINTS_MAX, CONSTRAINTS_MIN)}
           </div>
 
