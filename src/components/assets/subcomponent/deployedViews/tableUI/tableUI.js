@@ -74,7 +74,13 @@ const DataRowCell = (props)=>{
       let text = props.content.substring(0,12) + "..."
       return <div className={styles.CellVisible} title={props.content}> {text || "---No Content---"} </div>
      } else {
-      return <div className={styles.CellVisible} title={props.content}> {props.content || "---No Content---"} </div>
+      if(props.content.length > 15){
+       let text = props.content.substring(0,12) + "..."
+       return <div className={styles.CellVisible} title={props.content}> {text || "---No Content---"} </div>
+      }
+      else{
+       return <div className={styles.CellVisible} title={props.content}> {props.content || "---No Content---"} </div>
+      }
      }
    }
   }

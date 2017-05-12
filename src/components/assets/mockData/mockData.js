@@ -262,10 +262,10 @@ export const InitMarginTableStyleExpanded = {
 }
 
 // AssetsHomePanel
-const rowHomePledgeData = [ "British America", "Acuo", "12,345", "12,345.678 USD", "AAA", "DD-MM-YY", "99%", "99%", "Custodian1A", "Americas"]
-const rowHomePledgeDataMin = [ "British America", "Acuo", "12,345", "12,345.678 USD", "AAA"]
-const rowHomePrincipalData = [ "British America", "Counterparty", "12,345", "12,345.678 USD", "AAA", "DD-MM-YY", "99%", "99%", "Custodian1A", "Americas"]
-const rowHomePrincipalDataMin = [ "British America", "Counterparty", "12,345", "12,345.678 USD", "AAA"]
+const rowHomePledgeData = [ "British America", "Counterparty_Name", "12,345", "12,345.678 USD", "AAA", "DD-MM-YY", "99%", "99%", "Custodian1A", "Americas"]
+const rowHomePledgeDataMin = [ "British America", "Counterparty_Name", "12,345", "12,345.678 USD", "AAA"]
+const rowHomePrincipalData = [ "British America", "Acuo", "12,345", "12,345.678 USD", "AAA", "DD-MM-YY", "99%", "99%", "Custodian1A", "Americas"]
+const rowHomePrincipalDataMin = [ "British America", "Acuo", "12,345", "12,345.678 USD", "AAA"]
 
 export const HomePledgeContent = {
  Header: ['Asset', 'Counterparty', 'Quantity', 'Value', 'Rating', 'Maturity', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region'],
