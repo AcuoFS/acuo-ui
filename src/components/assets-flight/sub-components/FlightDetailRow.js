@@ -3,7 +3,7 @@ import * as FLIGHT_STATUS from '../../../constants/FlightStatuses'
 import styles from './FlightItemTable.css'
 import {checkNegative} from '../../../utils'
 import _ from 'lodash'
-
+import { maxLengthToEllipsis } from './../../../utils'
 
 export default class FlightDetailRow extends React.Component {
   // Additional styling for status on header row
@@ -28,6 +28,12 @@ export default class FlightDetailRow extends React.Component {
               {propStatus}
             </div>
           break
+        case FLIGHT_STATUS.DEPARTED:
+          statusCell =
+            <div className={styles.flightStatus + " " + styles.flightStatusGreen}>
+              {propStatus}
+            </div>
+          break
         default:
           statusCell = propStatus
       }
@@ -37,7 +43,7 @@ export default class FlightDetailRow extends React.Component {
 
   renderSecondRow(value) {
     if (value)
-      return (<div className={styles.secondRow}>{value}</div>)
+      return (<div className={styles.secondRow} title={value}>{maxLengthToEllipsis(value, 12)}</div>)
   }
 
   getTextFromObjectOrStr(property) {
