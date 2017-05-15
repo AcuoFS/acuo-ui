@@ -9,6 +9,7 @@ import Copyright from '../../components/copyright/Copyright.js'
 import { AssetsPanel } from '../../actions/AssetsActions.js'
 import Styles from "./DeployedPage.css"
 import { initDepartures } from '../../actions/DeployedActions'
+import { FETCH_DEPLOYED_DEPARTURES } from './../../constants/APIcalls'
 
 
 class DeployedPage extends React.Component {
@@ -36,7 +37,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   initDepartures: () => {
-    fetch('http://margin.acuo.com/acuo/api/pledge/assets/all').then((response) => {
+    fetch(FETCH_DEPLOYED_DEPARTURES).then((response) => {
       return response.json()
     }).then((obj) => {
       dispatch(initDepartures(obj))

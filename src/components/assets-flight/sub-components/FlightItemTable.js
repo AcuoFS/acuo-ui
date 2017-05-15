@@ -4,7 +4,6 @@ import FlightDetailRow from './FlightDetailRow'
 import * as FLIGHT_COL from '../../../constants/FlightDetailColumns'
 import styles from './FlightItemTable.css'
 
-
 export default class FlightItemTable extends React.Component {
 
   render() {
