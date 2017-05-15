@@ -53,7 +53,7 @@ const config = {
     REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
     UNMATCHED_PORTFOLIO_URL: 'http://qa.acuo.com:8181/unmatched',
     SEND_RECON_DISPUTE_URL: 'http://qa.acuo.com:8181/recon/disputeStatement',
-    PLEDGE_REMOVE_ALLOCATED_ASSET: 'http://qa.acuo.com:8181//pledge/remove-allocated-asset',
+    PLEDGE_REMOVE_ALLOCATED_ASSET: 'http://qa.acuo.com:8181/pledge/remove-allocated-asset',
     FETCH_GENERATED_PORTFOLIO: 'http://qa.acuo.com:9090/acuo/api/calls/async/generate/',
     FETCH_DEPLOYED_DEPARTURES: 'http://qa.acuo.com:7070/acuo/api/pledge/assets/all'
 
