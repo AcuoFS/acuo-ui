@@ -24,9 +24,9 @@ export default class FlightItemTable extends React.Component {
             propRowStyle={styles.flightItemTableHeader}/>
 
           {
-            flightGroup.map((x, i)=><FlightDetailGroup key={i}
-                                                      propListOfFlightDetail={x.flightDetailList}
-                                                      propHeaderDetail={x.header}/>)
+            flightGroup.map((x, i)=><FlightDetailGroup  key={i}
+                                                        propListOfFlightDetail={x.flightDetailList}
+                                                        propHeaderDetail={x.header}/>)
           }
 
           {/*{ flightGroup.length &&*/}

@@ -107,7 +107,7 @@ export default class FlightDetailRow extends React.Component {
         </div>
         <div className={styles.flightItemTableCell}>
           <div> {propRowStyle ? propValue :
-            checkNegative(parseFloat(this.getTextFromObjectOrStr(propValue)))}
+            checkNegative(Math.round(parseFloat(this.getTextFromObjectOrStr(propValue))))}
             {/*{propRowStyle ? propValue.main*/}
             {/*: checkNegative(parseFloat(propValue.main))}*/}
           </div>

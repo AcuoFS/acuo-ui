@@ -7,7 +7,14 @@
   padding: 1%;
   overflow-y: scroll;
   max-height: 600px;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  -ms-overflow-style: none;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 
 .flightTitle {
   display: flex;
