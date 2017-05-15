@@ -2,24 +2,16 @@ import React, {PropTypes} from 'react'
 import FlightDetailGroup from './FlightDetailGroup'
 import FlightDetailRow from './FlightDetailRow'
 import * as FLIGHT_COL from '../../../constants/FlightDetailColumns'
-import flightGroupDeparture from '../mockFlights'
-import flightGroupArrival from '../mockFlightsArrival'
 import styles from './FlightItemTable.css'
 
 
 export default class FlightItemTable extends React.Component {
 
-  jsonMocker(isArrival){
-    if(isArrival)
-      return flightGroupArrival
-    else
-      return flightGroupDeparture
-
-  }
-
   render() {
 
-    let flightGroup = this.jsonMocker(this.props.isArrival)
+    const flightGroup = this.props.data
+
+    console.log(flightGroup)
 
     return (
       <div>
@@ -34,16 +26,27 @@ export default class FlightItemTable extends React.Component {
             propStatus={FLIGHT_COL.FLIGHT_STATUS}
             propRowStyle={styles.flightItemTableHeader}/>
 
-          <FlightDetailGroup propsIsExpanded
-                             propListOfFlightDetail={flightGroup[0].flightDetailList}
-                             propHeaderDetail={flightGroup[0].header}/>
+          {
+            flightGroup.map(x=><FlightDetailGroup propListOfFlightDetail={x.flightDetailList}
+                                                  propHeaderDetail={x.header}/>)
+          }
 
-          <FlightDetailGroup propListOfFlightDetail={flightGroup[1].flightDetailList}
-                             propHeaderDetail={flightGroup[1].header}/>
+          {/*{ flightGroup.length &&*/}
+          {/*<FlightDetailGroup propsIsExpanded*/}
+                             {/*propListOfFlightDetail={flightGroup[0].flightDetailList}*/}
+                             {/*propHeaderDetail={flightGroup[0].header}/>*/}
+          {/*}*/}
 
-          <FlightDetailGroup propsIsExpanded
-                             propListOfFlightDetail={flightGroup[2].flightDetailList}
-                             propHeaderDetail={flightGroup[2].header}/>
+          {/*{ flightGroup.length &&*/}
+          {/*<FlightDetailGroup propListOfFlightDetail={flightGroup[1].flightDetailList}*/}
+                             {/*propHeaderDetail={flightGroup[1].header}/>*/}
+          {/*}*/}
+
+          {/*{ flightGroup.length &&*/}
+          {/*<FlightDetailGroup propsIsExpanded*/}
+                             {/*propListOfFlightDetail={flightGroup[2].flightDetailList}*/}
+                             {/*propHeaderDetail={flightGroup[2].header}/>*/}
+          {/*}*/}
 
         </div>
       </div>

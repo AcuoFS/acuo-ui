@@ -8,6 +8,7 @@ import UnmatchedPortfolioReducer from './UnmatchedPortfolioReducer'
 import DisputeReducer from './DisputeReducer'
 import AgreementsReducer from './AgreementsReducer'
 import AssetsReducer from './AssetsReducer'
+import DeployedReducer from './DeployedReducer'
 
 const reducer = combineReducers({
   mainReducer,
@@ -17,7 +18,8 @@ const reducer = combineReducers({
   UnmatchedPortfolioReducer,
   DisputeReducer,
   AgreementsReducer,
-  AssetsReducer
+  AssetsReducer,
+  DeployedReducer
 })
 
 export default reducer
