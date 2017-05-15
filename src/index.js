@@ -48,7 +48,7 @@ class App extends React.Component {
             <Route path="recon" component={PAGES.ReconcileContainer}/>
             <Route path="pledge" component={PAGES.PledgePage}/>
             <Route path="upload_portfolio" component={PAGES.UploadPortfolioPage}/>
-            <Route path="deployed" component={PAGES.DeployedPage}/>
+            <Route path="deployed" component={PAGES.DeployedPageContainer}/>
             <Route path="agreements" component={PAGES.AgreementsPage}/>
             <Route path="disputes" component={PAGES.DisputePage}/>
           </Router>

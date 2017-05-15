@@ -1,42 +1,44 @@
 .flightItemComponent {
-    background-color: #FFFFFF;
-    box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
-    border: 1px solid #EEEEEE;
-    border-radius: 8px;
-    /*margin: 0% 2%;*/
-    padding: 1%
+  background-color: #FFFFFF;
+  box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.5);
+  border: 1px solid #EEEEEE;
+  border-radius: 8px;
+  /*margin: 0% 2%;*/
+  padding: 1%;
+  overflow-y: scroll;
+  max-height: 600px;
 }
 
-.flightTitle{
-    display: flex;
+.flightTitle {
+  display: flex;
 }
 
-.flightTitleText{
-    font-size: 24px;
-    composes: baseFontBold from '../../../static/css-components/fonts.css';
-    line-height: 29px;
-    color: #4EB5B4;
-    align-self: center;
+.flightTitleText {
+  font-size: 24px;
+  composes: baseFontBold from '../../../static/css-components/fonts.css';
+  line-height: 29px;
+  color: #4EB5B4;
+  align-self: center;
 }
 
-.flightTitleText_arr{
-    color: #4E83B5;
+.flightTitleText_arr {
+  color: #4E83B5;
 }
 
-.headerContainer{
-    display: flex;
+.headerContainer {
+  display: flex;
 }
 
-.headerDates{
-    flex: 3;
+.headerDates {
+  flex: 3;
 }
 
-.headerSearch{
-    flex: 2;
-    /*text-align: right;*/
+.headerSearch {
+  flex: 2;
+  /*text-align: right;*/
 }
 
-.iconStyle{
-    height: 29px;
-    margin-left: 8px;
+.iconStyle {
+  height: 29px;
+  margin-left: 8px;
 }

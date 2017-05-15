@@ -8,9 +8,14 @@ import {
 import Copyright from '../../components/copyright/Copyright.js'
 import { AssetsPanel } from '../../actions/AssetsActions.js'
 import Styles from "./DeployedPage.css"
+import { initDepartures } from '../../actions/DeployedActions'
 
 
 class DeployedPage extends React.Component {
+  constructor(props){
+    super(props)
+    this.props.initDepartures()
+  }
   componentDidMount () {
     window.scrollTo(0, 0)
   }
@@ -25,7 +30,27 @@ class DeployedPage extends React.Component {
   }
 }
 
-export {DeployedPage}
+const mapStateToProps = state => {
+  return { test: 0 }
+}
+
+const mapDispatchToProps = dispatch => ({
+  initDepartures: () => {
+    fetch('http://margin.acuo.com/acuo/api/pledge/assets/all').then((response) => {
+      return response.json()
+    }).then((obj) => {
+      dispatch(initDepartures(obj))
+    })
+  }
+})
+
+const DeployedPageContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DeployedPage)
+
+export {DeployedPageContainer}
+
 
 
 // class DeployedPageComponent extends React.Component {
