@@ -13,11 +13,11 @@
 
 // Dashboard
 // export const DASHBOARD_URL = 'http://margin.acuo.com/acuo/api/margin/dashboard'
-export const DASHBOARD_URL = CONFIG.DASHBOARD_URL
+export const DASHBOARD_URL                  = CONFIG.DASHBOARD_URL
 
 // Recon
 // export const RECON_URL = 'http://margin.acuo.com/acuo/api/margin/items/all/999'
-export const RECON_URL = CONFIG.RECON_URL
+export const RECON_URL                      = CONFIG.RECON_URL
 
 // Pledge
 // export const OPTIMISATION_URL         = 'http://margin.acuo.com/acuo/api/pledge/settings/optimization/999'
@@ -34,12 +34,20 @@ export const PLEDGE_ALLOCATIONS             = CONFIG.PLEDGE_ALLOCATIONS
 export const PLEDGE_REMOVE_ALLOCATED_ASSET  = CONFIG.PLEDGE_REMOVE_ALLOCATED_ASSET
 
 // POST
-export const UPLOAD_FILE_URL = CONFIG.UPLOAD_FILE_URL
-export const RECON_DATA_URL  = CONFIG.RECON_DATA_URL
+export const UPLOAD_FILE_URL                = CONFIG.UPLOAD_FILE_URL
+export const RECON_DATA_URL                 = CONFIG.RECON_DATA_URL
 
-export const REMOVE_ASSET_ALLOCATION_URL = CONFIG.REMOVE_ASSET_ALLOCATION_URL
+export const REMOVE_ASSET_ALLOCATION_URL    = CONFIG.REMOVE_ASSET_ALLOCATION_URL
 
 // UNMATCHED PORTFOLIO
-export const UNMATCHED_PORTFOLIO_URL = CONFIG.UNMATCHED_PORTFOLIO_URL
+export const UNMATCHED_PORTFOLIO_URL        = CONFIG.UNMATCHED_PORTFOLIO_URL
 
-export const SEND_RECON_DISPUTE_URL = CONFIG.SEND_RECON_DISPUTE_URL
+export const SEND_RECON_DISPUTE_URL         = CONFIG.SEND_RECON_DISPUTE_URL
+
+//fetch generated portfolio
+export const FETCH_GENERATED_PORTFOLIO      = CONFIG.FETCH_GENERATED_PORTFOLIO
+
+//fetch departures
+export const FETCH_DEPLOYED_DEPARTURES      = CONFIG.FETCH_DEPLOYED_DEPARTURES
+
+

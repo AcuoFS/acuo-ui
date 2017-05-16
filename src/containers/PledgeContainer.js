@@ -138,12 +138,13 @@ const mapDispatchToProps = dispatch => ({
         // TODO: To handle how to inform user that pledge data is sucessfully sent
         //alert('Sent to endpoint!' + JSON.stringify(pledgeToSend))
         // Refresh selections
-        fetch(MARGIN_SELECTION_URL).then(response => {
+        setTimeout(() => fetch(MARGIN_SELECTION_URL).then(response => {
           return response.json()
         }).then(obj => {
           dispatch(initSelection(obj.items))
           dispatch(clearPendingAllocation())
-        })
+        }), 1000)
+
       } else {
         alert('Error sending pledge details')
       }
