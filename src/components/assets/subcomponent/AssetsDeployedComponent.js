@@ -59,12 +59,14 @@ const SearchContent = (rawAPI, testCase)=>{
 const AssetsDeployedComponent = (props)=>{
 
    let state = props.state
-   let actions = props.actions
+   let actions = props.actions;
 
    let ExpandedSideways = state.ui.DeployedPanel_ExpandedSideways;
    let ExpandedVertically = state.ui.DeployedPanel_ExpandedVertically;
    let IsRegionSelected = state.ui.IsRegionSelected;
    let IsVarMarginSelected = state.ui.IsVarMarginSelected;
+   let SearchText = (state.ui.DeployedPanel_SearchText.length >= 2 ? state.ui.DeployedPanel_SearchText : "") ;
+     // console.log( "SearchText|-> " ,SearchText);
 
    let dataHeader = (ExpandedSideways?  dataHeader_expandedView :  dataHeader_minView)
    let tableStyle = (IsVarMarginSelected? (ExpandedSideways? VarMarginTableStyleExpanded : VarMarginTableStyle) :  (ExpandedSideways? InitMarginTableStyleExpanded: InitMarginTableStyle))
@@ -73,7 +75,7 @@ const AssetsDeployedComponent = (props)=>{
    let rightContent = (IsVarMarginSelected? ApiVarMargResponse : ApiInitMargResponse)
    let sortedContent = (IsRegionSelected?  _.sortBy(rightContent, ["region"]) :  _.sortBy(rightContent, ["counterparty"]))
 
-   let filteredContent = SearchContent(sortedContent, "")
+   let filteredContent = SearchContent(sortedContent, SearchText)
 
    let tableContent = (rightContent)=>{
         if(ExpandedSideways){
@@ -97,7 +99,7 @@ const AssetsDeployedComponent = (props)=>{
            <input className={styles.assetsPanelHeaderInput}
                   type={"text"}
                   placeholder={"Search"}
-                  onChange={(e)=>{console.log(e.target.value)}}/>
+                  onChange={(e)=>{actions.DeployedPanel_SearchText(e.target.value)}}/>
            <img className={styles.assetsPanelHeaderSideExpandBtn}
                 src={(ExpandedSideways? "images/assets_deployed/expand-sideways.svg" : "images/assets_deployed/minimize-sideways.svg")}
                 onClick={ ()=>{ actions.DeployedPanel_ToggleSideExpand(!ExpandedSideways) }} />
