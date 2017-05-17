@@ -7,38 +7,19 @@ import _ from 'lodash'
 /************************* Helper Functions *******************************/
 let SearchArrivals = ( data, searchText )=>{
   /* Accronyms:
-     ctpyAgmt -> Counterparty Agreements
-     agmtList -> Agreement List
-     agmt     -> agmts                  */
+     ctpyAgmt     -> Counterparty Agreements
+     agmtList     -> Agreement List
+     agmt         -> agmts
+     acc          -> reduce function's accumulator
+     matchingProp -> Matching Property            */
 
-  let toArray = obj => _.map( obj, val=>val )  /* #helper */
-  // return _.filter(data, (ctpyAgmt)=>{
-  //
-  //  let agmtList = ctpyAgmt.flightDetailList //; console.log(agmtList);
-  //
-  //  let readyToFilterList = _.reduce(
-  //   agmtList,
-  //   (acc, agmts)=>{
-  //    console.log(agmts);
-  //    let agmtArray = _.reduce( agmts , (acc, content)=>_.concat(acc, toArray(content)) , [] )
-  //    return _.concat(acc, agmtArray)
-  //   },
-  //   []
-  //  )
-  //
-  //  let isThereAMatch = _.find( readyToFilterList , ( candidate )=>{
-  //     let isMatch = _.toUpper(String(candidate)).match( new RegExp(_.toUpper(searchText.trim())))
-  //     return (isMatch? true : false)
-  //  })
-  //
-  //  // console.log("isTheresAMatch|-> ", isThereAMatch);
-  //  return (isThereAMatch? true : false)
-  // })
+  console.log("@SearchArrivals() |-> ", searchText);
+  let toArray = obj => _.map( obj, val=>val )
 
   return _.reduce(
    data,
    (acc, cptyAgmt)=>{
-     console.log("---Conterparty Agreement---");
+     // console.log("---Conterparty Agreement---");
      // console.log(cptyAgmt);
 
      /* within each cptyAgmt,
@@ -52,7 +33,7 @@ let SearchArrivals = ( data, searchText )=>{
        let agmtArray =  _.reduce( agmt , (acc,prop)=>_.concat(acc, toArray(prop)) , []) //; console.log(agmtArray);
 
        let matchingProp = _.find( agmtArray, (candidate)=>{
-         let isMatch = _.toUpper(String(candidate)).match( new RegExp(_.toUpper(searchText.trim()))) ; if(isMatch) console.log(_.toUpper(String(candidate)) ,  new RegExp(_.toUpper(searchText.trim())) , isMatch)
+         let isMatch = _.toUpper(String(candidate)).match( new RegExp(_.toUpper(searchText.trim())));// if(isMatch) console.log(_.toUpper(String(candidate)) ,  new RegExp(_.toUpper(searchText.trim())) , isMatch)
          return (isMatch? true : false)
        } )  //; console.log("matchingProp |->", (matchingProp? _.concat(acc, agmt) : acc))
 
@@ -63,7 +44,7 @@ let SearchArrivals = ( data, searchText )=>{
      let matchedCptyAgmt = _.pick(cptyAgmt, ['header'])
      if(!_.isEmpty(newAgmtList)) { matchedCptyAgmt.flightDetailList = newAgmtList }
 
-     console.log("matchedCptyAgmt|->", matchedCptyAgmt);
+     // console.log("matchedCptyAgmt|->", matchedCptyAgmt);
      return _.concat( acc, matchedCptyAgmt )
    },
    [])
@@ -72,15 +53,15 @@ let SearchArrivals = ( data, searchText )=>{
 /**************************************************************************/
 
 const Flight = (props)=>{
-  let { departures, arrivals } = props
-  let searchedArrivals = SearchArrivals(arrivals, "   euro  ")
-  console.log("Arrivals Data|-> ", arrivals);
-  console.log("Searched Arrivals |-> ", searchedArrivals);
+  // console.log("@FlightComponent|-> ",props);
+  let { departures, arrivals, arrivals_searchText } = props
+  let searchedArrivals = SearchArrivals(arrivals, arrivals_searchText)
+  let arrivalActions = { arrivalSearch:  props.arrivalSearch}
 
   return(
    <div className={styles.flightComponent}>
      <div className={styles.flight}><FlightItem name={DEPARTURES} data={departures}/></div>
-     <div className={styles.flight}><FlightItem name={ARRIVALS} data={searchedArrivals}/></div>
+     <div className={styles.flight}><FlightItem name={ARRIVALS} data={{searchedArrivals, arrivals_searchText }} action={arrivalActions} /></div>
    </div>
   )
 }
