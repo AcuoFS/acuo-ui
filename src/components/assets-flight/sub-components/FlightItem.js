@@ -18,6 +18,7 @@ export default class FlightItem extends React.Component {
     }
 
     const { data } = this.props
+    // console.log( "FightItemData |-> " , data)
 
     return (
       <div className={styles.flightItemComponent}>
