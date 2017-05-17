@@ -57,35 +57,6 @@ let Search_DepartureArrival = ( data , searchText )=>{
 }
 /**************************************************************************/
 
-// const Flight = (props)=>{
-//   let { departures, arrivals, arrivals_searchText, departures_searchText } = props
-//
-//   let searchedArrivals = Search_DepartureArrival(arrivals, arrivals_searchText)
-//   let searchedDepartures = Search_DepartureArrival(departures, departures_searchText)
-//
-//   let arrivalActions = { arrivalSearch:  props.arrivalSearch}
-//   let departureActions = { departureSearch: props.departureSearch}
-//
-//
-//   return(
-//    <div className={styles.flightComponent}>
-//
-//      <div className={styles.flight}>
-//         <FlightItem name={DEPARTURES}
-//                     data={{searchedDepartures, departures_searchText}}
-//                     action={departureActions}  />   </div>
-//
-//      <div className={styles.flight}>
-//         <FlightItem name={ARRIVALS}
-//                     data={{searchedArrivals, arrivals_searchText }}
-//                     action={arrivalActions} />   </div>
-//
-//    </div>
-//   )
-// }
-//
-// export default Flight
-
 export default class Flight extends React.Component{
 
  componentWillUnmount(){
