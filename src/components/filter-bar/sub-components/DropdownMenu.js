@@ -6,8 +6,8 @@ export default class DropdownMenu extends React.Component{
   render(){
     const {handleOnOptionChange, options} = this.props
     // merge option 'ALL', with actual options
-    const optionList = [[], 'All', ...options]
-
+    const optionList = ['All', ...options]
+    console.log(optionList)
     return(
       <ul className={styles.filtersList}>
         {optionList.map(option => (

@@ -64,7 +64,7 @@ export default class DropdownMultiSelectMenu extends React.Component{
       optionList = options.filter(option => option.toUpperCase().includes(this.state.filterEntity.toUpperCase()))
     }
     // merge option 'ALL', with actual options
-    optionList = [[], 'All', ...optionList]
+    optionList = ['All', ...optionList]
 
     return(
       <ul className={styles.filtersList}>

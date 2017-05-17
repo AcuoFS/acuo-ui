@@ -73,7 +73,9 @@ const config = {
     RECON_DATA_URL: 'http://margin.acuo.com/acuo/api/margin/reconcile/',
     REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
     UNMATCHED_PORTFOLIO_URL: 'http://localhost:8081/unmatched',
-    PLEDGE_REMOVE_ALLOCATED_ASSET: 'http://localhost:8081/pledge/remove-allocated-asset'
+    PLEDGE_REMOVE_ALLOCATED_ASSET: 'http://localhost:8081/pledge/remove-allocated-asset',
+    FETCH_GENERATED_PORTFOLIO: 'http://valuation.acuo.com/acuo/api/calls/async/generate/',
+    FETCH_DEPLOYED_DEPARTURES: 'http://margin.acuo.com/acuo/api/pledge/assets/all'
   }
 }
 
