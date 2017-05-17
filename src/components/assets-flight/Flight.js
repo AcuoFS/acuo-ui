@@ -14,15 +14,19 @@ let Search_DepartureArrival = ( data , searchText )=>{
      acc          -> reduce function's accumulator
      matchingProp -> Matching Property            */
 
-  // console.log("@Search_DepartureArrival() |-> ", searchText);
   let toArray = obj => _.map( obj, val=>val )
+  let reformCptyAgmt = ( cptyAgmt , newList )=>{
+    let matchedCptyAgmt = undefined;
+    if(!_.isEmpty(newList)) {
+      matchedCptyAgmt = _.pick(cptyAgmt, ['header'])
+      matchedCptyAgmt.flightDetailList = newList
+    }
+    return matchedCptyAgmt
+  }
 
   return _.reduce(
    data,
    (acc, cptyAgmt)=>{
-     // console.log("---Conterparty Agreement---");
-     // console.log(cptyAgmt);
-
      /* within each cptyAgmt,
           loop through each agmtList,
           check if any agmtList.prop matches searchText,
@@ -40,24 +44,65 @@ let Search_DepartureArrival = ( data , searchText )=>{
        return (matchingProp? _.concat(acc2, agmt) : acc2)
      },[]);
 
-     let matchedCptyAgmt = _.pick(cptyAgmt, ['header'])
-     if(!_.isEmpty(newAgmtList)) { matchedCptyAgmt.flightDetailList = newAgmtList }
+     if(!_.isEmpty(newAgmtList)) {
+       let matchedCptyAgmt = _.pick(cptyAgmt, ['header'])
+       matchedCptyAgmt.flightDetailList = newAgmtList
+     }
+     let matchList =  reformCptyAgmt( cptyAgmt, newAgmtList)
 
-     return _.concat( acc, matchedCptyAgmt )
+     return ( matchList? _.concat( acc, matchList) : acc)
    },
    [])
 
 }
 /**************************************************************************/
 
-const Flight = (props)=>{
-  let { departures, arrivals, arrivals_searchText, departures_searchText } = props
+// const Flight = (props)=>{
+//   let { departures, arrivals, arrivals_searchText, departures_searchText } = props
+//
+//   let searchedArrivals = Search_DepartureArrival(arrivals, arrivals_searchText)
+//   let searchedDepartures = Search_DepartureArrival(departures, departures_searchText)
+//
+//   let arrivalActions = { arrivalSearch:  props.arrivalSearch}
+//   let departureActions = { departureSearch: props.departureSearch}
+//
+//
+//   return(
+//    <div className={styles.flightComponent}>
+//
+//      <div className={styles.flight}>
+//         <FlightItem name={DEPARTURES}
+//                     data={{searchedDepartures, departures_searchText}}
+//                     action={departureActions}  />   </div>
+//
+//      <div className={styles.flight}>
+//         <FlightItem name={ARRIVALS}
+//                     data={{searchedArrivals, arrivals_searchText }}
+//                     action={arrivalActions} />   </div>
+//
+//    </div>
+//   )
+// }
+//
+// export default Flight
+
+export default class Flight extends React.Component{
+
+ componentWillUnmount(){
+  let { arrivalSearch, departureSearch } = this.props
+  arrivalSearch("")
+  departureSearch("")
+ }
+
+ render(){
+
+  let { departures, arrivals, arrivals_searchText, departures_searchText } = this.props
 
   let searchedArrivals = Search_DepartureArrival(arrivals, arrivals_searchText)
   let searchedDepartures = Search_DepartureArrival(departures, departures_searchText)
 
-  let arrivalActions = { arrivalSearch:  props.arrivalSearch}
-  let departureActions = { departureSearch: props.departureSearch}
+  let arrivalActions = { arrivalSearch:  this.props.arrivalSearch}
+  let departureActions = { departureSearch: this.props.departureSearch}
 
   return(
    <div className={styles.flightComponent}>
@@ -74,20 +119,6 @@ const Flight = (props)=>{
 
    </div>
   )
+ }
+
 }
-
-export default Flight
-
-/* Class Component */
-// export default class Flight extends React.Component {
-//   render() {
-//     const { departures, arrivals } = this.props
-//
-//     return (
-//       <div className={styles.flightComponent}>
-//         <div className={styles.flight}><FlightItem name={DEPARTURES} data={departures}/></div>
-//         <div className={styles.flight}><FlightItem name={ARRIVALS} data={arrivals}/></div>
-//       </div>
-//     )
-//   }
-// }

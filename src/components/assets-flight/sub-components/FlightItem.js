@@ -11,7 +11,6 @@ export default class FlightItem extends React.Component {
 
   searchThisText(x){
     let { action } = this.props
-    // x && console.log( "Searching for:" , x);
     this.isArrival(this.props.name)? action.arrivalSearch(x) : action.departureSearch(x);
   }
 

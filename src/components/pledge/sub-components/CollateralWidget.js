@@ -64,8 +64,6 @@ export default class CollateralWidget extends React.Component {
       )
     })
 
-    console.log("CollateralData  |-> " ,newCollateralObj);
-
     _.forOwn(newCollateralObj, (value, key) => {
       collateralAssetGroupList = [...collateralAssetGroupList,
         <CollateralAssetGroup key={key}
