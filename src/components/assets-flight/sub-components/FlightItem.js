@@ -11,21 +11,16 @@ export default class FlightItem extends React.Component {
 
   searchThisText(x){
     let { action } = this.props
-    console.log( "Searching for:" , x);
-    this.isArrival(this.props.name)? action.arrivalSearch(x) : console.log("Departure's search under construction");
+    // x && console.log( "Searching for:" , x);
+    this.isArrival(this.props.name)? action.arrivalSearch(x) : action.departureSearch(x);
   }
 
   render() {
     let imgUrl
-    if (this.isArrival(this.props.name)){
-      imgUrl = "./images/assets_deployed/icon_arrival_plane.png"
-    }else{
-      imgUrl = "./images/assets_deployed/icon_departure_plane.png"
-    }
+    this.isArrival(this.props.name)? imgUrl = "./images/assets_deployed/icon_arrival_plane.png" : imgUrl = "./images/assets_deployed/icon_departure_plane.png"
 
-    let data = this.isArrival(this.props.name)? this.props.data.searchedArrivals : this.props.data
-    let searchText = this.isArrival(this.props.name)? this.props.data.arrivals_searchText : undefined
-    // console.log( "FlightItem.js |-> " , searchText)
+    let data = this.isArrival(this.props.name)? this.props.data.searchedArrivals : this.props.data.searchedDepartures
+    let searchText = this.isArrival(this.props.name)? this.props.data.arrivals_searchText : this.props.data.departures_searchText
 
     return (
       <div className={styles.flightItemComponent}>

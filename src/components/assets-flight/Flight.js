@@ -1,3 +1,4 @@
+
 import React, {Proptypes} from 'react'
 import FlightItem from './sub-components/FlightItem'
 import {DEPARTURES, ARRIVALS} from '../../constants/FlightTypes'
@@ -5,7 +6,7 @@ import styles from './Flight.css'
 import _ from 'lodash'
 
 /************************* Helper Functions *******************************/
-let SearchArrivals = ( data, searchText )=>{
+let Search_DepartureArrival = ( data , searchText )=>{
   /* Accronyms:
      ctpyAgmt     -> Counterparty Agreements
      agmtList     -> Agreement List
@@ -13,7 +14,7 @@ let SearchArrivals = ( data, searchText )=>{
      acc          -> reduce function's accumulator
      matchingProp -> Matching Property            */
 
-  console.log("@SearchArrivals() |-> ", searchText);
+  // console.log("@Search_DepartureArrival() |-> ", searchText);
   let toArray = obj => _.map( obj, val=>val )
 
   return _.reduce(
@@ -29,22 +30,19 @@ let SearchArrivals = ( data, searchText )=>{
      let agmtList = cptyAgmt.flightDetailList
 
      let newAgmtList = _.reduce(agmtList, (acc2, agmt)=>{
-       // console.log( "acc2|->", acc2, "  agmt|->", agmt);
-       let agmtArray =  _.reduce( agmt , (acc,prop)=>_.concat(acc, toArray(prop)) , []) //; console.log(agmtArray);
+       let agmtArray =  _.reduce( agmt , (acc,prop)=>_.concat(acc, toArray(prop)) , [])
 
        let matchingProp = _.find( agmtArray, (candidate)=>{
-         let isMatch = _.toUpper(String(candidate)).match( new RegExp(_.toUpper(searchText.trim())));// if(isMatch) console.log(_.toUpper(String(candidate)) ,  new RegExp(_.toUpper(searchText.trim())) , isMatch)
+         let isMatch = _.toUpper(String(candidate)).match( new RegExp(_.toUpper(searchText.trim())));
          return (isMatch? true : false)
-       } )  //; console.log("matchingProp |->", (matchingProp? _.concat(acc, agmt) : acc))
+       } );
 
        return (matchingProp? _.concat(acc2, agmt) : acc2)
-     },[])
-     // console.log("newAgmtList|->", newAgmtList);
+     },[]);
 
      let matchedCptyAgmt = _.pick(cptyAgmt, ['header'])
      if(!_.isEmpty(newAgmtList)) { matchedCptyAgmt.flightDetailList = newAgmtList }
 
-     // console.log("matchedCptyAgmt|->", matchedCptyAgmt);
      return _.concat( acc, matchedCptyAgmt )
    },
    [])
@@ -53,21 +51,32 @@ let SearchArrivals = ( data, searchText )=>{
 /**************************************************************************/
 
 const Flight = (props)=>{
-  // console.log("@FlightComponent|-> ",props);
-  let { departures, arrivals, arrivals_searchText } = props
-  let searchedArrivals = SearchArrivals(arrivals, arrivals_searchText)
+  let { departures, arrivals, arrivals_searchText, departures_searchText } = props
+
+  let searchedArrivals = Search_DepartureArrival(arrivals, arrivals_searchText)
+  let searchedDepartures = Search_DepartureArrival(departures, departures_searchText)
+
   let arrivalActions = { arrivalSearch:  props.arrivalSearch}
+  let departureActions = { departureSearch: props.departureSearch}
 
   return(
    <div className={styles.flightComponent}>
-     <div className={styles.flight}><FlightItem name={DEPARTURES} data={departures}/></div>
-     <div className={styles.flight}><FlightItem name={ARRIVALS} data={{searchedArrivals, arrivals_searchText }} action={arrivalActions} /></div>
+
+     <div className={styles.flight}>
+        <FlightItem name={DEPARTURES}
+                    data={{searchedDepartures, departures_searchText}}
+                    action={departureActions}  />   </div>
+
+     <div className={styles.flight}>
+        <FlightItem name={ARRIVALS}
+                    data={{searchedArrivals, arrivals_searchText }}
+                    action={arrivalActions} />   </div>
+
    </div>
   )
 }
 
 export default Flight
-
 
 /* Class Component */
 // export default class Flight extends React.Component {

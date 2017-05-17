@@ -8,9 +8,6 @@ export const initDepartures = (departures) => ({
 })
 
 export const search = {
- arrivals: (searchText)=>{
-  let action = { type: "ARRIVALS_SEARCHTEXT",
-                 payload: searchText }
-  return action
- }
+ arrivals: (searchText)=> ({ type: "ARRIVALS_SEARCHTEXT", payload: searchText }) ,
+ departures: (searchText)=>({ type: "DEPARTURES_SEARCHTEXT", payload: searchText })
 }
