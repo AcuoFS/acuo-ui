@@ -14,7 +14,7 @@ const NavigationBarItem = (props) => (
                 {props.label}
               </p>
               { props.notifications &&
-                props.notifications.alerts &&
+                props.notifications.alerts > 0 &&
                 <div className={styles.notificationBadge}>
                   {props.notifications.alerts}
                 </div>
