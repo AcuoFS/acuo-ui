@@ -8,11 +8,12 @@ import _ from 'lodash'
 /************************* Helper Functions *******************************/
 let Search_DepartureArrival = ( data , searchText )=>{
   /* Accronyms:
-     ctpyAgmt     -> Counterparty Agreements
-     agmtList     -> Agreement List
-     agmt         -> agmts
-     acc          -> reduce function's accumulator
-     matchingProp -> Matching Property            */
+      ctpyAgmt       -> Counterparty Agreements
+      agmtList       -> Agreement List
+      agmt           -> agmts
+      acc            -> reduce function's accumulator
+      matchingProp   -> Matching Property
+      reformCptyAgmt -> Reform Counterparty Agreement           */
 
   let toArray = obj => _.map( obj, val=>val )
   let reformCptyAgmt = ( cptyAgmt , newList )=>{

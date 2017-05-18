@@ -10,7 +10,6 @@ import {AssetsPanel} from './../../../actions/AssetsActions.js'
 //Mock Data
 import { categoryHeader, dataHeader_minView, dataHeader_expandedView, ApiInitMargResponse, ApiVarMargResponse, VarMarginTableStyle, VarMarginTableStyleExpanded, InitMarginTableStyle, InitMarginTableStyleExpanded } from "./../mockData/mockData.js"
 
-
 //Helper Functions
 const SearchContent = (rawAPI, testCase)=>{
  let toArray = obj => _.map( obj, ( val )=>{ return val } )
