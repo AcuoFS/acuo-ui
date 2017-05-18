@@ -44,6 +44,7 @@ class App extends React.Component {
       <Provider store={store}>
         <div className={styles.globalStyles}>
           <Router history={hashHistory}>
+            <Route path="/login" component={PAGES.LoginPage}/>
             <Route path="/" component={PAGES.DashboardContainer}/>
             <Route path="recon" component={PAGES.ReconcileContainer}/>
             <Route path="pledge" component={PAGES.PledgePage}/>

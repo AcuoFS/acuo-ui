@@ -1,4 +1,5 @@
-.globalStyles{
-    composes: baseFont from "./css-components/fonts.css";
-    font-size: 15px;
+.globalStyles {
+  composes: baseFont from "./css-components/fonts.css";
+  font-size: 15px;
+  height: 100%;
 }
