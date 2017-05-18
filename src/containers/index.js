@@ -16,6 +16,7 @@ import AgreementsContainer from './AgreementsContainer'
 import UploadWidgetContainer from './UploadWidgetContainer'
 import ReconDisputeContainer from'./ReconDisputeContainer'
 import LoginContainer from './LoginContainer'
+import TwoFA_Container from './TwoFA_Container.js'
 
 
 export {
@@ -36,5 +37,6 @@ export {
   AgreementsContainer,
   UploadWidgetContainer,
   ReconDisputeContainer,
-  LoginContainer
+  LoginContainer,
+  TwoFA_Container
 }

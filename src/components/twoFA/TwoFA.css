@@ -2,6 +2,8 @@
   display: flex;
   flex: 1;
   height: 100%;
+
+  /*transform: translateY();*/
 }
 
 .box {
@@ -38,17 +40,18 @@
   text-align: left;
   text-transform: uppercase;
   margin-bottom: 8px;
-  position:relative;
+
+  display: flex;
+  position: relative;
 }
 
-.label > span {
+.label span{
   position: absolute;
   right: 0;
   color: #3095c1;
 }
-
-.label > span:hover{
-  cursor: pointer;
+.label span:hover{
+ cursor: pointer;
 }
 
 .input input {
@@ -84,4 +87,12 @@
 
 .buttonHolder button:hover {
   background-color: #007b04;
+}
+
+.buttonHolder > div {
+  margin-top: 16px;
+  color: #3095c1;
+}
+.buttonHolder > div :hover {
+  cursor: pointer;
 }
