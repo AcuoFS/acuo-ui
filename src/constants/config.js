@@ -17,7 +17,8 @@ const config = {
     REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
     UNMATCHED_PORTFOLIO_URL: DEV_URL + '/unmatched',
     SEND_RECON_DISPUTE_URL: DEV_URL + '/recon/disputeStatement',
-    PLEDGE_REMOVE_ALLOCATED_ASSET: DEV_URL + '/pledge/remove-allocated-asset'
+    PLEDGE_REMOVE_ALLOCATED_ASSET: DEV_URL + '/pledge/remove-allocated-asset',
+    POST_MARGIN_CALL_IDS: 'http://margin.acuo.com/acuo/api/margin/send/calls'
   },
   local: {
     DASHBOARD_URL: UBUNTU_URL + '/dashboard',
@@ -51,7 +52,8 @@ const config = {
     REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
     UNMATCHED_PORTFOLIO_URL: 'http://qa.acuo.com:8181/unmatched',
     SEND_RECON_DISPUTE_URL: 'http://qa.acuo.com:8181/recon/disputeStatement',
-    PLEDGE_REMOVE_ALLOCATED_ASSET: 'tbc'
+    PLEDGE_REMOVE_ALLOCATED_ASSET: 'tbc',
+    POST_MARGIN_CALL_IDS: 'tbc'
 
   },
   prod: {},
@@ -69,7 +71,8 @@ const config = {
     RECON_DATA_URL: 'http://margin.acuo.com/acuo/api/margin/reconcile/',
     REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
     UNMATCHED_PORTFOLIO_URL: 'http://localhost:8081/unmatched',
-    PLEDGE_REMOVE_ALLOCATED_ASSET: 'http://localhost:8081/pledge/remove-allocated-asset'
+    PLEDGE_REMOVE_ALLOCATED_ASSET: 'http://localhost:8081/pledge/remove-allocated-asset',
+    POST_MARGIN_CALL_IDS: 'http://margin.acuo.com/acuo/api/margin/send/calls'
   }
 }
 

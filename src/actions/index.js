@@ -120,3 +120,8 @@ export const updateReconFilter = (value) =>({
   type: ActionTypes.RECON_FILTER_SET,
   value: value
 })
+
+//submit margin calls
+export const submitMarginCalls = (idArr) => ({
+
+})
