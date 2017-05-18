@@ -62,11 +62,13 @@
 .nav .menuIcon#navSetting{
     float: right;
     margin-top: 20px;
+    cursor: pointer;
 }
 
 .nav .menuIcon#navLogout{
     float: right;
     margin-top: 20px;
+    cursor: pointer;
 }
 
 
@@ -109,3 +111,7 @@
   /*display: block;*/
   line-height: 1.8em;
 }
+
+/*.logout_btn, .settings_btn {
+ cursor: pointer;
+}*/

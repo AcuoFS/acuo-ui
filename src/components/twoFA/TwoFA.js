@@ -1,12 +1,14 @@
 import React from 'react';
 import styles from './TwoFA.css'
 import _ from 'lodash';
+import { hashHistory } from 'react-router'
+
 
 export default class TwoFA_Component extends React.Component{
   constructor(props){
    super(props)
    this.state = { showPassword : false,
-                      password : ""     }
+                      password : "123456"     }
   }
 
   render(){
@@ -32,10 +34,13 @@ export default class TwoFA_Component extends React.Component{
         </div>
 
         <div className={styles.buttonHolder}>
-          <button>
+          <button onClick={ ()=>{
+            hashHistory.push("dashboard")
+            localStorage.loginAt = Date.now() + 86400000
+           }} >
             CONTINUE
           </button>
-          <div onClick={ ()=>{console.log("Going Back")} } >GO BACK</div>
+          <div onClick={ ()=>{hashHistory.push("/")} } >GO BACK</div>
         </div>
 
 

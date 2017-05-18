@@ -4,11 +4,13 @@ import {
   NavigationBarContainer,
   PledgeContainer
 } from '../../containers'
+import { hashHistory } from 'react-router'
 
 
 class PledgePage extends React.Component{
   componentDidMount () {
     window.scrollTo(0, 0)
+    if(localStorage.loginAt < Date.now()){ hashHistory.push("/") }
   }
 
   render(){

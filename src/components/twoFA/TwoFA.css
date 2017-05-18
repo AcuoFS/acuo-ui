@@ -93,6 +93,6 @@
   margin-top: 16px;
   color: #3095c1;
 }
-.buttonHolder > div :hover {
+.buttonHolder > div:hover {
   cursor: pointer;
 }

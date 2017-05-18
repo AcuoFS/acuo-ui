@@ -44,9 +44,9 @@ class App extends React.Component {
       <Provider store={store}>
         <div className={styles.globalStyles}>
           <Router history={hashHistory}>
-            <Route path="/login" component={PAGES.LoginPage}/>
-            <Route path="/2fa" component={PAGES.TwoFA_Page}/>
-            <Route path="/" component={PAGES.DashboardContainer}/>
+            <Route path="/" component={PAGES.LoginPage}/>
+            <Route path="2fa" component={PAGES.TwoFA_Page}/>
+            <Route path="dashboard" component={PAGES.DashboardContainer}/>
             <Route path="recon" component={PAGES.ReconcileContainer}/>
             <Route path="pledge" component={PAGES.PledgePage}/>
             <Route path="upload_portfolio" component={PAGES.UploadPortfolioPage}/>
@@ -63,3 +63,29 @@ class App extends React.Component {
 ReactDOM.render((
   <App />
 ), document.getElementById('app'))
+
+//Check if localStorage is available
+// function storageAvailable(type) {
+//     try {
+//         var storage = window[type],
+//             x = '__storage_test__';
+//         storage.setItem(x, x);
+//         storage.removeItem(x);
+//         return true;
+//     }
+//     catch(e) {
+//         return e instanceof DOMException && (
+//             // everything except Firefox
+//             e.code === 22 ||
+//             // Firefox
+//             e.code === 1014 ||
+//             // test name field too, because code might not be present
+//             // everything except Firefox
+//             e.name === 'QuotaExceededError' ||
+//             // Firefox
+//             e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+//             // acknowledge QuotaExceededError only if there's something already stored
+//             storage.length !== 0;
+//     }
+// }
+// storageAvailable('localStorage') ? console.log(`#localStorage: true`) : console.error("#SystemCheck: No Local Storage Detected");

@@ -1,6 +1,7 @@
 import React from 'react'
 import NavigationBarItem from './NavigationBarItem'
 import styles from './NavigationBar.css'
+import { hashHistory } from 'react-router'
 
 
 export default class NavigationBar extends React.Component {
@@ -29,7 +30,7 @@ export default class NavigationBar extends React.Component {
 
         <NavigationBarItem selected={this.props.curPage == '/'}
                            label={'Dashboard'}
-                           toUrl={'/'}/>
+                           toUrl={'/dashboard'}/>
         <NavigationBarItem selected={this.props.curPage == '/recon'}
                            label={'Reconcile'}
                            toUrl={'/recon'}/>
@@ -51,7 +52,10 @@ export default class NavigationBar extends React.Component {
         <div className={styles.menuIcon} id={styles.navLogout}>
           <div className={styles.vertiCenter}>
             <div className={styles.centerThis}>
-              <img src={'./images/dashboard/navbar/logout.png'} alt=""/>
+              <img 
+                   src={'./images/dashboard/navbar/logout.png'}
+                   alt=""
+                   onClick={ ()=>{ hashHistory.push("/") } }/>
             </div>
           </div>
         </div>
@@ -59,7 +63,10 @@ export default class NavigationBar extends React.Component {
         <div className={styles.menuIcon} id={styles.navSetting}>
           <div className={styles.vertiCenter}>
             <div className={styles.centerThis}>
-              <img src={'./images/dashboard/navbar/settings.png'} alt=""/>
+              <img
+                   src={'./images/dashboard/navbar/settings.png'}
+                   title="Feature Coming Soon!"
+                   alt=""/>
             </div>
           </div>
         </div>
