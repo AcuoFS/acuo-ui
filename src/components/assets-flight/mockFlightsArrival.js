@@ -223,7 +223,7 @@ export default [
       {
         agreement: {
           main: "MCDONALD'S CORP EQUITY",
-          secondary: ""
+          secondary: "A2"
         },
         from: {
           main: "Custodian 8",

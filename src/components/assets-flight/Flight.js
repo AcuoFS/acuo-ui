@@ -9,7 +9,6 @@ import _ from 'lodash'
 let Search_DepartureArrival = ( data , searchText )=>{
   /* Accronyms:
       ctpyAgmt       -> Counterparty Agreements
-      agmtList       -> Agreement List
       agmt           -> agmts
       acc            -> reduce function's accumulator
       matchingProp   -> Matching Property
@@ -24,34 +23,30 @@ let Search_DepartureArrival = ( data , searchText )=>{
     }
     return matchedCptyAgmt
   }
+  let searchHeaderProp = (agreementObject, mainAccumulator)=>{
+    let foundInHeader = _.find(toArray(agreementObject.header), (candidate)=>{
+        let matchFound = _.toUpper(String(candidate)).match( new RegExp(_.toUpper(searchText.trim())));
+        return (matchFound ? true : false)
+      })
+    return (foundInHeader? _.concat(mainAccumulator, agreementObject) : mainAccumulator )
+  }
 
   return _.reduce(
    data,
    (acc, cptyAgmt)=>{
-     /* within each cptyAgmt,
-          loop through each agmtList,
-          check if any agmtList.prop matches searchText,
-            if match, return entire agmtList */
-     let agmtList = cptyAgmt.flightDetailList
 
-     let newAgmtList = _.reduce(agmtList, (acc2, agmt)=>{
-       let agmtArray =  _.reduce( agmt , (acc,prop)=>_.concat(acc, toArray(prop)) , [])
-
-       let matchingProp = _.find( agmtArray, (candidate)=>{
-         let isMatch = _.toUpper(String(candidate)).match( new RegExp(_.toUpper(searchText.trim())));
-         return (isMatch? true : false)
+     let newAgmtList = _.reduce(cptyAgmt.flightDetailList, (acc2, agmt)=>{
+       let agreementsArray =  _.reduce( agmt , (acc,prop)=>_.concat(acc, toArray(prop)) , [])
+       let foundInAgreementAssets = _.find( agreementsArray, (candidate)=>{
+         let matchFound = _.toUpper(String(candidate)).match( new RegExp(_.toUpper(searchText.trim())));
+         return (matchFound? true : false)
        } );
 
-       return (matchingProp? _.concat(acc2, agmt) : acc2)
+       return (foundInAgreementAssets? _.concat(acc2, agmt) : acc2)
      },[]);
-
-     if(!_.isEmpty(newAgmtList)) {
-       let matchedCptyAgmt = _.pick(cptyAgmt, ['header'])
-       matchedCptyAgmt.flightDetailList = newAgmtList
-     }
      let matchList =  reformCptyAgmt( cptyAgmt, newAgmtList)
 
-     return ( matchList? _.concat( acc, matchList) : acc)
+     return ( matchList? _.concat( acc, matchList) : searchHeaderProp(cptyAgmt, acc))
    },
    [])
 
