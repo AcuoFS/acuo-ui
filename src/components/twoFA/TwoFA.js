@@ -8,7 +8,9 @@ export default class TwoFA_Component extends React.Component{
   constructor(props){
    super(props)
    this.state = { showPassword : false,
-                      password : "123456"     }
+                securekeyError : "",
+                     securekey : "123456",
+                inputSecurekey : ""    }
   }
 
   render(){
@@ -25,18 +27,25 @@ export default class TwoFA_Component extends React.Component{
               { (this.state.showPassword ? "hide" : "show") }
             </span>
           </div>
+          <div className={ styles.key_error }>
+            {this.state.securekeyError}
+          </div>
           <div className={styles.input}>
             <input type={ (this.state.showPassword ? "text" : "password") }
-                   onChange={ (e)=>{this.setState({password: e.currentTarget.value})} }
-                   value={this.state.password}
+                   onChange={ (e)=>{this.setState({inputSecurekey: e.currentTarget.value})} }
+                   value={this.state.inputSecurekey}
               />
           </div>
         </div>
 
         <div className={styles.buttonHolder}>
           <button onClick={ ()=>{
-            hashHistory.push("dashboard")
-            localStorage.loginAt = Date.now() + 86400000
+            this.setState( {securekeyError: ""} )
+            if( this.state.inputSecurekey != this.state.securekey ) {this.setState({securekeyError:"Invalid Key!"})}
+            else{
+             hashHistory.push("dashboard")
+             localStorage.loginAt = Date.now() + 86400000
+            }
            }} >
             CONTINUE
           </button>

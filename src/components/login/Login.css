@@ -51,6 +51,13 @@
   cursor: pointer;
 }
 
+.pw_error{
+ color: red;
+ font-style: italic;
+ text-align: left;
+ height: 1em;
+}
+
 .input input {
   width: calc(100% - 48px);
   line-height: 54px;
