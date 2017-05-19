@@ -20,7 +20,57 @@ const block_2 = {
  "quantity": "12,345",
  "adjValue": "12,345,678 USD",
  "value":"12,345,678 USD",
- "rating": "AAA",
+ "rating": "AAB",
+ "haircut": "1%",
+ "maturityDate": "DD-MM-YY",
+ "isin": "AB123456789"
+}
+const block_33 = {
+ "asset": "Initial Asset 3",
+ "quantity": "12,345",
+ "adjValue": "12,345,678 USD",
+ "value":"12,345,678 USD",
+ "rating": "AAc",
+ "haircut": "1%",
+ "maturityDate": "DD-MM-YY",
+ "isin": "AB123456789"
+}
+const block_11 = {
+ "asset": "Initial Asset 4",
+ "quantity": "12,345",
+ "adjValue": "12,345,678 USD",
+ "value":"12,345,678 USD",
+ "rating": "AAD",
+ "haircut": "1%",
+ "maturityDate": "DD-MM-YY",
+ "isin": "AB123456789"
+}
+const block_22 = {
+ "asset": "Initial Asset 5",
+ "quantity": "12,345",
+ "adjValue": "12,345,678 USD",
+ "value":"12,345,678 USD",
+ "rating": "AAE",
+ "haircut": "1%",
+ "maturityDate": "DD-MM-YY",
+ "isin": "AB123456789"
+}
+const block_111 = {
+ "asset": "Initial Asset 6",
+ "quantity": "12,345",
+ "adjValue": "12,345,678 USD",
+ "value":"12,345,678 USD",
+ "rating": "AAF",
+ "haircut": "1%",
+ "maturityDate": "DD-MM-YY",
+ "isin": "AB123456789"
+}
+const block_222 = {
+ "asset": "Initial Asset 7",
+ "quantity": "12,345",
+ "adjValue": "12,345,678 USD",
+ "value":"12,345,678 USD",
+ "rating": "AAG",
  "haircut": "1%",
  "maturityDate": "DD-MM-YY",
  "isin": "AB123456789"
@@ -38,7 +88,7 @@ export const ApiInitMargResponse = [
    region: "Europe",
    agreement: "Acuo SG Pte Ltd v Counterparty B4",
    counterparty: "ABA Counterparty",
-   data: [ block_1, block_2 ],
+   data: [ block_11, block_22 ],
    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
   },
@@ -46,7 +96,7 @@ export const ApiInitMargResponse = [
    region: "Asia",
    agreement: "Acuo SG Pte Ltd v Counterparty B4",
    counterparty: "AAA Counterparty",
-   data: [ block_1, block_2 ],
+   data: [ block_111, block_222 ],
    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
   },
@@ -54,7 +104,7 @@ export const ApiInitMargResponse = [
    region: "Australia",
    agreement: "Acuo SG Pte Ltd v Counterparty B4",
    counterparty: "HUA Counterparty",
-   data: [ block_1, block_2 ],
+   data: [ block_111, block_2 ],
    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
   },
@@ -62,7 +112,7 @@ export const ApiInitMargResponse = [
    region: "Africa",
    agreement: "Acuo SG Pte Ltd v Counterparty B4",
    counterparty: "BBA Counterparty",
-   data: [ block_1, block_2 ],
+   data: [ block_22, block_33 ],
    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
   }

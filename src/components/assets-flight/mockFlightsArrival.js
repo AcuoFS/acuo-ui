@@ -109,7 +109,7 @@ export default [
         },
         from: {
           main: "Custodian 7",
-          secondary: "CustAcct7E"
+          secondary: "CustAcct7EE"
         },
         to: {
           main: "Custodian 2",

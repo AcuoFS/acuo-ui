@@ -54,6 +54,8 @@ export default class CollateralWidget extends React.Component {
     let collateralAssetGroupList = [];
     let newCollateralObj = {}
 
+    // console.log(arguments[0]);
+
     _.forOwn(collateralJSList, (value, key) => {
       newCollateralObj = Object.assign(
         {},
