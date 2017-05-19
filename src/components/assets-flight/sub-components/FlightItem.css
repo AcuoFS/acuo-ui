@@ -37,7 +37,8 @@
 
 .headerSearch {
   flex: 2;
-  /*text-align: right;*/
+  height: 25px;
+  font-size: 14px;
 }
 
 .iconStyle {
