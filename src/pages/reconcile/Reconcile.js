@@ -11,6 +11,8 @@ import styles from './Reconcile.css'
 import { connect } from 'react-redux'
 import { reconInitState, initCurrencyInfo } from '../../actions'
 import { RECON_URL } from '../../constants/APIcalls'
+import { hashHistory } from 'react-router'
+
 
 
 // =============================================================================
@@ -37,6 +39,8 @@ class Reconcile extends React.Component {
 
   componentDidMount () {
     window.scrollTo(0, 0)
+    if(localStorage.loginAt < Date.now()){ hashHistory.push("/") }
+
   }
 
   render() {

@@ -15,6 +15,8 @@ import AgreementsComponent from './agreements/Agreements'
 import TimeSelectorComponent from './common/TimeSelector/TImeSelector'
 import AssetsComponent from './assets/assets'
 import Copyright from './copyright/Copyright'
+import LoginComponent from './login/Login'
+import TwoFA_Component from './twoFA/TwoFA'
 
 export {
   GraphComponent,
@@ -33,5 +35,7 @@ export {
   AgreementsComponent,
   TimeSelectorComponent,
   AssetsComponent,
-  Copyright
+  Copyright,
+  LoginComponent,
+  TwoFA_Component
 }
