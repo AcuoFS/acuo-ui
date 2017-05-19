@@ -129,6 +129,11 @@ export default class DropdownTimeMenu extends React.Component {
                        onClick={this.renderNextDay}></div>
                 </li>
 
+                <li
+                  onClick={ e => this.onMenuOptionSelect(handleOnOptionChange, option.minTime, option.maxTime, 'All')}>
+                  All
+                </li>
+
               </ul>)
 
         })}

@@ -24,7 +24,7 @@ const mapStateToProps = state => ({
 })
 
 const computeLegalEntityList = (state) => {
-  let derivatives = state.getIn(['data', 'derivatives'])
+  let derivatives = state.getIn(['display', 'derivatives'])
   let derivativeList = derivatives ? jsonObjectToFlatArray(derivatives.toJSON()) : []
   let legalEntitySet = derivativeList.reduce((entitySet, derivative) => (
     entitySet.add(derivative.legalEntity)
@@ -33,7 +33,7 @@ const computeLegalEntityList = (state) => {
 }
 
 const computeDerivativeType = (state) => {
-  let derivatives = state.getIn(['data', 'derivatives']) || []
+  let derivatives = state.getIn(['display', 'derivatives']) || []
   let derivativeTypeSet = derivatives.reduce((typeSet, derivative) => (
     typeSet.add(derivative.get('type'))
   ), Set())
@@ -41,7 +41,7 @@ const computeDerivativeType = (state) => {
 }
 
 const computeStatusList = (state) => {
-  let derivatives = state.getIn(['data', 'derivatives'])
+  let derivatives = state.getIn(['display', 'derivatives'])
   let derivativeList = derivatives ? jsonObjectToFlatArray(derivatives.toJSON()) : []
   let marginStatusSet = derivativeList.reduce((marginStatus, derivative) => (
     marginStatus.add(derivative.status)
@@ -50,7 +50,7 @@ const computeStatusList = (state) => {
 }
 
 const computeCptyOrganisation = (state) => {
-  let derivatives = state.getIn(['data', 'derivatives'])
+  let derivatives = state.getIn(['display', 'derivatives'])
   let derivativeList = derivatives ? jsonObjectToFlatArray(derivatives.toJSON()) : []
   let cptyOrganisationSet = derivativeList.reduce((cptyOrganisation, derivative) => (
     cptyOrganisation.add(derivative.cptyOrg)
@@ -90,7 +90,7 @@ const computeTimeWindowList = (state, currTime) => {
   const todayUnix = getToday(currTime)
   const dayAfterUnix = getDayAfter(currTime)
 
-  const derivatives = state.getIn(['data', 'derivatives']) || List()
+  const derivatives = state.getIn(['display', 'derivatives']) || List()
 
   const listOfDays = fromJS([
     {
@@ -145,7 +145,7 @@ const computeCptyEntity = (state) => {
   let cptyEntityFilter = state.getIn(['inputs', 'filters', 'cptyEntityFilter', 'filter']) || Set()
   let cptyOrgFilter = state.getIn(['inputs', 'filters', 'cptyOrgFilter', 'filter'])
 
-  let derivatives = state.getIn(['data', 'derivatives'])
+  let derivatives = state.getIn(['display', 'derivatives'])
   let derivativeList = derivatives ? jsonObjectToFlatArray(derivatives.toJSON()) : []
   let cptyEntityList = derivativeList.reduce((listSum, x) => {
     if (cptyOrgFilter && cptyOrgFilter != 'All') {
