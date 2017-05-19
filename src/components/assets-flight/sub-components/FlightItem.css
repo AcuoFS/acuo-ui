@@ -1,6 +1,6 @@
 .flightItemComponent {
   background-color: #FFFFFF;
-  box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.5);
   border: 1px solid #EEEEEE;
   border-radius: 8px;
   /*margin: 0% 2%;*/
