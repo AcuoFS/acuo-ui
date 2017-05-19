@@ -10,7 +10,7 @@ export default class TwoFA_Component extends React.Component{
    this.state = { showPassword : false,
                 securekeyError : "",
                      securekey : "123456",
-                inputSecurekey : ""    }
+                inputSecurekey : "123456"    }
   }
 
   render(){

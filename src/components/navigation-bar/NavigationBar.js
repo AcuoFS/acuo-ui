@@ -7,8 +7,6 @@ import { hashHistory } from 'react-router'
 export default class NavigationBar extends React.Component {
   constructor(props) {
     super(props)
-    // this.state = {
-    // }
   }
 
   getLastUpdatedTime() {
@@ -52,9 +50,10 @@ export default class NavigationBar extends React.Component {
         <div className={styles.menuIcon} id={styles.navLogout}>
           <div className={styles.vertiCenter}>
             <div className={styles.centerThis}>
-              <img 
+              <img
                    src={'./images/dashboard/navbar/logout.png'}
                    alt=""
+                   title="Logout"
                    onClick={ ()=>{ hashHistory.push("/") } }/>
             </div>
           </div>
