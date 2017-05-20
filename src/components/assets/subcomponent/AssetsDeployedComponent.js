@@ -46,7 +46,6 @@ let SearchContent =(rawAPI, searchedText) => {
        let testMatch = (_.toUpper(cat).trim()).match( new RegExp(_.toUpper(searchedText).trim()) );  //console.log(_.toUpper(cat).trim(), " | " , new RegExp( _.toUpper(searchedText).trim()) , " == " , testMatch);
        return (testMatch ?  true : false)
       })
-      if(findIn_RegAgrCpty){console.log(">> Match found in agreement label!");}
       return (findIn_RegAgrCpty? agreementObj : false );
     }
   }
