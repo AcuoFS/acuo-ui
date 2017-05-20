@@ -10,49 +10,71 @@ import {AssetsPanel} from './../../../actions/AssetsActions.js'
 //Mock Data
 import { categoryHeader, dataHeader_minView, dataHeader_expandedView, ApiInitMargResponse, ApiVarMargResponse, VarMarginTableStyle, VarMarginTableStyleExpanded, InitMarginTableStyle, InitMarginTableStyleExpanded } from "./../mockData/mockData.js"
 
-//Helper Functions
-const SearchContent = (rawAPI, testCase)=>{
- let toArray = obj => _.map( obj, ( val )=>{ return val } )
+/* Search Functions */
+let SearchContent =(rawAPI, searchedText) => {
+  /************** Helper Functions **************/
+  let pipe = (thread, init)=> _.reduce( thread , (acc, fn)=>(fn(acc)), init)
+  let toArray = (obj) => _.map( obj , val => val  )
+  let util = {
+    checkAssets: ( agreementObj )=>{
 
- let filteredList = _.reduce(rawAPI, ( acc, agreementObj )=>{
-   /* Filtering through rest of the agreementObj's properties */
+      let assetsWithMatches = _.reduce( agreementObj.data, ( results, assetObj )=>{
+        let findMatch = _.find( toArray(assetObj) , (prop)=>{
+          let testMatch = (_.toUpper(prop).trim()).match( new RegExp(_.toUpper(searchedText).trim()) ); // console.log(_.toUpper(prop).trim(), " | " , new RegExp( _.toUpper(searchedText).trim()) , " == " , testMatch);
+          return (testMatch ? true : false)
+        })// end _.find()
+       return ( findMatch? _.concat(results, assetObj) : results )
+      }, [] )
 
-   let regionAgreementCounterparty = _.omit(_.clone(agreementObj), ['data', 'pledge', 'excess'])
-   let otherAgreementProps = _.concat(toArray(regionAgreementCounterparty), toArray(agreementObj.pledge), toArray(agreementObj.excess))
-   let matchingProps =  _.filter(otherAgreementProps, (prop)=>{
-     let isAnyPropertyMatches = _.toUpper(String(prop)).match( new RegExp(_.toUpper(testCase.trim())))
-     return (isAnyPropertyMatches? true : false)
-   })
+      return { agreementObj, assetsWithMatches }
+    },
 
-   /* Filtering out statements in agreementObj.data array. */
-   let assetsArray = agreementObj.data;
-   let filteredAgreementObject = _.filter(assetsArray, (assetsObj)=>{
-     let isAnyPropertyMatches = false
+    rebuildAgreementWithMatchResults:  ( currentAgreement )=>{
+      if(!_.isEmpty(currentAgreement.assetsWithMatches)){
+       let clone = _.omit(_.clone(currentAgreement.agreementObj), ['data'])
+       clone.data = currentAgreement.assetsWithMatches
+       return clone
+      }
+      else {
+       return false
+      }
+    },
 
-       _.forOwn(assetsObj, (candidate)=>{
-        isAnyPropertyMatches = _.toUpper(String(candidate)).match( new RegExp(_.toUpper(testCase.trim())))
-        return !isAnyPropertyMatches
+    checkRegAgrCpty: (agreementObj)=>{
+      let RegAgrCpty = toArray(_.omit(_.clone(agreementObj), ['data', 'pledge', 'excess']))
+      let findIn_RegAgrCpty = _.find( RegAgrCpty, ( cat )=>{
+       let testMatch = (_.toUpper(cat).trim()).match( new RegExp(_.toUpper(searchedText).trim()) );  //console.log(_.toUpper(cat).trim(), " | " , new RegExp( _.toUpper(searchedText).trim()) , " == " , testMatch);
+       return (testMatch ?  true : false)
+      })
+      if(findIn_RegAgrCpty){console.log(">> Match found in agreement label!");}
+      return (findIn_RegAgrCpty? agreementObj : false );
+    }
+  }
+  /*********************************************/
+  if (searchedText.length > 0){
+    return _.reduce( rawAPI,
+                     (accumulatedResults, agreementObj , id)=>{
 
-       })
-     return isAnyPropertyMatches
-   })
+                      /* (1) In each agreement object, search within the {data} and return assetsObj that contains matching assetsProp */
+                      let sequence = [ util.checkAssets, util.rebuildAgreementWithMatchResults ]
+                      let searchInAssets = pipe(sequence, agreementObj)
 
-   /*
-      IF match is found witin in statement data, return newly cloned agreeementObj only with statement arrays with matches
-      Else, check if match is found in other properties
-        IF found, return entire agreement object
-        ELSE, return the existing accumulator array
-   */
+                      /* (2) Search within Region, Agreement */
+                      let searchRegAgrCpty = util.checkRegAgrCpty(agreementObj)
 
-   if ( _.isEmpty(filteredAgreementObject) ) { return (_.isEmpty(matchingProps)? acc : _.concat( acc, agreementObj)) }
-   else { let clone = _.clone(agreementObj)
-          _.update( clone, 'data', ()=>filteredAgreementObject )
-          return _.concat( acc, clone )   }
+                      /* (3) Conditional Returns
+                               if (1) return,
+                               else
+                               if (2) return,
+                               else return original */
+                      if(searchInAssets) return _.concat(accumulatedResults, searchInAssets)
+                      else { if(searchRegAgrCpty) return _.concat(accumulatedResults, searchRegAgrCpty)
+                             else return accumulatedResults  }
 
- }, [])
-
- return filteredList
-
+                     },
+                     [] )
+  }
+  else return rawAPI
 }
 
 const AssetsDeployedComponent = (props)=>{
