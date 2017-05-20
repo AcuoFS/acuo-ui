@@ -64,6 +64,7 @@ const DataRowCell = (props)=>{
   let cellWidth = props.cellWidth
   let IsDeployedPanelSideExpanded = props.IsDeployedPanelExpandedSideways;
   let cellType = (props, styles, IsDeployedPanelExpandedSideways)=>{
+   console.log(props.content);
 
    if(props.content.length > 40){
     let text = props.content.substring(0,41) + "..."
@@ -83,6 +84,9 @@ const DataRowCell = (props)=>{
       }
      }
    }
+
+
+
   }
 
   return(

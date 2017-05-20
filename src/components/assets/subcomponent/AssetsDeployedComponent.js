@@ -10,7 +10,7 @@ import {AssetsPanel} from './../../../actions/AssetsActions.js'
 //Mock Data
 import { categoryHeader, dataHeader_minView, dataHeader_expandedView, ApiInitMargResponse, ApiVarMargResponse, VarMarginTableStyle, VarMarginTableStyleExpanded, InitMarginTableStyle, InitMarginTableStyleExpanded } from "./../mockData/mockData.js"
 
-//Helper Functions
+/********************* Helper Functions ************************/
 const SearchContent = (rawAPI, testCase)=>{
  let toArray = obj => _.map( obj, ( val )=>{ return val } )
 
@@ -38,7 +38,7 @@ const SearchContent = (rawAPI, testCase)=>{
    })
 
    /*
-      IF match is found witin in statement data, return newly cloned agreeementObj only with statement arrays with matches
+      IF match is found within statement data, return newly cloned agreeementObj only with statement arrays with matches
       Else, check if match is found in other properties
         IF found, return entire agreement object
         ELSE, return the existing accumulator array
@@ -54,6 +54,7 @@ const SearchContent = (rawAPI, testCase)=>{
  return filteredList
 
 }
+/***************************************************************/
 
 const AssetsDeployedComponent = (props)=>{
 
