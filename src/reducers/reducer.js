@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { clearTime, getDate } from '../utils'
 import * as ActionTypes from '../constants/ActionTypes'
 
-const INITIAL_STATE = Map({"data": Map({"derivatives": List()}), "display": Map({"derivatives": List()})})
+const INITIAL_STATE = Map({"data": Map({"derivatives": List(), "menu": Map({"alerts": List()})}), "display": Map({"derivatives": List(), "menu": Map({"alerts": List()})})})
 
 export function initState(state = Map(), newJSON){
 
@@ -35,7 +35,7 @@ export function initState(state = Map(), newJSON){
       }
       , fromJS({"display": json})).get('display').toJS()
 
-  return state.set('data', fromJS(json)).set('display', fromJS(lol))
+  return state.withMutations((state) => state.set('data', fromJS(json)).set('display', fromJS(lol)))
   //pushed into two separate nodes, data(for retention of persistent data), display(for rendering the UI)
 }
 
@@ -53,7 +53,9 @@ const plusMinusThreeDays = (json) => {
         _.set(status, 'timeFrames', _.filter(status.timeFrames, timeFrame => (
           _.inRange((new Date(timeFrame.timeRangeStart)).getTime(), dMinusTwo.getTime(), dPlusOne.getTime())
         ))))
-      ))))
+      )))),
+    menu: json.menu,
+    timeUpdated: json.timeUpdated
   }
 
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import NavigationBarItem from './NavigationBarItem'
 import styles from './NavigationBar.css'
 import { hashHistory } from 'react-router'
-
+import _ from 'lodash'
 
 export default class NavigationBar extends React.Component {
   constructor(props) {
@@ -16,6 +16,8 @@ export default class NavigationBar extends React.Component {
 
   render() {
 
+    const { menuNotifications } = this.props
+
     return (
       <nav className={styles.nav}>
 
@@ -26,22 +28,25 @@ export default class NavigationBar extends React.Component {
 
         </div>
 
-        <NavigationBarItem selected={this.props.curPage == '/'}
+        <NavigationBarItem selected={this.props.curPage === '/'}
                            label={'Dashboard'}
                            toUrl={'/dashboard'}/>
-        <NavigationBarItem selected={this.props.curPage == '/recon'}
+        <NavigationBarItem selected={this.props.curPage === '/recon'}
                            label={'Reconcile'}
-                           toUrl={'/recon'}/>
-        <NavigationBarItem selected={this.props.curPage == '/disputes'}
+                           toUrl={'/recon'}
+                           notifications={_.find(menuNotifications, {"item": "Unrecon"})}/>
+        <NavigationBarItem selected={this.props.curPage === '/disputes'}
                            label={'Disputes'}
-                           toUrl={'/disputes'}/>
-        <NavigationBarItem selected={this.props.curPage == '/pledge'}
+                           toUrl={'/disputes'}
+                           notifications={_.find(menuNotifications, {"item": "ActionDispute"})}/>
+        <NavigationBarItem selected={this.props.curPage === '/pledge'}
                            label={'Pledge'}
-                           toUrl={'/pledge'}/>
-        <NavigationBarItem selected={this.props.curPage == '/deployed'}
+                           toUrl={'/pledge'}
+                           notifications={_.find(menuNotifications, {"item": "Pledged"})}/>
+        <NavigationBarItem selected={this.props.curPage === '/deployed'}
                            label={'Deployed'}
                            toUrl={'/deployed'}/>
-        <NavigationBarItem selected={this.props.curPage == '/agreements'}
+        <NavigationBarItem selected={this.props.curPage === '/agreements'}
                            label={'Agreements'}
                            toUrl={'/agreements'}/>
 
