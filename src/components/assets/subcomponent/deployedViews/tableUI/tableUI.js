@@ -79,7 +79,6 @@ const DataRowCell = (props)=>{
        }
    }
    else {
-      console.log(props.content, props.id)
       if(props.content.length > 12){
         if(props.id===3){
          return <div className={styles.CellVisible} title={props.content}> { props.content || "---No Content---"} </div>
