@@ -101,15 +101,15 @@ const AssetsDeployedComponent = (props)=>{
    let tableContent = (rightContent)=>{
         if(ExpandedSideways){
           return _.map(rightContent, (row)=>{ return{ CategoryContent: [ row.region, row.agreement, row.counterparty ],
-                                                       RowContent:  _.map( row.data , (block)=>{ return [ block.asset, block.quantity, block.adjValue, block.value, block.rating, block.haircut, block.maturityDate, block.isin ]}),
-                                                       PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " ", " ", " ", " "],
-                                                       ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " ", " ", " ", " "]  }})
+                                                      RowContent:  _.map( row.data , (block)=>{ return [ block.asset, block.quantity, block.adjValue, block.value, block.rating, block.haircut, block.maturityDate, block.isin ]}),
+                                                      PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " ", " ", " ", " "],
+                                                      ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " ", " ", " ", " "]  }})
           }
          else {
            return _.map(rightContent, (row)=>{ return{ CategoryContent: [ row.region, row.agreement, row.counterparty ],
-                                                        RowContent:  _.map( row.data , (block)=>{ return [ block.asset, block.quantity, block.adjValue, block.value, block.haircut ]}),
-                                                        PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " "],
-                                                        ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " "] }})
+                                                       RowContent:  _.map( row.data , (block)=>{ return [ block.asset, block.quantity, block.adjValue, block.value, block.haircut ]}),
+                                                       PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " "],
+                                                       ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " "] }})
          }
      }
 
