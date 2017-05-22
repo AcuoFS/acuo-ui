@@ -1,6 +1,7 @@
 import {connect} from 'react-redux'
 import {MarginCallComponent} from '../components'
 import *  as MarginCallUploadActions from  '../actions/MarginCallUploadActions'
+import { POST_MARGIN_CALL_IDS } from './../constants/APIcalls'
 
 const _default = ''
 const _defaultArray = []
@@ -19,6 +20,19 @@ const mapDispatchToProps = dispatch => ({
   },
   onUpdateMarginCallUpload: (newTotalCallAmt, uploadId) => {
     dispatch(MarginCallUploadActions.updateMarginCallUpload(newTotalCallAmt,uploadId))
+  },
+  onPostMarginCallIDs: (idArr) => {
+    fetch(POST_MARGIN_CALL_IDS, {
+      method: 'POST',
+      body: JSON.stringify(idArr)
+    }).then(response => {
+      alert('send success :' + JSON.stringify(idArr))
+      return response.json()
+    }).then(obj => {
+      return 1
+    }).catch(error => {
+      console.log('Error: ' + error)
+    })
   }
 })
 

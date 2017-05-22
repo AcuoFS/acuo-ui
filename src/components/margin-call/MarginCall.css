@@ -46,6 +46,12 @@
   padding: 10px 24px;
 }
 
+.button.disabled {
+  background-color: #FAFAFA;
+  border: 1px solid #d7dce0;
+  color: #d7dce0;
+}
+
 /*table stylings*/
 .content{
   border: 1px solid #2C3B4A;
