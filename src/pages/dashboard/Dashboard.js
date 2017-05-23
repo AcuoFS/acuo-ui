@@ -19,6 +19,11 @@ export class Dashboard extends React.Component {
     this.props.initDashboard()
   }
 
+  componentWillMount(){
+    if(localStorage.loginAt == undefined || localStorage.loginAt < Date.now()){ hashHistory.push('/') }
+  }
+
+
   componentDidMount () {
     window.scrollTo(0, 0)
     if(localStorage.loginAt < Date.now()){ hashHistory.push("/") }
