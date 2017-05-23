@@ -71,6 +71,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateOptimisationSettings(newSettings))
   },
   initSelection: (selection) => {
+    console.log(`dispatching: initSelection(arg) where arg =`, selection);
     dispatch(initSelection(selection.items))
   },
   onTogglePendingAllocation: (GUID) => {
@@ -101,6 +102,7 @@ const mapDispatchToProps = dispatch => ({
     })
   },
   onPledge: (selectionList) => {
+    // console.log(selectionList);
     let pledgeToSend = []
     selectionList.map((statement) => {
       // Check statement w allocations

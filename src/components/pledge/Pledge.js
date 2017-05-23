@@ -38,9 +38,11 @@ class Pledge extends React.Component {
       this.props.onInitOptimisationSettings(obj.items)
     })
 
+    // #OW-324
     fetch(MARGIN_SELECTION_URL).then(response => {
       return response.json()
     }).then(obj => {
+      console.log("Selection Response Received", obj);
       this.props.initSelection(obj)
     })
   }
@@ -71,7 +73,9 @@ class Pledge extends React.Component {
     }
   }
 
+  // #OW-324
   renderSelection(x, onTogglePendingAllocation, pendingAllocation, index, onRemoveAssetFromAllocate) {
+    // console.log(x.toJS());
     return (<Selection sideways={this.state.selectionSideway}
                        clicked={this.changeSideways}
                        chkTick={this.chkTick}
@@ -104,6 +108,7 @@ class Pledge extends React.Component {
   }
 
   render() {
+    // console.log("props: ", this.props);
     const {
       selection, onTogglePendingAllocation,
       pendingAllocation, onRemoveAssetFromAllocate

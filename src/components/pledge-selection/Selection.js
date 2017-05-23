@@ -1,10 +1,12 @@
 import React from 'react'
+import _ from 'lodash'
 import {checkNegative} from '../../utils'
 import DeselectionPopup from './sub-components/DeselectionPopup'
 import {List, toJS} from 'immutable'
 import * as ASSET from '../../constants/AllocatedAssetAttributes'
 import * as ALLOCATED from '../../constants/AllocatedAttributes'
 import styles from './Selection.css'
+import AllocatePopup from './popup-allocate.js'
 
 export default class Selection extends React.Component {
   constructor(props) {
@@ -44,10 +46,14 @@ export default class Selection extends React.Component {
     )
   }
 
-  renderMargin(asset, mgnType, guid) {
+  renderMargin(asset, id, mgnType, guid) {
     const popupID = guid + mgnType + asset.get(ASSET.A_ID) + asset.get(ASSET.A_NAME)
     return (
-      <tr key={asset.get(ASSET.A_ID)}>
+      <tr key={id + "_" + asset.get(ASSET.A_ID)}
+          onDrop={ e=>this.dragNdrop.ondrop_handler(e) }
+          onDragOver={ e=>this.dragNdrop.onDragOver_handler(e) }
+            >
+            { console.log( "renderMargin |->" , asset.get(ASSET.A_ID)) }
         <td>{asset.get(ASSET.A_NAME)}</td>
         <td>{checkNegative(asset.get(ASSET.A_NET_AMT))}</td>
         <td>{asset.get(ASSET.A_CCY)}</td>
@@ -70,6 +76,14 @@ export default class Selection extends React.Component {
       </tr>
     )
   }
+
+  dragNdrop = {  ondrop_handler: (e)=>{  let payload = e.dataTransfer.getData("text")
+                                         console.log("Data ondrop |-> ",JSON.parse(payload));
+                                         e.preventDefault() },
+
+                 onDragOver_handler: (e)=>{ e.preventDefault() }
+              }
+
 
   togglePendingAllocation(e) {
     this.props.onTogglePendingAllocation(e.currentTarget.dataset.ref)
@@ -141,6 +155,7 @@ export default class Selection extends React.Component {
 
     return (
       <div className={styles.panel} key={marginCall.get('GUID')}>
+
         <DeselectionPopup propOpenedDeselectionPopup={this.state.openedDeselectionPopup}
                           propHandlerClearPopup={this.clearDeselectionPopup}
                           propIsValidFlag={this.state.isValidPopupForm}
@@ -164,13 +179,9 @@ export default class Selection extends React.Component {
             <div className={styles.callTitle}>
               Calls Due
             </div>
-
             <div>
-
               {this.checkIfExist(marginCall.get('clientAssets')).map(x => this.renderGroup(x, marginCall.get('GUID')))}
-
             </div>
-
             <div className={styles.total}>
               <div className={styles.firstLevel}>
                 <div className={styles.assetName}>
@@ -192,7 +203,6 @@ export default class Selection extends React.Component {
                 </div>
               </div>
             </div>
-
           </div>
           <div className={styles.rightColumn}>
             <div className={styles.rightColHeading}>
@@ -237,10 +247,16 @@ export default class Selection extends React.Component {
                   <tbody>
                   { evlEmptyForIntMargin ?
                     <tr>
-                      <td colSpan="8" className={styles.notAlcText}>Collateral has not been allocated</td>
+                      <td colSpan="8"
+                          className={styles.notAlcText}
+                          onDrop={ e=>this.dragNdrop.ondrop_handler(e) }
+                          onDragOver={ e=>this.dragNdrop.onDragOver_handler(e) }
+                        >
+                       Collateral has not been allocated
+                      </td>
                     </tr> :
                     this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).map(
-                      x => this.renderMargin(x, ASSET.A_LIST_IM, marginCall.get('GUID')))
+                      (x, id) => this.renderMargin(x, id, ASSET.A_LIST_IM, marginCall.get('GUID')))
                   }
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
@@ -277,7 +293,13 @@ export default class Selection extends React.Component {
 
                   { evlEmptyForVariMargin ?
                     <tr>
-                      <td colSpan="8" className={styles.notAlcText}>Collateral has not been allocated</td>
+                      <td colSpan="8"
+                          className={styles.notAlcText}
+                          onDrop={ e=>this.dragNdrop.ondrop_handler(e) }
+                          onDragOver={ e=>this.dragNdrop.onDragOver_handler(e) }
+                          >
+                          Collateral has not been allocated
+                      </td>
                     </tr> :
                     this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).map(
                       x => this.renderMargin(x, ASSET.A_LIST_VM, marginCall.get('GUID')))
