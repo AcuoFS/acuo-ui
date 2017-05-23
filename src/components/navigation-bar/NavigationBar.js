@@ -59,7 +59,7 @@ export default class NavigationBar extends React.Component {
                    src={'./images/dashboard/navbar/logout.png'}
                    alt=""
                    title="Logout"
-                   onClick={ ()=>{ hashHistory.push("/") } }/>
+                   onClick={ ()=>{ localStorage.clear() ; hashHistory.push("/") } }/>
             </div>
           </div>
         </div>

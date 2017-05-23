@@ -18,58 +18,59 @@ export default class LoginComponent extends React.Component{
   }
 
   render(){
-   localStorage.clear()
+     return(
+      <div className={styles.container}>
+        <div className={styles.box}>
+          <img className={styles.logo} src={'./images/login/login_logo.png'} alt=""/>
+          <div className={styles.row}>
+            <div className={styles.label}>
+              Username
+            </div>
+            <div className={styles.input}>
+              <input type="text"
+                     value={this.state.username}
+                     onChange={ (e)=>{this.setState({password: e.currentTarget.value})} }  />
+            </div>
+          </div>
 
-   return(
-    <div className={styles.container}>
-      <div className={styles.box}>
-        <img className={styles.logo} src={'./images/login/login_logo.png'} alt=""/>
-        <div className={styles.row}>
-          <div className={styles.label}>
-            Username
+          <div className={styles.row}>
+            <div className={styles.label}>
+              password
+              <span onClick={ ()=>{ this.setState( {showPassword: !this.state.showPassword} ) } } >
+               {(this.state.showPassword? "hide" : "show")}
+              </span>
+            </div>
+            <div className={ styles.pw_error }>
+              {this.state.passwordError}
+            </div>
+            <div className={styles.input}>
+              <input type={(this.state.showPassword? "text" : "password")}
+                     value={this.state.inputPassword}
+                     onChange={ (e)=>{this.setState({inputPassword: e.currentTarget.value})} }
+                />
+            </div>
           </div>
-          <div className={styles.input}>
-            <input type="text"
-                   value={this.state.username}
-                   onChange={ (e)=>{this.setState({password: e.currentTarget.value})} }  />
-          </div>
-        </div>
 
-        <div className={styles.row}>
-          <div className={styles.label}>
-            password
-            <span onClick={ ()=>{ this.setState( {showPassword: !this.state.showPassword} ) } } >
-             {(this.state.showPassword? "hide" : "show")}
-            </span>
+          <div className={styles.buttonHolder}>
+            <button onClick={ ()=>{
+             this.setState( {passwordError: ""} )
+             if( this.state.inputPassword.length < 8 ) { this.setState( {passwordError: " Password must be a minimum of 8 characters "} ) }
+             else {
+              if( !(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/.test(this.state.inputPassword)) ) { this.setState( {passwordError: "Password must a mixed-case alphanumeric"} ) }
+              else{
+               if( this.state.inputPassword!=this.state.password  ) { this.setState( { passwordError: "Invalid Password!" } ) }
+               else {
+                localStorage.authenticating = true
+                hashHistory.push("/2fa")
+               }
+              }
+             }
+             } } >
+              sign in
+            </button>
           </div>
-          <div className={ styles.pw_error }>
-            {this.state.passwordError}
-          </div>
-          <div className={styles.input}>
-            <input type={(this.state.showPassword? "text" : "password")}
-                   value={this.state.inputPassword}
-                   onChange={ (e)=>{this.setState({inputPassword: e.currentTarget.value})} }
-              />
-          </div>
-        </div>
-
-        <div className={styles.buttonHolder}>
-          <button onClick={ ()=>{
-           this.setState( {passwordError: ""} )
-           if( this.state.inputPassword.length < 8 ) { this.setState( {passwordError: " Password must be a minimum of 8 characters "} ) }
-           else {
-            if( !(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/.test(this.state.inputPassword)) ) { this.setState( {passwordError: "Password must a mixed-case alphanumeric"} ) }
-            else{
-             if( this.state.inputPassword!=this.state.password  ) { this.setState( { passwordError: "Invalid Password!" } ) }
-             else { hashHistory.push("/2fa") }
-            }
-           }
-           } } >
-            sign in
-          </button>
         </div>
       </div>
-    </div>
    )
   }
 }

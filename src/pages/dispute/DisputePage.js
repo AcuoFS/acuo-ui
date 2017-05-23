@@ -9,11 +9,16 @@ import { hashHistory } from 'react-router'
 
 class DisputePage extends React.Component {
 
+  componentWillMount(){
+    if(localStorage.loginAt == undefined || localStorage.loginAt < Date.now()){ hashHistory.push('/') }
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0)
     if(localStorage.loginAt < Date.now()){ hashHistory.push("/") }
 
   }
+
 
   render() {
     return (
