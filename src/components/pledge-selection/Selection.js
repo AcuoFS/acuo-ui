@@ -52,8 +52,7 @@ export default class Selection extends React.Component {
       <tr key={id + "_" + asset.get(ASSET.A_ID)}
           onDrop={ e=>this.dragNdrop.ondrop_handler(e) }
           onDragOver={ e=>this.dragNdrop.onDragOver_handler(e) }
-            >
-            { console.log( "renderMargin |->" , asset.get(ASSET.A_ID)) }
+          >
         <td>{asset.get(ASSET.A_NAME)}</td>
         <td>{checkNegative(asset.get(ASSET.A_NET_AMT))}</td>
         <td>{asset.get(ASSET.A_CCY)}</td>
@@ -255,8 +254,9 @@ export default class Selection extends React.Component {
                        Collateral has not been allocated
                       </td>
                     </tr> :
-                    this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).map(
-                      (x, id) => this.renderMargin(x, id, ASSET.A_LIST_IM, marginCall.get('GUID')))
+                    this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).map( (x, id)=>{
+                       return this.renderMargin(x, id, ASSET.A_LIST_IM, marginCall.get('GUID'))
+                    })
                   }
                   <tr className={styles.bold}>
                     <td>Sub-Total</td>
@@ -301,8 +301,9 @@ export default class Selection extends React.Component {
                           Collateral has not been allocated
                       </td>
                     </tr> :
-                    this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).map(
-                      x => this.renderMargin(x, ASSET.A_LIST_VM, marginCall.get('GUID')))
+                    this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).map( (x, id)=>{
+                      return this.renderMargin(x, id , ASSET.A_LIST_VM, marginCall.get('GUID'))
+                    })
                   }
 
 
