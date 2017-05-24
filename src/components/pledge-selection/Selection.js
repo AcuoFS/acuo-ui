@@ -15,7 +15,9 @@ export default class Selection extends React.Component {
     this.state = {
       openedDeselectionPopup: "",
       isValidPopupForm: false,
-      currentAsset: {}
+      currentAsset: {},
+      allocationVM_PopupTracker: {},
+      allocationIM_PopupTracker: {}
     }
 
     this.togglePendingAllocation = this.togglePendingAllocation.bind(this)
@@ -48,9 +50,12 @@ export default class Selection extends React.Component {
 
   renderMargin(asset, id, mgnType, guid) {
     const popupID = guid + mgnType + asset.get(ASSET.A_ID) + asset.get(ASSET.A_NAME)
+    // console.log("asset :::", asset.toJS())
+    // console.log("popupID :::",popupID);
+    // console.log(this.state.allocationPopup["123"] = "123å" )
     return (
       <tr key={id + "_" + asset.get(ASSET.A_ID)}
-          onDrop={ e=>this.dragNdrop.ondrop_handler(e) }
+          onDrop={ e=>this.dragNdrop.ondrop_handler(e, asset) }
           onDragOver={ e=>this.dragNdrop.onDragOver_handler(e) }
           >
         <td>{asset.get(ASSET.A_NAME)}</td>
@@ -72,15 +77,55 @@ export default class Selection extends React.Component {
           </div>
 
         </td>
+        <td>
+         {
+          //<AllocatePopup />
+         }
+        </td>
       </tr>
     )
   }
 
-  dragNdrop = {  ondrop_handler: (e)=>{  let payload = e.dataTransfer.getData("text")
-                                         console.log("Data ondrop |-> ",JSON.parse(payload));
-                                         e.preventDefault() },
+  dragNdrop = {  ondrop_handler: (e, data)=>{  let payload = e.dataTransfer.getData("text")
+                                               console.log("Data ondrop |-> ",JSON.parse(payload));
+                                               let existingData = data || false
+                                               console.log("Data to replace |->", (existingData ? existingData.toJS() : existingData ) )
 
-                 onDragOver_handler: (e)=>{ e.preventDefault() }
+
+                                               e.preventDefault() },
+
+                 onDragOver_handler: (e)=>{ e.preventDefault() },
+
+                 initPopupTracker: (marginStatement)=>{
+                  let vm , im;
+
+                  if(marginStatement.variationMargin){
+                   vm = [...marginStatement.variationMargin] // console.log( vm.length , " x Variation Margins Found", vm )
+
+                   //Form allocationPopupTracker
+                   let newEntry = _.reduce( vm, (acc, asset)=>{
+                    let clone = _.clone(acc)
+                    clone[`${asset.marginType}${asset.msId}_${asset.fromAccount}_${asset.callId}`] = false
+                    return Object.assign(acc, clone)
+                   }, {} )
+
+                   this.setState( {allocationVM_PopupTracker : newEntry}  )
+                  }//end if-statement
+
+                  if(marginStatement.initialMargin){
+                   im = [...marginStatement.initialMargin] // console.log( vm.length , " x Variation Margins Found", vm )
+
+                   //Form allocationPopupTracker
+                   let newEntry = _.reduce( im, (acc, asset)=>{
+                    let clone = _.clone(acc)
+                    clone[`${asset.marginType}${asset.msId}_${asset.fromAccount}_${asset.callId}`] = false
+                    return Object.assign(acc, clone)
+                   }, {} )
+
+                   this.setState( {allocationIM_PopupTracker : newEntry}  )
+                  }//end if-statement
+                  
+                 }
               }
 
 
@@ -139,14 +184,22 @@ export default class Selection extends React.Component {
     if (!nextProps.toggleL && nextProps.toggleR) {
       this.clearDeselectionPopup()
     }
+
+    let allocatedExist = nextProps.marginCall.toJS().allocated
+    if(allocatedExist){
+      this.dragNdrop.initPopupTracker( allocatedExist )
+    }
+
   }
 
   render() {
+    console.log("@Render, state.allocationVM_PopupTracker ->", this.state.allocationVM_PopupTracker);
     const {
       marginCall, pendingAllocationStore,
       toggleL, toggleR, sideways,
       onRemoveAssetFromAllocate
     } = this.props
+
 
     let evlEmptyForIntMargin = this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).isEmpty()
     let evlEmptyForVariMargin = this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).isEmpty()

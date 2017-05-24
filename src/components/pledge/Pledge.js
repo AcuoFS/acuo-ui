@@ -42,7 +42,7 @@ class Pledge extends React.Component {
     fetch(MARGIN_SELECTION_URL).then(response => {
       return response.json()
     }).then(obj => {
-      console.log("Selection Response Received", obj);
+      // console.log("Selection Response Received", obj);
       this.props.initSelection(obj)
     })
   }
