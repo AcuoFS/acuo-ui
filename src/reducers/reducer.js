@@ -46,15 +46,13 @@ const plusMinusThreeDays = (json) => {
   const dPlusOne = new Date(d.getTime() + thirtySixHrDuration)
   const dMinusTwo = new Date(d.getTime() - thirtySixHrDuration)
 
-  let i = 1;
-
   return {
     derivatives: _.map(json.derivatives, deriv => (
       _.set(deriv, 'marginStatus', _.map(deriv.marginStatus, status => (
-        _.set(status, 'timeFrames', _.filter(status.timeFrames, timeFrame => {
-          return _.inRange((new Date(timeFrame.timeRangeStart)).getTime(), dMinusTwo.getTime(), dPlusOne.getTime())
-        })))
-      )))),
+        _.set(status, 'timeFrames', _.filter(status.timeFrames, timeFrame => (
+          _.inRange((new Date(timeFrame.timeRangeStart)).getTime(), dMinusTwo.getTime(), dPlusOne.getTime())
+        ))))
+      ).filter(x => x.timeFrames.length)))).filter(x => x.marginStatus.length),
     menu: json.menu,
     timeUpdated: json.timeUpdated
   }
