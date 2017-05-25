@@ -71,7 +71,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateOptimisationSettings(newSettings))
   },
   initSelection: (selection) => {
-    console.log(`dispatching: initSelection(arg) where arg =`, selection);
     dispatch(initSelection(selection.items))
   },
   onTogglePendingAllocation: (GUID) => {
