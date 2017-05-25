@@ -90,8 +90,7 @@ export default class MarginAgreementPortfolio extends React.Component {
   getPercentage(actionItem) {
     if (actionItem.get('clientAssets') && actionItem.get('counterpartyAssets')) {
 
-      return (this.displayTotalMargin(actionItem, 'clientAssets') /
-      this.displayTotalMargin(actionItem, 'counterpartyAssets') * 100).toFixed(0)
+      return (this.displayTotalMargin(actionItem,'counterpartyAssets' ) / this.displayTotalMargin(actionItem, 'clientAssets') * 100).toFixed(0)
 
     } else {
       return 0.00
