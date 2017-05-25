@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types'
 import DisputeTableRow from './DisputeTableRow'
 import _ from 'lodash'
 import * as DISPUTE_FILTER from '../../../constants/DisputeFilters'

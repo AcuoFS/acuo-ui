@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import AgreementsSummaryTable from './sub-components/AgreementsSummaryTable'
 import AgreementsTable from './sub-components/AgreementsTable'
 import mockAgreementsSummary from './mock/mockAgreementsSummary'

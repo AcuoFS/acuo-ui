@@ -23,7 +23,7 @@ const mapStateToProps = state => {
 
   const filteredItems = filterItems(items, filters)
   const outItems = _.filter(filteredItems, ['direction', 'OUT'])
-
+  // console.log("Filtered Items :::", filteredItems);
   return {
     outItems: filteredItems,
   }

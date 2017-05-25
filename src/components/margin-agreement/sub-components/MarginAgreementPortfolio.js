@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types'
 import CounterPartyAssets from './CounterPartyAssets'
 import ClientAsset from './ClientAsset'
 import MarginAgreementUpload from '../../margin-agreement-upload/MarginAgreementUpload'

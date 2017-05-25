@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types'
 import CollateralEarmarkStatusPopup from './popups/CollateralEarmarkStatusPopup'
 import CollateralStatusPopup from './popups/CollateralStatusPopup'
 import {COLLATERAL_EARMARKED} from '../../../constants/CollateralTypes'
