@@ -42,7 +42,7 @@ const plusMinusThreeDays = (json) => {
 
   const today = getDate()
   const thirtySixHrDuration = 36 * 60 * 60 * 1000
-  const d = clearTime(today)
+  const d = today
   const dPlusOne = new Date(d.getTime() + thirtySixHrDuration)
   const dMinusTwo = new Date(d.getTime() - thirtySixHrDuration)
 
