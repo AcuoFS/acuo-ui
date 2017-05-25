@@ -11,10 +11,6 @@ export default class MarginAgreementList extends React.Component {
   constructor(props) {
     super(props)
 
-    // this.state = {
-    //   adjAmount: 0.0
-    // }
-
     const {recon} = this.props
     this.displayLineItems = this.displayLineItems.bind(this)
     // this.getTotalAmount = this.getTotalAmount.bind(this)
@@ -28,7 +24,6 @@ export default class MarginAgreementList extends React.Component {
                    onSelectSecondLevelItem, currencyInfo) {
     return (recon.map((x) => {
 
-      if(x.get('direction') == 'OUT')
       return (
         <MarginAgreementPortfolio
           key={x}

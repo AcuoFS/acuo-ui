@@ -10,7 +10,6 @@ export function initState(state = Map(), newJSON){
 
   let json = plusMinusThreeDays(newJSON.toJS()) || []
   let lol = json
-
   if(state.getIn(['inputs', 'filters']) && !state.getIn(['inputs', 'filters']).isEmpty())
     lol = state.getIn(['inputs', 'filters']).reduce((json, x) => {
         switch(x.get('type')){
@@ -47,12 +46,14 @@ const plusMinusThreeDays = (json) => {
   const dPlusOne = new Date(d.getTime() + thirtySixHrDuration)
   const dMinusTwo = new Date(d.getTime() - thirtySixHrDuration)
 
+  let i = 1;
+
   return {
     derivatives: _.map(json.derivatives, deriv => (
       _.set(deriv, 'marginStatus', _.map(deriv.marginStatus, status => (
-        _.set(status, 'timeFrames', _.filter(status.timeFrames, timeFrame => (
-          _.inRange((new Date(timeFrame.timeRangeStart)).getTime(), dMinusTwo.getTime(), dPlusOne.getTime())
-        ))))
+        _.set(status, 'timeFrames', _.filter(status.timeFrames, timeFrame => {
+          return _.inRange((new Date(timeFrame.timeRangeStart)).getTime(), dMinusTwo.getTime(), dPlusOne.getTime())
+        })))
       )))),
     menu: json.menu,
     timeUpdated: json.timeUpdated
@@ -215,7 +216,6 @@ export function multifilters(state, action){
 }
 
 export function attachFilter(state, action){
-  //console.log(action)
   switch(action.type){
     case 'FILTER_STATE_DERIV':
       return state.setIn(['inputs','filters','typeFilter'], fromJS(action))

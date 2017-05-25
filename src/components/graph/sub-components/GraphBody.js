@@ -147,7 +147,8 @@ export default class GraphBody extends React.Component {
 
         return List()
         .push((timeFrame.get('inAmount') === 0)? 0 :
-          <g id={styles.componentId} key={status.get('status') + timeFrame.get('timeFrame') + 'in'}>
+          <g id={styles.componentId} key={status.get('status') + timeFrame.get('timeFrame') + 'in'}
+           onClick={onClickFunc}>
             <circle cx={this.props.x + (timeDifference + 0.5) * 60}
                     cy={colour[2]}
                     r={(timeFrame.get('inAmount') === 0)? 0 :(Math.log(timeFrame.get('inAmount'))) }
