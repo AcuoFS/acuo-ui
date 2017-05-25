@@ -27,7 +27,7 @@ export const updateCollateral = (state, collateralData) => {
 }
 
 export const initSelection = (state, selection) => {
-  console.info(`@PledgeReducer.js, initSelection(arg) where arg = `, selection);
+  // console.info(`@PledgeReducer.js, initSelection(arg) where arg = `, selection);
   if(selection){
     return state.setIn(['pledgeData', 'selection'], fromJS(selection))   }
   else

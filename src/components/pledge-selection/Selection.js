@@ -16,8 +16,11 @@ export default class Selection extends React.Component {
       openedDeselectionPopup: "",
       isValidPopupForm: false,
       currentAsset: {},
-      allocationVM_PopupTracker: {},
-      allocationIM_PopupTracker: {}
+      allocationPopup: false,
+      assetAllocated: null,
+      existingAsset: null,
+      agreementName: null,
+      marginType: null
     }
 
     this.togglePendingAllocation = this.togglePendingAllocation.bind(this)
@@ -25,7 +28,20 @@ export default class Selection extends React.Component {
     this.clearDeselectionPopup = this.clearDeselectionPopup.bind(this)
     this.handlerChangeSideWaysClick = this.handlerChangeSideWaysClick.bind(this)
     this.setPopupFormValidity = this.setPopupFormValidity.bind(this)
+    this.popupUnmount = this.popupUnmount.bind(this)
   }
+
+  popupUnmount(){
+   this.setState(
+      (prevState)=>{
+        let clone = _.clone(prevState)
+        _.update(clone, 'allocationPopup', ()=>false)
+        _.update(clone, 'marginType', ()=>null)
+        _.update(clone, 'assetAllocated', ()=>null)
+        _.update(clone, 'existingAsset', ()=>null)
+       return clone
+      } )
+  }// end popupUnmount()
 
   renderGroup(x, GUID) {
     return (
@@ -48,14 +64,11 @@ export default class Selection extends React.Component {
     )
   }
 
-  renderMargin(asset, id, mgnType, guid) {
+  renderMargin(asset, id, agreementName, mgnType, guid) {
     const popupID = guid + mgnType + asset.get(ASSET.A_ID) + asset.get(ASSET.A_NAME)
-    // console.log("asset :::", asset.toJS())
-    // console.log("popupID :::",popupID);
-    // console.log(this.state.allocationPopup["123"] = "123å" )
     return (
       <tr key={id + "_" + asset.get(ASSET.A_ID)}
-          onDrop={ e=>this.dragNdrop.ondrop_handler(e, asset) }
+          onDrop={ e=>this.dragNdrop.ondrop_handler(e, this.state, asset, mgnType) }
           onDragOver={ e=>this.dragNdrop.onDragOver_handler(e) }
           >
         <td>{asset.get(ASSET.A_NAME)}</td>
@@ -86,46 +99,20 @@ export default class Selection extends React.Component {
     )
   }
 
-  dragNdrop = {  ondrop_handler: (e, data)=>{  let payload = e.dataTransfer.getData("text")
-                                               console.log("Data ondrop |-> ",JSON.parse(payload));
-                                               let existingData = data || false
-                                               console.log("Data to replace |->", (existingData ? existingData.toJS() : existingData ) )
+  dragNdrop = {  ondrop_handler: (e, state, existingData, marginType)=>{  let droppedData = e.dataTransfer.getData("text")
+                                                                          this.setState( (prevState)=>{
+                                                                           let clone = _.clone(prevState)
+                                                                           _.update(clone, 'allocationPopup', ()=>true)
+                                                                           _.update(clone, 'marginType', ()=>marginType)
+                                                                           _.update(clone, 'assetAllocated', ()=>JSON.parse(droppedData))
+                                                                           if(existingData) _.update(clone, 'existingAsset', ()=>existingData.toJS())
 
-
-                                               e.preventDefault() },
+                                                                           return clone
+                                                                          })
+                                                                          e.preventDefault() },
 
                  onDragOver_handler: (e)=>{ e.preventDefault() },
 
-                 initPopupTracker: (marginStatement)=>{
-                  let vm , im;
-
-                  if(marginStatement.variationMargin){
-                   vm = [...marginStatement.variationMargin] // console.log( vm.length , " x Variation Margins Found", vm )
-
-                   //Form allocationPopupTracker
-                   let newEntry = _.reduce( vm, (acc, asset)=>{
-                    let clone = _.clone(acc)
-                    clone[`${asset.marginType}${asset.msId}_${asset.fromAccount}_${asset.callId}`] = false
-                    return Object.assign(acc, clone)
-                   }, {} )
-
-                   this.setState( {allocationVM_PopupTracker : newEntry}  )
-                  }//end if-statement
-
-                  if(marginStatement.initialMargin){
-                   im = [...marginStatement.initialMargin] // console.log( vm.length , " x Variation Margins Found", vm )
-
-                   //Form allocationPopupTracker
-                   let newEntry = _.reduce( im, (acc, asset)=>{
-                    let clone = _.clone(acc)
-                    clone[`${asset.marginType}${asset.msId}_${asset.fromAccount}_${asset.callId}`] = false
-                    return Object.assign(acc, clone)
-                   }, {} )
-
-                   this.setState( {allocationIM_PopupTracker : newEntry}  )
-                  }//end if-statement
-                  
-                 }
               }
 
 
@@ -180,26 +167,21 @@ export default class Selection extends React.Component {
 
   // Before change of props
   componentWillReceiveProps(nextProps) {
-    // Clear and close popup if selection list is collapsed
     if (!nextProps.toggleL && nextProps.toggleR) {
       this.clearDeselectionPopup()
     }
+  }
 
-    let allocatedExist = nextProps.marginCall.toJS().allocated
-    if(allocatedExist){
-      this.dragNdrop.initPopupTracker( allocatedExist )
-    }
-
+  componentDidMount(){
+   this.setState({agreementName: this.props.marginCall.get('agreementName')})
   }
 
   render() {
-    console.log("@Render, state.allocationVM_PopupTracker ->", this.state.allocationVM_PopupTracker);
     const {
       marginCall, pendingAllocationStore,
       toggleL, toggleR, sideways,
       onRemoveAssetFromAllocate
     } = this.props
-
 
     let evlEmptyForIntMargin = this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).isEmpty()
     let evlEmptyForVariMargin = this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).isEmpty()
@@ -214,7 +196,15 @@ export default class Selection extends React.Component {
                           propDeselectAsset={this.state.currentAsset}
                           GUID={marginCall.get('GUID')}
                           propHandlerSetFormValidity={this.setPopupFormValidity}
-                          onRemoveAssetFromAllocate={onRemoveAssetFromAllocate}/>
+                          onRemoveAssetFromAllocate={onRemoveAssetFromAllocate}
+         />
+
+        { this.state.allocationPopup &&
+          <AllocatePopup popupUnmount={this.popupUnmount}
+                         agreementName={marginCall.get('agreementName')}
+                         allocatedAsset={this.state.assetAllocated}
+                         existingAsset={this.state.existingAsset}
+                         marginType={this.state.marginType}  /> }
 
         <div className={styles.columnContainer}>
           <div className={styles.leftColumn + ' ' + (!toggleL ? styles.bigger : '')}>
@@ -301,14 +291,18 @@ export default class Selection extends React.Component {
                     <tr>
                       <td colSpan="8"
                           className={styles.notAlcText}
-                          onDrop={ e=>this.dragNdrop.ondrop_handler(e) }
+                          onDrop={ e=>this.dragNdrop.ondrop_handler(e, this.state, false , ASSET.A_LIST_IM) }
                           onDragOver={ e=>this.dragNdrop.onDragOver_handler(e) }
                         >
                        Collateral has not been allocated
                       </td>
                     </tr> :
                     this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).map( (x, id)=>{
-                       return this.renderMargin(x, id, ASSET.A_LIST_IM, marginCall.get('GUID'))
+                       return this.renderMargin(x,
+                                                id,
+                                                marginCall.toJS().agreementName, 
+                                                ASSET.A_LIST_IM,
+                                                marginCall.get('GUID'))
                     })
                   }
                   <tr className={styles.bold}>
@@ -348,14 +342,18 @@ export default class Selection extends React.Component {
                     <tr>
                       <td colSpan="8"
                           className={styles.notAlcText}
-                          onDrop={ e=>this.dragNdrop.ondrop_handler(e) }
+                          onDrop={ (e)=>{this.dragNdrop.ondrop_handler(e, this.state, false, ASSET.A_LIST_VM)} }
                           onDragOver={ e=>this.dragNdrop.onDragOver_handler(e) }
                           >
                           Collateral has not been allocated
                       </td>
                     </tr> :
                     this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).map( (x, id)=>{
-                      return this.renderMargin(x, id , ASSET.A_LIST_VM, marginCall.get('GUID'))
+                      return this.renderMargin(x,
+                                               id ,
+                                               marginCall.toJS().agreementName,
+                                               ASSET.A_LIST_VM,
+                                               marginCall.get('GUID'))
                     })
                   }
 

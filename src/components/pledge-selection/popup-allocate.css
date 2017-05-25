@@ -1,10 +1,85 @@
-.popup{
- border: 1px solid #DEDEDE;
- position: absolute;
- right: 0;
+.screen{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
 
- background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.popup{
  color: black;
- height: 250px;
- width: 500px;
+ background-color: white;
+ width: 420px;
+ height: 200px;
+ border: 1px solid #1c2124;
+ border-radius: 5px;
+ padding: 10px;
+ position: relative;
+}
+
+.closePopup{
+ text-align: right;
+}
+.closePopup > span{
+ cursor: pointer;
+ color: #9B9B9B;
+ font-size: 15px;
+}
+
+.row{
+ display: flex;
+ flex-direction: row;
+ flex: 1 0 auto;
+}
+
+.row > div {
+ margin-top: 10px;
+ margin-right: 10px;
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+}
+
+.label{
+ width: 35%;
+ justify-content: flex-end;
+}
+
+.systemPopulated{
+
+}
+
+.userInput{
+ margin-top: 10px;
+ margin-right: 10px;
+ height: 17px;
+ font-size: 14px;
+}
+
+.lastRow{
+ position: absolute;
+ bottom: 10px;
+ right: 10px;
+}
+
+.allocateBtn{
+ background-color: green;
+ color: white;
+ border-radius: 18px;
+
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+ align-items: center;
+
+ width: 120px;
+ height: 36px;
+
+ cursor: pointer;
 }

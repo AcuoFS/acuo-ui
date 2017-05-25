@@ -6,7 +6,6 @@ import styles from './DeselectionPopup.css'
 export default class DeselectionPopup extends React.Component {
   constructor() {
     super()
-
     this.radioCurDom = null
     this.radioAllDom = null
   }
