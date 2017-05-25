@@ -4,9 +4,22 @@ import styles from './popup-allocate.css'
 
 export default class AllocatePopup extends React.Component{
 
+ displayMarginType = ( input )=>{
+  switch(input){
+   case "variationMargin":
+     return "Variation"
+   case "initialMargin":
+     return "Initial"
+   case "credit":
+     return 'Credit'
+   case "netted":
+     return 'Netted'
+   default:
+     return "Error: No Margin Type Detected"
+  }
+ }// end displayMarginType()
+
  render(){
-  console.log("existingAsset", this.props.existingAsset)
-  console.log("allocatedAsset", this.props.allocatedAsset)
   return(
       <div className={styles.screen}>
        <div className={styles.popup}>
@@ -16,20 +29,20 @@ export default class AllocatePopup extends React.Component{
 
         <div className={styles.row}>
           <div className={styles.label}>Original Asset</div>
-          <div className={styles.systemPopulated}>{(this.props.existingAsset? this.props.existingAsset.assetName : "N.A.")}</div>
+          <div>{(this.props.existingAsset? this.props.existingAsset.assetName : "Unallocated")}</div>
         </div>
         <div className={styles.row}>
           <div className={styles.label}>New Asset</div>
-          <div className={styles.systemPopulated}>{this.props.allocatedAsset.propAsset}</div>
+          <div>{this.props.allocatedAsset.propAsset}</div>
         </div>
         <div className={styles.row}>
           <div className={styles.label}>Margin Agreement</div>
-          <div className={styles.systemPopulated}>{this.props.agreementName}</div>
+          <div>{this.props.agreementName}</div>
         </div>
 
         <div className={styles.row}>
           <div className={styles.label}>Margin Type</div>
-          <div className={styles.systemPopulated}>{this.props.marginType} </div>
+          <div>{this.displayMarginType(this.props.marginType)} </div>
         </div>
 
         <div className={styles.row}>
