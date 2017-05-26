@@ -138,7 +138,6 @@ export default class FlightDetailRow extends React.Component {
 
 FlightDetailRow.propTypes = {
   propTime: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  propAgreement: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
   propFrom: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
   propTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
   propValue: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
