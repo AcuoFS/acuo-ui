@@ -1,1 +1,1 @@
-export const P_MGN_CALL_ID = 'marginCallId'
+export const P_MGN_STMT_ID = 'marginStatementId'

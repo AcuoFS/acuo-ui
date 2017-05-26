@@ -1,29 +1,39 @@
 import {Map, List, fromJS} from 'immutable'
 import _ from 'lodash'
 
-const INITIAL_STATE = {
+const INITIAL_STATE = fromJS({
   ui: { 'DeployedPanel_ExpandedSideways': false,
         'DeployedPanel_ExpandedVertically': false,
         'IsVarMarginSelected': true,
-        'IsRegionSelected': true },
+        'IsRegionSelected': true,
+        'HomePanel_ExpandedVertically': false,
+        'HomePanel_IsPledgeSelected': true },
   data: {}
-}
+})
 
 const AssetsReducer = (state = INITIAL_STATE , action)=>{
   let newState = {}
   switch (action.type){
-    case "@DEPLOYED_PANEL__TOGGLE_SIDE_EXPAND":
-      newState = _.set(_.cloneDeep(state), ['ui', 'DeployedPanel_ExpandedSideways'], action.payload)
-      return newState
-    case "@DEPLOYED_PANEL__TOGGLE_Y_EXPAND":
-      newState = _.set(_.cloneDeep(state), ['ui', 'DeployedPanel_ExpandedVertically'], action.payload)
-      return newState
+   //For Deployed Panel
+    case "@DEPLOYED__TOGGLE_SIDE_EXPAND":
+      return state.setIn(['ui','DeployedPanel_ExpandedSideways'], fromJS(action.payload))
+
+    case "@DEPLOYED__TOGGLE_Y_EXPAND":
+      return state.setIn(['ui','DeployedPanel_ExpandedVertically'], fromJS(action.payload))
+
     case "@DEPLOYED__TOGGLE_INIT_VAR_MARGIN":
-      newState = _.set(_.cloneDeep(state), ['ui', 'IsVarMarginSelected'], action.payload)
-      return newState
+      return state.setIn(['ui','IsVarMarginSelected'], fromJS(action.payload))
+
     case "@DEPLOYED__TOGGLE_CATEGORY":
-      newState = _.set(_.cloneDeep(state), ['ui', 'IsRegionSelected'], action.payload)
-      return newState
+      return state.setIn(['ui','IsRegionSelected'], fromJS(action.payload))
+
+   //For Deployed Panel
+    case "@HOME__TOGGLE_Y_EXPAND":
+      return state.setIn(['ui','HomePanel_ExpandedVertically'], fromJS(action.payload))
+
+    case "@HOME__TOGGLE_CATEGORY":
+      return state.setIn(['ui','HomePanel_IsPledgeSelected'], fromJS(action.payload))
+
     default:
       return state
   }

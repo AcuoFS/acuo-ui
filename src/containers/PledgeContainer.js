@@ -44,10 +44,12 @@ const updatePledgeListToSend = (assetList, pledgeToSend, guid) => {
   assetList.map((asset) => {
     // Create obj and push into array to send
     pledgeToSend = [...pledgeToSend, {
-      [P_ASSET.P_MGN_CALL_ID]: guid,
+      [P_ASSET.P_MGN_STMT_ID]: guid,
       [ASSET.A_ID]: asset[ASSET.A_ID],
       [ASSET.A_QTY]: asset[ASSET.A_QTY],
-      [ASSET.A_FROM_ACCT]: asset[ASSET.A_FROM_ACCT]
+      [ASSET.A_FROM_ACCT]: asset[ASSET.A_FROM_ACCT],
+      "toAccount": asset.toAccount,
+      "marginCallId": asset.callId
     }]
   })
   return pledgeToSend
@@ -136,12 +138,13 @@ const mapDispatchToProps = dispatch => ({
         // TODO: To handle how to inform user that pledge data is sucessfully sent
         //alert('Sent to endpoint!' + JSON.stringify(pledgeToSend))
         // Refresh selections
-        fetch(MARGIN_SELECTION_URL).then(response => {
+        setTimeout(() => fetch(MARGIN_SELECTION_URL).then(response => {
           return response.json()
         }).then(obj => {
           dispatch(initSelection(obj.items))
           dispatch(clearPendingAllocation())
-        })
+        }), 1000)
+
       } else {
         alert('Error sending pledge details')
       }

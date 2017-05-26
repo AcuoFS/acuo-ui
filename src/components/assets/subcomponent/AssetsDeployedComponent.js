@@ -10,8 +10,6 @@ import {AssetsPanel} from './../../../actions/AssetsActions.js'
 //Mock Data
 import { categoryHeader, dataHeader_minView, dataHeader_expandedView, ApiInitMargResponse, ApiVarMargResponse, VarMarginTableStyle, VarMarginTableStyleExpanded, InitMarginTableStyle, InitMarginTableStyleExpanded } from "./../mockData/mockData.js"
 
-
-
 const AssetsDeployedComponent = (props)=>{
 
    let state = props.state
@@ -24,7 +22,8 @@ const AssetsDeployedComponent = (props)=>{
 
    let dataHeader = (ExpandedSideways?  dataHeader_expandedView :  dataHeader_minView)
    let tableStyle = (IsVarMarginSelected? (ExpandedSideways? VarMarginTableStyleExpanded : VarMarginTableStyle) :  (ExpandedSideways? InitMarginTableStyleExpanded: InitMarginTableStyle))
-   let cellWidth = (ExpandedSideways? [ 17, 10, 18, 18, 7, 7, 10, 13] : [ 20, 16, 27, 27, 10] )
+   let cellWidth = (ExpandedSideways? { category: [26, 37, 37], data: [ 17, 10, 18, 18, 7, 7, 10, 13] } : { category: [26, 37, 37], data: [ 20, 16, 27, 27, 10] } )
+
    let rightContent = (IsVarMarginSelected? ApiVarMargResponse : ApiInitMargResponse)
    let sortedContent = (IsRegionSelected?  _.sortBy(rightContent, ["region"]) :  _.sortBy(rightContent, ["counterparty"]))
    let tableContent = (sortedContent)=>{
@@ -43,15 +42,15 @@ const AssetsDeployedComponent = (props)=>{
      }
 
    return(
-     <div className={ ExpandedVertically? (styles.assetsPanelFrameExpanded) : (styles.assetsPanelFrame) } >
+     <div className={ ExpandedVertically? (styles.assetsPanelFrameExpandedVertically) : (styles.assetsPanelFrame) } >
         <div className={ styles.assetsPanelHeader} >
            <span className={ styles.assetsPanelTitleText }> Deployed </span>
            <input className={styles.assetsPanelHeaderInput}
                   type={"text"}
                   placeholder={"Search"}
-                  onChange={()=>{console.log("Change");}}/>
+                  onChange={(e)=>{console.log(e.target.value)}}/>
            <img className={styles.assetsPanelHeaderSideExpandBtn}
-                src="images/assets_deployed/expand-sideways.svg"
+                src={(ExpandedSideways? "images/assets_deployed/expand-sideways.svg" : "images/assets_deployed/minimize-sideways.svg")}
                 onClick={ ()=>{ actions.DeployedPanel_ToggleSideExpand(!ExpandedSideways) }} />
         </div>
         <PanelWindow>

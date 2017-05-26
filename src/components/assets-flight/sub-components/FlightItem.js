@@ -17,6 +17,8 @@ export default class FlightItem extends React.Component {
       imgUrl = "./images/assets_deployed/icon_departure_plane.png"
     }
 
+    const { data } = this.props
+
     return (
       <div className={styles.flightItemComponent}>
         <div className={styles.flightTitle}>
@@ -29,7 +31,7 @@ export default class FlightItem extends React.Component {
           <div className={styles.headerDates}>Dates</div>
           <input type="text" placeholder="Search" className={styles.headerSearch}/>
         </div>
-        <FlightItemTable isArrival={this.isArrival(this.props.name)}/>
+        <FlightItemTable isArrival={this.isArrival(this.props.name)} data={data}/>
       </div>
     )
   }

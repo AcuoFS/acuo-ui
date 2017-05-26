@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Assets.css'
-import AssetsDeployedComponent from './subcomponent/AssetsDeployed.js'
-import AssetsHomeComponent from './subcomponent/AssetsHome.js'
+import AssetsDeployedComponent from './subcomponent/AssetsDeployedComponent.js'
+import AssetsHomeComponent from './subcomponent/AssetsHomeComponent.js'
 
 const AssetsComponent = (props)=>{
    let DeployedPanel_ExpandedSideways = props.state.ui.DeployedPanel_ExpandedSideways;

@@ -27,7 +27,8 @@
  align-items: center;
  font-size: 13px;
  line-height: 16px;
- padding-left: 5px;
+ padding-left: 3px;
+ /*text-indent: 5px;*/
 }
 
 .CellVisibleNoBreak {
@@ -59,7 +60,6 @@
 
 .DataRow{
  border-bottom: 1px solid #979797;
- margin-bottom: 2px;
  -webkit-transition: background-color 250ms linear;
  -moz-transition: background-color 250ms linear;
  -o-transition: background-color 250ms linear;
@@ -69,20 +69,48 @@
 .DataRow:hover{
  background-color: #e5e5e5;
 }
+.DataRow:active{
+ background-color: #c3ddf5;
+}
 
 .RegCptyHead{
    background-color: #2b3c4c;
    color: white;
    border-right: 1px solid white;
-   text-indent: 3px;
+   padding: 0;
+   font-weight: bold;
 }
 .VarMarginHead{
    background-color: #4e83b5;
    color: white;
+   font-weight: bold;
+}
+.VarMarginPledgeRow{
+   background-color: #4e83b5;
+   color: white;
+   font-weight: bold;
+   margin-top: 2px;
+}
+.VarMarginExcessRow{
+   background-color: #4e83b5;
+   color: white;
+   font-weight: bold;
 }
 .InitMarginHead{
    background-color: #315271;
    color: white;
+   font-weight: bold;
+}
+.InitMarginPledgeRow{
+ background-color: #315271;
+ color: white;
+ font-weight: bold;
+ margin-top: 2px;
+}
+.InitMarginExcessRow{
+ background-color: #315271;
+ color: white;
+ font-weight: bold;
 }
 
 /* ----- AssetsHomeTableView ----- */

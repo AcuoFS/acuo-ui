@@ -305,8 +305,7 @@
   display: inline-flex;
   font-size: 0.9em;
   line-height: 1.4;
-  margin-left: 5px;
-  margin-top: 5px;
+  margin: 2.5px;
   vertical-align: top;
 }
 .Select--multi .Select-value-icon,

@@ -18,14 +18,14 @@ const MarginCallAgreementDetailRow = ({propAgreementDetailObj}) => (
     </div>
     <div className={styles.agreeRow}>
       <div></div>
-      <div>{propAgreementDetailObj.threshold}</div>
-      <div>{propAgreementDetailObj.minTransfer}</div>
-      <div>{propAgreementDetailObj.rounding}</div>
-      <div>{propAgreementDetailObj.netRequired}</div>
-      <div>{propAgreementDetailObj.rate}</div>
-      <div className={styles.boldText}>{propAgreementDetailObj.tradeCount}</div>
-      <div>Trades Valued placeholder</div>
-      <div>Px Source placeholder</div>
+      <div>{propAgreementDetailObj.threshold || '-'}</div>
+      <div>{propAgreementDetailObj.minTransfer || '-'}</div>
+      <div>{propAgreementDetailObj.rounding || '-'}</div>
+      <div>{propAgreementDetailObj.netRequired || '-'}</div>
+      <div>{propAgreementDetailObj.rate || '-'}</div>
+      <div className={styles.boldText}>{propAgreementDetailObj.tradeCount || '-'}</div>
+      <div>{propAgreementDetailObj.tradeValue || '-'}</div>
+      <div>{propAgreementDetailObj.pricingSource || '-'}</div>
       <div></div>
     </div>
   </div>

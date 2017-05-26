@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './AssetsDeployedTableView.css'
-import NavBar from './../NavBar'
+import { NavBarDeployed } from './../NavBar'
 import NavBarStyle from './../NavBar.css'
 import Table from './../tableUI/tableUI'
 
@@ -10,19 +10,21 @@ const AssetsDeployedTableView = (props)=>{
 
   let IsVarMarginSelected = props.state.ui.IsVarMarginSelected
   let IsRegionSelected = props.state.ui.IsRegionSelected
+  let IsDeployedPanelExpandedSideways = props.state.ui.DeployedPanel_ExpandedSideways
 
   let categoryHeader = props.categoryHeader
   let dataHeader = props.dataHeader
 
   let Content = props.tableContent
   let TableStyle = props.tableStyle
-  let CellWidth = props.cellWidth
+  let CatCellWidth = props.cellWidth.category
+  let DataCellWidth = props.cellWidth.data
 
   return (
     <div className={styles.tableView}>
       <Table.RowGroup style={TableStyle.RowGroupStyle}>
         <Table.ColGroup style={TableStyle.RegCptyColGroupStyle}>
-          <NavBar>
+          <NavBarDeployed>
             <div className={ (IsRegionSelected? NavBarStyle.tabs + " " + NavBarStyle.selected : NavBarStyle.tabs ) }
                  onClick={()=>{actions.DeployedPanel_ToggleRegionCounterparty(!IsRegionSelected)}} >
               Region
@@ -31,12 +33,12 @@ const AssetsDeployedTableView = (props)=>{
                  onClick={()=>{actions.DeployedPanel_ToggleRegionCounterparty(!IsRegionSelected)}} >
               Counterparty
             </div>
-          </NavBar>
-         <Table.DataRow content={categoryHeader} style={TableStyle.RegCptyHeadStyle} />
+          </NavBarDeployed>
+         <Table.DataRow content={categoryHeader} style={TableStyle.RegCptyHeadStyle} cellWidth={CatCellWidth}/>
 
         </Table.ColGroup>
         <Table.ColGroup style={TableStyle.VarMarginColGroupStyle}>
-          <NavBar>
+          <NavBarDeployed>
            <div className={IsVarMarginSelected? NavBarStyle.tabs : NavBarStyle.tabs + " " + NavBarStyle.selected }
                 onClick={()=>{actions.DeployedPanel_ToggleInitVarMargin( !IsVarMarginSelected ) }} >
              Initial Margin
@@ -45,19 +47,19 @@ const AssetsDeployedTableView = (props)=>{
                 onClick={()=>{actions.DeployedPanel_ToggleInitVarMargin( !IsVarMarginSelected )  }}  >
              Variation Margin
            </div>
-          </NavBar>
-          <Table.DataRow content={dataHeader} style={TableStyle.VarMarginHeadStyle} cellWidth={CellWidth} />
+          </NavBarDeployed>
+          <Table.DataRow content={dataHeader} style={TableStyle.VarMarginHeadStyle} cellWidth={DataCellWidth} />
         </Table.ColGroup>
       </Table.RowGroup>
 
      {Content.map((rowBlock, idx)=>{
       return(
        <Table.RowGroup style={TableStyle.DataBlockStyle} key={idx}>
-         <Table.DataRow content={rowBlock.CategoryContent} style={TableStyle.RowStyle1} />
+         <Table.DataRow content={rowBlock.CategoryContent} style={TableStyle.RowStyle1} cellWidth={CatCellWidth}/>
          <Table.ColGroup style={TableStyle.InnerColGroupStyle}>
-           { rowBlock.RowContent.map( (rowData,idy)=>(<Table.DataRow content={rowData} style={TableStyle.RowStyle2} cellWidth={CellWidth} key={idy}/>) ) }
-         <Table.DataRow content={rowBlock.PledgeContent} style={TableStyle.RowPledgeExcessStyle} cellWidth={CellWidth} />
-         <Table.DataRow content={rowBlock.ExcessContent} style={TableStyle.RowPledgeExcessStyle} cellWidth={CellWidth} />
+           { rowBlock.RowContent.map( (rowData,idy)=>(<Table.DataRow key={idy} content={rowData} style={TableStyle.RowStyle2} cellWidth={DataCellWidth} IsDeployedPanelExpandedSideways={IsDeployedPanelExpandedSideways} />) ) }
+         <Table.DataRow content={rowBlock.PledgeContent} style={TableStyle.RowPledgeStyle} cellWidth={DataCellWidth} />
+         <Table.DataRow content={rowBlock.ExcessContent} style={TableStyle.RowExcessStyle} cellWidth={DataCellWidth} />
          </Table.ColGroup>
        </Table.RowGroup>
       )

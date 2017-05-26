@@ -1,7 +1,8 @@
 import has from 'lodash/has'
+import { FETCH_GENERATED_PORTFOLIO } from '../constants/APIcalls'
 
 export const FetchMarginCall = (txnID) => {
-  return fetch('http://valuation.acuo.com/acuo/api/calls/async/generate/' + txnID).then(response => {
+  return fetch(FETCH_GENERATED_PORTFOLIO + txnID).then(response => {
     if(response.ok)
       return response.json()
     else

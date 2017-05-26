@@ -51,7 +51,7 @@ export default class CollateralWidget extends React.Component {
    * @returns {*}
    */
   createAssetGrpCompList(collateralJSList, open, onRemoveFromEarmarked, filterText) {
-    let collateralAssetGroupList = []
+    let collateralAssetGroupList = [];
     let newCollateralObj = {}
 
     _.forOwn(collateralJSList, (value, key) => {
@@ -122,6 +122,9 @@ export default class CollateralWidget extends React.Component {
       changeSideways,
       onRemoveFromEarmarked
     } = this.props
+    // console.log(collateral);
+    // console.log(open);
+    // console.log(onRemoveFromEarmarked);
 
     return (
       <div className={styles.col_R + ' ' + toggleColwidthR}>
@@ -158,8 +161,11 @@ export default class CollateralWidget extends React.Component {
 
             {
               collateral &&
-              this.createAssetGrpCompList(collateral,
-                open, onRemoveFromEarmarked, this.state.filterText)
+              this.createAssetGrpCompList(
+               collateral,
+               open,
+               onRemoveFromEarmarked,
+               this.state.filterText)
             }
 
           </div>
