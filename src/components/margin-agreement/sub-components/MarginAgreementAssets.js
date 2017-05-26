@@ -57,7 +57,6 @@ export default class MarginAgreementPortfolio extends React.Component {
   }
 
   onChangeAdjInput(){
-    // console.log(this.adjInput.value == '')
     this.props.handlerUpdateAdj(this.adjInput.value != '' ? this.adjInput.value : 0.0)
   }
 
@@ -100,8 +99,8 @@ export default class MarginAgreementPortfolio extends React.Component {
       party
     } = this.props
 
+
     let diff = this.getDifferencePortfolio(assetsName, marginData)
-    // diff = (diff < 0) ? "(" + (diff * -1) + ")" : diff
 
     let diffCal, adjCal
 
@@ -223,7 +222,10 @@ export default class MarginAgreementPortfolio extends React.Component {
     return (
       <div className={styles.panel + " " + (isHidePanel ? styles.hidePanel : "")}>
         {displayAssets}
-        <div className={styles.section + ' ' + styles.right}>
+        <div className={ ( marginData.toJS().direction=="IN" ?
+                           styles.section + ' ' + styles.right :
+                           styles.section + ' ' + styles.right + ' ' + styles.out) }
+           >
           <div className={styles.currency}>
             <div>CCY:{marginData.get('ccy')}</div>
             <div className={styles.viewFxRate}> View FX rate
@@ -235,6 +237,9 @@ export default class MarginAgreementPortfolio extends React.Component {
             </div>
           </div>
           <div className={styles.totalMargin}>
+            <div className={styles.direction}>
+             <div>{marginData.toJS().direction}</div>
+            </div>
             <div className={styles.marginTitle}>Total Margin</div>
             <div className={styles.marginValue}>
               {checkNegative((handlerTotalMargin(marginData, assetsName)/ 1000000).toFixed(2))}

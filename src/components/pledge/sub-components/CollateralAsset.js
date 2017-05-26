@@ -40,6 +40,11 @@ class CollateralAsset extends React.Component {
       )
   }
 
+  dragstart_handler(e, propsData){
+    let str = JSON.stringify(propsData)
+    e.dataTransfer.setData('text/plain', str )
+  }
+
   render() {
     const {
       propAsset,
@@ -93,7 +98,7 @@ class CollateralAsset extends React.Component {
 
     if (propIsDisplayAll) {
       return (
-        <div className={styles.collateralRow}>
+        <div className={styles.collateralRow} >
           <div className={styles.collateralCell} title={propAsset}>{maxLengthToEllipsis(propAsset, 17)}</div>
           <div className={styles.collateralCell} title={propPrice}>{propPrice}</div>
           <div className={styles.collateralCell} title={propCcy}>{propCcy}</div>
@@ -110,8 +115,13 @@ class CollateralAsset extends React.Component {
       )
     }
     else {
+     // #OW-324
       return (
-        <div className={styles.collateralRow}>
+
+        <div className={styles.collateralRow} draggable='true'
+                                              onDragStart={ (e)=>{
+                                                this.dragstart_handler(e, this.props)
+                                               }}>
           <div className={styles.collateralCell} title={propAsset}>{maxLengthToEllipsis(propAsset, 17)}</div>
           <div className={styles.collateralCell} title={propPrice}>{propPrice}</div>
           <div className={styles.collateralCell} title={propCcy}>{propCcy}</div>

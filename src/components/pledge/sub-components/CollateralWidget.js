@@ -71,7 +71,7 @@ export default class CollateralWidget extends React.Component {
                               propCollateralAssetList={value}
                               propIsExpanded={true}
                               propIsDisplayAll={open}
-                              propHandleOnRemoveFromEarmarked={onRemoveFromEarmarked}/>
+                              propHandleOnRemoveFromEarmarked={onRemoveFromEarmarked} />
       ]
     })
     return collateralAssetGroupList
