@@ -70,6 +70,7 @@ export default class Selection extends React.Component {
       <tr key={id + "_" + asset.get(ASSET.A_ID)}
           onDrop={ e=>this.dragNdrop.ondrop_handler(e, this.state, asset, mgnType) }
           onDragOver={ e=>this.dragNdrop.onDragOver_handler(e) }
+          onDragLeave={ e=>this.dragNdrop.onDragLeave_handler(e) }
           >
         <td>{asset.get(ASSET.A_NAME)}</td>
         <td>{checkNegative(asset.get(ASSET.A_NET_AMT))}</td>
@@ -90,30 +91,30 @@ export default class Selection extends React.Component {
           </div>
 
         </td>
-        <td>
-         {
-          //<AllocatePopup />
-         }
-        </td>
       </tr>
     )
   }
 
-  dragNdrop = {  ondrop_handler: (e, state, existingData, marginType)=>{  let droppedData = e.dataTransfer.getData("text")
+  dragNdrop = {  ondrop_handler: (e, state, existingData, marginType)=>{  e.currentTarget.style.background = "white"
+                                                                          let droppedData = e.dataTransfer.getData("text")
                                                                           this.setState( (prevState)=>{
                                                                            let clone = _.clone(prevState)
                                                                            _.update(clone, 'allocationPopup', ()=>true)
                                                                            _.update(clone, 'marginType', ()=>marginType)
                                                                            _.update(clone, 'assetAllocated', ()=>JSON.parse(droppedData))
                                                                            if(existingData) _.update(clone, 'existingAsset', ()=>existingData.toJS())
-
                                                                            return clone
                                                                           })
-                                                                          e.preventDefault() },
+                                                                          e.preventDefault()
+                  },
 
-                 onDragOver_handler: (e)=>{ e.preventDefault() },
+                 onDragOver_handler: (e)=>{ e.currentTarget.style.background = "#e5e5e5"
+                                            e.preventDefault()
+                  },
 
-              }
+                 onDragLeave_handler: (e)=>{ e.currentTarget.style.background = "white" }
+
+              } // end dragNdrop{}
 
 
   togglePendingAllocation(e) {
@@ -293,6 +294,7 @@ export default class Selection extends React.Component {
                           className={styles.notAlcText}
                           onDrop={ e=>this.dragNdrop.ondrop_handler(e, this.state, false , ASSET.A_LIST_IM) }
                           onDragOver={ e=>this.dragNdrop.onDragOver_handler(e) }
+                          onDragLeave={ e=>this.dragNdrop.onDragLeave_handler(e) }
                         >
                        Collateral has not been allocated
                       </td>
@@ -300,7 +302,7 @@ export default class Selection extends React.Component {
                     this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).map( (x, id)=>{
                        return this.renderMargin(x,
                                                 id,
-                                                marginCall.toJS().agreementName, 
+                                                marginCall.toJS().agreementName,
                                                 ASSET.A_LIST_IM,
                                                 marginCall.get('GUID'))
                     })
@@ -344,6 +346,7 @@ export default class Selection extends React.Component {
                           className={styles.notAlcText}
                           onDrop={ (e)=>{this.dragNdrop.ondrop_handler(e, this.state, false, ASSET.A_LIST_VM)} }
                           onDragOver={ e=>this.dragNdrop.onDragOver_handler(e) }
+                          onDragLeave={ e=>this.dragNdrop.onDragLeave_handler(e) }
                           >
                           Collateral has not been allocated
                       </td>
