@@ -179,10 +179,12 @@ export default class Selection extends React.Component {
 
   render() {
     const {
-      marginCall, pendingAllocationStore,
+      pendingAllocationStore,
       toggleL, toggleR, sideways,
       onRemoveAssetFromAllocate
     } = this.props
+
+    const {marginCall} = this.props // As of 26May17, only Variation and Initial Margin Types have been implemented. Remember to cater for other marginTypes in the future
 
     let evlEmptyForIntMargin = this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).isEmpty()
     let evlEmptyForVariMargin = this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).isEmpty()

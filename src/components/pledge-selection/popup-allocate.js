@@ -4,6 +4,7 @@ import styles from './popup-allocate.css'
 
 export default class AllocatePopup extends React.Component{
 
+ // As of 26May17, only Variation and Initial Margin Types have been implemented.
  displayMarginType = ( input )=>{
   switch(input){
    case "variationMargin":
