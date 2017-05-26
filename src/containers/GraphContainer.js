@@ -3,7 +3,6 @@ import { GraphComponent } from '../components'
 import { updateReconFilter } from '../actions'
 
 const mapStateToProps = state => ({
-  currentTime: state.mainReducer.getIn(['display', 'timeUpdated']),
   derivatives: state.mainReducer.getIn(['display', 'derivatives'])
 })
 
