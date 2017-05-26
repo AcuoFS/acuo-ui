@@ -7,11 +7,11 @@ export default [
       to: "ACUO US",
       value: "738981.6",
       ccy: "USD",
-      status: "In-Flight"
+      status: "InFlight"
     },
     flightDetailList: [
       {
-        agreement: {
+        asset: {
           main: "US Dollar",
           secondary: ""
         },
@@ -37,7 +37,7 @@ export default [
         }
       },
       {
-        agreement: {
+        asset: {
           main: "TREASURY BILL",
           secondary: ""
         },
@@ -63,7 +63,7 @@ export default [
         }
       },
       {
-        agreement: {
+        asset: {
           main: "JAPAN (5 YEAR ISSUE)",
           secondary: ""
         },
@@ -103,7 +103,7 @@ export default [
     },
     flightDetailList: [
       {
-        agreement: {
+        asset: {
           main: "Euro",
           secondary: ""
         },
@@ -129,7 +129,7 @@ export default [
         }
       },
       {
-        agreement: {
+        asset: {
           main: "BUNDESOBLIGATION",
           secondary: ""
         },
@@ -155,7 +155,7 @@ export default [
         }
       },
       {
-        agreement: {
+        asset: {
           main: "Singapore Dollar",
           secondary: ""
         },
@@ -195,7 +195,7 @@ export default [
     },
     flightDetailList: [
       {
-        agreement: {
+        asset: {
           main: "Singapore Dollar",
           secondary: ""
         },
@@ -221,7 +221,7 @@ export default [
         }
       },
       {
-        agreement: {
+        asset: {
           main: "MCDONALD'S CORP EQUITY",
           secondary: "A2"
         },
@@ -247,7 +247,7 @@ export default [
         }
       },
       {
-        agreement: {
+        asset: {
           main: "EXXON MOBIL CORP EQUITY",
           secondary: ""
         },
