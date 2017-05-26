@@ -1,7 +1,8 @@
 /**
  * Created by vikassaryal on 26/10/16.
  */
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types'
 import {Set, Map} from 'immutable'
 import styles from './FilterBar.css'
 import FilterDropdown from './sub-components/FilterBarDropdown'

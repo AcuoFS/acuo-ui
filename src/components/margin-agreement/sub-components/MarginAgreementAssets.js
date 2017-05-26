@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types'
 import {Map, List} from 'immutable'
 import MarginAgreementDetail from './MarginAgreementDetail'
 import {checkNegative, isEmptyCounterparty} from '../../../utils'
@@ -91,6 +92,7 @@ export default class MarginAgreementPortfolio extends React.Component {
   }
 
   render() {
+    // console.log( "MarginAgrmtAsset props:::" , this.props);
     const {
       marginData, orgName, assetsName,
       handlerTotalMargin, handlerSelectedItem, isHidePanel, adjAmt,
@@ -130,7 +132,8 @@ export default class MarginAgreementPortfolio extends React.Component {
                  onChange={this.onChangeAdjInput}/>
         </div>
       </div>
-    } else {
+    }
+    else {
       diffCal = <div className={styles.sectionRow + ' ' + styles.greyText}>
         <div className={styles.packageLeft}>
           <div>Difference</div>
@@ -223,8 +226,8 @@ export default class MarginAgreementPortfolio extends React.Component {
       <div className={styles.panel + " " + (isHidePanel ? styles.hidePanel : "")}>
         {displayAssets}
         <div className={ ( marginData.toJS().direction=="IN" ?
-                           styles.section + ' ' + styles.right :
-                           styles.section + ' ' + styles.right + ' ' + styles.out) }
+                           styles.section + ' ' + styles.right + ' ' + styles.in :
+                           styles.section + ' ' + styles.right) }
            >
           <div className={styles.currency}>
             <div>CCY:{marginData.get('ccy')}</div>

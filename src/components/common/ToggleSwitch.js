@@ -2,7 +2,8 @@
  * https://www.w3schools.com/howto/howto_css_switch.asp
  */
 
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types'
 import styles from './ToggleSwitch.css'
 
 
