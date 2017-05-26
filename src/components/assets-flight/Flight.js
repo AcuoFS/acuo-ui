@@ -1,5 +1,6 @@
 
-import React, {Proptypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types'
 import FlightItem from './sub-components/FlightItem'
 import {DEPARTURES, ARRIVALS} from '../../constants/FlightTypes'
 import styles from './Flight.css'

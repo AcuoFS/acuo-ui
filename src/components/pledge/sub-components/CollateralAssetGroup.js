@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types'
 import CollateralAssetContainer from '../../../containers/CollateralAssetContainer'
 import {formatDate} from '../../../utils/formatDate'
 import {checkNegative} from '../../../utils'

@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types'
 import CollateralAssetGroup from './CollateralAssetGroup'
 import {COLLATERAL_URL} from '../../../constants/APIcalls'
 import _ from 'lodash'
