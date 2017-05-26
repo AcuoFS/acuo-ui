@@ -21,6 +21,10 @@ const config = {
     FETCH_GENERATED_PORTFOLIO: 'http://valuation.acuo.com/acuo/api/calls/async/generate/',
     FETCH_DEPLOYED_DEPARTURES: 'http://margin.acuo.com/acuo/api/pledge/assets/all',
     POST_MARGIN_CALL_IDS: 'http://margin.acuo.com/acuo/api/margin/send/calls',
+    PROXY_HEALTH_CHECK: DEV_URL + '/common/check-connectivity',
+    MARGIN_HEALTH_CHECK: 'http://margin.acuo.com/acuo/admin/ping',
+    VALUATION_HEALTH_CHECK: 'http://valuation.acuo.com/acuo/admin/ping',
+    COLLATERAL_HEALTH_CHECK: 'http://collateral.acuo.com/acuo/admin/ping',
   },
   local: {
     DASHBOARD_URL: UBUNTU_URL + '/dashboard',
@@ -59,6 +63,10 @@ const config = {
     FETCH_DEPLOYED_DEPARTURES: 'http://qa.acuo.com:7070/acuo/api/pledge/assets/all',
     PLEDGE_REMOVE_ALLOCATED_ASSET: 'tbc',
     POST_MARGIN_CALL_IDS: 'tbc',
+    PROXY_HEALTH_CHECK: 'http://qa.acuo.com:8181/common/check-connectivity',
+    MARGIN_HEALTH_CHECK: 'tbc',
+    VALUATION_HEALTH_CHECK: 'tbc',
+    COLLATERAL_HEALTH_CHECK: 'tbc',
   },
   prod: {},
   test: {

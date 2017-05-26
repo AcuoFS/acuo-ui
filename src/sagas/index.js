@@ -2,7 +2,12 @@ import { delay } from 'redux-saga'
 import { fork, call, put, take, race } from 'redux-saga/effects'
 
 import { FetchMarginCall } from './FetchMarginCall'
-import { checkServerConnectivity } from './CheckServerConnectivity'
+import {
+  checkProxyServerConnectivity,
+  checkMarginServerConnectivity,
+  checkValuationServerConnectivity,
+  checkCollateralServerConnectivity
+} from './CheckServerConnectivity'
 import { pollMarginCall } from '../actions/MarginCallUploadActions'
 import {
   POLL_MARGIN_CALL,
@@ -13,7 +18,10 @@ import { getMarginCallUpload } from  '../actions/MarginCallUploadActions'
 import Notifications from 'react-notification-system-redux'
 
 let serverStatus = {
-  proxy: 'up'
+  proxy: 'up',
+  margin: 'up',
+  valuation: 'up',
+  collateral: 'up'
 }
 
 function* poll(txnID) {
@@ -48,34 +56,39 @@ function* watchMarginCall() {
   }
 }
 
+function* checkSpecificServer(server, failMsg, uid, successMsg) {
+  const result = yield call(server)
+  if (result === 'failed') {
+    yield put(Notifications.error({
+      title: 'Warning',
+      message: failMsg,
+      position: 'tr',
+      uid: uid,
+      autoDismiss: 0
+    }))
+    serverStatus[uid] = 'down'
+  } else if (result === 'passed') {
+    if (serverStatus[uid] === 'down') {
+      yield put(Notifications.success({
+        title: 'Reconnected',
+        message: successMsg,
+        position: 'tr',
+        uid: uid + 'Success',
+        autoDismiss: 0
+      }))
+      serverStatus[uid] = 'up'
+    }
+  }
+}
 
 function* serverHealthChecks() {
   while(true){
     try{
       // console.log('server check start')
-      const result = yield call(checkServerConnectivity)
-      // console.log(result)
-      if(result === 'failed'){
-        yield put(Notifications.error({
-          title: 'Warning',
-          message: 'Lost connectivity with proxy server',
-          position: 'tr',
-          uid: 'proxy',
-          autoDismiss: 0
-        }))
-        serverStatus.proxy = 'down'
-      }else if(result === 'passed'){
-        if(serverStatus.proxy === 'down'){
-          yield put(Notifications.success({
-            title: 'Reconnected',
-            message: 'Connectivity with proxy server has been restored',
-            position: 'tr',
-            uid: 'proxySuccess',
-            autoDismiss: 0
-          }))
-          serverStatus.proxy = 'up'
-        }
-      }
+      yield checkSpecificServer(checkProxyServerConnectivity, 'Lost connectivity to Proxy server', 'proxy', 'Reconnected with proxy server')
+      yield checkSpecificServer(checkMarginServerConnectivity, 'Lost connectivity to Margin server', 'margin', 'Reconnected with Margin server')
+      yield checkSpecificServer(checkValuationServerConnectivity, 'Lost connectivity to Valuation server', 'valuation', 'Reconnected with Valuation server')
+      yield checkSpecificServer(checkCollateralServerConnectivity, 'Lost connectivity to Collateral server', 'collateral', 'Reconnected with Collateral server')
 
       yield call(delay, 10000)
       // console.log('after pause')
