@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types'
 import {Set, Map} from 'immutable'
 import FilterBarDropdown from './sub-components/FilterBarDropdown'
 

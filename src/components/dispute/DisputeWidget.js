@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types'
 import DisputeTable from './sub-components/DisputeTable'
 import * as DISPUTE_FILTER from '../../constants/DisputeFilters'
 import mockData from './MockDisputes'

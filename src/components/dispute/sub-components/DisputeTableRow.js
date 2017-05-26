@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types'
 import ExclamationIcon from '../../../../images/dispute/Exclamation.svg'
 import {formatDate} from '../../../utils/'
 import styles from './DisputeTable.css'
