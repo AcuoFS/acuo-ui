@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './tableUI.css'
 
 const ColGroup = (props)=>{
@@ -61,6 +62,13 @@ const DataRow = (props)=>{
    )
 }
 
+DataRow.propTypes = {
+ style: PropTypes.object,
+ contentType: PropTypes.string,
+ content: PropTypes.arrayOf(PropTypes.string),
+ cellWidth: PropTypes.arrayOf(PropTypes.number)
+}
+
 const DataRowCell = (props)=>{
 
   let contentType = props.contentType || null;
@@ -103,6 +111,12 @@ const DataRowCell = (props)=>{
    </div> )
 }
 
+DataRowCell.propTypes = {
+ contentType: PropTypes.string,
+ cellWidth: PropTypes.number,
+ IsDeployedPanelExpandedSideways: PropTypes.bool
+}
+
 const Table = {
   ColGroup,
   RowGroup,
@@ -110,6 +124,7 @@ const Table = {
 }
 
 export default Table
+
 
 //-----Possible Refactoring-----
 /*

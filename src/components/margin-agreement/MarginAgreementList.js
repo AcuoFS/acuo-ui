@@ -46,8 +46,6 @@ export default class MarginAgreementList extends React.Component {
 
   render() {
 
-   // console.log("<MarginAgreementList> props :::", this.props.recon.toJS())
-
     const {recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList,
       onSelectSecondLevelItem, currencyInfo} = this.props
     return (

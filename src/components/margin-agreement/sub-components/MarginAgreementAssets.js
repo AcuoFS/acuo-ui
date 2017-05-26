@@ -226,8 +226,8 @@ export default class MarginAgreementPortfolio extends React.Component {
       <div className={styles.panel + " " + (isHidePanel ? styles.hidePanel : "")}>
         {displayAssets}
         <div className={ ( marginData.toJS().direction=="IN" ?
-                           styles.section + ' ' + styles.right :
-                           styles.section + ' ' + styles.right + ' ' + styles.out) }
+                           styles.section + ' ' + styles.right + ' ' + styles.in :
+                           styles.section + ' ' + styles.right) }
            >
           <div className={styles.currency}>
             <div>CCY:{marginData.get('ccy')}</div>
