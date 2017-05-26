@@ -97,14 +97,13 @@ export default class MarginCall extends React.Component {
     }
   }
 
-  onSendButton(selectedRows) {
-    // todo: API call to endpoint should be here
-    alert('selected ids: ' + selectedRows.map(row => row.referenceIdentifier))
+  onSendButton(selectedRows, onPostMarginCallIDs) {
+    onPostMarginCallIDs(selectedRows.map(row => row.referenceIdentifier))
   }
 
   render() {
 
-    const { uploadDataFlag, requestingValuation } = this.props
+    const { uploadDataFlag, requestingValuation, onPostMarginCallIDs } = this.props
 
     return (
       <div className={styles.container + ' ' + (requestingValuation || uploadDataFlag ? '' : styles.hidden)}>
@@ -117,7 +116,7 @@ export default class MarginCall extends React.Component {
 
         <div className={styles.header}>
           <div className={styles.title}>Margin Call</div>
-          <div className={styles.button} disabled={true} onClick={() => this.onSendButton(this.state.selectedRows)}>
+          <div className={styles.button + ' ' + (this.state.selectedRows.length <= 0 ? styles.disabled : '')} disabled={this.state.selectedRows.length <= 0} onClick={() => this.onSendButton(this.state.selectedRows, onPostMarginCallIDs)}>
             Send selected Margin Calls
           </div>
         </div>

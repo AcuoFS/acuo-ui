@@ -2,9 +2,9 @@ export default [
   {
     header: {
       time: "14:00",
-      agreement: "Acuo SG - Counterparty A",
+      agreement: "Acuo SG - Counterparty AAA",
       from: "Acuo SG",
-      to: "Counterparty A",
+      to: "Counterparty",
       value: "738981.6",
       ccy: "USD",
       status: "In-Flight"
@@ -12,7 +12,7 @@ export default [
     flightDetailList: [
       {
         agreement: {
-          main: "US Dollar",
+          main: "US Dollar AAC",
           secondary: ""
         },
         from: {
@@ -94,9 +94,9 @@ export default [
   {
     header: {
       time: "15:00",
-      agreement: "ACUO SG - Counterparty B1",
+      agreement: "ACUO SG - Counterparty AAB",
       from: "ACUO SG",
-      to: "Counterparty B1",
+      to: "Counterparty",
       value: "141473.6",
       ccy: "USD",
       status: "Delayed"
@@ -134,7 +134,7 @@ export default [
           secondary: ""
         },
         from: {
-          main: "Custodian 1",
+          main: "Custodian 1 AAA",
           secondary: "CustAcct1B"
         },
         to: {
@@ -188,7 +188,7 @@ export default [
       time: "17:00",
       agreement: "ACUO SG - Counterparty C1",
       from: "ACUO SG",
-      to: "Counterparty C1",
+      to: "Counterparty AAC",
       value: "707910.7",
       ccy: "USD",
       status: "Cancelled"

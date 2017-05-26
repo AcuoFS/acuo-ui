@@ -109,7 +109,7 @@ export default [
         },
         from: {
           main: "Custodian 7",
-          secondary: "CustAcct7E"
+          secondary: "CustAcct7EE"
         },
         to: {
           main: "Custodian 2",
@@ -223,7 +223,7 @@ export default [
       {
         agreement: {
           main: "MCDONALD'S CORP EQUITY",
-          secondary: ""
+          secondary: "A2"
         },
         from: {
           main: "Custodian 8",

@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { clearTime, getDate } from '../utils'
 import * as ActionTypes from '../constants/ActionTypes'
 
-const INITIAL_STATE = Map({"data": Map({"derivatives": List()}), "display": Map({"derivatives": List()})})
+const INITIAL_STATE = Map({"data": Map({"derivatives": List(), "menu": Map({"alerts": List()})}), "display": Map({"derivatives": List(), "menu": Map({"alerts": List()})})})
 
 export function initState(state = Map(), newJSON){
 
@@ -24,7 +24,7 @@ export function initState(state = Map(), newJSON){
             return updateStateStatus(json, x, 'display')
 
           case 'FILTER_STATE_TIMEWINDOW':
-            return updateTimeWindow(json, x.get('minTime'), x.get('maxTime'), 'display')
+            return updateTimeWindow(json, x.get('timeRangeText'), x.get('minTime'), x.get('maxTime'), 'display')
 
           case 'FILTER_STATE_CPTYORG':
             return updateStateCptyOrg(json, x, 'display')
@@ -35,7 +35,7 @@ export function initState(state = Map(), newJSON){
       }
       , fromJS({"display": json})).get('display').toJS()
 
-  return state.set('data', fromJS(json)).set('display', fromJS(lol))
+  return state.withMutations((state) => state.set('data', fromJS(json)).set('display', fromJS(lol)))
   //pushed into two separate nodes, data(for retention of persistent data), display(for rendering the UI)
 }
 
@@ -53,7 +53,9 @@ const plusMinusThreeDays = (json) => {
         _.set(status, 'timeFrames', _.filter(status.timeFrames, timeFrame => (
           _.inRange((new Date(timeFrame.timeRangeStart)).getTime(), dMinusTwo.getTime(), dPlusOne.getTime())
         ))))
-      ))))
+      )))),
+    menu: json.menu,
+    timeUpdated: json.timeUpdated
   }
 
 }
@@ -139,34 +141,34 @@ function applyCPTYFilter(derivatives, cptyEntityList) {
 //update state
 export function updateStateDeriv(state, action, store){
   if(action.get('filter') == "All"){
-    return state.set('display',state.get(store))
+    return state.set('display',state.get('data'))
   }else
     return state.setIn(['display', 'derivatives'], applyFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
 export function updateStateLegal(state, action, store){
   if(action.get('filter') == "All"){
-    return state.set('display', state.get(store))
+    return state.set('display', state.get('data'))
   }else
     return state.setIn(['display','derivatives'], applyLegalEntityFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
 export function updateStateStatus(state, action, store) {
   if (action.get('filter') == "all") {
-    return state.set('display', state.get(store))
+    return state.set('display', state.get('data'))
   } else
     return state.setIn(['display', 'derivatives'], applyStatusFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
-export function updateTimeWindow(state, actionMin, actionMax , store){
-  if(actionMin =='Today:All'){
-    return state.set('display', state.get(store))
+export function updateTimeWindow(state, text, actionMin, actionMax , store){
+  if(text.toLowerCase() === 'today: all'){
+    return state.set('display', state.get('data'))
   }
-  else if(actionMin =='Yesterday:All'){
-
+  else if(text.toLowerCase() === 'yesterday: all'){
+    return state.set('display', state.get('data'))
   }
-  else if(actionMin =='Tomorrow:All'){
-
+  else if(text.toLowerCase() === 'tomorrow: all'){
+    return state.set('display', state.get('data'))
   }
   else{
     return state.setIn(['display', 'derivatives'], applyTimeWindowFilter(state.getIn([store, 'derivatives']), actionMin, actionMax))
@@ -175,14 +177,14 @@ export function updateTimeWindow(state, actionMin, actionMax , store){
 
 export function updateStateCptyOrg(state, action, store){
   if(action.get('filter') == "All"){
-    return state.set('display', state.get(store))
+    return state.set('display', state.get('data'))
   }else
     return state.setIn(['display','derivatives'], applyCptyOrgFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
 export function updateStateCptyEntity(state, action, store) {
   if(action.get('filter').includes("All")){
-    return state.set('display', state.get(store))
+    return state.set('display', state.get('data'))
   }else
     return state.setIn(['display','derivatives'], applyCPTYFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
@@ -200,7 +202,7 @@ export function multifilters(state, action){
         return updateStateStatus(newState, filter, 'display')
 
       case 'FILTER_STATE_TIMEWINDOW':
-        return updateTimeWindow(newState, filter.get('minTime'), filter.get('maxTime'), 'display')
+        return updateTimeWindow(newState, filter.get('timeRangeText'), filter.get('minTime'), filter.get('maxTime'), 'display')
 
       case 'FILTER_STATE_CPTYORG':
         return updateStateCptyOrg(newState, filter, 'display')
@@ -208,7 +210,7 @@ export function multifilters(state, action){
       case 'FILTER_STATE_CPTYENTITY':
         return updateStateCptyEntity(newState, filter, 'display')
     }
-  }, attachFilter(initState(state, state.get('data')), action))
+  }, attachFilter(state.set('display', state.get('data')), action))
 
 }
 

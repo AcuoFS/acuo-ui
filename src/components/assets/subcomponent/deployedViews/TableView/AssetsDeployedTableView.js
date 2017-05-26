@@ -34,7 +34,7 @@ const AssetsDeployedTableView = (props)=>{
               Counterparty
             </div>
           </NavBarDeployed>
-         <Table.DataRow content={categoryHeader} style={TableStyle.RegCptyHeadStyle} cellWidth={CatCellWidth}/>
+         <Table.DataRow contentType={"deployed_categoryHeader"} content={categoryHeader} style={TableStyle.RegCptyHeadStyle} cellWidth={CatCellWidth}/>
 
         </Table.ColGroup>
         <Table.ColGroup style={TableStyle.VarMarginColGroupStyle}>
@@ -48,18 +48,18 @@ const AssetsDeployedTableView = (props)=>{
              Variation Margin
            </div>
           </NavBarDeployed>
-          <Table.DataRow content={dataHeader} style={TableStyle.VarMarginHeadStyle} cellWidth={DataCellWidth} />
+          <Table.DataRow contentType={"deployed_dataHeader"} content={dataHeader} style={TableStyle.VarMarginHeadStyle} cellWidth={DataCellWidth} />
         </Table.ColGroup>
       </Table.RowGroup>
 
      {Content.map((rowBlock, idx)=>{
       return(
        <Table.RowGroup style={TableStyle.DataBlockStyle} key={idx}>
-         <Table.DataRow content={rowBlock.CategoryContent} style={TableStyle.RowStyle1} cellWidth={CatCellWidth}/>
+         <Table.DataRow contentType={"deployed_CategoryContent"} content={rowBlock.CategoryContent} style={TableStyle.RowStyle1} cellWidth={CatCellWidth}/>
          <Table.ColGroup style={TableStyle.InnerColGroupStyle}>
-           { rowBlock.RowContent.map( (rowData,idy)=>(<Table.DataRow key={idy} content={rowData} style={TableStyle.RowStyle2} cellWidth={DataCellWidth} IsDeployedPanelExpandedSideways={IsDeployedPanelExpandedSideways} />) ) }
-         <Table.DataRow content={rowBlock.PledgeContent} style={TableStyle.RowPledgeStyle} cellWidth={DataCellWidth} />
-         <Table.DataRow content={rowBlock.ExcessContent} style={TableStyle.RowExcessStyle} cellWidth={DataCellWidth} />
+           { rowBlock.RowContent.map( (rowData,idy)=>(<Table.DataRow contentType={"deployed_rowData"} key={idy} content={rowData} style={TableStyle.RowStyle2} cellWidth={DataCellWidth} IsDeployedPanelExpandedSideways={IsDeployedPanelExpandedSideways} />) ) }
+         <Table.DataRow contentType={"deployed_PledgeContent"} content={rowBlock.PledgeContent} style={TableStyle.RowPledgeStyle} cellWidth={DataCellWidth} />
+         <Table.DataRow contentType={"deployed_ExcessContent"} content={rowBlock.ExcessContent} style={TableStyle.RowExcessStyle} cellWidth={DataCellWidth} />
          </Table.ColGroup>
        </Table.RowGroup>
       )

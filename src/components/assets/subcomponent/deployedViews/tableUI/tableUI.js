@@ -29,9 +29,10 @@ const RowGroup = (props)=>{
 const DataRow = (props)=>{
   if(!props.style){throw "DataRow's style not passed in through props"}
   let className = props.style.className;
-  let content = props.content || [" "]
-  let IsDeployedPanelExpandedSideways = props.IsDeployedPanelExpandedSideways; //console.log(IsDeployedPanelExpandedSideways);
-  let siblings = content.length // Number of cells in row instance
+  let contentType = props.contentType || null; if (!contentType) console.warn("Unspecified contentType")
+  let content = props.content || [""]
+  let IsDeployedPanelExpandedSideways = props.IsDeployedPanelExpandedSideways;
+  let siblings = content.length
   let width =  `${(props.style.width || 100).toString()}%`
   let cellWidth = props.cellWidth
   let height = ()=>{
@@ -42,7 +43,6 @@ const DataRow = (props)=>{
     }
     else { return "24px" }
   }
-
   return(
     <div className={className}
          ref={ (node)=>{ if(node){node.style.height = height(); node.style.width = width}  }}
@@ -52,6 +52,7 @@ const DataRow = (props)=>{
       { _.map(content, (content, idx)=>{
        return <DataRowCell key={idx}
                            id={idx}
+                           contentType={contentType}
                            content={content}
                            siblings={siblings}
                            IsDeployedPanelExpandedSideways={IsDeployedPanelExpandedSideways}
@@ -61,28 +62,38 @@ const DataRow = (props)=>{
 }
 
 const DataRowCell = (props)=>{
-  let cellWidth = props.cellWidth
-  let IsDeployedPanelSideExpanded = props.IsDeployedPanelExpandedSideways;
-  let cellType = (props, styles, IsDeployedPanelExpandedSideways)=>{
 
-   if(props.content.length > 40){
-    let text = props.content.substring(0,41) + "..."
-    return (<div className={styles.CellVisible} title={props.content}> {text || "---No Content---"} </div>)
+  let contentType = props.contentType || null;
+  let cellWidth = props.cellWidth
+  let IsDeployedPanelSideExpanded = props.IsDeployedPanelExpandedSideways
+  let cellType = (props, styles, IsDeployedPanelExpandedSideways)=>{
+   if(contentType==="deployed_categoryHeader" || contentType==="deployed_CategoryContent" || contentType==="deployed_dataHeader" || contentType==="deployed_rowData" || contentType==="deployed_PledgeContent" || contentType==="deployed_ExcessContent" ){
+       if(contentType==="deployed_CategoryContent"){
+           if(props.content.length > 40) <div className={styles.CellVisible} title={props.content}> { props.content.substring(0,41) + "..." || "---No Content---"} </div>
+           else return <div className={styles.CellVisible} title={props.content}> {props.content || "---No Content---"} </div>
+       }
+       else{
+           if(props.id===0 && props.content.length > 15 && !IsDeployedPanelSideExpanded) return <div className={styles.CellVisible} title={props.content}> {  (props.content.substring(0,16) + "...") || "---No Content---"} </div>
+           else { if(props.content.length > 15) return <div className={styles.CellVisible} title={props.content}> { props.content.substring(0,16) + "..." || "---No Content---"} </div>
+                  else return <div className={styles.CellVisible} title={props.content}> {props.content || "---No Content---"} </div> }
+       }
    }
-   else{
-     if(props.id===0 && props.content.length > 12 && !IsDeployedPanelSideExpanded){
-      let text = props.content.substring(0,12) + "..."
-      return <div className={styles.CellVisible} title={props.content}> {text || "---No Content---"} </div>
-     } else {
-      if(props.content.length > 15){
-       let text = props.content.substring(0,12) + "..."
-       return <div className={styles.CellVisible} title={props.content}> {text || "---No Content---"} </div>
+   else {
+      if(props.content.length > 12){
+        if(props.id===3){
+         return <div className={styles.CellVisible} title={props.content}> { props.content || "---No Content---"} </div>
+        }
+        else{
+         console.assert( props.content.length > 12, "Cell content: " , props.content , " is below " , props.content.length , " characters!")
+         return <div className={styles.CellVisible} title={props.content}> { props.content.substring(0,10) + "..." || "---No Content---"} </div>
+        }
       }
       else{
-       return <div className={styles.CellVisible} title={props.content}> {props.content || "---No Content---"} </div>
+        console.assert( props.content.length <= 12, "Cell content: " , props.content , " exceeds " , props.content.length, " characters" )
+        return <div className={styles.CellVisible} title={props.content}> {props.content || "---No Content---"} </div>
       }
-     }
    }
+
   }
 
   return(

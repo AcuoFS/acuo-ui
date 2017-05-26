@@ -4,6 +4,7 @@ import _ from 'lodash'
 const INITIAL_STATE = fromJS({
   ui: { 'DeployedPanel_ExpandedSideways': false,
         'DeployedPanel_ExpandedVertically': false,
+        'DeployedPanel_SearchText': "",
         'IsVarMarginSelected': true,
         'IsRegionSelected': true,
         'HomePanel_ExpandedVertically': false,
@@ -27,7 +28,11 @@ const AssetsReducer = (state = INITIAL_STATE , action)=>{
     case "@DEPLOYED__TOGGLE_CATEGORY":
       return state.setIn(['ui','IsRegionSelected'], fromJS(action.payload))
 
-   //For Deployed Panel
+    case "@DEPLOYED__SEARCHTEXT":
+      // console.log("DEPLOYED__SEARCHTEXT |-> ", action.payload);
+      return state.setIn(['ui','DeployedPanel_SearchText'], fromJS(action.payload))
+
+   //For Home Panel
     case "@HOME__TOGGLE_Y_EXPAND":
       return state.setIn(['ui','HomePanel_ExpandedVertically'], fromJS(action.payload))
 

@@ -9,9 +9,9 @@ import Table from '../tableUI/tableUI.js'
 const AssetsHomeTableView = (props)=>{
    // console.log("@---AssetsHomeTableView");
    let IsPledgeSelected = props.state.ui.HomePanel_IsPledgeSelected
-   let IsExpanded = props.state.ui.DeployedPanel_ExpandedSideways
+   let IsDeployedPanelExpandedSideways = props.state.ui.DeployedPanel_ExpandedSideways
    let {Content, actions, TableStyle} = props
-   let cellWidth = (IsExpanded?  props.cellWidth.minimized : props.cellWidth.expanded )
+   let cellWidth = (IsDeployedPanelExpandedSideways?  props.cellWidth.minimized : props.cellWidth.expanded )
 
    return(
     <div className={styles.tableView}>
@@ -32,10 +32,10 @@ const AssetsHomeTableView = (props)=>{
       </Table.RowGroup>
 
       <Table.ColGroup style={ TableStyle.RowGroupStyle }>
-        <Table.DataRow content={Content.Header} style={TableStyle.HeaderRow } cellWidth={ cellWidth } />
+        <Table.DataRow contentType={ "home_Header"} content={Content.Header} style={TableStyle.HeaderRow } cellWidth={ cellWidth } />
 
         {
-           Content.RowData.map((row,idx)=>( <Table.DataRow content={row} style={TableStyle.DataRow} key={idx} cellWidth={ cellWidth } /> ) )
+           Content.RowData.map((row,idx)=>( <Table.DataRow contentType={ "home_Row" } content={row} style={TableStyle.DataRow} IsDeployedPanelExpandedSideways={IsDeployedPanelExpandedSideways} key={idx} cellWidth={ cellWidth } /> ) )
         }
 
       </Table.ColGroup>

@@ -10,7 +10,7 @@ import { AssetsPanel } from '../../actions/AssetsActions.js'
 import Styles from "./DeployedPage.css"
 import { initDepartures } from '../../actions/DeployedActions'
 import { FETCH_DEPLOYED_DEPARTURES } from './../../constants/APIcalls'
-
+import { hashHistory } from 'react-router'
 
 class DeployedPage extends React.Component {
   constructor(props){
@@ -19,6 +19,7 @@ class DeployedPage extends React.Component {
   }
   componentDidMount () {
     window.scrollTo(0, 0)
+    if(localStorage.loginAt < Date.now()){  hashHistory.push("/")  }
   }
   render() {
     return (

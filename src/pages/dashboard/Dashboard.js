@@ -11,6 +11,7 @@ import styles from './Dashboard.css'
 import { initState } from '../../actions'
 import { DASHBOARD_URL } from '../../constants/APIcalls'
 import { fromJS } from 'immutable'
+import { hashHistory } from 'react-router'
 
 export class Dashboard extends React.Component {
   constructor(props){
@@ -20,7 +21,10 @@ export class Dashboard extends React.Component {
 
   componentDidMount () {
     window.scrollTo(0, 0)
+    if(localStorage.loginAt < Date.now()){ hashHistory.push("/") }
   }
+
+
 
   render() {
     return (
