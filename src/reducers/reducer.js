@@ -63,7 +63,7 @@ const plusMinusThreeDays = (json) => {
 
 function applyFilter(derivatives, type){
   return derivatives.filter((x) => {
-    return x.get('type') == type
+    return x.get('type') === type
   })
 }
 
@@ -142,34 +142,34 @@ function applyCPTYFilter(derivatives, cptyEntityList) {
 //update state
 export function updateStateDeriv(state, action, store){
   if(action.get('filter') == "All"){
-    return state.set('display',state.get('data'))
+    return state
   }else
     return state.setIn(['display', 'derivatives'], applyFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
 export function updateStateLegal(state, action, store){
   if(action.get('filter') == "All"){
-    return state.set('display', state.get('data'))
+    return state
   }else
     return state.setIn(['display','derivatives'], applyLegalEntityFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
 export function updateStateStatus(state, action, store) {
   if (action.get('filter') == "all") {
-    return state.set('display', state.get('data'))
+    return state
   } else
     return state.setIn(['display', 'derivatives'], applyStatusFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
 export function updateTimeWindow(state, text, actionMin, actionMax , store){
   if(text.toLowerCase() === 'today: all'){
-    return state.set('display', state.get('data'))
+    return state
   }
   else if(text.toLowerCase() === 'yesterday: all'){
-    return state.set('display', state.get('data'))
+    return state
   }
   else if(text.toLowerCase() === 'tomorrow: all'){
-    return state.set('display', state.get('data'))
+    return state
   }
   else{
     return state.setIn(['display', 'derivatives'], applyTimeWindowFilter(state.getIn([store, 'derivatives']), actionMin, actionMax))
@@ -178,14 +178,14 @@ export function updateTimeWindow(state, text, actionMin, actionMax , store){
 
 export function updateStateCptyOrg(state, action, store){
   if(action.get('filter') == "All"){
-    return state.set('display', state.get('data'))
+    return state
   }else
     return state.setIn(['display','derivatives'], applyCptyOrgFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
 export function updateStateCptyEntity(state, action, store) {
   if(action.get('filter').includes("All")){
-    return state.set('display', state.get('data'))
+    return state
   }else
     return state.setIn(['display','derivatives'], applyCPTYFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }

@@ -17,7 +17,7 @@ import UploadWidgetContainer from './UploadWidgetContainer'
 import ReconDisputeContainer from'./ReconDisputeContainer'
 import LoginContainer from './LoginContainer'
 import TwoFA_Container from './TwoFA_Container.js'
-
+import NotificationContainer from './NotificationContainer'
 
 export {
   FilterContainer,
@@ -38,5 +38,6 @@ export {
   UploadWidgetContainer,
   ReconDisputeContainer,
   LoginContainer,
-  TwoFA_Container
+  TwoFA_Container,
+  NotificationContainer
 }

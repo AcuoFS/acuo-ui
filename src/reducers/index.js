@@ -9,6 +9,8 @@ import DisputeReducer from './DisputeReducer'
 import AgreementsReducer from './AgreementsReducer'
 import AssetsReducer from './AssetsReducer'
 import DeployedReducer from './DeployedReducer'
+//import NotificationReducer from './NotificationReducer'
+import {reducer as NotificationReducer} from 'react-notification-system-redux'
 
 const reducer = combineReducers({
   mainReducer,
@@ -19,7 +21,8 @@ const reducer = combineReducers({
   DisputeReducer,
   AgreementsReducer,
   AssetsReducer,
-  DeployedReducer
+  DeployedReducer,
+  NotificationReducer
 })
 
 export default reducer
