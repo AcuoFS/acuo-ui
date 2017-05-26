@@ -13,7 +13,7 @@ export default class FlightDetailRow extends React.Component {
         case FLIGHT_STATUS.IN_FLIGHT:
           statusCell =
             <div className={styles.flightStatus + " " + styles.flightStatusBlue}>
-              {propStatus}
+              In-Flight
             </div>
           break
         case FLIGHT_STATUS.DELAYED:
@@ -62,6 +62,7 @@ export default class FlightDetailRow extends React.Component {
       propCcy,
       propStatus,
       propRowStyle,
+      propAsset,
       propHandlerExpand
     } = this.props
 
@@ -93,10 +94,18 @@ export default class FlightDetailRow extends React.Component {
         <div className={styles.flightItemTableCell}>
           <div>{this.getTextFromObjectOrStr(propTime)}</div>
         </div>
+        { propAgreement &&
+          <div className={styles.flightItemTableCell}>
+            <div>{this.getTextFromObjectOrStr(propAgreement)}</div>
+            {this.renderSecondRow(propAgreement.secondary)}
+          </div>
+        }
+        { propAsset &&
         <div className={styles.flightItemTableCell}>
-          <div>{this.getTextFromObjectOrStr(propAgreement)}</div>
-          {this.renderSecondRow(propAgreement.secondary)}
+          <div>{this.getTextFromObjectOrStr(propAsset)}</div>
+          {this.renderSecondRow(propAsset.secondary)}
         </div>
+        }
         <div className={styles.flightItemTableCell}>
           <div>{this.getTextFromObjectOrStr(propFrom)}</div>
           {this.renderSecondRow(propFrom.secondary)}
