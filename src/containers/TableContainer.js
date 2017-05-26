@@ -6,9 +6,11 @@ import _ from 'lodash'
 import { List } from 'immutable'
 
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => {
+ return {
   derivatives: state.mainReducer.getIn(['display', 'derivatives']).toJS() || []
-})
+ }
+}
 
 const mapDispatchToProps = dispatch => ({
 

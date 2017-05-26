@@ -1,7 +1,8 @@
 /**
  * Created by panyong on 4/11/16.
  */
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import MarginAgreementPortfolio from './sub-components/MarginAgreementPortfolio'
 import {UNMATCHED_PORTFOLIO_URL} from '../../constants/APIcalls'
 import styles from './MarginAgreementList.css'
@@ -10,10 +11,6 @@ import styles from './MarginAgreementList.css'
 export default class MarginAgreementList extends React.Component {
   constructor(props) {
     super(props)
-
-    // this.state = {
-    //   adjAmount: 0.0
-    // }
 
     const {recon} = this.props
     this.displayLineItems = this.displayLineItems.bind(this)
@@ -26,9 +23,7 @@ export default class MarginAgreementList extends React.Component {
 
   displayLineItems(recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList,
                    onSelectSecondLevelItem, currencyInfo) {
-    return (recon.map((x) => {
-
-      if(x.get('direction') == 'OUT')
+    return (recon.map((x , id) => {
       return (
         <MarginAgreementPortfolio
           key={x}
@@ -50,6 +45,7 @@ export default class MarginAgreementList extends React.Component {
   }
 
   render() {
+
     const {recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList,
       onSelectSecondLevelItem, currencyInfo} = this.props
     return (

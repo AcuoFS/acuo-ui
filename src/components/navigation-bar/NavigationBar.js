@@ -42,7 +42,7 @@ export default class NavigationBar extends React.Component {
         <NavigationBarItem selected={this.props.curPage === '/pledge'}
                            label={'Pledge'}
                            toUrl={'/pledge'}
-                           notifications={_.find(menuNotifications, {"item": "Pledged"})}/>
+                           notifications={_.find(menuNotifications, {"item": "Reconciled"})}/>
         <NavigationBarItem selected={this.props.curPage === '/deployed'}
                            label={'Deployed'}
                            toUrl={'/deployed'}/>
@@ -59,7 +59,7 @@ export default class NavigationBar extends React.Component {
                    src={'./images/dashboard/navbar/logout.png'}
                    alt=""
                    title="Logout"
-                   onClick={ ()=>{ hashHistory.push("/") } }/>
+                   onClick={ ()=>{ localStorage.clear() ; hashHistory.push("/") } }/>
             </div>
           </div>
         </div>

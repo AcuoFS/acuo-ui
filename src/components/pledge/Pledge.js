@@ -38,9 +38,11 @@ class Pledge extends React.Component {
       this.props.onInitOptimisationSettings(obj.items)
     })
 
+    // #OW-324
     fetch(MARGIN_SELECTION_URL).then(response => {
       return response.json()
     }).then(obj => {
+      // console.log("Selection Response Received", obj);
       this.props.initSelection(obj)
     })
   }
@@ -71,7 +73,9 @@ class Pledge extends React.Component {
     }
   }
 
+  // #OW-324
   renderSelection(x, onTogglePendingAllocation, pendingAllocation, index, onRemoveAssetFromAllocate) {
+    // console.log(x.toJS());
     return (<Selection sideways={this.state.selectionSideway}
                        clicked={this.changeSideways}
                        chkTick={this.chkTick}
@@ -85,16 +89,9 @@ class Pledge extends React.Component {
   }
 
   //generic checker
-  checkIfExist(something) {
-    return something || List()
-  }
+  checkIfExist(something) { return something || List() }
 
-
-  onPledgeButtonClick(e) {
-
-
-    alert('Pledge Button Click')
-  }
+  onPledgeButtonClick(e) { alert('Pledge Button Click') }
 
   sumOfIMVM(sumSelX, x) {
     return sumSelX + (x.getIn(['allocated', 'initialMargin'])
@@ -104,35 +101,30 @@ class Pledge extends React.Component {
   }
 
   render() {
-    const {
-      selection, onTogglePendingAllocation,
-      pendingAllocation, onRemoveAssetFromAllocate
-    } = this.props
+    // console.log("props: ", this.props);
+    const { selection, onTogglePendingAllocation, pendingAllocation, onRemoveAssetFromAllocate } = this.props
 
     return (
       <div className={styles.pledgeContainer}>
         <div className={styles.sliderAndStatus}>
-
           <OptimisationWidget {...this.props}/>
-
-          <div className={styles.panel} id={styles.pleStatus}>
-            {/*<div className={styles.panelTitle}>Pledge Status</div>*/}
-            <img src="./images/pledge/Pledge-status-widget.png"/>
-          </div>
+          <div className={styles.panel} id={styles.pleStatus}> <img src="./images/pledge/Pledge-status-widget.png"/> </div>
         </div>
 
         <div className={styles.secDivider}/>
 
         <div className={styles.flexContainer}>
 
+          {/*Render Selection Widgets*/}
           <div className={styles.col_L + ' ' + this.state.toggleColwidthL}>
-
-            {this.checkIfExist(selection)
-              .map((x, index) => this.renderSelection(x, onTogglePendingAllocation, pendingAllocation, index,
-                onRemoveAssetFromAllocate))}
-
+            {this.checkIfExist(selection).map((x, index) => this.renderSelection(x,
+                                                                                 onTogglePendingAllocation,
+                                                                                 pendingAllocation,
+                                                                                 index,
+                                                                                 onRemoveAssetFromAllocate))}
           </div>
 
+          {/*Render Collateral Widgets*/}
           <CollateralWidgetContainer
             toggleColwidthR={this.state.toggleColwidthR}
             sideways={this.state.sideways}
@@ -141,9 +133,6 @@ class Pledge extends React.Component {
 
         </div>
       </div>
-
-
-
     )
   }
 }

@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import {plusBox, minuxBox} from '../../../../images/common'
 import * as CONSTANTS from '../../../constants/AgreementsConstants'
 import AgreementsSummaryRow from './AgreementsSummaryRow'

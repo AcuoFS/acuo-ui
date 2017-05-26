@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import * as FLIGHT_STATUS from '../../../constants/FlightStatuses'
 import styles from './FlightItemTable.css'
 import {checkNegative} from '../../../utils'

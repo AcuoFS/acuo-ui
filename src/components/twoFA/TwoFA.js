@@ -13,6 +13,10 @@ export default class TwoFA_Component extends React.Component{
                 inputSecurekey : "123456"    }
   }
 
+  componentWillUnmount(){
+   delete localStorage.authenticating
+  }
+
   render(){
    return(
     <div className={styles.container}>
@@ -43,8 +47,8 @@ export default class TwoFA_Component extends React.Component{
             this.setState( {securekeyError: ""} )
             if( this.state.inputSecurekey != this.state.securekey ) {this.setState({securekeyError:"Invalid Key!"})}
             else{
-             hashHistory.push("dashboard")
              localStorage.loginAt = Date.now() + 86400000
+             hashHistory.push("dashboard")
             }
            }} >
             CONTINUE

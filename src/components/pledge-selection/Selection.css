@@ -188,9 +188,19 @@
   border-bottom: none;
 }
 
+.selTable > tr{
+  position: relative;
+}
+
 td{
   padding: 6px 4px;
   line-height: 16px;
+}
+
+.selTable > tr > td:last-child{
+ padding:0;
+ margin: 0;
+ width: 0;
 }
 
 .notAllocated{

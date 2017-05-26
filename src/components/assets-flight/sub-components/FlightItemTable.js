@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types'
 import FlightDetailGroup from './FlightDetailGroup'
 import FlightDetailRow from './FlightDetailRow'
 import * as FLIGHT_COL from '../../../constants/FlightDetailColumns'

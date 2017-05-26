@@ -13,6 +13,11 @@ class UploadPortfolioPage extends React.Component {
     super(props)
   }
 
+  componentWillMount(){
+    if(localStorage.loginAt == undefined || localStorage.loginAt < Date.now()){ hashHistory.push('/') }
+  }
+
+
   componentDidMount () {
     window.scrollTo(0, 0)
     if(localStorage.loginAt < Date.now()){ hashHistory.push("/") }

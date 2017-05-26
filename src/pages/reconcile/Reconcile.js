@@ -23,9 +23,9 @@ const mapStateToProps = state => {
 
   const filteredItems = filterItems(items, filters)
   const outItems = _.filter(filteredItems, ['direction', 'OUT'])
-
+  // console.log("Filtered Items :::", filteredItems);
   return {
-    outItems,
+    outItems: filteredItems,
   }
 }
 
@@ -35,6 +35,10 @@ class Reconcile extends React.Component {
   constructor(props) {
     super(props)
     this.props.initRecon()
+  }
+
+  componentWillMount(){
+    if(localStorage.loginAt == undefined || localStorage.loginAt < Date.now()){ hashHistory.push('/') }
   }
 
   componentDidMount () {

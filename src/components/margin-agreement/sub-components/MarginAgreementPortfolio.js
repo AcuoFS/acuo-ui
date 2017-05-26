@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types'
 import CounterPartyAssets from './CounterPartyAssets'
 import ClientAsset from './ClientAsset'
 import MarginAgreementUpload from '../../margin-agreement-upload/MarginAgreementUpload'
@@ -90,8 +91,7 @@ export default class MarginAgreementPortfolio extends React.Component {
   getPercentage(actionItem) {
     if (actionItem.get('clientAssets') && actionItem.get('counterpartyAssets')) {
 
-      return (this.displayTotalMargin(actionItem, 'clientAssets') /
-      this.displayTotalMargin(actionItem, 'counterpartyAssets') * 100).toFixed(0)
+      return (this.displayTotalMargin(actionItem,'counterpartyAssets' ) / this.displayTotalMargin(actionItem, 'clientAssets') * 100).toFixed(0)
 
     } else {
       return 0.00
