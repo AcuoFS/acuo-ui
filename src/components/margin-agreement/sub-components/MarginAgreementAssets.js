@@ -245,7 +245,7 @@ export default class MarginAgreementPortfolio extends React.Component {
             </div>
             <div className={styles.marginTitle}>Total Margin</div>
             <div className={styles.marginValue}>
-              {checkNegative((handlerTotalMargin(marginData, assetsName)/ 1000000).toFixed(2))}
+              {checkNegative((handlerTotalMargin(marginData, assetsName)/ 1000000).toFixed(2), "MarginAgreementAssets")}
             </div>
             <div className={styles.marginUnit}>Millions</div>
           </div>
