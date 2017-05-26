@@ -24,7 +24,6 @@ export default class MarginAgreementList extends React.Component {
   displayLineItems(recon, onReconItem, onSelectFirstLevelItem, firstLevelList, secondLevelList,
                    onSelectSecondLevelItem, currencyInfo) {
     return (recon.map((x , id) => {
-      console.log(`<MarginAgreementList> #${id} Margin Call :::` , x);
       return (
         <MarginAgreementPortfolio
           key={x}
