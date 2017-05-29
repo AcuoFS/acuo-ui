@@ -5,9 +5,9 @@
   border-radius: 8px;
   padding: 1%;
 
-  height: 400px;
+  height: 504px;
 
-  overflow-y: hidden;
+  overflow: hidden;
   max-height: 600px;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   -ms-overflow-style: none;
