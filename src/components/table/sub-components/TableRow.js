@@ -80,8 +80,7 @@ class TableRow extends React.Component {
       onLineItemClick(type, status, notificationTime, cptyEntity, legalEntity, cptyOrg)
       hashHistory.push('recon')
     }
-
-  }
+  } // end lineItemClick
 
   render() {
     const { rowItems, onLineItemClick } = this.props
@@ -105,7 +104,8 @@ class TableRow extends React.Component {
     let hoverbility = this.getHoverbility(directionText, statusCode)
 
     return (
-      <div className={styles.tableRow + ' ' + (hoverbility ? selfStyles.hoverable : '')} onClick={() => this.lineItemClick(hoverbility, onLineItemClick, hashHistory, rowItems.cptyEntity, rowItems.status, rowItems.notificationTime, rowItems.type, rowItems.legalEntity, rowItems.cptyOrg)}>
+      <div className={styles.tableRow + ' ' + (hoverbility ? selfStyles.hoverable : '')}
+           onClick={() => this.lineItemClick(hoverbility, onLineItemClick, hashHistory, rowItems.cptyEntity, rowItems.status, rowItems.notificationTime, rowItems.type, rowItems.legalEntity, rowItems.cptyOrg)}>
         <TableCell cellValue={rowItems.legalEntity}/>
         <TableCell cellValue={rowItems.cptyOrg}/>
         <TableCell cellValue={rowItems.cptyEntity}/>

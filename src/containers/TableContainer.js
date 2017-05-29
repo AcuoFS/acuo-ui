@@ -94,7 +94,7 @@ const mapDispatchToProps = dispatch => ({
         value: cptyOrg
       }
     }))
-  }
+  } // end-onLineItemClick()
 })
 
 const TableContainer = connect(
