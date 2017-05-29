@@ -1,15 +1,15 @@
-import { connect } from 'react-redux'
-import { TableComponent } from '../components'
-import { updateReconFilter } from '../actions'
-import { clearTime, getDate } from '../utils'
+import {connect} from 'react-redux'
+import {TableComponent} from '../components'
+import {updateReconFilter} from '../actions'
+import {clearTime, getDate} from '../utils'
 import _ from 'lodash'
-import { List } from 'immutable'
+import {List} from 'immutable'
 
 
 const mapStateToProps = state => {
- return {
-  derivatives: state.mainReducer.getIn(['display', 'derivatives']).toJS() || []
- }
+  return {
+    derivatives: state.mainReducer.getIn(['display', 'derivatives']).toJS() || []
+  }
 }
 
 const mapDispatchToProps = dispatch => ({
@@ -23,7 +23,7 @@ const mapDispatchToProps = dispatch => ({
       }
     }))
   },
-  onLineItemClick: (type, status, notificationTime, cptyEntity, legalEntity, cptyOrg) => {
+  onLineItemClick: (type, status, notificationTime, cptyEntity, legalEntity, cptyOrg, direction) => {
 
     let dateText = ''
 
@@ -43,11 +43,11 @@ const mapDispatchToProps = dispatch => ({
     const dPlusOne = new Date(d.getTime() + oneDayTime)
     const dPlusTwo = new Date(d.getTime() + 2 * oneDayTime)
 
-    if(_.inRange(itemTime.getTime(), dMinusOne.getTime(), d.getTime()))
+    if (_.inRange(itemTime.getTime(), dMinusOne.getTime(), d.getTime()))
       dateText = 'yesterday'
-    else if(_.inRange(itemTime.getTime(), d.getTime(), dPlusOne.getTime()))
+    else if (_.inRange(itemTime.getTime(), d.getTime(), dPlusOne.getTime()))
       dateText = 'today'
-    else if(_.inRange(itemTime.getTime(), dPlusOne.getTime(), dPlusTwo.getTime()))
+    else if (_.inRange(itemTime.getTime(), dPlusOne.getTime(), dPlusTwo.getTime()))
       dateText = 'tomorrow'
     else
       dateText = 'not in range'

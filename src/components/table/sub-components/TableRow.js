@@ -69,15 +69,15 @@ class TableRow extends React.Component {
     return statusCell
   }
 
-  getHoverbility(directionText, statusCode){
-    if ((statusCode == DASHBOARD_CONSTANTS.STATUS_CODE_EXPECTED || statusCode == DASHBOARD_CONSTANTS.STATUS_CODE_UNRECON) && (directionText == DASHBOARD_CONSTANTS.DIRECTION_OUT))
+  getHoverbility(statusCode){
+    if ((statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_EXPECTED || statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_UNRECON))
       return true
     else return false
   }
 
-  lineItemClick(hoverbility, onLineItemClick, hashHistory, cptyEntity, status, notificationTime, type, legalEntity, cptyOrg){
+  lineItemClick(hoverbility, onLineItemClick, hashHistory, cptyEntity, status, notificationTime, type, legalEntity, cptyOrg, direction){
     if(hoverbility){
-      onLineItemClick(type, status, notificationTime, cptyEntity, legalEntity, cptyOrg)
+      onLineItemClick(type, status, notificationTime, cptyEntity, legalEntity, cptyOrg, direction)
       hashHistory.push('recon')
     }
   } // end lineItemClick
@@ -101,11 +101,11 @@ class TableRow extends React.Component {
 
     let directionCell = this.getDirectionCell(directionText)
     let statusCell = this.getStatusCell(statusCode)
-    let hoverbility = this.getHoverbility(directionText, statusCode)
+    let hoverbility = this.getHoverbility(statusCode)
 
     return (
       <div className={styles.tableRow + ' ' + (hoverbility ? selfStyles.hoverable : '')}
-           onClick={() => this.lineItemClick(hoverbility, onLineItemClick, hashHistory, rowItems.cptyEntity, rowItems.status, rowItems.notificationTime, rowItems.type, rowItems.legalEntity, rowItems.cptyOrg)}>
+           onClick={() => this.lineItemClick(hoverbility, onLineItemClick, hashHistory, rowItems.cptyEntity, rowItems.status, rowItems.notificationTime, rowItems.type, rowItems.legalEntity, rowItems.cptyOrg, rowItems.direction)}>
         <TableCell cellValue={rowItems.legalEntity}/>
         <TableCell cellValue={rowItems.cptyOrg}/>
         <TableCell cellValue={rowItems.cptyEntity}/>
