@@ -85,7 +85,7 @@ function* serverHealthChecks() {
   while(true){
     try{
       // console.log('server check start')
-      yield checkSpecificServer(checkProxyServerConnectivity, 'Lost connectivity to Proxy server', 'proxy', 'Reconnected with proxy server')
+      yield checkSpecificServer(checkProxyServerConnectivity, 'Lost connectivity to Proxy server', 'proxy', 'Reconnected with Proxy server')
       yield checkSpecificServer(checkMarginServerConnectivity, 'Lost connectivity to Margin server', 'margin', 'Reconnected with Margin server')
       yield checkSpecificServer(checkValuationServerConnectivity, 'Lost connectivity to Valuation server', 'valuation', 'Reconnected with Valuation server')
       yield checkSpecificServer(checkCollateralServerConnectivity, 'Lost connectivity to Collateral server', 'collateral', 'Reconnected with Collateral server')
