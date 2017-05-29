@@ -12,7 +12,7 @@ export default class FlightItemTable extends React.Component {
     const flightGroup = this.props.data
 
     return (
-      <div>
+      <div className={styles.flightItemTableWindow}>
         <div className={styles.flightItemTable}>
           <FlightDetailRow
             propTime={FLIGHT_COL.FLIGHT_TIME}

@@ -1,6 +1,11 @@
+.flightItemTableWindow{
+ overflow: scroll;
+ height: 332px;
+ width: calc(100% + 100px)
+}
 .flightItemTable {
   display: table;
-  width: 100%;
+  width: calc(100% - 100px);
   margin-top: 5px;
   table-layout: fixed;
 }
