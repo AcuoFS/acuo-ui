@@ -47,7 +47,7 @@ let SearchContent =(rawAPI, searchedText) => {
        return (testMatch ?  true : false)
       })
       return (findIn_RegAgrCpty? agreementObj : false );
-    }
+    },
   }
   /*********************************************/
   if (searchedText.length > 0){
@@ -87,7 +87,6 @@ const AssetsDeployedComponent = (props)=>{
    let IsRegionSelected = state.ui.IsRegionSelected;
    let IsVarMarginSelected = state.ui.IsVarMarginSelected;
    let SearchText = (state.ui.DeployedPanel_SearchText.length >= 2 ? state.ui.DeployedPanel_SearchText : "") ;
-     // console.log( "SearchText|-> " ,SearchText);
 
    let dataHeader = (ExpandedSideways?  dataHeader_expandedView :  dataHeader_minView)
    let tableStyle = (IsVarMarginSelected? (ExpandedSideways? VarMarginTableStyleExpanded : VarMarginTableStyle) :  (ExpandedSideways? InitMarginTableStyleExpanded: InitMarginTableStyle))
