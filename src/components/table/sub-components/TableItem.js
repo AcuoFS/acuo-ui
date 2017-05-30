@@ -58,7 +58,7 @@ class TableItem extends React.Component {
       case 'OTC_bilateral':
         return 'OTC Bilateral'
       case 'OTC_clear':
-        return 'OTC Clear'
+        return 'OTC Cleared'
       default:
         return type
     }

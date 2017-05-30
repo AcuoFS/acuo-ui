@@ -15,9 +15,9 @@ class TableRow extends React.Component {
     const amount = parseFloat(orgAmount)
 
     if(amount < 0)
-      return '(' + numbersWithCommas(Math.abs(amount || 0)) + ')'
+      return '(' + numbersWithCommas(Math.abs(amount.toFixed(0) || 0)) + ')'
     else
-      return numbersWithCommas(amount || 0)
+      return numbersWithCommas((amount || 0).toFixed(0))
   }
 
   getDirectionCell(directionText) {
