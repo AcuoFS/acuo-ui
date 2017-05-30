@@ -143,12 +143,12 @@ export default class GraphBody extends React.Component {
           colour[0] = "#8CC5DD"
         }
 
-        const onClickFunc = this.whichClickFuncToRun(status.get('status').toLowerCase(), lastUpdatedTime, timeFrame.get('timeFrame'), timeDifference, onUnreconBubbleClick, (timeFrame.get('inAmount') === 0 ? 'OUT' : 'IN'))
+        const onClickFunc = (direction) => (this.whichClickFuncToRun(status.get('status').toLowerCase(), lastUpdatedTime, timeFrame.get('timeFrame'), timeDifference, onUnreconBubbleClick, direction))
 
         return List()
         .push((timeFrame.get('inAmount') === 0)? 0 :
           <g id={styles.componentId} key={status.get('status') + timeFrame.get('timeFrame') + 'in'}
-           onClick={onClickFunc}>
+           onClick={onClickFunc('IN')}>
             <circle cx={this.props.x + (timeDifference + 0.5) * 60}
                     cy={colour[2]}
                     r={(timeFrame.get('inAmount') === 0)? 0 :(Math.log(timeFrame.get('inAmount'))) }
@@ -181,7 +181,7 @@ export default class GraphBody extends React.Component {
           </g>)
           .push((timeFrame.get('outAmount') === 0)? 0 :
             <g id={styles.componentId} key={status.get('status') + timeFrame.get('timeFrame') + 'out'}
-               onClick={onClickFunc}>
+               onClick={onClickFunc('OUT')}>
               <circle cx={this.props.x + (timeDifference + 0.5) * 60}
                       cy={colour[1]}
                       r={(timeFrame.get('outAmount') === 0)? 0 :(Math.log(timeFrame.get('outAmount'))) }

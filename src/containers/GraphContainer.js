@@ -8,6 +8,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onUnreconBubbleClick: (minTime, maxTime, timeRangeText, status, direction) => {
+    console.log(direction)
     return dispatch(updateReconFilter({
       attr: 'notificationTime',
       selected: {
