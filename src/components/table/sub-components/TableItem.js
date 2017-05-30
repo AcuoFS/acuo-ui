@@ -56,7 +56,7 @@ class TableItem extends React.Component {
       case 'OTC_legacy':
         return 'OTC Legacy'
       case 'OTC_bilateral':
-        return 'OTC Bilateral'
+        return 'OTC Regulatory'
       case 'OTC_clear':
         return 'OTC Cleared'
       default:
