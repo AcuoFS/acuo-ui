@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  onUnreconBubbleClick: (minTime, maxTime, timeRangeText, status) => {
+  onUnreconBubbleClick: (minTime, maxTime, timeRangeText, status, direction) => {
     return dispatch(updateReconFilter({
       attr: 'notificationTime',
       selected: {
@@ -20,6 +20,13 @@ const mapDispatchToProps = dispatch => ({
         selected: {
           label: status.toUpperCase(),
           value: status
+        }
+      })),
+      dispatch(updateReconFilter({
+        attr: 'direction',
+        selected: {
+          label: direction.toUpperCase(),
+          value: direction
         }
       }))
   }

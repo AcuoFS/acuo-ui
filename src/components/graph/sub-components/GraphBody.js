@@ -11,7 +11,7 @@ export default class GraphBody extends React.Component {
     this.getDeriv = this.getDeriv.bind(this)
   }
 
-  whichClickFuncToRun(status, lastUpdatedTime, bubbleTimeStart, timeDifference, onUnreconBubbleClick){
+  whichClickFuncToRun(status, lastUpdatedTime, bubbleTimeStart, timeDifference, onUnreconBubbleClick, direction){
     switch(status){
       case 'expected':
         return () => {
@@ -26,7 +26,7 @@ export default class GraphBody extends React.Component {
             bubbleTimeStart,
             (new Date(bubbleTimeStart).setHours((new Date(bubbleTimeStart).getHours()+1))),
             this.getDay(new Date(Date.parse(lastUpdatedTime)).getHours() + timeDifference) + ': ' + (new Date(bubbleTimeStart).getHours()) + ':00 HRS',
-            'Expected'
+            'Expected', direction
           )
         }
       case 'unrecon':
@@ -42,7 +42,7 @@ export default class GraphBody extends React.Component {
             bubbleTimeStart,
             (new Date(bubbleTimeStart).setHours((new Date(bubbleTimeStart).getHours()+1))),
             this.getDay(new Date(Date.parse(lastUpdatedTime)).getHours() + timeDifference) + ': ' + (new Date(bubbleTimeStart).getHours()) + ':00 HRS',
-            'Unrecon'
+            'Unrecon', direction
           )
         }
       case 'reconciled':
@@ -143,7 +143,7 @@ export default class GraphBody extends React.Component {
           colour[0] = "#8CC5DD"
         }
 
-        const onClickFunc = this.whichClickFuncToRun(status.get('status').toLowerCase(), lastUpdatedTime, timeFrame.get('timeFrame'), timeDifference, onUnreconBubbleClick)
+        const onClickFunc = this.whichClickFuncToRun(status.get('status').toLowerCase(), lastUpdatedTime, timeFrame.get('timeFrame'), timeDifference, onUnreconBubbleClick, (timeFrame.get('inAmount') === 0 ? 'OUT' : 'IN'))
 
         return List()
         .push((timeFrame.get('inAmount') === 0)? 0 :

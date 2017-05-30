@@ -34,6 +34,9 @@ export default class FilterBar extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.removeDirectionFilter()
+  }
 
   render () {
     return  <div className={styles.filterContainer}>
