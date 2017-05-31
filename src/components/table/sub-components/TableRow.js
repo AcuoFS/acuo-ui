@@ -64,6 +64,11 @@ class TableRow extends React.Component {
           <div className={selfStyles.statusCont + ' ' + selfStyles.statusDispute}>
             {statusCode}
           </div>
+      case DASHBOARD_CONSTANTS.STATUS_CODE_PLEDGE:
+        statusCell =
+          <div className={selfStyles.statusCont + ' ' + selfStyles.statusPledge}>
+            {statusCode}
+          </div>
 
     }
     return statusCell
