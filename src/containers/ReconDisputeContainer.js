@@ -4,7 +4,6 @@ import {reconInitState} from '../actions'
 import {RECON_URL, SEND_RECON_DISPUTE_URL} from '../constants/APIcalls'
 import _ from 'lodash'
 
-
 const mapStateToProps = state => ({})
 
 const mapDispatchToProps = dispatch => ({
