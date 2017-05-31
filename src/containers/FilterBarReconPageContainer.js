@@ -21,8 +21,6 @@ const mapStateToProps = state => {
     return _.set(filter, 'options', options)
   })
 
-  console.log(filterWithOptions)
-
   return {
     filters: _.orderBy(filterWithOptions, 'order'),
   }
