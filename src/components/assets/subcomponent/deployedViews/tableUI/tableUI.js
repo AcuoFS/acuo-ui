@@ -29,6 +29,8 @@ const RowGroup = (props)=>{
 
 const DataRow = (props)=>{
   if(!props.style){throw "DataRow's style not passed in through props"}
+  let { actions , state,  assetID } = props;
+  let showPopup = ( state? state.ui.HomePanel_ShowPopup : false)
   let className = props.style.className;
   let contentType = props.contentType || null; if (!contentType) console.warn("Unspecified contentType")
   let content = props.content || [""]
@@ -47,12 +49,15 @@ const DataRow = (props)=>{
   return(
     <div className={className}
          ref={ (node)=>{ if(node){node.style.height = height(); node.style.width = width}  }}
+
          draggable={true}
 
          onDragStart={ (ev)=>{
           let data = JSON.stringify({id:"foo"})
           ev.dataTransfer.setData('text/plain', data)
           ev.dataTransfer.effectAllowed="move"
+          if(!assetID) actions.Popup_DraggingHomeAssetID(assetID)
+          // console.log(showPopup)
          }}
 
          onDragOver={ (ev)=>{
@@ -61,10 +66,11 @@ const DataRow = (props)=>{
          }}
 
          onDrop={ (ev)=>{
+          actions.HomePanel_ShowPopup(!showPopup)
           let payload = ev.dataTransfer.getData('text/plain')
          }}
 
-         onDragEnd={ ()=>{}}
+         onDragEnd={ ()=>{ actions.Popup_DraggingHomeAssetID(null) }}
          >
 
       { _.map(content, (content, idx)=>{
@@ -82,7 +88,6 @@ const DataRow = (props)=>{
 DataRow.propTypes = {
  style: PropTypes.object,
  contentType: PropTypes.string,
- content: PropTypes.arrayOf(PropTypes.string),
  cellWidth: PropTypes.arrayOf(PropTypes.number)
 }
 
@@ -134,10 +139,23 @@ DataRowCell.propTypes = {
  IsDeployedPanelExpandedSideways: PropTypes.bool
 }
 
+const Popup = (props)=>{
+ let { show } = props
+
+ return(
+  <div className={ ( show? styles.screen : styles.screen + ' ' + styles.hide) }>
+   <div className={styles.popup}>
+    This a Popup!
+   </div>
+  </div>
+ )
+}
+
 const Table = {
   ColGroup,
   RowGroup,
   DataRow,
+  Popup
 }
 
 export default Table

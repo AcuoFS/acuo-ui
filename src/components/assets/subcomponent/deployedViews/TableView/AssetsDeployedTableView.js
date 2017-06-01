@@ -6,7 +6,8 @@ import Table from './../tableUI/tableUI'
 
 const AssetsDeployedTableView = (props)=>{
 
-  let actions = props.actions
+  let { actions , state } = props
+  console.log(state.ui.HomePanel_ShowPopup);
 
   let IsVarMarginSelected = props.state.ui.IsVarMarginSelected
   let IsRegionSelected = props.state.ui.IsRegionSelected
@@ -20,8 +21,12 @@ const AssetsDeployedTableView = (props)=>{
   let CatCellWidth = props.cellWidth.category
   let DataCellWidth = props.cellWidth.data
 
+  let HomePanel_ShowPopup = (state? state.ui.HomePanel_ShowPopup : false)
+
+
   return (
     <div className={styles.tableView}>
+      <Table.Popup show={HomePanel_ShowPopup} />
       <Table.RowGroup style={TableStyle.RowGroupStyle}>
         <Table.ColGroup style={TableStyle.RegCptyColGroupStyle}>
           <NavBarDeployed>
@@ -57,7 +62,7 @@ const AssetsDeployedTableView = (props)=>{
        <Table.RowGroup style={TableStyle.DataBlockStyle} key={idx}>
          <Table.DataRow contentType={"deployed_CategoryContent"} content={rowBlock.CategoryContent} style={TableStyle.RowStyle1} cellWidth={CatCellWidth}/>
          <Table.ColGroup style={TableStyle.InnerColGroupStyle}>
-           { rowBlock.RowContent.map( (rowData,idy)=>(<Table.DataRow contentType={"deployed_rowData"} key={idy} content={rowData} style={TableStyle.RowStyle2} cellWidth={DataCellWidth} IsDeployedPanelExpandedSideways={IsDeployedPanelExpandedSideways} />) ) }
+           { rowBlock.RowContent.map( (rowData,idy)=>(<Table.DataRow contentType={"deployed_rowData"} key={idy} content={rowData.assetInfo} actions={actions} state={state} style={TableStyle.RowStyle2} cellWidth={DataCellWidth} IsDeployedPanelExpandedSideways={IsDeployedPanelExpandedSideways} />) ) }
          <Table.DataRow contentType={"deployed_PledgeContent"} content={rowBlock.PledgeContent} style={TableStyle.RowPledgeStyle} cellWidth={DataCellWidth} />
          <Table.DataRow contentType={"deployed_ExcessContent"} content={rowBlock.ExcessContent} style={TableStyle.RowExcessStyle} cellWidth={DataCellWidth} />
          </Table.ColGroup>

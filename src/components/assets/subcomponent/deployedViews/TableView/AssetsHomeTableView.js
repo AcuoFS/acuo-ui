@@ -7,14 +7,20 @@ import Table from '../tableUI/tableUI.js'
 
 // export default class AssetsHomeTableView extends React.Component{
 const AssetsHomeTableView = (props)=>{
-   // console.log("@---AssetsHomeTableView");
    let IsPledgeSelected = props.state.ui.HomePanel_IsPledgeSelected
    let IsDeployedPanelExpandedSideways = props.state.ui.DeployedPanel_ExpandedSideways
-   const {Content, actions, TableStyle} = props
+   let { Content, state, actions, TableStyle } = props
+   let { Popup_DraggingHomeAssetID } = state.data
    let cellWidth = (IsDeployedPanelExpandedSideways?  props.cellWidth.minimized : props.cellWidth.expanded )
+   let HomePanel_ShowPopup = (state? state.ui.HomePanel_ShowPopup : false)
+
+
 
    return(
     <div className={styles.tableView}>
+
+     {/*<Table.Popup show={HomePanel_ShowPopup} />*/}
+
       <Table.RowGroup style={ TableStyle.RowGroupStyle } >
         <NavBarHome>
 
@@ -35,7 +41,18 @@ const AssetsHomeTableView = (props)=>{
         <Table.DataRow contentType={ "home_Header"} content={Content.Header} style={TableStyle.HeaderRow } cellWidth={ cellWidth } />
 
         {
-           Content.RowData.map((row,idx)=>( <Table.DataRow contentType={ "home_Row" } content={row} style={TableStyle.DataRow} IsDeployedPanelExpandedSideways={IsDeployedPanelExpandedSideways} key={idx} cellWidth={ cellWidth } /> ) )
+          _.map( Content.RowData , (row,idx)=>{
+            return <Table.DataRow contentType={ "home_Row" }
+                                  assetID = { row.assetID }
+                                  content={ row.assetInfo }
+                                  actions={ actions }
+                                  state={ state }
+                                  style={ TableStyle.DataRow }
+                                  IsDeployedPanelExpandedSideways={ IsDeployedPanelExpandedSideways }
+                                  cellWidth={ cellWidth }
+                                  key={ row.assetID }
+                                  /> }
+           )//end map()
         }
 
       </Table.ColGroup>

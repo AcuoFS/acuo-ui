@@ -12,5 +12,9 @@ export const AssetsPanel = {
   HomePanel_ToggleVerticalExpand: (isExpanded)=>{ return { type: "@HOME__TOGGLE_Y_EXPAND",
                                                            payload: isExpanded  }},
   HomePanel_ToggleCategory: (IsPledgeSelected)=>{ return{ type:"@HOME__TOGGLE_CATEGORY",
-                                                          payload: IsPledgeSelected }}
+                                                          payload: IsPledgeSelected }},
+  HomePanel_ShowPopup: (bool)=>{ return{ type:"@HOME__SHOW_POPUP",
+                                         payload: bool }},
+  Popup_DraggingHomeAssetID: (assetID)=>{ return{ type:"@HOME__DRAGGING_HOME_ASSET_ID",
+                                                  payload: assetID }},
 }

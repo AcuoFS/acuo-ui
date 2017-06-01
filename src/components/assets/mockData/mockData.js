@@ -585,22 +585,24 @@ const block_30 = {
  "custodian": "Custodian_30",
  "corpAction": "0"
 }
-const rowHomePledgeData = [ "British America", "Counterparty_Name", "12,345", "12,345.678 USD", "AAA", "DD-MM-YY", "99%", "99%", "Custodian1A", "Americas"]
-const rowHomePledgeDataMin = [ "British America", "Counterparty_Name", "12,345", "12,345.678 USD", "AAA"]
-const rowHomePrincipalData = [ "British America", "Acuo", "12,345", "12,345.678 USD", "AAA", "DD-MM-YY", "99%", "99%", "Custodian1A", "Americas"]
-const rowHomePrincipalDataMin = [ "British America", "Acuo", "12,345", "12,345.678 USD", "AAA"]
-
 export const HomePledgeContentNew = [ block_21, block_22, block_23, block_24, block_25 ]
 export const HomePrincipalContentNew = [ block_26, block_27, block_28, block_29, block_30 ]
 export const HomeTableStyle={
-  "RowGroupStyle": { className: `${TableStyle.ColGroup}`  },
-  "HeaderRow": { className: `${TableStyle.Row} ${TableStyle.InitMarginHead}`,
-                 height: 30,
-                 rowSpan: 1 },
-  "DataRow": { className: TableStyle.Row + ' ' + TableStyle.DataRow,
-                 height: 30,
-                 rowSpan: 1 },
+ "RowGroupStyle": { className: `${TableStyle.ColGroup}`  },
+ "HeaderRow": { className: `${TableStyle.Row} ${TableStyle.InitMarginHead}`,
+ height: 30,
+ rowSpan: 1 },
+ "DataRow": { className: TableStyle.Row + ' ' + TableStyle.DataRow,
+ height: 30,
+ rowSpan: 1 },
 }
+
+
+// const rowHomePledgeData = [ "British America", "Counterparty_Name", "12,345", "12,345.678 USD", "AAA", "DD-MM-YY", "99%", "99%", "Custodian1A", "Americas"]
+// const rowHomePledgeDataMin = [ "British America", "Counterparty_Name", "12,345", "12,345.678 USD", "AAA"]
+// const rowHomePrincipalData = [ "British America", "Acuo", "12,345", "12,345.678 USD", "AAA", "DD-MM-YY", "99%", "99%", "Custodian1A", "Americas"]
+// const rowHomePrincipalDataMin = [ "British America", "Acuo", "12,345", "12,345.678 USD", "AAA"]
+
 // export const HomePledgeContent = {
 //  Header: ['Asset', 'Counterparty', 'Quantity', 'Value', 'Rating', 'Maturity', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region'],
 //  RowData: [ rowHomePledgeData, rowHomePledgeData, rowHomePledgeData ]

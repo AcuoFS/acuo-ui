@@ -21,7 +21,11 @@ const mapDispatchToProps = (dispatch, ownProps)=>{
 
   //AssetsHomePanel
   HomePanel_ToggleVerticalExpand: (IsExpanded)=>{dispatch( AssetsPanel.HomePanel_ToggleVerticalExpand(IsExpanded) )},
-  HomePanel_ToggleCategory: (IsPledgeSelected)=>{dispatch( AssetsPanel.HomePanel_ToggleCategory(IsPledgeSelected) )}
+  HomePanel_ToggleCategory: (IsPledgeSelected)=>{dispatch( AssetsPanel.HomePanel_ToggleCategory(IsPledgeSelected) )},
+
+  //PopupRelated
+  Popup_DraggingHomeAssetID: (HomeAssetID)=>{dispatch( AssetsPanel.Popup_DraggingHomeAssetID(HomeAssetID) )},
+  HomePanel_ShowPopup: (bool)=>{dispatch(AssetsPanel.HomePanel_ShowPopup(bool))}
  }
 }
 

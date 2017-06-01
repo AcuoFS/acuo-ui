@@ -39,11 +39,11 @@ const AssetsHomeComponent = (props)=>{
                                                                           assert.ExpectPledgeOrPrincipal(IsPledgeSelected, asset)
                                                                           assert.AssetContainsMissingField(asset)
 
-                                                                          let row = ( HomeWidgetSideExpanded ?
+                                                                          let assetInfo = ( HomeWidgetSideExpanded ?
                                                                                       [asset.asset, (IsPledgeSelected==true ? asset.counterparty : asset.legalEntity), asset.quantity, asset.value, asset.rating, asset.maturityDate, asset.intCost, asset.oppCost, asset.custodian, asset.region ] :
                                                                                       [asset.asset, (IsPledgeSelected==true ? asset.counterparty : asset.legalEntity), asset.quantity, asset.value, asset.rating] )
 
-                                                                          return _.concat(acc, [row])},
+                                                                          return _.concat(acc, {assetID: asset.id, assetInfo})},
                                                                          []) },
     formContentObject : (Header, RowData)=>( {Header,RowData} )
    }
@@ -53,6 +53,7 @@ const AssetsHomeComponent = (props)=>{
    let RowData = run.getRow( IsPledgeSelected , response , HomeWidgetSideExpanded )
    return run.formContentObject( Header, RowData )
  } //end generateContent()
+ console.log(generateContent(IsPledgeSelected , FetchedHomeAssetData , HomeWidgetSideExpanded));
 
    return(
      <div className={ ExpandedVertically? (styles.assetsPanelFrameExpandedVertically) : (styles.assetsPanelFrame) }>
