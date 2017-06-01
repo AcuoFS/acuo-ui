@@ -70,7 +70,7 @@ export default class CollateralAssetGroup extends React.Component {
           key={index}
           rowStyle={"tableRow"}
           propAsset={asset.assetName || '-'}
-          propPrice={checkNegative(asset.price)}
+          propPrice={checkNegative(parseFloat(asset.price).toFixed(0))}
           rawPrice={asset.price || '-'}
           propCcy={asset.ccy || '-'}
           propDeliveryTime={asset.deliveryTime || '-'}

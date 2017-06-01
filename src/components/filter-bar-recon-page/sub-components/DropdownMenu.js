@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from '../FilterBar.css'
+import { derivTypeMapping } from './../../../utils'
 
 const DropdownMenu = (props) => {
     const {handleOnSelectChange, options} = props
@@ -22,7 +23,7 @@ const DropdownMenu = (props) => {
         {options.map(option => (
           <li key={option}
               onClick={e => handleLocalOptionChange(e, option.toUpperCase(), option)}>
-            {option.toUpperCase()}
+            {derivTypeMapping(option).toUpperCase()}
           </li>
         ))}
       </ul>
