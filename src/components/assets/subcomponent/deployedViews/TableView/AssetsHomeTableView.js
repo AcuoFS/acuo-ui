@@ -14,8 +14,6 @@ const AssetsHomeTableView = (props)=>{
    let cellWidth = (IsDeployedPanelExpandedSideways?  props.cellWidth.minimized : props.cellWidth.expanded )
    let HomePanel_ShowPopup = (state? state.ui.HomePanel_ShowPopup : false)
 
-
-
    return(
     <div className={styles.tableView}>
 

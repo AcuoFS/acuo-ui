@@ -29,15 +29,13 @@ const RowGroup = (props)=>{
 
 const DataRow = (props)=>{
   if(!props.style){throw "DataRow's style not passed in through props"}
-  let { actions , state,  assetID } = props;
+  let { actions , state,  assetID , IsDeployedPanelExpandedSideways, cellWidth} = props;
   let showPopup = ( state? state.ui.HomePanel_ShowPopup : false)
   let className = props.style.className;
   let contentType = props.contentType || null; if (!contentType) console.warn("Unspecified contentType")
   let content = props.content || [""]
-  let IsDeployedPanelExpandedSideways = props.IsDeployedPanelExpandedSideways;
   let siblings = content.length
   let width =  `${(props.style.width || 100).toString()}%`
-  let cellWidth = props.cellWidth
   let height = ()=>{
     if(props.style) {
       let rowSpan = props.style.rowSpan
@@ -46,28 +44,34 @@ const DataRow = (props)=>{
     }
     else { return "24px" }
   }
+
   return(
     <div className={className}
          ref={ (node)=>{ if(node){node.style.height = height(); node.style.width = width}  }}
 
-         draggable={true}
+         draggable={ ((contentType==="deployed_rowData" || contentType==="home_Row") ? true : false) }
 
          onDragStart={ (ev)=>{
           let data = JSON.stringify({id:"foo"})
-          ev.dataTransfer.setData('text/plain', data)
+          ev.dataTransfer.setData((contentType==="deployed_rowData" ? 'asset/deployed' :'asset/home'), content)
           ev.dataTransfer.effectAllowed="move"
           if(!assetID) actions.Popup_DraggingHomeAssetID(assetID)
-          // console.log(showPopup)
          }}
 
          onDragOver={ (ev)=>{
           ev.dataTransfer.dragEffect="none"
-          if(true) ev.preventDefault()
+          if(contentType==="deployed_rowData"){ if(ev.dataTransfer.types == "asset/home") ev.preventDefault() }
+          else{ if(contentType==="home_Row"){ if(ev.dataTransfer.types == "asset/deployed") ev.preventDefault() } }
+
          }}
 
          onDrop={ (ev)=>{
+          let getDropLoad = (ev, contentType)=>{
+           if (contentType === "deployed_rowData") {return ev.dataTransfer.getData('asset/home')}
+           if (contentType === "home_Row") {return ev.dataTransfer.getData('asset/deployed')}
+          }
           actions.HomePanel_ShowPopup(!showPopup)
-          let payload = ev.dataTransfer.getData('text/plain')
+          let payload = getDropLoad(ev, contentType)
          }}
 
          onDragEnd={ ()=>{ actions.Popup_DraggingHomeAssetID(null) }}

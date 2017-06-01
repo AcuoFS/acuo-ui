@@ -25,7 +25,16 @@ const mapDispatchToProps = (dispatch, ownProps)=>{
 
   //PopupRelated
   Popup_DraggingHomeAssetID: (HomeAssetID)=>{dispatch( AssetsPanel.Popup_DraggingHomeAssetID(HomeAssetID) )},
-  HomePanel_ShowPopup: (bool)=>{dispatch(AssetsPanel.HomePanel_ShowPopup(bool))}
+  HomePanel_ShowPopup: (bool)=>{dispatch(AssetsPanel.HomePanel_ShowPopup(bool))},
+  Popup_DroppedHomeAssetInfo: (assetInfo)=>{dispatch(AssetsPanel.Popup_DroppedHomeAssetInfo(assetInfo))}
+
+
+  /*
+    # To Continue
+    Added Popup_DroppedHomeAssetInfo()
+    Set logic to detect drag from Home Panel
+  */
+
  }
 }
 

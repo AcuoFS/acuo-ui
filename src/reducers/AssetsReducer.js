@@ -11,7 +11,9 @@ const INITIAL_STATE = fromJS({
              'HomePanel_IsPledgeSelected': true,
                    'HomePanel_ShowPopup' : false
        },
-  data: {'Popup_DraggingHomeAssetID': null}
+  data: { 'Popup_DraggingHomeAssetID': null,
+          'Popup_DroppedHomeAssetDetails': null
+         }
 })
 
 const AssetsReducer = (state = INITIAL_STATE , action)=>{
@@ -44,8 +46,12 @@ const AssetsReducer = (state = INITIAL_STATE , action)=>{
    //For Popup
     case "@HOME__SHOW_POPUP":
       return state.setIn(['ui','HomePanel_ShowPopup'], fromJS(action.payload))
+
     case "@HOME__DRAGGING_HOME_ASSET_ID":
       return state.setIn(['data','Popup_DraggingHomeAssetID'], fromJS(action.payload))
+
+    case "@DEPLOYED__DROPPED_HOME_ASSET_DETAILS":
+      return state.setIn(['data','Popup_DroppedHomeAssetDetails'], fromJS(action.payload))
 
     default:
       return state

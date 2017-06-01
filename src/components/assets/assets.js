@@ -4,7 +4,6 @@ import AssetsDeployedComponent from './subcomponent/AssetsDeployedComponent.js'
 import AssetsHomeComponent from './subcomponent/AssetsHomeComponent.js'
 
 const AssetsComponent = (props)=>{
-   console.log(props.state.data);
    let DeployedPanel_ExpandedSideways = props.state.ui.DeployedPanel_ExpandedSideways;
 
     return(

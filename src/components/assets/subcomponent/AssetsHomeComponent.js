@@ -53,7 +53,6 @@ const AssetsHomeComponent = (props)=>{
    let RowData = run.getRow( IsPledgeSelected , response , HomeWidgetSideExpanded )
    return run.formContentObject( Header, RowData )
  } //end generateContent()
- console.log(generateContent(IsPledgeSelected , FetchedHomeAssetData , HomeWidgetSideExpanded));
 
    return(
      <div className={ ExpandedVertically? (styles.assetsPanelFrameExpandedVertically) : (styles.assetsPanelFrame) }>

@@ -7,7 +7,6 @@ import Table from './../tableUI/tableUI'
 const AssetsDeployedTableView = (props)=>{
 
   let { actions , state } = props
-  console.log(state.ui.HomePanel_ShowPopup);
 
   let IsVarMarginSelected = props.state.ui.IsVarMarginSelected
   let IsRegionSelected = props.state.ui.IsRegionSelected
