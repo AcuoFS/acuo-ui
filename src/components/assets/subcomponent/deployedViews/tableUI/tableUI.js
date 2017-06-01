@@ -48,7 +48,24 @@ const DataRow = (props)=>{
     <div className={className}
          ref={ (node)=>{ if(node){node.style.height = height(); node.style.width = width}  }}
          draggable={true}
-         onDragStart={(node)=>{console.log("Drag Started")}}   >
+
+         onDragStart={ (ev)=>{
+          let data = JSON.stringify({id:"foo"})
+          ev.dataTransfer.setData('text/plain', data)
+          ev.dataTransfer.effectAllowed="move"
+         }}
+
+         onDragOver={ (ev)=>{
+          ev.dataTransfer.dragEffect="none"
+          if(true) ev.preventDefault()
+         }}
+
+         onDrop={ (ev)=>{
+          let payload = ev.dataTransfer.getData('text/plain')
+         }}
+
+         onDragEnd={ ()=>{}}
+         >
 
       { _.map(content, (content, idx)=>{
        return <DataRowCell key={idx}

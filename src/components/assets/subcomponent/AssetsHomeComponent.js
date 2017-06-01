@@ -6,23 +6,53 @@ import AssetsHomeTableView from './deployedViews/TableView/AssetsHomeTableView.j
 import {AssetsPanel} from '../../../actions/AssetsActions.js'
 //Mock Data
 import { HomeTableStyle, HomePledgeContent, HomePledgeContentMin, HomePrincipalContent, HomePrincipalContentMin } from '../mockData/mockData.js'
-
+import { HomePledgeContentNew, HomePrincipalContentNew } from '../mockData/mockData.js'
 
 const AssetsHomeComponent = (props)=>{
  let state = props.state
  let actions = props.actions;
 
  let ExpandedVertically = state.ui.HomePanel_ExpandedVertically;
- let AssetsDeployedPanelExpandedSideways = state.ui.DeployedPanel_ExpandedSideways;
+ let AssetsDeployedPanelExpandedSideways = state.ui.DeployedPanel_ExpandedSideways; //default: false
+ let HomeWidgetSideExpanded = !AssetsDeployedPanelExpandedSideways
  let IsPledgeSelected = state.ui.HomePanel_IsPledgeSelected;
+ let FetchedHomeAssetData = (IsPledgeSelected ? HomePledgeContentNew : HomePrincipalContentNew)
 
  let cellWidth = {
   expanded: [ 12, 12, 8, 14, 7, 11, 6, 6, 11, 10 ],
   minimized: [ 16, 25, 16, 29, 13 ]
  }
 
- let content = ()=>{ if(IsPledgeSelected) { return (AssetsDeployedPanelExpandedSideways? HomePledgeContentMin : HomePledgeContent) }
-                     else { return (AssetsDeployedPanelExpandedSideways? HomePrincipalContentMin : HomePrincipalContent) }  }
+ let generateContent = (IsPledgeSelected, response, HomeWidgetSideExpanded)=>{
+   /* Asserts Logs */
+   let assert = {
+    ExpectPledgeOrPrincipal : (IsPledgeSelected,asset)=>{ (IsPledgeSelected===true ? console.assert(asset.counterparty!=undefined , { error: `Expecting Pledge data but no Counterparty specified`, asset}) : console.assert(asset.legalEntity!=undefined , { error: `Expecting Principal data but Legal Entity specified`, asset})) },
+    AssetContainsMissingField : (asset)=>{ _.map( asset, (el, key)=> console.assert(el!= undefined && el!= null && el.trim()!= "" , {error: `Asset's ${key} is missing`, asset}) ) }
+   }
+   /* Helper Functions */
+   let run = {
+    getHeader : (HomeWidgetSideExpanded)=>{ return (HomeWidgetSideExpanded ?
+                                                    ['Asset', (IsPledgeSelected===true ? 'Counterparty' : 'Legal Entity'), 'Quantity', 'Value', 'Rating', 'Maturity', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region'] :
+                                                    ['Asset', (IsPledgeSelected===true ? 'Counterparty' : 'Legal Entity'), 'Quantity', 'Value', 'Rating']) },
+    getRow : (IsPledgeSelected, response, HomeWidgetSideExpanded)=>{ return _.reduce(response,
+                                                                         (acc, asset)=>{
+                                                                          assert.ExpectPledgeOrPrincipal(IsPledgeSelected, asset)
+                                                                          assert.AssetContainsMissingField(asset)
+
+                                                                          let row = ( HomeWidgetSideExpanded ?
+                                                                                      [asset.asset, (IsPledgeSelected==true ? asset.counterparty : asset.legalEntity), asset.quantity, asset.value, asset.rating, asset.maturityDate, asset.intCost, asset.oppCost, asset.custodian, asset.region ] :
+                                                                                      [asset.asset, (IsPledgeSelected==true ? asset.counterparty : asset.legalEntity), asset.quantity, asset.value, asset.rating] )
+
+                                                                          return _.concat(acc, [row])},
+                                                                         []) },
+    formContentObject : (Header, RowData)=>( {Header,RowData} )
+   }
+   /*-------------------------------------------------*/
+
+   let Header =  run.getHeader( HomeWidgetSideExpanded )
+   let RowData = run.getRow( IsPledgeSelected , response , HomeWidgetSideExpanded )
+   return run.formContentObject( Header, RowData )
+ } //end generateContent()
 
    return(
      <div className={ ExpandedVertically? (styles.assetsPanelFrameExpandedVertically) : (styles.assetsPanelFrame) }>
@@ -39,7 +69,7 @@ const AssetsHomeComponent = (props)=>{
           {
              <AssetsHomeTableView state={ state }
                                   actions={ actions }
-                                  Content={ content() }
+                                  Content={ generateContent(IsPledgeSelected , FetchedHomeAssetData , HomeWidgetSideExpanded) }
                                   cellWidth = { cellWidth }
                                   TableStyle={ HomeTableStyle } />
            }

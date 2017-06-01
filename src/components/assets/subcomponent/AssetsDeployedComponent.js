@@ -19,7 +19,8 @@ let SearchContent =(rawAPI, searchedText) => {
     checkAssets: ( agreementObj )=>{
 
       let assetsWithMatches = _.reduce( agreementObj.data, ( results, assetObj )=>{
-        let findMatch = _.find( toArray(assetObj) , (prop)=>{
+        let clone = _.omit(_.clone(assetObj), ['id'])
+        let findMatch = _.find( toArray(clone) , (prop)=>{
           let testMatch = (_.toUpper(prop).trim()).match( new RegExp(_.toUpper(searchedText).trim()) ); // console.log(_.toUpper(prop).trim(), " | " , new RegExp( _.toUpper(searchedText).trim()) , " == " , testMatch);
           return (testMatch ? true : false)
         })// end _.find()

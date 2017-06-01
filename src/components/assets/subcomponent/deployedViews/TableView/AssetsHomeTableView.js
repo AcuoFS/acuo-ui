@@ -10,7 +10,7 @@ const AssetsHomeTableView = (props)=>{
    // console.log("@---AssetsHomeTableView");
    let IsPledgeSelected = props.state.ui.HomePanel_IsPledgeSelected
    let IsDeployedPanelExpandedSideways = props.state.ui.DeployedPanel_ExpandedSideways
-   let {Content, actions, TableStyle} = props
+   const {Content, actions, TableStyle} = props
    let cellWidth = (IsDeployedPanelExpandedSideways?  props.cellWidth.minimized : props.cellWidth.expanded )
 
    return(
