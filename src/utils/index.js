@@ -9,9 +9,10 @@ import { numberWithCommas } from './numbersWithCommas'
 import { checkNegative } from './formatNegativeAmount'
 import { getDate } from './getDate'
 import clearTime from './clearTime'
-import {filterByAllPropertiesOfObj} from './filterByCheckingAllPropertiesOfObj'
-import {gmtTimezoneList} from './gmtTimezoneList'
-import {isEmptyCounterparty} from './reconUtils'
+import { filterByAllPropertiesOfObj } from './filterByCheckingAllPropertiesOfObj'
+import { gmtTimezoneList } from './gmtTimezoneList'
+import { isEmptyCounterparty } from './reconUtils'
+import { derivTypeMapping } from './derivMapping'
 
 export {
   formatDate,
@@ -24,5 +25,6 @@ export {
   clearTime,
   filterByAllPropertiesOfObj,
   gmtTimezoneList,
-  isEmptyCounterparty
+  isEmptyCounterparty,
+  derivTypeMapping
 }

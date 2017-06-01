@@ -64,22 +64,46 @@ class TableRow extends React.Component {
           <div className={selfStyles.statusCont + ' ' + selfStyles.statusDispute}>
             {statusCode}
           </div>
+      case DASHBOARD_CONSTANTS.STATUS_CODE_PLEDGE:
+        statusCell =
+          <div className={selfStyles.statusCont + ' ' + selfStyles.statusPledge}>
+            {statusCode}
+          </div>
 
     }
     return statusCell
   }
 
   getHoverbility(statusCode){
-    if ((statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_EXPECTED || statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_UNRECON))
+    if ((statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_EXPECTED || statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_UNRECON || statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_PLEDGE))
       return true
     else return false
   }
 
-  lineItemClick(hoverbility, onLineItemClick, hashHistory, cptyEntity, status, notificationTime, type, legalEntity, cptyOrg, direction){
+  lineItemClick(hoverbility, onLineItemClick, hashHistory, statusCode, cptyEntity, status, notificationTime, type, legalEntity, cptyOrg, direction){
     if(hoverbility){
-      onLineItemClick(type, status, notificationTime, cptyEntity, legalEntity, cptyOrg, direction)
-      hashHistory.push('recon')
-    }
+      switch (statusCode) {
+        case DASHBOARD_CONSTANTS.STATUS_CODE_RECON:
+          onLineItemClick(type, status, notificationTime, cptyEntity, legalEntity, cptyOrg, direction)
+          hashHistory.push('recon')
+          break
+        case DASHBOARD_CONSTANTS.STATUS_CODE_UNRECON:
+          onLineItemClick(type, status, notificationTime, cptyEntity, legalEntity, cptyOrg, direction)
+          hashHistory.push('recon')
+          break
+        case DASHBOARD_CONSTANTS.STATUS_CODE_PLEDGE:
+          hashHistory.push('pledge')
+          break
+        case DASHBOARD_CONSTANTS.STATUS_CODE_EXPECTED:
+          hashHistory.push('recon')
+          break
+        case DASHBOARD_CONSTANTS.STATUS_CODE_DISPUTE:
+          hashHistory.push('disputes')
+          break
+        default:
+          break
+        }//end switch()
+      }
   } // end lineItemClick
 
   render() {
@@ -105,7 +129,10 @@ class TableRow extends React.Component {
 
     return (
       <div className={styles.tableRow + ' ' + (hoverbility ? selfStyles.hoverable : '')}
-           onClick={() => this.lineItemClick(hoverbility, onLineItemClick, hashHistory, rowItems.cptyEntity, rowItems.status, rowItems.notificationTime, rowItems.type, rowItems.legalEntity, rowItems.cptyOrg, rowItems.direction)}>
+           onClick={ ()=>{
+            console.log(statusCode)
+            this.lineItemClick(hoverbility, onLineItemClick, hashHistory, statusCode , rowItems.cptyEntity, rowItems.status, rowItems.notificationTime, rowItems.type, rowItems.legalEntity, rowItems.cptyOrg, rowItems.direction)
+           }}>
         <TableCell cellValue={rowItems.legalEntity}/>
         <TableCell cellValue={rowItems.cptyOrg}/>
         <TableCell cellValue={rowItems.cptyEntity}/>

@@ -24,6 +24,8 @@ let serverStatus = {
   collateral: 'up'
 }
 
+
+
 function* poll(txnID) {
   // console.log('poll')
   try {
@@ -85,12 +87,13 @@ function* serverHealthChecks() {
   while(true){
     try{
       // console.log('server check start')
+      yield call(delay, 4000)
       yield checkSpecificServer(checkProxyServerConnectivity, 'Lost connectivity to Proxy server', 'proxy', 'Reconnected with Proxy server')
       yield checkSpecificServer(checkMarginServerConnectivity, 'Lost connectivity to Margin server', 'margin', 'Reconnected with Margin server')
       yield checkSpecificServer(checkValuationServerConnectivity, 'Lost connectivity to Valuation server', 'valuation', 'Reconnected with Valuation server')
       yield checkSpecificServer(checkCollateralServerConnectivity, 'Lost connectivity to Collateral server', 'collateral', 'Reconnected with Collateral server')
 
-      yield call(delay, 10000)
+      yield call(delay, 16000)
       // console.log('after pause')
       // console.log('end cycle')
     } catch (error) {

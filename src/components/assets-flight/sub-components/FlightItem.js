@@ -6,6 +6,12 @@ import styles from './FlightItem.css'
 
 
 export default class FlightItem extends React.Component {
+  constructor(props){
+   super(props)
+
+   this.state={ flightItemTableWidth : 0 }
+  }
+
   isArrival(flightType){
     return flightType == ARRIVALS
   }
@@ -30,7 +36,7 @@ export default class FlightItem extends React.Component {
             {this.props.name}</span>
           <img className={styles.iconStyle} src={imgUrl}/>
         </div>
-        <div className={styles.headerContainer}>
+        <div className={styles.headerContainer} >
           <div className={styles.headerDates}>Dates</div>
           <input className={styles.headerSearch}
                  type="text"
@@ -39,7 +45,7 @@ export default class FlightItem extends React.Component {
                  onChange={(e)=>{this.searchThisText(e.target.value)}}
                  />
         </div>
-        <FlightItemTable isArrival={this.isArrival(this.props.name)} data={data}/>
+        <FlightItemTable isArrival={this.isArrival(this.props.name)} data={data} width={this.state.flightItemTableWidth}/>
       </div>
     )
   }
