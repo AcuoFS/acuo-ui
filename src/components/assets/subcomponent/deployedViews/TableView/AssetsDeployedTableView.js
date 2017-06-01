@@ -25,7 +25,6 @@ const AssetsDeployedTableView = (props)=>{
 
   return (
     <div className={styles.tableView}>
-      <Table.Popup show={HomePanel_ShowPopup} />
       <Table.RowGroup style={TableStyle.RowGroupStyle}>
         <Table.ColGroup style={TableStyle.RegCptyColGroupStyle}>
           <NavBarDeployed>

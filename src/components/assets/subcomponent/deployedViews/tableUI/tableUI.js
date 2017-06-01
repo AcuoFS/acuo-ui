@@ -70,7 +70,7 @@ const DataRow = (props)=>{
            if (contentType === "deployed_rowData") {return ev.dataTransfer.getData('asset/home')}
            if (contentType === "home_Row") {return ev.dataTransfer.getData('asset/deployed')}
           }
-          actions.HomePanel_ShowPopup(!showPopup)
+          actions.DeployedPanel_ShowPopup(!showPopup)
           let payload = getDropLoad(ev, contentType)
          }}
 
@@ -143,23 +143,11 @@ DataRowCell.propTypes = {
  IsDeployedPanelExpandedSideways: PropTypes.bool
 }
 
-const Popup = (props)=>{
- let { show } = props
-
- return(
-  <div className={ ( show? styles.screen : styles.screen + ' ' + styles.hide) }>
-   <div className={styles.popup}>
-    This a Popup!
-   </div>
-  </div>
- )
-}
 
 const Table = {
   ColGroup,
   RowGroup,
   DataRow,
-  Popup
 }
 
 export default Table
