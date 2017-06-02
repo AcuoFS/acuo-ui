@@ -25,6 +25,7 @@ const config = {
     MARGIN_HEALTH_CHECK: 'http://margin.acuo.com/acuo/admin/ping',
     VALUATION_HEALTH_CHECK: 'http://valuation.acuo.com/acuo/admin/ping',
     COLLATERAL_HEALTH_CHECK: 'http://collateral.acuo.com/acuo/admin/ping',
+    FETCH_NAVBAR_ALERTS: 'http://margin.acuo.com/acuo/api/dashboard/menu'
   },
   local: {
     DASHBOARD_URL: UBUNTU_URL + '/dashboard',
@@ -66,6 +67,7 @@ const config = {
     MARGIN_HEALTH_CHECK: 'http://qa.acuo.com:7070/acuo/admin/ping',
     VALUATION_HEALTH_CHECK: 'http://qa.acuo.com:9090/acuo/admin/ping',
     COLLATERAL_HEALTH_CHECK: 'http://qa.acuo.com:8080/acuo/admin/ping',
+    FETCH_NAVBAR_ALERTS: 'http://qa.acuo.com:7070/acuo/api/dashboard/menu'
   },
   prod: {},
   test: {
