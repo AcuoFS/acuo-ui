@@ -269,7 +269,6 @@ export const ApiInitMargResponse = [
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
   }
  ]
-
 export const ApiVarMargResponse = [
  {
   region: "Americas",
@@ -585,6 +584,8 @@ const block_30 = {
  "custodian": "Custodian_30",
  "corpAction": "0"
 }
+export const HomePledgedContent = [ block_21, block_22, block_23, block_24, block_25 ]
+export const HomePrincipalContent = [ block_26, block_27, block_28, block_29, block_30 ]
 export const HomePledgeContentNew = [ block_21, block_22, block_23, block_24, block_25 ]
 export const HomePrincipalContentNew = [ block_26, block_27, block_28, block_29, block_30 ]
 export const HomeTableStyle={

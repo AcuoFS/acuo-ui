@@ -34,6 +34,7 @@ const DataRow = (props)=>{
   let className = props.style.className;
   let contentType = props.contentType || null; if (!contentType) console.warn("Unspecified contentType")
   let content = props.content || [""]
+  let Home_PledgedContent; if(state) Home_PledgedContent = state.data.Home_PledgedContent;
   let siblings = content.length
   let width =  `${(props.style.width || 100).toString()}%`
   let height = ()=>{
@@ -52,8 +53,8 @@ const DataRow = (props)=>{
          draggable={ ((contentType==="deployed_rowData" || contentType==="home_Row") ? true : false) }
 
          onDragStart={ (ev)=>{
-          let data = JSON.stringify({id:"foo"})
-          ev.dataTransfer.setData((contentType==="deployed_rowData" ? 'asset/deployed' :'asset/home'), content)
+          let payload = JSON.stringify(_.find( Home_PledgedContent, (o)=>{ if(o.id==assetID) return true } ))
+          ev.dataTransfer.setData((contentType==="deployed_rowData" ? 'asset/deployed' :'asset/home'), payload)
           ev.dataTransfer.effectAllowed="move"
           if(!assetID) actions.Popup_DraggingHomeAssetID(assetID)
          }}
@@ -72,6 +73,7 @@ const DataRow = (props)=>{
           }
           actions.DeployedPanel_ShowPopup(!showPopup)
           let payload = getDropLoad(ev, contentType)
+          actions.Popup_DroppedHomeAssetInfo(payload)
          }}
 
          onDragEnd={ ()=>{ actions.Popup_DraggingHomeAssetID(null) }}

@@ -94,7 +94,6 @@ const AssetsDeployedComponent = (props)=>{
 
    let rightContent = (IsVarMarginSelected? ApiVarMargResponse : ApiInitMargResponse)
    let sortedContent = (IsRegionSelected?  _.sortBy(rightContent, ["region"]) :  _.sortBy(rightContent, ["counterparty"]))
-
    let filteredContent = SearchContent(sortedContent, SearchText)
 
    let tableContent = (rightContent)=>{
