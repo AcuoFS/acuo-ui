@@ -13,10 +13,12 @@ export const AssetsPanel = {
                                                            payload: isExpanded  }},
   HomePanel_ToggleCategory: (IsPledgeSelected)=>{ return{ type:"@HOME__TOGGLE_CATEGORY",
                                                           payload: IsPledgeSelected }},
-  DeployedPanel_ShowPopup: (bool)=>{ return{ type:"@DEPLOYED__SHOW_POPUP",
-                                             payload: bool }},
+  ShowPopup: (bool)=>{ return{ type:"@SHOW_POPUP",
+                               payload: bool }},
   Popup_DraggingHomeAssetID: (assetID)=>{ return{ type:"@HOME__DRAGGING_HOME_ASSET_ID",
                                                   payload: assetID }},
   Popup_DroppedHomeAssetInfo: (assetInfo)=>{ return{ type:"@DEPLOYED__DROPPED_HOME_ASSET_DETAILS",
-                                                     payload: assetInfo }}
+                                                     payload: assetInfo }},
+  Popup_DeployedAssetToBeReplaced: (assetInfo)=>{ return{ type:"@DEPLOYED__ASSET_TO_BE_REPLACED",
+                                                          payload: assetInfo }}
 }

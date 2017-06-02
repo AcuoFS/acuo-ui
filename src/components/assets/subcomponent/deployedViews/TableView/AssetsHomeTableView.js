@@ -8,6 +8,7 @@ import Table from '../tableUI/tableUI.js'
 // export default class AssetsHomeTableView extends React.Component{
 const AssetsHomeTableView = (props)=>{
    let IsPledgeSelected = props.state.ui.HomePanel_IsPledgeSelected
+   let assetCategory = ( IsPledgeSelected ? "pledged" : "principal" )
    let IsDeployedPanelExpandedSideways = props.state.ui.DeployedPanel_ExpandedSideways
    let { Content, state, actions, TableStyle } = props
    let { Popup_DraggingHomeAssetID } = state.data
@@ -39,6 +40,7 @@ const AssetsHomeTableView = (props)=>{
         {
           _.map( Content.RowData , (row,idx)=>{
             return <Table.DataRow contentType={ "home_Row" }
+                                  assetCategory={ assetCategory }
                                   assetID = { row.assetID }
                                   content={ row.assetInfo }
                                   actions={ actions }
