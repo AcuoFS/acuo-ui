@@ -1,5 +1,9 @@
 const DEV_URL = 'http://dev.acuo.com:8181'
 const UBUNTU_URL = 'http://52.74.186.112:8081'
+const PRO_URL = 'http://localhost/proxy'
+const VAL_URL = 'http://localhost/valuation'
+const MAR_URL = 'http://localhost/margin'
+const COL_URL = 'http://localhost/collateral'
 
 const config = {
   dev: {
@@ -25,6 +29,30 @@ const config = {
     MARGIN_HEALTH_CHECK: 'http://margin.acuo.com/acuo/admin/ping',
     VALUATION_HEALTH_CHECK: 'http://valuation.acuo.com/acuo/admin/ping',
     COLLATERAL_HEALTH_CHECK: 'http://collateral.acuo.com/acuo/admin/ping',
+  },
+  docker: {
+    DASHBOARD_URL: PRO_URL + '/dashboard',
+    RECON_URL: PRO_URL + '/recon/new',
+    OPTIMISATION_URL: PRO_URL + '/pledge/optimization',
+    COLLATERAL_URL: PRO_URL + '/pledge/init-new-collateral',
+    MARGIN_SELECTION_URL: PRO_URL + '/pledge/init-selection',
+    ALLOCATE_COLLATERALS_URL: PRO_URL + '/pledge/allocate-selection',
+    ALLOCATE_COLLATERALS_URL_NEW: PRO_URL + '/pledge/allocate-selection-new',
+    PLEDGE_ALLOCATIONS: PRO_URL + '/pledge/pledge-allocation',
+    UPLOAD_FILE_URL: VAL_URL + '/acuo/api/upload',
+    // Please add the trailing / for recon single item (ok button)
+    RECON_DATA_URL: MAR_URL + '/acuo/api/margin/reconcile/',
+    REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
+    UNMATCHED_PORTFOLIO_URL: PRO_URL + '/unmatched',
+    SEND_RECON_DISPUTE_URL: PRO_URL + '/recon/disputeStatement',
+    PLEDGE_REMOVE_ALLOCATED_ASSET: PRO_URL + '/pledge/remove-allocated-asset',
+    FETCH_GENERATED_PORTFOLIO: VAL_URL + '/acuo/api/calls/async/generate/',
+    FETCH_DEPLOYED_DEPARTURES: MAR_URL + '/acuo/api/pledge/assets/all',
+    POST_MARGIN_CALL_IDS: MAR_URL + '/acuo/api/margin/send/calls',
+    PROXY_HEALTH_CHECK: PRO_URL + '/common/check-connectivity',
+    MARGIN_HEALTH_CHECK: MAR_URL + '/acuo/admin/ping',
+    VALUATION_HEALTH_CHECK: VAL_URL + '/acuo/admin/ping',
+    COLLATERAL_HEALTH_CHECK: COL_URL + '/acuo/admin/ping',
   },
   local: {
     DASHBOARD_URL: UBUNTU_URL + '/dashboard',
