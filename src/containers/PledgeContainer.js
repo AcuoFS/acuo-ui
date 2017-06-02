@@ -18,6 +18,7 @@ import {
 } from '../constants/APIcalls'
 import * as ASSET from '../constants/AllocatedAssetAttributes'
 import * as P_ASSET from '../constants/PledgeAssetAttribute'
+import { sagaNavbarAlerts } from './../actions/CommonActions'
 
 const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
   if(pendingAllocationSize >= selectionSize)
@@ -145,6 +146,7 @@ const mapDispatchToProps = dispatch => ({
           dispatch(initSelection(obj.items))
           dispatch(clearPendingAllocation())
         }), 1000)
+        dispatch(sagaNavbarAlerts())
 
       } else {
         alert('Error sending pledge details')

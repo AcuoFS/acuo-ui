@@ -1,6 +1,7 @@
 import {connect} from 'react-redux'
 import Dispute from '../components/margin-agreement/sub-components/Dispute'
 import {reconInitState} from '../actions'
+import { sagaNavbarAlerts } from './../actions/CommonActions'
 import {RECON_URL, SEND_RECON_DISPUTE_URL} from '../constants/APIcalls'
 import _ from 'lodash'
 
@@ -31,6 +32,7 @@ const mapDispatchToProps = dispatch => ({
         const {items} = obj
         dispatch(reconInitState(items))
       })
+      dispatch(sagaNavbarAlerts())
     }).catch(error => {
       console.log('Error: ' + error)
     })

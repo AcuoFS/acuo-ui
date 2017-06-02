@@ -14,6 +14,10 @@ export default class NavigationBar extends React.Component {
     return varTime.substr(16, 15) + ':' + varTime.substr(31, 2)
   }
 
+  componentDidMount(){
+    this.props.onUpdateNavbarAlert()
+  }
+
   render() {
 
     const { menuNotifications } = this.props

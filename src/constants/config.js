@@ -24,7 +24,8 @@ var configJson = {
     PROXY_HEALTH_CHECK: '<%= baseUrl %>/proxy/common/check-connectivity',
     MARGIN_HEALTH_CHECK: '<%= baseUrl %>/margin/acuo/admin/ping',
     VALUATION_HEALTH_CHECK: '<%= baseUrl %>/valuation/acuo/admin/ping',
-    COLLATERAL_HEALTH_CHECK: '<%= baseUrl %>/collateral/acuo/admin/ping'
+    COLLATERAL_HEALTH_CHECK: '<%= baseUrl %>/collateral/acuo/admin/ping',
+    FETCH_NAVBAR_ALERTS: '<%= baseUrl %>/margin/acuo/api/dashboard/menu'
 }
 
 exports.get = (env) => {

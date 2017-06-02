@@ -61,3 +61,7 @@ export const INIT_AGREEMENT = 'INIT_AGREEMENT'
 
 //deployed
 export const INIT_DEPARTURES = 'INIT_DEPARTURES'
+
+//navbar alerts
+export const UPDATE_NAVBAR_ALERTS = 'UPDATE_NAVBAR_ALERTS'
+export const SAGA_NAVBAR_ALERTS = 'SAGA_NAVBAR_ALERTS'
