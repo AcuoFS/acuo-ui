@@ -34,6 +34,9 @@ export default class FilterBar extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.removeDirectionFilter()
+  }
 
   render () {
     return  <div className={styles.filterContainer}>
@@ -46,7 +49,7 @@ export default class FilterBar extends React.Component {
               </div>
 
               <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
-                {this.props.filters.map(filter => (
+                {this.props.filters.filter(filter => !filter.hide).map(filter => (
                   <FilterBarDropdown key={filter.attr}
                                      {...filter}
                                      setFilter={this.props.setFilter}/>

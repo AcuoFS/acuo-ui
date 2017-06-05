@@ -3,6 +3,7 @@ import TableBody from './TableBody'
 import styles from '../Table.css'
 import { Link } from 'react-router'
 import _ from 'lodash'
+import { derivTypeMapping } from './../../../utils'
 
 class TableItem extends React.Component {
   constructor(props) {
@@ -51,19 +52,6 @@ class TableItem extends React.Component {
       return numbersWithCommas(amount || 0)
   }
 
-  derivTypeMapping(type) {
-    switch(type){
-      case 'OTC_legacy':
-        return 'OTC Legacy'
-      case 'OTC_bilateral':
-        return 'OTC Bilateral'
-      case 'OTC_clear':
-        return 'OTC Clear'
-      default:
-        return type
-    }
-  }
-
   render() {
 
     const {redirect, deriv, clicked, arrow, toggle, onLineItemClick} = this.props
@@ -75,7 +63,7 @@ class TableItem extends React.Component {
         <div className={styles.table}>
           <div className={styles.derivItem}>
             <div className={styles.vertiCenter + " " + styles.derivType}>
-              <p className={styles.centerThis + " " + styles.derivTypeText}>{this.derivTypeMapping(deriv.type)}</p>
+              <p className={styles.centerThis + " " + styles.derivTypeText}>{derivTypeMapping(deriv.type)}</p>
             </div>
           </div>
 

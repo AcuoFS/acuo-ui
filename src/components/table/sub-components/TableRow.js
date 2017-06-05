@@ -15,9 +15,9 @@ class TableRow extends React.Component {
     const amount = parseFloat(orgAmount)
 
     if(amount < 0)
-      return '(' + numbersWithCommas(Math.abs(amount || 0)) + ')'
+      return '(' + numbersWithCommas(Math.abs(amount.toFixed(0) || 0)) + ')'
     else
-      return numbersWithCommas(amount || 0)
+      return numbersWithCommas((amount || 0).toFixed(0))
   }
 
   getDirectionCell(directionText) {
@@ -64,24 +64,47 @@ class TableRow extends React.Component {
           <div className={selfStyles.statusCont + ' ' + selfStyles.statusDispute}>
             {statusCode}
           </div>
+      case DASHBOARD_CONSTANTS.STATUS_CODE_PLEDGE:
+        statusCell =
+          <div className={selfStyles.statusCont + ' ' + selfStyles.statusPledge}>
+            {statusCode}
+          </div>
 
     }
     return statusCell
   }
 
-  getHoverbility(directionText, statusCode){
-    if ((statusCode == DASHBOARD_CONSTANTS.STATUS_CODE_EXPECTED || statusCode == DASHBOARD_CONSTANTS.STATUS_CODE_UNRECON) && (directionText == DASHBOARD_CONSTANTS.DIRECTION_OUT))
+  getHoverbility(statusCode){
+    if ((statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_EXPECTED || statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_UNRECON || statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_PLEDGE))
       return true
     else return false
   }
 
-  lineItemClick(hoverbility, onLineItemClick, hashHistory, cptyEntity, status, notificationTime, type, legalEntity, cptyOrg){
+  lineItemClick(hoverbility, onLineItemClick, hashHistory, statusCode, cptyEntity, status, notificationTime, type, legalEntity, cptyOrg, direction){
     if(hoverbility){
-      onLineItemClick(type, status, notificationTime, cptyEntity, legalEntity, cptyOrg)
-      hashHistory.push('recon')
-    }
-
-  }
+      switch (statusCode) {
+        case DASHBOARD_CONSTANTS.STATUS_CODE_RECON:
+          onLineItemClick(type, status, notificationTime, cptyEntity, legalEntity, cptyOrg, direction)
+          hashHistory.push('recon')
+          break
+        case DASHBOARD_CONSTANTS.STATUS_CODE_UNRECON:
+          onLineItemClick(type, status, notificationTime, cptyEntity, legalEntity, cptyOrg, direction)
+          hashHistory.push('recon')
+          break
+        case DASHBOARD_CONSTANTS.STATUS_CODE_PLEDGE:
+          hashHistory.push('pledge')
+          break
+        case DASHBOARD_CONSTANTS.STATUS_CODE_EXPECTED:
+          hashHistory.push('recon')
+          break
+        case DASHBOARD_CONSTANTS.STATUS_CODE_DISPUTE:
+          hashHistory.push('disputes')
+          break
+        default:
+          break
+        }//end switch()
+      }
+  } // end lineItemClick
 
   render() {
     const { rowItems, onLineItemClick } = this.props
@@ -102,10 +125,14 @@ class TableRow extends React.Component {
 
     let directionCell = this.getDirectionCell(directionText)
     let statusCell = this.getStatusCell(statusCode)
-    let hoverbility = this.getHoverbility(directionText, statusCode)
+    let hoverbility = this.getHoverbility(statusCode)
 
     return (
-      <div className={styles.tableRow + ' ' + (hoverbility ? selfStyles.hoverable : '')} onClick={() => this.lineItemClick(hoverbility, onLineItemClick, hashHistory, rowItems.cptyEntity, rowItems.status, rowItems.notificationTime, rowItems.type, rowItems.legalEntity, rowItems.cptyOrg)}>
+      <div className={styles.tableRow + ' ' + (hoverbility ? selfStyles.hoverable : '')}
+           onClick={ ()=>{
+            console.log(statusCode)
+            this.lineItemClick(hoverbility, onLineItemClick, hashHistory, statusCode , rowItems.cptyEntity, rowItems.status, rowItems.notificationTime, rowItems.type, rowItems.legalEntity, rowItems.cptyOrg, rowItems.direction)
+           }}>
         <TableCell cellValue={rowItems.legalEntity}/>
         <TableCell cellValue={rowItems.cptyOrg}/>
         <TableCell cellValue={rowItems.cptyEntity}/>

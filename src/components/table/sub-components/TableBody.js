@@ -13,7 +13,8 @@ class TableBody extends React.Component {
     if (status.timeFrames)
       return _.map(status.timeFrames, (x) =>
         (x.actionsList ? _.map(x.actionsList, (y) =>
-          <TableRow rowItems={y} onLineItemClick={onLineItemClick}/>
+          <TableRow rowItems={y}
+                    onLineItemClick={onLineItemClick}/>
         ) : '')
       )
   }

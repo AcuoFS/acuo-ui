@@ -11,6 +11,7 @@ const initFilters = [
   {order: 4, attr: "status",      label: "Status"},
   {order: 5, attr: "cptyOrg",     label: "CPTY Organisation"},
   {order: 6, attr: "cptyEntity",  label: "CPTY Entity", type: "multi"},
+  {order: 7, attr: "direction",   label:  "Direction",  hide: true}
 ]
 
 const initState = Map({"items":   List(),

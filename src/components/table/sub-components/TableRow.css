@@ -35,6 +35,9 @@
 .statusDispute {
   background-color: #CE0B24;
 }
+.statusPledge {
+  background-color: #0170B0;
+}
 
 .hoverable {
   -webkit-transition: background-color 250ms linear;

@@ -9,8 +9,7 @@ const mapStateToProps = state => {
   const filters = state.ReconReducer.get('filters').toJS()
   const items   = state.ReconReducer.get('items').toJS()
 
-  const outItems = _.filter(items, ['direction', 'OUT'])
-  const filteredOutItems = filterItems(outItems, filters)
+  const filteredOutItems = filterItems(items, filters)
 
   const filterWithOptions = _.map(filters, filter => {
     const options = (((_.get(filter, 'type', 'single') === 'single') &&
@@ -18,7 +17,7 @@ const mapStateToProps = state => {
                     // if it is single-value filter
                     ? _.uniq(_.map(filteredOutItems, filter.attr))
                     // if it is non-single-value filter
-                    : _.uniq(_.map(outItems, filter.attr))
+                    : _.uniq(_.map(items, filter.attr))
     return _.set(filter, 'options', options)
   })
 
@@ -30,7 +29,14 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   // use this function to dispatch an action to set filter
   // value here should be array with objects like {name, options, selected(str/[])}
-  setFilter: (value) => dispatch(updateReconFilter(value))
+  setFilter: (value) => dispatch(updateReconFilter(value)),
+  removeDirectionFilter: () => dispatch(updateReconFilter({
+    attr: 'direction',
+    selected: {
+      label: "ALL",
+      value: ""
+    }
+  }))
 })
 
 const FilterContainer = connect(

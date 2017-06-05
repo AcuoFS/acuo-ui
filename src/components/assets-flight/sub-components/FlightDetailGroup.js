@@ -72,5 +72,5 @@ FlightDetailGroup.propTypes = {
 
 FlightDetailGroup.defaultProps = {
   propListOfFlightDetail: [],
-  propsIsExpanded: false
+  propsIsExpanded: false,
 }
