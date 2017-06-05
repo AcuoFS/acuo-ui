@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Popup_DeployedHome.css'
+import styles from './Popup_deployedHome.css'
 
 const Popup_DeployedHome = (props)=>{
  let { show , actions , state } = props
