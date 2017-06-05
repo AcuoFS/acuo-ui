@@ -17,6 +17,7 @@ import AssetsComponent from './assets/assets'
 import Copyright from './copyright/Copyright'
 import LoginComponent from './login/Login'
 import TwoFA_Component from './twoFA/TwoFA'
+import NotificationComponent from './notification-system/Notification'
 
 export {
   GraphComponent,
@@ -37,5 +38,6 @@ export {
   AssetsComponent,
   Copyright,
   LoginComponent,
-  TwoFA_Component
+  TwoFA_Component,
+  NotificationComponent
 }

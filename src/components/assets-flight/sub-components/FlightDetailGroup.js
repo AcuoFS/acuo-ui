@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import FlightDetailRow from './FlightDetailRow'
 import styles from './FlightItemTable.css'
 
@@ -33,7 +34,7 @@ export default class FlightDetailGroup extends React.Component {
         <FlightDetailRow
           key={index}
           propTime={flightDetail.time}
-          propAgreement={flightDetail.agreement}
+          propAsset={flightDetail.asset}
           propFrom={flightDetail.from}
           propTo={flightDetail.to}
           propValue={flightDetail.value}
@@ -48,7 +49,7 @@ export default class FlightDetailGroup extends React.Component {
           propIsGroupHeader
           propIsGroupExpanded={this.state.isExpanded}
           propTime={propHeaderDetail.time}
-          propAgreement={propHeaderDetail.agreement}
+          propAsset={propHeaderDetail.agreement}
           propFrom={propHeaderDetail.from}
           propTo={propHeaderDetail.to}
           propValue={propHeaderDetail.value}

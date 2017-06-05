@@ -1,4 +1,5 @@
 export const FLIGHT_TIME = "Time"
+export const FLIGHT_ASSET = "Asset"
 export const FLIGHT_AGREEMENT = "Agreement"
 export const FLIGHT_FROM = "From"
 export const FLIGHT_TO = "To"

@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types'
 import CollateralAssetGroup from './CollateralAssetGroup'
 import {COLLATERAL_URL} from '../../../constants/APIcalls'
 import _ from 'lodash'
@@ -71,7 +72,7 @@ export default class CollateralWidget extends React.Component {
                               propCollateralAssetList={value}
                               propIsExpanded={true}
                               propIsDisplayAll={open}
-                              propHandleOnRemoveFromEarmarked={onRemoveFromEarmarked}/>
+                              propHandleOnRemoveFromEarmarked={onRemoveFromEarmarked} />
       ]
     })
     return collateralAssetGroupList

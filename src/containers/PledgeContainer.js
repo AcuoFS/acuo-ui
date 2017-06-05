@@ -101,6 +101,7 @@ const mapDispatchToProps = dispatch => ({
     })
   },
   onPledge: (selectionList) => {
+    // console.log(selectionList);
     let pledgeToSend = []
     selectionList.map((statement) => {
       // Check statement w allocations

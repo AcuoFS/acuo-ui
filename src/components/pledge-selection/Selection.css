@@ -172,6 +172,12 @@
 
 .selTable tr{
   border-bottom: 1px solid rgba(151,151,151,0.35);
+
+  background-color: white;
+  -webkit-transition: background-color 250ms linear;
+  -moz-transition: background-color 250ms linear;
+  -o-transition: background-color 250ms linear;
+  transition: background-color 250ms linear;
 }
 
 .selTable thead{
@@ -188,9 +194,19 @@
   border-bottom: none;
 }
 
+.selTable > tr{
+  position: relative;
+}
+
 td{
   padding: 6px 4px;
   line-height: 16px;
+}
+
+.selTable > tr > td:last-child{
+ padding:0;
+ margin: 0;
+ width: 0;
 }
 
 .notAllocated{
@@ -205,6 +221,11 @@ td{
 }
 .notAllocated .notAlcText{
   padding: 30px 20px;
+  background-color: white;
+  -webkit-transition: background-color 250ms linear;
+  -moz-transition: background-color 250ms linear;
+  -o-transition: background-color 250ms linear;
+  transition: background-color 250ms linear;
 }
 .totalTable1 {
   width:102.22px;

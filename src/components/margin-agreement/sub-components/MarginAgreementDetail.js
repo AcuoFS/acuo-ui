@@ -1,7 +1,8 @@
 /**
  * Created by achalkagwad on 9/11/16.
  */
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types'
 import MarginAgreementDetailExpand from './MarginAgreementDetailExpand'
 import {List} from 'immutable'
 import {checkNegative} from '../../../utils'

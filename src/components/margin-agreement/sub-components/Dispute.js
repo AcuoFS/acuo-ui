@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types'
 import styles from '../MarginAgreementList.css'
 // import Dropdown from '../../Dropdown/Dropdown'
 import {reconDisputeReasonCodes}from '../../../mappings'

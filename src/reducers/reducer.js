@@ -10,7 +10,6 @@ export function initState(state = Map(), newJSON){
 
   let json = plusMinusThreeDays(newJSON.toJS()) || []
   let lol = json
-
   if(state.getIn(['inputs', 'filters']) && !state.getIn(['inputs', 'filters']).isEmpty())
     lol = state.getIn(['inputs', 'filters']).reduce((json, x) => {
         switch(x.get('type')){
@@ -43,7 +42,7 @@ const plusMinusThreeDays = (json) => {
 
   const today = getDate()
   const thirtySixHrDuration = 36 * 60 * 60 * 1000
-  const d = clearTime(today)
+  const d = today
   const dPlusOne = new Date(d.getTime() + thirtySixHrDuration)
   const dMinusTwo = new Date(d.getTime() - thirtySixHrDuration)
 
@@ -53,7 +52,7 @@ const plusMinusThreeDays = (json) => {
         _.set(status, 'timeFrames', _.filter(status.timeFrames, timeFrame => (
           _.inRange((new Date(timeFrame.timeRangeStart)).getTime(), dMinusTwo.getTime(), dPlusOne.getTime())
         ))))
-      )))),
+      ).filter(x => x.timeFrames.length)))).filter(x => x.marginStatus.length),
     menu: json.menu,
     timeUpdated: json.timeUpdated
   }
@@ -62,7 +61,7 @@ const plusMinusThreeDays = (json) => {
 
 function applyFilter(derivatives, type){
   return derivatives.filter((x) => {
-    return x.get('type') == type
+    return x.get('type') === type
   })
 }
 
@@ -141,34 +140,34 @@ function applyCPTYFilter(derivatives, cptyEntityList) {
 //update state
 export function updateStateDeriv(state, action, store){
   if(action.get('filter') == "All"){
-    return state.set('display',state.get('data'))
+    return state
   }else
     return state.setIn(['display', 'derivatives'], applyFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
 export function updateStateLegal(state, action, store){
   if(action.get('filter') == "All"){
-    return state.set('display', state.get('data'))
+    return state
   }else
     return state.setIn(['display','derivatives'], applyLegalEntityFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
 export function updateStateStatus(state, action, store) {
   if (action.get('filter') == "all") {
-    return state.set('display', state.get('data'))
+    return state
   } else
     return state.setIn(['display', 'derivatives'], applyStatusFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
 export function updateTimeWindow(state, text, actionMin, actionMax , store){
   if(text.toLowerCase() === 'today: all'){
-    return state.set('display', state.get('data'))
+    return state
   }
   else if(text.toLowerCase() === 'yesterday: all'){
-    return state.set('display', state.get('data'))
+    return state
   }
   else if(text.toLowerCase() === 'tomorrow: all'){
-    return state.set('display', state.get('data'))
+    return state
   }
   else{
     return state.setIn(['display', 'derivatives'], applyTimeWindowFilter(state.getIn([store, 'derivatives']), actionMin, actionMax))
@@ -177,14 +176,14 @@ export function updateTimeWindow(state, text, actionMin, actionMax , store){
 
 export function updateStateCptyOrg(state, action, store){
   if(action.get('filter') == "All"){
-    return state.set('display', state.get('data'))
+    return state
   }else
     return state.setIn(['display','derivatives'], applyCptyOrgFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
 
 export function updateStateCptyEntity(state, action, store) {
   if(action.get('filter').includes("All")){
-    return state.set('display', state.get('data'))
+    return state
   }else
     return state.setIn(['display','derivatives'], applyCPTYFilter(state.getIn([store, 'derivatives']), action.get('filter')))
 }
@@ -215,7 +214,6 @@ export function multifilters(state, action){
 }
 
 export function attachFilter(state, action){
-  //console.log(action)
   switch(action.type){
     case 'FILTER_STATE_DERIV':
       return state.setIn(['inputs','filters','typeFilter'], fromJS(action))
