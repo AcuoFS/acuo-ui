@@ -36,12 +36,12 @@ const DataRow = (props)=>{
         cellWidth,
         assetCategory} = props;
   let Deployed_InitMarginContent, Deployed_VarMarginContent, Home_PledgedContent, Home_PrincipalContent
-   if(state){
-    Home_PledgedContent = state.data.Home_PledgedContent;
-    Home_PrincipalContent = state.data.Home_PrincipalContent;
-    Deployed_InitMarginContent = state.data.Deployed_InitMarginContent
-    Deployed_VarMarginContent = state.data.Deployed_VarMarginContent
-   }
+  if(state){
+   Home_PledgedContent = state.data.Home_PledgedContent;
+   Home_PrincipalContent = state.data.Home_PrincipalContent;
+   Deployed_InitMarginContent = state.data.Deployed_InitMarginContent
+   Deployed_VarMarginContent = state.data.Deployed_VarMarginContent
+  }
   let showPopup = ( state? state.ui.showPopup : false)
   let className = props.style.className;
   let contentType = props.contentType || null; if (!contentType) console.warn("Unspecified contentType")
@@ -58,12 +58,25 @@ const DataRow = (props)=>{
   }
 
   let dragCategoryContent = (assetCategory)=>{
-   if(assetCategory=='pledged'){return JSON.stringify(_.find( Home_PledgedContent, (o)=>{if(o.id==assetID) return true})) }
-   else{ return JSON.stringify(_.find( Home_PrincipalContent, (o)=>{if(o.id==assetID) return true}))  }
+   let searchHomeAsset = content => _.find( content, (o)=>{if(o.id==assetID) return true})
+   console.log(Deployed_VarMarginContent);
+
+   switch(assetCategory){
+    case 'pledged':
+     return JSON.stringify(searchHomeAsset(Home_PledgedContent))
+    case 'principal':
+     return JSON.stringify(searchHomeAsset(Home_PrincipalContent))
+    case 'varMargin':
+     return JSON.stringify(_.find( Deployed_VarMarginContent, (o)=>{if(o.id==assetID) return true}))
+    default:
+     alert("Asset Category Not Found!")
+   }
+
   }
 
   return(
     <div className={className}
+
          ref={ (node)=>{ if(node){node.style.height = height(); node.style.width = width}  }}
 
          draggable={ ((contentType==="deployed_rowData" || contentType==="home_Row") ? true : false) }
@@ -71,7 +84,6 @@ const DataRow = (props)=>{
          onDragStart={ (ev)=>{
           let dragLoad = dragCategoryContent(assetCategory)
           ev.dataTransfer.setData((contentType==="deployed_rowData" ? 'asset/deployed' :'asset/home'), dragLoad)
-
           ev.dataTransfer.effectAllowed="move"
           if(!assetID) actions.Popup_DraggingHomeAssetID(assetID)
          }}
@@ -100,16 +112,16 @@ const DataRow = (props)=>{
                return searchWithinAgreementAssets(Deployed_VarMarginContent, assetID)
              case "initMargin":
                return searchWithinAgreementAssets(Deployed_InitMarginContent, assetID)
-             default:
-               alert('Error!')
+             // default:
+             //   alert('Error!')
                break
             }//end switch()
           }//end findAgreementObject()
 
+          let dropload = getDropLoad(ev, contentType)
           let agreementObjectSelected = findAgreementObject(assetCategory, assetID, Deployed_InitMarginContent, Deployed_VarMarginContent)
 
           actions.ShowPopup(!showPopup)
-          let dropload = getDropLoad(ev, contentType)
           actions.Popup_DroppedHomeAssetInfo(dropload)
           actions.Popup_DeployedAssetToBeReplaced( {assetID , agreementObjectSelected} )
          }}
