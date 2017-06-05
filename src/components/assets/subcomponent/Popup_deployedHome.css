@@ -18,11 +18,11 @@
  width: 550px;
  background-color: white;
  color: black;
- border: 1px solid black;
+ border: 1px solid #1c2124;
  border-radius: 10px;
  position: relative;
  z-index: 1;
- box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.5)
+ box-shadow: 3px 3px 5px 1px rgba(28, 33, 36, 0.8)
 }
 .contentHolder{
  height:100%;
