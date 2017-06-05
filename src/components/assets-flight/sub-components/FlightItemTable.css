@@ -1,15 +1,27 @@
 .flightItemTableWindow{
- overflow-y: scroll;
+ overflow-y: auto;
  overflow-x: hidden;
  height: calc(100% - 65px);
  width: 100%;
  margin-top: 5px;
+ display: flex;
+ flex-direction: row;
+ flex: 1 0 auto;
+ -ms-overflow-style:
+ -ms-autohiding-scrollbar;
+ -ms-overflow-style: none;
+ -moz-scrollbars-vertical: hidden;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 .flightItemTable {
   display: table;
-  width: 100%;
   margin-top: 5px;
   table-layout: fixed;
+  width: 100%;
 }
 
 .flightItemTableHeader {

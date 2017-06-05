@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     padding: 30px 10px 0 10px;
+    position: relative;
 }
 
 .assetsPanels{
@@ -11,15 +12,9 @@
 
 .assetsPanelDeployed{
  padding: 0 10px;
- /*flex: 2 0 auto  ;*/
-  /*flex: 2 0 75%  ;*/
-  /*flex: 2 0 0  ;*/
-  width: 75%
+ width: 75%
 }
 .assetsPanelHome{
  padding: 0 10px;
- /*flex: 1 0 auto  ;*/
-  /*flex: 1 0 25%  ;*/
-  /*flex: 1 0 0  ;*/
-  width: 25%
+ width: 25%
 }
