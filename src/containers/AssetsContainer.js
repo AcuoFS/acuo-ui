@@ -26,6 +26,7 @@ const mapDispatchToProps = (dispatch, ownProps)=>{
   //PopupRelated
   Popup_DraggingHomeAssetID: (HomeAssetID)=>{dispatch( AssetsPanel.Popup_DraggingHomeAssetID(HomeAssetID) )},
   ShowPopup: (bool)=>{dispatch(AssetsPanel.ShowPopup(bool))},
+  Popup_Amount: (amount)=>{dispatch(AssetsPanel.Popup_Amount(amount))},
   Popup_DroppedHomeAssetInfo: (assetInfo)=>{dispatch(AssetsPanel.Popup_DroppedHomeAssetInfo(assetInfo))},
   Popup_DeployedAssetToBeReplaced: (assetInfo)=>{dispatch(AssetsPanel.Popup_DeployedAssetToBeReplaced(assetInfo))}
 

@@ -3,6 +3,7 @@ import styles from './Popup_DeployedHome.css'
 
 const Popup_DeployedHome = (props)=>{
  let { show , actions , state } = props
+
  let droppedAsset = JSON.parse(state.data.Popup_DroppedHomeAssetDetails)
  let fromWho = function(show){if(show){ return ( droppedAsset.counterparty ? droppedAsset.counterparty : droppedAsset.legalEntity) }}(show)
  let fromAsset = function(show){if(show){ return droppedAsset.asset }}(show)
@@ -41,7 +42,15 @@ const Popup_DeployedHome = (props)=>{
      </div>
      <div className={styles.row}>
       <div><div>Amount:</div></div>
-      <div><div><input type="number" placeholder="Enter amount"></input></div></div>
+      <div><div>
+       <input className={styles.amtInput}
+              type="number"
+              placeholder="Enter Integer Amounts"
+              onChange={  (e)=>{actions.Popup_Amount(e.currentTarget.value)} }
+              value={ (typeof state.ui.Popup_Amount=="number")? parseFloat(state.ui.Popup_Amount) : undefined }
+              />
+
+       </div></div>
      </div>
      <div className={ styles.buttonHolder }>
       <div className={ styles.cancelBtn }
@@ -49,6 +58,7 @@ const Popup_DeployedHome = (props)=>{
                               actions.Popup_DroppedHomeAssetInfo(JSON.stringify(null))
                               actions.Popup_DeployedAssetToBeReplaced(null)
                               actions.Popup_DraggingHomeAssetID(null)
+                              actions.Popup_Amount(undefined)
            }}
        >Cancel</div>
       <div className={ styles.confirmBtn }>Confirm</div>

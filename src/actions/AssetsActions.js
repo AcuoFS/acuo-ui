@@ -15,6 +15,8 @@ export const AssetsPanel = {
                                                           payload: IsPledgeSelected }},
   ShowPopup: (bool)=>{ return{ type:"@SHOW_POPUP",
                                payload: bool }},
+  Popup_Amount: (amount)=>{ return{ type:"@POPUP_AMOUNT",
+                                    payload: amount }},
   Popup_DraggingHomeAssetID: (assetID)=>{ return{ type:"@HOME__DRAGGING_HOME_ASSET_ID",
                                                   payload: assetID }},
   Popup_DroppedHomeAssetInfo: (assetInfo)=>{ return{ type:"@DEPLOYED__DROPPED_HOME_ASSET_DETAILS",
