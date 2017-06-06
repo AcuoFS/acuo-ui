@@ -1,11 +1,20 @@
 import * as ActionTypes from '../constants/ActionTypes'
 import { Map, fromJS, List, toJS } from 'immutable'
+import _ from 'lodash'
+
+const initFilters = [
+  {order: 1, attr: "legalEntity", label: "Legal Entity"},
+  {order: 2, attr: "type",        label: "Deriv Type"},
+  {order: 3, attr: "notificationTime",        label: "Time Window", type: "time"},
+  {order: 4, attr: "direction",   label:  "Direction",  hide: true}
+]
 
 const initialState = Map({
   pledgeData: Map({
     optimisation: List(),
     selection: List(),
-    collateral: Map()
+    collateral: Map(),
+    filters: fromJS(initFilters)
   })
 })
 
@@ -65,7 +74,17 @@ export const removeAssetFromEarmark = (state, removingAsset) => {
   }
 }
 
+const updateFilters = (filters, newFilter) => (
+  _.map(filters, filter => (
+    (filter.attr === newFilter.attr)
+      ? _.set(filter, 'selected', newFilter.selected)
+      : filter
+  ))
+)
+
 const PledgeReducer = (state = initialState, action) => {
+  let filters, newFilter, updatedFilters
+
   switch (action.type) {
     case ActionTypes.INIT_OPTIMISATION_SETTINGS:
       return initOptimisationSettings(state, action.settings)
@@ -91,8 +110,12 @@ const PledgeReducer = (state = initialState, action) => {
     case ActionTypes.REMOVE_ASSET_FROM_EARMARK:
       return removeAssetFromEarmark(state, action.asset)
 
+    case ActionTypes.PLEDGE_FILTER_SET:
+      newFilter = action.value
+      filters = state.getIn(['pledgeData', 'filters']).toJS()
+      updatedFilters = updateFilters(filters, newFilter)
+      return state.setIn(['pledgeData', 'filters'], fromJS(updatedFilters))
   }
-
   return state
 }
 

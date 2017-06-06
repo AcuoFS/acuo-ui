@@ -109,6 +109,7 @@ export default class Graph extends React.Component {
               time={this.props.now}
               data={this.props.derivatives}
               onUnreconBubbleClick={this.props.onUnreconBubbleClick}
+              onReconBubbleClick={this.props.onReconBubbleClick}
             />
             <Pointer
               xrec={this.props.width * 0.5 -50} //670

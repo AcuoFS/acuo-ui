@@ -102,6 +102,11 @@ export const removeAssetFromEarmark = (e, assetType, assetId, assetIdType) => ({
   }
 })
 
+export const updatePledgeFilter = (value) =>({
+  type: ActionTypes.PLEDGE_FILTER_SET,
+  value: value
+})
+
 //recon
 export const firstLeveSelect = (GUID, firstLevelID) => ({
   type: ActionTypes.FIRSTLEVEL_SELECT,

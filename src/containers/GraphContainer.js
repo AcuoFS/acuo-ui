@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { GraphComponent } from '../components'
-import { updateReconFilter } from '../actions'
+import { updateReconFilter, updatePledgeFilter } from '../actions'
 
 const mapStateToProps = state => ({
   derivatives: state.mainReducer.getIn(['display', 'derivatives'])
@@ -30,7 +30,14 @@ const mapDispatchToProps = dispatch => ({
           value: direction
         }
       }))
-  }
+  },
+  onReconBubbleClick: (minTime) => dispatch(updatePledgeFilter({
+    attr: 'notificationTime',
+    selected: {
+      label: new Date(minTime).getTime(),
+      value: new Date(minTime).getTime()
+    }
+  }))
 })
 
 const GraphContainer = connect(

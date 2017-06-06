@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { PledgeComponent } from '../components'
 import _ from 'lodash'
+import { List, fromJS } from 'immutable'
 
 import {
   initOptimisationSettings,
@@ -8,8 +9,9 @@ import {
   initSelection,
   togglePendingAllocation,
   toggleCheckall,
-  clearPendingAllocation} from '../actions'
-import { List, fromJS } from 'immutable'
+  clearPendingAllocation,
+  updatePledgeFilter
+} from '../actions'
 import {
   ALLOCATE_COLLATERALS_URL_NEW,
   PLEDGE_ALLOCATIONS,
@@ -19,6 +21,7 @@ import {
 import * as ASSET from '../constants/AllocatedAssetAttributes'
 import * as P_ASSET from '../constants/PledgeAssetAttribute'
 import { sagaNavbarAlerts } from './../actions/CommonActions'
+import filterItems from '../utils/filterItems'
 
 const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
   if(pendingAllocationSize >= selectionSize)
@@ -35,7 +38,6 @@ const fetchAnalysisData = () => (
     { name: 'Cash Only (Settlement CCY)', cost: 123456789, savings: 123456789, ratio: '1.00'},
     { name: 'Algorithm Suggestion', cost: 123456789, savings: 123456789, ratio: '1.00' },
     { name: 'Least Liquid Assets', cost: 123456789, savings: 123456789, ratio: '1.00' }
-
   ]
 )
 
@@ -58,7 +60,10 @@ const updatePledgeListToSend = (assetList, pledgeToSend, guid) => {
 
 const mapStateToProps = state => ({
   optimisation: state.PledgeReducer.getIn(['pledgeData', 'optimisation']),
-  selection: state.PledgeReducer.getIn(['pledgeData', 'selection']),
+  selection: fromJS(
+    filterItems(
+      state.PledgeReducer.getIn(['pledgeData', 'selection']).toJS(),
+      state.PledgeReducer.getIn(['pledgeData', 'filters']).toJS())),
   pendingAllocation: state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation']),
   sliderCheckbox: determineCheckboxStatus(checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'selection'])).size, checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation'])).size ),
   scenarioAnalysis: fetchAnalysisData()
@@ -134,8 +139,8 @@ const mapDispatchToProps = dispatch => ({
       json: true,
       resolveWithFullResponse: true
     }).then(response => {
-      console.log('Pledge response: ')
-      console.log(response)
+      // console.log('Pledge response: ')
+      // console.log(response)
       if (response.status == 200) {
         // TODO: To handle how to inform user that pledge data is sucessfully sent
         //alert('Sent to endpoint!' + JSON.stringify(pledgeToSend))
@@ -182,7 +187,14 @@ const mapDispatchToProps = dispatch => ({
     }).catch(error => {
       console.log('Error: ' + error)
     })
-  }
+  },
+  resetFilters: () => dispatch(updatePledgeFilter({
+    attr: 'notificationTime',
+    selected: {
+      label: '',
+      value: ''
+    }
+  }))
 })
 
 const checkAllocated = (selection) => (
