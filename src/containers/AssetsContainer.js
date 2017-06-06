@@ -24,11 +24,11 @@ const mapDispatchToProps = (dispatch, ownProps)=>{
   HomePanel_ToggleCategory: (IsPledgeSelected)=>{dispatch( AssetsPanel.HomePanel_ToggleCategory(IsPledgeSelected) )},
 
   //PopupRelated
-  Popup_DraggingHomeAssetID: (HomeAssetID)=>{dispatch( AssetsPanel.Popup_DraggingHomeAssetID(HomeAssetID) )},
+  Popup_Update_DraggingAssetID: (HomeAssetID)=>{dispatch( AssetsPanel.Popup_Update_DraggingAssetID(HomeAssetID) )},
   ShowPopup: (bool)=>{dispatch(AssetsPanel.ShowPopup(bool))},
   Popup_Amount: (amount)=>{dispatch(AssetsPanel.Popup_Amount(amount))},
-  Popup_DroppedHomeAssetInfo: (assetInfo)=>{dispatch(AssetsPanel.Popup_DroppedHomeAssetInfo(assetInfo))},
-  Popup_DeployedAssetToBeReplaced: (assetInfo)=>{dispatch(AssetsPanel.Popup_DeployedAssetToBeReplaced(assetInfo))}
+  Popup_Update_DroppedAsset: (assetInfo)=>{dispatch(AssetsPanel.Popup_Update_DroppedAsset(assetInfo))},
+  Popup_Update_AssetToBeReplaced: (assetInfo)=>{dispatch(AssetsPanel.Popup_Update_AssetToBeReplaced(assetInfo))}
 
  }
 }

@@ -57,22 +57,38 @@ const DataRow = (props)=>{
     else { return "24px" }
   }
 
+
+
   let dragCategoryContent = (assetCategory)=>{
-   let searchHomeAsset = content => _.find( content, (o)=>{if(o.id==assetID) return true})
-   console.log(Deployed_VarMarginContent);
+    let searchHomeAsset = content => {
+     let widget = 'home'
+     let asset =  _.find( content, (asset)=>{if(asset.id==assetID) return true})
+     return { widget, asset }
+    }
+    let searchDeployedAsset = content => {
+      let findAssetInAgreementObject = (content, assetID)=>{
+      let agreement = _.find( content , (o)=>{ let x =  _.map( o.data, (asset)=> _.includes(asset, assetID) )
+                                               return _.includes(x, true) })
+      let asset = _.find( agreement.data, asset => asset.id === assetID  )
 
-   switch(assetCategory){
-    case 'pledged':
-     return JSON.stringify(searchHomeAsset(Home_PledgedContent))
-    case 'principal':
-     return JSON.stringify(searchHomeAsset(Home_PrincipalContent))
-    case 'varMargin':
-     return JSON.stringify(_.find( Deployed_VarMarginContent, (o)=>{if(o.id==assetID) return true}))
-    default:
-     alert("Asset Category Not Found!")
-   }
+      return { widget:'deployed', agreement , asset }
+     }// end-findAssetInAgreementObject()
+      return findAssetInAgreementObject(content, assetID)
+    }// end-searchDeployedAsset()
 
-  }
+    switch(assetCategory){
+     case 'pledged':
+       return JSON.stringify(searchHomeAsset(Home_PledgedContent))
+     case 'principal':
+       return JSON.stringify(searchHomeAsset(Home_PrincipalContent))
+     case 'varMargin':
+       return JSON.stringify(searchDeployedAsset(Deployed_VarMarginContent))
+     case 'initMargin':
+       return JSON.stringify(searchDeployedAsset(Deployed_InitMarginContent))
+     default:
+      alert("Application Error: Asset Category Not Found!")
+    }
+  } //end-dragCategoryContent()
 
   return(
     <div className={className}
@@ -85,7 +101,7 @@ const DataRow = (props)=>{
           let dragLoad = dragCategoryContent(assetCategory)
           ev.dataTransfer.setData((contentType==="deployed_rowData" ? 'asset/deployed' :'asset/home'), dragLoad)
           ev.dataTransfer.effectAllowed="move"
-          if(!assetID) actions.Popup_DraggingHomeAssetID(assetID)
+          if(!assetID) actions.Popup_Update_DraggingAssetID(assetID)
          }}
 
          onDragOver={ (ev)=>{
@@ -100,33 +116,49 @@ const DataRow = (props)=>{
            if (contentType === "deployed_rowData") {return ev.dataTransfer.getData('asset/home')}
            if (contentType === "home_Row") {return ev.dataTransfer.getData('asset/deployed')}
           }
-          let searchWithinAgreementAssets = (content, assetID)=>{
-             return _.find(content,
-                           (o)=>{ let x =  _.map( o.data, (asset)=>_.includes(asset, assetID) );
-                                  return _.includes(x, true) }
-                          )//end find()
-          }
-          let findAgreementObject = (assetCategory, assetID, Deployed_InitMarginContent, Deployed_VarMarginContent)=>{
+          let dropload = getDropLoad(ev, contentType)
+          let fromWidget =  JSON.parse(dropload).widget
+
+          let findDeployedAgreementObject = (assetCategory, assetID, Deployed_InitMarginContent, Deployed_VarMarginContent)=>{
+           /******** Helper Function ********/
+           let searchWithinAgreementAssets = (content, assetID)=>{
+              return _.find(content,
+                            (o)=>{ let x =  _.map( o.data, (asset)=>_.includes(asset, assetID) );
+                                   return _.includes(x, true) }
+                           )//end find()
+           }
+           /*********************************/
             switch(assetCategory){
              case "varMargin":
                return searchWithinAgreementAssets(Deployed_VarMarginContent, assetID)
              case "initMargin":
                return searchWithinAgreementAssets(Deployed_InitMarginContent, assetID)
-             // default:
-             //   alert('Error!')
+             default:
+               alert(`Error! Asset Category [${assetCategory}] not found!`)
                break
             }//end switch()
-          }//end findAgreementObject()
-
-          let dropload = getDropLoad(ev, contentType)
-          let agreementObjectSelected = findAgreementObject(assetCategory, assetID, Deployed_InitMarginContent, Deployed_VarMarginContent)
+          }//end findDeployedAgreementObject()
+          let findHomeAssetObject = (assetCategory, assetID, Home_PledgedContent, Home_PrincipalContent)=>{
+           switch(assetCategory){
+             case "pledged":
+                return _.find( Home_PledgedContent, (asset)=>{ return assetID===asset.id } )
+             case "principal":
+                return _.find( Home_PrincipalContent, (asset)=>{ return assetID===asset.id } )
+             default:
+                alert(`Error! Asset Category [${assetCategory}] not found!`)
+                return
+             }//end-switch()
+           }//end-findAssetObject()
 
           actions.ShowPopup(!showPopup)
-          actions.Popup_DroppedHomeAssetInfo(dropload)
-          actions.Popup_DeployedAssetToBeReplaced( {assetID , agreementObjectSelected} )
+          actions.Popup_Update_DroppedAsset(dropload)
+          actions.Popup_Update_AssetToBeReplaced( ( fromWidget==="home" ?
+                                                    {assetID , SelectedDeployedAgreement: findDeployedAgreementObject(assetCategory, assetID, Deployed_InitMarginContent, Deployed_VarMarginContent) } :
+                                                    {assetID , assetCategory , SelectedHomeAsset: findHomeAssetObject(assetCategory, assetID, Home_PledgedContent, Home_PrincipalContent)}
+                                                   ) )
          }}
 
-         onDragEnd={ ()=>{ actions.Popup_DraggingHomeAssetID(null) }}
+         onDragEnd={ ()=>{ actions.Popup_Update_DraggingAssetID(null) }}
          >
 
       { _.map(content, (content, idx)=>{

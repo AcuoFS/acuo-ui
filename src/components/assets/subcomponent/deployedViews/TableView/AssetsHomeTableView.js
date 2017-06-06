@@ -11,7 +11,7 @@ const AssetsHomeTableView = (props)=>{
    let assetCategory = ( IsPledgeSelected ? "pledged" : "principal" )
    let IsDeployedPanelExpandedSideways = props.state.ui.DeployedPanel_ExpandedSideways
    let { Content, state, actions, TableStyle } = props
-   let { Popup_DraggingHomeAssetID } = state.data
+   let { Popup_DraggingAssetID } = state.data
    let cellWidth = (IsDeployedPanelExpandedSideways?  props.cellWidth.minimized : props.cellWidth.expanded )
    let HomePanel_ShowPopup = (state? state.ui.HomePanel_ShowPopup : false)
 

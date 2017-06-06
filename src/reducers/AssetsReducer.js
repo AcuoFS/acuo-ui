@@ -13,9 +13,9 @@ const INITIAL_STATE = fromJS({
                              'showPopup' : false,
                           'Popup_Amount' : undefined
        },
-  data: { 'Popup_DraggingHomeAssetID': null,
-          'Popup_DroppedHomeAssetDetails': null,
-          'Popup_DeployedAssetToBeReplaced': null,
+  data: { 'Popup_DraggingAssetID': null,
+          'Popup_DroppedAsset': null,
+          'Popup_AssetToBeReplaced': null,
           'Home_PledgedContent': HomePledgedContent,
           'Home_PrincipalContent': HomePrincipalContent,
           'Deployed_InitMarginContent': ApiInitMargResponse,
@@ -57,14 +57,14 @@ const AssetsReducer = (state = INITIAL_STATE , action)=>{
     case "@POPUP_AMOUNT":
       return state.setIn(['ui','Popup_Amount'], fromJS(action.payload))
 
-    case "@HOME__DRAGGING_HOME_ASSET_ID":
-      return state.setIn(['data','Popup_DraggingHomeAssetID'], fromJS(action.payload))
+    case "@POPUP__DRAGGING__ASSET_ID":
+      return state.setIn(['data','Popup_DraggingAssetID'], fromJS(action.payload))
 
-    case "@DEPLOYED__DROPPED_HOME_ASSET_DETAILS":
-      return state.setIn(['data','Popup_DroppedHomeAssetDetails'], fromJS(action.payload))
+    case "@POPUP__DROPPED_ASSET":
+      return state.setIn(['data','Popup_DroppedAsset'], fromJS(action.payload))
 
-    case "@DEPLOYED__ASSET_TO_BE_REPLACED":
-      return state.setIn(['data','Popup_DeployedAssetToBeReplaced'], fromJS(action.payload))
+    case "@POPUP__ASSET_TO_BE_REPLACED":
+      return state.setIn(['data','Popup_AssetToBeReplaced'], fromJS(action.payload))
 
     default:
       return state
