@@ -179,3 +179,16 @@ const Popup_DeployedHome = (props)=>{
 }//end of Component: Popup_DeployedHome()
 
 export default Popup_DeployedHome
+
+
+/*
+#Possible Improvements
+
+* Render functions for popup are seperated for the time being for easy debugging.
+  Refactoring can be done (eg combining render function into one) once there's
+  more clarity to the responsibility of each popup.
+
+* The block of fields (className={styles.col_2}) are now nested in divs. It is possible to
+  reduce the nested-ness.
+
+*/
