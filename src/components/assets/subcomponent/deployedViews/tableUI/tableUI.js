@@ -57,8 +57,6 @@ const DataRow = (props)=>{
     else { return "24px" }
   }
 
-
-
   let dragCategoryContent = (assetCategory)=>{
     let searchHomeAsset = content => {
      let widget = 'home'
@@ -171,13 +169,7 @@ const DataRow = (props)=>{
                            cellWidth={ cellWidth? cellWidth[idx] : null }  />} )}
     </div>
    )
-}
-
-DataRow.propTypes = {
- style: PropTypes.object,
- contentType: PropTypes.string,
- cellWidth: PropTypes.arrayOf(PropTypes.number)
-}
+} // end DataRow-Component
 
 const DataRowCell = (props)=>{
 
@@ -187,28 +179,28 @@ const DataRowCell = (props)=>{
   let cellType = (props, styles, IsDeployedPanelExpandedSideways)=>{
    if(contentType==="deployed_categoryHeader" || contentType==="deployed_CategoryContent" || contentType==="deployed_dataHeader" || contentType==="deployed_rowData" || contentType==="deployed_PledgeContent" || contentType==="deployed_ExcessContent" ){
        if(contentType==="deployed_CategoryContent"){
-           if(props.content.length > 40) <div className={styles.CellVisible} title={props.content}> { props.content.substring(0,41) + "..." || "---No Content---"} </div>
-           else return <div className={styles.CellVisible} title={props.content}> {props.content || "---No Content---"} </div>
+           if(props.content.length > 40) <div className={styles.Cell_Overflow_Visible} title={props.content}> { props.content.substring(0,41) + "..." || "---No Content---"} </div>
+           else return <div className={styles.Cell_Overflow_Visible} title={props.content}> {props.content || "---No Content---"} </div>
        }
        else{
-           if(props.id===0 && props.content.length > 15 && !IsDeployedPanelSideExpanded) return <div className={styles.CellVisible} title={props.content}> {  (props.content.substring(0,16) + "...") || "---No Content---"} </div>
-           else { if(props.content.length > 15) return <div className={styles.CellVisible} title={props.content}> { props.content.substring(0,16) + "..." || "---No Content---"} </div>
-                  else return <div className={styles.CellVisible} title={props.content}> {props.content || "---No Content---"} </div> }
+           if(props.id===0 && props.content.length > 15 && !IsDeployedPanelSideExpanded) return <div className={styles.Cell_Overflow_Visible} title={props.content}> {  (props.content.substring(0,16) + "...") || "---No Content---"} </div>
+           else { if(props.content.length > 15) return <div className={styles.Cell_Overflow_Visible} title={props.content}> { props.content.substring(0,16) + "..." || "---No Content---"} </div>
+                  else return <div className={styles.Cell_Overflow_Visible} title={props.content}> {props.content || "---No Content---"} </div> }
        }
    }
    else {
       if(props.content.length > 12){
         if(props.id===3){
-         return <div className={styles.CellVisible} title={props.content}> { props.content || "---No Content---"} </div>
+         return <div className={styles.Cell_Overflow_Visible} title={props.content}> { props.content || "---No Content---"} </div>
         }
         else{
          console.assert( props.content.length > 12, "Cell content: " , props.content , " is below " , props.content.length , " characters!")
-         return <div className={styles.CellVisible} title={props.content}> { props.content.substring(0,10) + "..." || "---No Content---"} </div>
+         return <div className={styles.Cell_Overflow_Visible} title={props.content}> { props.content.substring(0,10) + "..." || "---No Content---"} </div>
         }
       }
       else{
         console.assert( props.content.length <= 12, "Cell content: " , props.content , " exceeds " , props.content.length, " characters" )
-        return <div className={styles.CellVisible} title={props.content}> {props.content || "---No Content---"} </div>
+        return <div className={styles.Cell_Overflow_Visible} title={props.content}> {props.content || "---No Content---"} </div>
       }
    }
 
@@ -218,9 +210,15 @@ const DataRowCell = (props)=>{
    <div className={styles.DataRowCell}
         ref={ (node)=>{ if(node){node.style.width = `${ cellWidth || (100 / props.siblings).toString()}%`} } } >
      { cellType(props, styles) }
-   </div> )
-}
+   </div>
+  )
+} //end DataRowCell-component
 
+DataRow.propTypes = {
+ style: PropTypes.object,
+ contentType: PropTypes.string,
+ cellWidth: PropTypes.arrayOf(PropTypes.number)
+}
 DataRowCell.propTypes = {
  contentType: PropTypes.string,
  cellWidth: PropTypes.number,

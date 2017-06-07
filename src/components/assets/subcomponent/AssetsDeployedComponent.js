@@ -8,7 +8,8 @@ import AssetsDeployedTableView from './deployedViews/TableView/AssetsDeployedTab
 /*Actions*/
 import {AssetsPanel} from './../../../actions/AssetsActions.js'
 //Mock Data
-import { categoryHeader, dataHeader_minView, dataHeader_expandedView, ApiInitMargResponse, ApiVarMargResponse, VarMarginTableStyle, VarMarginTableStyleExpanded, InitMarginTableStyle, InitMarginTableStyleExpanded } from "./../mockData/mockData.js"
+import { categoryHeader, dataHeader_minView, dataHeader_expandedView, ApiInitMargResponse, ApiVarMargResponse } from "./../mockData/mockData.js"
+import TableStyles from './TableStyles.js'
 
 /* Search Functions */
 let SearchContent =(rawAPI, searchedText) => {
@@ -89,7 +90,7 @@ const AssetsDeployedComponent = (props)=>{
    let SearchText = (state.ui.DeployedPanel_SearchText.length >= 2 ? state.ui.DeployedPanel_SearchText : "") ;
 
    let dataHeader = (ExpandedSideways?  dataHeader_expandedView :  dataHeader_minView)
-   let tableStyle = (IsVarMarginSelected? (ExpandedSideways? VarMarginTableStyleExpanded : VarMarginTableStyle) :  (ExpandedSideways? InitMarginTableStyleExpanded: InitMarginTableStyle))
+   let tableStyle = (IsVarMarginSelected? (ExpandedSideways? TableStyles.VarMarginTableStyleExpanded : TableStyles.VarMarginTableStyle) :  (ExpandedSideways? TableStyles.InitMarginTableStyleExpanded: TableStyles.InitMarginTableStyle))
    let cellWidth = (ExpandedSideways? { category: [26, 37, 37], data: [ 17, 10, 18, 18, 7, 7, 10, 13] } : { category: [26, 37, 37], data: [ 20, 16, 27, 27, 10] } )
 
    let rightContent = (IsVarMarginSelected? ApiVarMargResponse : ApiInitMargResponse)

@@ -226,7 +226,6 @@ const block_20 = {
  "isin": "AB123456789"
 }
 
-
 export const ApiInitMargResponse = [
   {
    region: "Americas",
@@ -312,138 +311,7 @@ export const ApiVarMargResponse = [
  }
  ]
 
-export const VarMarginTableStyle = {
-           "RowGroupStyle" : { className: `${TableStyle.RowGroup}`},
-    "RegCptyColGroupStyle" : { className: `${TableStyle.ColGroup} ${TableStyle.RegCptyColGroupStyle}`,
-                                   width: 33 },
-  "VarMarginColGroupStyle" : { className: `${TableStyle.ColGroup}`, width: 100-33 },
-        "RegCptyHeadStyle" : { className: `${TableStyle.Row} ${TableStyle.RegCptyHead}`,
-                                   width: null,
-                                  height: 30,
-                                 rowSpan: 1},
-      "VarMarginHeadStyle" : { className: `${TableStyle.Row} ${TableStyle.VarMarginHead}`, //${TableStyle.RegCptyHead}
-                                   width: null,
-                                  height: 30,
-                                 rowSpan: 1 },
-               "RowStyle1" : { className: TableStyle.Row,
-                                   width: 33,
-                                  height: 30,
-                                 rowSpan: 4,
-                                 bgColor: undefined },
-          "DataBlockStyle" : { className: `${TableStyle.RowGroup} ${TableStyle.DataBlock}`},
-      "InnerColGroupStyle" : { className: `${TableStyle.ColGroup}`,
-                                   width: 100-33 },
-               "RowStyle2" : { className: TableStyle.Row + ' ' + TableStyle.DataRow,
-                                  height: 30,
-                                 rowSpan: 1,
-                                 bgColor: undefined },
-          "RowPledgeStyle" : { className: `${TableStyle.Row} ${TableStyle.VarMarginPledgeRow}`,
-                                  height: 30,
-                                 rowSpan: 1 },
-          "RowExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.VarMarginExcessRow}`,
-                                  height: 30,
-                                 rowSpan: 1 }
-}
-export const VarMarginTableStyleExpanded = {
-           "RowGroupStyle" : { className: `${TableStyle.RowGroup}`},
-    "RegCptyColGroupStyle" : { className: `${TableStyle.ColGroup} ${TableStyle.RegCptyColGroupStyle}`,
-                                   width: 30 },
-  "VarMarginColGroupStyle" : { className: `${TableStyle.ColGroup}`, width: 100-30 },
-        "RegCptyHeadStyle" : { className: `${TableStyle.Row} ${TableStyle.RegCptyHead}`,
-                                   width: null,
-                                  height: 30,
-                                 rowSpan: 1},
-      "VarMarginHeadStyle" : { className: `${TableStyle.Row} ${TableStyle.VarMarginHead}`, //${TableStyle.RegCptyHead}
-                                   width: null,
-                                  height: 30,
-                                 rowSpan: 1 },
-               "RowStyle1" : { className: TableStyle.Row,
-                                   width: 30,
-                                  height: 30,
-                                 rowSpan: 4,
-                                 bgColor: undefined },
-          "DataBlockStyle" : { className: `${TableStyle.RowGroup} ${TableStyle.DataBlock}`},
-      "InnerColGroupStyle" : { className: `${TableStyle.ColGroup}`,
-                                   width: 100-30 },
-               "RowStyle2" : { className: TableStyle.Row + ' ' + TableStyle.DataRow,
-                                  height: 30,
-                                 rowSpan: 1,
-                                 bgColor: undefined },
-          "RowPledgeStyle" : { className: `${TableStyle.Row} ${TableStyle.VarMarginPledgeRow}`,
-                                  height: 30,
-                                 rowSpan: 1 },
-          "RowExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.VarMarginExcessRow}`,
-                                  height: 30,
-                                 rowSpan: 1 }
-}
-
-export const InitMarginTableStyle = {
-           "RowGroupStyle" : { className: `${TableStyle.RowGroup}`},
-    "RegCptyColGroupStyle" : { className: `${TableStyle.ColGroup} ${TableStyle.RegCptyColGroupStyle}`,
-                                   width: 33 },
-  "VarMarginColGroupStyle" : { className: `${TableStyle.ColGroup}`, width: 100-33 },
-        "RegCptyHeadStyle" : { className: `${TableStyle.Row} ${TableStyle.RegCptyHead}`,
-                                   width: null,
-                                  height: 30,
-                                 rowSpan: 1},
-      "VarMarginHeadStyle" : { className: `${TableStyle.Row} ${TableStyle.InitMarginHead}`,
-                                   width: null,
-                                  height: 30,
-                                 rowSpan: 1 },
-               "RowStyle1" : { className: TableStyle.Row,
-                                   width: 33,
-                                  height: 30,
-                                 rowSpan: 4,
-                                 bgColor: undefined },
-          "DataBlockStyle" : { className: `${TableStyle.RowGroup} ${TableStyle.DataBlock}`},
-      "InnerColGroupStyle" : { className: `${TableStyle.ColGroup}`,
-                                   width: 100-33 },
-               "RowStyle2" : { className: TableStyle.Row + ' ' + TableStyle.DataRow,
-                                  height: 30,
-                                 rowSpan: 1,
-                                 bgColor: undefined },
-          "RowPledgeStyle" : { className: `${TableStyle.Row} ${TableStyle.InitMarginPledgeRow}`,
-                                  height: 30,
-                                 rowSpan: 1 },
-          "RowExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.InitMarginExcessRow}`,
-                                  height: 30,
-                                 rowSpan: 1 }
-}
-export const InitMarginTableStyleExpanded = {
-           "RowGroupStyle" : { className: `${TableStyle.RowGroup}`},
-    "RegCptyColGroupStyle" : { className: `${TableStyle.ColGroup} ${TableStyle.RegCptyColGroupStyle}`,
-                                   width: 30 },
-  "VarMarginColGroupStyle" : { className: `${TableStyle.ColGroup}`, width: 100-30 },
-        "RegCptyHeadStyle" : { className: `${TableStyle.Row} ${TableStyle.RegCptyHead}`,
-                                   width: null,
-                                  height: 30,
-                                 rowSpan: 1},
-      "VarMarginHeadStyle" : { className: `${TableStyle.Row} ${TableStyle.InitMarginHead}`,
-                                   width: null,
-                                  height: 30,
-                                 rowSpan: 1 },
-               "RowStyle1" : { className: TableStyle.Row,
-                                   width: 30,
-                                  height: 30,
-                                 rowSpan: 4,
-                                 bgColor: undefined },
-          "DataBlockStyle" : { className: `${TableStyle.RowGroup} ${TableStyle.DataBlock}`},
-      "InnerColGroupStyle" : { className: `${TableStyle.ColGroup}`,
-                                   width: 100-30 },
-               "RowStyle2" : { className: TableStyle.Row + ' ' + TableStyle.DataRow,
-                                  height: 30,
-                                 rowSpan: 1,
-                                 bgColor: undefined },
-          "RowPledgeStyle" : { className: `${TableStyle.Row} ${TableStyle.InitMarginPledgeRow}`,
-                                  height: 30,
-                                 rowSpan: 1 },
-          "RowExcessStyle" : { className: `${TableStyle.Row} ${TableStyle.InitMarginExcessRow}`,
-                                  height: 30,
-                                 rowSpan: 1 }
-}
-
 // AssetsHomePanel
-//Home Asset Data
 const block_21 = {
  "id": "21",
  "asset": "Home Asset 21",
@@ -584,39 +452,5 @@ const block_30 = {
  "custodian": "Custodian_30",
  "corpAction": "0"
 }
-export const HomePledgedContent = [ block_21, block_22, block_23, block_24, block_25 ]
-export const HomePrincipalContent = [ block_26, block_27, block_28, block_29, block_30 ]
-export const HomePledgeContentNew = [ block_21, block_22, block_23, block_24, block_25 ]
+export const HomePledgedContentNew = [ block_21, block_22, block_23, block_24, block_25 ]
 export const HomePrincipalContentNew = [ block_26, block_27, block_28, block_29, block_30 ]
-export const HomeTableStyle={
- "RowGroupStyle": { className: `${TableStyle.ColGroup}`  },
- "HeaderRow": { className: `${TableStyle.Row} ${TableStyle.InitMarginHead}`,
- height: 30,
- rowSpan: 1 },
- "DataRow": { className: TableStyle.Row + ' ' + TableStyle.DataRow,
- height: 30,
- rowSpan: 1 },
-}
-
-
-// const rowHomePledgeData = [ "British America", "Counterparty_Name", "12,345", "12,345.678 USD", "AAA", "DD-MM-YY", "99%", "99%", "Custodian1A", "Americas"]
-// const rowHomePledgeDataMin = [ "British America", "Counterparty_Name", "12,345", "12,345.678 USD", "AAA"]
-// const rowHomePrincipalData = [ "British America", "Acuo", "12,345", "12,345.678 USD", "AAA", "DD-MM-YY", "99%", "99%", "Custodian1A", "Americas"]
-// const rowHomePrincipalDataMin = [ "British America", "Acuo", "12,345", "12,345.678 USD", "AAA"]
-
-// export const HomePledgeContent = {
-//  Header: ['Asset', 'Counterparty', 'Quantity', 'Value', 'Rating', 'Maturity', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region'],
-//  RowData: [ rowHomePledgeData, rowHomePledgeData, rowHomePledgeData ]
-// }
-// export const HomePledgeContentMin = {
-//  Header: ['Asset', 'Counterparty', 'Quantity', 'Value', 'Rating'],
-//  RowData: [ rowHomePledgeDataMin, rowHomePledgeDataMin, rowHomePledgeDataMin ]
-// }
-// export const HomePrincipalContent = {
-//  Header: ['Asset', 'Legal Entity', 'Quantity', 'Value', 'Rating', 'Maturity', 'Int. Cost', 'Opp. Cost', 'Custodian', 'Region'],
-//  RowData: [ rowHomePrincipalData, rowHomePrincipalData, rowHomePrincipalData ]
-// }
-// export const HomePrincipalContentMin = {
-//  Header: ['Asset', 'Legal Entity', 'Quantity', 'Value', 'Rating'],
-//  RowData: [ rowHomePrincipalDataMin, rowHomePrincipalDataMin, rowHomePrincipalDataMin ]
-// }

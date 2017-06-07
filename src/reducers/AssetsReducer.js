@@ -1,6 +1,6 @@
 import {Map, List, fromJS} from 'immutable'
 import _ from 'lodash'
-import { HomePledgedContent , HomePrincipalContent, ApiInitMargResponse, ApiVarMargResponse } from '../components/assets/mockData/mockData.js'
+import { HomePledgedContentNew , HomePrincipalContentNew, ApiInitMargResponse, ApiVarMargResponse } from '../components/assets/mockData/mockData.js'
 
 const INITIAL_STATE = fromJS({
   ui: {  'DeployedPanel_ExpandedSideways': false,
@@ -16,8 +16,8 @@ const INITIAL_STATE = fromJS({
   data: { 'Popup_DraggingAssetID': null,
           'Popup_DroppedAsset': null,
           'Popup_AssetToBeReplaced': null,
-          'Home_PledgedContent': HomePledgedContent,
-          'Home_PrincipalContent': HomePrincipalContent,
+          'Home_PledgedContent': HomePledgedContentNew,
+          'Home_PrincipalContent': HomePrincipalContentNew,
           'Deployed_InitMarginContent': ApiInitMargResponse,
           'Deployed_VarMarginContent': ApiVarMargResponse,
          }
