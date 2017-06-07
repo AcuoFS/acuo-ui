@@ -59,6 +59,7 @@ const Popup_DeployedHome = (props)=>{
       <div className={styles.agreement} >
        Agreement: { PopupObject.toAgreement }
       </div>
+
       <div className={ styles.col_2 }>
        <div><div>From:</div></div>
        <div><div>{ PopupObject.fromWho }</div></div>
@@ -77,25 +78,22 @@ const Popup_DeployedHome = (props)=>{
        <div><div>FX:</div></div>
        <div><div>1.00</div></div>
       </div>
-      <div className={styles.row}>
-       <div><div>Amount (USD):</div></div>
-       <div><div>
-        <input className={styles.amtInput}
-               type="number"
-               placeholder="Enter Amount"
-               onChange={  (e)=>{actions.Popup_Amount(e.currentTarget.value)} }
-               value={ (typeof state.ui.Popup_Amount=="number")? parseFloat(state.ui.Popup_Amount) : undefined }
-         />
-        </div></div>
+
+      <div className={styles.row + ' ' + styles.topRow}>
+       <div>Amount (USD):</div>
+       <input className={styles.amtInput}
+        type="number"
+        placeholder="Enter Amount"
+        onChange={  (e)=>{actions.Popup_Amount(e.currentTarget.value)} }
+        value={ (typeof state.ui.Popup_Amount=="number")? parseFloat(state.ui.Popup_Amount) : undefined }
+        />
       </div>
       <div className={styles.row}>
-       <div><div>Adj. Amount (USD):</div></div>
-       <div><div>
-        <input className={styles.amtInput}
-               type="number"
-               placeholder="Enter Adj. Amount"
-         />
-        </div></div>
+       <div>Adj. Amount (USD):</div>
+       <input className={styles.amtInput}
+        type="number"
+        placeholder="Enter Adj. Amount"
+        />
       </div>
       <div className={ styles.buttonHolder }>
        <div className={ styles.cancelBtn }
@@ -121,9 +119,10 @@ const Popup_DeployedHome = (props)=>{
       <div className={styles.agreement} >
        Agreement: { PopupObject.fromAgreement }
       </div>
+
       <div className={ styles.col_2 }>
        <div><div>From:</div></div>
-       <div><div>{ PopupObject.fromCounterparty }</div></div>
+       <div><div>{ PopupObject.fromCounterparty  }</div></div>
        <div><div>To:</div></div>
        <div><div>{ PopupObject.toCounterparty }</div></div>
       </div>
@@ -139,25 +138,22 @@ const Popup_DeployedHome = (props)=>{
        <div><div>FX:</div></div>
        <div><div>1.00</div></div>
       </div>
-      <div className={styles.row}>
-       <div><div>Amount (USD):</div></div>
-       <div><div>
-        <input className={styles.amtInput}
-               type="number"
-               placeholder="Enter Amount"
-               onChange={  (e)=>{actions.Popup_Amount(e.currentTarget.value)} }
-               value={ (typeof state.ui.Popup_Amount=="number")? parseFloat(state.ui.Popup_Amount) : undefined }
-         />
-        </div></div>
+
+      <div className={styles.row + ' ' + styles.topRow}>
+       <div>Amount (USD):</div>
+       <input className={styles.amtInput}
+        type="number"
+        placeholder="Enter Amount"
+        onChange={  (e)=>{actions.Popup_Amount(e.currentTarget.value)} }
+        value={ (typeof state.ui.Popup_Amount=="number")? parseFloat(state.ui.Popup_Amount) : undefined }
+        />
       </div>
       <div className={styles.row}>
-       <div><div>Adj. Amount (USD):</div></div>
-       <div><div>
-        <input className={styles.amtInput}
-               type="number"
-               placeholder="Enter Adj. Amount"
-         />
-        </div></div>
+       <div>Adj. Amount (USD):</div>
+       <input className={styles.amtInput}
+        type="number"
+        placeholder="Enter Adj. Amount"
+        />
       </div>
       <div className={ styles.buttonHolder }>
        <div className={ styles.cancelBtn }

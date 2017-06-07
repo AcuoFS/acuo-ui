@@ -13,7 +13,9 @@ const AssetsComponent = (props)=>{
     return(
       <div className={styles.assetsComponent}>
 
-       { renderPopup(props.state.ui.showPopup) }
+       {
+        renderPopup(props.state.ui.showPopup)
+       }
 
         <div className={DeployedPanel_ExpandedSideways? styles.assetsPanelDeployed : styles.assetsPanels}>
           <AssetsDeployedComponent state={props.state} actions={props.actions} />

@@ -14,7 +14,7 @@
 .hide{ display: none }
 
 .popup{
- height: 300px;
+ height: auto;
  width: 550px;
  background-color: white;
  color: black;
@@ -33,52 +33,44 @@
  justify-content: center;
 }
 .row, .col_2 {
- height: 18px;
+ height: 30px;
  width: 100%;
  display: flex;
  flex-direction: row;
  align-items: center;
  justify-content: center;
- flex: 1 0 auto;
  margin-bottom: 5px;
 }
 
 .agreement{
- height: 18px;
+ height: 40px;
  width: 100%;
  display: flex;
- flex-direction: column;
+ flex-direction: row;
  align-items: center;
  justify-content: center;
- flex: 1 0 auto;
- margin-top: 15px;
+ flex: 2 0 auto;
+ margin-bottom: 10px;
 }
 
-.row > div:nth-child(1)  {
- height: 100%;
- width: 40%;
- display: inline-block;
-}
-.row > div:nth-child(2)  {
- height: 100%;
- width: 60%;
- display: inline-block;
-}
-
-.row > div:nth-child(1) > div {
- height: 100%;
+.row > div:nth-child(1) {
+ width: 30%;
+ height: 30px;
  display: flex;
  flex-direction: row;
  align-items: center;
  justify-content: flex-end;
+ margin-right: 10px;
 }
-.row > div:nth-child(2) > div{
- height: 100%;
- display: flex;
- flex-direction: row;
- align-items: center;
- justify-content: flex-start;
- padding-left: 10px;
+
+.topRow{
+ margin-top: 10px;
+}
+
+.amtInput{
+ height: 90%;
+ width: 300px;
+ font-size: 14px;
 }
 
 .col_2 > div:nth-child(1){
@@ -133,13 +125,6 @@
  padding-left: 10px;
 }
 
-
-.amtInput{
- height: 80%;
- width: 250px;
- font-size: 14px;
-}
-
 .buttonHolder{
  height: 70px;
  width: 100%;
@@ -148,10 +133,11 @@
  flex-direction: row;
  align-items: center;
  justify-content: space-around;
+ flex: 2 0 auto;
 }
 .cancelBtn, .confirmBtn{
   border-radius: 16px;
-  border:1px solid black;
+  border:1px solid  #1c2124;
   font-weight: bold;
 
   display: flex;
