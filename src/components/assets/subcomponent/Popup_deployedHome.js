@@ -82,7 +82,7 @@ const Popup_DeployedHome = (props)=>{
        <div><div>
         <input className={styles.amtInput}
                type="number"
-               placeholder="Enter Integer Amounts"
+               placeholder="Enter Amount"
                onChange={  (e)=>{actions.Popup_Amount(e.currentTarget.value)} }
                value={ (typeof state.ui.Popup_Amount=="number")? parseFloat(state.ui.Popup_Amount) : undefined }
          />
@@ -144,7 +144,7 @@ const Popup_DeployedHome = (props)=>{
        <div><div>
         <input className={styles.amtInput}
                type="number"
-               placeholder="Enter Integer Amounts"
+               placeholder="Enter Amount"
                onChange={  (e)=>{actions.Popup_Amount(e.currentTarget.value)} }
                value={ (typeof state.ui.Popup_Amount=="number")? parseFloat(state.ui.Popup_Amount) : undefined }
          />
