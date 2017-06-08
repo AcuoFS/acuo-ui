@@ -57,11 +57,19 @@ export default class ChangeCallAmountPopup extends React.Component {
 
   render() {
     const {
-      propIsShow
+      propIsShow,
+      popUpX,
+      popUpY,
+      isCurrentRowExpanded
     } = this.props
 
+    const xy = {
+      'left': popUpX,
+      'top': isCurrentRowExpanded ? popUpY + 100 : popUpY + 30
+    }
+
     return (
-      <div className={styles.popupPanel + ' ' + (propIsShow ? styles.showPopup : '')}>
+      <div className={styles.popupPanel + ' ' + (propIsShow ? styles.showPopup : '')} style={xy}>
         <div className={styles.closeButton} onClick={this.onCancel}>
           x
         </div>
