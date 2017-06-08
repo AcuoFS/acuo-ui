@@ -166,7 +166,7 @@ export default class Dispute extends React.Component {
         </div>
 
 
-        <form>
+        <div>
           <div className={styles.secondRow}> {/* two row div for bold*/}
             <div className={styles.sectionRowDispute}> {/* one row div*/}
               <div className={styles.columnleft}> Dispute Amount
@@ -260,7 +260,7 @@ export default class Dispute extends React.Component {
             </button>
           </div>
 
-        </form>
+        </div>
 
       </div>
     )
