@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import {checkNegative} from '../../../utils'
 import styles from './ChangeCallAmountPopup.css'
+import _ from 'lodash'
 
 
 export default class ChangeCallAmountPopup extends React.Component {
@@ -55,6 +56,10 @@ export default class ChangeCallAmountPopup extends React.Component {
   //   })
   // }
 
+  shouldComponentUpdate(nextProps){
+    return !_.isEqual(this.props, nextProps)
+  }
+
   render() {
     const {
       propIsShow,
@@ -95,7 +100,7 @@ export default class ChangeCallAmountPopup extends React.Component {
             <div className={styles.formInput}>
               <input disabled type="text" className={styles.inputStyle}
                      value={checkNegative((Number(this.state.returnAmt)
-                     + Number(this.state.deliverAmt)))}/>
+                     + Number(this.state.deliverAmt)).toFixed(0))}/>
             </div>
           </div>
         </div>
