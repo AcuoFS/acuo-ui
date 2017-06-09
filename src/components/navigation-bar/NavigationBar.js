@@ -38,15 +38,15 @@ export default class NavigationBar extends React.Component {
         <NavigationBarItem selected={this.props.curPage === '/recon'}
                            label={'Reconcile'}
                            toUrl={'/recon'}
-                           notifications={_.find(menuNotifications, {"item": "Unrecon"})}/>
+                           notifications={[_.find(menuNotifications, {"item": "Unrecon"}), _.find(menuNotifications, {"item": "Expected"})]}/>
         <NavigationBarItem selected={this.props.curPage === '/disputes'}
                            label={'Disputes'}
                            toUrl={'/disputes'}
-                           notifications={_.find(menuNotifications, {"item": "ActionDispute"})}/>
+                           notifications={[_.find(menuNotifications, {"item": "ActionDispute"})]}/>
         <NavigationBarItem selected={this.props.curPage === '/pledge'}
                            label={'Pledge'}
                            toUrl={'/pledge'}
-                           notifications={_.find(menuNotifications, {"item": "Reconciled"})}/>
+                           notifications={[_.find(menuNotifications, {"item": "Reconciled"})]}/>
         <NavigationBarItem selected={this.props.curPage === '/deployed'}
                            label={'Deployed'}
                            toUrl={'/deployed'}/>
