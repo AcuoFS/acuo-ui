@@ -15,9 +15,9 @@ const NavigationBarItem = (props) => (
                 {props.label}
               </p>
               { props.notifications &&
-                props.notifications.alerts > 0 &&
+                props.notifications.reduce((sum, item) => item ? sum + item.alerts : sum , 0) > 0 &&
                 <div className={styles.notificationBadge}>
-                  {props.notifications.alerts}
+                  {props.notifications.reduce((sum, item) => sum + item.alerts, 0)}
                 </div>
               }
             </div>
