@@ -195,7 +195,7 @@ const DataRow = (props)=>{
           actions.Popup_OnDrop(
                {
                   ui: { showPopup: !showPopup },
-                data: {Popup_DroppedAsset, Popup_AssetToBeReplaced}
+                data: { Popup_DroppedAsset, Popup_AssetToBeReplaced }
                }
            )
 
@@ -205,9 +205,8 @@ const DataRow = (props)=>{
          onDragEnd={ ()=> actions.Popup_OnDragEnd( { data: { Popup_DraggingDeployedAssetID: null,
                                                              Popup_DraggingHomeAssetID: null ,
                                                              Popup_OriginAgreement: null,
-                                                             Popup_DragDirectionTo: null }
-                                                    }
-                           )}
+                                                             Popup_DragDirectionTo: null } }
+                                                   )}
          >
 
       { renderFade(toFade) }
@@ -282,7 +281,6 @@ DataRowCell.propTypes = {
  cellWidth: PropTypes.number,
  IsDeployedPanelExpandedSideways: PropTypes.bool
 }
-
 
 const Table = {
   ColGroup,

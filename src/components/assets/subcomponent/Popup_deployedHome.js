@@ -20,6 +20,9 @@ const Popup_DeployedHome = (props)=>{
                                                                              return selectedAsset
                                                                            }})(show, selectedDeployedAgreement)
 
+
+
+
            return { fromWho: ( droppedLoad.asset ? droppedLoad.asset.counterparty : droppedLoad.asset.legalEntity),
                     fromAsset: droppedLoad.asset.asset,
                     toCounterparty: selectedDeployedAgreement.SelectedDeployedAgreement.counterparty,
@@ -62,7 +65,6 @@ const Popup_DeployedHome = (props)=>{
  const Values = genValues(props)
 
  let Render_HomeToDepoyedPopup = (PopupObject, Values, styles)=>{
-  console.log("Values ::: ", Values);
   return(
    <div className={ ( Values.show ? styles.screen : styles.screen + ' ' + styles.hide) }>
     <div className={styles.popup}>
