@@ -2,58 +2,69 @@ import React from 'react'
 import styles from './Popup_deployedHome.css'
 
 const Popup_DeployedHome = (props)=>{
- let { show , actions , state } = props
 
- let droppedLoad = JSON.parse(state.data.Popup_DroppedAsset)
- let fromWidget = droppedLoad.widget
- let formPopupObject = (state, droppedLoad)=>{
-  let buildFor ={
-    HomeToDeployed: (state, droppedLoad)=>{
-       let selectedDeployedAgreement = state.data.Popup_AssetToBeReplaced;
-       let selectedDeployedAsset = ((show, selectedDeployedAgreement)=>{if(show){ let agreementObj = _.clone(selectedDeployedAgreement)
-                                                                         let selectedAsset = _.find(agreementObj.SelectedDeployedAgreement.data, (a)=>{return a.id===agreementObj.assetID})
-                                                                         return selectedAsset
-                                                                       }})(show, selectedDeployedAgreement)
+ let genValues = (props)=>{
+   function AssignConstants (props){
+    if(props){
+     this.state = props.state;
+     this.actions = props.actions;
+     this.show = props.show;
+     this.droppedLoad = JSON.parse(this.state.data.Popup_DroppedAsset);
+     this.fromWidget = this.droppedLoad.widget;
+     this.formPopupObject = (state, droppedLoad, show)=>{
+      let buildFor ={
+        HomeToDeployed: (state, droppedLoad)=>{
+           let selectedDeployedAgreement = state.data.Popup_AssetToBeReplaced;
+           let selectedDeployedAsset = ((show, selectedDeployedAgreement)=>{if(show){ let agreementObj = _.clone(selectedDeployedAgreement)
+                                                                             let selectedAsset = _.find(agreementObj.SelectedDeployedAgreement.data, (a)=>{return a.id===agreementObj.assetID})
+                                                                             return selectedAsset
+                                                                           }})(show, selectedDeployedAgreement)
 
-       return { fromWho: ( droppedLoad.asset ? droppedLoad.asset.counterparty : droppedLoad.asset.legalEntity),
-                fromAsset: droppedLoad.asset.asset,
-                toCounterparty: selectedDeployedAgreement.SelectedDeployedAgreement.counterparty,
-                toAgreement: selectedDeployedAgreement.SelectedDeployedAgreement.agreement,
-                toAsset: selectedDeployedAsset.asset,
-                haircut: selectedDeployedAsset.haircut,
-               }}, //end-HomeToDeployed()
-    DeployedToHome: (state, droppedLoad)=>{
-       let { agreement , asset } = droppedLoad
-       let { assetCategory, SelectedHomeAsset } = state.data.Popup_AssetToBeReplaced
+           return { fromWho: ( droppedLoad.asset ? droppedLoad.asset.counterparty : droppedLoad.asset.legalEntity),
+                    fromAsset: droppedLoad.asset.asset,
+                    toCounterparty: selectedDeployedAgreement.SelectedDeployedAgreement.counterparty,
+                    toAgreement: selectedDeployedAgreement.SelectedDeployedAgreement.agreement,
+                    toAsset: selectedDeployedAsset.asset,
+                    haircut: selectedDeployedAsset.haircut,
+                   }}, //end-HomeToDeployed()
+        DeployedToHome: (state, droppedLoad)=>{
+           let { agreement , asset } = droppedLoad
+           let { assetCategory, SelectedHomeAsset } = state.data.Popup_AssetToBeReplaced
 
-       return { fromAgreement: agreement.agreement,
-                fromCounterparty: agreement.counterparty,
-                fromAsset: asset.asset,
-                fromAdjAmount: asset.adjValue,
-                fromHaircut: asset.haircut,
-                toCounterparty: ( assetCategory==="pledged" ? SelectedHomeAsset.counterparty : SelectedHomeAsset.legalEntity ),
-                toAsset: SelectedHomeAsset.asset,
-               }
-     }, //end-DeployedToHome()
-   }//{ buildFor }
+           return { fromAgreement: agreement.agreement,
+                    fromCounterparty: agreement.counterparty,
+                    fromAsset: asset.asset,
+                    fromAdjAmount: asset.adjValue,
+                    fromHaircut: asset.haircut,
+                    toCounterparty: ( assetCategory==="pledged" ? SelectedHomeAsset.counterparty : SelectedHomeAsset.legalEntity ),
+                    toAsset: SelectedHomeAsset.asset,
+                   }
+         }, //end-DeployedToHome()
+       }//{ buildFor }
 
-  switch(droppedLoad.widget){
-    case 'home':
-      return buildFor.HomeToDeployed(state, droppedLoad)
-    case 'deployed':
-      return buildFor.DeployedToHome(state, droppedLoad)
-    default:
-      console.error(`Application Error! Source widget is unspecified!`)
-      alert(`Application Error! Source widget is unspecified!`)
-      break
+      switch(droppedLoad.widget){
+        case 'home':
+          return buildFor.HomeToDeployed(state, droppedLoad)
+        case 'deployed':
+          return buildFor.DeployedToHome(state, droppedLoad)
+        default:
+          console.error(`Application Error! Source widget is unspecified!`)
+          alert(`Application Error! Source widget is unspecified!`)
+          break
+       }
+
+     }//end-formPopupObject()
+     this.PopupObject = this.formPopupObject(this.state, this.droppedLoad, this.show)
+    }
    }
+   return new AssignConstants(props)
+ }
+ const Values = genValues(props)
 
- }//end-formPopupObject()
-
- let PopupObject = formPopupObject(state, droppedLoad)
- let Render_HomeToDepoyedPopup = (PopupObject)=>{
+ let Render_HomeToDepoyedPopup = (PopupObject, Values, styles)=>{
+  console.log("Values ::: ", Values);
   return(
-   <div className={ ( show? styles.screen : styles.screen + ' ' + styles.hide) }>
+   <div className={ ( Values.show ? styles.screen : styles.screen + ' ' + styles.hide) }>
     <div className={styles.popup}>
      <div className={styles.contentHolder}>
       <div className={styles.agreement} >
@@ -84,8 +95,8 @@ const Popup_DeployedHome = (props)=>{
        <input className={styles.amtInput}
         type="number"
         placeholder="Enter Amount"
-        onChange={  (e)=>{actions.Popup_Amount(e.currentTarget.value)} }
-        value={ (typeof state.ui.Popup_Amount=="number")? parseFloat(state.ui.Popup_Amount) : undefined }
+        onChange={  (e)=>{Values.actions.Popup_Amount(e.currentTarget.value)} }
+        value={ (typeof Values.state.ui.Popup_Amount=="number")? parseFloat(Values.state.ui.Popup_Amount) : undefined }
         />
       </div>
       <div className={styles.row}>
@@ -97,12 +108,12 @@ const Popup_DeployedHome = (props)=>{
       </div>
       <div className={ styles.buttonHolder }>
        <div className={ styles.cancelBtn }
-            onClick={(show)=>{ actions.Popup_onClickCancel( { "ui": { "showPopup": !show } ,
-                                                              "data": { "Popup_DroppedAsset": undefined,
-                                                                       "Popup_AssetToBeReplaced": undefined,
-                                                                       "Popup_Amount": undefined  }
-                                                            }
-                                                          )
+            onClick={()=>{ Values.actions.Popup_onClickCancel( { "ui": { "showPopup": !Values.show } ,
+                                                                         "data": { "Popup_DroppedAsset": undefined,
+                                                                                   "Popup_AssetToBeReplaced": undefined,
+                                                                                   "Popup_Amount": undefined  }
+                                                                       }
+                                                                     )
             }} >
          Cancel
        </div>
@@ -113,9 +124,9 @@ const Popup_DeployedHome = (props)=>{
    </div>
    )
  }
- let Render_DeployedToHomePopup = (PopupObject)=>{
+ let Render_DeployedToHomePopup = (PopupObject, Values, styles)=>{
   return(
-   <div className={ ( show? styles.screen : styles.screen + ' ' + styles.hide) }>
+   <div className={ ( Values.show? styles.screen : styles.screen + ' ' + styles.hide) }>
     <div className={styles.popup}>
      <div className={styles.contentHolder}>
       <div className={styles.agreement} >
@@ -146,8 +157,8 @@ const Popup_DeployedHome = (props)=>{
        <input className={styles.amtInput}
         type="number"
         placeholder="Enter Amount"
-        onChange={  (e)=>{actions.Popup_Amount(e.currentTarget.value)} }
-        value={ (typeof state.ui.Popup_Amount=="number")? parseFloat(state.ui.Popup_Amount) : undefined }
+        onChange={  (e)=>{Values.actions.Popup_Amount(e.currentTarget.value)} }
+        value={ (typeof Values.state.ui.Popup_Amount=="number")? parseFloat(Values.state.ui.Popup_Amount) : undefined }
         />
       </div>
       <div className={styles.row}>
@@ -159,13 +170,13 @@ const Popup_DeployedHome = (props)=>{
       </div>
       <div className={ styles.buttonHolder }>
        <div className={ styles.cancelBtn }
-            onClick={(show)=>{ actions.Popup_onClickCancel( { ui: { "showPopup": !show } ,
-                                                              data:  { "Popup_DroppedAsset": undefined,
-                                                                       "Popup_AssetToBeReplaced": undefined,
-                                                                       "Popup_Amount": undefined,
-                                                                       "Popup_DraggingDeployedAssetID": undefined, }
-                                                             }
-                                                          )
+            onClick={()=>{ Values.actions.Popup_onClickCancel( { ui: { "showPopup": !Values.show } ,
+                                                                 data:  { "Popup_DroppedAsset": undefined,
+                                                                          "Popup_AssetToBeReplaced": undefined,
+                                                                          "Popup_Amount": undefined,
+                                                                          "Popup_DraggingDeployedAssetID": undefined, }
+                                                                }
+                                                             )
             }} >
          Cancel
        </div>
@@ -177,9 +188,19 @@ const Popup_DeployedHome = (props)=>{
    )
  }
 
- return ( fromWidget==="home" ?
-          Render_HomeToDepoyedPopup(PopupObject) :
-          Render_DeployedToHomePopup(PopupObject)   )
+ switch(Values.fromWidget){
+   case "home":
+     return Render_HomeToDepoyedPopup(Values.PopupObject, Values, styles)
+   case "deployed":
+     return Render_DeployedToHomePopup(Values.PopupObject, Values, styles)
+   default:
+     alert("Popup Failed!\n See Browser's Dev Console ")
+     console.warn( {error: { message: "Unable to identify where drag is started from",
+                             constant: fromWidget,
+                             component_Values: Values
+                             }} )
+     break
+ }
 
 }//end of Component: Popup_DeployedHome()
 
