@@ -234,7 +234,7 @@ export const ApiInitMargResponse = [
    data: [ block_1, block_2 ],
    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-    ineligible_IDs: [ 21, 30 ]
+   ineligible_IDs: [ 21, 30, 31 ]
   },
   {
    region: "Europe",
@@ -243,7 +243,7 @@ export const ApiInitMargResponse = [
    data: [ block_3, block_4 ],
    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-    ineligible_IDs: [ 22, 29 ]
+   ineligible_IDs: [ 22, 29, 40 ]
   },
   {
    region: "Asia",
@@ -252,7 +252,7 @@ export const ApiInitMargResponse = [
    data: [ block_5, block_6 ],
    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-    ineligible_IDs: [ 23, 28 ]
+   ineligible_IDs: [ 23, 28, 32 ]
   },
   {
    region: "Australia",
@@ -261,7 +261,7 @@ export const ApiInitMargResponse = [
    data: [ block_7, block_8 ],
    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-    ineligible_IDs: [ 24, 27 ]
+   ineligible_IDs: [ 24, 27, 39 ]
   },
   {
    region: "Africa",
@@ -270,7 +270,7 @@ export const ApiInitMargResponse = [
    data: [ block_9, block_10 ],
    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
    excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-    ineligible_IDs: [ 25, 26 ]
+   ineligible_IDs: [ 25, 26, 33 ]
   }
  ]
 export const ApiVarMargResponse = [
@@ -281,7 +281,7 @@ export const ApiVarMargResponse = [
   data: [ block_11, block_12 ],
   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-   ineligible_IDs: [ 21 , 30]
+  ineligible_IDs: [ 21 , 30, 38]
  },
  {
   region: "Europe",
@@ -290,7 +290,7 @@ export const ApiVarMargResponse = [
   data: [ block_13, block_14 ],
   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-   ineligible_IDs: [ 22 , 29 ]
+  ineligible_IDs: [ 22 , 29, 34 ]
  },
  {
   region: "Asia",
@@ -299,7 +299,7 @@ export const ApiVarMargResponse = [
   data: [ block_15, block_16 ],
   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-  ineligible_IDs: [ 23 , 28 ]
+ ineligible_IDs: [ 23 , 28, 37 ]
  },
  {
   region: "Australia",
@@ -308,7 +308,7 @@ export const ApiVarMargResponse = [
   data: [ block_17, block_18 ],
   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-   ineligible_IDs: [ 24 , 27 ]
+  ineligible_IDs: [ 24 , 27, 35 ]
  },
  {
   region: "Africa",
@@ -317,7 +317,7 @@ export const ApiVarMargResponse = [
   data: [ block_19, block_20 ],
   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-   ineligible_IDs: [ 25 , 26 ]
+  ineligible_IDs: [ 25 , 26, 36 ]
  }
  ]
 
@@ -462,5 +462,145 @@ const block_30 = {
  "custodian": "Custodian_30",
  "corpAction": "0"
 }
-export const HomePledgedContentNew = [ block_21, block_22, block_23, block_24, block_25 ]
-export const HomePrincipalContentNew = [ block_26, block_27, block_28, block_29, block_30 ]
+const block_31 = {
+ "id": "31",
+ "asset": "Home Asset 31",
+ "counterparty": "Counterparty 31",
+ "region": "Bristish Americas",
+ "quantity": "12,345",
+ "value":"12,345,678 USD",
+ "rating": "AAA",
+ "maturityDate": "DD-MM-YY",
+ "intCost": "99%",
+ "oppCost": "99%",
+ "custodian": "Custodian_31",
+ "corpAction": "0"
+}
+const block_32 = {
+ "id": "32",
+ "asset": "Home Asset 32",
+ "counterparty": "Counterparty 32",
+ "region": "Bristish Americas",
+ "quantity": "12,345",
+ "value":"12,345,678 USD",
+ "rating": "AAB",
+ "maturityDate": "DD-MM-YY",
+ "intCost": "99%",
+ "oppCost": "99%",
+ "custodian": "Custodian_32",
+ "corpAction": "0"
+}
+const block_33 = {
+ "id": "33",
+ "asset": "Home Asset 33",
+ "counterparty": "Counterparty 33",
+ "region": "Bristish Americas",
+ "quantity": "12,345",
+ "value":"12,345,678 USD",
+ "rating": "AAc",
+ "maturityDate": "DD-MM-YY",
+ "intCost": "99%",
+ "oppCost": "99%",
+ "custodian": "Custodian_33",
+ "corpAction": "0"
+}
+const block_34 = {
+ "id": "34",
+ "asset": "Home Asset 34",
+ "counterparty": "Counterparty 34",
+ "region": "Bristish Americas",
+ "quantity": "12,345",
+ "value":"12,345,678 USD",
+ "rating": "AAD",
+ "maturityDate": "DD-MM-YY",
+ "intCost": "99%",
+ "oppCost": "99%",
+ "custodian": "Custodian_34",
+ "corpAction": "0"
+}
+const block_35 = {
+ "id": "35",
+ "asset": "Home Asset 35",
+ "counterparty": "Counterparty 35",
+ "region": "Bristish Americas",
+ "quantity": "12,345",
+ "value":"12,345,678 USD",
+ "rating": "AAE",
+ "maturityDate": "DD-MM-YY",
+ "intCost": "99%",
+ "oppCost": "99%",
+ "custodian": "Custodian_35",
+ "corpAction": "0"
+}
+const block_36 = {
+ "id": "36",
+ "asset": "Home Asset 36",
+ "legalEntity": "Acuo",
+ "region": "Bristish Americas",
+ "quantity": "12,345",
+ "value":"12,345,678 USD",
+ "rating": "AAF",
+ "maturityDate": "DD-MM-YY",
+ "intCost": "99%",
+ "oppCost": "99%",
+ "custodian": "Custodian_36",
+ "corpAction": "0"
+}
+const block_37 = {
+ "id": "37",
+ "asset": "Home Asset 37",
+ "legalEntity": "Acuo",
+ "region": "Bristish Americas",
+ "quantity": "12,345",
+ "value":"12,345,678 USD",
+ "rating": "AAg",
+ "maturityDate": "DD-MM-YY",
+ "intCost": "99%",
+ "oppCost": "99%",
+ "custodian": "Custodian_37",
+ "corpAction": "0"
+}
+const block_38 = {
+ "id": "38",
+ "asset": "Home Asset 38",
+ "legalEntity": "Acuo",
+ "region": "Bristish Americas",
+ "quantity": "12,345",
+ "value":"12,345,678 USD",
+ "rating": "AAh",
+ "maturityDate": "DD-MM-YY",
+ "intCost": "99%",
+ "oppCost": "99%",
+ "custodian": "Custodian_38",
+ "corpAction": "0"
+}
+const block_39 = {
+ "id": "39",
+ "asset": "Home Asset 39",
+ "legalEntity": "Acuo",
+ "region": "Bristish Americas",
+ "quantity": "12,345",
+ "value":"12,345,678 USD",
+ "rating": "AAi",
+ "maturityDate": "DD-MM-YY",
+ "intCost": "99%",
+ "oppCost": "99%",
+ "custodian": "Custodian_39",
+ "corpAction": "0"
+}
+const block_40 = {
+ "id": "40",
+ "asset": "Home Asset 40",
+ "legalEntity": "Acuo",
+ "region": "Bristish Americas",
+ "quantity": "12,345",
+ "value":"12,345,678 USD",
+ "rating": "AAi",
+ "maturityDate": "DD-MM-YY",
+ "intCost": "99%",
+ "oppCost": "99%",
+ "custodian": "Custodian_40",
+ "corpAction": "0"
+}
+export const HomePledgedContentNew = [ block_21, block_22, block_23, block_24, block_25, block_31, block_32, block_33, block_34, block_35 ]
+export const HomePrincipalContentNew = [ block_26, block_27, block_28, block_29, block_30, block_36, block_37, block_38, block_39, block_40 ]
