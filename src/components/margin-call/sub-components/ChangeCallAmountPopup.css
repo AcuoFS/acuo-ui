@@ -1,81 +1,82 @@
 .popupPanel {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    padding: 10px;
-    width: 274px;
-    height: 200px;
-    background-color: #FFFFFF;
-    border: 1px solid #979797;
-    border-radius: 8px;
-    display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 10px;
+  width: 274px;
+  height: 200px;
+  background-color: #FFFFFF;
+  border: 1px solid #979797;
+  border-radius: 8px;
+  display: none;
+  z-index: 2;
 }
 
 .showPopup {
-    display: block;
+  display: block;
 }
 
 .popupHeader {
-    font-size: 14px;
-    line-height: 17px;
-    color: #2B3C4C;
-    margin: 5px 0px;
+  font-size: 14px;
+  line-height: 17px;
+  color: #2B3C4C;
+  margin: 5px 0px;
 }
 
 .flexRow {
-    display: flex;
-    font-size: 13px;
-    text-align: right;
-    line-height: 16px;
-    color: #4A4A4A;
-    padding: 5px;
+  display: flex;
+  font-size: 13px;
+  text-align: right;
+  line-height: 16px;
+  color: #4A4A4A;
+  padding: 5px;
 }
 
 .formLabel {
-    flex: 1;
-    text-align: right;
-    padding: 0px 5px;
-    align-self: center;
+  flex: 1;
+  text-align: right;
+  padding: 0px 5px;
+  align-self: center;
 }
 
 .formInput {
-    flex: 1;
+  flex: 1;
 }
 
 .inputStyle {
-    height: 28px;
-    font-size: 13px;
-    text-align: right;
-    line-height: 16px;
+  height: 28px;
+  font-size: 13px;
+  text-align: right;
+  line-height: 16px;
 }
 
 .btnCont {
-    text-align: right;
-    padding: 10px 5px;
+  text-align: right;
+  padding: 10px 5px;
 }
 
 .buttonStyle {
-    width: 84px;
-    height: 29px;
-    background-color: #008B04;
-    border-radius: 20px;
-    color: #FFFFFF;
-    cursor: pointer;
-    margin: 0px 5px;
-    font-size: 14px;
+  width: 84px;
+  height: 29px;
+  background-color: #008B04;
+  border-radius: 20px;
+  color: #FFFFFF;
+  cursor: pointer;
+  margin: 0px 5px;
+  font-size: 14px;
 }
 
 .cancelButtonStyle {
-    background-color: #FFFFFF;
-    color: #000000;
-    border: none;
+  background-color: #FFFFFF;
+  color: #000000;
+  border: none;
 }
 
 .closeButton {
-    color: #585858;
-    float: right;
-    font-size: 15px;
-    cursor: pointer;
+  color: #585858;
+  float: right;
+  font-size: 15px;
+  cursor: pointer;
 }

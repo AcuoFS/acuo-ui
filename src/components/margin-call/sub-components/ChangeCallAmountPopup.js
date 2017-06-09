@@ -56,8 +56,8 @@ export default class ChangeCallAmountPopup extends React.Component {
   //   })
   // }
 
-  shouldComponentUpdate(nextProps){
-    return !_.isEqual(this.props, nextProps)
+  shouldComponentUpdate(nextProps, nextState){
+    return !_.isEqual(this.props, nextProps) || !_.isEqual(this.state, nextState)
   }
 
   render() {
@@ -98,7 +98,7 @@ export default class ChangeCallAmountPopup extends React.Component {
           <div className={styles.flexRow}>
             <div className={styles.formLabel}>Total Call Amount</div>
             <div className={styles.formInput}>
-              <input disabled type="text" className={styles.inputStyle}
+              <input type="text" disabled className={styles.inputStyle}
                      value={checkNegative((Number(this.state.returnAmt)
                      + Number(this.state.deliverAmt)).toFixed(0))}/>
             </div>

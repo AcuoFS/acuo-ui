@@ -78,6 +78,9 @@ export default class MarginCallRow extends React.Component {
           + ' ' + styles.clickableCell}
                onClick={(e) => propHandlerOnTotalMargin(item.totalCallAmount, item.mgnCallUploadId, e.pageX, e.pageY, this.state.isExpanded)}>
             {checkNegative(item.totalCallAmount)}
+            <div className={styles.tooltip}>
+              Click to edit
+            </div>
           </div>
           <div className={styles.cell}>{item.referenceIdentifier || '-'}</div>
           <div className={styles.cell + ' ' + styles.largeCell}>{checkNegative(item.exposure) || '-'}</div>
