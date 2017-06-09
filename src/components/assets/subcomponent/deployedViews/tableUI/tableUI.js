@@ -48,6 +48,18 @@ const DataRow = (props)=>{
     }
     else { return "24px" }
   }
+  let findOriginAgreement = (assetCategory, Deployed_VarMarginContent, Deployed_InitMarginContent)=>{
+     let getAgreement = (content)=> _.find( content , (o)=>{ let x =  _.map(o.data, (asset)=> _.includes(asset, assetID)); return _.includes(x, true) })
+     switch(assetCategory){
+      case 'varMargin':
+        return getAgreement(Deployed_VarMarginContent)
+      case 'initMargin':
+        return getAgreement(Deployed_InitMarginContent)
+      default:
+        alert("Application Error! Agreement Not Found!!!")
+        break
+     }
+  }
   let dragCategoryContent = (assetCategory)=>{
     let searchHomeAsset = content => {
      let widget = 'home'
@@ -111,24 +123,19 @@ const DataRow = (props)=>{
           if(assetID) {
            switch(contentType){
             case "home_Row":
-              return actions.Popup_OnDragStart( { Popup_DraggingHomeAssetID : assetID ,
-                                                  Popup_DragDirectionTo : draggingTo } )
+              return actions.Popup_OnDragStart( {"data": { "Popup_DraggingHomeAssetID" : assetID ,
+                                                           "Popup_DragDirectionTo" : draggingTo   }} )
             case "deployed_rowData":
-              let findOriginAgreement = (assetCategory, Deployed_VarMarginContent, Deployed_InitMarginContent)=>{
-                 let getAgreement = (content)=> _.find( content , (o)=>{ let x =  _.map(o.data, (asset)=> _.includes(asset, assetID)); return _.includes(x, true) })
-                 switch(assetCategory){
-                  case 'varMargin':
-                    return getAgreement(Deployed_VarMarginContent)
-                  case 'initMargin':
-                    return getAgreement(Deployed_InitMarginContent)
-                  default:
-                    alert("Application Error! Agreement Not Found!!!")
-                    break
-                 }
-              }
-              return actions.Popup_OnDragStart( { Popup_DraggingDeployedAssetID : assetID ,
-                                                  Popup_OriginAgreement: findOriginAgreement( assetCategory, Deployed_VarMarginContent, Deployed_InitMarginContent ),
-                                                  Popup_DragDirectionTo : draggingTo } )
+              return actions.Popup_OnDragStart(  { "data": { "Popup_DraggingDeployedAssetID": assetID,
+                                                             "Popup_OriginAgreement": findOriginAgreement( assetCategory, Deployed_VarMarginContent, Deployed_InitMarginContent ),
+                                                             "Popup_DragDirectionTo": draggingTo }  }
+                     )
+            default:
+              alert(" onDragStart() Error!\n See React Component <DataRow>. \n See Browser's Dev Console for more info")
+              console.error( {error : { "Error Component": ev.target,
+                                        "Error Location": `onDragStart()'s switch statement`,
+                                        "Error Issue": `Invalid <const|value> ::: <contentType|${contentType}> `  }} )
+              break
            }
           }
          }}
@@ -149,23 +156,23 @@ const DataRow = (props)=>{
           let fromWidget =  JSON.parse(dropload).widget
 
           let findDeployedAgreementObject = (assetCategory, assetID, Deployed_InitMarginContent, Deployed_VarMarginContent)=>{
-           /******** Helper Function ********/
-           let searchWithinAgreementAssets = (content, assetID)=>{
-              return _.find(content,
-                            (o)=>{ let x =  _.map( o.data, (asset)=>_.includes(asset, assetID) );
-                                   return _.includes(x, true) }
-                           )//end find()
-           }
-           /*********************************/
-            switch(assetCategory){
-             case "varMargin":
-               return searchWithinAgreementAssets(Deployed_VarMarginContent, assetID)
-             case "initMargin":
-               return searchWithinAgreementAssets(Deployed_InitMarginContent, assetID)
-             default:
-               alert(`Error! Asset Category [${assetCategory}] not found!`)
-               break
-            }//end switch()
+            /******** Helper Function ********/
+            let searchWithinAgreementAssets = (content, assetID)=>{
+               return _.find(content,
+                             (o)=>{ let x =  _.map( o.data, (asset)=>_.includes(asset, assetID) );
+                                    return _.includes(x, true) }
+                            )//end find()
+            }
+            /*********************************/
+             switch(assetCategory){
+              case "varMargin":
+                return searchWithinAgreementAssets(Deployed_VarMarginContent, assetID)
+              case "initMargin":
+                return searchWithinAgreementAssets(Deployed_InitMarginContent, assetID)
+              default:
+                alert(`Error! Asset Category [${assetCategory}] not found!`)
+                break
+             }//end switch()
           }//end findDeployedAgreementObject()
           let findHomeAssetObject = (assetCategory, assetID, Home_PledgedContent, Home_PrincipalContent)=>{
            switch(assetCategory){
@@ -174,31 +181,37 @@ const DataRow = (props)=>{
              case "principal":
                 return _.find( Home_PrincipalContent, (asset)=>{ return assetID===asset.id } )
              default:
-                alert(`Error! Asset Category [${assetCategory}] not found!`)
+                alert(` onDrop() Event Error! \n See React Component <DataRow> \n Asset Category [${assetCategory}] not found!`)
                 return
              }//end-switch()
            }//end-findAssetObject()
 
-          actions.ShowPopup(!showPopup)
-          actions.Popup_Update_DroppedAsset(dropload)
-          actions.Popup_Update_AssetToBeReplaced( ( fromWidget==="home" ?
-                                                    {assetID , SelectedDeployedAgreement: findDeployedAgreementObject(assetCategory, assetID, Deployed_InitMarginContent, Deployed_VarMarginContent) } :
-                                                    {assetID , assetCategory , SelectedHomeAsset: findHomeAssetObject(assetCategory, assetID, Home_PledgedContent, Home_PrincipalContent)}
-                                                   ) )
-         }}
+          let Popup_DroppedAsset = dropload
+          let Popup_AssetToBeReplaced = ( fromWidget==="home" ?
+                                            {assetID , SelectedDeployedAgreement: findDeployedAgreementObject(assetCategory, assetID, Deployed_InitMarginContent, Deployed_VarMarginContent) } :
+                                            {assetID , assetCategory , SelectedHomeAsset: findHomeAssetObject(assetCategory, assetID, Home_PledgedContent, Home_PrincipalContent)}
+                                           )
 
-         onDragEnd={
-          ()=>{
-           actions.Popup_OnDragEnd( { Popup_DraggingDeployedAssetID:null,
-                                      Popup_DraggingHomeAssetID: null ,
-                                      Popup_OriginAgreement: null,
-                                      Popup_DragDirectionTo: null } )
-          }
+          actions.Popup_OnDrop(
+               {
+                  ui: { showPopup: !showPopup },
+                data: {Popup_DroppedAsset, Popup_AssetToBeReplaced}
+               }
+           )
+
+          }//end onDrop(callback)
          }
 
-
+         onDragEnd={ ()=> actions.Popup_OnDragEnd( { data: { Popup_DraggingDeployedAssetID: null,
+                                                             Popup_DraggingHomeAssetID: null ,
+                                                             Popup_OriginAgreement: null,
+                                                             Popup_DragDirectionTo: null }
+                                                    }
+                           )}
          >
+
       { renderFade(toFade) }
+
       { _.map(content, (content, idx)=>{ return <DataRowCell key={idx}
                                                              id={idx}
                                                              contentType={contentType}
@@ -257,9 +270,7 @@ const DataRowCell = (props)=>{
   )
 } //end DataRowCell-component
 
-const FadeScreen = (props) => {
- return <div className={styles.FadeScreen} ref={ (node)=>{ if(node)node.style.height=props.height } }/>
-}
+const FadeScreen = (props) => <div className={styles.FadeScreen} ref={(node)=>{ if(node)node.style.height=props.height }} />
 
 DataRow.propTypes = {
  style: PropTypes.object,
@@ -281,7 +292,6 @@ const Table = {
 }
 
 export default Table
-
 
 //-----Possible Refactoring-----
 /*

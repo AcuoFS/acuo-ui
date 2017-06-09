@@ -97,10 +97,12 @@ const Popup_DeployedHome = (props)=>{
       </div>
       <div className={ styles.buttonHolder }>
        <div className={ styles.cancelBtn }
-            onClick={(show)=>{ actions.ShowPopup(!show)
-                               actions.Popup_Update_DroppedAsset(undefined)
-                               actions.Popup_Update_AssetToBeReplaced(undefined)
-                               actions.Popup_Amount(undefined)
+            onClick={(show)=>{ actions.Popup_onClickCancel( { "ui": { "showPopup": !show } ,
+                                                              "data": { "Popup_DroppedAsset": undefined,
+                                                                       "Popup_AssetToBeReplaced": undefined,
+                                                                       "Popup_Amount": undefined  }
+                                                            }
+                                                          )
             }} >
          Cancel
        </div>
@@ -157,10 +159,13 @@ const Popup_DeployedHome = (props)=>{
       </div>
       <div className={ styles.buttonHolder }>
        <div className={ styles.cancelBtn }
-            onClick={(show)=>{ actions.ShowPopup(!show)
-                               actions.Popup_Update_DroppedAsset(undefined)
-                               actions.Popup_Update_AssetToBeReplaced(undefined)
-                               actions.Popup_Amount(undefined)
+            onClick={(show)=>{ actions.Popup_onClickCancel( { ui: { "showPopup": !show } ,
+                                                              data:  { "Popup_DroppedAsset": undefined,
+                                                                       "Popup_AssetToBeReplaced": undefined,
+                                                                       "Popup_Amount": undefined,
+                                                                       "Popup_DraggingDeployedAssetID": undefined, }
+                                                             }
+                                                          )
             }} >
          Cancel
        </div>
@@ -180,9 +185,7 @@ const Popup_DeployedHome = (props)=>{
 
 export default Popup_DeployedHome
 
-
-/*
-#Possible Improvements
+/* #Possible Improvements
 
 * Render functions for popup are seperated for the time being for easy debugging.
   Refactoring can be done (eg combining render function into one) once there's

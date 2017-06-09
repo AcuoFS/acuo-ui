@@ -27,10 +27,12 @@ const mapDispatchToProps = (dispatch, ownProps)=>{
   // Popup_Update_DraggingAssetID: (HomeAssetID)=>{dispatch( AssetsPanel.Popup_Update_DraggingAssetID(HomeAssetID) )},
   ShowPopup: (bool)=>{dispatch(AssetsPanel.ShowPopup(bool))},
   Popup_Amount: (amount)=>{dispatch(AssetsPanel.Popup_Amount(amount))},
-  Popup_Update_DroppedAsset: (assetInfo)=>{dispatch(AssetsPanel.Popup_Update_DroppedAsset(assetInfo))},
-  Popup_Update_AssetToBeReplaced: (assetInfo)=>{dispatch(AssetsPanel.Popup_Update_AssetToBeReplaced(assetInfo))},
+  // Popup_Update_DroppedAsset: (assetInfo)=>{dispatch(AssetsPanel.Popup_Update_DroppedAsset(assetInfo))},
+  // Popup_Update_AssetToBeReplaced: (assetInfo)=>{dispatch(AssetsPanel.Popup_Update_AssetToBeReplaced(assetInfo))},
   Popup_OnDragStart: (dragInfo)=>{dispatch(AssetsPanel.Popup_OnDragStart(dragInfo))},
   Popup_OnDragEnd: (dragInfo)=>{dispatch(AssetsPanel.Popup_OnDragEnd(dragInfo))},
+  Popup_OnDrop: (dropInfo)=>{dispatch(AssetsPanel.Popup_OnDrop(dropInfo))},
+  Popup_onClickCancel: (resetAction)=>{dispatch(AssetsPanel.Popup_onClickCancel(resetAction))},
 
  }
 }

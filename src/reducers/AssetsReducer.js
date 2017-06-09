@@ -5,11 +5,13 @@ import { HomePledgedContentNew , HomePrincipalContentNew, ApiInitMargResponse, A
 /* thread() Caveats!!!!
 - Argument:action is the dispatched action object. Its key-names must be identical with the keyname in the state!!!
 */
-let thread = (state , path ,  action)=>{
-  return _.reduce( action ,
-                   (newState , val , key )=> _.update(state, `${path}.${key}` , ()=>val),
-                   state )
-}
+
+let thread = (state, action)=> _.reduce( action ,
+                                         (newState , pathObj , path)=> _.reduce( pathObj ,
+                                                                                 (pathState, fieldValue, field) => _.update(pathState, `${path}.${field}` , ()=>fieldValue) ,
+                                                                                 state ) ,
+                                         state )
+
 
 const INITIAL_STATE = fromJS({
   ui: {  'DeployedPanel_ExpandedSideways': false,
@@ -38,6 +40,9 @@ const INITIAL_STATE = fromJS({
 
 const AssetsReducer = (state = INITIAL_STATE , action)=>{
   let newState = {}
+  let actionFoo = { data: { showPopup: true } }
+  thread( state , actionFoo )
+
   switch (action.type){
    //For Deployed Panel
     case "@DEPLOYED__TOGGLE_SIDE_EXPAND":
@@ -69,9 +74,6 @@ const AssetsReducer = (state = INITIAL_STATE , action)=>{
     case "@POPUP_AMOUNT":
       return state.setIn(['ui','Popup_Amount'], fromJS(action.payload))
 
-    // case "@POPUP__DRAGGING__ASSET_ID":
-    //   return state.setIn(['data','Popup_DraggingAssetID'], fromJS(action.payload))
-
     case "@POPUP__DROPPED_ASSET":
       return state.setIn(['data','Popup_DroppedAsset'], fromJS(action.payload))
 
@@ -79,11 +81,19 @@ const AssetsReducer = (state = INITIAL_STATE , action)=>{
       return state.setIn(['data','Popup_AssetToBeReplaced'], fromJS(action.payload))
 
     case "@POPUP_ON_DRAG_START":
-      newState = thread(state.toJS() , 'data' , action.payload)
+      newState = thread( state.toJS() , action.payload )
       return fromJS(newState)
 
     case "@POPUP_ON_DRAG_END":
-      newState = thread(state.toJS() , 'data' , action.payload)
+      newState = thread( state.toJS() , action.payload )
+      return fromJS(newState)
+
+    case "@POPUP_ON_DROP":
+      newState = thread( state.toJS() , action.payload )
+      return fromJS(newState)
+
+    case "@POPUP_ON_CLICK_CANCEL":
+      newState = thread( state.toJS() , action.payload )
       return fromJS(newState)
 
     default:
