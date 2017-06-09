@@ -233,7 +233,8 @@ export const ApiInitMargResponse = [
    counterparty: "CCC Counterparty",
    data: [ block_1, block_2 ],
    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+    ineligible_IDs: [ 21, 30 ]
   },
   {
    region: "Europe",
@@ -241,7 +242,8 @@ export const ApiInitMargResponse = [
    counterparty: "ABA Counterparty",
    data: [ block_3, block_4 ],
    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+    ineligible_IDs: [ 22, 29 ]
   },
   {
    region: "Asia",
@@ -249,7 +251,8 @@ export const ApiInitMargResponse = [
    counterparty: "AAA Counterparty",
    data: [ block_5, block_6 ],
    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+    ineligible_IDs: [ 23, 28 ]
   },
   {
    region: "Australia",
@@ -257,7 +260,8 @@ export const ApiInitMargResponse = [
    counterparty: "HUA Counterparty",
    data: [ block_7, block_8 ],
    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+    ineligible_IDs: [ 24, 27 ]
   },
   {
    region: "Africa",
@@ -265,7 +269,8 @@ export const ApiInitMargResponse = [
    counterparty: "BBA Counterparty",
    data: [ block_9, block_10 ],
    pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+   excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+    ineligible_IDs: [ 25, 26 ]
   }
  ]
 export const ApiVarMargResponse = [
@@ -275,7 +280,8 @@ export const ApiVarMargResponse = [
   counterparty: "CCC Counterparty",
   data: [ block_11, block_12 ],
   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-  excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+  excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+   ineligible_IDs: [ 21 , 30]
  },
  {
   region: "Europe",
@@ -283,7 +289,8 @@ export const ApiVarMargResponse = [
   counterparty: "ABA Counterparty",
   data: [ block_13, block_14 ],
   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-  excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+  excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+   ineligible_IDs: [ 22 , 29 ]
  },
  {
   region: "Asia",
@@ -291,7 +298,8 @@ export const ApiVarMargResponse = [
   counterparty: "AAA Counterparty",
   data: [ block_15, block_16 ],
   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-  excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+  excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+  ineligible_IDs: [ 23 , 28 ]
  },
  {
   region: "Australia",
@@ -299,7 +307,8 @@ export const ApiVarMargResponse = [
   counterparty: "HUA Counterparty",
   data: [ block_17, block_18 ],
   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-  excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+  excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+   ineligible_IDs: [ 24 , 27 ]
  },
  {
   region: "Africa",
@@ -307,7 +316,8 @@ export const ApiVarMargResponse = [
   counterparty: "BBA Counterparty",
   data: [ block_19, block_20 ],
   pledge: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
-  excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"}
+  excess: {  "adjValue": "12,345,678 USD", "value":"12,345,678 USD"},
+   ineligible_IDs: [ 25 , 26 ]
  }
  ]
 

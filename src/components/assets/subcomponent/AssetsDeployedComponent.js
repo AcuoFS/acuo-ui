@@ -97,20 +97,25 @@ const AssetsDeployedComponent = (props)=>{
    let sortedContent = (IsRegionSelected?  _.sortBy(rightContent, ["region"]) :  _.sortBy(rightContent, ["counterparty"]))
    let filteredContent = SearchContent(sortedContent, SearchText)
 
-   let tableContent = (rightContent)=>{
+   let tableContent = (filteredContent)=>{
         if(ExpandedSideways){
-          return _.map(rightContent, (row)=>{ return{ CategoryContent: [ row.region, row.agreement, row.counterparty ],
-                                                      RowContent:  _.map( row.data , (block)=>{ return { assetID: block.id , assetInfo: [ block.asset, block.quantity, block.adjValue, block.value, block.rating, block.haircut, block.maturityDate, block.isin ]}}),
-                                                      PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " ", " ", " ", " "],
-                                                      ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " ", " ", " ", " "]  }})
+          return _.map(filteredContent, (row)=>{
+                                                 return{ CategoryContent: [ row.region, row.agreement, row.counterparty ],
+                                                         RowContent:  _.map( row.data , (block)=>{ return { assetID: block.id , assetInfo: [ block.asset, block.quantity, block.adjValue, block.value, block.rating, block.haircut, block.maturityDate, block.isin ]}}),
+                                                         PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " ", " ", " ", " "],
+                                                         ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " ", " ", " ", " "],
+                                                         RawAgreementObject: row  }})
           }
          else {
-           return _.map(rightContent, (row)=>{ return{ CategoryContent: [ row.region, row.agreement, row.counterparty ],
-                                                       RowContent:  _.map( row.data , (block)=>{ return { assetID: block.id , assetInfo: [ block.asset, block.quantity, block.adjValue, block.value, block.haircut ]}}),
-                                                       PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " "],
-                                                       ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " "] }})
+           return _.map(filteredContent, (row)=>{
+                                                 return{ CategoryContent: [ row.region, row.agreement, row.counterparty ],
+                                                         RowContent:  _.map( row.data , (block)=>{ return { assetID: block.id , assetInfo: [ block.asset, block.quantity, block.adjValue, block.value, block.haircut ]}}),
+                                                         PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " "],
+                                                         ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " "],
+                                                         RawAgreementObject: row }})
          }
      }
+     // console.log(tableContent(filteredContent));
 
    return(
      <div className={ ExpandedVertically? (styles.assetsPanelFrameExpandedVertically) : (styles.assetsPanelFrame) } >

@@ -18,7 +18,7 @@ const VarMarginTableStyle = {
                                   height: 30,
                                  rowSpan: 4,
                                  bgColor: undefined },
-          "DataBlockStyle" : { className: `${TableCSS.RowGroup} ${TableCSS.DataBlock}`},
+          "DataBlockStyle" : { className: `${TableCSS.RowGroup} ${TableCSS.DataBlock} ${TableCSS.FadeScreen_Anchor}` },
       "InnerColGroupStyle" : { className: `${TableCSS.ColGroup}`,
                                    width: 100-33 },
                "RowStyle2" : { className: TableCSS.Row + ' ' + TableCSS.DataRow,
@@ -50,7 +50,7 @@ const VarMarginTableStyleExpanded = {
                                   height: 30,
                                  rowSpan: 4,
                                  bgColor: undefined },
-          "DataBlockStyle" : { className: `${TableCSS.RowGroup} ${TableCSS.DataBlock}`},
+          "DataBlockStyle" : { className: `${TableCSS.RowGroup} ${TableCSS.DataBlock} ${TableCSS.FadeScreen_Anchor}` },
       "InnerColGroupStyle" : { className: `${TableCSS.ColGroup}`,
                                    width: 100-30 },
                "RowStyle2" : { className: TableCSS.Row + ' ' + TableCSS.DataRow,
@@ -83,7 +83,7 @@ const InitMarginTableStyle = {
                                   height: 30,
                                  rowSpan: 4,
                                  bgColor: undefined },
-          "DataBlockStyle" : { className: `${TableCSS.RowGroup} ${TableCSS.DataBlock}`},
+          "DataBlockStyle" : { className: `${TableCSS.RowGroup} ${TableCSS.DataBlock} ${TableCSS.FadeScreen_Anchor}` },
       "InnerColGroupStyle" : { className: `${TableCSS.ColGroup}`,
                                    width: 100-33 },
                "RowStyle2" : { className: TableCSS.Row + ' ' + TableCSS.DataRow,
@@ -115,7 +115,7 @@ const InitMarginTableStyleExpanded = {
                                   height: 30,
                                  rowSpan: 4,
                                  bgColor: undefined },
-          "DataBlockStyle" : { className: `${TableCSS.RowGroup} ${TableCSS.DataBlock}`},
+          "DataBlockStyle" : { className: `${TableCSS.RowGroup} ${TableCSS.DataBlock} ${TableCSS.FadeScreen_Anchor}` },
       "InnerColGroupStyle" : { className: `${TableCSS.ColGroup}`,
                                    width: 100-30 },
                "RowStyle2" : { className: TableCSS.Row + ' ' + TableCSS.DataRow,
@@ -132,12 +132,13 @@ const InitMarginTableStyleExpanded = {
 
 const HomeTableStyle={
  "RowGroupStyle": { className: `${TableCSS.ColGroup}`  },
- "HeaderRow": { className: `${TableCSS.Row} ${TableCSS.InitMarginHead}`,
- height: 30,
- rowSpan: 1 },
- "DataRow": { className: TableCSS.Row + ' ' + TableCSS.DataRow,
- height: 30,
- rowSpan: 1 },
+     "HeaderRow": { className: `${TableCSS.Row} ${TableCSS.InitMarginHead}`,
+                       height: 30,
+                      rowSpan: 1 },
+       "DataRow": { className: TableCSS.Row + ' ' + TableCSS.DataRow,
+                       height: 30,
+                      rowSpan: 1 },
+    "FadeScreen": { height: 30 }
 }
 
 const TableStyles = {

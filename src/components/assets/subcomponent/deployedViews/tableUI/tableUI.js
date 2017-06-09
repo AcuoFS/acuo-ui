@@ -29,25 +29,17 @@ const RowGroup = (props)=>{
 
 const DataRow = (props)=>{
   if(!props.style){throw "DataRow's style not passed in through props"}
-  let { actions ,
-        state,
-        assetID ,
-        IsDeployedPanelExpandedSideways,
-        cellWidth,
-        assetCategory} = props;
-  let Deployed_InitMarginContent, Deployed_VarMarginContent, Home_PledgedContent, Home_PrincipalContent
-  if(state){
-   Home_PledgedContent = state.data.Home_PledgedContent;
-   Home_PrincipalContent = state.data.Home_PrincipalContent;
-   Deployed_InitMarginContent = state.data.Deployed_InitMarginContent
-   Deployed_VarMarginContent = state.data.Deployed_VarMarginContent
-  }
-  let showPopup = ( state? state.ui.showPopup : false)
-  let className = props.style.className;
-  let contentType = props.contentType || null; if (!contentType) console.warn("Unspecified contentType")
-  let content = props.content || [""]
-  let siblings = content.length
-  let width =  `${(props.style.width || 100).toString()}%`
+  const { actions , state, assetID, IsDeployedPanelExpandedSideways, cellWidth, assetCategory} = props;
+  const Home_PledgedContent = ( state ? state.data.Home_PledgedContent : null )
+  const Home_PrincipalContent = ( state ? state.data.Home_PrincipalContent : null )
+  const Deployed_InitMarginContent = ( state ? state.data.Deployed_InitMarginContent : null )
+  const Deployed_VarMarginContent = ( state ? state.data.Deployed_VarMarginContent : null )
+  const showPopup = ( state ? state.ui.showPopup : false)
+  const className = props.style.className;
+  const contentType = props.contentType || null; console.assert( contentType != null, `From <DataRow>: unspecified contentType`)
+  const content = props.content || [""]
+  const siblings = content.length
+  const width =  `${(props.style.width || 100).toString()}%`
   let height = ()=>{
     if(props.style) {
       let rowSpan = props.style.rowSpan
@@ -56,7 +48,6 @@ const DataRow = (props)=>{
     }
     else { return "24px" }
   }
-
   let dragCategoryContent = (assetCategory)=>{
     let searchHomeAsset = content => {
      let widget = 'home'
@@ -64,12 +55,16 @@ const DataRow = (props)=>{
      return { widget, asset }
     }
     let searchDeployedAsset = content => {
+      let getAgreement = (content)=> _.find( content , (o)=>{ let x =  _.map(o.data, (asset)=> _.includes(asset, assetID)); return _.includes(x, true) })
+      let getAsset = (agreement)=> _.find( agreement.data, asset => asset.id === assetID  )
       let findAssetInAgreementObject = (content, assetID)=>{
-      let agreement = _.find( content , (o)=>{ let x =  _.map( o.data, (asset)=> _.includes(asset, assetID) )
-                                               return _.includes(x, true) })
-      let asset = _.find( agreement.data, asset => asset.id === assetID  )
+         let agreement = getAgreement(content)
+         let asset = getAsset(agreement)
 
-      return { widget:'deployed', agreement , asset }
+         return { widget:'deployed',
+                  agreement,
+                  asset}
+
      }// end-findAssetInAgreementObject()
       return findAssetInAgreementObject(content, assetID)
     }// end-searchDeployedAsset()
@@ -87,6 +82,19 @@ const DataRow = (props)=>{
       alert("Application Error: Asset Category Not Found!")
     }
   } //end-dragCategoryContent()
+  let dragDirection = (contentType)=>{
+    switch(contentType){
+     case 'deployed_rowData':
+       return 'home'
+     case 'home_Row':
+       return 'deployed'
+     default:
+       break
+    }
+  }
+
+  const toFade = props.toFade || false
+  let renderFade = (bool)=>{ if(bool){ return <FadeScreen height={ height() } />} }
 
   return(
     <div className={className}
@@ -96,10 +104,33 @@ const DataRow = (props)=>{
          draggable={ ((contentType==="deployed_rowData" || contentType==="home_Row") ? true : false) }
 
          onDragStart={ (ev)=>{
-          let dragLoad = dragCategoryContent(assetCategory)
+          let dragLoad = dragCategoryContent(assetCategory);
+          let draggingTo = dragDirection(contentType)
           ev.dataTransfer.setData((contentType==="deployed_rowData" ? 'asset/deployed' :'asset/home'), dragLoad)
           ev.dataTransfer.effectAllowed="move"
-          if(!assetID) actions.Popup_Update_DraggingAssetID(assetID)
+          if(assetID) {
+           switch(contentType){
+            case "home_Row":
+              return actions.Popup_OnDragStart( { Popup_DraggingHomeAssetID : assetID ,
+                                                  Popup_DragDirectionTo : draggingTo } )
+            case "deployed_rowData":
+              let findOriginAgreement = (assetCategory, Deployed_VarMarginContent, Deployed_InitMarginContent)=>{
+                 let getAgreement = (content)=> _.find( content , (o)=>{ let x =  _.map(o.data, (asset)=> _.includes(asset, assetID)); return _.includes(x, true) })
+                 switch(assetCategory){
+                  case 'varMargin':
+                    return getAgreement(Deployed_VarMarginContent)
+                  case 'initMargin':
+                    return getAgreement(Deployed_InitMarginContent)
+                  default:
+                    alert("Application Error! Agreement Not Found!!!")
+                    break
+                 }
+              }
+              return actions.Popup_OnDragStart( { Popup_DraggingDeployedAssetID : assetID ,
+                                                  Popup_OriginAgreement: findOriginAgreement( assetCategory, Deployed_VarMarginContent, Deployed_InitMarginContent ),
+                                                  Popup_DragDirectionTo : draggingTo } )
+           }
+          }
          }}
 
          onDragOver={ (ev)=>{
@@ -156,17 +187,29 @@ const DataRow = (props)=>{
                                                    ) )
          }}
 
-         onDragEnd={ ()=>{ actions.Popup_Update_DraggingAssetID(null) }}
-         >
+         onDragEnd={
+          ()=>{
+           actions.Popup_OnDragEnd( { Popup_DraggingDeployedAssetID:null,
+                                      Popup_DraggingHomeAssetID: null ,
+                                      Popup_OriginAgreement: null,
+                                      Popup_DragDirectionTo: null } )
+          }
+         }
 
-      { _.map(content, (content, idx)=>{
-       return <DataRowCell key={idx}
-                           id={idx}
-                           contentType={contentType}
-                           content={content}
-                           siblings={siblings}
-                           IsDeployedPanelExpandedSideways={IsDeployedPanelExpandedSideways}
-                           cellWidth={ cellWidth? cellWidth[idx] : null }  />} )}
+
+         >
+      { renderFade(toFade) }
+      { _.map(content, (content, idx)=>{ return <DataRowCell key={idx}
+                                                             id={idx}
+                                                             contentType={contentType}
+                                                             content={content}
+                                                             siblings={siblings}
+                                                             IsDeployedPanelExpandedSideways={IsDeployedPanelExpandedSideways}
+                                                             cellWidth={ cellWidth? cellWidth[idx] : null }
+                                                             />
+                                                           })
+      }
+
     </div>
    )
 } // end DataRow-Component
@@ -214,6 +257,10 @@ const DataRowCell = (props)=>{
   )
 } //end DataRowCell-component
 
+const FadeScreen = (props) => {
+ return <div className={styles.FadeScreen} ref={ (node)=>{ if(node)node.style.height=props.height } }/>
+}
+
 DataRow.propTypes = {
  style: PropTypes.object,
  contentType: PropTypes.string,
@@ -230,6 +277,7 @@ const Table = {
   ColGroup,
   RowGroup,
   DataRow,
+  FadeScreen,
 }
 
 export default Table

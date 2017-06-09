@@ -73,7 +73,7 @@ const AssetsHomeComponent = (props)=>{
                                 Content={ generateContent(IsPledgeSelected , FetchedHomeAssetData , HomeWidgetSideExpanded) }
                                 cellWidth = { cellWidth }
                                 TableStyle={ TableStyles.HomeTableStyle } />
-         }
+        }
 
      </PanelWindow>
      <div className={styles.panelResizeHandle}

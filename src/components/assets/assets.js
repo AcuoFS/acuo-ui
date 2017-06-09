@@ -10,6 +10,8 @@ const AssetsComponent = (props)=>{
     if(show){ return <Popup_DeployedHome show={props.state.ui.showPopup} state={ props.state } actions={props.actions}/> }
    }
 
+   // console.log(props.state.data);
+
     return(
       <div className={styles.assetsComponent}>
 
