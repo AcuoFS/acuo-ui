@@ -23,6 +23,16 @@ const AssetsDeployedTableView = (props)=>{
 
   let HomePanel_ShowPopup = (state? state.ui.HomePanel_ShowPopup : false)
 
+  let incomingDragHomeAssetID = (state.data.Popup_DraggingHomeAssetID ? state.data.Popup_DraggingHomeAssetID : false)
+
+  let eligibilityCheck = ( incomingDragHomeAssetID , assetCategory , AgreementData )=>{
+   if(incomingDragHomeAssetID){
+    let ineligible_IDs = AgreementData.RawAgreementObject.ineligible_IDs // Array Type
+    return _.includes( ineligible_IDs , parseInt(incomingDragHomeAssetID))
+   }
+   else false
+  }
+  let renderIneligibleFade =  eligibility => { if(eligibility) {return <Table.FadeScreen/>} }
 
   return (
     <div className={styles.tableView}>
@@ -56,26 +66,30 @@ const AssetsDeployedTableView = (props)=>{
         </Table.ColGroup>
       </Table.RowGroup>
 
-     {Content.map((rowBlock, idx)=>{
+     {Content.map((AgreementData, idx)=>{
+
+      const eligibility = eligibilityCheck( incomingDragHomeAssetID, assetCategory, AgreementData )
+
       return(
        <Table.RowGroup style={TableStyle.DataBlockStyle} key={idx}>
-         <Table.DataRow contentType={"deployed_CategoryContent"} content={rowBlock.CategoryContent} style={TableStyle.RowStyle1} cellWidth={CatCellWidth}/>
+         { renderIneligibleFade(eligibility) }
+         <Table.DataRow contentType={"deployed_CategoryContent"} content={AgreementData.CategoryContent} style={TableStyle.RowStyle1} cellWidth={CatCellWidth} />
          <Table.ColGroup style={TableStyle.InnerColGroupStyle}>
-           { rowBlock.RowContent.map( (rowData,idy)=>{
-            // console.log(rowData.assetID);
+           { AgreementData.RowContent.map( (rowData,idy)=>{
             return <Table.DataRow contentType={"deployed_rowData"}
+                                  state={state}
+                                  actions={actions}
                                   assetCategory={assetCategory}
                                   assetID={rowData.assetID}
                                   content={rowData.assetInfo}
-                                  actions={actions}
-                                  state={state}
                                   style={TableStyle.RowStyle2}
                                   cellWidth={DataCellWidth}
+                                  IsDeployedPanelExpandedSideways={IsDeployedPanelExpandedSideways}
                                   key={idy}
-                                  IsDeployedPanelExpandedSideways={IsDeployedPanelExpandedSideways} />
+                                  />
            } ) }
-         <Table.DataRow contentType={"deployed_PledgeContent"} content={rowBlock.PledgeContent} style={TableStyle.RowPledgeStyle} cellWidth={DataCellWidth} />
-         <Table.DataRow contentType={"deployed_ExcessContent"} content={rowBlock.ExcessContent} style={TableStyle.RowExcessStyle} cellWidth={DataCellWidth} />
+         <Table.DataRow contentType={"deployed_PledgeContent"} content={AgreementData.PledgeContent} style={TableStyle.RowPledgeStyle} cellWidth={DataCellWidth}/>
+         <Table.DataRow contentType={"deployed_ExcessContent"} content={AgreementData.ExcessContent} style={TableStyle.RowExcessStyle} cellWidth={DataCellWidth}/>
          </Table.ColGroup>
        </Table.RowGroup>
       )

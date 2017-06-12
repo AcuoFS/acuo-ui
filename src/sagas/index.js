@@ -74,7 +74,6 @@ function* sagaNavbarAlerts() {
     try{
       yield take(SAGA_NAVBAR_ALERTS)
       const alerts = yield call(FetchNavbarAlerts)
-      console.log(alerts)
       yield put(updateNavbarAlerts(alerts))
     } catch(error){
       console.log(error)

@@ -5,8 +5,9 @@ import AssetsHomeTableView from './deployedViews/TableView/AssetsHomeTableView.j
 /*Actions*/
 import {AssetsPanel} from '../../../actions/AssetsActions.js'
 //Mock Data
-import { HomeTableStyle, HomePledgeContent, HomePledgeContentMin, HomePrincipalContent, HomePrincipalContentMin } from '../mockData/mockData.js'
-import { HomePledgeContentNew, HomePrincipalContentNew } from '../mockData/mockData.js'
+import { HomePledgedContentNew, HomePrincipalContentNew } from '../mockData/mockData.js'
+import TableStyles from './TableStyles.js'
+
 
 const AssetsHomeComponent = (props)=>{
  let state = props.state
@@ -16,7 +17,7 @@ const AssetsHomeComponent = (props)=>{
  let AssetsDeployedPanelExpandedSideways = state.ui.DeployedPanel_ExpandedSideways; //default: false
  let HomeWidgetSideExpanded = !AssetsDeployedPanelExpandedSideways
  let IsPledgeSelected = state.ui.HomePanel_IsPledgeSelected;
- let FetchedHomeAssetData = (IsPledgeSelected ? HomePledgeContentNew : HomePrincipalContentNew)
+ let FetchedHomeAssetData = (IsPledgeSelected ? HomePledgedContentNew : HomePrincipalContentNew)
 
  let cellWidth = {
   expanded: [ 12, 12, 8, 14, 7, 11, 6, 6, 11, 10 ],
@@ -54,34 +55,34 @@ const AssetsHomeComponent = (props)=>{
    return run.formContentObject( Header, RowData )
  } //end generateContent()
 
-   return(
-     <div className={ ExpandedVertically? (styles.assetsPanelFrameExpandedVertically) : (styles.assetsPanelFrame) }>
-       <div  className={ styles.assetsPanelHeader} >
-         <span  className={ styles.assetsPanelTitleText }> At Home </span>
-         {
-          <img className={styles.assetsPanelHeaderSideExpandBtn}
-               src={(AssetsDeployedPanelExpandedSideways? "images/assets_deployed/minimize-sideways.svg" : "images/assets_deployed/expand-sideways.svg")}
-               onClick={ ()=>{actions.DeployedPanel_ToggleSideExpand(!AssetsDeployedPanelExpandedSideways)} }/>
-         }
-
-       </div>
-       <PanelWindow>
-          {
-             <AssetsHomeTableView state={ state }
-                                  actions={ actions }
-                                  Content={ generateContent(IsPledgeSelected , FetchedHomeAssetData , HomeWidgetSideExpanded) }
-                                  cellWidth = { cellWidth }
-                                  TableStyle={ HomeTableStyle } />
-           }
-
-       </PanelWindow>
-       <div className={styles.panelResizeHandle}
-            onClick={ ()=>{actions.HomePanel_ToggleVerticalExpand(!ExpandedVertically)}} >
-         &#9650;  &#9660;
-       </div>
+ return(
+   <div className={ ExpandedVertically? (styles.assetsPanelFrameExpandedVertically) : (styles.assetsPanelFrame) }>
+     <div  className={ styles.assetsPanelHeader} >
+       <span  className={ styles.assetsPanelTitleText }> At Home </span>
+       {
+        <img className={styles.assetsPanelHeaderSideExpandBtn}
+             src={(AssetsDeployedPanelExpandedSideways? "images/assets_deployed/minimize-sideways.svg" : "images/assets_deployed/expand-sideways.svg")}
+             onClick={ ()=>{actions.DeployedPanel_ToggleSideExpand(!AssetsDeployedPanelExpandedSideways)} }/>
+       }
 
      </div>
-   )
+     <PanelWindow>
+        {
+           <AssetsHomeTableView state={ state }
+                                actions={ actions }
+                                Content={ generateContent(IsPledgeSelected , FetchedHomeAssetData , HomeWidgetSideExpanded) }
+                                cellWidth = { cellWidth }
+                                TableStyle={ TableStyles.HomeTableStyle } />
+        }
+
+     </PanelWindow>
+     <div className={styles.panelResizeHandle}
+          onClick={ ()=>{actions.HomePanel_ToggleVerticalExpand(!ExpandedVertically)}} >
+       &#9650;  &#9660;
+     </div>
+
+   </div>
+ )
 }
 
 export default AssetsHomeComponent
