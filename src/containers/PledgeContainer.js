@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { PledgeComponent } from '../components'
 import _ from 'lodash'
 import { List, fromJS } from 'immutable'
+import { COLLATERAL_URL } from './../constants/APIcalls'
 
 import {
   initOptimisationSettings,
@@ -10,8 +11,10 @@ import {
   togglePendingAllocation,
   toggleCheckall,
   clearPendingAllocation,
-  updatePledgeFilter
+  updatePledgeFilter,
+  updateCollateral
 } from '../actions'
+import { List, fromJS } from 'immutable'
 import {
   ALLOCATE_COLLATERALS_URL_NEW,
   PLEDGE_ALLOCATIONS,
@@ -102,6 +105,13 @@ const mapDispatchToProps = dispatch => ({
       return response.json()
     }).then(obj => {
       dispatch(initSelection(fromJS(obj.items)))
+
+      //TODO: REWORK THIS
+      fetch(COLLATERAL_URL).then((response) => {
+        return response.json()
+      }).then((obj) => {
+        dispatch(updateCollateral(fromJS(obj.items)))
+      })
     }).catch(error => {
       console.log('Error: ' + error)
     })
@@ -145,6 +155,8 @@ const mapDispatchToProps = dispatch => ({
         // TODO: To handle how to inform user that pledge data is sucessfully sent
         //alert('Sent to endpoint!' + JSON.stringify(pledgeToSend))
         // Refresh selections
+
+        //TODO: REWORK ALL OF THESE
         setTimeout(() => fetch(MARGIN_SELECTION_URL).then(response => {
           return response.json()
         }).then(obj => {
@@ -152,6 +164,12 @@ const mapDispatchToProps = dispatch => ({
           dispatch(clearPendingAllocation())
         }), 1000)
         dispatch(sagaNavbarAlerts())
+
+        fetch(COLLATERAL_URL).then((response) => {
+          return response.json()
+        }).then((obj) => {
+          dispatch(updateCollateral(fromJS(obj.items)))
+        })
 
       } else {
         alert('Error sending pledge details')
@@ -176,7 +194,7 @@ const mapDispatchToProps = dispatch => ({
     }).then(response => {
       // console.log('remove allocation response: ')
       // console.log(response)
-      if (response.status == 200) {
+      if (response.status === 200) {
         // TODO: To handle how to inform user that pledge data is sucessfully sent
         return response.json()
       } else {
@@ -184,6 +202,13 @@ const mapDispatchToProps = dispatch => ({
       }
     }).then(obj => {
       dispatch(initSelection(obj.items))
+
+      //TODO: REWORK THIS
+      fetch(COLLATERAL_URL).then((response) => {
+        return response.json()
+      }).then((obj) => {
+        dispatch(updateCollateral(fromJS(obj.items)))
+      })
     }).catch(error => {
       console.log('Error: ' + error)
     })
