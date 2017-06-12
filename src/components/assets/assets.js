@@ -5,6 +5,7 @@ import AssetsHomeComponent from './subcomponent/AssetsHomeComponent.js'
 import Popup_DeployedHome from './subcomponent/Popup_deployedHome.js'
 
 const AssetsComponent = (props)=>{
+
    let DeployedPanel_ExpandedSideways = props.state.ui.DeployedPanel_ExpandedSideways;
    let renderPopup = (show)=>{
     if(show){ return <Popup_DeployedHome show={props.state.ui.showPopup} state={ props.state } actions={props.actions}/> }
