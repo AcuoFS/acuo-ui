@@ -73,6 +73,10 @@ class Pledge extends React.Component {
     }
   }
 
+  componentWillUnmount = () => {
+    this.props.resetFilters()
+  }
+
   // #OW-324
   renderSelection(x, onTogglePendingAllocation, pendingAllocation, index, onRemoveAssetFromAllocate) {
     // console.log(x.toJS());
