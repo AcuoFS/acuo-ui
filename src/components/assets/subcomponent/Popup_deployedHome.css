@@ -140,6 +140,7 @@
   border:1px solid #979797;
   font-weight: bold;
 
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -150,6 +151,10 @@
   width: 150px;
 
   cursor: pointer;
+}
+
+.cancelBtn{
+ color: #4A4A4A;
 }
 
 .cancelBtn:active, .confirmBtn:active{
