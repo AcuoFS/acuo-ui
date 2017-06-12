@@ -33,7 +33,7 @@ export class Dashboard extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.dashboardMinWrapper}>
         <NavigationBarContainer curPage={this.props.location.pathname}/>
         <UploadPortfolioButton />
         <div className={styles.filterGraphContainer}>

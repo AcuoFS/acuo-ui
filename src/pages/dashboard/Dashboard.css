@@ -1,6 +1,10 @@
 .filterGraphContainer {
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px 0 #c9c9c9;
-    margin: 0 20px;
-    background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px 0 #c9c9c9;
+  margin: 0 20px;
+  background-color: #fff;
+}
+
+.dashboardMinWrapper {
+  min-width: 1400px;
 }
