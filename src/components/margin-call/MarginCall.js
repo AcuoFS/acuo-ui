@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './MarginCall.css'
-import ContentRows from './MarginCallRows'
+import MarginCallRow from './MarginCallRow'
 import {checkBox, checkBoxWithTick} from '../../../images/common'
 import ChangeCallAmountPopup from './sub-components/ChangeCallAmountPopup'
 import LoadingBarSpinner from './../common/LoadingBarSpinner/LoadingBarSpinner'
@@ -14,6 +14,8 @@ export default class MarginCall extends React.Component {
       isChecked: false,
       isShowPopup: false,
       marginCallUploadId: '',
+      popUpX: 0,
+      popUpY: 0,
       totalCallAmount: '',
       selectedRows: []
     }
@@ -65,11 +67,14 @@ export default class MarginCall extends React.Component {
     }
   }
 
-  onTotalCallAmt(totalCallAmount, marginCallUploadId) {
+  onTotalCallAmt(totalCallAmount, marginCallUploadId, pageX, pageY, rowExpansionState) {
     this.setState({
       isShowPopup: true,
       marginCallUploadId: marginCallUploadId,
-      totalCallAmount: totalCallAmount
+      totalCallAmount: totalCallAmount,
+      popUpX: pageX,
+      popUpY: pageY,
+      isCurrentRowExpanded: rowExpansionState
     })
   }
 
@@ -112,7 +117,10 @@ export default class MarginCall extends React.Component {
                                  {Number.parseInt(this.state.totalCallAmount ? this.state.totalCallAmount : 0)}
                                propCurrentId={this.state.marginCallUploadId}
                                propHandlerClearPopup={this.clearPopup}
-                               propHandlerSave={this.props.onUpdateMarginCallUpload}/>
+                               propHandlerSave={this.props.onUpdateMarginCallUpload}
+                               popUpX={this.state.popUpX}
+                               popUpY={this.state.popUpY}
+                               isCurrentRowExpanded={this.state.isCurrentRowExpanded}/>
 
         <div className={styles.header}>
           <div className={styles.title}>Margin Call</div>
@@ -144,11 +152,14 @@ export default class MarginCall extends React.Component {
           </div>
 
           { uploadDataFlag ?
-              <ContentRows spillContents={this.openRow} isChecked={this.state.isChecked}
-                           isOpen={this.state.openedRows.indexOf(1) > -1}
-                           propHandlerOnTotalMargin={this.onTotalCallAmt}
-                           propMarginCallUploadData={this.props.uploadData}
-                           propHandlerSingleRow={this.onSingleRow}/>
+            this.props.uploadData.map((item, i) =>
+              <MarginCallRow spillContents={this.openRow} isChecked={this.state.isChecked}
+                             isOpen={this.state.openedRows.indexOf(1) > -1}
+                             propHandlerOnTotalMargin={this.onTotalCallAmt}
+                             propMarginCallUploadData={this.props.uploadData} row={item}
+                             propHandlerSingleRow={this.onSingleRow}
+                             key={i}/>
+            )
             :
             <div className={styles.loadingContainer}>
               <LoadingBarSpinner text={'Valuation in progress'} />
