@@ -8,6 +8,8 @@ import {filterByAllPropertiesOfObj} from '../../../utils'
 import styles from '../Pledge.css'
 import selfStyles from './CollateralWidget.css'
 
+import mockData from './mockData_collateral.js'
+
 
 export default class CollateralWidget extends React.Component {
   constructor(props) {
@@ -21,13 +23,15 @@ export default class CollateralWidget extends React.Component {
   }
 
   componentWillMount() {
-    if (_.isEmpty(this.props.collateral)) {
-      fetch(COLLATERAL_URL).then((response) => {
-        return response.json()
-      }).then((obj) => {
-        this.props.onCollateralDataAvailable(fromJS(obj.items))
-      })
-    }
+    // if (_.isEmpty(this.props.collateral)) {
+    //   fetch(COLLATERAL_URL).then((response) => {
+    //     return response.json()
+    //   }).then((obj) => {
+    //     console.log(fromJS(obj.items));
+    //     this.props.onCollateralDataAvailable(fromJS(obj.items))
+    //   })
+    // }
+    this.props.onCollateralDataAvailable(fromJS(mockData.items))
   }
 
   handleFilterChange(value) {
@@ -124,6 +128,9 @@ export default class CollateralWidget extends React.Component {
       onRemoveFromEarmarked
     } = this.props
 
+    // #Caveat Image
+    // <img className={styles.caveats} src="../../../../images/pledge/caveat_down.svg" />
+
     return (
       <div className={styles.col_R + ' ' + toggleColwidthR}>
         <div className={styles.panel}>
@@ -138,7 +145,10 @@ export default class CollateralWidget extends React.Component {
 
             <div className={styles.collateralRow + ' '
             + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
-              <div className={styles.collateralCell}>Asset</div>
+              <div className={styles.collateralCell}>
+               Asset
+
+              </div>
               <div className={styles.collateralCell}>Total Value</div>
               <div className={styles.collateralCell}>CCY</div>
               <div className={styles.collateralCell}>Delivery Time</div>
