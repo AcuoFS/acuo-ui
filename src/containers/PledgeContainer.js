@@ -2,8 +2,6 @@ import { connect } from 'react-redux'
 import { PledgeComponent } from '../components'
 import _ from 'lodash'
 import { List, fromJS } from 'immutable'
-import { COLLATERAL_URL } from './../constants/APIcalls'
-
 import {
   initOptimisationSettings,
   updateOptimisationSettings,
@@ -14,13 +12,13 @@ import {
   updatePledgeFilter,
   updateCollateral
 } from '../actions'
-import { List, fromJS } from 'immutable'
 import {
   ALLOCATE_COLLATERALS_URL_NEW,
   PLEDGE_ALLOCATIONS,
   MARGIN_SELECTION_URL,
-  PLEDGE_REMOVE_ALLOCATED_ASSET
-} from '../constants/APIcalls'
+  PLEDGE_REMOVE_ALLOCATED_ASSET,
+  COLLATERAL_URL
+} from './../constants/APIcalls'
 import * as ASSET from '../constants/AllocatedAssetAttributes'
 import * as P_ASSET from '../constants/PledgeAssetAttribute'
 import { sagaNavbarAlerts } from './../actions/CommonActions'
@@ -29,7 +27,7 @@ import filterItems from '../utils/filterItems'
 const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
   if(pendingAllocationSize >= selectionSize)
     return ["./images/pledge/checkboxwithtick.png", "All"]
-  else if(pendingAllocationSize == 0 && selectionSize != 0)
+  else if(pendingAllocationSize === 0 && selectionSize !== 0)
     return ["./images/pledge/checkbox.png", "None"]
   else
     return ["./images/common/minusbox.png", "Selected"]
