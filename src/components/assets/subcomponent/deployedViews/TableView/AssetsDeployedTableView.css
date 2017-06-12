@@ -4,4 +4,6 @@
  flex-grow: 1;
  height: inherit;
  overflow: hidden;
+ position: relative;
+
 }

@@ -1,28 +1,24 @@
 import { delay } from 'redux-saga'
 import { fork, call, put, take, race } from 'redux-saga/effects'
 
+//fetches
 import { FetchMarginCall } from './FetchMarginCall'
 import {
-  checkProxyServerConnectivity,
-  checkMarginServerConnectivity,
-  checkValuationServerConnectivity,
-  checkCollateralServerConnectivity
+  checkSpecificServer
 } from './CheckServerConnectivity'
+import { FetchNavbarAlerts } from './FetchNavbarAlerts'
+
+//actions
+import { getMarginCallUpload } from  '../actions/MarginCallUploadActions'
 import { pollMarginCall } from '../actions/MarginCallUploadActions'
+import { updateNavbarAlerts } from './../actions/CommonActions'
+
+//action types
 import {
   POLL_MARGIN_CALL,
-  STOP_MARGIN_POLL
+  STOP_MARGIN_POLL,
+  SAGA_NAVBAR_ALERTS
 } from '../constants/ActionTypes'
-import { getMarginCallUpload } from  '../actions/MarginCallUploadActions'
-
-import Notifications from 'react-notification-system-redux'
-
-let serverStatus = {
-  proxy: 'up',
-  margin: 'up',
-  valuation: 'up',
-  collateral: 'up'
-}
 
 function* poll(txnID) {
   // console.log('poll')
@@ -56,46 +52,32 @@ function* watchMarginCall() {
   }
 }
 
-function* checkSpecificServer(server, failMsg, uid, successMsg) {
-  const result = yield call(server)
-  if (result === 'failed') {
-    yield put(Notifications.error({
-      title: 'Warning',
-      message: failMsg,
-      position: 'tr',
-      uid: uid,
-      autoDismiss: 0
-    }))
-    serverStatus[uid] = 'down'
-  } else if (result === 'passed') {
-    if (serverStatus[uid] === 'down') {
-      yield put(Notifications.success({
-        title: 'Reconnected',
-        message: successMsg,
-        position: 'tr',
-        uid: uid + 'Success',
-        autoDismiss: 0
-      }))
-      serverStatus[uid] = 'up'
+function* serverHealthChecks() {
+  while(true){
+    try{
+      yield call(delay, 4000)
+      yield checkSpecificServer('Proxy')
+      yield checkSpecificServer('Margin')
+      yield checkSpecificServer('Valuation')
+      yield checkSpecificServer('Collateral')
+
+      yield call(delay, 16000)
+    } catch (error) {
+      console.log(error)
+      return false
     }
   }
 }
 
-function* serverHealthChecks() {
+function* sagaNavbarAlerts() {
   while(true){
     try{
-      // console.log('server check start')
-      yield checkSpecificServer(checkProxyServerConnectivity, 'Lost connectivity to Proxy server', 'proxy', 'Reconnected with Proxy server')
-      yield checkSpecificServer(checkMarginServerConnectivity, 'Lost connectivity to Margin server', 'margin', 'Reconnected with Margin server')
-      yield checkSpecificServer(checkValuationServerConnectivity, 'Lost connectivity to Valuation server', 'valuation', 'Reconnected with Valuation server')
-      yield checkSpecificServer(checkCollateralServerConnectivity, 'Lost connectivity to Collateral server', 'collateral', 'Reconnected with Collateral server')
-
-      yield call(delay, 10000)
-      // console.log('after pause')
-      // console.log('end cycle')
-    } catch (error) {
-      // cancellation error -- can handle this if you wish
-      // console.log('cancelled, not the right place to go')
+      yield take(SAGA_NAVBAR_ALERTS)
+      const alerts = yield call(FetchNavbarAlerts)
+      console.log(alerts)
+      yield put(updateNavbarAlerts(alerts))
+    } catch(error){
+      console.log(error)
       return false
     }
   }
@@ -105,6 +87,7 @@ export default function* root() {
   // console.log('root')
   yield [
     fork(watchMarginCall),
-    fork(serverHealthChecks)
+    fork(serverHealthChecks),
+    fork(sagaNavbarAlerts)
   ]
 }

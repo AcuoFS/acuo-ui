@@ -19,7 +19,8 @@ let SearchContent =(rawAPI, searchedText) => {
     checkAssets: ( agreementObj )=>{
 
       let assetsWithMatches = _.reduce( agreementObj.data, ( results, assetObj )=>{
-        let findMatch = _.find( toArray(assetObj) , (prop)=>{
+        let clone = _.omit(_.clone(assetObj), ['id'])
+        let findMatch = _.find( toArray(clone) , (prop)=>{
           let testMatch = (_.toUpper(prop).trim()).match( new RegExp(_.toUpper(searchedText).trim()) ); // console.log(_.toUpper(prop).trim(), " | " , new RegExp( _.toUpper(searchedText).trim()) , " == " , testMatch);
           return (testMatch ? true : false)
         })// end _.find()
@@ -79,8 +80,7 @@ let SearchContent =(rawAPI, searchedText) => {
 
 const AssetsDeployedComponent = (props)=>{
 
-   let state = props.state
-   let actions = props.actions;
+   let { state , actions } = props
 
    let ExpandedSideways = state.ui.DeployedPanel_ExpandedSideways;
    let ExpandedVertically = state.ui.DeployedPanel_ExpandedVertically;
@@ -94,19 +94,18 @@ const AssetsDeployedComponent = (props)=>{
 
    let rightContent = (IsVarMarginSelected? ApiVarMargResponse : ApiInitMargResponse)
    let sortedContent = (IsRegionSelected?  _.sortBy(rightContent, ["region"]) :  _.sortBy(rightContent, ["counterparty"]))
-
    let filteredContent = SearchContent(sortedContent, SearchText)
 
    let tableContent = (rightContent)=>{
         if(ExpandedSideways){
           return _.map(rightContent, (row)=>{ return{ CategoryContent: [ row.region, row.agreement, row.counterparty ],
-                                                      RowContent:  _.map( row.data , (block)=>{ return [ block.asset, block.quantity, block.adjValue, block.value, block.rating, block.haircut, block.maturityDate, block.isin ]}),
+                                                      RowContent:  _.map( row.data , (block)=>{ return { assetID: block.id , assetInfo: [ block.asset, block.quantity, block.adjValue, block.value, block.rating, block.haircut, block.maturityDate, block.isin ]}}),
                                                       PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " ", " ", " ", " "],
                                                       ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " ", " ", " ", " "]  }})
           }
          else {
            return _.map(rightContent, (row)=>{ return{ CategoryContent: [ row.region, row.agreement, row.counterparty ],
-                                                       RowContent:  _.map( row.data , (block)=>{ return [ block.asset, block.quantity, block.adjValue, block.value, block.haircut ]}),
+                                                       RowContent:  _.map( row.data , (block)=>{ return { assetID: block.id , assetInfo: [ block.asset, block.quantity, block.adjValue, block.value, block.haircut ]}}),
                                                        PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " "],
                                                        ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " "] }})
          }

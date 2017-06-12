@@ -10,10 +10,16 @@ export default class FlightItemTable extends React.Component {
   render() {
 
     const flightGroup = this.props.data
+    const {width} = this.props
 
     return (
       <div className={styles.flightItemTableWindow}>
-        <div className={styles.flightItemTable}>
+        <div className={styles.flightItemTable} >
+        {/*<div className={styles.flightItemTable}
+             ref={(dom)=>{
+              if( dom && width>0){dom.style.width = width.toString() + 'px'}
+             }}
+             >*/}
           <FlightDetailRow
             propTime={FLIGHT_COL.FLIGHT_TIME}
             propAgreement={FLIGHT_COL.FLIGHT_AGREEMENT}

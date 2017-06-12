@@ -30,13 +30,50 @@ const mapDispatchToProps = dispatch => ({
   // use this function to dispatch an action to set filter
   // value here should be array with objects like {name, options, selected(str/[])}
   setFilter: (value) => dispatch(updateReconFilter(value)),
-  removeDirectionFilter: () => dispatch(updateReconFilter({
-    attr: 'direction',
-    selected: {
-      label: "ALL",
-      value: ""
-    }
-  }))
+  removeDirectionFilter: () => (
+    dispatch(updateReconFilter({
+      attr: 'direction',
+      selected: {
+        label: "ALL",
+        value: ""
+      }
+    })),
+    dispatch(updateReconFilter({
+      attr: 'notificationTime',
+      selected: {
+        label: "ALL",
+        value: ""
+      }
+    })),
+    dispatch(updateReconFilter({
+      attr: 'type',
+      selected: {
+        label: "ALL",
+        value: ""
+      }
+    })),
+    dispatch(updateReconFilter({
+      attr: 'cptyOrg',
+      selected: {
+        label: "ALL",
+        value: ""
+      }
+    })),
+    dispatch(updateReconFilter({
+      attr: 'cptyEntity',
+      selected: {
+        label: "ALL",
+        value: ""
+      }
+    })),
+    dispatch(updateReconFilter({
+      attr: 'legalEntity',
+      selected: {
+        label: "ALL",
+        value: ""
+      }
+    }))
+  )
 })
 
 const FilterContainer = connect(

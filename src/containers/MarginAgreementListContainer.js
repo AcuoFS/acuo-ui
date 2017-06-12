@@ -10,6 +10,7 @@ import {
 } from '../actions'
 import { RECON_DATA_URL, RECON_URL, DASHBOARD_URL } from '../constants/APIcalls'
 import filterItems from '../utils/filterItems'
+import { sagaNavbarAlerts } from './../actions/CommonActions'
 
 const defaultList = List()
 
@@ -31,22 +32,23 @@ const mapDispatchToProps = dispatch => ({
   // !!! THIS LOGIC PART NEED REVIEW !!!
   // ************************************
   onReconItem : (e) => {
-    console.log('GET URL: ' + RECON_DATA_URL + e.currentTarget.dataset.ref)
+    // console.log('GET URL: ' + RECON_DATA_URL + e.currentTarget.dataset.ref)
     //new recon entire margin call with one get api
     fetch(RECON_DATA_URL + e.currentTarget.dataset.ref, {
       method: 'GET'
     }).then(response => {
-      console.log('response ' + JSON.stringify(response))
+      // console.log('response ' + JSON.stringify(response))
       return response
     }).then(obj => {
-      console.log('refreshing recon data...')
+      // console.log('refreshing recon data...')
       fetch(RECON_URL).then((response) => {
         return response.json()
       }).then((obj) => {
-        console.log('Data fetched: ' + obj)
+        // console.log('Data fetched: ' + obj)
         const {items} = obj
         dispatch(reconInitState(items))
       })
+      dispatch(sagaNavbarAlerts())
     })
     //dispatch(reconItem(e.currentTarget.dataset.ref)) //old recon line by line
   },
