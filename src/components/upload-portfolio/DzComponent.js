@@ -43,9 +43,9 @@ export default class DzComponent extends React.Component {
   }
 
   success(file, response) {
-
-    this.props.updateUploadStatus(response.statuses)
-    this.props.onUpdateTxnID(response.txnID)
+    //console.log(response)
+    //this.props.updateUploadStatus(response.statuses)
+    this.props.onUpdateTxnID(response.uploadMarginCallDetails)
     // Wait for animation to complete before removing file from the widget
     setTimeout((() => {
       this.dropzone.removeFile(file)

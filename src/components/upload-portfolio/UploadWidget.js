@@ -104,18 +104,18 @@ export default class UploadWidget extends React.Component {
             {this.state.status.map((x, i) => <p key={i}>{x.remarks}</p>)}
           </div>
 
-          {(txnID ?
-            <button className={styles.textBold + ' ' + (!requestingValuation ? styles.enabled : '')} type="button" onClick={onRequestValuation} disabled={requestingValuation}>
-              Request Valuation
-            </button>
-            :
+          {/*{(txnID ?*/}
+            {/*<button className={styles.textBold + ' ' + (!requestingValuation ? styles.enabled : '')} type="button" onClick={onRequestValuation} disabled={requestingValuation}>*/}
+              {/*Request Valuation*/}
+            {/*</button>*/}
+            {/*:*/}
             <button className={styles.textBold + ' ' + (this.state.isWidgetValidForSubmission && !uploading ?
               styles.enabled : '')} type="button" onClick={() => this.onGenerate(flagUploading)}
                     disabled={!this.state.isWidgetValidForSubmission && uploading}>
               Upload
             </button>
 
-          )}
+          {/*)}*/}
         </div>
       </div>
     )

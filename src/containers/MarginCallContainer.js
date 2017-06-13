@@ -33,11 +33,18 @@ const mapDispatchToProps = dispatch => ({
     }).catch(error => {
       console.log('Error: ' + error)
     })
+  },
+  requestValuation: () =>{
+    // dispatch(pollMarginCall(txnID))
+    // dispatch(requestingValuationFlag())
   }
 })
 
 const mergeProps = (stateProps, dispatchProps) => ({
   uploadDataFlag: checkUploadData(stateProps.uploadData),
+  onRequestValuation: () => {
+    // dispatchProps.requestValuation(stateProps.txnID)
+   },
   ...stateProps, ...dispatchProps
 })
 

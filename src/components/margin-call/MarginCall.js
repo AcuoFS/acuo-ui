@@ -108,7 +108,7 @@ export default class MarginCall extends React.Component {
 
   render() {
 
-    const { uploadDataFlag, requestingValuation, onPostMarginCallIDs } = this.props
+    const { uploadDataFlag, requestingValuation, onPostMarginCallIDs, onRequestValuation } = this.props
 
     return (
       <div className={styles.container + ' ' + (requestingValuation || uploadDataFlag ? '' : styles.hidden)}>
@@ -124,8 +124,14 @@ export default class MarginCall extends React.Component {
 
         <div className={styles.header}>
           <div className={styles.title}>Margin Call</div>
+          <div className={styles.button + ' ' + (requestingValuation ? styles.disabled : '')} onClick={onRequestValuation}>
+            Request Valuation
+          </div>
+          <div className={styles.button + ' ' + (requestingValuation ? styles.disabled : '')} onClick={onRequestValuation}>
+            Generate Margin Calls
+          </div>
           <div className={styles.button + ' ' + (this.state.selectedRows.length <= 0 ? styles.disabled : '')} disabled={this.state.selectedRows.length <= 0} onClick={() => this.onSendButton(this.state.selectedRows, onPostMarginCallIDs)}>
-            Send selected Margin Calls
+            Send Margin Calls
           </div>
         </div>
         <div className={styles.content}>

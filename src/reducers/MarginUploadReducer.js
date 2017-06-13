@@ -20,7 +20,7 @@ const MarginUploadReducer = (state = initialState, action) => {
       // console.log(action.uploadData)
       // console.log(fromJS(action.uploadData))
 
-      return state.withMutations((state) => state.set('uploadData', fromJS(action.uploadData).toList()).set('txnID', '').set('requestingValuation', false))
+      return state.withMutations((state) => state.set('uploadData', fromJS(action.uploadData).toList()).set('txnID', '').set('requestingValuation', false).set('uploading', false))
 
     case UPDATE_MARGIN_CALL_UPLOAD:
       return state.set('uploadData',

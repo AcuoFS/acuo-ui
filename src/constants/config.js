@@ -11,7 +11,7 @@ var configJson = {
   ALLOCATE_COLLATERALS_URL: '<%= baseUrl %>/proxy/pledge/allocate-selection',
   ALLOCATE_COLLATERALS_URL_NEW: '<%= baseUrl %>/proxy/pledge/allocate-selection-new',
   PLEDGE_ALLOCATIONS: '<%= baseUrl %>/proxy/pledge/pledge-allocation',
-  UPLOAD_FILE_URL: '<%= baseUrl %>/valuation/acuo/api/upload',
+  UPLOAD_FILE_URL: '<%= baseUrl %>/valuation/acuo/api/upload/v1',
   // Please add the trailing / for recon single item (ok button)
   RECON_DATA_URL: '<%= baseUrl %>/margin/acuo/api/margin/reconcile/',
   REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
