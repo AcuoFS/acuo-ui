@@ -5,7 +5,11 @@ const initialState = Map({
   pledgeData: Map({
     optimisation: List(),
     selection: List(),
-    collateral: Map()
+    collateral: Map(),
+
+  }),
+  pledgeUI: Map({
+   CollWidget_SortBy: "asset"
   })
 })
 

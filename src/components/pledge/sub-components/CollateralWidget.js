@@ -7,7 +7,7 @@ import {fromJS} from 'immutable'
 import {filterByAllPropertiesOfObj} from '../../../utils'
 import styles from '../Pledge.css'
 import selfStyles from './CollateralWidget.css'
-
+//#remove
 import mockData from './mockData_collateral.js'
 
 
@@ -77,6 +77,7 @@ export default class CollateralWidget extends React.Component {
                               propHandleOnRemoveFromEarmarked={onRemoveFromEarmarked} />
       ]
     })
+
     return collateralAssetGroupList
   }
 
@@ -127,6 +128,8 @@ export default class CollateralWidget extends React.Component {
       changeSideways,
       onRemoveFromEarmarked
     } = this.props
+    // console.log(collateral);
+    // console.log(">>>",this.props);
 
     // #Caveat Image
     // <img className={styles.caveats} src="../../../../images/pledge/caveat_down.svg" />
@@ -147,7 +150,6 @@ export default class CollateralWidget extends React.Component {
             + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
               <div className={styles.collateralCell}>
                Asset
-
               </div>
               <div className={styles.collateralCell}>Total Value</div>
               <div className={styles.collateralCell}>CCY</div>
