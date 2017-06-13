@@ -23,6 +23,7 @@ export default class CollateralWidget extends React.Component {
   }
 
   componentWillMount() {
+    ///////// DO NOT DELETE!!!! //////////////
     // if (_.isEmpty(this.props.collateral)) {
     //   fetch(COLLATERAL_URL).then((response) => {
     //     return response.json()
@@ -129,7 +130,7 @@ export default class CollateralWidget extends React.Component {
       onRemoveFromEarmarked
     } = this.props
     // console.log(collateral);
-    // console.log(">>>",this.props);
+    // console.log("this.props ::: ",this.props);
 
     // #Caveat Image
     // <img className={styles.caveats} src="../../../../images/pledge/caveat_down.svg" />
