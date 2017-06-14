@@ -228,6 +228,12 @@
   height: 16px;
 }
 
+.sortedBy{
+ border-bottom: 1px solid white;
+ display: inline-block;
+ text-align: left;
+}
+
 .collateralHeaderCell{
   margin: 0px;
   cursor: pointer;
@@ -282,55 +288,57 @@ div.collateralTableCollapse div:nth-child(7){
 
 
 /*Asset*/
-div.collateralTableExpanded div:nth-child(1){
+div.collateralTableExpanded div.collateralCell:nth-child(1){
   width: 19%;
 }
 /*Price*/
-div.collateralTableExpanded div:nth-child(2){
+div.collateralTableExpanded div.collateralCell:nth-child(2){
   width: 11%;
 }
 /*CCY*/
-div.collateralTableExpanded div:nth-child(3){
+div.collateralTableExpanded div.collateralCell:nth-child(3){
   width: 4%;
 }
 /*Delivery Time*/
-div.collateralTableExpanded div:nth-child(4){
+div.collateralTableExpanded div.collateralCell:nth-child(4){
   width: 6%;
 }
 /*Status*/
-div.collateralTableExpanded div:nth-child(5){
+div.collateralTableExpanded div.collateralCell:nth-child(5){
   width: 8%;
 }
 /*Rating*/
-div.collateralTableExpanded div:nth-child(6){
+div.collateralTableExpanded div.collateralCell:nth-child(6){
   width: 6%;
 }
 /*Maturity Date*/
-div.collateralTableExpanded div:nth-child(7){
+div.collateralTableExpanded div.collateralCell:nth-child(7){
   width: 6%;
 }
 /*Internal Cost*/
-div.collateralTableExpanded div:nth-child(8){
+div.collateralTableExpanded div.collateralCell:nth-child(8){
   width: 7%;
+  text-align: left;
 }
 /*External Cost*/
 /*div.collateralTableExpanded div:nth-child(9){*/
   /*width: 4%;*/
 /*}*/
 /*Opportunity Cost*/
-div.collateralTableExpanded div:nth-child(9){
+div.collateralTableExpanded div.collateralCell:nth-child(9){
   width: 8%;
+  text-align: left;
 }
 /*ISIN*/
-div.collateralTableExpanded div:nth-child(10){
+div.collateralTableExpanded div.collateralCell:nth-child(10){
   width: 10%;
 }
 /*Venue*/
-div.collateralTableExpanded div:nth-child(11){
+div.collateralTableExpanded div.collateralCell:nth-child(11){
   width: 8%;
 }
 /*Acc ID*/
-div.collateralTableExpanded div:nth-child(12){
+div.collateralTableExpanded div.collateralCell:nth-child(12){
   width: 8%;
 }
 

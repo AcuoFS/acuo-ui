@@ -45,11 +45,10 @@ export default class CollateralWidget extends React.Component {
       return(
        <div className={styles.collateralCell} key={i}>
 
-        <span className={styles.collateralHeaderCell}
+        <div className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy==columnName? styles.sortedBy : '')}
               onClick={e=>{ sortColumnBy(columnName) }}>
               {columnName}
-        </span>
-        {this.renderCaveat(collateralSortedBy, columnName)}
+        </div>
 
        </div> )
      }
@@ -171,31 +170,25 @@ export default class CollateralWidget extends React.Component {
 
             <div className={styles.collateralRow + ' ' + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
               <div className={styles.collateralCell}>
-               <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("assetName")}>Asset</span>
-               {this.renderCaveat(collateralSortedBy, "assetName")}
+               <span className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="assetName"? styles.sortedBy : '')} onClick={e=>sortColumnBy("assetName")}>Asset</span>
               </div>
               <div className={styles.collateralCell}>
-               <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("price")}>Total Value</span>
-               {this.renderCaveat(collateralSortedBy, "price")}
+               <span className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="price"? styles.sortedBy : '')} onClick={e=>sortColumnBy("price")}>Total Value</span>
               </div>
               <div className={styles.collateralCell}>
-                <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("ccy")}>CCY</span>
-                {this.renderCaveat(collateralSortedBy, "ccy")}
+                <span className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="ccy"? styles.sortedBy : '')} onClick={e=>sortColumnBy("ccy")}>CCY</span>
               </div>
               <div className={styles.collateralCell}>
                 Delivery Time
               </div>
               <div className={styles.collateralCell}>
-                <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("status")}>Status</span>
-                {this.renderCaveat(collateralSortedBy, "status")}
+                <span className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="status"? styles.sortedBy : '')} onClick={e=>sortColumnBy("status")}>Status</span>
               </div>
               <div className={styles.collateralCell}>
-                <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("rating")}>Rating</span>
-                {this.renderCaveat(collateralSortedBy, "rating")}
+                <span className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="rating"? styles.sortedBy : '')} onClick={e=>sortColumnBy("rating")}>Rating</span>
               </div>
               <div className={styles.collateralCell}>
-                <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("maturityDate")}>Maturity Date</span>
-                {this.renderCaveat(collateralSortedBy, "maturityDate")}
+                <div className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="maturityDate"? styles.sortedBy : '')} onClick={e=>sortColumnBy("maturityDate")}>Maturity Date</div>
               </div>
               {
                 open && this.getAdditionalColumns(
