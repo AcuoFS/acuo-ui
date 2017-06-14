@@ -194,7 +194,7 @@ export default class OptimisationWidget extends React.Component {
           Cost Savings (USD)
         </div>
         <div className={styles.cell}>
-          Reserved Liq. Ratio(%)
+          Reserved <span>Liq. Ratio(%)</span>
         </div>
         <div className={styles.cell}>
           <div className={styles.arrowContainer} onClick={this.handleToggle}>
