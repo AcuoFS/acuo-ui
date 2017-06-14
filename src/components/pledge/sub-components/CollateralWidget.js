@@ -48,8 +48,8 @@ export default class CollateralWidget extends React.Component {
         <span className={styles.collateralHeaderCell}
               onClick={e=>{ sortColumnBy(columnName) }}>
               {columnName}
-              {this.renderCaveat(collateralSortedBy, columnName)}
         </span>
+        {this.renderCaveat(collateralSortedBy, columnName)}
 
        </div> )
      }
