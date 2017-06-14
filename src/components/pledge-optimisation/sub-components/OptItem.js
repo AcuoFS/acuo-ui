@@ -9,6 +9,10 @@ export default class OptItem extends React.Component {
     this.updateState = this.updateState.bind(this)
     this.updateDisplay = this.updateDisplay.bind(this)
 
+    // this.state = {
+    //   left: 180
+    // }
+
   }
 
   componentWillMount() {
@@ -40,29 +44,41 @@ export default class OptItem extends React.Component {
           <div className={styles.optItemSlider}>
             <input type="range" step="1" max="100" min="0" onMouseUp={this.updateState}
                    onChange={this.updateDisplay} value={this.state.allocation * 10}/>
-            <div className={styles.markings}>
-              <div className={styles.marking}>|</div>
-              <div className={styles.miniMarking}>|</div>
-              <div className={styles.marking}>|</div>
-              <div className={styles.miniMarking}>|</div>
-              <div className={styles.marking}>|</div>
-              <div className={styles.miniMarking}>|</div>
-              <div className={styles.marking}>|</div>
-              <div className={styles.miniMarking}>|</div>
-              <div className={styles.marking}>|</div>
-              <div className={styles.miniMarking}>|</div>
-              <div className={styles.marking}>|</div>
-              <div className={styles.miniMarking}>|</div>
-              <div className={styles.marking}>|</div>
-              <div className={styles.miniMarking}>|</div>
-              <div className={styles.marking}>|</div>
-              <div className={styles.miniMarking}>|</div>
-              <div className={styles.marking}>|</div>
-              <div className={styles.miniMarking}>|</div>
-              <div className={styles.marking}>|</div>
-              <div className={styles.miniMarking}>|</div>
-              <div className={styles.markingLast}>|</div>
-            </div>
+            {/*<div className={styles.markings}>*/}
+              {/*<div className={styles.marking}>|</div>*/}
+              {/*<div className={styles.miniMarking}>|</div>*/}
+              {/*<div className={styles.marking}>|</div>*/}
+              {/*<div className={styles.miniMarking}>|</div>*/}
+              {/*<div className={styles.marking}>|</div>*/}
+              {/*<div className={styles.miniMarking}>|</div>*/}
+              {/*<div className={styles.marking}>|</div>*/}
+              {/*<div className={styles.miniMarking}>|</div>*/}
+              {/*<div className={styles.marking}>|</div>*/}
+              {/*<div className={styles.miniMarking}>|</div>*/}
+              {/*<div className={styles.marking}>|</div>*/}
+              {/*<div className={styles.miniMarking}>|</div>*/}
+              {/*<div className={styles.marking}>|</div>*/}
+              {/*<div className={styles.miniMarking}>|</div>*/}
+              {/*<div className={styles.marking}>|</div>*/}
+              {/*<div className={styles.miniMarking}>|</div>*/}
+              {/*<div className={styles.marking}>|</div>*/}
+              {/*<div className={styles.miniMarking}>|</div>*/}
+              {/*<div className={styles.marking}>|</div>*/}
+              {/*<div className={styles.miniMarking}>|</div>*/}
+              {/*<div className={styles.markingLast}>|</div>*/}
+            {/*</div>*/}
+
+            {/*custom slider*/}
+            {/*<div className={styles.container}>*/}
+              {/*<div className={styles.barContainer}>*/}
+                {/*<div className={styles.bar} style={{right: -this.state.left}}>*/}
+
+                {/*</div>*/}
+              {/*</div>*/}
+              {/*<div className={styles.slider} style={{left: this.state.left}}>*/}
+
+              {/*</div>*/}
+            {/*</div>*/}
           </div>
         </div>
 
