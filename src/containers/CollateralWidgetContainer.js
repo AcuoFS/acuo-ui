@@ -15,6 +15,7 @@ const mapStateToProps = state => {
  }
 
  return { collateral: helper.CollSort(helperArgs.CollSort_Args),
+          collateralSortedBy: state.PledgeReducer.getIn(['collateralWidget', 'sortBy']),
         }
 }
 
