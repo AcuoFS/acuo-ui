@@ -1,27 +1,25 @@
 import _ from 'lodash'
 
-let FormState = (HelperStack, Default_State)=>{
+const EnhanceState = (HelperStack, Default_State)=>{
  return _.reduce( HelperStack,
                   (newState, modifier)=>{
                    return _.merge(newState, modifier)
                   },
                   Default_State )
-} //EndOF-FormState()
+} //EndOF-EnhanceState()
 
 const Process = ( AllProps, Helper )=>{
 
   const CollSort_Arg = {
-   All_Collaterals: AllProps.stateProps.collateral,
-   SortBy: AllProps.stateProps.state.getIn(['pledgeUI', 'CollWidget_SortBy'])
+   All_Collaterals: AllProps.something_1,
+   SortBy: AllProps.something_2
   }
 
   const HelperStack = [ Helper.CollSort( CollSort_Arg ) ]
 
-  const Default_State = { ...AllProps.stateProps,
-                          ...AllProps.dispatchProps,
-                          ...AllProps.ownProps }
+  const Default_State = { }
 
-  return FormState(HelperStack, Default_State)
+  return EnhanceState(HelperStack, Default_State)
 }
 
 export default Process

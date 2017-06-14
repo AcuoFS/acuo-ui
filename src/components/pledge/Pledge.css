@@ -227,6 +227,11 @@
   height: 16px;
 }
 
+.collateralHeaderCell{
+  margin: 0px;
+  cursor: pointer;
+}
+
 .caveats{
  color: white;
 }

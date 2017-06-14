@@ -41,9 +41,24 @@ export default class CollateralWidget extends React.Component {
     })
   }
 
-  getAdditionalColumns(listOfNames) {
-    return _.map(listOfNames, (columnName, i) =>
-      <div className={styles.collateralCell} key={i}>{columnName}</div>)
+  getAdditionalColumns(listOfNames , sortColumnBy) {
+
+    const headerType = (columnName, i) => {
+     if(/*columnName!=='Internal Cost (bps)' && columnName!=='Opportunity Cost (bps)'*/ true){
+      return(
+       <div className={styles.collateralCell} key={i}>
+
+        <span className={styles.collateralHeaderCell}
+              onClick={e=>{ sortColumnBy(columnName) }}>
+              {columnName}
+        </span>
+       </div> )
+     }
+     else {return <div className={styles.collateralCell} key={i}> {columnName} </div>}
+    }//End-headerType()
+
+    return _.map( listOfNames,
+                  (columnName, i) => headerType(columnName, i) )
   }
 
   /**
@@ -120,6 +135,10 @@ export default class CollateralWidget extends React.Component {
   //     })
   // }
 
+  shouldComponentUpdate(nextProps){
+   return !_.isEqual(this.props, nextProps)
+  }
+
   render() {
     const {
       toggleColwidthR,
@@ -127,13 +146,14 @@ export default class CollateralWidget extends React.Component {
       open,
       collateral,
       changeSideways,
-      onRemoveFromEarmarked
+      onRemoveFromEarmarked,
+      sortColumnBy,
+      sortedCollateral
     } = this.props
-    // console.log(collateral);
-    // console.log("this.props ::: ",this.props);
 
     // #Caveat Image
     // <img className={styles.caveats} src="../../../../images/pledge/caveat_down.svg" />
+    console.log(collateral);
 
     return (
       <div className={styles.col_R + ' ' + toggleColwidthR}>
@@ -147,17 +167,28 @@ export default class CollateralWidget extends React.Component {
 
           <div className={styles.collateralTable}>
 
-            <div className={styles.collateralRow + ' '
-            + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
+            <div className={styles.collateralRow + ' ' + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
               <div className={styles.collateralCell}>
-               Asset
+               <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("assetName")}>Asset</span>
               </div>
-              <div className={styles.collateralCell}>Total Value</div>
-              <div className={styles.collateralCell}>CCY</div>
-              <div className={styles.collateralCell}>Delivery Time</div>
-              <div className={styles.collateralCell}>Status</div>
-              <div className={styles.collateralCell}>Rating</div>
-              <div className={styles.collateralCell}>Maturity Date</div>
+              <div className={styles.collateralCell}>
+               <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("price")}>Total Value</span>
+              </div>
+              <div className={styles.collateralCell}>
+                <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("ccy")}>CCY</span>
+              </div>
+              <div className={styles.collateralCell}>
+                Delivery Time
+              </div>
+              <div className={styles.collateralCell}>
+                <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("status")}>Status</span>
+              </div>
+              <div className={styles.collateralCell}>
+                <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("rating")}>Rating</span>
+              </div>
+              <div className={styles.collateralCell}>
+                <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("maturityDate")}>Maturity Date</span>
+              </div>
               {
                 open && this.getAdditionalColumns(
                   [
@@ -166,7 +197,7 @@ export default class CollateralWidget extends React.Component {
                     'ISIN',
                     'Venue',
                     'Acc ID'
-                  ])
+                  ], sortColumnBy)
               }
             </div>
 
