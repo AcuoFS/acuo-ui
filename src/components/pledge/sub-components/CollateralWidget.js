@@ -139,7 +139,7 @@ export default class CollateralWidget extends React.Component {
             <div className={styles.collateralRow + ' '
             + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
               <div className={styles.collateralCell}>Asset</div>
-              <div className={styles.collateralCell}>Total Value</div>
+              <div className={styles.collateralCell}>Total Amt.</div>
               <div className={styles.collateralCell}>CCY</div>
               <div className={styles.collateralCell}>Delivery Time</div>
               <div className={styles.collateralCell}>Status</div>

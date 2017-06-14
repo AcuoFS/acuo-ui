@@ -164,13 +164,11 @@ export default class MarginAgreementPortfolio extends React.Component {
             <div className={styles.actFig + ' ' + this.getTextColour(percentage)}>
               {percentage}%
             </div>
-            <div className={styles.actBtn + ' ' + (this.isDisableReconButton(portfolioData, percentage, firstLevelList) ? styles.actBtnDisable : this.getBtnColour(percentage)) + " " + (_.upperCase( portfolioData.toJS().direction)=="OUT"? "" : styles.actBtnDisable ) }
+            <div className={styles.actBtn + ' ' + (this.isDisableReconButton(portfolioData, percentage, firstLevelList) ? styles.actBtnDisable : this.getBtnColour(percentage))}
                  onClick={ (e)=>{
-                   _.upperCase( portfolioData.toJS().direction)=="OUT" && onReconItem(e)
+                   onReconItem(e)
                   }}
-                 data-ref={portfolioData.get('GUID') + "?amount=" + this.state.adjAmount}
-
-                 >
+                 data-ref={portfolioData.get('GUID') + "?amount=" + this.state.adjAmount}>
              OK
             </div>
           </div>}

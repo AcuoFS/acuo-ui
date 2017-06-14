@@ -11,7 +11,7 @@ export default class GraphBody extends React.Component {
     this.getDeriv = this.getDeriv.bind(this)
   }
 
-  whichClickFuncToRun(status, lastUpdatedTime, bubbleTimeStart, timeDifference, onUnreconBubbleClick, direction){
+  whichClickFuncToRun(func, status, lastUpdatedTime, bubbleTimeStart, timeDifference, direction){
     switch(status){
       case 'expected':
         return () => {
@@ -22,7 +22,7 @@ export default class GraphBody extends React.Component {
           //3rd param: getDay() returns 'today', 'tomorrow', 'yesterday' based on summation of
           //           today's hours + the difference in time of the bubble, appends it with
           //           the 'hours' portion of time start to form a string for dispatch use
-          onUnreconBubbleClick(
+          func(
             bubbleTimeStart,
             (new Date(bubbleTimeStart).setHours((new Date(bubbleTimeStart).getHours()+1))),
             this.getDay(new Date(Date.parse(lastUpdatedTime)).getHours() + timeDifference) + ': ' + (new Date(bubbleTimeStart).getHours()) + ':00 HRS',
@@ -32,13 +32,12 @@ export default class GraphBody extends React.Component {
       case 'unrecon':
         return () => {
           hashHistory.push('/recon')
-
           //1st param: time range start
           //2nd param: time range start + 1 hour
           //3rd param: getDay() returns 'today', 'tomorrow', 'yesterday' based on summation of
           //           today's hours + the difference in time of the bubble, appends it with
           //           the 'hours' portion of time start to form a string for dispatch use
-          onUnreconBubbleClick(
+          func(
             bubbleTimeStart,
             (new Date(bubbleTimeStart).setHours((new Date(bubbleTimeStart).getHours()+1))),
             this.getDay(new Date(Date.parse(lastUpdatedTime)).getHours() + timeDifference) + ': ' + (new Date(bubbleTimeStart).getHours()) + ':00 HRS',
@@ -46,7 +45,12 @@ export default class GraphBody extends React.Component {
           )
         }
       case 'reconciled':
-        return () => hashHistory.push('/pledge')
+        return () => {
+          hashHistory.push('/pledge')
+          func(
+            bubbleTimeStart
+          )
+        }
       case 'pledged':
         return () => hashHistory.push('/deployed')
       case 'dispute':
@@ -67,7 +71,7 @@ export default class GraphBody extends React.Component {
     }
   }
 
-  getCircle(lastUpdatedTime, onUnreconBubbleClick){
+  getCircle(lastUpdatedTime, onUnreconBubbleClick, onReconBubbleClick){
     let status = this.getDeriv().reduce((setX, x) => {
       return setX.union(x.get('marginStatus').map(y => y.get('status')))
     }, Set()).toList()
@@ -143,7 +147,20 @@ export default class GraphBody extends React.Component {
           colour[0] = "#8CC5DD"
         }
 
-        const onClickFunc = (direction) => (this.whichClickFuncToRun(status.get('status').toLowerCase(), lastUpdatedTime, timeFrame.get('timeFrame'), timeDifference, onUnreconBubbleClick, direction))
+        const getFunction = (status) => {
+          switch(status){
+            case 'unrecon' || 'expected':
+              return onUnreconBubbleClick
+            case 'reconciled':
+              return onReconBubbleClick
+            default:
+              return () => {}
+          }
+        }
+
+        //console.log(getFunction(status.get('status')))
+
+        const onClickFunc = (direction) => (this.whichClickFuncToRun(getFunction(status.get('status')), status.get('status').toLowerCase(), lastUpdatedTime, timeFrame.get('timeFrame'), timeDifference, direction))
 
         return List()
         .push((timeFrame.get('inAmount') === 0)? 0 :
@@ -259,11 +276,11 @@ export default class GraphBody extends React.Component {
   }
   render() {
 
-    const { time, onUnreconBubbleClick } = this.props
+    const { time, onUnreconBubbleClick, onReconBubbleClick } = this.props
 
     return(
       <svg>
-        {this.getCircle(time, onUnreconBubbleClick).map(x => x)}
+        {this.getCircle(time, onUnreconBubbleClick, onReconBubbleClick).map(x => x)}
       </svg>
     )
   }

@@ -1,29 +1,33 @@
 import { connect } from 'react-redux'
 import { PledgeComponent } from '../components'
 import _ from 'lodash'
-
+import { List, fromJS } from 'immutable'
 import {
   initOptimisationSettings,
   updateOptimisationSettings,
   initSelection,
   togglePendingAllocation,
   toggleCheckall,
-  clearPendingAllocation} from '../actions'
-import { List, fromJS } from 'immutable'
+  clearPendingAllocation,
+  updatePledgeFilter,
+  updateCollateral
+} from '../actions'
 import {
   ALLOCATE_COLLATERALS_URL_NEW,
   PLEDGE_ALLOCATIONS,
   MARGIN_SELECTION_URL,
-  PLEDGE_REMOVE_ALLOCATED_ASSET
-} from '../constants/APIcalls'
+  PLEDGE_REMOVE_ALLOCATED_ASSET,
+  COLLATERAL_URL
+} from './../constants/APIcalls'
 import * as ASSET from '../constants/AllocatedAssetAttributes'
 import * as P_ASSET from '../constants/PledgeAssetAttribute'
 import { sagaNavbarAlerts } from './../actions/CommonActions'
+import filterItems from '../utils/filterItems'
 
 const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
   if(pendingAllocationSize >= selectionSize)
     return ["./images/pledge/checkboxwithtick.png", "All"]
-  else if(pendingAllocationSize == 0 && selectionSize != 0)
+  else if(pendingAllocationSize === 0 && selectionSize !== 0)
     return ["./images/pledge/checkbox.png", "None"]
   else
     return ["./images/common/minusbox.png", "Selected"]
@@ -35,7 +39,6 @@ const fetchAnalysisData = () => (
     { name: 'Cash Only (Settlement CCY)', cost: 123456789, savings: 123456789, ratio: '1.00'},
     { name: 'Algorithm Suggestion', cost: 123456789, savings: 123456789, ratio: '1.00' },
     { name: 'Least Liquid Assets', cost: 123456789, savings: 123456789, ratio: '1.00' }
-
   ]
 )
 
@@ -58,7 +61,10 @@ const updatePledgeListToSend = (assetList, pledgeToSend, guid) => {
 
 const mapStateToProps = state => ({
   optimisation: state.PledgeReducer.getIn(['pledgeData', 'optimisation']),
-  selection: state.PledgeReducer.getIn(['pledgeData', 'selection']),
+  selection: fromJS(
+    filterItems(
+      state.PledgeReducer.getIn(['pledgeData', 'selection']).toJS(),
+      state.PledgeReducer.getIn(['pledgeData', 'filters']).toJS())),
   pendingAllocation: state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation']),
   sliderCheckbox: determineCheckboxStatus(checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'selection'])).size, checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation'])).size ),
   scenarioAnalysis: fetchAnalysisData()
@@ -97,6 +103,13 @@ const mapDispatchToProps = dispatch => ({
       return response.json()
     }).then(obj => {
       dispatch(initSelection(fromJS(obj.items)))
+
+      //TODO: REWORK THIS
+      fetch(COLLATERAL_URL).then((response) => {
+        return response.json()
+      }).then((obj) => {
+        dispatch(updateCollateral(fromJS(obj.items)))
+      })
     }).catch(error => {
       console.log('Error: ' + error)
     })
@@ -134,12 +147,14 @@ const mapDispatchToProps = dispatch => ({
       json: true,
       resolveWithFullResponse: true
     }).then(response => {
-      console.log('Pledge response: ')
-      console.log(response)
+      // console.log('Pledge response: ')
+      // console.log(response)
       if (response.status == 200) {
         // TODO: To handle how to inform user that pledge data is sucessfully sent
         //alert('Sent to endpoint!' + JSON.stringify(pledgeToSend))
         // Refresh selections
+
+        //TODO: REWORK ALL OF THESE
         setTimeout(() => fetch(MARGIN_SELECTION_URL).then(response => {
           return response.json()
         }).then(obj => {
@@ -147,6 +162,12 @@ const mapDispatchToProps = dispatch => ({
           dispatch(clearPendingAllocation())
         }), 1000)
         dispatch(sagaNavbarAlerts())
+
+        fetch(COLLATERAL_URL).then((response) => {
+          return response.json()
+        }).then((obj) => {
+          dispatch(updateCollateral(fromJS(obj.items)))
+        })
 
       } else {
         alert('Error sending pledge details')
@@ -171,7 +192,7 @@ const mapDispatchToProps = dispatch => ({
     }).then(response => {
       // console.log('remove allocation response: ')
       // console.log(response)
-      if (response.status == 200) {
+      if (response.status === 200) {
         // TODO: To handle how to inform user that pledge data is sucessfully sent
         return response.json()
       } else {
@@ -179,10 +200,24 @@ const mapDispatchToProps = dispatch => ({
       }
     }).then(obj => {
       dispatch(initSelection(obj.items))
+
+      //TODO: REWORK THIS
+      fetch(COLLATERAL_URL).then((response) => {
+        return response.json()
+      }).then((obj) => {
+        dispatch(updateCollateral(fromJS(obj.items)))
+      })
     }).catch(error => {
       console.log('Error: ' + error)
     })
-  }
+  },
+  resetFilters: () => dispatch(updatePledgeFilter({
+    attr: 'notificationTime',
+    selected: {
+      label: '',
+      value: ''
+    }
+  }))
 })
 
 const checkAllocated = (selection) => (
