@@ -15,7 +15,8 @@ const initialState = Map({
     selection: List(),
     collateral: Map(),
     filters: fromJS(initFilters)
-  })
+  }),
+  collateralWidget: Map({ sortBy: "assetName" })
 })
 
 const initOptimisationSettings = (state, settings) => {
@@ -43,21 +44,21 @@ export const initSelection = (state, selection) => {
     return state
 }
 
-export const togglePendingAllocation = (state, GUID) => {
+ export const togglePendingAllocation = (state, GUID) => {
   if(!state.getIn(['pledgeData', 'pendingAllocation']) || state.getIn(['pledgeData', 'pendingAllocation']).isEmpty())
     return state.setIn(['pledgeData', 'pendingAllocation'], List().push(GUID))
   else if(state.getIn(['pledgeData', 'pendingAllocation']).includes(GUID))
     return state.setIn(['pledgeData', 'pendingAllocation'], state.getIn(['pledgeData', 'pendingAllocation']).filter(x => x != GUID))
   else
     return state.setIn(['pledgeData', 'pendingAllocation'], state.getIn(['pledgeData', 'pendingAllocation']).push(GUID))
-}
+ }
 
-export const toggleCheckall = (state) => {
+ export const toggleCheckall = (state) => {
   if(state.getIn(['pledgeData', 'pendingAllocation']) && !state.getIn(['pledgeData', 'pendingAllocation']).isEmpty())
     return state.setIn(['pledgeData', 'pendingAllocation'], List())
   else
     return state.setIn(['pledgeData', 'pendingAllocation'], state.getIn(['pledgeData', 'selection']).map(x => x.get('GUID')))
-}
+ }
 
 export const removeAssetFromEarmark = (state, removingAsset) => {
 
@@ -115,6 +116,10 @@ const PledgeReducer = (state = initialState, action) => {
       filters = state.getIn(['pledgeData', 'filters']).toJS()
       updatedFilters = updateFilters(filters, newFilter)
       return state.setIn(['pledgeData', 'filters'], fromJS(updatedFilters))
+
+    case ActionTypes.SELECTION_WIDGET__COLUMN_SORT:
+      return state.setIn(['collateralWidget' , 'sortBy'], action.payload)
+
   }
   return state
 }

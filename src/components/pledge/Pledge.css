@@ -181,6 +181,7 @@
   display: table;
   width: 100%;
   table-layout: fixed;
+  margin-top: 8px;
 }
 
 .collateralRow {
@@ -225,6 +226,15 @@
   display: table-cell;
   vertical-align: middle;
   height: 16px;
+}
+
+.collateralHeaderCell{
+  margin: 0px;
+  cursor: pointer;
+}
+
+.caveats{
+ color: white;
 }
 
 .collateralExpandRow > .collateralCell,

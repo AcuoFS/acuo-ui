@@ -7,6 +7,8 @@ import {fromJS} from 'immutable'
 import {filterByAllPropertiesOfObj} from '../../../utils'
 import styles from '../Pledge.css'
 import selfStyles from './CollateralWidget.css'
+//#remove
+import mockData from './mockData_collateral.js'
 
 
 export default class CollateralWidget extends React.Component {
@@ -36,9 +38,26 @@ export default class CollateralWidget extends React.Component {
     })
   }
 
-  getAdditionalColumns(listOfNames) {
-    return _.map(listOfNames, (columnName, i) =>
-      <div className={styles.collateralCell} key={i}>{columnName}</div>)
+  getAdditionalColumns(listOfNames , sortColumnBy, collateralSortedBy) {
+
+    const headerType = (columnName, i) => {
+     if(/*columnName!=='Internal Cost (bps)' && columnName!=='Opportunity Cost (bps)'*/ true){
+      return(
+       <div className={styles.collateralCell} key={i}>
+
+        <span className={styles.collateralHeaderCell}
+              onClick={e=>{ sortColumnBy(columnName) }}>
+              {columnName}
+              {this.renderCaveat(collateralSortedBy, columnName)}
+        </span>
+
+       </div> )
+     }
+     else {return <div className={styles.collateralCell} key={i}> {columnName} </div>}
+    }//End-headerType()
+
+    return _.map( listOfNames,
+                  (columnName, i) => headerType(columnName, i) )
   }
 
   /**
@@ -73,6 +92,7 @@ export default class CollateralWidget extends React.Component {
                               propHandleOnRemoveFromEarmarked={onRemoveFromEarmarked} />
       ]
     })
+
     return collateralAssetGroupList
   }
 
@@ -114,6 +134,16 @@ export default class CollateralWidget extends React.Component {
   //     })
   // }
 
+  shouldComponentUpdate(nextProps){
+   return !_.isEqual(this.props, nextProps)
+  }
+
+  renderCaveat(collateralSortedBy , columnAttr){
+   if(collateralSortedBy===columnAttr){
+    return <img className={styles.caveats} src="../../../../images/pledge/caveat_up.svg" />
+   }
+  }
+
   render() {
     const {
       toggleColwidthR,
@@ -121,7 +151,10 @@ export default class CollateralWidget extends React.Component {
       open,
       collateral,
       changeSideways,
-      onRemoveFromEarmarked
+      onRemoveFromEarmarked,
+      sortColumnBy,
+      sortedCollateral,
+      collateralSortedBy
     } = this.props
 
     return (
@@ -136,15 +169,34 @@ export default class CollateralWidget extends React.Component {
 
           <div className={styles.collateralTable}>
 
-            <div className={styles.collateralRow + ' '
-            + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
-              <div className={styles.collateralCell}>Asset</div>
-              <div className={styles.collateralCell}>Total Amt.</div>
-              <div className={styles.collateralCell}>CCY</div>
-              <div className={styles.collateralCell}>Delivery Time</div>
-              <div className={styles.collateralCell}>Status</div>
-              <div className={styles.collateralCell}>Rating</div>
-              <div className={styles.collateralCell}>Maturity Date</div>
+            <div className={styles.collateralRow + ' ' + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
+              <div className={styles.collateralCell}>
+               <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("assetName")}>Asset</span>
+               {this.renderCaveat(collateralSortedBy, "assetName")}
+              </div>
+              <div className={styles.collateralCell}>
+               <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("price")}>Total Value</span>
+               {this.renderCaveat(collateralSortedBy, "price")}
+              </div>
+              <div className={styles.collateralCell}>
+                <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("ccy")}>CCY</span>
+                {this.renderCaveat(collateralSortedBy, "ccy")}
+              </div>
+              <div className={styles.collateralCell}>
+                Delivery Time
+              </div>
+              <div className={styles.collateralCell}>
+                <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("status")}>Status</span>
+                {this.renderCaveat(collateralSortedBy, "status")}
+              </div>
+              <div className={styles.collateralCell}>
+                <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("rating")}>Rating</span>
+                {this.renderCaveat(collateralSortedBy, "rating")}
+              </div>
+              <div className={styles.collateralCell}>
+                <span className={styles.collateralHeaderCell} onClick={e=>sortColumnBy("maturityDate")}>Maturity Date</span>
+                {this.renderCaveat(collateralSortedBy, "maturityDate")}
+              </div>
               {
                 open && this.getAdditionalColumns(
                   [
@@ -153,7 +205,7 @@ export default class CollateralWidget extends React.Component {
                     'ISIN',
                     'Venue',
                     'Acc ID'
-                  ])
+                  ], sortColumnBy, collateralSortedBy)
               }
             </div>
 
