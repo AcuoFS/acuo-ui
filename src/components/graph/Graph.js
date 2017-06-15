@@ -70,6 +70,7 @@ export default class Graph extends React.Component {
   render() {
     return (
       <div className={styles.graphWrapper}>
+        <div className={styles.moneyIcon + ' ' + styles.moneyOut}>OUT</div>
         <div className={styles.graphCont}
              ref={
               (graphCont) => {
@@ -77,10 +78,10 @@ export default class Graph extends React.Component {
                 graphCont && (graphCont.scrollLeft = this.state.scrollLeft)
               }}
               onMouseDown={this.onMouseDown}>
+
           <SVGWrapper {...this.props}/>
         </div>
-        <div className={styles.moneyIcon + " " + styles.moneyOutIcon}>OUT</div>
-        <div className={styles.moneyIcon + " " + styles.moneyInIcon}>IN</div>
+        <div className={styles.moneyIcon + ' ' + styles.moneyIn}>IN</div>
       </div>
     )
   }
