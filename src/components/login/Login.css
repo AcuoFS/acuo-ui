@@ -5,7 +5,7 @@
 }
 
 .box {
-  flex: 1;
+  flex: 1 0 auto;
   min-height: 200px;
   max-height: 500px;
   min-width: 350px;

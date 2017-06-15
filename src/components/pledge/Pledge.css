@@ -239,10 +239,6 @@
   cursor: pointer;
 }
 
-.caveats{
- color: white;
-}
-
 .collateralExpandRow > .collateralCell,
 .collateralExpandEarmarkedRow > .collateralCell{
   border-top-style: solid;
