@@ -7,8 +7,6 @@ import {fromJS} from 'immutable'
 import {filterByAllPropertiesOfObj} from '../../../utils'
 import styles from '../Pledge.css'
 import selfStyles from './CollateralWidget.css'
-//#remove
-import mockData from './mockData_collateral.js'
 
 export default class CollateralWidget extends React.Component {
   constructor(props) {
