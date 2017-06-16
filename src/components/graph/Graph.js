@@ -81,7 +81,7 @@ export default class Graph extends React.Component {
 
           <SVGWrapper {...this.props}/>
         </div>
-        <div className={styles.moneyIcon + ' ' + styles.moneyIn}>IN</div>
+        <div className={styles.moneyIcon}>IN</div>
       </div>
     )
   }

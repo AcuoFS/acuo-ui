@@ -29,17 +29,12 @@
   background-color: #D5DADF;
   color: #353535;
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.5);
-  /* To resolve bug where the drop-down options are covered */
-  /*z-index: 50;*/
   composes: baseFontBold from './../../static/css-components/fonts.css';
   text-align: center;
 }
 
 .moneyOut{
  margin-bottom: 10px;
-}
-.moneyIn{
- /*margin-top: 10px;*/
 }
 
 /*@media screen\0 and (min-width: 768px) {*/
