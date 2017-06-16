@@ -10,7 +10,6 @@ import selfStyles from './CollateralWidget.css'
 //#remove
 import mockData from './mockData_collateral.js'
 
-
 export default class CollateralWidget extends React.Component {
   constructor(props) {
     super(props)
@@ -135,12 +134,6 @@ export default class CollateralWidget extends React.Component {
 
   shouldComponentUpdate(nextProps){
    return !_.isEqual(this.props, nextProps)
-  }
-
-  renderCaveat(collateralSortedBy , columnAttr){
-   if(collateralSortedBy===columnAttr){
-    return <img className={styles.caveats} src="../../../../images/pledge/caveat_up.svg" />
-   }
   }
 
   render() {
