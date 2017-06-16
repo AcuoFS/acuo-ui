@@ -19,6 +19,10 @@
   padding: 55px 0 40px;
 }
 
+.graphCont::-webkit-scrollbar {
+  display: none;
+}
+
 .moneyIcon {
   padding: 10px;
   background-color: #D5DADF;

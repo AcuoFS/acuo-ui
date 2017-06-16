@@ -13,7 +13,7 @@
  -moz-scrollbars-vertical: hidden;
 }
 
-::-webkit-scrollbar {
+.flightItemTableWindow::-webkit-scrollbar {
   display: none;
 }
 
