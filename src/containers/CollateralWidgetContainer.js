@@ -3,11 +3,13 @@ import CollateralWidget from '../components/pledge/sub-components/CollateralWidg
 import {updateCollateral, removeAssetFromEarmark} from '../actions'
 import {toJS} from 'immutable'
 import helper from '../components/pledge/utilities/Helpers.js'
+import transformer from '../components/pledge/utilities/transformer.js'
 
 import ColWidgetActions from "../actions/CollateralWidgetActions.js"
 
 const mapStateToProps = state => {
 
+ //helperArgs are meant for imported helper functions
  const helperArgs = {
   CollSort_Args: { allAssets: state.PledgeReducer.getIn(['pledgeData', 'collateral']),
                    sortBy: state.PledgeReducer.getIn(['collateralWidget', 'sortBy'])
