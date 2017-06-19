@@ -220,6 +220,7 @@
 
 .clickableCell:hover .tooltip {
   opacity: 1;
+  transition-delay:2s;
 }
 
 .tooltip{
@@ -238,6 +239,7 @@
   transition: opacity 250ms linear;
   z-index: 1;
   pointer-events: none;
+  transition-delay:0s;
 }
 
 .tooltip::before{
