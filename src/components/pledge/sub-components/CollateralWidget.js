@@ -30,6 +30,8 @@ export default class CollateralWidget extends React.Component {
         this.props.onCollateralDataAvailable(fromJS(obj.items))
       })
     }
+    //#mockData
+    // this.props.onCollateralDataAvailable(fromJS(mockData.items))
   }
 
   handleFilterChange(value) {
