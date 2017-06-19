@@ -20,6 +20,10 @@
   padding-bottom: 10px;
 }
 
+.graphCont::-webkit-scrollbar {
+  display: none;
+}
+
 .moneyIcon {
   padding: 10px;
   margin-left: 10px;
