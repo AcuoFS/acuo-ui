@@ -52,9 +52,9 @@ class Reconcile extends React.Component {
 
     return (
       <div className={stylesG.globalStyles}>
-        <NavigationBarContainer curPage={this.props.location.pathname}/>
+        <NavigationBarContainer curPage={this.props.location.pathname} />
         <div className={styles.titleBar}>
-          <div className={styles.title}>{outItems.length} Actions to reconcile</div>
+          <div className={styles.title}>{outItems.filter(x=>x.status.toLowerCase() !== 'expected').length} Actions to reconcile</div>
           <div className={styles.titleTriangle}></div>
         </div>
         <FilterReconPageContainer />
