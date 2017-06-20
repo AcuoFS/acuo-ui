@@ -34,3 +34,54 @@
     background-color: #FFFFFF;
 }
 
+
+
+.tableGroup{
+ flex: 3 0 auto;
+
+ /*border: 1px red dashed;*/
+}
+.headerRow{
+ width: 100%;
+
+ display: flex;
+ flex-direction: row;
+ justify-content: space-around;
+ align-items: center;
+ align-content: stretch;
+
+ font-size: 14px;
+ composes: baseFontBold from '../../../static/css-components/fonts.css';
+ line-height: 17px;
+ color: #6389AD;
+}
+.headerCell{
+ display: flex;
+ flex: 0 0 auto;
+ /*display: inline-block;*/
+}
+
+.rowGroup{
+ overflow-y: scroll;
+ height: 270px;
+
+ /*border: 1px blue dashed;*/
+}
+.row{
+ width: 100%;
+
+ display: flex;
+ flex-direction: row;
+ justify-content: space-around;
+ align-items: center;
+ align-content: stretch;
+
+ font-size: 13px;
+ line-height: 16px;
+ color: #4A4A4A;
+}
+.rowCell{
+ display: flex;
+ flex: 0 0 auto;
+ /*display: inline-block;*/
+}

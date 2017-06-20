@@ -51,23 +51,45 @@ export default class UnmatchedTable extends React.Component {
     ))
 
     return (
-      <div className={styles.unmatchedTable}>
-        <div className={styles.unmatchedTableHeader}>
-          <div className={styles.unmatchedTableCell}></div>
-          <div className={styles.unmatchedTableCell}>Counterparty</div>
-          <div className={styles.unmatchedTableCell}>Net Total IM</div>
-          <div className={styles.unmatchedTableCell}>Net VM Call (SGD)</div>
-          <div className={styles.unmatchedTableCell}>Interest Payment (IM)</div>
-          <div className={styles.unmatchedTableCell}>Product Cash Flows</div>
-          <div className={styles.unmatchedTableCell}>Daily PAI</div>
-          <div className={styles.unmatchedTableCell}>Fees & Comms</div>
-          <div className={styles.unmatchedTableCell}>Pending Non-Cash</div>
-          <div className={styles.unmatchedTableCell}>Pending Cash</div>
+      <div className={styles.tableGroup}>
+        <div className={styles.headerRow}>
+          <div className={styles.headerCell}></div>
+          <div className={styles.headerCell}>Counterparty</div>
+          <div className={styles.headerCell}>Net Total IM</div>
+          <div className={styles.headerCell}>Net VM Call (SGD)</div>
+          <div className={styles.headerCell}>Interest Payment (IM)</div>
+          <div className={styles.headerCell}>Product Cash Flows</div>
+          <div className={styles.headerCell}>Daily PAI</div>
+          <div className={styles.headerCell}>Fees & Comms</div>
+          <div className={styles.headerCell}>Pending Non-Cash</div>
+          <div className={styles.headerCell}>Pending Cash</div>
         </div>
 
-        {rows}
+        <div className={styles.rowGroup}>
+         {rows}
+        </div>
 
       </div>
-    )
+     )
+
+    // return (
+    //   <div className={styles.unmatchedTable}>
+    //     <div className={styles.unmatchedTableHeader}>
+    //       <div className={styles.unmatchedTableCell}></div>
+    //       <div className={styles.unmatchedTableCell}>Counterparty</div>
+    //       <div className={styles.unmatchedTableCell}>Net Total IM</div>
+    //       <div className={styles.unmatchedTableCell}>Net VM Call (SGD)</div>
+    //       <div className={styles.unmatchedTableCell}>Interest Payment (IM)</div>
+    //       <div className={styles.unmatchedTableCell}>Product Cash Flows</div>
+    //       <div className={styles.unmatchedTableCell}>Daily PAI</div>
+    //       <div className={styles.unmatchedTableCell}>Fees & Comms</div>
+    //       <div className={styles.unmatchedTableCell}>Pending Non-Cash</div>
+    //       <div className={styles.unmatchedTableCell}>Pending Cash</div>
+    //     </div>
+    //
+    //     {rows}
+    //
+    //   </div>
+    //  )
   }
 }

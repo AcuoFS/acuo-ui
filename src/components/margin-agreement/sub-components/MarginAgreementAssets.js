@@ -155,7 +155,8 @@ export default class MarginAgreementPortfolio extends React.Component {
 
     let displayAssets
 
-    if ('counterpartyAssets' == assetsName && isEmptyCounterparty(marginData.get(assetsName))) {
+    // if ('counterpartyAssets' == assetsName && isEmptyCounterparty(marginData.get(assetsName))) {
+    if (true) {
       let findDom
 
       // Display the upload widget when it's displayed on a popup

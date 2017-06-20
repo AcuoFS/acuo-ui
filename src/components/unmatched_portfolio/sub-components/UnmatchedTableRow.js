@@ -29,19 +29,19 @@ export default class UnmatchedTableRow extends React.Component {
   render() {
     const {portfolio} = this.props
     return (
-      <div className={styles.unmatchedTableRow}>
-        <div className={styles.unmatchedTableCell}>
+      <div className={styles.row}>
+        <div className={styles.rowCell}>
           <img src={this.state.isChecked ? checkBoxWithTick : checkBox} onClick={() => this.onCheck(portfolio)}/>
         </div>
-        <div className={styles.unmatchedTableCell}>{portfolio.counterparty}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.netTotalIm}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.netVmCall}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.interestPayment}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.productCashFlow}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.dailyPai}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.feesComms}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.pendingNonCash}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.pendingCash}</div>
+        <div className={styles.rowCell}>{portfolio.counterparty}</div>
+        <div className={styles.rowCell}>{portfolio.netTotalIm}</div>
+        <div className={styles.rowCell}>{portfolio.netVmCall}</div>
+        <div className={styles.rowCell}>{portfolio.interestPayment}</div>
+        <div className={styles.rowCell}>{portfolio.productCashFlow}</div>
+        <div className={styles.rowCell}>{portfolio.dailyPai}</div>
+        <div className={styles.rowCell}>{portfolio.feesComms}</div>
+        <div className={styles.rowCell}>{portfolio.pendingNonCash}</div>
+        <div className={styles.rowCell}>{portfolio.pendingCash}</div>
       </div>
     )
   }

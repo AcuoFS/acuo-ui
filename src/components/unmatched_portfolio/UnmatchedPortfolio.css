@@ -1,11 +1,11 @@
 .compContainer {
-    /*width: 1372px;*/
-    height: 300px;
+    margin-top: 20px;
+    /* As flex child of .popupContainer*/
+    flex: 5 0 50%;
+
     background-color: #FAFAFA;
     border: 1px solid #D5DADF;
     border-radius: 8px;
-    margin: 10px 0px;
-    padding: 10px 0px;
 }
 
 .compHeader {
@@ -25,6 +25,7 @@
 
 .flexCont {
     display: flex;
+    flex: 1 0 auto;
 }
 
 .searchInput {
