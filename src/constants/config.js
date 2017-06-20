@@ -1,7 +1,7 @@
 var configJson = {
   'baseUrl': 'http://dev.acuo.com',
   '$dev_baseUrl': 'http://dev.acuo.com',
-  '$local_baseUrl': 'http://52.74.186.112',
+  '$local_baseUrl': 'http://localhost:8081',
   '$qa_baseUrl': 'http://qa.acuo.com',
   DASHBOARD_URL: '<%= baseUrl %>/proxy/dashboard',
   RECON_URL: '<%= baseUrl %>/proxy/recon/new',
@@ -11,7 +11,7 @@ var configJson = {
   ALLOCATE_COLLATERALS_URL: '<%= baseUrl %>/proxy/pledge/allocate-selection',
   ALLOCATE_COLLATERALS_URL_NEW: '<%= baseUrl %>/proxy/pledge/allocate-selection-new',
   PLEDGE_ALLOCATIONS: '<%= baseUrl %>/proxy/pledge/pledge-allocation',
-  UPLOAD_FILE_URL: '<%= baseUrl %>/valuation/acuo/api/upload',
+  UPLOAD_FILE_URL: 'http://localhost:8081/upload',
   // Please add the trailing / for recon single item (ok button)
   RECON_DATA_URL: '<%= baseUrl %>/margin/acuo/api/margin/reconcile/',
   REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
