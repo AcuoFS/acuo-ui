@@ -32,9 +32,9 @@
 
 .flexCont {
   width: 100%;
+  margin: 10px 0;
   height: 50px;
   /*As flex child of .compContainer*/
-  /*flex: 1 0 auto;*/
 
   /*As flex parent*/
   display: flex;
@@ -57,11 +57,13 @@
 .buttonContainer {
   width: 100%;
   text-align: right;
+  margin: 5px 0;
 }
 
-.okButton {
+.okButton, .okButtonDisabled  {
     width: 82px;
-    height: 32px;
+    height: 30px;
+    margin: 5px 5px 5px 0 ;
     background-color: #008B04;
     border-radius: 20px;
     color: #FFFFFF;
@@ -69,10 +71,6 @@
 }
 
 .okButtonDisabled {
-    width: 82px;
-    height: 32px;
     background-color: grey;
-    border-radius: 20px;
-    color: white;
     cursor: not-allowed;
 }

@@ -1,43 +1,8 @@
-/*.unmatchedTable {
-    display: table;
-    width: 100%;
-    margin: 5px -1px;
-    border: 1px solid #D5DADF;
-}*/
-
-/*.unmatchedTableHeader {
-    display: table-row;
-    font-size: 14px;
-    composes: baseFontBold from '../../../static/css-components/fonts.css';
-    line-height: 17px;
-    color: #6389AD;
-}*/
-
-/*.unmatchedTableRow {
-    display: table-row;
-    font-size: 13px;
-    line-height: 16px;
-    color: #4A4A4A;
-}*/
-
-/*.unmatchedTableCell {
-    display: table-cell;
-    padding: 5px;
-}*/
-
-/*.unmatchedTableHeader > .unmatchedTableCell {
-    border-bottom: 1px solid #D5DADF;
-}*/
-
-/*.unmatchedTableRow > .unmatchedTableCell {
-    background-color: #FFFFFF;
-}*/
-
 .tableGroup{
- /* As flex child of .compContainer */
  width: 100%;
  height: 350px;
- /*flex: 2 0 auto;*/
+
+ /* As flex child of .compContainer */
 
  /* As flex parent */
  display: flex;
@@ -45,17 +10,19 @@
  justify-content: flex-start;
 
  overflow-y: scroll;
-
- border: 1px red dashed;
 }
 .headerRow{
  width: 100%;
+ margin-top: 5px;
+ padding: 10px 0;
+
  /*As flex child of tableGroup*/
  /*flex: 1 0 0;*/
+
  /* As flex parent */
  display: flex;
  flex-direction: row;
- justify-content: space-around;
+ justify-content: flex-start;
  align-items: center;
  align-content: stretch;
 
@@ -63,25 +30,20 @@
  composes: baseFontBold from '../../../static/css-components/fonts.css';
  line-height: 17px;
  color: #6389AD;
-}
-.headerCell{
- display: flex;
- /*flex: 0 0 auto;*/
- /*display: inline-block;*/
-}
-.headerRow > .headerCell{
 
+ border-top: 1px solid #D5DADF;
+ border-bottom: 1px solid #D5DADF;
 }
+.headerCell{ }
 
 .rowGroup{
  /*As flex child of tableGroup*/
- /*flex: 4 0 0;*/
 
  height: auto;
  overflow-y: scroll;
- /*height: 270px;*/
 
- /*border: 1px blue dashed;*/
+ background-color: white;
+ border-bottom: 1px solid #D5DADF;
 }
 .row{
  width: 100%;
@@ -98,6 +60,13 @@
 }
 .rowCell{
  display: flex;
- /*flex: 0 0 auto;*/
- /*display: inline-block;*/
+ flex-direction: row;
+ align-content: flex-start;
+ align-items: flex-start;
+ justify-content: flex-start;
+
+ padding: 5px 0;
+}
+.rowCell:nth-child(1){
+ justify-content: center;
 }

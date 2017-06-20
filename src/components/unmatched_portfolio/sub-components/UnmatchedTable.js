@@ -27,7 +27,7 @@ export default class UnmatchedTable extends React.Component {
       selectedList
     } = this.props
 
-    const widths = [ 5, 16, 10, 10, 10, 10, 10, 10, 10, 10 ]
+    const widths = [ 2, 18, 10, 10, 12, 12, 8, 8, 10, 10 ]
     /**
      * format:
      * {
@@ -55,6 +55,7 @@ export default class UnmatchedTable extends React.Component {
 
     return (
       <div className={styles.tableGroup}>
+
         <div className={styles.headerRow}>
           <div className={styles.headerCell}
                ref={(node)=>{ if(node){ node.style.width = `${widths[0]}%` }} } />
@@ -112,25 +113,5 @@ export default class UnmatchedTable extends React.Component {
 
       </div>
      )
-
-    // return (
-    //   <div className={styles.unmatchedTable}>
-    //     <div className={styles.unmatchedTableHeader}>
-    //       <div className={styles.unmatchedTableCell}></div>
-    //       <div className={styles.unmatchedTableCell}>Counterparty</div>
-    //       <div className={styles.unmatchedTableCell}>Net Total IM</div>
-    //       <div className={styles.unmatchedTableCell}>Net VM Call (SGD)</div>
-    //       <div className={styles.unmatchedTableCell}>Interest Payment (IM)</div>
-    //       <div className={styles.unmatchedTableCell}>Product Cash Flows</div>
-    //       <div className={styles.unmatchedTableCell}>Daily PAI</div>
-    //       <div className={styles.unmatchedTableCell}>Fees & Comms</div>
-    //       <div className={styles.unmatchedTableCell}>Pending Non-Cash</div>
-    //       <div className={styles.unmatchedTableCell}>Pending Cash</div>
-    //     </div>
-    //
-    //     {rows}
-    //
-    //   </div>
-    //  )
   }
 }
