@@ -16,7 +16,14 @@ class SVGWrapper extends React.Component{
   render() {
     return (
       <svg viewBox="0 0 4320 460" preserveAspectRatio="xMidYMin slice"
-           style={{'width': '4320px', 'paddingBottom': '455px', 'height': '1px', 'overflow': 'visible', 'userSelect': 'none', 'cursor': 'grab'}}>
+           style={{'width': '4320px',
+                   'paddingBottom': '10px',
+                   'height': '100%',
+                   'overflow': 'hidden',
+                   'userSelect': 'none',
+                   'cursor': 'grab',
+
+                  }}>
         {/*<svg viewBox="0 0 1440 460" preserveAspectRatio="xMaxYMax meet">*/}
         <Axis
           x={0}
