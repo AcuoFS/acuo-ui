@@ -8,7 +8,6 @@ export const FetchNavbarAlerts = () =>{
     fetch(FETCH_NAVBAR_ALERTS)
      .then( response=>response.json() )
      .then(json => {
-      console.log(json);
       return json.alerts
      })
    )
