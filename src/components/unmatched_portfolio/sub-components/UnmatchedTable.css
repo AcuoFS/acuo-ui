@@ -1,49 +1,58 @@
-.unmatchedTable {
+/*.unmatchedTable {
     display: table;
     width: 100%;
     margin: 5px -1px;
-    /*table-layout: fixed;*/
     border: 1px solid #D5DADF;
-}
+}*/
 
-.unmatchedTableHeader {
+/*.unmatchedTableHeader {
     display: table-row;
     font-size: 14px;
     composes: baseFontBold from '../../../static/css-components/fonts.css';
     line-height: 17px;
     color: #6389AD;
-}
+}*/
 
-.unmatchedTableRow {
+/*.unmatchedTableRow {
     display: table-row;
     font-size: 13px;
     line-height: 16px;
     color: #4A4A4A;
-}
+}*/
 
-.unmatchedTableCell {
+/*.unmatchedTableCell {
     display: table-cell;
     padding: 5px;
-}
+}*/
 
-.unmatchedTableHeader > .unmatchedTableCell {
+/*.unmatchedTableHeader > .unmatchedTableCell {
     border-bottom: 1px solid #D5DADF;
-}
+}*/
 
-.unmatchedTableRow > .unmatchedTableCell {
+/*.unmatchedTableRow > .unmatchedTableCell {
     background-color: #FFFFFF;
-}
-
-
+}*/
 
 .tableGroup{
- flex: 3 0 auto;
+ /* As flex child of .compContainer */
+ width: 100%;
+ height: 350px;
+ /*flex: 2 0 auto;*/
 
- /*border: 1px red dashed;*/
+ /* As flex parent */
+ display: flex;
+ flex-direction: column;
+ justify-content: flex-start;
+
+ overflow-y: scroll;
+
+ border: 1px red dashed;
 }
 .headerRow{
  width: 100%;
-
+ /*As flex child of tableGroup*/
+ /*flex: 1 0 0;*/
+ /* As flex parent */
  display: flex;
  flex-direction: row;
  justify-content: space-around;
@@ -57,13 +66,20 @@
 }
 .headerCell{
  display: flex;
- flex: 0 0 auto;
+ /*flex: 0 0 auto;*/
  /*display: inline-block;*/
+}
+.headerRow > .headerCell{
+
 }
 
 .rowGroup{
+ /*As flex child of tableGroup*/
+ /*flex: 4 0 0;*/
+
+ height: auto;
  overflow-y: scroll;
- height: 270px;
+ /*height: 270px;*/
 
  /*border: 1px blue dashed;*/
 }
@@ -82,6 +98,6 @@
 }
 .rowCell{
  display: flex;
- flex: 0 0 auto;
+ /*flex: 0 0 auto;*/
  /*display: inline-block;*/
 }

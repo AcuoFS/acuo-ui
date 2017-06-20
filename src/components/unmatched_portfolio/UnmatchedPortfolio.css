@@ -1,11 +1,18 @@
 .compContainer {
     margin-top: 20px;
+    height: 430px;
     /* As flex child of .popupContainer*/
-    flex: 5 0 50%;
+    flex: 5 0 auto;
 
     background-color: #FAFAFA;
     border: 1px solid #D5DADF;
     border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
 }
 
 .compHeader {
@@ -24,8 +31,17 @@
 }
 
 .flexCont {
-    display: flex;
-    flex: 1 0 auto;
+  width: 100%;
+  height: 50px;
+  /*As flex child of .compContainer*/
+  /*flex: 1 0 auto;*/
+
+  /*As flex parent*/
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
 }
 
 .searchInput {
@@ -39,11 +55,11 @@
 }
 
 .buttonContainer {
-    margin: 10px;
-    text-align: right;
+  width: 100%;
+  text-align: right;
 }
 
-.buttonContainer button {
+.okButton {
     width: 82px;
     height: 32px;
     background-color: #008B04;
@@ -52,6 +68,11 @@
     cursor: pointer;
 }
 
-.hide {
-    display: none;
+.okButtonDisabled {
+    width: 82px;
+    height: 32px;
+    background-color: grey;
+    border-radius: 20px;
+    color: white;
+    cursor: not-allowed;
 }

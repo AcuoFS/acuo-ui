@@ -2,7 +2,7 @@
     position: absolute;
     top: 0; left: 0;
     width: calc(100% - 20px);
-    height: 840px;
+    height: 880px;
     background-color: #FAFAFA;
     box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
     border: 1px solid #9B9B9B;
