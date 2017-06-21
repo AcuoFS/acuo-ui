@@ -3,9 +3,7 @@ import { fork, call, put, take, race } from 'redux-saga/effects'
 
 //fetches
 import { FetchMarginCall } from './FetchMarginCall'
-import {
-  checkSpecificServer
-} from './CheckServerConnectivity'
+import { checkSpecificServer } from './CheckServerConnectivity'
 import { FetchNavbarAlerts } from './FetchNavbarAlerts'
 
 //actions
