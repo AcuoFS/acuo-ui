@@ -86,9 +86,9 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     proxy: {
-      '/proxy': {
-        target: 'https://dev.acuo.com',
-        secure: false
+      '/proxy/**/**/**/**/**': {
+        target: 'http://dev.acuo.com',
+        changeOrigin: true
       }
     }
   }
