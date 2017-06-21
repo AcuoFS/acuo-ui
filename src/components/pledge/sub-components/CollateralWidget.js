@@ -7,6 +7,7 @@ import {fromJS} from 'immutable'
 import {filterByAllPropertiesOfObj} from '../../../utils'
 import styles from '../Pledge.css'
 import selfStyles from './CollateralWidget.css'
+import mockData from './mockData_collateral.js'
 
 export default class CollateralWidget extends React.Component {
   constructor(props) {
@@ -20,15 +21,16 @@ export default class CollateralWidget extends React.Component {
   }
 
   componentWillMount() {
-    if (_.isEmpty(this.props.collateral)) {
-      fetch(COLLATERAL_URL).then((response) => {
-        return response.json()
-      }).then((obj) => {
-        this.props.onCollateralDataAvailable(fromJS(obj.items))
-      })
-    }
+    // if (_.isEmpty(this.props.collateral)) {
+    //   fetch(COLLATERAL_URL).then((response) => {
+    //     return response.json()
+    //   }).then((obj) => {
+    //     this.props.onCollateralDataAvailable(fromJS(obj.items))
+    //   })
+    // }
+
     //#mockData
-    // this.props.onCollateralDataAvailable(fromJS(mockData.items))
+    this.props.onCollateralDataAvailable(fromJS(mockData.items))
   }
 
   handleFilterChange(value) {
@@ -37,22 +39,18 @@ export default class CollateralWidget extends React.Component {
     })
   }
 
-  getAdditionalColumns(listOfNames , sortColumnBy, collateralSortedBy) {
+  getAdditionalColumns(listOfNames , sortColumnBy, collateralSortedBy, isAscSort) {
 
-    const headerType = (columnName, i) => {
-     if(/*columnName!=='Internal Cost (bps)' && columnName!=='Opportunity Cost (bps)'*/ true){
-      return(
+    const headerType = (columnName, i) => (
        <div className={styles.collateralCell} key={i}>
 
         <div className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy==columnName? styles.sortedBy : '')}
-              onClick={e=>{ sortColumnBy(columnName) }}>
+              onClick={e=>{ sortColumnBy(  {sortBy:columnName, sortAscending: isAscSort } ) }}>
               {columnName}
         </div>
 
-       </div> )
-     }
-     else {return <div className={styles.collateralCell} key={i}> {columnName} </div>}
-    }//End-headerType()
+       </div>
+    )//End-headerType()
 
     return _.map( listOfNames,
                   (columnName, i) => headerType(columnName, i) )
@@ -90,7 +88,6 @@ export default class CollateralWidget extends React.Component {
                               propHandleOnRemoveFromEarmarked={onRemoveFromEarmarked} />
       ]
     })
-
     return collateralAssetGroupList
   }
 
@@ -146,7 +143,8 @@ export default class CollateralWidget extends React.Component {
       onRemoveFromEarmarked,
       sortColumnBy,
       sortedCollateral,
-      collateralSortedBy
+      collateralSortedBy,
+      isAscSort
     } = this.props
 
     return (
@@ -163,25 +161,25 @@ export default class CollateralWidget extends React.Component {
 
             <div className={styles.collateralRow + ' ' + styles.collateralHeader + ' ' + styles.collateralTableExpanded}>
               <div className={styles.collateralCell}>
-               <span className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="assetName"? styles.sortedBy : '')} onClick={e=>sortColumnBy("assetName")}>Asset</span>
+               <span className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="assetName"? styles.sortedBy : '')} onClick={e=>sortColumnBy( {sortBy:"assetName", sortAscending: isAscSort } )}>Asset</span>
               </div>
               <div className={styles.collateralCell}>
-               <span className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="price"? styles.sortedBy : '')} onClick={e=>sortColumnBy("price")}>Total Value</span>
+               <span className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="price"? styles.sortedBy : '')} onClick={e=>sortColumnBy( {sortBy:"price", sortAscending: isAscSort }  )}>Total Value</span>
               </div>
               <div className={styles.collateralCell}>
-                <span className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="ccy"? styles.sortedBy : '')} onClick={e=>sortColumnBy("ccy")}>CCY</span>
+                <span className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="ccy"? styles.sortedBy : '')} onClick={e=>sortColumnBy( {sortBy:"ccy", sortAscending: isAscSort }  )}>CCY</span>
               </div>
               <div className={styles.collateralCell}>
                 Delivery Time
               </div>
               <div className={styles.collateralCell}>
-                <span className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="status"? styles.sortedBy : '')} onClick={e=>sortColumnBy("status")}>Status</span>
+                <span className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="status"? styles.sortedBy : '')} onClick={e=>sortColumnBy( {sortBy:"status", sortAscending: isAscSort }  )}>Status</span>
               </div>
               <div className={styles.collateralCell}>
-                <span className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="rating"? styles.sortedBy : '')} onClick={e=>sortColumnBy("rating")}>Rating</span>
+                <span className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="rating"? styles.sortedBy : '')} onClick={e=>sortColumnBy( {sortBy:"rating", sortAscending: isAscSort }  )}>Rating</span>
               </div>
               <div className={styles.collateralCell}>
-                <div className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="maturityDate"? styles.sortedBy : '')} onClick={e=>sortColumnBy("maturityDate")}>Maturity Date</div>
+                <div className={styles.collateralHeaderCell + ' ' + ( collateralSortedBy=="maturityDate"? styles.sortedBy : '')} onClick={e=>sortColumnBy( {sortBy:"maturityDate", sortAscending: isAscSort }  )}>Maturity Date</div>
               </div>
               {
                 open && this.getAdditionalColumns(
@@ -191,7 +189,7 @@ export default class CollateralWidget extends React.Component {
                     'ISIN',
                     'Venue',
                     'Acc ID'
-                  ], sortColumnBy, collateralSortedBy)
+                  ], sortColumnBy, collateralSortedBy, isAscSort)
               }
             </div>
 
