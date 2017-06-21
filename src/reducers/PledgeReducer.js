@@ -16,7 +16,7 @@ const initialState = Map({
     collateral: Map(),
     filters: fromJS(initFilters)
   }),
-  collateralWidget: Map({ sortBy: "assetName" })
+  collateralWidget: Map({ sortBy: "assetName", sortAscending: true })
 })
 
 const initOptimisationSettings = (state, settings) => {
@@ -118,7 +118,14 @@ const PledgeReducer = (state = initialState, action) => {
       return state.setIn(['pledgeData', 'filters'], fromJS(updatedFilters))
 
     case ActionTypes.SELECTION_WIDGET__COLUMN_SORT:
-      return state.setIn(['collateralWidget' , 'sortBy'], action.payload)
+      const { sortBy , sortAscending } = action.payload
+      const currentSortBy = state.getIn(['collateralWidget' , 'sortBy'])
+      if( sortBy != currentSortBy ){
+        return state.setIn(['collateralWidget'], Map({ sortBy:sortBy, sortAscending: true }))
+      }
+      else{
+        return state.setIn(['collateralWidget' , 'sortAscending'], !sortAscending )
+      }
 
   }
   return state
