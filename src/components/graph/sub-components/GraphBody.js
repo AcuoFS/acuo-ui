@@ -16,7 +16,6 @@ export default class GraphBody extends React.Component {
       case 'expected':
         return () => {
           hashHistory.push('/recon')
-
           //1st param: time range start
           //2nd param: time range start + 1 hour
           //3rd param: getDay() returns 'today', 'tomorrow', 'yesterday' based on summation of
@@ -149,16 +148,19 @@ export default class GraphBody extends React.Component {
 
         const getFunction = (status) => {
           switch(status){
-            case 'unrecon' || 'expected':
+            case 'unrecon':
               return onUnreconBubbleClick
             case 'reconciled':
               return onReconBubbleClick
+            case 'expected':
+              return onUnreconBubbleClick
             default:
               return () => {}
           }
         }
 
-        //console.log(getFunction(status.get('status')))
+        // console.log(status.get('status'))
+        // console.log(getFunction(status.get('status')))
 
         const onClickFunc = (direction) => (this.whichClickFuncToRun(getFunction(status.get('status')), status.get('status').toLowerCase(), lastUpdatedTime, timeFrame.get('timeFrame'), timeDifference, direction))
 
