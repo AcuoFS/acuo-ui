@@ -21,16 +21,16 @@ export default class CollateralWidget extends React.Component {
   }
 
   componentWillMount() {
-    // if (_.isEmpty(this.props.collateral)) {
-    //   fetch(COLLATERAL_URL).then((response) => {
-    //     return response.json()
-    //   }).then((obj) => {
-    //     this.props.onCollateralDataAvailable(fromJS(obj.items))
-    //   })
-    // }
+    if (_.isEmpty(this.props.collateral)) {
+      fetch(COLLATERAL_URL).then((response) => {
+        return response.json()
+      }).then((obj) => {
+        this.props.onCollateralDataAvailable(fromJS(obj.items))
+      })
+    }
 
-    //#mockData
-    this.props.onCollateralDataAvailable(fromJS(mockData.items))
+    // #mockData
+    // this.props.onCollateralDataAvailable(fromJS(mockData.items))
   }
 
   handleFilterChange(value) {
