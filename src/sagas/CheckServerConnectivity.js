@@ -17,7 +17,7 @@ let serverStatus = {
 }
 
 const checkProxyServerConnectivity = () => {
-  return fetch(/*PROXY_HEALTH_CHECK*/ "http://localhost:8081/common/throw-404").then(response => {
+  return fetch(PROXY_HEALTH_CHECK).then(response => {
     if(response.status === 200){
      console.log("checkProxyServerConnectivity ::: Response Evaluation:" , true , "@", new Date());
      return 'passed'
