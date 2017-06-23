@@ -54,11 +54,12 @@ function* serverHealthChecks() {
   while(true){
     try{
       yield call(delay, 4000)
+      console.groupCollapsed("Server Health Checks")
       yield checkSpecificServer('Proxy')
       yield checkSpecificServer('Margin')
       yield checkSpecificServer('Valuation')
       yield checkSpecificServer('Collateral')
-
+      console.groupEnd("server Health Checks")
       yield call(delay, 16000)
     } catch (error) {
       console.log(error)
