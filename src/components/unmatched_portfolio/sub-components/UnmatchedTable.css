@@ -1,36 +1,72 @@
-.unmatchedTable {
-    display: table;
-    width: 100%;
-    margin: 5px -1px;
-    /*table-layout: fixed;*/
-    border: 1px solid #D5DADF;
-}
+.tableGroup{
+ width: 100%;
+ height: 350px;
 
-.unmatchedTableHeader {
-    display: table-row;
-    font-size: 14px;
-    composes: baseFontBold from '../../../static/css-components/fonts.css';
-    line-height: 17px;
-    color: #6389AD;
-}
+ /* As flex child of .compContainer */
 
-.unmatchedTableRow {
-    display: table-row;
-    font-size: 13px;
-    line-height: 16px;
-    color: #4A4A4A;
-}
+ /* As flex parent */
+ display: flex;
+ flex-direction: column;
+ justify-content: flex-start;
 
-.unmatchedTableCell {
-    display: table-cell;
-    padding: 5px;
+ overflow-y: scroll;
 }
+.headerRow{
+ width: 100%;
+ margin-top: 5px;
+ padding: 10px 0;
 
-.unmatchedTableHeader > .unmatchedTableCell {
-    border-bottom: 1px solid #D5DADF;
+ /*As flex child of tableGroup*/
+ /*flex: 1 0 0;*/
+
+ /* As flex parent */
+ display: flex;
+ flex-direction: row;
+ justify-content: flex-start;
+ align-items: center;
+ align-content: stretch;
+
+ font-size: 14px;
+ composes: baseFontBold from '../../../static/css-components/fonts.css';
+ line-height: 17px;
+ color: #6389AD;
+
+ border-top: 1px solid #D5DADF;
+ border-bottom: 1px solid #D5DADF;
 }
+.headerCell{ }
 
-.unmatchedTableRow > .unmatchedTableCell {
-    background-color: #FFFFFF;
+.rowGroup{
+ /*As flex child of tableGroup*/
+
+ height: auto;
+ overflow-y: scroll;
+
+ background-color: white;
+ border-bottom: 1px solid #D5DADF;
 }
+.row{
+ width: 100%;
 
+ display: flex;
+ flex-direction: row;
+ justify-content: space-around;
+ align-items: center;
+ align-content: stretch;
+
+ font-size: 13px;
+ line-height: 16px;
+ color: #4A4A4A;
+}
+.rowCell{
+ display: flex;
+ flex-direction: row;
+ align-content: flex-start;
+ align-items: flex-start;
+ justify-content: flex-start;
+
+ padding: 5px 0;
+}
+.rowCell:nth-child(1){
+ justify-content: center;
+}
