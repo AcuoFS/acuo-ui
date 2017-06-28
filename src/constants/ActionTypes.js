@@ -67,3 +67,7 @@ export const INIT_DEPARTURES = 'INIT_DEPARTURES'
 //navbar alerts
 export const UPDATE_NAVBAR_ALERTS = 'UPDATE_NAVBAR_ALERTS'
 export const SAGA_NAVBAR_ALERTS = 'SAGA_NAVBAR_ALERTS'
+
+//login
+export const DO_LOGIN = 'DO_LOGIN'
+export const UPDATE_LOGIN_PROCESS = 'UPDATE_LOGIN_PROCESS'

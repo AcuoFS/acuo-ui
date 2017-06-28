@@ -1,10 +1,11 @@
 import { delay } from 'redux-saga'
-import { fork, call, put, take, race } from 'redux-saga/effects'
+import { fork, call, put, take, race, takeLatest } from 'redux-saga/effects'
 
 //fetches
 import { FetchMarginCall } from './FetchMarginCall'
 import { checkSpecificServer } from './CheckServerConnectivity'
 import { FetchNavbarAlerts } from './FetchNavbarAlerts'
+import { login } from './Login'
 
 //actions
 import { getMarginCallUpload } from  '../actions/MarginCallUploadActions'
@@ -15,8 +16,10 @@ import { updateNavbarAlerts } from './../actions/CommonActions'
 import {
   POLL_MARGIN_CALL,
   STOP_MARGIN_POLL,
-  SAGA_NAVBAR_ALERTS
+  SAGA_NAVBAR_ALERTS,
+  DO_LOGIN
 } from '../constants/ActionTypes'
+
 
 function* poll(txnID) {
   // console.log('poll')
@@ -81,11 +84,16 @@ function* sagaNavbarAlerts() {
   }
 }
 
+function* watchLogin() {
+  yield takeLatest(DO_LOGIN, login)
+}
+
 export default function* root() {
   // console.log('root')
   yield [
     fork(watchMarginCall),
     fork(serverHealthChecks),
-    fork(sagaNavbarAlerts)
+    fork(sagaNavbarAlerts),
+    fork(watchLogin)
   ]
 }
