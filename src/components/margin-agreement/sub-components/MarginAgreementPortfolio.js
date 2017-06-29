@@ -168,7 +168,7 @@ export default class MarginAgreementPortfolio extends React.Component {
                  onClick={ (e)=>{
                    onReconItem(e)
                   }}
-                 data-ref={portfolioData.get('GUID') + "?amount=" + this.state.adjAmount}>
+                 data-ref={portfolioData.get('GUID') + "?amount=" + this.state.adjAmount + "&direction=" + portfolioData.get('direction')}>
              OK
             </div>
           </div>}
