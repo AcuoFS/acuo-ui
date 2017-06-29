@@ -84,6 +84,12 @@ module.exports = {
     })
   ],
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: {
+      '/proxy/**/**/**/**/**': {
+        target: 'http://dev.acuo.com',
+        changeOrigin: true
+      }
+    }
   }
 };

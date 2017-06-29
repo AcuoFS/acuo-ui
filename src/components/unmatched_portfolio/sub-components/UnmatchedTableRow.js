@@ -27,21 +27,59 @@ export default class UnmatchedTableRow extends React.Component {
   }
 
   render() {
-    const {portfolio} = this.props
+    const {portfolio, widths} = this.props
     return (
-      <div className={styles.unmatchedTableRow}>
-        <div className={styles.unmatchedTableCell}>
-          <img src={this.state.isChecked ? checkBoxWithTick : checkBox} onClick={() => this.onCheck(portfolio)}/>
+      <div className={styles.row}>
+        <div className={styles.rowCell}
+             ref={(node)=>{ if(node){ node.style.width = `${widths[0]}%` }} } >
+              <img src={this.state.isChecked ? checkBoxWithTick : checkBox} onClick={() => this.onCheck(portfolio)}/>
+         </div>
+
+        <div className={styles.rowCell}
+             ref={(node)=>{ if(node){ node.style.width = `${widths[1]}%` }} } >
+             {portfolio.counterparty}
         </div>
-        <div className={styles.unmatchedTableCell}>{portfolio.counterparty}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.netTotalIm}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.netVmCall}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.interestPayment}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.productCashFlow}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.dailyPai}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.feesComms}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.pendingNonCash}</div>
-        <div className={styles.unmatchedTableCell}>{portfolio.pendingCash}</div>
+
+        <div className={styles.rowCell}
+             ref={(node)=>{ if(node){ node.style.width = `${widths[2]}%` }} } >
+             {portfolio.netTotalIm}
+        </div>
+
+        <div className={styles.rowCell}
+             ref={(node)=>{ if(node){ node.style.width = `${widths[3]}%` }} } >
+             {portfolio.netVmCall}
+        </div>
+
+        <div className={styles.rowCell}
+             ref={(node)=>{ if(node){ node.style.width = `${widths[4]}%` }} } >
+             {portfolio.interestPayment}
+        </div>
+
+        <div className={styles.rowCell}
+             ref={(node)=>{ if(node){ node.style.width = `${widths[5]}%` }} } >
+             {portfolio.productCashFlow}
+        </div>
+
+        <div className={styles.rowCell}
+             ref={(node)=>{ if(node){ node.style.width = `${widths[6]}%` }} } >
+             {portfolio.dailyPai}
+        </div>
+
+        <div className={styles.rowCell}
+             ref={(node)=>{ if(node){ node.style.width = `${widths[7]}%` }} } >
+             {portfolio.feesComms}
+        </div>
+
+        <div className={styles.rowCell}
+             ref={(node)=>{ if(node){ node.style.width = `${widths[8]}%` }} } >
+             {portfolio.pendingNonCash}
+        </div>
+
+        <div className={styles.rowCell}
+             ref={(node)=>{ if(node){ node.style.width = `${widths[9]}%` }} } >
+             {portfolio.pendingCash}
+        </div>
+
       </div>
     )
   }

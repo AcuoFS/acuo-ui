@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
 const sortType = (attr, sortBy)=>{
- const condition = sortBy.toLowerCase
+ const condition = sortBy.toLowerCase()
  switch(sortBy){
    case 'assetName':
      return attr[sortBy]
@@ -34,14 +34,26 @@ const sortType = (attr, sortBy)=>{
 }
 
 const CollSort = ( CollSort_Args )=>{
-  const { allAssets, sortBy } = CollSort_Args
+  const { allAssets, collateralWidget } = CollSort_Args
 
-  return _.reduce( allAssets.toJS(),
-                   (acc , AssetType, key)=>{
-                    const sorted = _.sortBy( AssetType, attr=>sortType(attr, sortBy) )
-                    return _.set( acc, `${key}` , sorted )
-                   },
-                   {}  )
+  const ascSort =  _.reduce( allAssets.toJS(),
+                            (acc , AssetType, key)=>{
+                             const sorted = _.sortBy( AssetType, attr=>sortType(attr, collateralWidget.get('sortBy')) )
+                             return _.set( acc, `${key}` , sorted )
+                            },
+                            {}  )
+
+  if(collateralWidget.get('sortAscending')) { return ascSort }
+  else{
+            return _.reduce( ascSort,
+                             (acc , AssetType, key)=>{
+                              const sorted = _.reverse(AssetType)
+                              return _.set( acc, `${key}` , sorted )
+                             },
+                             {}  )
+   return descSort
+  }
+
 }//EndOf - CollSort()
 
 const Helper = {

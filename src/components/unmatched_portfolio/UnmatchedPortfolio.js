@@ -47,12 +47,16 @@ export default class UnmatchedPortfolio extends React.Component {
         </div>
         <UnmatchedTableContainer onTableRow={this.onTableRow}
                                  filterText={this.state.filterText}
-                                 selectedList={this.state.selectedList}/>
-        <div className={
-          (this.state.selectedList.length > 0)
-            ? styles.buttonContainer : styles.hide}>
-          <button onClick={this.onGenerate}>OK</button>
-        </div>
+                                 selectedList={this.state.selectedList}
+         />
+
+        <div className={ styles.buttonContainer }>
+         {
+          (this.state.selectedList.length > 0 ?
+           <button className={styles.okButton} onClick={this.onGenerate}>OK</button>  :
+           <button className={styles.okButtonDisabled} disabled="true">OK</button> )
+          }
+       </div>
 
       </div>
     )

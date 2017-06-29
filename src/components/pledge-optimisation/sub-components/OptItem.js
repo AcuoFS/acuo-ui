@@ -18,7 +18,7 @@ export default class OptItem extends React.Component {
   componentWillMount() {
     this.setState({
       name: this.props.sldName,
-      allocation: (this.props.allocation).toFixed(1)
+      allocation: parseFloat(this.props.allocation).toFixed(1)
     })
   }
 
