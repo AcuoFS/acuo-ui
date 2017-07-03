@@ -8,39 +8,37 @@
 }
 
 .graphWrapper{
-  position: relative;
+  padding-bottom: 10px;
 }
 
 .graphCont {
-  position: relative;
-  overflow-x: scroll;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -ms-overflow-style: none;
   width: 100%;
-  height: 480px;
-  padding: 55px 0 40px;
+  height: 490px;
+  padding-bottom: 10px;
+}
+
+.graphCont::-webkit-scrollbar {
+  display: none;
 }
 
 .moneyIcon {
   padding: 10px;
+  margin-left: 10px;
+  border-radius: 8px;
+  width: 35px;
+
   background-color: #D5DADF;
   color: #353535;
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.5);
-  border-radius: 8px;
-  position: absolute;
-  /* To resolve bug where the drop-down options are covered */
-  /*z-index: 50;*/
   composes: baseFontBold from './../../static/css-components/fonts.css';
-  width: 35px;
   text-align: center;
 }
 
-.moneyOutIcon {
-  top: 15px;
-  left: 15px;
-}
-
-.moneyInIcon {
-  bottom: 20px;
-  left: 15px;
+.moneyOut{
+ margin-bottom: 10px;
 }
 
 /*@media screen\0 and (min-width: 768px) {*/

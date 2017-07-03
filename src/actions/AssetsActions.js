@@ -9,18 +9,30 @@ export const AssetsPanel = {
                                                            payload: isExpanded  }},
   DeployedPanel_SearchText: (text)=>{ return { type: "@DEPLOYED__SEARCHTEXT",
                                                payload: text  }},
+
   HomePanel_ToggleVerticalExpand: (isExpanded)=>{ return { type: "@HOME__TOGGLE_Y_EXPAND",
                                                            payload: isExpanded  }},
   HomePanel_ToggleCategory: (IsPledgeSelected)=>{ return{ type:"@HOME__TOGGLE_CATEGORY",
                                                           payload: IsPledgeSelected }},
-  ShowPopup: (bool)=>{ return{ type:"@SHOW_POPUP",
-                               payload: bool }},
+
+  // ShowPopup: (bool)=>{ return{ type:"@SHOW_POPUP",
+  //                              payload: bool }},
   Popup_Amount: (amount)=>{ return{ type:"@POPUP_AMOUNT",
                                     payload: amount }},
-  Popup_DraggingHomeAssetID: (assetID)=>{ return{ type:"@HOME__DRAGGING_HOME_ASSET_ID",
+  Popup_Update_DraggingAssetID: (assetID)=>{ return{ type:"@POPUP__DRAGGING__ASSET_ID",
                                                   payload: assetID }},
-  Popup_DroppedHomeAssetInfo: (assetInfo)=>{ return{ type:"@DEPLOYED__DROPPED_HOME_ASSET_DETAILS",
-                                                     payload: assetInfo }},
-  Popup_DeployedAssetToBeReplaced: (assetInfo)=>{ return{ type:"@DEPLOYED__ASSET_TO_BE_REPLACED",
-                                                          payload: assetInfo }}
+  // Popup_Update_DroppedAsset: (assetInfo)=>{ return{ type:"@POPUP__DROPPED_ASSET",
+  //                                                    payload: assetInfo }},
+  // Popup_Update_AssetToBeReplaced: (assetInfo)=>{ return{ type:"@POPUP__ASSET_TO_BE_REPLACED",
+  //                                                        payload: assetInfo }},
+  Popup_OnDragStart: (dragInfo)=>{ return{ type:"@POPUP_ON_DRAG_START",
+                                           payload: dragInfo  }},
+  Popup_OnDragEnd: (dragInfo)=>{ return{ type:"@POPUP_ON_DRAG_END",
+                                         payload: dragInfo  }},
+  Popup_OnDrop: ( dropInfo )=>{ return { type:"@POPUP_ON_DROP",
+                                         payload:dropInfo }},
+  Popup_onClickCancel: ( cancelAction )=>{ return { type:"@POPUP_ON_CLICK_CANCEL",
+                                                    payload:cancelAction }},
+
+
 }

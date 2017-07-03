@@ -31,6 +31,7 @@ const store = createStore(
   reducer,
   composeEnhancers(applyMiddleware(sagaMiddleware)))
 
+
 sagaMiddleware.run(root)
 
 class App extends React.Component {

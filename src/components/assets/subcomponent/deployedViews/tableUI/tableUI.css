@@ -6,21 +6,19 @@
 
  flex-direction: column;
  }
-
 .RowGroup{
  border-collapse: collapse;
  display: flex;
  flex: 0 0 auto;
 
  flex-direction: row;
+ /*position: relative;*/
  }
-
 .Row{
  display: flex;
  flex-direction: row;
  flex: 1 0 auto;
 }
-
 .DataRowCell{
  display: flex;
  flex-direction: row;
@@ -28,36 +26,11 @@
  font-size: 13px;
  line-height: 16px;
  padding-left: 3px;
- /*text-indent: 5px;*/
 }
-
-.CellVisibleNoBreak {
- white-space: nowrap;
- text-overflow: ellipsis;
-}
-.CellVisible {
- text-overflow: visible;
- overflow-wrap: normal;
- word-break: keep-all;
-}
-
-.CellEllipsis {
- white-space: nowrap;
- overflow: hidden;
- text-overflow: ellipsis;
-}
-
-/* ----- AssetsDeployedTableView ----- */
-/*Navbars*/
-.RegCptyColGroupStyle{
- border-right: 1px white solid;
-}
-
 .DataBlock{
  padding-bottom: 2px;
  border-bottom: 1px solid #979797;
 }
-
 .DataRow{
  border-bottom: 1px solid #979797;
  -webkit-transition: background-color 250ms linear;
@@ -71,6 +44,26 @@
 }
 .DataRow:active{
  background-color: #c3ddf5;
+}
+.CellVisibleNoBreak {
+ white-space: nowrap;
+ text-overflow: ellipsis;
+}
+.Cell_Overflow_Visible {
+ text-overflow: visible;
+ overflow-wrap: normal;
+ word-break: keep-all;
+}
+.CellEllipsis {
+ white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
+}
+
+/* ----- AssetsDeployedTableView ----- */
+/*Navbars*/
+.RegCptyColGroupStyle{
+ border-right: 1px white solid;
 }
 
 .RegCptyHead{
@@ -118,4 +111,14 @@
  background-color: #2b3c4c;
  color: white;
  border-right: 1px solid white
+}
+
+/* Fade Screen */
+.FadeScreen_Anchor{
+ position: relative;
+}
+.FadeScreen{
+ width: 100%; height: 100%;
+ position: absolute;
+ background-color: rgba(255,255,255,0.9);
 }

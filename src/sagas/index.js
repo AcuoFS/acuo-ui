@@ -3,9 +3,7 @@ import { fork, call, put, take, race } from 'redux-saga/effects'
 
 //fetches
 import { FetchMarginCall } from './FetchMarginCall'
-import {
-  checkSpecificServer
-} from './CheckServerConnectivity'
+import { checkSpecificServer } from './CheckServerConnectivity'
 import { FetchNavbarAlerts } from './FetchNavbarAlerts'
 
 //actions
@@ -56,11 +54,12 @@ function* serverHealthChecks() {
   while(true){
     try{
       yield call(delay, 4000)
+      console.groupCollapsed("Server Health Checks")
       yield checkSpecificServer('Proxy')
       yield checkSpecificServer('Margin')
       yield checkSpecificServer('Valuation')
       yield checkSpecificServer('Collateral')
-
+      console.groupEnd("server Health Checks")
       yield call(delay, 16000)
     } catch (error) {
       console.log(error)
@@ -74,7 +73,6 @@ function* sagaNavbarAlerts() {
     try{
       yield take(SAGA_NAVBAR_ALERTS)
       const alerts = yield call(FetchNavbarAlerts)
-      console.log(alerts)
       yield put(updateNavbarAlerts(alerts))
     } catch(error){
       console.log(error)
