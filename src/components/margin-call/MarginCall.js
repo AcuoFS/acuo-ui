@@ -37,7 +37,7 @@ export default class MarginCall extends React.Component {
     // check all
     if (!this.state.isChecked) {
       this.setState({
-        selectedRows: [...this.props.uploadData]
+        selectedRows: [...this.props.uploadData.map(x => x.marginAgreement)]
       })
     }
     // uncheck all
@@ -88,9 +88,10 @@ export default class MarginCall extends React.Component {
 
   onSingleRow(rowObj, actionIsChecked) {
     // check action coming from row
+    console.log(this.state.selectedRows)
     if (actionIsChecked) {
       this.setState({
-        selectedRows: [...this.state.selectedRows, rowObj]
+        selectedRows: [...this.state.selectedRows, rowObj.marginAgreement]
       })
     }
     // uncheck action from row
