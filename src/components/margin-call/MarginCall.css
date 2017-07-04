@@ -50,6 +50,7 @@
   background-color: #FAFAFA;
   border: 1px solid #d7dce0;
   color: #d7dce0;
+  pointer-events: none;
 }
 
 /*table stylings*/

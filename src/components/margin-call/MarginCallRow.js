@@ -14,7 +14,7 @@ export default class MarginCallRow extends React.Component {
     super(props)
 
     this.state = {
-      isChecked: props.isChecked,
+      // isChecked: props.isChecked,
       isExpanded: false
     }
 
@@ -25,17 +25,17 @@ export default class MarginCallRow extends React.Component {
   componentWillReceiveProps(nextProps) {
     // Make sure it's really an update of the checkbox from
     // parent before update of state from prop
-    if (nextProps.isChecked != this.props.isChecked) {
-      this.setState({
-        isChecked: nextProps.isChecked
-      })
-    }
+    // if (nextProps.isChecked != this.props.isChecked) {
+    //   this.setState({
+    //     isChecked: nextProps.isChecked
+    //   })
+    // }
   }
 
   toggleIsChecked() {
     // update parent via callback
-    this.props.propHandlerSingleRow(this.props.row, !this.state.isChecked)
-    this.setState(state => Object.assign({}, state, {isChecked: !state.isChecked}))
+    this.props.propHandlerSingleRow(this.props.row, this.props.selected)
+    // this.setState(state => Object.assign({}, state, {isChecked: !state.isChecked}))
   }
 
   onArrowClick(e) {
@@ -60,7 +60,7 @@ export default class MarginCallRow extends React.Component {
         (this.state.isExpanded ? styles.contentRowExpand : styles.contentRow)}>
           <div className={styles.cell}>
             {/*<input type="checkbox" checked={this.state.isChecked} onChange={this.toggleIsChecked} />*/}
-            <img onClick={this.toggleIsChecked} src={this.state.isChecked ? checkBoxWithTick : checkBox}/>
+            <img onClick={this.toggleIsChecked} src={this.props.selected ? checkBoxWithTick : checkBox}/>
           </div>
           <div className={styles.cell}>{item.legalEntity || '-'}</div>
           <div className={styles.cell}>{item.cptyOrg || '-'}</div>

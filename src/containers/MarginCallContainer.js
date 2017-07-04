@@ -34,9 +34,33 @@ const mapDispatchToProps = dispatch => ({
       console.log('Error: ' + error)
     })
   },
-  requestValuation: () =>{
+  requestValuation: (referenceIDs) =>{
     // dispatch(pollMarginCall(txnID))
     // dispatch(requestingValuationFlag())
+    // console.log(referenceIDs)
+    fetch('http://dev.acuo.com/valuation/acuo/api/swaps/priceSwapTrades/portfolio', {
+      method: 'POST',
+      body: JSON.stringify({"ids": referenceIDs}),
+      headers: {'content-type': 'application/json'},
+      json: true,
+      resolveWithFullResponse: true
+    }).then(response => {
+      if(response.status === 200)
+        alert('valuation successful')
+    })
+  },
+  generateMarginCalls: (referenceIDs) =>{
+    // dispatch(pollMarginCall(txnID))
+    // dispatch(requestingValuationFlag())
+    // console.log(referenceIDs)
+    fetch('http://dev.acuo.com/valuation/acuo/api/swaps/priceSwapTrades/generatemc', {
+      method: 'POST',
+      body: JSON.stringify({"ids": referenceIDs}),
+      headers: {'content-type': 'application/json'},
+      json: true,
+      resolveWithFullResponse: true
+    }).then(response => response.json())
+      .then(json => console.log(json))
   }
 })
 
@@ -44,6 +68,7 @@ const mergeProps = (stateProps, dispatchProps) => ({
   uploadDataFlag: checkUploadData(stateProps.uploadData),
   onRequestValuation: () => {
     // dispatchProps.requestValuation(stateProps.txnID)
+
    },
   ...stateProps, ...dispatchProps
 })
