@@ -19,7 +19,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(MarginCallUploadActions.getMarginCallUpload(uploadData))
   },
   onUpdateMarginCallUpload: (newTotalCallAmt, uploadId) => {
-    dispatch(MarginCallUploadActions.updateMarginCallUpload(newTotalCallAmt,uploadId))
+    dispatch(MarginCallUploadActions.updateMarginCallUpload(newTotalCallAmt, uploadId))
   },
   onPostMarginCallIDs: (idArr) => {
     fetch(POST_MARGIN_CALL_IDS, {
@@ -60,7 +60,7 @@ const mapDispatchToProps = dispatch => ({
       json: true,
       resolveWithFullResponse: true
     }).then(response => response.json())
-      .then(json => console.log(json))
+      .then(json => dispatch(MarginCallUploadActions.marginCallGenerated(json)))
   }
 })
 
