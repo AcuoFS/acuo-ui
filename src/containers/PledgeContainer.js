@@ -155,12 +155,12 @@ const mapDispatchToProps = dispatch => ({
         // Refresh selections
 
         //TODO: REWORK ALL OF THESE
-        setTimeout(() => fetch(MARGIN_SELECTION_URL).then(response => {
+        fetch(MARGIN_SELECTION_URL).then(response => {
           return response.json()
         }).then(obj => {
           dispatch(initSelection(obj.items))
           dispatch(clearPendingAllocation())
-        }), 1500)
+        })
         dispatch(sagaNavbarAlerts())
 
         fetch(COLLATERAL_URL).then((response) => {
