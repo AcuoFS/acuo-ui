@@ -44,10 +44,8 @@ const mapDispatchToProps = dispatch => ({
       headers: {'content-type': 'application/json'},
       json: true,
       resolveWithFullResponse: true
-    }).then(response => {
-      if(response.status === 200)
-        alert('valuation successful')
-    })
+    }).then(response => response.json())
+      .then(json => dispatch(MarginCallUploadActions.marginCallGenerated(json)))
   },
   generateMarginCalls: (referenceIDs) =>{
     // dispatch(pollMarginCall(txnID))
