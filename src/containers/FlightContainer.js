@@ -7,11 +7,12 @@ import flightGroupArrival from '../components/assets-flight/mockFlightsArrival'
 import { search } from "../actions/DeployedActions.js"
 
 const mapStateToProps = state => {
- return { departures: state.DeployedReducer.get('departures').toJS(),
-         arrivals: flightGroupArrival,
-         arrivals_searchText: state.DeployedReducer.get('arrivals_searchText'),
-         departures_searchText: state.DeployedReducer.get('departures_searchText'),
-         departureDates: getUniqueDates(state.DeployedReducer.get('departures').toJS())
+ return {
+          departures: state.DeployedReducer.get('departures').toJS(),
+          arrivals: flightGroupArrival,
+          arrivals_searchText: state.DeployedReducer.get('arrivals_searchText'),
+          departures_searchText: state.DeployedReducer.get('departures_searchText'),
+          departureDatesList: state.DeployedReducer.get('departureDatesList').toJS().sort((a, b) => a.min > b.min)
         }
 }
 
@@ -21,10 +22,6 @@ const mapDispatchToProps = dispatch => {
     departureSearch: (searchText)=>{ dispatch(search.departures(searchText))}
   }
 }
-
-const getUniqueDates = departuresList =>
-  _.reduce(departuresList, (sum, x) => _.union(sum, [(new Date(x.header.time).getDate()) + ' ' + monthNames[(new Date(x.header.time).getMonth())]]), [])
-
 
 const FlightContainer = connect(
   mapStateToProps,

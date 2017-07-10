@@ -37,7 +37,10 @@ export default class FlightItem extends React.Component {
           <img className={styles.iconStyle} src={imgUrl}/>
         </div>
         <div className={styles.headerContainer} >
-          <div className={styles.headerDates}>Dates</div>
+          <div className={styles.headerDates}>
+            {this.props.departureDatesList && this.props.departureDatesList.map((x, i) =>
+              <div key={i}>{x.label}</div>)}
+          </div>
           <input className={styles.headerSearch}
                  type="text"
                  placeholder="Search"
