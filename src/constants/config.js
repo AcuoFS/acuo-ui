@@ -10,7 +10,7 @@ var configJson = {
   MARGIN_SELECTION_URL: '/proxy/pledge/init-selection',
   ALLOCATE_COLLATERALS_URL: '/proxy/pledge/allocate-selection',
   ALLOCATE_COLLATERALS_URL_NEW: '/proxy/pledge/allocate-selection-new',
-  PLEDGE_ALLOCATIONS: '/proxy/pledge/pledge-allocation',
+  PLEDGE_ALLOCATIONS: 'http://localhost:8081/pledge/pledge-allocation',
   UPLOAD_FILE_URL: 'http://localhost:8081/upload',
   // Please add the trailing / for recon single item (ok button)
   RECON_DATA_URL: '<%= baseUrl %>/margin/acuo/api/margin/reconcile/',
