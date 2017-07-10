@@ -39,7 +39,10 @@ export default class FlightItem extends React.Component {
         <div className={styles.headerContainer} >
           <div className={styles.headerDates}>
             {this.props.departureDatesList && this.props.departureDatesList.map((x, i) =>
-              <div key={i}>{x.label}</div>)}
+              <div
+                className={styles.date + ' ' + (this.props.selectedDate.label === x.label ? styles.active : '')}
+                onClick={() => this.props.onUpdateSelectedDepartureDate(x)}
+                key={i}>{x.label}</div>)}
           </div>
           <input className={styles.headerSearch}
                  type="text"

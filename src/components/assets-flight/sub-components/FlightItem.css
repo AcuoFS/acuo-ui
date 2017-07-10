@@ -15,6 +15,7 @@
 
 .flightTitle {
   display: flex;
+  margin-bottom: 10px;
 }
 
 .flightTitleText {
@@ -48,9 +49,23 @@
   margin-left: 8px;
 }
 
-.headerDates div {
+.date {
   display: inline-block;
-  font-size: 14px;
+  font-size: 16px;
   color: #979797;
-  line-height: 17px;
+  line-height: 19px;
+  padding: 10px 0 3px;
+  margin-right: 10px;
+  vertical-align: bottom;
+  border-bottom: 2px solid white;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.date:hover, .date.active{
+  color: #315271;
+  border-bottom: 2px solid #315271;
 }

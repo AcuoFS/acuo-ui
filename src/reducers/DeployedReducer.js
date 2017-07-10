@@ -1,5 +1,6 @@
 import {
-  INIT_DEPARTURES
+  INIT_DEPARTURES,
+  UPDATE_SELECTED_DEPARTURE_DATE
 } from '../constants/ActionTypes'
 import {List, Map, fromJS} from 'immutable'
 import _ from 'lodash'
@@ -11,7 +12,8 @@ const INITIAL_STATE = Map({
   arrivals: List(),
   arrivals_searchText: "",
   departures_searchText: "",
-  departureDatesList: List()
+  departureDatesList: List(),
+  selectedDepartureDate: Map({'label': ''})
 })
 
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -28,11 +30,13 @@ const DeployedReducer = (state = INITIAL_STATE, action) => {
                 "label": (new Date(x.header.time).getDate()) + ' ' + monthNames[(new Date(x.header.time).getMonth())],
                 "min": clearTime(new Date(x.header.time)).getTime(),
                 "max": clearTime(new Date(x.header.time)).setHours(23, 59, 59, 99)
-              }], _.isEqual), []))))
+              }], _.isEqual), []).sort((a, b) => a.min > b.min))))
     case "DEPARTURES_SEARCHTEXT":
       return state.set('departures_searchText', fromJS(action.payload))
     case "ARRIVALS_SEARCHTEXT":
       return state.set('arrivals_searchText', fromJS(action.payload))
+    case UPDATE_SELECTED_DEPARTURE_DATE:
+      return state.set('selectedDepartureDate', fromJS(action.date))
     default:
       return state
   }
