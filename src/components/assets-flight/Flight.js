@@ -64,10 +64,10 @@ export default class Flight extends React.Component{
 
  render(){
 
-  let { departures, arrivals, arrivals_searchText, departures_searchText } = this.props
+  let { arrivals, arrivals_searchText, departures_searchText, departureDatesList, filteredDepartures, selectedDepartureDate, onUpdateSelectedDepartureDate } = this.props
 
   let searchedArrivals = Search_DepartureArrival(arrivals, arrivals_searchText)
-  let searchedDepartures = Search_DepartureArrival(departures, departures_searchText)
+  let searchedDepartures = Search_DepartureArrival(filteredDepartures, departures_searchText)
 
   let arrivalActions = { arrivalSearch:  this.props.arrivalSearch}
   let departureActions = { departureSearch: this.props.departureSearch}
@@ -78,7 +78,10 @@ export default class Flight extends React.Component{
      <div className={styles.flight}>
         <FlightItem name={DEPARTURES}
                     data={{searchedDepartures, departures_searchText}}
-                    action={departureActions}  />   </div>
+                    action={departureActions}
+                    departureDatesList={departureDatesList}
+                    selectedDate={selectedDepartureDate}
+                    onUpdateSelectedDepartureDate={onUpdateSelectedDepartureDate}/>   </div>
 
      <div className={styles.flight}>
         <FlightItem name={ARRIVALS}
