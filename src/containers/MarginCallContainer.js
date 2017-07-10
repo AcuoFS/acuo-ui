@@ -19,7 +19,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(MarginCallUploadActions.getMarginCallUpload(uploadData))
   },
   onUpdateMarginCallUpload: (newTotalCallAmt, uploadId) => {
-    dispatch(MarginCallUploadActions.updateMarginCallUpload(newTotalCallAmt,uploadId))
+    dispatch(MarginCallUploadActions.updateMarginCallUpload(newTotalCallAmt, uploadId))
   },
   onPostMarginCallIDs: (idArr) => {
     fetch(POST_MARGIN_CALL_IDS, {
@@ -33,11 +33,41 @@ const mapDispatchToProps = dispatch => ({
     }).catch(error => {
       console.log('Error: ' + error)
     })
+  },
+  requestValuation: (referenceIDs) =>{
+    // dispatch(pollMarginCall(txnID))
+    // dispatch(requestingValuationFlag())
+    // console.log(referenceIDs)
+    fetch('http://dev.acuo.com/valuation/acuo/api/swaps/priceSwapTrades/portfolio', {
+      method: 'POST',
+      body: JSON.stringify({"ids": referenceIDs}),
+      headers: {'content-type': 'application/json'},
+      json: true,
+      resolveWithFullResponse: true
+    }).then(response => response.json())
+      .then(json => dispatch(MarginCallUploadActions.marginCallGenerated(json)))
+  },
+  generateMarginCalls: (referenceIDs) =>{
+    // dispatch(pollMarginCall(txnID))
+    // dispatch(requestingValuationFlag())
+    // console.log(referenceIDs)
+    fetch('http://dev.acuo.com/valuation/acuo/api/swaps/priceSwapTrades/generatemc', {
+      method: 'POST',
+      body: JSON.stringify({"ids": referenceIDs}),
+      headers: {'content-type': 'application/json'},
+      json: true,
+      resolveWithFullResponse: true
+    }).then(response => response.json())
+      .then(json => dispatch(MarginCallUploadActions.marginCallGenerated(json)))
   }
 })
 
 const mergeProps = (stateProps, dispatchProps) => ({
   uploadDataFlag: checkUploadData(stateProps.uploadData),
+  onRequestValuation: () => {
+    // dispatchProps.requestValuation(stateProps.txnID)
+
+   },
   ...stateProps, ...dispatchProps
 })
 
