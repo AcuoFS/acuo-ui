@@ -38,7 +38,7 @@ const mapDispatchToProps = dispatch => ({
     // dispatch(pollMarginCall(txnID))
     // dispatch(requestingValuationFlag())
     // console.log(referenceIDs)
-    fetch('http://dev.acuo.com/valuation/acuo/api/swaps/priceSwapTrades/portfolio', {
+    fetch('http://dev.acuo.com/valuation/acuo/api/calls/split/portfolios', {
       method: 'POST',
       body: JSON.stringify({"ids": referenceIDs}),
       headers: {'content-type': 'application/json'},
@@ -51,7 +51,7 @@ const mapDispatchToProps = dispatch => ({
     // dispatch(pollMarginCall(txnID))
     // dispatch(requestingValuationFlag())
     // console.log(referenceIDs)
-    fetch('http://dev.acuo.com/valuation/acuo/api/swaps/priceSwapTrades/generatemc', {
+    fetch('http://dev.acuo.com/valuation/acuo/api/calls/generate/portfolios', {
       method: 'POST',
       body: JSON.stringify({"ids": referenceIDs}),
       headers: {'content-type': 'application/json'},
