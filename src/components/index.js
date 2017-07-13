@@ -18,6 +18,7 @@ import Copyright from './copyright/Copyright'
 import LoginComponent from './login/Login'
 import TwoFA_Component from './twoFA/TwoFA'
 import NotificationComponent from './notification-system/Notification'
+import AppWrapperComponent from './AppWrapper/AppWrapper'
 
 export {
   GraphComponent,
@@ -39,5 +40,6 @@ export {
   Copyright,
   LoginComponent,
   TwoFA_Component,
-  NotificationComponent
+  NotificationComponent,
+  AppWrapperComponent
 }
