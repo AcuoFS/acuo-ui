@@ -1,5 +1,9 @@
 @value acuoGrey from './../../static/css-components/colors.css';
 
+.optimisationWidgetHolder {
+  flex: 1;
+}
+
 #optSetting {
   /*display: inline-block;*/
   /*width: 600px;*/

@@ -1,9 +1,12 @@
 .blurWrapper {
   position: relative;
+  height: 100%;
 }
 
 .blurrer{
   transition: filter 0.5s ease;
+  height: 100%;
+
 }
 
 .blur {
