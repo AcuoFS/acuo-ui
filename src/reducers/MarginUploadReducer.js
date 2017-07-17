@@ -4,7 +4,8 @@ import {
   UPDATE_TXN_ID,
   REQUESTING_VALUATION,
   UPLOADING_PORTFOLIO,
-  MARGIN_CALL_GENERATED
+  MARGIN_CALL_GENERATED,
+  UPDATE_REQUESTING_STATE
 } from '../constants/ActionTypes'
 import {List, Map, fromJS} from 'immutable'
 
@@ -12,7 +13,9 @@ const initialState = Map({
   uploadData: List(),
   txnID: '',
   requestingValuation: false,
-  uploading: false
+  uploading: false,
+  requestingMCGenerationOrValuation: false,
+
 })
 
 const MarginUploadReducer = (state = initialState, action) => {
@@ -24,7 +27,7 @@ const MarginUploadReducer = (state = initialState, action) => {
       return state.set('uploadData',
         state.get('uploadData').map(
           uploadRecord => {
-            if (uploadRecord.get('mgnCallUploadId') == action.uploadId) {
+            if (uploadRecord.get('mgnCallUploadId') === action.uploadId) {
               return uploadRecord.set('totalCallAmount', action.newTotalCallAmt)
             } else {
               return uploadRecord
@@ -41,35 +44,12 @@ const MarginUploadReducer = (state = initialState, action) => {
     case UPLOADING_PORTFOLIO:
       return state.withMutations((state) => state.set('uploading', true).set('uploadData', List()))
 
+    case UPDATE_REQUESTING_STATE:
+      return state.set('requestingMCGenerationOrValuation', action.flag)
+
     case MARGIN_CALL_GENERATED:
       console.log(action.updatedPortfolios)
-
-      // "2017/07/04"
-      // callType
-      //   :
-      //   "Variation"
-      // currency
-      //   :
-      //   "NZD"
-      // exposure
-      //   :
-      //   "0.00"
-      // marginAgreement
-      //   :
-      //   "a22"
-      // pendingCollateral
-      //   :
-      //   "0.00"
-      // referenceIdentifier
-      //   :
-      //   "a3f1aed9"
-      // totalCallAmount
-      //   :
-      //   "0.00"
-      // valuationDate
-      //   :
-      //   "2017/07/04"
-      return state.set('uploadData', state.get('uploadData').map(x => {
+      return state.withMutations(state => state.set('uploadData', state.get('uploadData').map(x => {
         const flag = action.updatedPortfolios.uploadMarginCallDetails.filter(y => {
           return x.get('marginAgreement') === y.marginAgreement
         })
@@ -77,7 +57,7 @@ const MarginUploadReducer = (state = initialState, action) => {
           return fromJS(flag[0])
         else
           return x
-      }))
+      })).set('requestingMCGenerationOrValuation', false))
 
     default:
       return state
