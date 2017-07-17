@@ -109,7 +109,7 @@ export default class MarginCall extends React.Component {
 
   render() {
 
-    const { uploadDataFlag, requestingValuation, onPostMarginCallIDs, onRequestValuation, requestValuation, generateMarginCalls } = this.props
+    const { uploadDataFlag, requestingValuation, onPostMarginCallIDs, onRequestValuation, requestValuation, generateMarginCalls, requestingMCGenerationOrValuation } = this.props
 
     return (
       <div className={styles.container + ' ' + (requestingValuation || uploadDataFlag ? '' : styles.hidden)}>
@@ -142,7 +142,7 @@ export default class MarginCall extends React.Component {
             Send Margin Calls
           </div>
         </div>
-        <div className={styles.content}>
+        <div className={styles.content + ' ' + (requestingMCGenerationOrValuation ? styles.requesting : '')}>
           <div className={styles.masterRow}>
             <div className={styles.cell}>
               {/*<input type="checkbox" checked={this.state.isChecked} onChange={this.toggleIsChecked} />*/}

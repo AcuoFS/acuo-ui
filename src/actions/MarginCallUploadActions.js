@@ -5,7 +5,8 @@ import {
   POLL_MARGIN_CALL,
   REQUESTING_VALUATION,
   UPLOADING_PORTFOLIO,
-  MARGIN_CALL_GENERATED
+  MARGIN_CALL_GENERATED,
+  UPDATE_REQUESTING_STATE
 } from '../constants/ActionTypes'
 
 export const getMarginCallUpload = (uploadData) => ({
@@ -40,4 +41,9 @@ export const uploadingPortfolioFlag = () => ({
 export const marginCallGenerated = (updatedPortfolios) => ({
   type: MARGIN_CALL_GENERATED,
   updatedPortfolios
+})
+
+export const updateRequestState = flag => ({
+  type: UPDATE_REQUESTING_STATE,
+  flag
 })
