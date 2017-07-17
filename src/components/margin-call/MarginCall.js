@@ -37,7 +37,7 @@ export default class MarginCall extends React.Component {
     // check all
     if (!this.state.isChecked) {
       this.setState({
-        selectedRows: [...this.props.uploadData]
+        selectedRows: [...this.props.uploadData.map(x => x.referenceIdentifier)]
       })
     }
     // uncheck all
@@ -56,7 +56,7 @@ export default class MarginCall extends React.Component {
   }
 
   toggleRow(arr, index) {
-    console.log(arr.length)
+    //console.log(arr.length)
     if (arr.length) {
       if (arr.indexOf(index) > -1)
         console.log(arr.splice(arr.indexOf(index), 1))
@@ -88,16 +88,17 @@ export default class MarginCall extends React.Component {
 
   onSingleRow(rowObj, actionIsChecked) {
     // check action coming from row
-    if (actionIsChecked) {
+    //console.log(rowObj)
+    if (!actionIsChecked) {
       this.setState({
-        selectedRows: [...this.state.selectedRows, rowObj]
+        selectedRows: [...this.state.selectedRows, rowObj.referenceIdentifier]
       })
     }
     // uncheck action from row
     else {
       this.setState({
         selectedRows: this.state.selectedRows.filter(row =>
-        row.mgnCallUploadId != rowObj.mgnCallUploadId)
+        row !== rowObj.referenceIdentifier)
       })
     }
   }
@@ -108,7 +109,7 @@ export default class MarginCall extends React.Component {
 
   render() {
 
-    const { uploadDataFlag, requestingValuation, onPostMarginCallIDs } = this.props
+    const { uploadDataFlag, requestingValuation, onPostMarginCallIDs, onRequestValuation, requestValuation, generateMarginCalls } = this.props
 
     return (
       <div className={styles.container + ' ' + (requestingValuation || uploadDataFlag ? '' : styles.hidden)}>
@@ -124,8 +125,21 @@ export default class MarginCall extends React.Component {
 
         <div className={styles.header}>
           <div className={styles.title}>Margin Call</div>
-          <div className={styles.button + ' ' + (this.state.selectedRows.length <= 0 ? styles.disabled : '')} disabled={this.state.selectedRows.length <= 0} onClick={() => this.onSendButton(this.state.selectedRows, onPostMarginCallIDs)}>
-            Send selected Margin Calls
+          <div className={styles.button + ' ' + (this.state.selectedRows.length <= 0 ? styles.disabled : '')}
+               disabled={this.state.selectedRows.length <= 0}
+               onClick={() => requestValuation(this.state.selectedRows)}>
+            Request Valuation
+          </div>
+          <div className={styles.button + ' ' + (this.state.selectedRows.length <= 0 ? styles.disabled : '')}
+               disabled={this.state.selectedRows.length <= 0}
+               onClick={() => generateMarginCalls(this.state.selectedRows)}>
+            Generate Margin Calls
+          </div>
+          <div className={styles.button + ' ' + (true ? styles.disabled : '')}
+               //disabled={this.state.selectedRows.length <= 0}
+               disabled={true}
+               onClick={() => this.onSendButton(this.state.selectedRows, onPostMarginCallIDs)}>
+            Send Margin Calls
           </div>
         </div>
         <div className={styles.content}>
@@ -152,13 +166,15 @@ export default class MarginCall extends React.Component {
           </div>
 
           { uploadDataFlag ?
-            this.props.uploadData.map((item, i) =>
-              <MarginCallRow spillContents={this.openRow} isChecked={this.state.isChecked}
+            this.props.uploadData.map((item, i) => {
+            //console.log(this.state.selectedRows.filter(x => x === item.referenceIdentifier))
+              return <MarginCallRow spillContents={this.openRow} isChecked={this.state.isChecked}
                              isOpen={this.state.openedRows.indexOf(1) > -1}
                              propHandlerOnTotalMargin={this.onTotalCallAmt}
                              propMarginCallUploadData={this.props.uploadData} row={item}
                              propHandlerSingleRow={this.onSingleRow}
-                             key={i}/>
+                             key={i}
+                             selected={!!this.state.selectedRows.filter(x => x === item.referenceIdentifier).length}/>}
             )
             :
             <div className={styles.loadingContainer}>

@@ -25,10 +25,10 @@ import { sagaNavbarAlerts } from './../actions/CommonActions'
 import filterItems from '../utils/filterItems'
 
 const determineCheckboxStatus = (selectionSize, pendingAllocationSize) => {
-  if(pendingAllocationSize >= selectionSize)
-    return ["./images/pledge/checkboxwithtick.png", "All"]
-  else if(pendingAllocationSize === 0 && selectionSize !== 0)
+  if(!selectionSize || (pendingAllocationSize === 0 && selectionSize !== 0))
     return ["./images/pledge/checkbox.png", "None"]
+  else if(pendingAllocationSize >= selectionSize)
+    return ["./images/pledge/checkboxwithtick.png", "All"]
   else
     return ["./images/common/minusbox.png", "Selected"]
 }
@@ -66,7 +66,7 @@ const mapStateToProps = state => ({
       state.PledgeReducer.getIn(['pledgeData', 'selection']).toJS(),
       state.PledgeReducer.getIn(['pledgeData', 'filters']).toJS())),
   pendingAllocation: state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation']),
-  sliderCheckbox: determineCheckboxStatus(checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'selection'])).size, checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation'])).size ),
+  sliderCheckbox: determineCheckboxStatus(checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'selection'])).size, checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation'])).size),
   scenarioAnalysis: fetchAnalysisData()
 })
 
@@ -155,12 +155,12 @@ const mapDispatchToProps = dispatch => ({
         // Refresh selections
 
         //TODO: REWORK ALL OF THESE
-        setTimeout(() => fetch(MARGIN_SELECTION_URL).then(response => {
+        fetch(MARGIN_SELECTION_URL).then(response => {
           return response.json()
         }).then(obj => {
           dispatch(initSelection(obj.items))
           dispatch(clearPendingAllocation())
-        }), 1000)
+        })
         dispatch(sagaNavbarAlerts())
 
         fetch(COLLATERAL_URL).then((response) => {

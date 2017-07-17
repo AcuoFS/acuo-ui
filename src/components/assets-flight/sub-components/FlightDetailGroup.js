@@ -20,6 +20,14 @@ export default class FlightDetailGroup extends React.Component {
     })
   }
 
+  getTime(time) {
+    console.log(time.length)
+    if(time.length > 5)
+      return new Date(time).getHours() + ':' + new Date(time).getMinutes()
+    else
+      return time
+  }
+
   render() {
     const {
       propHeaderDetail,
@@ -48,7 +56,7 @@ export default class FlightDetailGroup extends React.Component {
         <FlightDetailRow
           propIsGroupHeader
           propIsGroupExpanded={this.state.isExpanded}
-          propTime={propHeaderDetail.time}
+          propTime={this.getTime(propHeaderDetail.time)}
           propAsset={propHeaderDetail.agreement}
           propFrom={propHeaderDetail.from}
           propTo={propHeaderDetail.to}
