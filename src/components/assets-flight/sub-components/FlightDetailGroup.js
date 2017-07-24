@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import FlightDetailRow from './FlightDetailRow'
 import styles from './FlightItemTable.css'
+import transitions from './transition.css'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
 
 export default class FlightDetailGroup extends React.Component {
   constructor(props) {
@@ -52,7 +54,14 @@ export default class FlightDetailGroup extends React.Component {
     }
 
     return (
-      <div className={styles.flightItemTableRowGroup}>
+      <ReactCSSTransitionGroup
+        component="div"
+        className={styles.flightItemTableRowGroup}
+        transitionName={transitions}
+        transitionAppear={true}
+        transitionAppearTimeout={500}
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={300}>
         <FlightDetailRow
           propIsGroupHeader
           propIsGroupExpanded={this.state.isExpanded}
@@ -67,7 +76,7 @@ export default class FlightDetailGroup extends React.Component {
 
         {flightDetailList}
 
-      </div>
+      </ReactCSSTransitionGroup>
     )
   }
 }

@@ -1,7 +1,7 @@
 .assetsPanelFrame{
-  background-color: #FFFFFF;
+  background-color: #FFFFFF ;
   box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
-  border: 1px solid #EEEEEE;
+  border: 1px solid #EEEEEE ;
   border-radius: 8px;
   padding: 10px;
 
@@ -9,18 +9,26 @@
   flex-direction: column;
   flex: 1 0 auto;
 
-  height: 518px;
+  max-height: 518px;
+
+  -webkit-transition: max-height 0.3s; /* For Safari 3.1 to 6.0 */
+  transition: max-height 0.3s;
+
 }
 .assetsPanelFrameExpandedVertically{
-  background-color: #FFFFFF;
+  background-color: #FFFFFF ;
   box-shadow: 2px 3px 5px 0 rgba(0,0,0,0.5);
-  border: 1px solid #EEEEEE;
+  border: 1px solid #EEEEEE ;
   border-radius: 8px;
   padding: 10px;
 
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
+
+  -webkit-transition: max-height 1s; /* For Safari 3.1 to 6.0 */
+  transition: max-height 1s;
+  max-height: 5000px;
 }
 
 .assetsPanelHeader{

@@ -16,6 +16,8 @@ export default class DzComponent extends React.Component {
     const {propNoOfFiles, propTemplate, propPostUrl} = props
 
     this.djsConfig = {
+      uploadMultiple: true,
+      paramName: 'portfolios',
       autoProcessQueue: false
       , maxFiles: propNoOfFiles
       , parallelUploads: propNoOfFiles
