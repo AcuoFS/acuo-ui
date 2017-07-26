@@ -20,15 +20,15 @@ export const updateMarginCallUpload = (newTotalCallAmt, uploadId) => ({
   uploadId
 })
 
-export const updateTxnID = (txnID) => ({
-  type: UPDATE_TXN_ID,
-  txnID
-})
+// export const updateTxnID = (txnID) => ({
+//   type: UPDATE_TXN_ID,
+//   txnID
+// })
 
-export const pollMarginCall = (txnID) => ({
-  type: POLL_MARGIN_CALL,
-  txnID
-})
+// export const pollMarginCall = (txnID) => ({
+//   type: POLL_MARGIN_CALL,
+//   txnID
+// })
 
 export const requestingValuationFlag = () => ({
   type: REQUESTING_VALUATION
