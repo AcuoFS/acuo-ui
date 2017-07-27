@@ -1,7 +1,6 @@
 import {
   GET_MARGIN_CALL_UPLOAD,
   UPDATE_MARGIN_CALL_UPLOAD,
-  UPDATE_TXN_ID,
   REQUESTING_VALUATION,
   UPLOADING_PORTFOLIO,
   MARGIN_CALL_GENERATED,
@@ -34,9 +33,6 @@ const MarginUploadReducer = (state = initialState, action) => {
             }
           }
         ))
-
-    case UPDATE_TXN_ID:
-      return state.withMutations((state) => state.set('txnID', fromJS(action.txnID)).set('uploading', false))
 
     case REQUESTING_VALUATION:
       return state.set('requestingValuation', true)

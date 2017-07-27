@@ -393,8 +393,8 @@ export default function mainReducer(state = INITIAL_STATE, action, store = 'data
     case 'SELECT_ITEM':
       return selectItem(state, action)
 
-    case 'RECON_ITEM':
-      return reconItem(state, action)
+    // case 'RECON_ITEM':
+    //   return reconItem(state, action)
   }
 
   return state
