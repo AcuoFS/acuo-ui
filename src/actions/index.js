@@ -64,6 +64,11 @@ export const reconItem = (id) => ({
   GUID: id
 })
 
+export const reconDispute = (disputeObj) => ({
+  type: ActionTypes.RECON_DISPUTE_SUBMIT,
+  disputeObj
+})
+
 //pledgeReducer stuffs, to be split later
 export const initOptimisationSettings = (settings) => ({
   type: ActionTypes.INIT_OPTIMISATION_SETTINGS,
