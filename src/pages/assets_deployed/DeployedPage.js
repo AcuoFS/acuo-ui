@@ -5,17 +5,17 @@ import {
   FlightContainer,
   AssetsContainer
 } from '../../containers'
-import Copyright from '../../components/copyright/Copyright.js'
-import { AssetsPanel } from '../../actions/AssetsActions.js'
+import { fetchDepartures } from './../../actions/DeployedActions'
+// import Copyright from '../../components/copyright/Copyright.js'
+// import { AssetsPanel } from '../../actions/AssetsActions.js'
 import Styles from "./DeployedPage.css"
-import { initDepartures } from '../../actions/DeployedActions'
-import { FETCH_DEPLOYED_DEPARTURES } from './../../constants/APIcalls'
+// import { initDepartures } from '../../actions/DeployedActions'
+// import { FETCH_DEPLOYED_DEPARTURES } from './../../constants/APIcalls'
 import { hashHistory } from 'react-router'
 
 class DeployedPage extends React.Component {
   constructor(props){
     super(props)
-    this.props.initDepartures()
   }
   componentWillMount(){
     if(localStorage.loginAt == undefined || localStorage.loginAt < Date.now()){ hashHistory.push('/') }
@@ -39,15 +39,9 @@ const mapStateToProps = state => {
   return { test: 0 }
 }
 
-const mapDispatchToProps = dispatch => ({
-  initDepartures: () => {
-    fetch(FETCH_DEPLOYED_DEPARTURES).then((response) => {
-      return response.json()
-    }).then((obj) => {
-      dispatch(initDepartures(obj))
-    })
-  }
-})
+const mapDispatchToProps = dispatch => {
+  dispatch(fetchDepartures())
+}
 
 const DeployedPageContainer = connect(
   mapStateToProps,

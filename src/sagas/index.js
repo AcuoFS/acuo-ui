@@ -6,6 +6,7 @@ import { checkSpecificServer } from './CheckServerConnectivitySaga'
 import { FetchNavbarAlerts } from './FetchNavbarAlertsSaga'
 import { ReconItemSaga } from './ReconItemSaga'
 import { ReconDisputeSaga } from './ReconDisputeSaga'
+import { FetchDeparturesSaga } from './FetchDeparturesSaga'
 
 //actions
 import {
@@ -13,12 +14,14 @@ import {
   sagaNavbarAlerts
 } from './../actions/CommonActions'
 import { reconInitState } from './../actions'
+import { initDepartures } from './../actions/DeployedActions'
 
 //action types
 import {
   SAGA_NAVBAR_ALERTS,
   RECON_ITEM,
-  RECON_DISPUTE_SUBMIT
+  RECON_DISPUTE_SUBMIT,
+  FETCH_DEPARTURES
 } from '../constants/ActionTypes'
 
 function* serverHealthChecks() {
@@ -84,12 +87,26 @@ function* onReconDispute() {
   }
 }
 
+function* onFetchDepatures() {
+  while(true){
+    try{
+      yield take(FETCH_DEPARTURES)
+      const obj = yield call(FetchDeparturesSaga)
+      yield put(initDepartures(obj))
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
 export default function* root() {
   // console.log('root')
   yield [
     fork(serverHealthChecks),
     fork(navbarAlerts),
     fork(onReconcile),
-    fork(onReconDispute)
+    fork(onReconDispute),
+    fork(onFetchDepatures)
   ]
 }
