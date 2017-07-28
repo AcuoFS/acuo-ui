@@ -54,9 +54,9 @@ function* onReconcile() {
   while(true){
     try{
       const action = yield take(RECON_ITEM)
-      console.log(action.GUID)
+      // console.log(action.GUID)
       const result = yield call(ReconItemSaga, action.GUID)
-      console.log(result)
+      // console.log(result)
       yield put(reconInitState(result.items))
       yield put(sagaNavbarAlerts())
     } catch(error){

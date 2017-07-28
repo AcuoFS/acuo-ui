@@ -13,7 +13,8 @@ var configJson = {
   PLEDGE_ALLOCATIONS: '/proxy/pledge/pledge-allocation',
   UPLOAD_FILE_URL: 'http://localhost:8081/upload',
   // Please add the trailing / for recon single item (ok button)
-  RECON_DATA_URL: '<%= baseUrl %>/margin/acuo/api/margin/reconcile/',
+  // RECON_DATA_URL: '<%= baseUrl %>/margin/acuo/api/margin/reconcile/',
+  RECON_DATA_URL: 'http://localhost:8081/recon/reconcile',
   REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
   UNMATCHED_PORTFOLIO_URL: '/proxy/unmatched',
   SEND_RECON_DISPUTE_URL: '/proxy/recon/disputeStatement',

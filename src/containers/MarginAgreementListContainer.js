@@ -35,6 +35,7 @@ const mapDispatchToProps = dispatch => ({
   onReconItem : (e) => {
     // console.log('GET URL: ' + RECON_DATA_URL + e.currentTarget.dataset.ref)
     //new recon entire margin call with one get api
+    console.log(e.currentTarget.dataset.ref)
     dispatch(reconItem(e.currentTarget.dataset.ref))
     // fetch(RECON_DATA_URL + e.currentTarget.dataset.ref, {
     //   method: 'GET'

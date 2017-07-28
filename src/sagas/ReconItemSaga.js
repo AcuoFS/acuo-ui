@@ -7,19 +7,20 @@ export const ReconItemSaga = (params) =>{
 
   // let result = {}
 
-  return fetch(RECON_DATA_URL + params, {
-    method: 'GET'
+  return fetch(RECON_DATA_URL, {
+    method: 'post',
+    body: JSON.stringify({params})
   }).then(response => {
     // console.log('response ' + JSON.stringify(response))
-    console.log(response)
+    // console.log(response)
     return response
   }).then(obj => {
     // console.log('refreshing recon data...')
     return fetch(RECON_URL).then((response) => {
-      console.log(response)
+      // console.log(response)
       return response.json()
     }).then((obj) => {
-      console.log(obj)
+      // console.log(obj)
       // console.log('Data fetched: ' + obj)
       // const {items} = obj
       // dispatch(reconInitState(items))
