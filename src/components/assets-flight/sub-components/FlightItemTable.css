@@ -41,7 +41,7 @@
 
 /* Agreement */
 .flightItemTableHeader div:nth-child(2) {
-  width: 27%;
+  width: 26%;
 }
 
 /* From */
@@ -61,17 +61,22 @@
 
 /* CCY */
 .flightItemTableHeader div:nth-child(6) {
+  width: 5%
+}
+
+/* haircut */
+.flightItemTableHeader div:nth-child(7) {
   width: 6%
 }
 
 /* Status */
-.flightItemTableHeader div:nth-child(7) {
-  width: 13%;
+.flightItemTableHeader div:nth-child(8) {
+  width: 10%;
 }
 
 /* PlusMinus */
-.flightItemTableHeader div:nth-child(8) {
-  width: 4%;
+.flightItemTableHeader div:nth-child(9) {
+  width: 3%;
 }
 
 .flightItemTableRowGroup {
