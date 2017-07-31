@@ -263,3 +263,12 @@
   top: -9px;
   left: 8px;
 }
+
+.requesting {
+  opacity: 0.2;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

@@ -2,7 +2,6 @@
   position: relative;
   padding: 20px;
   margin: 0 auto;
-  max-width: 1440px;
 }
 
 .secDivider {
@@ -77,6 +76,7 @@
 #pleStatus {
   margin: 20px 20px 30px 20px;
   flex: 1;
+  max-width: 650px;
 }
 
 #pleStatus .panelTitle {

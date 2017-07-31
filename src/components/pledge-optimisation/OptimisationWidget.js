@@ -96,7 +96,7 @@ export default class OptimisationWidget extends React.Component {
       scenarioAnalysis
     } = this.props
 
-    return <div>
+    return <div className={styles.optimisationWidgetHolder}>
     <div className={sharedStyles.panel} id={styles.optSetting}>
       <div className={sharedStyles.panelTitle}>Optimization Setting <img src={'./images/pledge/locked.png'}/></div>
       <div className={styles.tabHolder}>

@@ -37,7 +37,7 @@ export default class MarginCall extends React.Component {
     // check all
     if (!this.state.isChecked) {
       this.setState({
-        selectedRows: [...this.props.uploadData.map(x => x.referenceIdentifier)]
+        selectedRows: [...this.props.uploadData.map(x => x.portfolioId)]
       })
     }
     // uncheck all
@@ -91,25 +91,25 @@ export default class MarginCall extends React.Component {
     //console.log(rowObj)
     if (!actionIsChecked) {
       this.setState({
-        selectedRows: [...this.state.selectedRows, rowObj.referenceIdentifier]
+        selectedRows: [...this.state.selectedRows, rowObj.portfolioId]
       })
     }
     // uncheck action from row
     else {
       this.setState({
         selectedRows: this.state.selectedRows.filter(row =>
-        row !== rowObj.referenceIdentifier)
+        row !== rowObj.portfolioId)
       })
     }
   }
 
   onSendButton(selectedRows, onPostMarginCallIDs) {
-    onPostMarginCallIDs(selectedRows.map(row => row.referenceIdentifier))
+    onPostMarginCallIDs(selectedRows.map(row => row.portfolioId))
   }
 
   render() {
 
-    const { uploadDataFlag, requestingValuation, onPostMarginCallIDs, onRequestValuation, requestValuation, generateMarginCalls } = this.props
+    const { uploadDataFlag, requestingValuation, onPostMarginCallIDs, onRequestValuation, requestValuation, generateMarginCalls, requestingMCGenerationOrValuation } = this.props
 
     return (
       <div className={styles.container + ' ' + (requestingValuation || uploadDataFlag ? '' : styles.hidden)}>
@@ -142,7 +142,7 @@ export default class MarginCall extends React.Component {
             Send Margin Calls
           </div>
         </div>
-        <div className={styles.content}>
+        <div className={styles.content + ' ' + (requestingMCGenerationOrValuation ? styles.requesting : '')}>
           <div className={styles.masterRow}>
             <div className={styles.cell}>
               {/*<input type="checkbox" checked={this.state.isChecked} onChange={this.toggleIsChecked} />*/}
@@ -167,14 +167,14 @@ export default class MarginCall extends React.Component {
 
           { uploadDataFlag ?
             this.props.uploadData.map((item, i) => {
-            //console.log(this.state.selectedRows.filter(x => x === item.referenceIdentifier))
+            //console.log(this.state.selectedRows.filter(x => x === item.portfolioId))
               return <MarginCallRow spillContents={this.openRow} isChecked={this.state.isChecked}
                              isOpen={this.state.openedRows.indexOf(1) > -1}
                              propHandlerOnTotalMargin={this.onTotalCallAmt}
                              propMarginCallUploadData={this.props.uploadData} row={item}
                              propHandlerSingleRow={this.onSingleRow}
                              key={i}
-                             selected={!!this.state.selectedRows.filter(x => x === item.referenceIdentifier).length}/>}
+                             selected={!!this.state.selectedRows.filter(x => x === item.portfolioId).length}/>}
             )
             :
             <div className={styles.loadingContainer}>

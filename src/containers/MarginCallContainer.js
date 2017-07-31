@@ -9,7 +9,8 @@ const _defaultArray = []
 const mapStateToProps = state => ({
   uploadData: state.MarginUploadReducer.get('uploadData')
     ? state.MarginUploadReducer.get('uploadData').toJS() : _defaultArray,
-  requestingValuation: state.MarginUploadReducer.get('requestingValuation') || _default
+  requestingValuation: state.MarginUploadReducer.get('requestingValuation') || _default,
+  requestingMCGenerationOrValuation: state.MarginUploadReducer.get('requestingMCGenerationOrValuation') || _default
 })
 
 const checkUploadData = (data) => (data.length)
@@ -35,30 +36,44 @@ const mapDispatchToProps = dispatch => ({
     })
   },
   requestValuation: (referenceIDs) =>{
-    // dispatch(pollMarginCall(txnID))
-    // dispatch(requestingValuationFlag())
-    // console.log(referenceIDs)
+    dispatch(MarginCallUploadActions.updateRequestState(true))
     fetch('http://dev.acuo.com/valuation/acuo/api/calls/split/portfolios', {
       method: 'POST',
       body: JSON.stringify({"ids": referenceIDs}),
       headers: {'content-type': 'application/json'},
       json: true,
       resolveWithFullResponse: true
-    }).then(response => response.json())
-      .then(json => dispatch(MarginCallUploadActions.marginCallGenerated(json)))
+    }).then(response => {
+      if(response.ok)
+        return response.json()
+      alert('request valuation failed, try again')
+      dispatch(MarginCallUploadActions.updateRequestState(false))
+    }).then(json => dispatch(MarginCallUploadActions.marginCallGenerated(json)))
+      .catch(error => {
+        console.log(error)
+        alert('request valuation failed, try again')
+        dispatch(MarginCallUploadActions.updateRequestState(false))
+      })
   },
   generateMarginCalls: (referenceIDs) =>{
-    // dispatch(pollMarginCall(txnID))
-    // dispatch(requestingValuationFlag())
-    // console.log(referenceIDs)
+    dispatch(MarginCallUploadActions.updateRequestState(true))
     fetch('http://dev.acuo.com/valuation/acuo/api/calls/generate/portfolios', {
       method: 'POST',
       body: JSON.stringify({"ids": referenceIDs}),
       headers: {'content-type': 'application/json'},
       json: true,
       resolveWithFullResponse: true
-    }).then(response => response.json())
-      .then(json => dispatch(MarginCallUploadActions.marginCallGenerated(json)))
+    }).then(response => {
+      if(response.ok)
+        return response.json()
+      alert('generate margin call failed, try again')
+      dispatch(MarginCallUploadActions.updateRequestState(false))
+    }).then(json => dispatch(MarginCallUploadActions.marginCallGenerated(json)))
+      .catch(error => {
+        console.log(error)
+        alert('generate margin call failed, try again')
+        dispatch(MarginCallUploadActions.updateRequestState(false))
+      })
   }
 })
 

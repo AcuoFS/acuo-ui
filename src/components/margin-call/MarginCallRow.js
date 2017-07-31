@@ -82,7 +82,7 @@ export default class MarginCallRow extends React.Component {
               Click to edit
             </div>
           </div>
-          <div className={styles.cell}>{item.referenceIdentifier || '-'}</div>
+          <div className={styles.cell}>{item.portfolioId || '-'}</div>
           <div className={styles.cell + ' ' + styles.largeCell}>{checkNegative(item.exposure || 0)}</div>
           <div className={styles.cell + ' ' + styles.largeCell}>{checkNegative(item.collateralValue || 0)}</div>
           <div className={styles.cell + ' ' + styles.largeCell}>{item.pendingCollateral || '-'}</div>

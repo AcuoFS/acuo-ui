@@ -6,12 +6,15 @@ import _ from 'lodash'
 
 import * as ActionTypes from './../constants/ActionTypes'
 
-const INITIAL_STATE = Map({'alerts': List()})
+const INITIAL_STATE = Map({'alerts': List(), 'noPrompt': true})
 
 const CommonReducer = (state = INITIAL_STATE, action) => {
   switch(action.type){
     case ActionTypes.UPDATE_NAVBAR_ALERTS:
       return state.set('alerts', fromJS(action.alerts))
+    case ActionTypes.SCREEN_RESIZE:
+      return state.set('noPrompt', action.noPrompt)
+
     default:
       return state
   }

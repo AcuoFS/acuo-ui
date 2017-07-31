@@ -9,7 +9,8 @@ import root from './sagas'
 import reducer from './reducers'
 import styles from './static/global.css'
 import * as PAGES from './pages'
-import { NotificationContainer } from './containers'
+import { NotificationContainer, AppWrapperContainer } from './containers'
+import { updateScreensize } from './actions/CommonActions'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -39,23 +40,41 @@ class App extends React.Component {
     super(props)
     //http://localhost:3000/data
     //https://acuo.herokuapp.com/json
+
+    const mediaQuery = window.matchMedia('(min-width: 1200px)');
+
+    if (mediaQuery.matches) {
+      store.dispatch(updateScreensize(false));
+    } else {
+      store.dispatch(updateScreensize(true));
+    }
+
+    mediaQuery.addListener((mq) => {
+      if (mq.matches) {
+        store.dispatch(updateScreensize(false))
+      } else {
+        store.dispatch(updateScreensize(true))
+      }
+    })
   }
 
   render() {
     return (
       <Provider store={store}>
         <div className={styles.globalStyles}>
-          <Router history={hashHistory}>
-            <Route path="/" component={PAGES.LoginPage}/>
-            <Route path="2fa" component={PAGES.TwoFA_Page}/>
-            <Route path="dashboard" component={PAGES.DashboardContainer}/>
-            <Route path="recon" component={PAGES.ReconcileContainer}/>
-            <Route path="pledge" component={PAGES.PledgePage}/>
-            <Route path="upload_portfolio" component={PAGES.UploadPortfolioPage}/>
-            <Route path="deployed" component={PAGES.DeployedPageContainer}/>
-            <Route path="agreements" component={PAGES.AgreementsPage}/>
-            <Route path="disputes" component={PAGES.DisputePage}/>
-          </Router>
+          <AppWrapperContainer>
+            <Router history={hashHistory}>
+              <Route path="/" component={PAGES.LoginPage}/>
+              <Route path="2fa" component={PAGES.TwoFA_Page}/>
+              <Route path="dashboard" component={PAGES.DashboardContainer}/>
+              <Route path="recon" component={PAGES.ReconcileContainer}/>
+              <Route path="pledge" component={PAGES.PledgePage}/>
+              <Route path="upload_portfolio" component={PAGES.UploadPortfolioPage}/>
+              <Route path="deployed" component={PAGES.DeployedPageContainer}/>
+              <Route path="agreements" component={PAGES.AgreementsPage}/>
+              <Route path="disputes" component={PAGES.DisputePage}/>
+            </Router>
+          </AppWrapperContainer>
           <NotificationContainer />
         </div>
       </Provider>
