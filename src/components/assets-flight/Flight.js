@@ -62,6 +62,10 @@ export default class Flight extends React.Component{
   departureSearch("")
  }
 
+ componentDidMount() {
+   this.props.initDepartures()
+ }
+
  render(){
 
   let { arrivals, arrivals_searchText, departures_searchText, departureDatesList, filteredDepartures, selectedDepartureDate, onUpdateSelectedDepartureDate } = this.props

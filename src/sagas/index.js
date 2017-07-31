@@ -100,7 +100,8 @@ function* onFetchDepatures() {
     try{
       yield take(FETCH_DEPARTURES)
       const obj = yield call(FetchDeparturesSaga)
-      yield put(initDepartures(obj))
+      if(obj.length)
+        yield put(initDepartures(obj))
     } catch(error){
       console.log(error)
       return false

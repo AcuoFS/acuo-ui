@@ -23,7 +23,7 @@ export default class FlightDetailGroup extends React.Component {
   }
 
   getTime(time) {
-    console.log(time.length)
+    // console.log(time.length)
     if(time.length > 5)
       return new Date(time).getHours() + ':' + new Date(time).getMinutes()
     else

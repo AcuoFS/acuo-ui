@@ -40,7 +40,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  dispatch(fetchDepartures())
+  return {}
 }
 
 const DeployedPageContainer = connect(

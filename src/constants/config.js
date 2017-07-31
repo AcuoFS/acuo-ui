@@ -20,7 +20,7 @@ var configJson = {
   SEND_RECON_DISPUTE_URL: '/proxy/recon/disputeStatement',
   PLEDGE_REMOVE_ALLOCATED_ASSET: '/proxy/pledge/remove-allocated-asset',
   FETCH_GENERATED_PORTFOLIO: '<%= baseUrl %>/valuation/acuo/api/calls/async/generate/',
-  FETCH_DEPLOYED_DEPARTURES: '<%= baseUrl %>/margin/acuo/api/pledge/assets/all',
+  FETCH_DEPLOYED_DEPARTURES: 'http://localhost:8081/deployed/departures',
   POST_MARGIN_CALL_IDS: '<%= baseUrl %>/margin/acuo/api/margin/send/calls',
   PROXY_HEALTH_CHECK: '/proxy/common/check-connectivity',
   MARGIN_HEALTH_CHECK: '<%= baseUrl %>/margin/acuo/admin/ping',
