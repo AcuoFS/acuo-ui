@@ -7,6 +7,7 @@ import { FetchNavbarAlerts } from './FetchNavbarAlertsSaga'
 import { ReconItemSaga } from './ReconItemSaga'
 import { ReconDisputeSaga } from './ReconDisputeSaga'
 import { FetchDeparturesSaga } from './FetchDeparturesSaga'
+import { RequestValuationSaga } from './RequestValuationSaga'
 
 //actions
 import {
@@ -15,13 +16,18 @@ import {
 } from './../actions/CommonActions'
 import { reconInitState } from './../actions'
 import { initDepartures } from './../actions/DeployedActions'
+import {
+  updateRequestState,
+  marginCallGenerated
+} from './../actions/MarginCallUploadActions'
 
 //action types
 import {
   SAGA_NAVBAR_ALERTS,
   RECON_ITEM,
   RECON_DISPUTE_SUBMIT,
-  FETCH_DEPARTURES
+  FETCH_DEPARTURES,
+  ON_REQUEST_VALUATION
 } from '../constants/ActionTypes'
 
 function* serverHealthChecks() {
@@ -100,6 +106,22 @@ function* onFetchDepatures() {
   }
 }
 
+function* onRequestValuation() {
+  while(true){
+    try{
+      const action = yield take(ON_REQUEST_VALUATION)
+      // console.log(action)
+      const obj = yield call(RequestValuationSaga, action.referenceIDs)
+      console.log(obj)
+      yield put(marginCallGenerated(obj))
+      yield put(updateRequestState(false))
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
 export default function* root() {
   // console.log('root')
   yield [
@@ -107,6 +129,7 @@ export default function* root() {
     fork(navbarAlerts),
     fork(onReconcile),
     fork(onReconDispute),
-    fork(onFetchDepatures)
+    fork(onFetchDepatures),
+    fork(onRequestValuation)
   ]
 }

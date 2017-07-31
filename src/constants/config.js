@@ -26,7 +26,8 @@ var configJson = {
   MARGIN_HEALTH_CHECK: '<%= baseUrl %>/margin/acuo/admin/ping',
   VALUATION_HEALTH_CHECK: '<%= baseUrl %>/valuation/acuo/admin/ping',
   COLLATERAL_HEALTH_CHECK: '<%= baseUrl %>/collateral/acuo/admin/ping',
-  FETCH_NAVBAR_ALERTS: '<%= baseUrl %>/margin/acuo/api/dashboard/menu'
+  FETCH_NAVBAR_ALERTS: '<%= baseUrl %>/margin/acuo/api/dashboard/menu',
+  REQUEST_VALUATION_URL: 'http://localhost:8081/upload/request-valuation'
 }
 
 exports.get = (env) => {
