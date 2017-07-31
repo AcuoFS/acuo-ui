@@ -56,25 +56,26 @@ const mapDispatchToProps = dispatch => ({
     //     dispatch(MarginCallUploadActions.updateRequestState(false))
     //   })
   },
-  generateMarginCalls: (referenceIDs) =>{
+  generateMarginCalls: (referenceIDs) => {
     dispatch(MarginCallUploadActions.updateRequestState(true))
-    fetch('http://dev.acuo.com/valuation/acuo/api/calls/generate/portfolios', {
-      method: 'POST',
-      body: JSON.stringify({"ids": referenceIDs}),
-      headers: {'content-type': 'application/json'},
-      json: true,
-      resolveWithFullResponse: true
-    }).then(response => {
-      if(response.ok)
-        return response.json()
-      alert('generate margin call failed, try again')
-      dispatch(MarginCallUploadActions.updateRequestState(false))
-    }).then(json => dispatch(MarginCallUploadActions.marginCallGenerated(json)))
-      .catch(error => {
-        console.log(error)
-        alert('generate margin call failed, try again')
-        dispatch(MarginCallUploadActions.updateRequestState(false))
-      })
+    dispatch(MarginCallUploadActions.onRequestGenerateMarginCall(referenceIDs))
+  //   fetch('http://dev.acuo.com/valuation/acuo/api/calls/generate/portfolios', {
+  //     method: 'POST',
+  //     body: JSON.stringify({"ids": referenceIDs}),
+  //     headers: {'content-type': 'application/json'},
+  //     json: true,
+  //     resolveWithFullResponse: true
+  //   }).then(response => {
+  //     if(response.ok)
+  //       return response.json()
+  //     alert('generate margin call failed, try again')
+  //     dispatch(MarginCallUploadActions.updateRequestState(false))
+  //   }).then(json => dispatch(MarginCallUploadActions.marginCallGenerated(json)))
+  //     .catch(error => {
+  //       console.log(error)
+  //       alert('generate margin call failed, try again')
+  //       dispatch(MarginCallUploadActions.updateRequestState(false))
+  //     })
   }
 })
 

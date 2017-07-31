@@ -7,7 +7,8 @@ import {
   UPLOADING_PORTFOLIO,
   MARGIN_CALL_GENERATED,
   UPDATE_REQUESTING_STATE,
-  ON_REQUEST_VALUATION
+  ON_REQUEST_VALUATION,
+  ON_REQUEST_GENERATE_MARGINCALL
 } from '../constants/ActionTypes'
 
 export const getMarginCallUpload = (uploadData) => ({
@@ -51,5 +52,10 @@ export const updateRequestState = flag => ({
 
 export const onRequestValuationAction = referenceIDs => ({
   type: ON_REQUEST_VALUATION,
+  referenceIDs
+})
+
+export const onRequestGenerateMarginCall = referenceIDs => ({
+  type: ON_REQUEST_GENERATE_MARGINCALL,
   referenceIDs
 })

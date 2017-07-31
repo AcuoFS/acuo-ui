@@ -8,6 +8,7 @@ import { ReconItemSaga } from './ReconItemSaga'
 import { ReconDisputeSaga } from './ReconDisputeSaga'
 import { FetchDeparturesSaga } from './FetchDeparturesSaga'
 import { RequestValuationSaga } from './RequestValuationSaga'
+import { GenerateMarginCallSaga } from './GenerateMarginCallSaga'
 
 //actions
 import {
@@ -27,7 +28,8 @@ import {
   RECON_ITEM,
   RECON_DISPUTE_SUBMIT,
   FETCH_DEPARTURES,
-  ON_REQUEST_VALUATION
+  ON_REQUEST_VALUATION,
+  ON_REQUEST_GENERATE_MARGINCALL
 } from '../constants/ActionTypes'
 
 function* serverHealthChecks() {
@@ -122,6 +124,22 @@ function* onRequestValuation() {
   }
 }
 
+function* onGenerateMarginCalls() {
+  while(true){
+    try{
+      const action = yield take(ON_REQUEST_GENERATE_MARGINCALL)
+      // console.log(action)
+      const obj = yield call(GenerateMarginCallSaga, action.referenceIDs)
+      console.log(obj)
+      yield put(marginCallGenerated(obj))
+      yield put(updateRequestState(false))
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
 export default function* root() {
   // console.log('root')
   yield [
@@ -130,6 +148,7 @@ export default function* root() {
     fork(onReconcile),
     fork(onReconDispute),
     fork(onFetchDepatures),
-    fork(onRequestValuation)
+    fork(onRequestValuation),
+    fork(onGenerateMarginCalls)
   ]
 }
