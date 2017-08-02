@@ -1,4 +1,5 @@
 export const INIT_STATE = 'INIT_STATE'
+export const ON_INIT_DASHBOARD = 'ON_INIT_DASHBOARD'
 export const RECON_INIT_STATE = 'RECON_INIT_STATE'
 
 //filters

@@ -5,6 +5,10 @@ export const initState = (state) => ({
   state: state
 })
 
+export const onInitDashboard = () => ({
+  type: ActionTypes.ON_INIT_DASHBOARD
+})
+
 export const reconInitState = (items) => ({
   type: ActionTypes.RECON_INIT_STATE,
   items,

@@ -9,13 +9,17 @@ import { ReconDisputeSaga } from './ReconDisputeSaga'
 import { FetchDeparturesSaga } from './FetchDeparturesSaga'
 import { RequestValuationSaga } from './RequestValuationSaga'
 import { GenerateMarginCallSaga } from './GenerateMarginCallSaga'
+import { FetchDashboardSaga } from './FetchDashboardSaga'
 
 //actions
 import {
   updateNavbarAlerts,
   sagaNavbarAlerts
 } from './../actions/CommonActions'
-import { reconInitState } from './../actions'
+import {
+  reconInitState,
+  initState
+} from './../actions'
 import { initDepartures } from './../actions/DeployedActions'
 import {
   updateRequestState,
@@ -29,7 +33,8 @@ import {
   RECON_DISPUTE_SUBMIT,
   FETCH_DEPARTURES,
   ON_REQUEST_VALUATION,
-  ON_REQUEST_GENERATE_MARGINCALL
+  ON_REQUEST_GENERATE_MARGINCALL,
+  ON_INIT_DASHBOARD
 } from '../constants/ActionTypes'
 
 function* serverHealthChecks() {
@@ -141,8 +146,20 @@ function* onGenerateMarginCalls() {
   }
 }
 
+function* onFetchDashboardData() {
+  while(true){
+    try{
+      yield take(ON_INIT_DASHBOARD)
+      const obj = yield call(FetchDashboardSaga)
+      yield put(initState(obj))
+    } catch(error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
 export default function* root() {
-  // console.log('root')
   yield [
     fork(serverHealthChecks),
     fork(navbarAlerts),
@@ -150,6 +167,7 @@ export default function* root() {
     fork(onReconDispute),
     fork(onFetchDepatures),
     fork(onRequestValuation),
-    fork(onGenerateMarginCalls)
+    fork(onGenerateMarginCalls),
+    fork(onFetchDashboardData)
   ]
 }
