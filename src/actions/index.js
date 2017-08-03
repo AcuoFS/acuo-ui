@@ -14,6 +14,10 @@ export const reconInitState = (items) => ({
   items,
 })
 
+export const onInitReconState = () => ({
+  type: ActionTypes.ON_INIT_RECON
+})
+
 export const initCurrencyInfo = (currencyInfo) => ({
   type: ActionTypes.INIT_CURRENCY_INFO,
   currencyInfo

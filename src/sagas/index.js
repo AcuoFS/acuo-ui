@@ -10,6 +10,7 @@ import { FetchDeparturesSaga } from './FetchDeparturesSaga'
 import { RequestValuationSaga } from './RequestValuationSaga'
 import { GenerateMarginCallSaga } from './GenerateMarginCallSaga'
 import { FetchDashboardSaga } from './FetchDashboardSaga'
+import { FetchReconSaga } from './FetchReconSaga'
 
 //actions
 import {
@@ -18,7 +19,8 @@ import {
 } from './../actions/CommonActions'
 import {
   reconInitState,
-  initState
+  initState,
+  initCurrencyInfo
 } from './../actions'
 import { initDepartures } from './../actions/DeployedActions'
 import {
@@ -34,7 +36,8 @@ import {
   FETCH_DEPARTURES,
   ON_REQUEST_VALUATION,
   ON_REQUEST_GENERATE_MARGINCALL,
-  ON_INIT_DASHBOARD
+  ON_INIT_DASHBOARD,
+  ON_INIT_RECON
 } from '../constants/ActionTypes'
 
 function* serverHealthChecks() {
@@ -159,6 +162,20 @@ function* onFetchDashboardData() {
   }
 }
 
+function* onFetchReconSaga() {
+  while(true){
+    try{
+      yield take(ON_INIT_RECON)
+      const {items, currencyInfo} = yield call(FetchReconSaga)
+      yield put(reconInitState(items))
+      yield put(initCurrencyInfo(currencyInfo))
+    } catch(error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
 export default function* root() {
   yield [
     fork(serverHealthChecks),
@@ -168,6 +185,7 @@ export default function* root() {
     fork(onFetchDepatures),
     fork(onRequestValuation),
     fork(onGenerateMarginCalls),
-    fork(onFetchDashboardData)
+    fork(onFetchDashboardData),
+    fork(onFetchReconSaga)
   ]
 }

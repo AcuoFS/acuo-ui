@@ -9,7 +9,7 @@ import filterItems from '../../utils/filterItems'
 import stylesG from '../../static/global.css'
 import styles from './Reconcile.css'
 import { connect } from 'react-redux'
-import { reconInitState, initCurrencyInfo } from '../../actions'
+import { onInitReconState } from '../../actions'
 import { RECON_URL } from '../../constants/APIcalls'
 import { hashHistory } from 'react-router'
 
@@ -34,7 +34,6 @@ const mapStateToProps = state => {
 class Reconcile extends React.Component {
   constructor(props) {
     super(props)
-    this.props.initRecon()
   }
 
   componentWillMount(){
@@ -67,17 +66,20 @@ class Reconcile extends React.Component {
 // =============================================================================
 // connect component with redux
 
-const mapDispatchToProps = dispatch => ({
-  initRecon: () => {
-    fetch(RECON_URL).then((response) => {
-      return response.json()
-    }).then((obj) => {
-      const {items, currencyInfo} = obj
-      dispatch(reconInitState(items))
-      dispatch(initCurrencyInfo(currencyInfo))
-    })
+const mapDispatchToProps = dispatch => {
+  dispatch(onInitReconState())
+  return {
+    // initRecon: () => {
+    //   fetch(RECON_URL).then((response) => {
+    //     return response.json()
+    //   }).then((obj) => {
+    //     const {items, currencyInfo} = obj
+    //     dispatch(reconInitState(items))
+    //     dispatch(initCurrencyInfo(currencyInfo))
+    //   })
+    // }
   }
-})
+}
 
 const ReconcileContainer = connect(
   mapStateToProps,
