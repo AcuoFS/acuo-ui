@@ -255,7 +255,11 @@ export default class Dispute extends React.Component {
 
           <div className={(!this.isValidForm() || isDisputed)
             ? styles.buttonContainerDisabled : styles.buttonContainerEnabled}>
-            <button type="submit" onClick={this.submitDisputeForm}
+            <button type="submit"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      this.submitDisputeForm()
+                    }}
                     disabled={!this.isValidForm() || isDisputed}>Dispute
             </button>
           </div>

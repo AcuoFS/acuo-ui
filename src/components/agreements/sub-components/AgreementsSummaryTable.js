@@ -4,6 +4,8 @@ import {plusBox, minuxBox} from '../../../../images/common'
 import * as CONSTANTS from '../../../constants/AgreementsConstants'
 import AgreementsSummaryRow from './AgreementsSummaryRow'
 import styles from './AgreementsSummaryTable.css'
+import transitions from './transition.css'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
 
 
 /**
@@ -57,7 +59,12 @@ const AgreementsSummaryTable = ({
   propIsIncomingSelected
 }) => {
   return (
-    <div className={styles.summaryTable}>
+    <ReactCSSTransitionGroup
+      component="div"
+      className={styles.summaryTable}
+      transitionName={transitions}
+      transitionEnterTimeout={500}
+      transitionLeaveTimeout={300}>
       <div className={styles.summaryTableHeaderRow}>
         <div className={styles.summaryTableCell}></div>
         <div className={styles.summaryTableCell}>Pending New</div>
@@ -95,7 +102,7 @@ const AgreementsSummaryTable = ({
           <div className={styles.summaryTableCell}></div>
         </div>
       }
-    </div>
+    </ReactCSSTransitionGroup>
   )
 }
 

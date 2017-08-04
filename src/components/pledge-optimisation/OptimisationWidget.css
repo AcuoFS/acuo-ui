@@ -493,10 +493,32 @@ input[type=range]:focus::-ms-fill-upper {
 
 .show#innerContent {
   display: block;
+  visibility: visible;
+  opacity: 1;
+  max-height: 250px;
+  transition: 0.7s ease-out;
 }
 
 .invisible#innerContent {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  max-height: 0px;
+  transition: .2s ease-in;
+  overflow: hidden;
+}
+
+.showtransition {
+  opacity: 1;
+  visibility: visible;
+  max-height: 250px;
+  transition: opacity 0.4s 0.3s ease;
+}
+
+.invisibletransition {
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0px;
+  transition: 0.2s ease-in;
 }
 
 .arrowContainer span {
