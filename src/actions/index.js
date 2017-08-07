@@ -83,6 +83,10 @@ export const initOptimisationSettings = (settings) => ({
   settings: settings
 })
 
+export const fetchOptimisationSettings = () => ({
+  type: ActionTypes.ON_FETCH_OPTIMISATION_SETTINGS
+})
+
 export const updateOptimisationSettings = (newSettings) => ({
   type: ActionTypes.UPDATE_OPTIMISATION_SETTINGS,
   newSettings: newSettings
