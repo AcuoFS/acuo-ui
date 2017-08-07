@@ -1,5 +1,5 @@
 import has from 'lodash/has'
-import { FETCH_GENERATED_PORTFOLIO } from '../constants/APIcalls'
+import { FETCH_GENERATED_PORTFOLIO } from '../../constants/APIcalls'
 
 export const FetchMarginCall = (txnID) => {
   return fetch(FETCH_GENERATED_PORTFOLIO + txnID).then(response => {

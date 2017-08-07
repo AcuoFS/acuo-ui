@@ -1,7 +1,7 @@
 /**
  * Created by Rui on 28/7/17.
  */
-import {RECON_URL, SEND_RECON_DISPUTE_URL} from '../constants/APIcalls'
+import {RECON_URL, SEND_RECON_DISPUTE_URL} from '../../constants/APIcalls'
 
 export const ReconDisputeSaga = (disputeObjToSend) => {
   return fetch(SEND_RECON_DISPUTE_URL, {

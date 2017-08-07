@@ -41,12 +41,12 @@ class Pledge extends React.Component {
     // })
 
     // #OW-324
-    fetch(MARGIN_SELECTION_URL).then(response => {
-      return response.json()
-    }).then(obj => {
-      // console.log("Selection Response Received", obj);
-      this.props.initSelection(obj)
-    })
+    // fetch(MARGIN_SELECTION_URL).then(response => {
+    //   return response.json()
+    // }).then(obj => {
+    //   // console.log("Selection Response Received", obj);
+    //   this.props.initSelection(obj)
+    // })
   }
 
   changeSideways() {

@@ -11,7 +11,8 @@ import {
   clearPendingAllocation,
   updatePledgeFilter,
   updateCollateral,
-  fetchOptimisationSettings
+  fetchOptimisationSettings,
+  fetchSelection
 } from '../actions'
 import {
   ALLOCATE_COLLATERALS_URL_NEW,
@@ -73,6 +74,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   dispatch(fetchOptimisationSettings())
+  dispatch(fetchSelection())
   return {
     // onInitOptimisationSettings: (settings) => {
     //   dispatch(initOptimisationSettings(settings))
@@ -80,9 +82,9 @@ const mapDispatchToProps = dispatch => {
     onUpdateOptimisationSettings: (newSettings) => {
       dispatch(updateOptimisationSettings(newSettings))
     },
-    initSelection: (selection) => {
-      dispatch(initSelection(selection.items))
-    },
+    // initSelection: (selection) => {
+    //   dispatch(initSelection(selection.items))
+    // },
     onTogglePendingAllocation: (GUID) => {
       dispatch(togglePendingAllocation(GUID))
     },
