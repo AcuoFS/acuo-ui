@@ -92,6 +92,10 @@ export const updateOptimisationSettings = (newSettings) => ({
   newSettings: newSettings
 })
 
+export const fetchSelection = () => ({
+  type: ActionTypes.ON_FETCH_SELECTION
+})
+
 export const initSelection = (selection) => ({
   type: ActionTypes.INIT_SELECTION,
   selection: selection

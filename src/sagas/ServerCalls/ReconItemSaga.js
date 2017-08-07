@@ -1,7 +1,7 @@
 /**
  * Created by Rui on 27/7/17.
  */
-import { RECON_DATA_URL, RECON_URL } from './../constants/APIcalls'
+import { RECON_DATA_URL, RECON_URL } from '../../constants/APIcalls'
 
 export const ReconItemSaga = (params) =>{
 

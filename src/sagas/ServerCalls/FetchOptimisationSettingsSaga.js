@@ -2,7 +2,7 @@
  * Created by Rui on 4/8/17.
  */
 
-import { OPTIMISATION_URL } from './../constants/APIcalls'
+import { OPTIMISATION_URL } from '../../constants/APIcalls'
 
 export const FetchOptimisationSettingsSaga = () =>{
   return(
