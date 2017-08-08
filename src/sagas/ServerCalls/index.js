@@ -9,6 +9,9 @@ import { FetchDashboardSaga } from './FetchDashboardSaga'
 import { FetchReconSaga } from './FetchReconSaga'
 import { FetchOptimisationSettingsSaga } from './FetchOptimisationSettingsSaga'
 import { FetchSelectionSaga } from './FetchSelectionSaga'
+import { AllocateCollateralsSaga } from './AllocateCollateralsSaga'
+import { FetchCollateralsSaga } from './FetchCollateralsSaga'
+import { PostPledgeSaga } from './PostPledgeSaga'
 
 export {
   checkSpecificServer,
@@ -22,4 +25,7 @@ export {
   FetchReconSaga,
   FetchOptimisationSettingsSaga,
   FetchSelectionSaga,
+  AllocateCollateralsSaga,
+  FetchCollateralsSaga,
+  PostPledgeSaga
 }

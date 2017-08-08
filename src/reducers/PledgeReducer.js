@@ -94,7 +94,7 @@ const PledgeReducer = (state = initialState, action) => {
       return updateOptimisationSettings(state, action.newSettings)
 
     case ActionTypes.UPDATE_COLLATERAL:
-      return updateCollateral(state, action.collateralData)
+      return updateCollateral(state, fromJS(action.collateralData))
 
     case ActionTypes.INIT_SELECTION:
       return initSelection(state, action.selection)
