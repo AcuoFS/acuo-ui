@@ -12,7 +12,9 @@ import {
   updatePledgeFilter,
   updateCollateral,
   fetchOptimisationSettings,
-  fetchSelection
+  fetchSelection,
+  allocateCollaterals,
+  onPledge
 } from '../actions'
 import {
   ALLOCATE_COLLATERALS_URL_NEW,
@@ -99,25 +101,27 @@ const mapDispatchToProps = dispatch => {
         optimisationSettings: optimisationSetting,
         toBeAllocated: guids
       }
-      //console.log('request obj: ' + JSON.stringify(reqObj))
-      fetch(ALLOCATE_COLLATERALS_URL_NEW, {
-        method: 'POST',
-        body: JSON.stringify(reqObj)
-      }).then(response => {
-        //console.log('Allocate response: ' + JSON.stringify(response))
-        return response.json()
-      }).then(obj => {
-        dispatch(initSelection(fromJS(obj.items)))
 
-        //TODO: REWORK THIS
-        fetch(COLLATERAL_URL).then((response) => {
-          return response.json()
-        }).then((obj) => {
-          dispatch(updateCollateral(fromJS(obj.items)))
-        })
-      }).catch(error => {
-        console.log('Error: ' + error)
-      })
+      dispatch(allocateCollaterals(reqObj))
+      //console.log('request obj: ' + JSON.stringify(reqObj))
+      // fetch(ALLOCATE_COLLATERALS_URL_NEW, {
+      //   method: 'POST',
+      //   body: JSON.stringify(reqObj)
+      // }).then(response => {
+      //   //console.log('Allocate response: ' + JSON.stringify(response))
+      //   return response.json()
+      // }).then(obj => {
+      //   dispatch(initSelection(fromJS(obj.items)))
+      //
+      //   //TODO: REWORK THIS
+      //   fetch(COLLATERAL_URL).then((response) => {
+      //     return response.json()
+      //   }).then((obj) => {
+      //     dispatch(updateCollateral(fromJS(obj.items)))
+      //   })
+      // }).catch(error => {
+      //   console.log('Error: ' + error)
+      // })
     },
     onPledge: (selectionList) => {
       // console.log(selectionList);
@@ -144,42 +148,42 @@ const mapDispatchToProps = dispatch => {
       // console.log(pledgeToSend)
       // console.log('JSON string :')
       // console.log(JSON.stringify(pledgeToSend))
-
-      fetch(PLEDGE_ALLOCATIONS, {
-        method: 'POST',
-        body: JSON.stringify(pledgeToSend),
-        headers: {'content-type': 'application/json'},
-        json: true,
-        resolveWithFullResponse: true
-      }).then(response => {
-        // console.log('Pledge response: ')
-        // console.log(response)
-        if (response.status == 200) {
-          // TODO: To handle how to inform user that pledge data is sucessfully sent
-          //alert('Sent to endpoint!' + JSON.stringify(pledgeToSend))
-          // Refresh selections
-
-          //TODO: REWORK ALL OF THESE
-          fetch(MARGIN_SELECTION_URL).then(response => {
-            return response.json()
-          }).then(obj => {
-            dispatch(initSelection(obj.items))
-            dispatch(clearPendingAllocation())
-          })
-          dispatch(sagaNavbarAlerts())
-
-          fetch(COLLATERAL_URL).then((response) => {
-            return response.json()
-          }).then((obj) => {
-            dispatch(updateCollateral(fromJS(obj.items)))
-          })
-
-        } else {
-          alert('Error sending pledge details')
-        }
-      }).catch(error => {
-        console.log('Error: ' + error)
-      })
+      dispatch(onPledge(pledgeToSend))
+      // fetch(PLEDGE_ALLOCATIONS, {
+      //   method: 'POST',
+      //   body: JSON.stringify(pledgeToSend),
+      //   headers: {'content-type': 'application/json'},
+      //   json: true,
+      //   resolveWithFullResponse: true
+      // }).then(response => {
+      //   // console.log('Pledge response: ')
+      //   // console.log(response)
+      //   if (response.status == 200) {
+      //     // TODO: To handle how to inform user that pledge data is sucessfully sent
+      //     //alert('Sent to endpoint!' + JSON.stringify(pledgeToSend))
+      //     // Refresh selections
+      //
+      //     //TODO: REWORK ALL OF THESE
+      //     fetch(MARGIN_SELECTION_URL).then(response => {
+      //       return response.json()
+      //     }).then(obj => {
+      //       dispatch(initSelection(obj.items))
+      //       dispatch(clearPendingAllocation())
+      //     })
+      //     dispatch(sagaNavbarAlerts())
+      //
+      //     fetch(COLLATERAL_URL).then((response) => {
+      //       return response.json()
+      //     }).then((obj) => {
+      //       dispatch(updateCollateral(fromJS(obj.items)))
+      //     })
+      //
+      //   } else {
+      //     alert('Error sending pledge details')
+      //   }
+      // }).catch(error => {
+      //   console.log('Error: ' + error)
+      // })
     },
     onDispatchRemoveAssetFromAllocate: (obj) => {
       //TODO: implement fetch to send this obj to backend

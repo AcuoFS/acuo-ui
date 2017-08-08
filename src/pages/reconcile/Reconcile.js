@@ -38,6 +38,7 @@ class Reconcile extends React.Component {
 
   componentWillMount(){
     if(localStorage.loginAt == undefined || localStorage.loginAt < Date.now()){ hashHistory.push('/') }
+    this.props.initRecon()
   }
 
   componentDidMount () {
@@ -67,17 +68,11 @@ class Reconcile extends React.Component {
 // connect component with redux
 
 const mapDispatchToProps = dispatch => {
-  dispatch(onInitReconState())
+  // dispatch(onInitReconState())
   return {
-    // initRecon: () => {
-    //   fetch(RECON_URL).then((response) => {
-    //     return response.json()
-    //   }).then((obj) => {
-    //     const {items, currencyInfo} = obj
-    //     dispatch(reconInitState(items))
-    //     dispatch(initCurrencyInfo(currencyInfo))
-    //   })
-    // }
+    initRecon: () => {
+      dispatch(onInitReconState())
+    }
   }
 }
 

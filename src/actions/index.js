@@ -128,6 +128,15 @@ export const updatePledgeFilter = (value) =>({
   value: value
 })
 
+export const fetchCollaterals = () => ({
+  type: ActionTypes.ON_FETCH_COLLATERALS
+})
+
+export const allocateCollaterals = (obj) => ({
+  type: ActionTypes.ON_ALLOCATE_COLLATERALS,
+  obj
+})
+
 //recon
 export const firstLeveSelect = (GUID, firstLevelID) => ({
   type: ActionTypes.FIRSTLEVEL_SELECT,
@@ -142,9 +151,14 @@ export const secondLevelSelect = (GUID, parentID, secondLevelID) => ({
   secondLevelID: secondLevelID
 })
 
-export const updateReconFilter = (value) =>({
+export const updateReconFilter = (value) => ({
   type: ActionTypes.RECON_FILTER_SET,
   value: value
+})
+
+export const onPledge = (pledgeToSend) => ({
+  type: ActionTypes.ON_PLEDGE ,
+  pledgeToSend
 })
 
 //submit margin calls

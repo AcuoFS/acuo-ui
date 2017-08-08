@@ -9,18 +9,16 @@ import {
 import { connect } from 'react-redux'
 import styles from './Dashboard.css'
 import { onInitDashboard } from '../../actions'
-import { DASHBOARD_URL } from '../../constants/APIcalls'
-import { fromJS } from 'immutable'
 import { hashHistory } from 'react-router'
 
 export class Dashboard extends React.Component {
   constructor(props){
     super(props)
-    // this.props.initDashboard()
   }
 
   componentWillMount(){
     if(localStorage.loginAt == undefined || localStorage.loginAt < Date.now()){ hashHistory.push('/') }
+    this.props.fetchDashboardData()
   }
 
 
@@ -54,8 +52,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  dispatch(onInitDashboard())
-  return {}
+  return {
+    fetchDashboardData: () => dispatch(onInitDashboard())
+  }
 }
 
 const DashboardContainer = connect(

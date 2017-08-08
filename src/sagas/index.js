@@ -13,7 +13,10 @@ import {
   FetchDashboardSaga,
   FetchReconSaga,
   FetchOptimisationSettingsSaga,
-  FetchSelectionSaga
+  FetchSelectionSaga,
+  AllocateCollateralsSaga,
+  FetchCollateralsSaga,
+  PostPledgeSaga
 } from './ServerCalls'
 //actions
 import {
@@ -25,7 +28,10 @@ import {
   initState,
   initCurrencyInfo,
   initOptimisationSettings,
-  initSelection
+  initSelection,
+  updateCollateral,
+  fetchCollaterals,
+  fetchSelection
 } from './../actions'
 import { initDepartures } from './../actions/DeployedActions'
 import {
@@ -44,7 +50,10 @@ import {
   ON_INIT_DASHBOARD,
   ON_INIT_RECON,
   ON_FETCH_OPTIMISATION_SETTINGS,
-  ON_FETCH_SELECTION
+  ON_FETCH_SELECTION,
+  ON_ALLOCATE_COLLATERALS,
+  ON_FETCH_COLLATERALS,
+  ON_PLEDGE
 } from '../constants/ActionTypes'
 
 function* serverHealthChecks() {
@@ -205,6 +214,49 @@ function* watchFetchSelection() {
   }
 }
 
+function* watchAllocateCollaterals() {
+  while (true) {
+    try {
+      const { obj } = yield take(ON_ALLOCATE_COLLATERALS)
+      const { payload } = yield call(AllocateCollateralsSaga, obj)
+      yield put(initSelection(payload.items))
+      yield put(fetchCollaterals())
+    } catch (error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchFetchCollaterals() {
+  while (true) {
+    try {
+      yield take(ON_FETCH_COLLATERALS)
+      const payload = yield call(FetchCollateralsSaga)
+      yield put(updateCollateral(payload.items))
+    } catch (error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchPledge() {
+  while(true){
+    try{
+      const action = yield take(ON_PLEDGE)
+      yield call(PostPledgeSaga, action.pledgeToSend)
+      yield put(fetchSelection())
+      yield put(clearPendingAllocation())
+      yield put(sagaNavbarAlerts())
+      yield put(fetchCollaterals())
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
 export default function* root() {
   yield [
     fork(serverHealthChecks),
@@ -217,6 +269,9 @@ export default function* root() {
     fork(watchFetchDashboardData),
     fork(watchFetchReconSaga),
     fork(watchFetchOptimisationSettings),
-    fork(watchFetchSelection)
+    fork(watchFetchSelection),
+    fork(watchAllocateCollaterals),
+    fork(watchFetchCollaterals),
+    fork(watchPledge)
   ]
 }
