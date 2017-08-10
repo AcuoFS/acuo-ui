@@ -12,6 +12,7 @@ import { FetchSelectionSaga } from './FetchSelectionSaga'
 import { AllocateCollateralsSaga } from './AllocateCollateralsSaga'
 import { FetchCollateralsSaga } from './FetchCollateralsSaga'
 import { PostPledgeSaga } from './PostPledgeSaga'
+import { RemoveAllocatedAssetsSaga } from './RemoveAllocatedAssetsSaga'
 
 export {
   checkSpecificServer,
@@ -27,5 +28,6 @@ export {
   FetchSelectionSaga,
   AllocateCollateralsSaga,
   FetchCollateralsSaga,
-  PostPledgeSaga
+  PostPledgeSaga,
+  RemoveAllocatedAssetsSaga
 }

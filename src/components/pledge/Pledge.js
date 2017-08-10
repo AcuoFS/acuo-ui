@@ -49,6 +49,11 @@ class Pledge extends React.Component {
     // })
   }
 
+  componentDidMount() {
+    this.props.onInitOptimisationSettings()
+    this.props.initSelection()
+  }
+
   changeSideways() {
     if (this.state.open) {
       this.setState({

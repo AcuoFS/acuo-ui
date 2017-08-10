@@ -1,5 +1,6 @@
-import { delay } from 'redux-saga'
+import { delay, takeEvery } from 'redux-saga'
 import { fork, call, put, take, race } from 'redux-saga/effects'
+// import {  } from 'redux-saga/helpers'
 
 //fetches
 import {
@@ -16,7 +17,8 @@ import {
   FetchSelectionSaga,
   AllocateCollateralsSaga,
   FetchCollateralsSaga,
-  PostPledgeSaga
+  PostPledgeSaga,
+  RemoveAllocatedAssetsSaga
 } from './ServerCalls'
 //actions
 import {
@@ -31,7 +33,8 @@ import {
   initSelection,
   updateCollateral,
   fetchCollaterals,
-  fetchSelection
+  fetchSelection,
+  clearPendingAllocation
 } from './../actions'
 import { initDepartures } from './../actions/DeployedActions'
 import {
@@ -53,7 +56,8 @@ import {
   ON_FETCH_SELECTION,
   ON_ALLOCATE_COLLATERALS,
   ON_FETCH_COLLATERALS,
-  ON_PLEDGE
+  ON_PLEDGE,
+  ON_REMOVE_ALLOCATED_ASSET
 } from '../constants/ActionTypes'
 
 function* serverHealthChecks() {
@@ -218,7 +222,7 @@ function* watchAllocateCollaterals() {
   while (true) {
     try {
       const { obj } = yield take(ON_ALLOCATE_COLLATERALS)
-      const { payload } = yield call(AllocateCollateralsSaga, obj)
+      const payload = yield call(AllocateCollateralsSaga, obj)
       yield put(initSelection(payload.items))
       yield put(fetchCollaterals())
     } catch (error) {
@@ -257,6 +261,20 @@ function* watchPledge() {
   }
 }
 
+function* watchRemoveAllocatedAsset() {
+  while(true){
+    try{
+      const action = yield take(ON_REMOVE_ALLOCATED_ASSET)
+      const json = yield call(RemoveAllocatedAssetsSaga, action.obj)
+      yield put(initSelection(json.items))
+      yield put(fetchCollaterals())
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
 export default function* root() {
   yield [
     fork(serverHealthChecks),
@@ -272,6 +290,7 @@ export default function* root() {
     fork(watchFetchSelection),
     fork(watchAllocateCollaterals),
     fork(watchFetchCollaterals),
-    fork(watchPledge)
+    fork(watchPledge),
+    fork(watchRemoveAllocatedAsset)
   ]
 }

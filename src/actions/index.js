@@ -153,7 +153,12 @@ export const secondLevelSelect = (GUID, parentID, secondLevelID) => ({
 
 export const updateReconFilter = (value) => ({
   type: ActionTypes.RECON_FILTER_SET,
-  value: value
+  value
+})
+
+export const onRemoveAllocatedAsset = (obj) => ({
+  type: ActionTypes.ON_REMOVE_ALLOCATED_ASSET,
+  obj
 })
 
 export const onPledge = (pledgeToSend) => ({
