@@ -14,7 +14,8 @@ import {
   fetchOptimisationSettings,
   fetchSelection,
   allocateCollaterals,
-  onPledge
+  onPledge,
+  onRemoveAllocatedAsset
 } from '../actions'
 import {
   ALLOCATE_COLLATERALS_URL_NEW,
@@ -75,18 +76,16 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
-  dispatch(fetchOptimisationSettings())
-  dispatch(fetchSelection())
   return {
-    // onInitOptimisationSettings: (settings) => {
-    //   dispatch(initOptimisationSettings(settings))
-    // },
+    onInitOptimisationSettings: () => {
+      dispatch(fetchOptimisationSettings())
+    },
+    initSelection: () => {
+      dispatch(fetchSelection())
+    },
     onUpdateOptimisationSettings: (newSettings) => {
       dispatch(updateOptimisationSettings(newSettings))
     },
-    // initSelection: (selection) => {
-    //   dispatch(initSelection(selection.items))
-    // },
     onTogglePendingAllocation: (GUID) => {
       dispatch(togglePendingAllocation(GUID))
     },
@@ -186,39 +185,40 @@ const mapDispatchToProps = dispatch => {
       // })
     },
     onDispatchRemoveAssetFromAllocate: (obj) => {
+      dispatch(onRemoveAllocatedAsset(obj))
       //TODO: implement fetch to send this obj to backend
       // console.log('========== REMOVE ALLOCATED =========')
       // console.log('JS obj :')
       // console.log(obj)
       // console.log('JSON string :')
       // console.log(JSON.stringify(obj))
-      fetch(PLEDGE_REMOVE_ALLOCATED_ASSET, {
-        method: 'POST',
-        body: JSON.stringify(obj),
-        headers: {'content-type': 'application/json'},
-        json: true,
-        resolveWithFullResponse: true
-      }).then(response => {
-        // console.log('remove allocation response: ')
-        // console.log(response)
-        if (response.status === 200) {
-          // TODO: To handle how to inform user that pledge data is sucessfully sent
-          return response.json()
-        } else {
-          console.log('Error sending pledge details')
-        }
-      }).then(obj => {
-        dispatch(initSelection(obj.items))
-
-        //TODO: REWORK THIS
-        fetch(COLLATERAL_URL).then((response) => {
-          return response.json()
-        }).then((obj) => {
-          dispatch(updateCollateral(fromJS(obj.items)))
-        })
-      }).catch(error => {
-        console.log('Error: ' + error)
-      })
+      // fetch(PLEDGE_REMOVE_ALLOCATED_ASSET, {
+      //   method: 'POST',
+      //   body: JSON.stringify(obj),
+      //   headers: {'content-type': 'application/json'},
+      //   json: true,
+      //   resolveWithFullResponse: true
+      // }).then(response => {
+      //   // console.log('remove allocation response: ')
+      //   // console.log(response)
+      //   if (response.status === 200) {
+      //     // TODO: To handle how to inform user that pledge data is sucessfully sent
+      //     return response.json()
+      //   } else {
+      //     console.log('Error sending pledge details')
+      //   }
+      // }).then(obj => {
+      //   dispatch(initSelection(obj.items))
+      //
+      //   //TODO: REWORK THIS
+      //   fetch(COLLATERAL_URL).then((response) => {
+      //     return response.json()
+      //   }).then((obj) => {
+      //     dispatch(updateCollateral(fromJS(obj.items)))
+      //   })
+      // }).catch(error => {
+      //   console.log('Error: ' + error)
+      // })
     },
     resetFilters: () => dispatch(updatePledgeFilter({
       attr: 'notificationTime',

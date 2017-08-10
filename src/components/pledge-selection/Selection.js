@@ -95,26 +95,31 @@ export default class Selection extends React.Component {
     )
   }
 
-  dragNdrop = {  ondrop_handler: (e, state, existingData, marginType)=>{  e.currentTarget.style.background = "white"
-                                                                          let droppedData = e.dataTransfer.getData("text")
-                                                                          this.setState( (prevState)=>{
-                                                                           let clone = _.clone(prevState)
-                                                                           _.update(clone, 'allocationPopup', ()=>true)
-                                                                           _.update(clone, 'marginType', ()=>marginType)
-                                                                           _.update(clone, 'assetAllocated', ()=>JSON.parse(droppedData))
-                                                                           if(existingData) _.update(clone, 'existingAsset', ()=>existingData.toJS())
-                                                                           return clone
-                                                                          })
-                                                                          e.preventDefault()
-                  },
+  dragNdrop = {
+    ondrop_handler: (e, state, existingData, marginType) => {
+      e.currentTarget.style.background = "white"
+      let droppedData = e.dataTransfer.getData("text")
+      this.setState((prevState) => {
+        let clone = _.clone(prevState)
+        _.update(clone, 'allocationPopup', () => true)
+        _.update(clone, 'marginType', () => marginType)
+        _.update(clone, 'assetAllocated', () => JSON.parse(droppedData))
+        if (existingData) _.update(clone, 'existingAsset', () => existingData.toJS())
+        return clone
+      })
+      e.preventDefault()
+    },
 
-                 onDragOver_handler: (e)=>{ e.currentTarget.style.background = "#e5e5e5"
-                                            e.preventDefault()
-                  },
+    onDragOver_handler: (e) => {
+      e.currentTarget.style.background = "#e5e5e5"
+      e.preventDefault()
+    },
 
-                 onDragLeave_handler: (e)=>{ e.currentTarget.style.background = "white" }
+    onDragLeave_handler: (e) => {
+      e.currentTarget.style.background = "white"
+    }
 
-              } // end dragNdrop{}
+  } // end dragNdrop{}
 
 
   togglePendingAllocation(e) {
@@ -174,7 +179,7 @@ export default class Selection extends React.Component {
   }
 
   componentDidMount(){
-   this.setState({agreementName: this.props.marginCall.get('agreementName')})
+    this.setState({agreementName: this.props.marginCall.get('agreementName')})
   }
 
   render() {
