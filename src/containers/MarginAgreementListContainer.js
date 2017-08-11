@@ -6,7 +6,8 @@ import {
   reconInitState,
   firstLeveSelect,
   secondLevelSelect,
-  updateReconFilter
+  updateReconFilter,
+  reconItem
 } from '../actions'
 import { RECON_DATA_URL, RECON_URL, DASHBOARD_URL } from '../constants/APIcalls'
 import filterItems from '../utils/filterItems'
@@ -34,22 +35,24 @@ const mapDispatchToProps = dispatch => ({
   onReconItem : (e) => {
     // console.log('GET URL: ' + RECON_DATA_URL + e.currentTarget.dataset.ref)
     //new recon entire margin call with one get api
-    fetch(RECON_DATA_URL + e.currentTarget.dataset.ref, {
-      method: 'GET'
-    }).then(response => {
-      // console.log('response ' + JSON.stringify(response))
-      return response
-    }).then(obj => {
-      // console.log('refreshing recon data...')
-      fetch(RECON_URL).then((response) => {
-        return response.json()
-      }).then((obj) => {
-        // console.log('Data fetched: ' + obj)
-        const {items} = obj
-        dispatch(reconInitState(items))
-      })
-      dispatch(sagaNavbarAlerts())
-    })
+    console.log(e.currentTarget.dataset.ref)
+    dispatch(reconItem(e.currentTarget.dataset.ref))
+    // fetch(RECON_DATA_URL + e.currentTarget.dataset.ref, {
+    //   method: 'GET'
+    // }).then(response => {
+    //   // console.log('response ' + JSON.stringify(response))
+    //   return response
+    // }).then(obj => {
+    //   // console.log('refreshing recon data...')
+    //   fetch(RECON_URL).then((response) => {
+    //     return response.json()
+    //   }).then((obj) => {
+    //     // console.log('Data fetched: ' + obj)
+    //     const {items} = obj
+    //     dispatch(reconInitState(items))
+    //   })
+    //   dispatch(sagaNavbarAlerts())
+    // })
     //dispatch(reconItem(e.currentTarget.dataset.ref)) //old recon line by line
   },
   onSelectedItem : (guid, assetID) => {

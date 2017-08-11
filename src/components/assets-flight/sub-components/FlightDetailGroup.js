@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import FlightDetailRow from './FlightDetailRow'
 import styles from './FlightItemTable.css'
+import transitions from './transition.css'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
 
 export default class FlightDetailGroup extends React.Component {
   constructor(props) {
@@ -18,6 +20,14 @@ export default class FlightDetailGroup extends React.Component {
     this.setState({
       isExpanded: !this.state.isExpanded
     })
+  }
+
+  getTime(time) {
+    // console.log(time.length)
+    if(time.length > 5)
+      return new Date(time).getHours() + ':' + new Date(time).getMinutes()
+    else
+      return time
   }
 
   render() {
@@ -44,11 +54,18 @@ export default class FlightDetailGroup extends React.Component {
     }
 
     return (
-      <div className={styles.flightItemTableRowGroup}>
+      <ReactCSSTransitionGroup
+        component="div"
+        className={styles.flightItemTableRowGroup}
+        transitionName={transitions}
+        transitionAppear={true}
+        transitionAppearTimeout={500}
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={300}>
         <FlightDetailRow
           propIsGroupHeader
           propIsGroupExpanded={this.state.isExpanded}
-          propTime={propHeaderDetail.time}
+          propTime={this.getTime(propHeaderDetail.time)}
           propAsset={propHeaderDetail.agreement}
           propFrom={propHeaderDetail.from}
           propTo={propHeaderDetail.to}
@@ -59,7 +76,7 @@ export default class FlightDetailGroup extends React.Component {
 
         {flightDetailList}
 
-      </div>
+      </ReactCSSTransitionGroup>
     )
   }
 }

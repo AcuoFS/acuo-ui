@@ -158,8 +158,9 @@ export default class MarginAgreementPortfolio extends React.Component {
                      currencyInfo={currencyInfo}/>
 
         <div className={styles.actPanel + ' ' + styles.act_C}>
-          {!isEmptyCounterparty(portfolioData.get('counterpartyAssets')) &&
-          !this.isDisputed(portfolioData) &&
+          { !isEmptyCounterparty(portfolioData.get('counterpartyAssets')) &&
+            !this.isDisputed(portfolioData) &&
+            percentage !== 'Infinity' &&
           <div className={styles.btnWrap}>
             <div className={styles.actFig + ' ' + this.getTextColour(percentage)}>
               {percentage}%
@@ -168,7 +169,7 @@ export default class MarginAgreementPortfolio extends React.Component {
                  onClick={ (e)=>{
                    onReconItem(e)
                   }}
-                 data-ref={portfolioData.get('GUID') + "?amount=" + this.state.adjAmount}>
+                 data-ref={portfolioData.get('GUID') + "?amount=" + this.state.adjAmount + "&direction=" + portfolioData.get('direction')}>
              OK
             </div>
           </div>}

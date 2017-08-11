@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { UploadWidgetComponent } from '../components'
 import {
-  updateTxnID,
+  getMarginCallUpload,
   pollMarginCall,
   requestingValuationFlag,
   uploadingPortfolioFlag
@@ -16,13 +16,13 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  onUpdateTxnID: (txnID) =>
-    dispatch(updateTxnID(txnID))
+  onUpdateTxnID: (data) =>
+    dispatch(getMarginCallUpload(data))
   ,
-  requestValuation: (txnID) =>{
-    dispatch(pollMarginCall(txnID))
-    dispatch(requestingValuationFlag())
-  },
+  // requestValuation: (txnID) =>{
+  //   dispatch(pollMarginCall(txnID))
+  //   dispatch(requestingValuationFlag())
+  // },
   flagUploading: () =>
     dispatch(uploadingPortfolioFlag())
 })

@@ -1,57 +1,76 @@
-import { delay } from 'redux-saga'
+
+// import { delay } from 'redux-saga'
 import { fork, call, put, take, race, takeLatest } from 'redux-saga/effects'
 
 //fetches
-import { FetchMarginCall } from './FetchMarginCall'
-import { checkSpecificServer } from './CheckServerConnectivity'
-import { FetchNavbarAlerts } from './FetchNavbarAlerts'
+// import { FetchMarginCall } from './FetchMarginCall'
+// import { checkSpecificServer } from './CheckServerConnectivity'
+// import { FetchNavbarAlerts } from './FetchNavbarAlerts'
 import { login } from './Login'
 
+import { delay, takeEvery } from 'redux-saga'
+// import { fork, call, put, take, race } from 'redux-saga/effects'
+// import {  } from 'redux-saga/helpers'
+
+//fetches
+import {
+  checkSpecificServer,
+  FetchNavbarAlerts,
+  ReconItemSaga,
+  ReconDisputeSaga,
+  FetchDeparturesSaga,
+  RequestValuationSaga,
+  GenerateMarginCallSaga,
+  FetchDashboardSaga,
+  FetchReconSaga,
+  FetchOptimisationSettingsSaga,
+  FetchSelectionSaga,
+  AllocateCollateralsSaga,
+  FetchCollateralsSaga,
+  PostPledgeSaga,
+  RemoveAllocatedAssetsSaga
+} from './ServerCalls'
+
 //actions
-import { getMarginCallUpload } from  '../actions/MarginCallUploadActions'
-import { pollMarginCall } from '../actions/MarginCallUploadActions'
-import { updateNavbarAlerts } from './../actions/CommonActions'
+import {
+  updateNavbarAlerts,
+  sagaNavbarAlerts
+} from './../actions/CommonActions'
+import {
+  reconInitState,
+  initState,
+  initCurrencyInfo,
+  initOptimisationSettings,
+  initSelection,
+  updateCollateral,
+  fetchCollaterals,
+  fetchSelection,
+  clearPendingAllocation
+} from './../actions'
+import { initDepartures } from './../actions/DeployedActions'
+import {
+  updateRequestState,
+  marginCallGenerated
+} from './../actions/MarginCallUploadActions'
 
 //action types
 import {
-  POLL_MARGIN_CALL,
-  STOP_MARGIN_POLL,
+  DO_LOGIN,
   SAGA_NAVBAR_ALERTS,
-  DO_LOGIN
+  RECON_ITEM,
+  RECON_DISPUTE_SUBMIT,
+  FETCH_DEPARTURES,
+  ON_REQUEST_VALUATION,
+  ON_REQUEST_GENERATE_MARGINCALL,
+  ON_INIT_DASHBOARD,
+  ON_INIT_RECON,
+  ON_FETCH_OPTIMISATION_SETTINGS,
+  ON_FETCH_SELECTION,
+  ON_ALLOCATE_COLLATERALS,
+  ON_FETCH_COLLATERALS,
+  ON_PLEDGE,
+  ON_REMOVE_ALLOCATED_ASSET
 } from '../constants/ActionTypes'
-
-
-function* poll(txnID) {
-  // console.log('poll')
-  try {
-    yield call(delay, 10000)
-    const result = yield call(FetchMarginCall, txnID)
-
-    // console.log(result)
-
-    if(result[0] === 'failed')
-      yield put(pollMarginCall(txnID))
-    else
-      yield put(getMarginCallUpload(result[1]))
-
-
-  } catch (error) {
-    // cancellation error -- can handle this if you wish
-    return
-  }
-}
-
-function* watchMarginCall() {
-  // console.log('watch margin call')
-  while (true) {
-    const { txnID } = yield take(POLL_MARGIN_CALL)
-    yield race([
-      fork(poll, txnID),
-      take(STOP_MARGIN_POLL)
-    ])
-    // console.log('loop')
-  }
-}
 
 function* serverHealthChecks() {
   while(true){
@@ -71,7 +90,7 @@ function* serverHealthChecks() {
   }
 }
 
-function* sagaNavbarAlerts() {
+function* navbarAlerts() {
   while(true){
     try{
       yield take(SAGA_NAVBAR_ALERTS)
@@ -84,16 +103,213 @@ function* sagaNavbarAlerts() {
   }
 }
 
+
 function* watchLogin() {
-  yield takeLatest(DO_LOGIN, login)
+    yield takeLatest(DO_LOGIN, login)
+  }
+
+function* watchReconcile() {
+  while(true){
+    try{
+      const action = yield take(RECON_ITEM)
+      const result = yield call(ReconItemSaga, action.GUID)
+      yield put(reconInitState(result.items))
+      yield put(sagaNavbarAlerts())
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchReconDispute() {
+  while(true){
+    try{
+      const action = yield take(RECON_DISPUTE_SUBMIT)
+      // console.log(action)
+      const items = yield call(ReconDisputeSaga, action.disputeObj)
+      // console.log(result)
+      yield put(reconInitState(items))
+      yield put(sagaNavbarAlerts())
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchFetchDepatures() {
+  while(true){
+    try{
+      yield take(FETCH_DEPARTURES)
+      const obj = yield call(FetchDeparturesSaga)
+      if(obj.length)
+        yield put(initDepartures(obj))
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchRequestValuation() {
+  while(true){
+    try{
+      const action = yield take(ON_REQUEST_VALUATION)
+      const obj = yield call(RequestValuationSaga, action.referenceIDs)
+      console.log(obj)
+      yield put(marginCallGenerated(obj))
+      yield put(updateRequestState(false))
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchGenerateMarginCalls() {
+  while(true){
+    try{
+      const action = yield take(ON_REQUEST_GENERATE_MARGINCALL)
+      const obj = yield call(GenerateMarginCallSaga, action.referenceIDs)
+      console.log(obj)
+      yield put(marginCallGenerated(obj))
+      yield put(updateRequestState(false))
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchFetchDashboardData() {
+  while(true){
+    try{
+      yield take(ON_INIT_DASHBOARD)
+      const obj = yield call(FetchDashboardSaga)
+      yield put(initState(obj))
+    } catch(error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchFetchReconSaga() {
+  while(true){
+    try{
+      yield take(ON_INIT_RECON)
+      const {items, currencyInfo} = yield call(FetchReconSaga)
+      yield put(reconInitState(items))
+      yield put(initCurrencyInfo(currencyInfo))
+    } catch(error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchFetchOptimisationSettings() {
+  while(true){
+    try{
+      yield take(ON_FETCH_OPTIMISATION_SETTINGS)
+      const payload = yield call(FetchOptimisationSettingsSaga)
+      yield put(initOptimisationSettings(payload.items))
+    }catch(error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchFetchSelection() {
+  while (true) {
+    try {
+      yield take(ON_FETCH_SELECTION)
+      const payload = yield call(FetchSelectionSaga)
+      yield put(initSelection(payload.items))
+    } catch (error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchAllocateCollaterals() {
+  while (true) {
+    try {
+      const { obj } = yield take(ON_ALLOCATE_COLLATERALS)
+      const payload = yield call(AllocateCollateralsSaga, obj)
+      yield put(initSelection(payload.items))
+      yield put(fetchCollaterals())
+    } catch (error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchFetchCollaterals() {
+  while (true) {
+    try {
+      yield take(ON_FETCH_COLLATERALS)
+      const payload = yield call(FetchCollateralsSaga)
+      yield put(updateCollateral(payload.items))
+    } catch (error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchPledge() {
+  while(true){
+    try{
+      const action = yield take(ON_PLEDGE)
+      yield call(PostPledgeSaga, action.pledgeToSend)
+      yield put(fetchSelection())
+      yield put(clearPendingAllocation())
+      yield put(sagaNavbarAlerts())
+      yield put(fetchCollaterals())
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchRemoveAllocatedAsset() {
+  while(true){
+    try{
+      const action = yield take(ON_REMOVE_ALLOCATED_ASSET)
+      const json = yield call(RemoveAllocatedAssetsSaga, action.obj)
+      yield put(initSelection(json.items))
+      yield put(fetchCollaterals())
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
 }
 
 export default function* root() {
-  // console.log('root')
   yield [
-    fork(watchMarginCall),
     fork(serverHealthChecks),
     fork(sagaNavbarAlerts),
-    fork(watchLogin)
+    fork(watchLogin),
+    fork(navbarAlerts),
+    fork(watchReconcile),
+    fork(watchReconDispute),
+    fork(watchFetchDepatures),
+    fork(watchRequestValuation),
+    fork(watchGenerateMarginCalls),
+    fork(watchFetchDashboardData),
+    fork(watchFetchReconSaga),
+    fork(watchFetchOptimisationSettings),
+    fork(watchFetchSelection),
+    fork(watchAllocateCollaterals),
+    fork(watchFetchCollaterals),
+    fork(watchPledge),
+    fork(watchRemoveAllocatedAsset)
   ]
 }

@@ -33,8 +33,8 @@
 
 .button{
   color: #fff ;
-  background-color: #00B9CC ;
-  border: 1px solid #00B9CC ;
+  background-color: #118917;
+  border: 1px solid #118917;
   font-size: 18px;
   composes: baseFontBold from '../../static/css-components/fonts.css';
   text-align: center;
@@ -43,12 +43,14 @@
   align-self: center;
   cursor: pointer;
   padding: 10px 24px;
+  margin-left: 10px;
 }
 
 .button.disabled {
   background-color: #FAFAFA;
   border: 1px solid #d7dce0;
   color: #d7dce0;
+  pointer-events: none;
 }
 
 /*table stylings*/
@@ -260,4 +262,13 @@
   border-right: 7px solid transparent;
   top: -9px;
   left: 8px;
+}
+
+.requesting {
+  opacity: 0.2;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

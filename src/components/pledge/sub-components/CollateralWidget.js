@@ -7,7 +7,7 @@ import {fromJS} from 'immutable'
 import {filterByAllPropertiesOfObj} from '../../../utils'
 import styles from '../Pledge.css'
 import selfStyles from './CollateralWidget.css'
-import mockData from './mockData_collateral.js'
+// import mockData from './mockData_collateral.js'
 
 export default class CollateralWidget extends React.Component {
   constructor(props) {
@@ -21,16 +21,7 @@ export default class CollateralWidget extends React.Component {
   }
 
   componentWillMount() {
-    if (_.isEmpty(this.props.collateral)) {
-      fetch(COLLATERAL_URL).then((response) => {
-        return response.json()
-      }).then((obj) => {
-        this.props.onCollateralDataAvailable(fromJS(obj.items))
-      })
-    }
-
-    // #mockData
-    // this.props.onCollateralDataAvailable(fromJS(mockData.items))
+    this.props.onFetchCollaterals()
   }
 
   handleFilterChange(value) {
