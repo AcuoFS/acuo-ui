@@ -9,7 +9,7 @@ export default class LoginComponent extends React.Component{
    this.state = { showPassword : false,
                  passwordError : "",
                       password : "@Password1",
-                      username : 'john_doe',
+                      username : 'user@acuocpty.com',
                  inputPassword : "@Password1" }
   }
 
@@ -29,7 +29,7 @@ export default class LoginComponent extends React.Component{
             <div className={styles.input}>
               <input type="text"
                      value={this.state.username}
-                     onChange={ (e)=>{this.setState({password: e.currentTarget.value})} }  />
+                     onChange={ (e)=>{this.setState({username: e.currentTarget.value})} }  />
             </div>
           </div>
 
@@ -54,11 +54,14 @@ export default class LoginComponent extends React.Component{
           <div className={styles.buttonHolder}>
             <button className={(this.props.processingLogin ? styles.disabled : '')} onClick={ ()=>{
              this.setState( {passwordError: ""} )
-             if( this.state.inputPassword.length < 8 ) { this.setState( {passwordError: " Password must be a minimum of 8 characters "} ) }
+             if( this.state.inputPassword.length < 8 ) {
+               this.setState( {passwordError: " Password must be a minimum of 8 characters "} ) }
              else {
-              if( !(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/.test(this.state.inputPassword)) ) { this.setState( {passwordError: "Password must a mixed-case alphanumeric"} ) }
+              if( !(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/.test(this.state.inputPassword)) ) {
+                this.setState( {passwordError: "Password must a mixed-case alphanumeric"} ) }
               else{
-               if( this.state.inputPassword!=this.state.password  ) { this.setState( { passwordError: "Invalid Password!" } ) }
+               if( this.state.inputPassword!=this.state.password  ) {
+                 this.setState( { passwordError: "Invalid Password!" } ) }
                else {
                 //localStorage.authenticating = true
                 //hashHistory.push("/2fa")

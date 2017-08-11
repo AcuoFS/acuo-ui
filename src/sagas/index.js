@@ -11,6 +11,7 @@ import { login } from './Login'
 import { delay, takeEvery } from 'redux-saga'
 // import { fork, call, put, take, race } from 'redux-saga/effects'
 // import {  } from 'redux-saga/helpers'
+import { hashHistory } from 'react-router'
 
 //fetches
 import {
@@ -28,7 +29,8 @@ import {
   AllocateCollateralsSaga,
   FetchCollateralsSaga,
   PostPledgeSaga,
-  RemoveAllocatedAssetsSaga
+  RemoveAllocatedAssetsSaga,
+  DoLoginSaga
 } from './ServerCalls'
 
 //actions
@@ -52,6 +54,8 @@ import {
   updateRequestState,
   marginCallGenerated
 } from './../actions/MarginCallUploadActions'
+import { updateLoginProcess } from './../actions/LoginActions'
+
 
 //action types
 import {
@@ -105,8 +109,29 @@ function* navbarAlerts() {
 
 
 function* watchLogin() {
-    yield takeLatest(DO_LOGIN, login)
+  // yield takeLatest(DO_LOGIN, login)
+  while (true) {
+    try {
+      const action = yield take(DO_LOGIN)
+      const {user, pass} = action
+      if (user && pass) {
+        yield put(updateLoginProcess(true))
+        const clientID = yield call(DoLoginSaga, user, pass)
+        if(clientID) {
+          localStorage.authenticating = true
+          hashHistory.push('/2fa')
+        }
+        yield put(updateLoginProcess(false))
+      }
+    }
+    catch
+      (error) {
+      console.log(error)
+      return false
+    }
   }
+}
+
 
 function* watchReconcile() {
   while(true){
