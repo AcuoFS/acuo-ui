@@ -2,7 +2,7 @@
  * Created by Rui on 31/7/17.
  */
 
-import { REQUEST_GENERATE_MARGIN_CALLS } from './../constants/APIcalls'
+import { REQUEST_GENERATE_MARGIN_CALLS } from '../../constants/APIcalls'
 
 export const GenerateMarginCallSaga = (referenceIDs) =>
   fetch(REQUEST_GENERATE_MARGIN_CALLS, {

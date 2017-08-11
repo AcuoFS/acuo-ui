@@ -83,9 +83,17 @@ export const initOptimisationSettings = (settings) => ({
   settings: settings
 })
 
+export const fetchOptimisationSettings = () => ({
+  type: ActionTypes.ON_FETCH_OPTIMISATION_SETTINGS
+})
+
 export const updateOptimisationSettings = (newSettings) => ({
   type: ActionTypes.UPDATE_OPTIMISATION_SETTINGS,
   newSettings: newSettings
+})
+
+export const fetchSelection = () => ({
+  type: ActionTypes.ON_FETCH_SELECTION
 })
 
 export const initSelection = (selection) => ({
@@ -120,6 +128,15 @@ export const updatePledgeFilter = (value) =>({
   value: value
 })
 
+export const fetchCollaterals = () => ({
+  type: ActionTypes.ON_FETCH_COLLATERALS
+})
+
+export const allocateCollaterals = (obj) => ({
+  type: ActionTypes.ON_ALLOCATE_COLLATERALS,
+  obj
+})
+
 //recon
 export const firstLeveSelect = (GUID, firstLevelID) => ({
   type: ActionTypes.FIRSTLEVEL_SELECT,
@@ -134,9 +151,19 @@ export const secondLevelSelect = (GUID, parentID, secondLevelID) => ({
   secondLevelID: secondLevelID
 })
 
-export const updateReconFilter = (value) =>({
+export const updateReconFilter = (value) => ({
   type: ActionTypes.RECON_FILTER_SET,
-  value: value
+  value
+})
+
+export const onRemoveAllocatedAsset = (obj) => ({
+  type: ActionTypes.ON_REMOVE_ALLOCATED_ASSET,
+  obj
+})
+
+export const onPledge = (pledgeToSend) => ({
+  type: ActionTypes.ON_PLEDGE ,
+  pledgeToSend
 })
 
 //submit margin calls

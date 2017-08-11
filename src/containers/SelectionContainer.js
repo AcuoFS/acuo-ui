@@ -6,6 +6,22 @@ import { connect } from 'react-redux'
 //import { PledgeSelectionComponent } from '../components'
 import PledgeSelectionComponent from '../components/pledge-selection/Selection'
 
+import {
+  initOptimisationSettings,
+  updateOptimisationSettings,
+  initSelection,
+  togglePendingAllocation,
+  toggleCheckall,
+  clearPendingAllocation,
+  updatePledgeFilter,
+  updateCollateral,
+  fetchOptimisationSettings,
+  fetchSelection,
+  allocateCollaterals,
+  onPledge,
+  onRemoveAllocatedAsset
+} from '../actions'
+
 const mapStateToProps = (state, ownProps) => ({
   sideways: ownProps.sideways,
   clicked: ownProps.clicked,

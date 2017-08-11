@@ -23,6 +23,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(MarginCallUploadActions.updateMarginCallUpload(newTotalCallAmt, uploadId))
   },
   onPostMarginCallIDs: (idArr) => {
+    // TODO: migrate to saga
     fetch(POST_MARGIN_CALL_IDS, {
       method: 'POST',
       body: JSON.stringify(idArr)

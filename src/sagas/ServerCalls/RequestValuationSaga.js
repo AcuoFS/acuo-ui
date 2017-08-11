@@ -2,7 +2,7 @@
  * Created by Rui on 28/7/17.
  */
 
-import { REQUEST_VALUATION_URL } from './../constants/APIcalls'
+import { REQUEST_VALUATION_URL } from '../../constants/APIcalls'
 
 export const RequestValuationSaga = (referenceIDs) =>
   fetch(REQUEST_VALUATION_URL, {
