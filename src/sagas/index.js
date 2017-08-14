@@ -1,6 +1,8 @@
+import { fork, call, put, take, race, takeLatest } from 'redux-saga/effects'
 import { delay, takeEvery } from 'redux-saga'
-import { fork, call, put, take, race } from 'redux-saga/effects'
-// import {  } from 'redux-saga/helpers'
+import { hashHistory } from 'react-router'
+import Notifications from 'react-notification-system-redux'
+
 
 //fetches
 import {
@@ -18,8 +20,10 @@ import {
   AllocateCollateralsSaga,
   FetchCollateralsSaga,
   PostPledgeSaga,
-  RemoveAllocatedAssetsSaga
+  RemoveAllocatedAssetsSaga,
+  DoLoginSaga
 } from './ServerCalls'
+
 //actions
 import {
   updateNavbarAlerts,
@@ -41,9 +45,12 @@ import {
   updateRequestState,
   marginCallGenerated
 } from './../actions/MarginCallUploadActions'
+import { updateLoginProcess } from './../actions/LoginActions'
+
 
 //action types
 import {
+  DO_LOGIN,
   SAGA_NAVBAR_ALERTS,
   RECON_ITEM,
   RECON_DISPUTE_SUBMIT,
@@ -90,6 +97,39 @@ function* navbarAlerts() {
     }
   }
 }
+
+
+function* watchLogin() {
+  // yield takeLatest(DO_LOGIN, login)
+  while (true) {
+    try {
+      const action = yield take(DO_LOGIN)
+      const {user, pass} = action
+      if (user && pass) {
+        yield put(updateLoginProcess(true))
+        const { clientID } = yield call(DoLoginSaga, user, pass)
+        if(clientID) {
+          localStorage.authenticating = true
+          hashHistory.push('/2fa')
+        }else{
+          yield put(Notifications.error({
+            title: 'Warning',
+            message: `Login failed, please check your credentials`,
+            position: 'tr',
+            autoDismiss: 3
+          }))
+        }
+        yield put(updateLoginProcess(false))
+      }
+    }
+    catch
+      (error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
 
 function* watchReconcile() {
   while(true){
@@ -278,6 +318,8 @@ function* watchRemoveAllocatedAsset() {
 export default function* root() {
   yield [
     fork(serverHealthChecks),
+    fork(sagaNavbarAlerts),
+    fork(watchLogin),
     fork(navbarAlerts),
     fork(watchReconcile),
     fork(watchReconDispute),

@@ -12,6 +12,10 @@ const CommonReducer = (state = INITIAL_STATE, action) => {
   switch(action.type){
     case ActionTypes.UPDATE_NAVBAR_ALERTS:
       return state.set('alerts', fromJS(action.alerts))
+
+    case ActionTypes.UPDATE_LOGIN_PROCESS:
+      return state.set('processingLogin', fromJS(action.status))
+
     case ActionTypes.SCREEN_RESIZE:
       return state.set('noPrompt', action.noPrompt)
 
