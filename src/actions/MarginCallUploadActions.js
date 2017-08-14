@@ -1,12 +1,14 @@
 import {
   GET_MARGIN_CALL_UPLOAD,
   UPDATE_MARGIN_CALL_UPLOAD,
-  UPDATE_TXN_ID,
-  POLL_MARGIN_CALL,
+  // UPDATE_TXN_ID,
+  // POLL_MARGIN_CALL,
   REQUESTING_VALUATION,
   UPLOADING_PORTFOLIO,
   MARGIN_CALL_GENERATED,
-  UPDATE_REQUESTING_STATE
+  UPDATE_REQUESTING_STATE,
+  ON_REQUEST_VALUATION,
+  ON_REQUEST_GENERATE_MARGINCALL
 } from '../constants/ActionTypes'
 
 export const getMarginCallUpload = (uploadData) => ({
@@ -20,15 +22,15 @@ export const updateMarginCallUpload = (newTotalCallAmt, uploadId) => ({
   uploadId
 })
 
-export const updateTxnID = (txnID) => ({
-  type: UPDATE_TXN_ID,
-  txnID
-})
+// export const updateTxnID = (txnID) => ({
+//   type: UPDATE_TXN_ID,
+//   txnID
+// })
 
-export const pollMarginCall = (txnID) => ({
-  type: POLL_MARGIN_CALL,
-  txnID
-})
+// export const pollMarginCall = (txnID) => ({
+//   type: POLL_MARGIN_CALL,
+//   txnID
+// })
 
 export const requestingValuationFlag = () => ({
   type: REQUESTING_VALUATION
@@ -46,4 +48,14 @@ export const marginCallGenerated = (updatedPortfolios) => ({
 export const updateRequestState = flag => ({
   type: UPDATE_REQUESTING_STATE,
   flag
+})
+
+export const onRequestValuationAction = referenceIDs => ({
+  type: ON_REQUEST_VALUATION,
+  referenceIDs
+})
+
+export const onRequestGenerateMarginCall = referenceIDs => ({
+  type: ON_REQUEST_GENERATE_MARGINCALL,
+  referenceIDs
 })

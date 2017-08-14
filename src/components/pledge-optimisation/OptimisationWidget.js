@@ -49,6 +49,13 @@ export default class OptimisationWidget extends React.Component {
     return (styles.invisible);
   }
 
+  contentClassTransition(isShow) {
+    if(isShow) {
+      return (styles.showtransition);
+    }
+    return (styles.invisibletransition);
+  }
+
   arrowClass(arrow) {
     if(arrow) {
       return (styles.down);
@@ -209,20 +216,22 @@ export default class OptimisationWidget extends React.Component {
       </div>
 
       <div className={this.contentClass(this.state.isShow)} id={styles.innerContent}>
-        <form action="">
-          {scenarioAnalysis
-            .map((x,index) =>
-            <AnalysisWidget
-              key={index}
-              name={x.name}
-              cost={x.cost}
-              savings={x.savings}
-              ratio={x.ratio}
-              isActive={x.name === this.state.activeRow}
-              toggle={this.selectActiveRow}
-            />)
-          }
-        </form>
+        <div className={this.contentClassTransition(this.state.isShow)}>
+          <form action="">
+            {scenarioAnalysis
+              .map((x,index) =>
+              <AnalysisWidget
+                key={index}
+                name={x.name}
+                cost={x.cost}
+                savings={x.savings}
+                ratio={x.ratio}
+                isActive={x.name === this.state.activeRow}
+                toggle={this.selectActiveRow}
+              />)
+            }
+          </form>
+        </div>
       </div>
     </div>
   </div>

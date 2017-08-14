@@ -2,53 +2,43 @@ import { delay } from 'redux-saga'
 import { fork, call, put, take, race } from 'redux-saga/effects'
 
 //fetches
-import { FetchMarginCall } from './FetchMarginCall'
-import { checkSpecificServer } from './CheckServerConnectivity'
-import { FetchNavbarAlerts } from './FetchNavbarAlerts'
+import { checkSpecificServer } from './CheckServerConnectivitySaga'
+import { FetchNavbarAlerts } from './FetchNavbarAlertsSaga'
+import { ReconItemSaga } from './ReconItemSaga'
+import { ReconDisputeSaga } from './ReconDisputeSaga'
+import { FetchDeparturesSaga } from './FetchDeparturesSaga'
+import { RequestValuationSaga } from './RequestValuationSaga'
+import { GenerateMarginCallSaga } from './GenerateMarginCallSaga'
+import { FetchDashboardSaga } from './FetchDashboardSaga'
+import { FetchReconSaga } from './FetchReconSaga'
 
 //actions
-import { getMarginCallUpload } from  '../actions/MarginCallUploadActions'
-import { pollMarginCall } from '../actions/MarginCallUploadActions'
-import { updateNavbarAlerts } from './../actions/CommonActions'
+import {
+  updateNavbarAlerts,
+  sagaNavbarAlerts
+} from './../actions/CommonActions'
+import {
+  reconInitState,
+  initState,
+  initCurrencyInfo
+} from './../actions'
+import { initDepartures } from './../actions/DeployedActions'
+import {
+  updateRequestState,
+  marginCallGenerated
+} from './../actions/MarginCallUploadActions'
 
 //action types
 import {
-  POLL_MARGIN_CALL,
-  STOP_MARGIN_POLL,
-  SAGA_NAVBAR_ALERTS
+  SAGA_NAVBAR_ALERTS,
+  RECON_ITEM,
+  RECON_DISPUTE_SUBMIT,
+  FETCH_DEPARTURES,
+  ON_REQUEST_VALUATION,
+  ON_REQUEST_GENERATE_MARGINCALL,
+  ON_INIT_DASHBOARD,
+  ON_INIT_RECON
 } from '../constants/ActionTypes'
-
-function* poll(txnID) {
-  // console.log('poll')
-  try {
-    yield call(delay, 10000)
-    const result = yield call(FetchMarginCall, txnID)
-
-    // console.log(result)
-
-    if(result[0] === 'failed')
-      yield put(pollMarginCall(txnID))
-    else
-      yield put(getMarginCallUpload(result[1]))
-
-
-  } catch (error) {
-    // cancellation error -- can handle this if you wish
-    return
-  }
-}
-
-function* watchMarginCall() {
-  // console.log('watch margin call')
-  while (true) {
-    const { txnID } = yield take(POLL_MARGIN_CALL)
-    yield race([
-      fork(poll, txnID),
-      take(STOP_MARGIN_POLL)
-    ])
-    // console.log('loop')
-  }
-}
 
 function* serverHealthChecks() {
   while(true){
@@ -68,7 +58,7 @@ function* serverHealthChecks() {
   }
 }
 
-function* sagaNavbarAlerts() {
+function* navbarAlerts() {
   while(true){
     try{
       yield take(SAGA_NAVBAR_ALERTS)
@@ -81,11 +71,121 @@ function* sagaNavbarAlerts() {
   }
 }
 
+function* onReconcile() {
+  while(true){
+    try{
+      const action = yield take(RECON_ITEM)
+      // console.log(action.GUID)
+      const result = yield call(ReconItemSaga, action.GUID)
+      // console.log(result)
+      yield put(reconInitState(result.items))
+      yield put(sagaNavbarAlerts())
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* onReconDispute() {
+  while(true){
+    try{
+      const action = yield take(RECON_DISPUTE_SUBMIT)
+      // console.log(action)
+      const items = yield call(ReconDisputeSaga, action.disputeObj)
+      // console.log(result)
+      yield put(reconInitState(items))
+      yield put(sagaNavbarAlerts())
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* onFetchDepatures() {
+  while(true){
+    try{
+      yield take(FETCH_DEPARTURES)
+      const obj = yield call(FetchDeparturesSaga)
+      if(obj.length)
+        yield put(initDepartures(obj))
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* onRequestValuation() {
+  while(true){
+    try{
+      const action = yield take(ON_REQUEST_VALUATION)
+      // console.log(action)
+      const obj = yield call(RequestValuationSaga, action.referenceIDs)
+      console.log(obj)
+      yield put(marginCallGenerated(obj))
+      yield put(updateRequestState(false))
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* onGenerateMarginCalls() {
+  while(true){
+    try{
+      const action = yield take(ON_REQUEST_GENERATE_MARGINCALL)
+      // console.log(action)
+      const obj = yield call(GenerateMarginCallSaga, action.referenceIDs)
+      console.log(obj)
+      yield put(marginCallGenerated(obj))
+      yield put(updateRequestState(false))
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* onFetchDashboardData() {
+  while(true){
+    try{
+      yield take(ON_INIT_DASHBOARD)
+      const obj = yield call(FetchDashboardSaga)
+      yield put(initState(obj))
+    } catch(error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* onFetchReconSaga() {
+  while(true){
+    try{
+      yield take(ON_INIT_RECON)
+      const {items, currencyInfo} = yield call(FetchReconSaga)
+      yield put(reconInitState(items))
+      yield put(initCurrencyInfo(currencyInfo))
+    } catch(error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
 export default function* root() {
-  // console.log('root')
   yield [
-    fork(watchMarginCall),
     fork(serverHealthChecks),
-    fork(sagaNavbarAlerts)
+    fork(navbarAlerts),
+    fork(onReconcile),
+    fork(onReconDispute),
+    fork(onFetchDepatures),
+    fork(onRequestValuation),
+    fork(onGenerateMarginCalls),
+    fork(onFetchDashboardData),
+    fork(onFetchReconSaga)
   ]
 }

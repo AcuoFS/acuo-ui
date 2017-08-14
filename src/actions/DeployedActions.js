@@ -1,6 +1,7 @@
 import {
   INIT_DEPARTURES,
-  UPDATE_SELECTED_DEPARTURE_DATE
+  UPDATE_SELECTED_DEPARTURE_DATE,
+  FETCH_DEPARTURES
 } from '../constants/ActionTypes'
 
 export const initDepartures = (departures) => ({
@@ -16,4 +17,8 @@ export const search = {
 export const updateSelectedDepartureDate = date => ({
   type: UPDATE_SELECTED_DEPARTURE_DATE,
   date
+})
+
+export const fetchDepartures = () => ({
+  type: FETCH_DEPARTURES
 })

@@ -5,10 +5,10 @@ import _ from 'lodash'
 import { FlightComponent } from '../components'
 import flightGroupArrival from '../components/assets-flight/mockFlightsArrival'
 import { search } from "../actions/DeployedActions.js"
-import { updateSelectedDepartureDate } from './../actions/DeployedActions'
+import { updateSelectedDepartureDate, fetchDepartures } from './../actions/DeployedActions'
 
 const mapStateToProps = state => {
-  console.log(state.DeployedReducer.getIn(['selectedDepartureDate', 'label']))
+  // console.log(state.DeployedReducer.getIn(['selectedDepartureDate', 'label']))
  return {
           departures: state.DeployedReducer.get('departures').toJS(),
           arrivals: flightGroupArrival,
@@ -21,6 +21,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    initDepartures: () => dispatch(fetchDepartures()),
     arrivalSearch: (searchText)=>{ dispatch(search.arrivals(searchText))},
     departureSearch: (searchText)=>{ dispatch(search.departures(searchText))},
     onUpdateSelectedDepartureDate: date => dispatch(updateSelectedDepartureDate(date))

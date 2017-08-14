@@ -5,9 +5,17 @@ export const initState = (state) => ({
   state: state
 })
 
+export const onInitDashboard = () => ({
+  type: ActionTypes.ON_INIT_DASHBOARD
+})
+
 export const reconInitState = (items) => ({
   type: ActionTypes.RECON_INIT_STATE,
   items,
+})
+
+export const onInitReconState = () => ({
+  type: ActionTypes.ON_INIT_RECON
 })
 
 export const initCurrencyInfo = (currencyInfo) => ({
@@ -62,6 +70,11 @@ export const selectedItems = (GUID, id) => ({
 export const reconItem = (id) => ({
   type: ActionTypes.RECON_ITEM,
   GUID: id
+})
+
+export const reconDispute = (disputeObj) => ({
+  type: ActionTypes.RECON_DISPUTE_SUBMIT,
+  disputeObj
 })
 
 //pledgeReducer stuffs, to be split later

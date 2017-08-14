@@ -11,21 +11,24 @@ var configJson = {
   ALLOCATE_COLLATERALS_URL: '/proxy/pledge/allocate-selection',
   ALLOCATE_COLLATERALS_URL_NEW: '/proxy/pledge/allocate-selection-new',
   PLEDGE_ALLOCATIONS: '/proxy/pledge/pledge-allocation',
-  UPLOAD_FILE_URL: '<%= baseUrl %>/valuation/acuo/api/upload/v1',
+  UPLOAD_FILE_URL: '/proxy/upload',
   // Please add the trailing / for recon single item (ok button)
-  RECON_DATA_URL: '<%= baseUrl %>/margin/acuo/api/margin/reconcile/',
+  // RECON_DATA_URL: '<%= baseUrl %>/margin/acuo/api/margin/reconcile/',
+  RECON_DATA_URL: '/proxy/recon/reconcile',
   REMOVE_ASSET_ALLOCATION_URL: 'url to remove(and earmark) asset from margin call',
   UNMATCHED_PORTFOLIO_URL: '/proxy/unmatched',
   SEND_RECON_DISPUTE_URL: '/proxy/recon/disputeStatement',
   PLEDGE_REMOVE_ALLOCATED_ASSET: '/proxy/pledge/remove-allocated-asset',
+  FETCH_DEPLOYED_DEPARTURES: '/proxy/deployed/departures',
+  PROXY_HEALTH_CHECK: '/proxy/common/proxy-connectivity',
+  MARGIN_HEALTH_CHECK: '/proxy/common/margin-connectivity',
+  VALUATION_HEALTH_CHECK: '/proxy/common/valuation-connectivity',
+  COLLATERAL_HEALTH_CHECK: '/proxy/common/collateral-connectivity',
+  FETCH_NAVBAR_ALERTS: '/proxy/common/navbar-alerts',
+  REQUEST_VALUATION_URL: '/proxy/upload/request-valuation',
+  REQUEST_GENERATE_MARGIN_CALLS: '/proxy/upload/request-margincalls',
   FETCH_GENERATED_PORTFOLIO: '<%= baseUrl %>/valuation/acuo/api/calls/async/generate/',
-  FETCH_DEPLOYED_DEPARTURES: '<%= baseUrl %>/margin/acuo/api/pledge/assets/all',
   POST_MARGIN_CALL_IDS: '<%= baseUrl %>/margin/acuo/api/margin/send/calls',
-  PROXY_HEALTH_CHECK: '/proxy/common/check-connectivity',
-  MARGIN_HEALTH_CHECK: '<%= baseUrl %>/margin/acuo/admin/ping',
-  VALUATION_HEALTH_CHECK: '<%= baseUrl %>/valuation/acuo/admin/ping',
-  COLLATERAL_HEALTH_CHECK: '<%= baseUrl %>/collateral/acuo/admin/ping',
-  FETCH_NAVBAR_ALERTS: '<%= baseUrl %>/margin/acuo/api/dashboard/menu'
 }
 
 exports.get = (env) => {

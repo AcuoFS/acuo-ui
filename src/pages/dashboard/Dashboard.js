@@ -8,7 +8,7 @@ import {
 } from '../../containers'
 import { connect } from 'react-redux'
 import styles from './Dashboard.css'
-import { initState } from '../../actions'
+import { onInitDashboard } from '../../actions'
 import { DASHBOARD_URL } from '../../constants/APIcalls'
 import { fromJS } from 'immutable'
 import { hashHistory } from 'react-router'
@@ -16,7 +16,7 @@ import { hashHistory } from 'react-router'
 export class Dashboard extends React.Component {
   constructor(props){
     super(props)
-    this.props.initDashboard()
+    // this.props.initDashboard()
   }
 
   componentWillMount(){
@@ -53,15 +53,10 @@ const mapStateToProps = state => {
   return { test: 0 }
 }
 
-const mapDispatchToProps = dispatch => ({
-  initDashboard: () => {
-    fetch(DASHBOARD_URL).then((response) => {
-      return response.json()
-    }).then((obj) => {
-      dispatch(initState(fromJS(obj)))
-    })
-  }
-})
+const mapDispatchToProps = dispatch => {
+  dispatch(onInitDashboard())
+  return {}
+}
 
 const DashboardContainer = connect(
   mapStateToProps,
