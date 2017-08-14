@@ -24,13 +24,16 @@ class TableBody extends React.Component {
     return (
       <div className={open}>
         <div className={styles.tableBody}>
-          <TableCell cellValue={'LEGAL ENTITY'}/>
+          <TableCell cellValue={'Principle Entity'}/>
           <TableCell cellValue={'CPTY Org'}/>
           <TableCell cellValue={'CPTY Entity'}/>
           <TableCell cellValue={'CCY'}/>
-          <TableCell cellValue={'IM'}/>
-          <TableCell cellValue={'VM'}/>
-          <TableCell cellValue={'Excess'}/>
+          <TableCell cellValue={'Collateral Balance'}/>
+          <TableCell cellValue={'Pending Collateral'}/>
+          <TableCell cellValue={'∆ Collateral'}/>
+          <TableCell cellValue={'∆ IM'}/>
+          <TableCell cellValue={'∆ VM'}/>
+          <TableCell cellValue={'Delta'}/>
           <TableCell cellValue={'In / Out'}/>
           <TableCell cellValue={'Status'}/>
         </div>
