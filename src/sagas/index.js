@@ -1,17 +1,8 @@
-
-// import { delay } from 'redux-saga'
 import { fork, call, put, take, race, takeLatest } from 'redux-saga/effects'
-
-//fetches
-// import { FetchMarginCall } from './FetchMarginCall'
-// import { checkSpecificServer } from './CheckServerConnectivity'
-// import { FetchNavbarAlerts } from './FetchNavbarAlerts'
-import { login } from './Login'
-
 import { delay, takeEvery } from 'redux-saga'
-// import { fork, call, put, take, race } from 'redux-saga/effects'
-// import {  } from 'redux-saga/helpers'
 import { hashHistory } from 'react-router'
+import Notifications from 'react-notification-system-redux'
+
 
 //fetches
 import {
@@ -116,10 +107,17 @@ function* watchLogin() {
       const {user, pass} = action
       if (user && pass) {
         yield put(updateLoginProcess(true))
-        const clientID = yield call(DoLoginSaga, user, pass)
+        const { clientID } = yield call(DoLoginSaga, user, pass)
         if(clientID) {
           localStorage.authenticating = true
           hashHistory.push('/2fa')
+        }else{
+          yield put(Notifications.error({
+            title: 'Warning',
+            message: `Login failed, please check your credentials`,
+            position: 'tr',
+            autoDismiss: 3
+          }))
         }
         yield put(updateLoginProcess(false))
       }
