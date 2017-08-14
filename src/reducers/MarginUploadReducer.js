@@ -44,13 +44,15 @@ const MarginUploadReducer = (state = initialState, action) => {
       return state.set('requestingMCGenerationOrValuation', action.flag)
 
     case MARGIN_CALL_GENERATED:
-      console.log(action.updatedPortfolios)
+      //console.log(action.updatedPortfolios)
       return state.withMutations(state => state.set('uploadData', state.get('uploadData').map(x => {
         const flag = action.updatedPortfolios.uploadMarginCallDetails.filter(y => {
           return x.get('marginAgreement') === y.marginAgreement && x.get('callType') === y.callType
         })
-        if(flag.length)
-          return fromJS(flag[0])
+        if(flag.length){
+          // console.log({portfolioId: x.get('portfolioId'), ...flag[0]})
+          return fromJS({portfolioId: x.get('portfolioId'), ...flag[0]})
+        }
         else
           return x
       })).set('requestingMCGenerationOrValuation', false))
