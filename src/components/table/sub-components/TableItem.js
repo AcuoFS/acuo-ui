@@ -69,36 +69,43 @@ class TableItem extends React.Component {
 
           <div className={styles.tableItem}>
             <div className={styles.margin}>
-              <p className={styles.leftThis}>Initial Margin</p>
-              <p
-                className={styles.fineFont}>{this.checkNegative(this.compute(deriv, 'initialMargin'), this.numberWithCommas)}</p>
-            </div>
-          </div>
-
-          <div className={styles.tableItem}>
-            <div className={styles.margin}>
-              <p className={styles.leftThis}>Variation Margin</p>
-              <p className={styles.fineFont}>{this.checkNegative(this.compute(deriv, 'variableMargin'), this.numberWithCommas)}</p>
-            </div>
-          </div>
-
-          <div className={styles.tableItem}>
-            <div className={styles.margin}>
-              <p className={styles.leftThis}>Excess</p>
-              <p className={styles.fineFont}>{this.checkNegative(excess, this.numberWithCommas)}</p>
-            </div>
-          </div>
-
-          <div className={styles.tableItem}>
-            <div className={styles.margin}>
               <p className={styles.leftThis}>Collateral Balance</p>
-              <p className={styles.fineFont}>{this.checkNegative(this.compute(deriv, 'balanceAmount'), this.numberWithCommas)}</p>
+              <p
+                className={styles.fineFont}>{this.numberWithCommas(this.compute(deriv, 'pendingCollateral'))}</p>
             </div>
           </div>
 
           <div className={styles.tableItem}>
             <div className={styles.margin}>
               <p className={styles.leftThis}>Pending Collateral</p>
+              <p className={styles.fineFont}>{this.numberWithCommas(this.compute(deriv, 'pendingCollateral'))}</p>
+            </div>
+          </div>
+
+          <div className={styles.tableItem}>
+            <div className={styles.margin}>
+              <p className={styles.leftThis}>∆ Collateral</p>
+              <p className={styles.fineFont}>{this.checkNegative(excess, this.numberWithCommas)}</p>
+            </div>
+          </div>
+
+          <div className={styles.tableItem}>
+            <div className={styles.margin}>
+              <p className={styles.leftThis}>∆ IM</p>
+              <p className={styles.fineFont}>{this.checkNegative(this.compute(deriv, 'initialMargin'), this.numberWithCommas)}</p>
+            </div>
+          </div>
+
+          <div className={styles.tableItem}>
+            <div className={styles.margin}>
+              <p className={styles.leftThis}>∆ VM</p>
+              <p className={styles.fineFont}>{this.checkNegative(this.compute(deriv, 'variableMargin'), this.numberWithCommas)}</p>
+            </div>
+          </div>
+
+          <div className={styles.tableItem}>
+            <div className={styles.margin}>
+              <p className={styles.leftThis}>Delta</p>
               <p className={styles.fineFont}>{this.numberWithCommas(this.compute(deriv, 'pendingCollateral'))}</p>
             </div>
           </div>
