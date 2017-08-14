@@ -52,22 +52,10 @@ export default class LoginComponent extends React.Component{
           </div>
 
           <div className={styles.buttonHolder}>
-            <button className={(this.props.processingLogin ? styles.disabled : '')} onClick={ ()=>{
-             this.setState( {passwordError: ""} )
-             {/*if( this.state.inputPassword.length < 8 ) {*/}
-               {/*this.setState( {passwordError: " Password must be a minimum of 8 characters "} ) }*/}
-             {/*else {*/}
-              {/*if( !(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/.test(this.state.inputPassword)) ) {*/}
-                {/*this.setState( {passwordError: "Password must a mixed-case alphanumeric"} ) }*/}
-              {/*else{*/}
-               {/*if( this.state.inputPassword!=this.state.password  ) {*/}
-                 {/*this.setState( { passwordError: "Invalid Password!" } ) }*/}
-               {/*else {*/}
-                //localStorage.authenticating = true
-                //hashHistory.push("/2fa")
-                 this.props.onLogin(this.state.username, this.state.password)
-               }
-              }>
+            <button className={(this.props.processingLogin ? styles.disabled : '')}
+                    onClick={ () => {
+                      this.setState({passwordError: ""})
+                      this.props.onLogin(this.state.username, this.state.password)}}>
               sign in
             </button>
           </div>
