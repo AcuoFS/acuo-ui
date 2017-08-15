@@ -118,7 +118,7 @@ export default class FilterBar extends React.Component {
               this.props.filters.getIn(['cptyOrgFilter', 'filter'])}/>
 
           <FilterDropdown
-            title={'CPTY Entity'}
+            title={'Principal Entity'}
             handleOnSelectedItemChange={this.handleCPTYEntityChange}
             dropdownType={DROPDOWN_TYPE_MULTI_SELECT}
             options={this.props.cptyEntity}
