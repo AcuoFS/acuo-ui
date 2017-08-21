@@ -24,7 +24,7 @@ class TableBody extends React.Component {
     return (
       <div className={open}>
         <div className={styles.tableBody}>
-          <TableCell cellValue={'Principle Entity'}/>
+          <TableCell cellValue={'Principal Entity'}/>
           <TableCell cellValue={'CPTY Org'}/>
           <TableCell cellValue={'CPTY Entity'}/>
           <TableCell cellValue={'CCY'}/>
