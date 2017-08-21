@@ -1,8 +1,5 @@
 var configJson = {
-  'baseUrl': 'http://dev.acuo.com',
-  '$dev_baseUrl': 'http://dev.acuo.com',
-  '$local_baseUrl': 'http://localhost:8081',
-  '$qa_baseUrl': 'http://qa.acuo.com',
+  'baseUrl': 'not_used',
   DASHBOARD_URL: '/proxy/dashboard',
   RECON_URL: '/proxy/recon/new',
   OPTIMISATION_URL: '/proxy/pledge/optimization',
@@ -27,8 +24,9 @@ var configJson = {
   FETCH_NAVBAR_ALERTS: '/proxy/common/navbar-alerts',
   REQUEST_VALUATION_URL: '/proxy/upload/request-valuation',
   REQUEST_GENERATE_MARGIN_CALLS: '/proxy/upload/request-margincalls',
-  FETCH_GENERATED_PORTFOLIO: '<%= baseUrl %>/valuation/acuo/api/calls/async/generate/',
-  POST_MARGIN_CALL_IDS: '<%= baseUrl %>/margin/acuo/api/margin/send/calls',
+  //FETCH_GENERATED_PORTFOLIO: '<%= baseUrl %>/valuation/acuo/api/calls/async/generate/',
+  //POST_MARGIN_CALL_IDS: '<%= baseUrl %>/margin/acuo/api/margin/send/calls',
+  LOGIN_URL: '/proxy/common/auth/login'
 }
 
 exports.get = (env) => {

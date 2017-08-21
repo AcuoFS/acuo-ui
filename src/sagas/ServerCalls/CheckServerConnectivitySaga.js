@@ -3,7 +3,7 @@ import {
   MARGIN_HEALTH_CHECK,
   VALUATION_HEALTH_CHECK,
   COLLATERAL_HEALTH_CHECK
-} from './../constants/APIcalls'
+} from '../../constants/APIcalls'
 
 import { call, put } from 'redux-saga/effects'
 

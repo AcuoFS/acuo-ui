@@ -1,16 +1,28 @@
-import { delay } from 'redux-saga'
-import { fork, call, put, take, race } from 'redux-saga/effects'
+import { fork, call, put, take, race, takeLatest } from 'redux-saga/effects'
+import { delay, takeEvery } from 'redux-saga'
+import { hashHistory } from 'react-router'
+import Notifications from 'react-notification-system-redux'
+
 
 //fetches
-import { checkSpecificServer } from './CheckServerConnectivitySaga'
-import { FetchNavbarAlerts } from './FetchNavbarAlertsSaga'
-import { ReconItemSaga } from './ReconItemSaga'
-import { ReconDisputeSaga } from './ReconDisputeSaga'
-import { FetchDeparturesSaga } from './FetchDeparturesSaga'
-import { RequestValuationSaga } from './RequestValuationSaga'
-import { GenerateMarginCallSaga } from './GenerateMarginCallSaga'
-import { FetchDashboardSaga } from './FetchDashboardSaga'
-import { FetchReconSaga } from './FetchReconSaga'
+import {
+  checkSpecificServer,
+  FetchNavbarAlerts,
+  ReconItemSaga,
+  ReconDisputeSaga,
+  FetchDeparturesSaga,
+  RequestValuationSaga,
+  GenerateMarginCallSaga,
+  FetchDashboardSaga,
+  FetchReconSaga,
+  FetchOptimisationSettingsSaga,
+  FetchSelectionSaga,
+  AllocateCollateralsSaga,
+  FetchCollateralsSaga,
+  PostPledgeSaga,
+  RemoveAllocatedAssetsSaga,
+  DoLoginSaga
+} from './ServerCalls'
 
 //actions
 import {
@@ -20,16 +32,25 @@ import {
 import {
   reconInitState,
   initState,
-  initCurrencyInfo
+  initCurrencyInfo,
+  initOptimisationSettings,
+  initSelection,
+  updateCollateral,
+  fetchCollaterals,
+  fetchSelection,
+  clearPendingAllocation
 } from './../actions'
 import { initDepartures } from './../actions/DeployedActions'
 import {
   updateRequestState,
   marginCallGenerated
 } from './../actions/MarginCallUploadActions'
+import { updateLoginProcess } from './../actions/LoginActions'
+
 
 //action types
 import {
+  DO_LOGIN,
   SAGA_NAVBAR_ALERTS,
   RECON_ITEM,
   RECON_DISPUTE_SUBMIT,
@@ -37,7 +58,13 @@ import {
   ON_REQUEST_VALUATION,
   ON_REQUEST_GENERATE_MARGINCALL,
   ON_INIT_DASHBOARD,
-  ON_INIT_RECON
+  ON_INIT_RECON,
+  ON_FETCH_OPTIMISATION_SETTINGS,
+  ON_FETCH_SELECTION,
+  ON_ALLOCATE_COLLATERALS,
+  ON_FETCH_COLLATERALS,
+  ON_PLEDGE,
+  ON_REMOVE_ALLOCATED_ASSET
 } from '../constants/ActionTypes'
 
 function* serverHealthChecks() {
@@ -71,13 +98,44 @@ function* navbarAlerts() {
   }
 }
 
-function* onReconcile() {
+
+function* watchLogin() {
+  // yield takeLatest(DO_LOGIN, login)
+  while (true) {
+    try {
+      const action = yield take(DO_LOGIN)
+      const {user, pass} = action
+      if (user && pass) {
+        yield put(updateLoginProcess(true))
+        const { clientID } = yield call(DoLoginSaga, user, pass)
+        if(clientID) {
+          localStorage.authenticating = true
+          hashHistory.push('/2fa')
+        }else{
+          yield put(Notifications.error({
+            title: 'Warning',
+            message: `Login failed, please check your credentials`,
+            position: 'tr',
+            autoDismiss: 3
+          }))
+        }
+        yield put(updateLoginProcess(false))
+      }
+    }
+    catch
+      (error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
+
+function* watchReconcile() {
   while(true){
     try{
       const action = yield take(RECON_ITEM)
-      // console.log(action.GUID)
       const result = yield call(ReconItemSaga, action.GUID)
-      // console.log(result)
       yield put(reconInitState(result.items))
       yield put(sagaNavbarAlerts())
     } catch(error){
@@ -87,7 +145,7 @@ function* onReconcile() {
   }
 }
 
-function* onReconDispute() {
+function* watchReconDispute() {
   while(true){
     try{
       const action = yield take(RECON_DISPUTE_SUBMIT)
@@ -103,7 +161,7 @@ function* onReconDispute() {
   }
 }
 
-function* onFetchDepatures() {
+function* watchFetchDepatures() {
   while(true){
     try{
       yield take(FETCH_DEPARTURES)
@@ -117,11 +175,10 @@ function* onFetchDepatures() {
   }
 }
 
-function* onRequestValuation() {
+function* watchRequestValuation() {
   while(true){
     try{
       const action = yield take(ON_REQUEST_VALUATION)
-      // console.log(action)
       const obj = yield call(RequestValuationSaga, action.referenceIDs)
       console.log(obj)
       yield put(marginCallGenerated(obj))
@@ -133,11 +190,10 @@ function* onRequestValuation() {
   }
 }
 
-function* onGenerateMarginCalls() {
+function* watchGenerateMarginCalls() {
   while(true){
     try{
       const action = yield take(ON_REQUEST_GENERATE_MARGINCALL)
-      // console.log(action)
       const obj = yield call(GenerateMarginCallSaga, action.referenceIDs)
       console.log(obj)
       yield put(marginCallGenerated(obj))
@@ -149,7 +205,7 @@ function* onGenerateMarginCalls() {
   }
 }
 
-function* onFetchDashboardData() {
+function* watchFetchDashboardData() {
   while(true){
     try{
       yield take(ON_INIT_DASHBOARD)
@@ -162,7 +218,7 @@ function* onFetchDashboardData() {
   }
 }
 
-function* onFetchReconSaga() {
+function* watchFetchReconSaga() {
   while(true){
     try{
       yield take(ON_INIT_RECON)
@@ -176,16 +232,107 @@ function* onFetchReconSaga() {
   }
 }
 
+function* watchFetchOptimisationSettings() {
+  while(true){
+    try{
+      yield take(ON_FETCH_OPTIMISATION_SETTINGS)
+      const payload = yield call(FetchOptimisationSettingsSaga)
+      yield put(initOptimisationSettings(payload.items))
+    }catch(error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchFetchSelection() {
+  while (true) {
+    try {
+      yield take(ON_FETCH_SELECTION)
+      const payload = yield call(FetchSelectionSaga)
+      yield put(initSelection(payload.items))
+    } catch (error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchAllocateCollaterals() {
+  while (true) {
+    try {
+      const { obj } = yield take(ON_ALLOCATE_COLLATERALS)
+      const payload = yield call(AllocateCollateralsSaga, obj)
+      yield put(initSelection(payload.items))
+      yield put(fetchCollaterals())
+    } catch (error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchFetchCollaterals() {
+  while (true) {
+    try {
+      yield take(ON_FETCH_COLLATERALS)
+      const payload = yield call(FetchCollateralsSaga)
+      yield put(updateCollateral(payload.items))
+    } catch (error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchPledge() {
+  while(true){
+    try{
+      const action = yield take(ON_PLEDGE)
+      yield call(PostPledgeSaga, action.pledgeToSend)
+      yield put(fetchSelection())
+      yield put(clearPendingAllocation())
+      yield put(sagaNavbarAlerts())
+      yield put(fetchCollaterals())
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchRemoveAllocatedAsset() {
+  while(true){
+    try{
+      const action = yield take(ON_REMOVE_ALLOCATED_ASSET)
+      const json = yield call(RemoveAllocatedAssetsSaga, action.obj)
+      yield put(initSelection(json.items))
+      yield put(fetchCollaterals())
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
 export default function* root() {
   yield [
     fork(serverHealthChecks),
+    fork(sagaNavbarAlerts),
+    fork(watchLogin),
     fork(navbarAlerts),
-    fork(onReconcile),
-    fork(onReconDispute),
-    fork(onFetchDepatures),
-    fork(onRequestValuation),
-    fork(onGenerateMarginCalls),
-    fork(onFetchDashboardData),
-    fork(onFetchReconSaga)
+    fork(watchReconcile),
+    fork(watchReconDispute),
+    fork(watchFetchDepatures),
+    fork(watchRequestValuation),
+    fork(watchGenerateMarginCalls),
+    fork(watchFetchDashboardData),
+    fork(watchFetchReconSaga),
+    fork(watchFetchOptimisationSettings),
+    fork(watchFetchSelection),
+    fork(watchAllocateCollaterals),
+    fork(watchFetchCollaterals),
+    fork(watchPledge),
+    fork(watchRemoveAllocatedAsset)
   ]
 }

@@ -137,6 +137,9 @@ class TableRow extends React.Component {
         <TableCell cellValue={rowItems.cptyOrg}/>
         <TableCell cellValue={rowItems.cptyEntity}/>
         <TableCell cellValue={rowItems.ccy}/>
+        <TableCell cellValue={this.checkNegative(excess, numberWithCommas)}/>
+        <TableCell cellValue={this.checkNegative(excess, numberWithCommas)}/>
+        <TableCell cellValue={this.checkNegative(excess, numberWithCommas)}/>
         <TableCell cellValue={this.checkNegative(rowItems.initialMargin, numberWithCommas)}/>
         <TableCell cellValue={this.checkNegative(rowItems.variableMargin, numberWithCommas)}/>
         <TableCell cellValue={this.checkNegative(excess, numberWithCommas)}/>

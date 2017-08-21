@@ -1,7 +1,7 @@
 /**
  * Created by Rui on 2/6/17.
  */
-import { FETCH_NAVBAR_ALERTS } from './../constants/APIcalls'
+import { FETCH_NAVBAR_ALERTS } from '../../constants/APIcalls'
 
 export const FetchNavbarAlerts = () =>{
    return(
