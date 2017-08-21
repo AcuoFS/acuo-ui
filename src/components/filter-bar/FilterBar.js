@@ -81,7 +81,7 @@ export default class FilterBar extends React.Component {
         <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
 
           <FilterDropdown
-            title={'Legal Entity'}
+            title={'Principal Entity'}
             handleOnSelectedItemChange={this.props.onLegalEntityChange}
             options={this.props.legalEntityList}
             selectedOption={
@@ -118,7 +118,7 @@ export default class FilterBar extends React.Component {
               this.props.filters.getIn(['cptyOrgFilter', 'filter'])}/>
 
           <FilterDropdown
-            title={'Principal Entity'}
+            title={'CPTY Entity'}
             handleOnSelectedItemChange={this.handleCPTYEntityChange}
             dropdownType={DROPDOWN_TYPE_MULTI_SELECT}
             options={this.props.cptyEntity}
