@@ -55,7 +55,7 @@ export default class LoginComponent extends React.Component{
             <button className={(this.props.processingLogin ? styles.disabled : '')}
                     onClick={ () => {
                       this.setState({passwordError: ""})
-                      this.props.onLogin(this.state.username, this.state.password)}}>
+                      this.props.onLogin(this.state.username, this.state.inputPassword)}}>
               sign in
             </button>
           </div>

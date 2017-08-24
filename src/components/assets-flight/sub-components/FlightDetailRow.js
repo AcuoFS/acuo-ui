@@ -132,6 +132,7 @@ export default class FlightDetailRow extends React.Component {
         </div>
         <div className={styles.flightItemTableCell}>
           <div>{statusCell}</div>
+          {this.renderSecondRow(propStatus.secondary)}
         </div>
         <div className={styles.flightItemTableCell}>{imgDom}</div>
       </div>

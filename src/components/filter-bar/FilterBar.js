@@ -81,7 +81,7 @@ export default class FilterBar extends React.Component {
         <div className={styles.filterItemWrap + ' ' + this.state.filterItems}>
 
           <FilterDropdown
-            title={'Legal Entity'}
+            title={'Principal Entity'}
             handleOnSelectedItemChange={this.props.onLegalEntityChange}
             options={this.props.legalEntityList}
             selectedOption={

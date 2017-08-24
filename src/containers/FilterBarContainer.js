@@ -145,7 +145,7 @@ const computeCptyEntity = (state) => {
   let cptyEntityFilter = state.getIn(['inputs', 'filters', 'cptyEntityFilter', 'filter']) || Set()
   let cptyOrgFilter = state.getIn(['inputs', 'filters', 'cptyOrgFilter', 'filter'])
 
-  let derivatives = state.getIn(['display', 'derivatives'])
+  let derivatives = state.getIn(['data', 'derivatives'])
   let derivativeList = derivatives ? jsonObjectToFlatArray(derivatives.toJSON()) : []
   let cptyEntityList = derivativeList.reduce((listSum, x) => {
     if (cptyOrgFilter && cptyOrgFilter != 'All') {
