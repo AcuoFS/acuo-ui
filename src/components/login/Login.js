@@ -12,10 +12,18 @@ export default class LoginComponent extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.refs.focus.focus()
+  }
+
   render() {
     const { processingLogin, wrongCredentials, onLogin } = this.props
     return (
-      <div className={styles.container}>
+      <form className={styles.container}
+            onSubmit={ () => {
+              this.setState({passwordError: ""})
+              onLogin(this.state.username, this.state.password)
+            }}>
         <div className={styles.box}>
           <img className={styles.logo} src={'./images/login/login_logo.png'} alt=""/>
           <div className={styles.row}>
@@ -25,9 +33,10 @@ export default class LoginComponent extends React.Component {
             <div className={styles.input}>
               <input type="text"
                      value={this.state.username}
-                     onChange={ (e) => {
+                     onChange={(e) => {
                        this.setState({username: e.currentTarget.value})
-                     } }/>
+                     }}
+                     ref="focus"/>
             </div>
           </div>
 
@@ -56,15 +65,12 @@ export default class LoginComponent extends React.Component {
 
           <div className={styles.buttonHolder}>
             <button className={(processingLogin ? styles.disabled : '')}
-                    onClick={ () => {
-                      this.setState({passwordError: ""})
-                      onLogin(this.state.username, this.state.password)
-                    }}>
+                    type="submit">
               sign in
             </button>
           </div>
         </div>
-      </div>
+      </form>
     )
   }
 }
