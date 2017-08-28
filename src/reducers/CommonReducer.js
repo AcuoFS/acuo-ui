@@ -6,7 +6,10 @@ import _ from 'lodash'
 
 import * as ActionTypes from './../constants/ActionTypes'
 
-const INITIAL_STATE = Map({'alerts': List(), 'noPrompt': true})
+const INITIAL_STATE = Map({
+  'alerts': List(),
+  'noPrompt': true,
+  'wrongCredentials': false})
 
 const CommonReducer = (state = INITIAL_STATE, action) => {
   switch(action.type){
@@ -18,6 +21,9 @@ const CommonReducer = (state = INITIAL_STATE, action) => {
 
     case ActionTypes.SCREEN_RESIZE:
       return state.set('noPrompt', action.noPrompt)
+
+    case ActionTypes.UPDATE_WRONG_CREDENTIALS_FLAG:
+      return state.set('wrongCredentials', fromJS(action.flag))
 
     default:
       return state
