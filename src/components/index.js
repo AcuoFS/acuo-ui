@@ -19,6 +19,7 @@ import LoginComponent from './login/Login'
 import TwoFA_Component from './twoFA/TwoFA'
 import NotificationComponent from './notification-system/Notification'
 import AppWrapperComponent from './AppWrapper/AppWrapper'
+import AnalyticsGraphComponent from './analytics-graph/AnalyticsGraph'
 
 export {
   GraphComponent,
@@ -41,5 +42,6 @@ export {
   LoginComponent,
   TwoFA_Component,
   NotificationComponent,
-  AppWrapperComponent
+  AppWrapperComponent,
+  AnalyticsGraphComponent
 }

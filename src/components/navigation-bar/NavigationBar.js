@@ -54,7 +54,9 @@ export default class NavigationBar extends React.Component {
                            label={'Agreements'}
                            toUrl={'/agreements'}/>
 
-        <NavigationBarItem label={'Analytics'} toUrl={'/analytics'}/>
+        <NavigationBarItem selected={this.props.curPage === '/analytics'}
+                           label={'Analytics'}
+                           toUrl={'/analytics'}/>
 
         <div className={styles.menuIcon} id={styles.navLogout}>
           <div className={styles.vertiCenter}>
