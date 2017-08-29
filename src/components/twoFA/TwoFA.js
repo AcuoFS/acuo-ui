@@ -23,7 +23,8 @@ export default class TwoFA_Component extends React.Component{
 
   render(){
    return(
-    <form className={styles.container} onSubmit={()=>{
+    <form className={styles.container} onSubmit={(e)=>{
+      e.preventDefault()
       this.setState( {securekeyError: ""} )
       if( this.state.inputSecurekey != this.state.securekey ) {this.setState({securekeyError:"Invalid Key!"})}
       else{

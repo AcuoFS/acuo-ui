@@ -20,7 +20,8 @@ export default class LoginComponent extends React.Component {
     const { processingLogin, wrongCredentials, onLogin } = this.props
     return (
       <form className={styles.container}
-            onSubmit={ () => {
+            onSubmit={ (e) => {
+              e.preventDefault()
               this.setState({passwordError: ""})
               onLogin(this.state.username, this.state.password)
             }}>
