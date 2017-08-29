@@ -88,6 +88,7 @@ export default class WorkflowOptions extends React.Component {
           &nbsp;Separate Initial Calls by Currency
         </div>}
 
+        {this.state.isEnableInitial &&
         <div className={styles.workflowLine + ' ' + styles.flexLine}>
           <ToggleSwitch propIsOn={this.state.isContingentRelease}
                         propOnToggle={() =>
@@ -95,7 +96,7 @@ export default class WorkflowOptions extends React.Component {
                             isContingentRelease: !this.state.isContingentRelease
                           })}/>
           &nbsp;Contingent Release Pledge Accept
-        </div>
+        </div>}
 
         <div className={styles.workflowLine + ' ' + styles.flexLine}>
           <ToggleSwitch propIsOn={this.state.isExpectedMatching}
