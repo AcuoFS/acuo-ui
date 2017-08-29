@@ -75,7 +75,7 @@ class TableRow extends React.Component {
   }
 
   getHoverbility(statusCode){
-    if ((statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_EXPECTED || statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_UNRECON || statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_PLEDGE))
+    if ((statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_EXPECTED || statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_UNRECON || statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_PLEDGE || DASHBOARD_CONSTANTS.STATUS_CODE_RECON))
       return true
     else return false
   }
@@ -84,15 +84,15 @@ class TableRow extends React.Component {
     if(hoverbility){
       switch (statusCode) {
         case DASHBOARD_CONSTANTS.STATUS_CODE_RECON:
-          onLineItemClick(type, status, notificationTime, cptyEntity, legalEntity, cptyOrg, direction)
-          hashHistory.push('recon')
+          // onLineItemClick(type, status, notificationTime, cptyEntity, legalEntity, cptyOrg, direction)
+          hashHistory.push('pledge')
           break
         case DASHBOARD_CONSTANTS.STATUS_CODE_UNRECON:
           onLineItemClick(type, status, notificationTime, cptyEntity, legalEntity, cptyOrg, direction)
           hashHistory.push('recon')
           break
         case DASHBOARD_CONSTANTS.STATUS_CODE_PLEDGE:
-          hashHistory.push('pledge')
+          hashHistory.push('deployed')
           break
         case DASHBOARD_CONSTANTS.STATUS_CODE_EXPECTED:
           hashHistory.push('recon')
@@ -130,7 +130,7 @@ class TableRow extends React.Component {
     return (
       <div className={styles.tableRow + ' ' + (hoverbility ? selfStyles.hoverable : '')}
            onClick={ ()=>{
-            console.log(statusCode)
+            {/*console.log(statusCode)*/}
             this.lineItemClick(hoverbility, onLineItemClick, hashHistory, statusCode , rowItems.cptyEntity, rowItems.status, rowItems.notificationTime, rowItems.type, rowItems.legalEntity, rowItems.cptyOrg, rowItems.direction)
            }}>
         <TableCell cellValue={rowItems.legalEntity}/>
