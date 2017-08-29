@@ -170,7 +170,7 @@ export default class ReferenceSubCommon extends React.Component {
 
         <ReferenceCallType
           contClass={styles.agreementsSectionLeft} splitByRoleState={this.state[STATE_PROPERTY_SPLIT_VARIATION]}
-          baseGroup={VARIATION_GROUP} baseDisplay={'Variable Reference'} baseDom={VARIATION_DOM}
+          baseGroup={VARIATION_GROUP} baseDisplay={'Variation Reference'} baseDom={VARIATION_DOM}
           pledgorGroup={VARIATION_PLEDGOR_GROUP} pledgorDisplay={'Variation Pledgor Reference'}
           pledgorDom={VARIATION_PLEDGOR_DOM}
           securedGroup={VARIATION_SECURED_GROUP} securedDisplay={'Variation Secured Reference'}
