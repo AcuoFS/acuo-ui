@@ -9,10 +9,11 @@ import { updateSelectedDepartureDate, fetchDepartures } from './../actions/Deplo
 
 const mapStateToProps = state => {
   // console.log(state.DeployedReducer.getIn(['selectedDepartureDate', 'label']))
+  // console.log(state.DeployedReducer.get('departures').toJS())
  return {
           departures: state.DeployedReducer.get('departures').toJS(),
-          arrivals: flightGroupArrival,
           arrivals_searchText: state.DeployedReducer.get('arrivals_searchText'),
+          arrivals: flightGroupArrival,
           departures_searchText: state.DeployedReducer.get('departures_searchText'),
           departureDatesList: state.DeployedReducer.get('departureDatesList').toJS(),
           selectedDepartureDate: (state.DeployedReducer.getIn(['selectedDepartureDate', 'label']) ? state.DeployedReducer.get('selectedDepartureDate').toJS() : state.DeployedReducer.get('departureDatesList').toJS()[0])
