@@ -24,8 +24,10 @@ export default class FlightDetailGroup extends React.Component {
 
   getTime(time) {
     // console.log(time.length)
+    const padTime = foo => foo < 10 ? '0' + foo : foo
+
     if(time.length > 5)
-      return new Date(time).getHours() + ':' + new Date(time).getMinutes()
+      return padTime(new Date(time).getHours()) + ':' + padTime(new Date(time).getMinutes())
     else
       return time
   }
