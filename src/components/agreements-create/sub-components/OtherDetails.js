@@ -56,14 +56,7 @@ export default class OtherDetails extends React.Component {
         <div className={styles.rowGroup}>
           <div className={styles.line}>Agreement Email List</div>
           <div className={styles.line}>
-            <div className={styles.dropDown}>
-              <Dropdown
-                handlerOnClick={this.toggleDropDown}
-                handleOnSelectedItemChange={this.onDropdownItemChange}
-                selectedOption={'Select'}
-                options={['Select', 'WIP']}
-                activateMouseLeaveEvent/>
-            </div>
+            <input type="text" className={styles.inputTextBox}/>
           </div>
         </div>
 
