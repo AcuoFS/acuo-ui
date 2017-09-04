@@ -50,7 +50,7 @@ export default class MarginAgreementPortfolio extends React.Component {
     }
   }
 
-  isDisableReconButton(actionItem, percentage, firstLevelList) {
+  isDisableReconButton(actionItem, cptyTotal, clientTotal, firstLevelList) {
 
     const firstLevelLength = Math.max.apply(Math,
       [
@@ -65,12 +65,12 @@ export default class MarginAgreementPortfolio extends React.Component {
       return true
 
     // Need adjustment
-    if (percentage != 100.00 && this.state.adjAmount == 0.0) {
+    if (clientTotal + parseFloat(this.state.adjAmount) !== cptyTotal) {
       return true
     }
 
     // Either client and cpty has no recon details
-    if (percentage === 0.00) {
+    if (!cptyTotal || !clientTotal) {
       return true
     }
 
@@ -165,7 +165,7 @@ export default class MarginAgreementPortfolio extends React.Component {
             <div className={styles.actFig + ' ' + this.getTextColour(percentage)}>
               {percentage}%
             </div>
-            <div className={styles.actBtn + ' ' + (this.isDisableReconButton(portfolioData, percentage, firstLevelList) ? styles.actBtnDisable : this.getBtnColour(percentage))}
+            <div className={styles.actBtn + ' ' + (this.isDisableReconButton(portfolioData, this.displayTotalMargin(portfolioData, 'counterpartyAssets'), this.displayTotalMargin(portfolioData, 'clientAssets'), firstLevelList) ? styles.actBtnDisable : this.getBtnColour(percentage))}
                  onClick={ (e)=>{
                    onReconItem(e)
                   }}
