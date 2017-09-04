@@ -221,7 +221,7 @@ export default class ReferenceSubCommon extends React.Component {
 
         <div>
           <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === INITIAL_GROUP)}
-                                 propLabel={' - CSA Initial'}/>
+                                 propLabel={' - Regulatory CSA Initial'}/>
           <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === INITIAL_PLEDGOR_GROUP)}
                                  propLabel={' - Regulatory CSA Initial Pledgor'}/>
           <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === INITIAL_SECURED_GROUP)}
@@ -230,9 +230,9 @@ export default class ReferenceSubCommon extends React.Component {
 
         <div>
           <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === NETTED_GROUP)}
-                                 propLabel={' - CSA Netted'}/>
+                                 propLabel={' - Regulatory CSA Netted'}/>
           <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === NETTED_PLEDGOR_GROUP)}
-                                 propLabel={' - CSA Netted Pledgor'}
+                                 propLabel={' - Regulatory CSA Netted Pledgor'}
                                  propCallDriverLabel={' - Regulatory CSA Netted Pledgor'}/>
           <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === NETTED_SECURED_GROUP)}
                                  propLabel={' - Regulatory CSA Netted Secured'}
