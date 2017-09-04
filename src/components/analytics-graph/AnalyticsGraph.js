@@ -63,13 +63,18 @@ const AnalyticsGraphComponent = (props) => {
   }
 
   return (
-    <svg height={h} width={w + cheat}>
-      <Axes {...props}/>
-      <line {...lineSettings} />
-      <text {...xAxisLabel}>{props.xAxis.label}</text>
-      <text {...yAxisLabel}>{props.yAxis.label}</text>
-      <Circles {...scales} {...props}/>
-    </svg>
+    <div>
+      <svg height={h} width={w + cheat}>
+        <Axes {...props} />
+        <line {...lineSettings} />
+        <text {...xAxisLabel}>{props.xAxis.label}</text>
+        <text {...yAxisLabel}>{props.yAxis.label}</text>
+        <Circles {...scales} {...props} />
+      </svg>
+      <div style={{paddingLeft: '50px'}}>
+        <button onClick={props.onFlipAxes}>flip</button>
+      </div>
+    </div>
   )
 }
 

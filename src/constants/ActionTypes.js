@@ -90,3 +90,6 @@ export const UPDATE_WRONG_CREDENTIALS_FLAG = 'UPDATE_WRONG_CREDENTIALS_FLAG'
 
 //screenresize
 export const SCREEN_RESIZE = 'SCREEN_RESIZE'
+
+//analytics
+export const FLIP_AXES = 'FLIP_AXES'

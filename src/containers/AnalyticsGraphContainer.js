@@ -3,6 +3,7 @@
  */
 import { AnalyticsGraphComponent } from './../components'
 import { connect } from 'react-redux'
+import { flipAxes } from './../actions/AnalyticsActions'
 
 const mapStateToProps = (state) => ({
   dataSet: {
@@ -188,18 +189,14 @@ const mapStateToProps = (state) => ({
       }
     ]
   },
-  xAxis: {
-    key: 'counterpartyAllegation',
-    label: 'Counterpart estimation'
-  },
-  yAxis: {
-    key: 'clientAllegation',
-    label: 'ACUO estimation'
-  }
+  xAxis: state.AnalyticsReducer.get('xAxis').toJS(),
+  yAxis: state.AnalyticsReducer.get('yAxis').toJS()
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  // onLogin: (user, pass) => dispatch(doLogin(user, pass))
+  onFlipAxes: () => {
+    dispatch(flipAxes())
+  }
 })
 
 const AnalyticsGraphContainer = connect(mapStateToProps, mapDispatchToProps)(AnalyticsGraphComponent)
