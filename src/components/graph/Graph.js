@@ -24,6 +24,8 @@ export default class Graph extends React.Component {
       isScrolling: false,
       scrollLeft: false
     }
+
+
   }
 
   componentWillUpdate = (nextProps, nextState) =>{
@@ -64,6 +66,10 @@ export default class Graph extends React.Component {
     this.setState({isScrolling:true, clientX:event.clientX})
   }
 
+  scrollEvent = (event) => {
+    this.setState({scrollLeft: event.currentTarget.scrollLeft})
+  }
+
   componentDidMount() {
   }
 
@@ -77,7 +83,8 @@ export default class Graph extends React.Component {
                 if(graphCont && this.state.scrollLeft === false) this.setState({scrollLeft : 1440 - ((graphCont.getBoundingClientRect().width - 1440) / 2)})
                 graphCont && (graphCont.scrollLeft = this.state.scrollLeft)
               }}
-              onMouseDown={this.onMouseDown}>
+              onMouseDown={this.onMouseDown}
+              onScroll={this.scrollEvent}>
 
           <SVGWrapper {...this.props}/>
         </div>

@@ -73,6 +73,7 @@ class App extends React.Component {
               <Route path="deployed" component={PAGES.DeployedPageContainer}/>
               <Route path="agreements" component={PAGES.AgreementsPage}/>
               <Route path="disputes" component={PAGES.DisputePage}/>
+              <Route path="analytics" component={PAGES.AnalyticsPage}/>
             </Router>
           </AppWrapperContainer>
           <NotificationContainer />

@@ -1,0 +1,7 @@
+.circle .tooltip{
+  visibility: hidden;
+}
+
+.circle:hover .tooltip{
+  visibility: visible;
+}

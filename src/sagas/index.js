@@ -3,7 +3,6 @@ import { delay, takeEvery } from 'redux-saga'
 import { hashHistory } from 'react-router'
 import Notifications from 'react-notification-system-redux'
 
-
 //fetches
 import {
   checkSpecificServer,
@@ -45,8 +44,10 @@ import {
   updateRequestState,
   marginCallGenerated
 } from './../actions/MarginCallUploadActions'
-import { updateLoginProcess } from './../actions/LoginActions'
-
+import {
+  updateLoginProcess,
+  updateWrongCredentialsFlag
+} from './../actions/LoginActions'
 
 //action types
 import {
@@ -107,17 +108,20 @@ function* watchLogin() {
       const {user, pass} = action
       if (user && pass) {
         yield put(updateLoginProcess(true))
+        yield put(updateWrongCredentialsFlag(false))
         const { clientID } = yield call(DoLoginSaga, user, pass)
         if(clientID) {
           localStorage.authenticating = true
           hashHistory.push('/2fa')
         }else{
-          yield put(Notifications.error({
-            title: 'Warning',
-            message: `Login failed, please check your credentials`,
-            position: 'tr',
-            autoDismiss: 3
-          }))
+          yield put(updateWrongCredentialsFlag(true))
+          // yield put(Notifications.error({
+          //   title: 'Warning',
+          //   message: `Login failed, please check your credentials`,
+          //   position: 'tr',
+          //   autoDismiss: 3
+          // }))
+          // no toastr for failed login
         }
         yield put(updateLoginProcess(false))
       }
