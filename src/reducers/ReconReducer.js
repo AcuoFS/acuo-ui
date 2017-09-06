@@ -150,8 +150,8 @@ export default function reconReducer(state = initState, action) {
       const secondLevelList1 = secondLevelChecks(_.cloneDeep(items))
 
       const firstLevelList1 = updateFirstlevelListFromSecondLevel(secondLevelList1, [], _.cloneDeep(items))
-
-      return state.set('items', fromJS(items)).set('secondLevelList', fromJS(secondLevelList1)).set('firstLevelList', fromJS(_.concat(firstLevelList1, autoCheckFirstLevelOnly(_.cloneDeep(items)))))
+      // console.log(_.keyBy(items, (o) => o.GUID))
+      return state.withMutations(state => state.set('items', fromJS(items)).set('newItems', fromJS(_.keyBy(items, (o) => o.GUID))).set('secondLevelList', fromJS(secondLevelList1)).set('firstLevelList', fromJS(_.concat(firstLevelList1, autoCheckFirstLevelOnly(_.cloneDeep(items))))))
 
     case ActionTypes.INIT_CURRENCY_INFO:
       return state.set('currencyInfo', fromJS(action.currencyInfo))
