@@ -39,6 +39,8 @@ export class Dashboard extends React.Component {
           <GraphContainer />
         </div>
         <TableContainer />
+
+        <iframe src={"https://develop.symphony.com/embed/?module=im&userIds=347583113330922,347583113330926&theme=light&font=xsmall"} />
       </div>
     )
   }
