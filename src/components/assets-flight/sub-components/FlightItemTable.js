@@ -31,7 +31,7 @@ export default class FlightItemTable extends React.Component {
             propRowStyle={styles.flightItemTableHeader}/>
 
           {
-            flightGroup.map((x, i)=><FlightDetailGroup  key={i}
+            (flightGroup).sort((a, b) => a.header.time > b.header.time).map((x, i)=><FlightDetailGroup  key={i}
                                                         propListOfFlightDetail={x.flightDetailList}
                                                         propHeaderDetail={x.header}/>)
           }

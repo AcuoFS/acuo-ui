@@ -103,14 +103,7 @@ export default class ReferencesMarginTerms extends React.Component {
             <div className={styles.rowGroup}>
               <div className={styles.line}>Threshold Amount</div>
               <div className={styles.line}>
-                <div className={styles.dropDown}>
-                  <Dropdown
-                    handlerOnClick={this.toggleDropDown}
-                    handleOnSelectedItemChange={this.onDropdownItemChange}
-                    selectedOption={'Select'}
-                    options={['Select', 'WIP']}
-                    activateMouseLeaveEvent/>
-                </div>
+                <input type="number" className={styles.inputTextBox}/>
               </div>
             </div>
 
