@@ -17,11 +17,14 @@ class TradingEntities extends React.Component {
     }
 
     this.changeDate = this.changeDate.bind(this)
+    this.textboxClick = this.textboxClick.bind(this)
   }
 
   changeDate = (date) => this.setState({
     activeDate: date
   })
+
+  textboxClick = (e) => this.refs.datepicker.setOpen(e)
 
   render() {
     const props = this.props
@@ -92,12 +95,17 @@ class TradingEntities extends React.Component {
             <DatePicker className={styles.datepicker}
                         selected={this.state.activeDate}
                         customInput={<img src={'./images/agreements/calendar-icon.png'}/>}
-                        onChange={this.changeDate}/>
+                        onChange={this.changeDate}
+                        ref="datepicker"/>
           </span>
           <span>Active Date</span>
         </div>
         <div className={styles.line}>
-          <input type="text" className={styles.inputTextBox} disabled value={formatDate(this.state.activeDate)}/>
+          <input type="text"
+                 className={styles.inputTextBox}
+                 readOnly
+                 value={formatDate(this.state.activeDate)}
+                 onClick={this.textboxClick}/>
         </div>
       </div>
 
