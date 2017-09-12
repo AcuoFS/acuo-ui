@@ -35,6 +35,14 @@
   margin: 10px 0;
 }
 
+.line.calenderGroup {
+  display: flex;
+}
+
+.line.calenderGroup > span {
+  align-self: center;
+}
+
 .workflowLine {
   margin: 10px 0;
   padding: 5px 30px;
@@ -43,6 +51,11 @@
 .workflowGroup {
   display: flex;
   flex-direction: column;
+}
+
+.datepicker {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .line > .dropDown {
@@ -60,6 +73,7 @@
   border: 1px solid #979797;
   font-size: 13px;
   line-height: 16px;
+  padding: 5px;
 }
 
 .inputTextBoxDisabled {
@@ -206,3 +220,11 @@
   flex: 1;
   margin-left: 10px;
 }
+
+/* calendar */
+
+.datepickerWrapper > div{
+  display: inline-block;
+  cursor: pointer;
+}
+

@@ -68,6 +68,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.3.2",
     "react-addons-css-transition-group": "^15.4.1",
+    "react-datepicker": "^0.54.0",
     "react-dom": "^15.3.2",
     "react-dropzone-component": "^1.2.1",
     "react-notification-system": "^0.2.14",
