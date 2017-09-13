@@ -110,13 +110,13 @@ class TableRow extends React.Component {
     const { rowItems, onLineItemClick } = this.props
     const excess =
       (
-        parseInt(rowItems.collateralBalance ? rowItems.collateralBalance : 0) +
-        parseInt(rowItems.pendingCollateral ? rowItems.pendingCollateral : 0)
+        parseInt(rowItems.collateralBalance ? Math.round(parseFloat(rowItems.collateralBalance).toFixed(2)) : 0) +
+        parseInt(rowItems.pendingCollateral ? Math.round(parseFloat(rowItems.pendingCollateral).toFixed(2)) : 0)
       )
       -
       (
-        parseInt(rowItems.variableMargin ? rowItems.variableMargin : 0) +
-        parseInt(rowItems.initialMargin ? rowItems.initialMargin : 0)
+        parseInt(rowItems.variableMargin ? Math.round(parseFloat(rowItems.variableMargin).toFixed(2)) : 0) +
+        parseInt(rowItems.initialMargin ? Math.round(parseFloat(rowItems.initialMargin).toFixed(2)) : 0)
       )
 
     const directionText = rowItems.direction
@@ -137,9 +137,9 @@ class TableRow extends React.Component {
         <TableCell cellValue={rowItems.cptyOrg}/>
         <TableCell cellValue={rowItems.cptyEntity}/>
         <TableCell cellValue={rowItems.ccy}/>
-        <TableCell cellValue={this.checkNegative(excess, numberWithCommas)}/>
-        <TableCell cellValue={this.checkNegative(excess, numberWithCommas)}/>
-        <TableCell cellValue={this.checkNegative(excess, numberWithCommas)}/>
+        <TableCell cellValue={this.checkNegative(0, numberWithCommas)}/>
+        <TableCell cellValue={this.checkNegative(0, numberWithCommas)}/>
+        <TableCell cellValue={this.checkNegative(0, numberWithCommas)}/>
         <TableCell cellValue={this.checkNegative(rowItems.initialMargin, numberWithCommas)}/>
         <TableCell cellValue={this.checkNegative(rowItems.variableMargin, numberWithCommas)}/>
         <TableCell cellValue={this.checkNegative(excess, numberWithCommas)}/>
