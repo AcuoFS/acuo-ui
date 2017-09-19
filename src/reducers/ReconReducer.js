@@ -3,6 +3,8 @@ import _ from 'lodash'
 
 import { clearTime, getDate } from '../utils'
 import * as ActionTypes from '../constants/ActionTypes'
+import convertToString from './../utils/convertToString'
+
 
 const initFilters = [
   {order: 1, attr: "legalEntity", label: "Principal Entity"},
@@ -14,8 +16,11 @@ const initFilters = [
   {order: 7, attr: "direction",   label:  "Direction",  hide: true}
 ]
 
-const initState = Map({"items":   List(),
-  "filters": fromJS(initFilters)})
+const initState = Map({
+  "items": List(),
+  "newItems": Map(),
+  "filters": fromJS(initFilters)
+})
 
 const updateFilters = (filters, newFilter) => (
   _.map(filters, filter => (
@@ -109,28 +114,104 @@ const updateFirstlevelListFromSecondLevel = (secondLevelList, firstLevelList, it
   return newFirstLevel
 }
 
-const secondLevelChecks = (items) => (
-  _.reduce(
-    _.filter(items,
-      item => (item.counterpartyAssets.length && item.clientAssets.length) && (item.counterpartyAssets.length === item.clientAssets.length) ),
-    (sum, item) =>
-      (_.concat(sum, _.reduce(item.clientAssets, (sum, group) =>
-          _.concat(sum, _.reduce(group.data, (sum, firstLevel) =>
-            _.concat(sum, _.reduce(firstLevel.firstLevel.secondLevel, (sum, secondLevel) =>
-              !secondLevel.tolerance ? _.concat(sum, [{"GUID": item.GUID, "id": secondLevel.id, "parentIndex": firstLevel.firstLevel.id}]) : sum, [])), [])), []))), [])
-)
+// console.log(convertToString("pewpew", "test", "lol"))
 
+const secondLevelChecks = (items) => {
+
+  //filter out empty mismatched MS & different sized assets
+  const dataSet = _.filter(items,
+    item => (item.counterpartyAssets.length && item.clientAssets.length) && (item.counterpartyAssets.length === item.clientAssets.length))
+
+  const lol = _.reduce(dataSet, (sum, item) => {
+    // console.log(item)
+
+    let composite = {}
+    composite[item.GUID] = {}
+
+    return _.assign(sum, _.reduce(item.clientAssets, (sum, group) => {
+      // console.log(group)
+      return _.assign(sum, _.reduce(group.data, (sum, firstLevel) => {
+        // console.log(firstLevel)
+        return _.assign(sum, _.reduce(firstLevel.firstLevel.secondLevel, (sum, secondLevel) => {
+          // console.log("---------- 2nd level ---------")
+          // console.log(secondLevel)
+          //
+          // console.log(convertToString)
+
+          if(secondLevel.tolerance){
+            let composite = {}
+            composite[convertToString(firstLevel.firstLevel.id, secondLevel.id)] = {
+              "GUID": item.GUID,
+              "id": secondLevel.id,
+              "parentIndex": firstLevel.firstLevel.id
+            }
+
+            return _.assign(sum, composite)
+          }
+
+          return sum
+        }, {}))
+      }, {}))
+    }, {}))
+  }, {})
+
+  return lol
+}
+
+// const secondLevelChecks = (items) => (
+//   _.reduce(
+//     _.filter(items, //filter out empty mismatched MS & different sized assets
+//       item => (item.counterpartyAssets.length && item.clientAssets.length) && (item.counterpartyAssets.length === item.clientAssets.length) ),
+//     (sum, item) =>
+//       (_.concat(sum, _.reduce(item.clientAssets, (sum, group) =>
+//         _.concat(sum, _.reduce(group.data, (sum, firstLevel) =>
+//           _.concat(sum, _.reduce(firstLevel.firstLevel.secondLevel, (sum, secondLevel) =>
+//             !secondLevel.tolerance ? _.concat(sum, [{"GUID": item.GUID, "id": secondLevel.id, "parentIndex": firstLevel.firstLevel.id}]) : sum, [])), [])), []))), [])
+//
+// )
+
+
+// review functionality
 const autoCheckFirstLevelOnly = (items) => {
 
-  return _.reduce(
-    _.filter(items,
-      item => (item.counterpartyAssets.length && item.clientAssets.length) && (item.counterpartyAssets.length === item.clientAssets.length) ),
+  const dataSet = _.filter(items,
+    item => (item.counterpartyAssets.length && item.clientAssets.length) && (item.counterpartyAssets.length === item.clientAssets.length) )
+
+  const lol = _.reduce(
+    dataSet,
     (sum, item) =>
-      (_.concat(sum, _.reduce(item.clientAssets, (sum, group) =>
-        _.concat(sum, _.reduce(group.data, (sum, firstLevel) =>
-          !firstLevel.firstLevel.secondLevelCount && !firstLevel.firstLevel.tolerance ? _.concat(sum, [{"GUID": item.GUID, "id": firstLevel.firstLevel.id, 'parties': ['cpty', 'client']}]) : sum
-          , [])), []))), [])
+      (_.assign(sum, _.reduce(item.clientAssets, (sum, group) =>
+        _.assign(sum, _.reduce(group.data, (sum, firstLevel) => {
+
+          if(!firstLevel.firstLevel.secondLevelCount && !firstLevel.firstLevel.tolerance){
+            let composite = {}
+            composite[convertToString(item.GUID, firstLevel.firstLevel.id)] = {
+              "GUID": item.GUID,
+              "id": firstLevel.firstLevel.id,
+              'parties': ['cpty', 'client']
+            }
+
+            return _.assign(sum, composite)
+          }
+
+          return sum
+
+        }, {})), {}))), {})
+
+  return lol
 }
+
+// const autoCheckFirstLevelOnly = (items) => {
+//
+//   return _.reduce(
+//     _.filter(items,
+//       item => (item.counterpartyAssets.length && item.clientAssets.length) && (item.counterpartyAssets.length === item.clientAssets.length) ),
+//     (sum, item) =>
+//       (_.concat(sum, _.reduce(item.clientAssets, (sum, group) =>
+//         _.concat(sum, _.reduce(group.data, (sum, firstLevel) =>
+//           !firstLevel.firstLevel.secondLevelCount && !firstLevel.firstLevel.tolerance ? _.concat(sum, [{"GUID": item.GUID, "id": firstLevel.firstLevel.id, 'parties': ['cpty', 'client']}]) : sum
+//           , [])), []))), [])
+// }
 
 export default function reconReducer(state = initState, action) {
   let items, filters, newFilter, updatedFilters

@@ -13,7 +13,7 @@ import clearTime from './clearTime'
  */
 export default (items, filterArray) => {
   // remove those with empty selected value: "" or []
-
+  // console.log(items)
   const filters = _.filter(filterArray, filter => {
     const selectedValue = _.get(filter, 'selected.value', '')
 
