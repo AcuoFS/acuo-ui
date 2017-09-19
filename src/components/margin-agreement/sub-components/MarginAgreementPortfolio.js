@@ -59,6 +59,9 @@ export default class MarginAgreementPortfolio extends React.Component {
       ]
     )
 
+    console.log(clientTotal + parseFloat(this.state.adjAmount))
+    console.log(cptyTotal)
+
     const checkedFirstLevelLength = firstLevelList.filter((x) => x.get('GUID') == actionItem.get('GUID')).size
 
     if (firstLevelLength > checkedFirstLevelLength)
@@ -120,11 +123,19 @@ export default class MarginAgreementPortfolio extends React.Component {
     return (!_.isEmpty(marginData.get('disputeInfo').toJS()) ? marginData.get('disputeInfo').toJS() : false)
   }
 
+  shouldComponentUpdate(nextProps, nextState){
+    return !_.isEqual(this.props.firstLevelList, nextProps.firstLevelList) ||
+      !_.isEqual(this.props.secondLevelList, nextProps.secondLevelList) ||
+      !_.isEqual(this.props.currencyInfo, nextProps.currencyInfo) ||
+      !_.isEqual(this.props.portfolioData, nextProps.portfolioData) ||
+      !_.isEqual(this.state, nextState)
+  }
+
   render() {
 
     const {
-      onSelectFirstLevelItem, portfolioData, onReconItem, firstLevelList, secondLevelList,
-      onSelectSecondLevelItem, currencyInfo
+      firstLevelList, secondLevelList, currencyInfo, portfolioData,
+      onSelectFirstLevelItem, onSelectSecondLevelItem, onReconItem
     } = this.props
 
     let percentage = this.getPercentage(portfolioData)

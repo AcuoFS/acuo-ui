@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
+import moment from 'moment'
+
 import CollateralEarmarkStatusPopup from './popups/CollateralEarmarkStatusPopup'
 import CollateralStatusPopup from './popups/CollateralStatusPopup'
 import {COLLATERAL_EARMARKED} from '../../../constants/CollateralTypes'
@@ -44,6 +46,14 @@ class CollateralAsset extends React.Component {
   dragstart_handler(e, propsData){
     let str = JSON.stringify(propsData)
     e.dataTransfer.setData('text/plain', str )
+  }
+
+  standardizeDate(date) {
+    console.log(date)
+    if(date !== '-')
+      return moment(date, "DD-MM-YY").format('YYYY-MM-DD')
+
+    return date
   }
 
   render() {
@@ -96,7 +106,7 @@ class CollateralAsset extends React.Component {
                                               rawPrice={rawPrice}
                                               checkAmountExceeding={this.checkAmountExceeding}/>)
     }
-
+    console.log(this.standardizeDate(propMaturityDate))
     if (propIsDisplayAll) {
       return (
         <div className={styles.collateralRow} >
@@ -106,7 +116,7 @@ class CollateralAsset extends React.Component {
           <div className={styles.collateralCell} title={propDeliveryTime}>{propDeliveryTime}</div>
           {statusDisplay}
           <div className={styles.collateralCell} title={propRating}>{propRating}</div>
-          <div className={styles.collateralCell} title={propMaturityDate}>{propMaturityDate}</div>
+          <div className={styles.collateralCell} title={propMaturityDate}>{this.standardizeDate(propMaturityDate)}</div>
           <div className={styles.collateralCell} title={propInternalCost}>{propInternalCost}</div>
           <div className={styles.collateralCell} title={propOppCost}>{propOppCost}</div>
           <div className={styles.collateralCell} title={propIsin}>{propIsin}</div>
@@ -129,7 +139,7 @@ class CollateralAsset extends React.Component {
           <div className={styles.collateralCell} title={propDeliveryTime}>{propDeliveryTime}</div>
           {statusDisplay}
           <div className={styles.collateralCell} title={propRating}>{propRating}</div>
-          <div className={styles.collateralCell} title={propMaturityDate}>{propMaturityDate}</div>
+          <div className={styles.collateralCell} title={propMaturityDate}>{this.standardizeDate(propMaturityDate)}</div>
         </div>
       )
     }
