@@ -16,9 +16,15 @@ import { sagaNavbarAlerts } from './../actions/CommonActions'
 const defaultList = List()
 
 const mapStateToProps = state => {
-  const items = state.ReconReducer.get('items').toJS()
+  const items = state.ReconReducer.get('newItems').toJS()
   const filters = state.ReconReducer.get('filters').toJS()
   const filteredItems = filterItems(items, filters)
+
+  // if(state.ReconReducer.get('newItems')){
+  //   console.log(state.ReconReducer.get('newItems').toJS())
+  //   console.log(state.ReconReducer.get('firstLevelList').toJS())
+  //   console.log(state.ReconReducer.get('secondLevelList').toJS())
+  // }
 
   return {
     recon : fromJS(filteredItems),
@@ -35,7 +41,7 @@ const mapDispatchToProps = dispatch => ({
   onReconItem : (e) => {
     // console.log('GET URL: ' + RECON_DATA_URL + e.currentTarget.dataset.ref)
     //new recon entire margin call with one get api
-    console.log(e.currentTarget.dataset.ref)
+    //console.log(e.currentTarget.dataset.ref)
     dispatch(reconItem(e.currentTarget.dataset.ref))
     // fetch(RECON_DATA_URL + e.currentTarget.dataset.ref, {
     //   method: 'GET'
