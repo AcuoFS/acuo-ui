@@ -221,7 +221,7 @@ export default class ReferenceSubCommon extends React.Component {
 
         <div>
           <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === INITIAL_GROUP)}
-                                 propLabel={' - Regulatory CSA Initial'}/>
+                                 propLabel={' - Regulatory CSA Initial'} propShowMarginTypeDropdown={true}/>
           <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === INITIAL_PLEDGOR_GROUP)}
                                  propLabel={' - Regulatory CSA Initial Pledgor'}/>
           <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === INITIAL_SECURED_GROUP)}

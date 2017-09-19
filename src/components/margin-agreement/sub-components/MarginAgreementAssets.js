@@ -54,7 +54,10 @@ export default class MarginAgreementPortfolio extends React.Component {
     const differencePortfolio = this.getDifferencePortfolio(assetsName, marginData)
 
     handlerUpdateAdj(differencePortfolio)
-    this.adjInput.value = Math.round(differencePortfolio)
+    // this.adjInput.value = Math.round(differencePortfolio)
+
+    this.adjInput.value = differencePortfolio
+
   }
 
   onChangeAdjInput(){

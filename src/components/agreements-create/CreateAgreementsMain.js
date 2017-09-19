@@ -43,7 +43,7 @@ export class CreateAgreementsMain extends React.Component {
     super(props)
 
     this.state = {
-      sizeOfPopup: smallStyle,
+      sizeOfPopup: mediumStyle,
       currentMenu: MENU_TRADING_ENTITIES,
       isAgreementTypeSelected: false,
       isCsa: false,
@@ -97,7 +97,7 @@ export class CreateAgreementsMain extends React.Component {
               <div className={styles.menuItemContainer}>
 
                 {this.createMenuItemDom('Trading Entities', MENU_TRADING_ENTITIES,
-                  smallStyle, (this.state.currentMenu == MENU_TRADING_ENTITIES))}
+                  mediumStyle, (this.state.currentMenu == MENU_TRADING_ENTITIES))}
 
                 {this.createMenuItemDom('Agreement References', MENU_REFERENCES,
                   bigStyle, (this.state.currentMenu == MENU_REFERENCES))}
