@@ -51,7 +51,7 @@ export default class MarginAgreementList extends React.Component {
       onSelectSecondLevelItem,  onReconItem, onSelectFirstLevelItem
     } = this.props
 
-    console.log(secondLevelList.toJS())
+    // console.log(secondLevelList.toJS())
 
     return (
       <div className={styles.actionContainer}>

@@ -119,41 +119,114 @@ const updateFirstlevelListFromSecondLevel = (secondLevelList, firstLevelList, it
 const secondLevelChecks = (items) => {
 
   //filter out empty mismatched MS & different sized assets
+  // console.log(items)
   const dataSet = _.filter(items,
     item => (item.counterpartyAssets.length && item.clientAssets.length) && (item.counterpartyAssets.length === item.clientAssets.length))
 
-  const lol = _.reduce(dataSet, (sum, item) => {
+  //console.log(dataSet)
+
+  let lol = _.reduce(dataSet, (sum, item) => {
     // console.log(item)
-
-    let composite = {}
-    composite[item.GUID] = {}
-
+    // if(item.GUID == "3e5e748d")
+    //   console.log(item)
     return _.assign(sum, _.reduce(item.clientAssets, (sum, group) => {
-      // console.log(group)
+       //console.log(group)
       return _.assign(sum, _.reduce(group.data, (sum, firstLevel) => {
-        // console.log(firstLevel)
-        return _.assign(sum, _.reduce(firstLevel.firstLevel.secondLevel, (sum, secondLevel) => {
+         // console.log(_.cloneDeep(sum))
+
+        let firstlevel = _.reduce(firstLevel.firstLevel.secondLevel, (sum, secondLevel) => {
           // console.log("---------- 2nd level ---------")
-          // console.log(secondLevel)
+
           //
           // console.log(convertToString)
+          // console.log(secondLevel.tolerance)
+          //console.log('break')
 
-          if(secondLevel.tolerance){
-            let composite = {}
-            composite[convertToString(firstLevel.firstLevel.id, secondLevel.id)] = {
+          if(!secondLevel.tolerance){
+            // let composite = {}
+            // composite[convertToString(item.GUID, firstLevel.firstLevel.id, secondLevel.id)] = {
+            //   "GUID": item.GUID,
+            //   "id": secondLevel.id,
+            //   "parentIndex": firstLevel.firstLevel.id
+            // }
+
+            // console.log(item.GUID)
+            // console.log(secondLevel)
+            // console.log(sum)
+            // console.log(convertToString(firstLevel.firstLevel.id))
+            // console.log(convertToString(item.GUID))
+            // console.log('here')
+
+            let asd = {}
+
+            asd[secondLevel.id] = {
               "GUID": item.GUID,
               "id": secondLevel.id,
               "parentIndex": firstLevel.firstLevel.id
             }
 
-            return _.assign(sum, composite)
+            let def = {}
+            def[convertToString(firstLevel.firstLevel.id)] = asd
+
+            let ghi = {}
+            ghi[convertToString(item.GUID)] = def
+
+            // console.log('========================')
+            // console.log('guid');
+            // console.log(item.GUID)
+            // console.log('sum');
+            // console.log(_.isEmpty(sum))
+            // console.log(_.cloneDeep(sum))
+            // console.log('ghi');
+            // console.log(_.cloneDeep(ghi))
+            // console.log('merge');
+            // console.log(_.cloneDeep(_.merge(sum, ghi)))
+            // console.log('========================')
+
+            return _.merge(sum, ghi)
+
+            // if(!_.isEmpty(sum))
+            //   return _.set(sum, [convertToString(item.GUID)][convertToString(firstLevel.firstLevel.id)], _.concat(sum[convertToString(item.GUID)][convertToString(firstLevel.firstLevel.id)], asd))
+            // else
+            //   return ghi
           }
 
           return sum
-        }, {}))
+        }, {})
+
+        // console.log('break')
+        // console.log(firstlevel)
+        // console.log(!_.isEmpty(firstlevel))
+        // console.log(sum)
+        //console.log(_.set(firstlevel, [convertToString(item.GUID)][convertToString(firstLevel.firstLevel.id)], firstlevel[convertToString(item.GUID)][convertToString(firstLevel.firstLevel.id)].filter(n => !_.isEmpty(n))))
+
+        //console.log(firstlevel)
+
+        // console.log(firstLevel)
+
+        // if(!_.isEmpty(firstlevel))
+        //   _.set(firstlevel, //object
+        //     [convertToString(item.GUID)][convertToString(firstLevel.firstLevel.id)], //path of object
+        //     firstlevel[convertToString(item.GUID)][convertToString(firstLevel.firstLevel.id)].filter(n => !_.isEmpty(n))) //filter out empty items
+
+        // if(!_.isEmpty(firstlevel))
+        //   _.set(firstlevel, //object
+        //     [convertToString(item.GUID)][convertToString(firstLevel.firstLevel.id)], //path of object
+        //     firstlevel[convertToString(item.GUID)][convertToString(firstLevel.firstLevel.id)].filter(n => !_.isEmpty(n))) //filter out empty items
+
+        // if(!_.isEmpty(firstlevel)) //check if firstlevel is empty, if empty, no need to clean array
+          return _.assign(sum, firstlevel)
+        // else
+        //   return sum
+
       }, {}))
     }, {}))
   }, {})
+
+  if(!_.isEmpty(lol.undefined))
+    _.unset(lol, undefined)
+
+  // console.log(lol)
 
   return lol
 }
@@ -228,11 +301,18 @@ export default function reconReducer(state = initState, action) {
 
       const items = plusMinusThreeDays(action.items)
 
+      const newItems = _.keyBy(items, (o) => o.GUID)
+
       const secondLevelList1 = secondLevelChecks(_.cloneDeep(items))
 
-      const firstLevelList1 = updateFirstlevelListFromSecondLevel(secondLevelList1, [], _.cloneDeep(items))
+      console.log(secondLevelList1)
+
+      // const firstLevelList1 = updateFirstlevelListFromSecondLevel(secondLevelList1, [], _.cloneDeep(items))
+
       // console.log(_.keyBy(items, (o) => o.GUID))
-      return state.withMutations(state => state.set('items', fromJS(items)).set('newItems', fromJS(_.keyBy(items, (o) => o.GUID))).set('secondLevelList', fromJS(secondLevelList1)).set('firstLevelList', fromJS(_.concat(firstLevelList1, autoCheckFirstLevelOnly(_.cloneDeep(items))))))
+      //return state.withMutations(state => state.set('items', fromJS(items)).set('newItems', fromJS(_.keyBy(items, (o) => o.GUID))).set('secondLevelList', fromJS(secondLevelList1)).set('firstLevelList', fromJS(_.concat(firstLevelList1, autoCheckFirstLevelOnly(_.cloneDeep(items))))))
+
+      return state.withMutations(state => state.set('items', fromJS(items)).set('newItems', fromJS(newItems)))
 
     case ActionTypes.INIT_CURRENCY_INFO:
       return state.set('currencyInfo', fromJS(action.currencyInfo))

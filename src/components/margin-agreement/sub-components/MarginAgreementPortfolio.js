@@ -59,8 +59,8 @@ export default class MarginAgreementPortfolio extends React.Component {
       ]
     )
 
-    console.log(clientTotal + parseFloat(this.state.adjAmount))
-    console.log(cptyTotal)
+    // console.log(clientTotal + parseFloat(this.state.adjAmount))
+    // console.log(cptyTotal)
 
     const checkedFirstLevelLength = firstLevelList.filter((x) => x.get('GUID') == actionItem.get('GUID')).size
 
