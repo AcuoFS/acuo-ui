@@ -90,4 +90,5 @@
   /*as flex child of .popupContainer*/
   flex: 1 0 auto;
   padding-right: 15px;
+  align-self: self-end;
 }
