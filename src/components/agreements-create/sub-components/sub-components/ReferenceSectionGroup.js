@@ -15,6 +15,7 @@ import styles from '../ContentBody.css'
  * @param propCallDriverLabel
  * @param propMarginTermsLabel
  * @param propCallIssuanceLabel
+ * @param propShowMarginTypeDropdown
  * @constructor
  */
 const ReferenceSectionGroup = ({
@@ -24,11 +25,13 @@ const ReferenceSectionGroup = ({
                                  propCallDriverLabel,
                                  propMarginTermsLabel,
                                  propCallIssuanceLabel,
+                                 propShowMarginTypeDropdown = false
                                }) => (
   <div className={!propIsActiveGroup && styles.hideForm}>
     <ReferencesCallDriver propIsSubMenu
                           propPostfixLabel={propCallDriverLabel || propLabel}
-                          propIsRemoveExposure={propIsRemoveExposureFromCallDriver}/>
+                          propIsRemoveExposure={propIsRemoveExposureFromCallDriver}
+                          propShowMarginTypeDropdown={propShowMarginTypeDropdown}/>
     <ReferencesMarginTerms propIsSubMenu
                            propPostfixLabel={propMarginTermsLabel || propLabel}/>
     <ReferencesCallIssuance propIsSubMenu

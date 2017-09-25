@@ -1,0 +1,67 @@
+:global .react-datepicker {
+  color: #757575; }
+
+:global .react-datepicker__header {
+  background-color: #fff; }
+
+:global .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before, :global .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle::before {
+  content: unset; }
+
+:global .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle, :global .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before {
+  border: none;
+}
+
+:global .react-datepicker__header {
+  background-color: #fff;
+  border-bottom: none; }
+
+:global .react-datepicker__month {
+  margin: 0.4rem;
+  text-align: center;
+  margin-top: 0; }
+
+:global .react-datepicker__day-names {
+  margin-top: 0.4rem;
+  border-top: 1px solid #D0D0D0; }
+
+:global .react-datepicker__day-names .react-datepicker__day-name:first-letter {
+  visibility: visible; }
+
+:global .react-datepicker__day {
+  color: #ACACAC; }
+  :global .react-datepicker__day:hover {
+    border-radius: 1rem;
+    background-color: #f0f0f0; }
+  :global .react-datepicker__day.react-datepicker__day--keyboard-selected,
+  :global .react-datepicker__day.react-datepicker__day--selected {
+    border-radius: 1rem;
+    background-color: #4E83B5;
+    color: #fff;
+    -webkit-box-shadow: 0px 4px 10px 4px rgba(223,222,223,1);
+    -moz-box-shadow: 0px 4px 10px 4px rgba(223,222,223,1);
+    box-shadow: 0px 4px 10px 4px rgba(223,222,223,1); }
+  :global .react-datepicker__day.react-datepicker__day--keyboard-selected:hover,
+  :global .react-datepicker__day.react-datepicker__day--selected {
+    border-radius: 1rem;
+    background-color: #4E83B5; }
+
+:global .react-datepicker__day-names .react-datepicker__day-name {
+  visibility: hidden;
+  font-weight: bold;
+  color: #606060;
+  text-indent: 0.5rem; }
+
+:global .react-datepicker__current-month {
+  color: #7D7D7D;
+}
+
+:global .react-datepicker__day.react-datepicker__day--outside-month {
+  color: #fff;
+  pointer-events: none;
+  user-select: none;
+  cursor: none;
+}
+
+:global .react-datepicker-popper {
+  left: -76px !important;
+}
