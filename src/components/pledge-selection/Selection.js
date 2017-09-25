@@ -75,7 +75,13 @@ export default class Selection extends React.Component {
         <td>{asset.get(ASSET.A_NAME)}</td>
         <td>{checkNegative(asset.get(ASSET.A_NET_AMT))}</td>
         <td>{asset.get(ASSET.A_CCY)}</td>
-        <td>{asset.get(ASSET.A_HAIRCUT_PCT)}%</td>
+        <td className={styles.hoverCtrl}>
+          {asset.get(ASSET.A_HAIRCUT_PCT)}%
+          <div className={styles.tooltip}>
+            <div>H<sub>c</sub>&nbsp;: 00.0%</div>
+            <div>H<sub>fx</sub>: 00.0%</div>
+          </div>
+        </td>
         <td>{checkNegative(asset.get(ASSET.A_AMT))}</td>
         <td>{checkNegative(asset.get(ASSET.A_FX))}</td>
         <td>{asset.get(ASSET.A_VENUE)}</td>
@@ -85,9 +91,6 @@ export default class Selection extends React.Component {
                  this.setDeselectionPopup(popupID, asset.toJS())
                }}>
             <img src="./images/pledge/cancel.png"></img>
-            {/*<div className={styles.tooltip}>*/}
-              {/*Move to Earmarked*/}
-            {/*</div>*/}
           </div>
 
         </td>
