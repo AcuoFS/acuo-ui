@@ -10,6 +10,7 @@ const initFilters = [
 ]
 
 const initialState = Map({
+  allocating: false,
   pledgeData: Map({
     optimisation: List(),
     selection: List(),
@@ -126,6 +127,9 @@ const PledgeReducer = (state = initialState, action) => {
       else{
         return state.setIn(['collateralWidget' , 'sortAscending'], !sortAscending )
       }
+
+    case ActionTypes.ALLOCATING_COLLATERALS:
+      return state.set('allocating', fromJS(action.flag))
 
   }
   return state
