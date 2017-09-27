@@ -9,7 +9,11 @@ import root from './sagas'
 import reducer from './reducers'
 import styles from './static/global.css'
 import * as PAGES from './pages'
-import { NotificationContainer, AppWrapperContainer } from './containers'
+import {
+  NotificationContainer,
+  AppWrapperContainer,
+  ChatContainer
+} from './containers'
 import { updateScreensize } from './actions/CommonActions'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -75,6 +79,7 @@ class App extends React.Component {
               <Route path="disputes" component={PAGES.DisputePage}/>
               <Route path="analytics" component={PAGES.AnalyticsPage}/>
             </Router>
+            <ChatContainer />
           </AppWrapperContainer>
           <NotificationContainer />
         </div>
