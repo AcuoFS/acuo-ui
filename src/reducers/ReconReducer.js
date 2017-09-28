@@ -347,13 +347,29 @@ export default function reconReducer(state = initState, action) {
 
       const newItems = _.keyBy(items, (o) => o.GUID)
 
-      console.log(newItems)
+      // console.log(newItems)
+
+
+      _.keyBy( //guid keyby
+
+        _.map(items, item => {
+
+          _.set(item.clientAssets, _.map(item.clientAssets, clientAsset => {
+            return _.set(
+              clientAsset, //second level keyby
+              'data', _.keyBy(clientAsset.data, data => data.firstLevel.id)) //first level keyby
+          }))
+          console.log(item)
+          return item
+        })
+
+      , (o) => o.GUID) //end guid keyby
 
       const secondLevelList1 = secondLevelChecks(_.cloneDeep(items))
 
       // console.log(secondLevelList1)
 
-      const firstLevelList1 = updateFirstlevelListFromSecondLevel(secondLevelList1, {}, _.cloneDeep(newItems))
+      // const firstLevelList1 = updateFirstlevelListFromSecondLevel(secondLevelList1, {}, _.cloneDeep(newItems))
 
       // console.log(_.keyBy(items, (o) => o.GUID))
       //return state.withMutations(state => state.set('items', fromJS(items)).set('newItems', fromJS(_.keyBy(items, (o) => o.GUID))).set('secondLevelList', fromJS(secondLevelList1)).set('firstLevelList', fromJS(_.concat(firstLevelList1, autoCheckFirstLevelOnly(_.cloneDeep(items))))))
