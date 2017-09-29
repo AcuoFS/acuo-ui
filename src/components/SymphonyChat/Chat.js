@@ -18,8 +18,9 @@ export default ({minimised, opened, onToggleMinimise, onToggleOpen}) => (
 
       </div>
       <div className={styles.tempIframe}>
-        <iframe className={styles.iframe} src={"https://develop.symphony.com/embed/?module=im&userIds=347583113330922,347583113330926&theme=light&font=xsmall"} />
+        <iframe className={styles.iframe} src={"https://develop.symphony.com/embed/?module=im&streamId=kT7iUrPsKzdGk1urVMHzcn___qEzjIkkdA&userIds=347583113330926,347583113330928&theme=light&font=xsmall"} />
       </div>
     </div>
   </div>
 )
+
