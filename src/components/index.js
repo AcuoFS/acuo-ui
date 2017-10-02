@@ -20,6 +20,7 @@ import TwoFA_Component from './twoFA/TwoFA'
 import NotificationComponent from './notification-system/Notification'
 import AppWrapperComponent from './AppWrapper/AppWrapper'
 import AnalyticsGraphComponent from './analytics-graph/AnalyticsGraph'
+import ChatComponent from './SymphonyChat/Chat'
 
 export {
   GraphComponent,
@@ -43,5 +44,6 @@ export {
   TwoFA_Component,
   NotificationComponent,
   AppWrapperComponent,
-  AnalyticsGraphComponent
+  AnalyticsGraphComponent,
+  ChatComponent
 }

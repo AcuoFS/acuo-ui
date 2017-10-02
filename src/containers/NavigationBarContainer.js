@@ -1,6 +1,9 @@
 import {connect} from 'react-redux'
 import {NavigationBarComponent} from '../components'
-import { sagaNavbarAlerts } from './../actions/CommonActions'
+import {
+  sagaNavbarAlerts,
+  defaultChatOpen
+} from './../actions/CommonActions'
 
 const _default = []
 
@@ -12,7 +15,8 @@ const mapStateToProp = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  onUpdateNavbarAlert: () => dispatch(sagaNavbarAlerts())
+  onUpdateNavbarAlert: () => dispatch(sagaNavbarAlerts()),
+  onChatOpen: () => dispatch(defaultChatOpen())
 })
 
 const NavigationBarContainer = connect(

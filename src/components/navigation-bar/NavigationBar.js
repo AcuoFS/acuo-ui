@@ -20,71 +20,79 @@ export default class NavigationBar extends React.Component {
 
   render() {
 
-    const { menuNotifications } = this.props
+    const { menuNotifications, onChatOpen } = this.props
 
     return (
       <nav className={styles.nav}>
 
-        <div className={styles.logoContainer}>
-          <div className={styles.vertiCenter}>
-            <img className={styles.centerThis} src={'./images/dashboard/navbar/logo.png'} alt=""/>
-          </div>
-
-        </div>
-
-        <NavigationBarItem selected={this.props.curPage === '/'}
-                           label={'Dashboard'}
-                           toUrl={'/dashboard'}/>
-        <NavigationBarItem selected={this.props.curPage === '/recon'}
-                           label={'Reconcile'}
-                           toUrl={'/recon'}
-                           notifications={[_.find(menuNotifications, {"item": "Unrecon"}), _.find(menuNotifications, {"item": "Expected"})]}/>
-        <NavigationBarItem selected={this.props.curPage === '/disputes'}
-                           label={'Disputes'}
-                           toUrl={'/disputes'}
-                           notifications={[_.find(menuNotifications, {"item": "ActionDispute"})]}/>
-        <NavigationBarItem selected={this.props.curPage === '/pledge'}
-                           label={'Pledge'}
-                           toUrl={'/pledge'}
-                           notifications={[_.find(menuNotifications, {"item": "Reconciled"})]}/>
-        <NavigationBarItem selected={this.props.curPage === '/deployed'}
-                           label={'Deployed'}
-                           toUrl={'/deployed'}/>
-        <NavigationBarItem selected={this.props.curPage === '/agreements'}
-                           label={'Agreements'}
-                           toUrl={'/agreements'}/>
-
-        <NavigationBarItem selected={this.props.curPage === '/analytics'}
-                           label={'Analytics'}
-                           toUrl={'/analytics'}/>
-
-        <div className={styles.menuIcon} id={styles.navLogout}>
-          <div className={styles.vertiCenter}>
-            <div className={styles.centerThis}>
-              <img
-                   src={'./images/dashboard/navbar/logout.png'}
-                   alt=""
-                   title="Logout"
-                   onClick={ ()=>{ localStorage.clear() ; hashHistory.push("/") } }/>
+        <div className={styles.menuLeft}>
+          <div className={styles.logoContainer}>
+            <div className={styles.vertiCenter}>
+              <img className={styles.centerThis} src={'./images/dashboard/navbar/logo.png'} alt=""/>
             </div>
+
           </div>
+
+          <NavigationBarItem selected={this.props.curPage === '/'}
+                             label={'Dashboard'}
+                             toUrl={'/dashboard'}/>
+          <NavigationBarItem selected={this.props.curPage === '/recon'}
+                             label={'Reconcile'}
+                             toUrl={'/recon'}
+                             notifications={[_.find(menuNotifications, {"item": "Unrecon"}), _.find(menuNotifications, {"item": "Expected"})]}/>
+          <NavigationBarItem selected={this.props.curPage === '/disputes'}
+                             label={'Disputes'}
+                             toUrl={'/disputes'}
+                             notifications={[_.find(menuNotifications, {"item": "ActionDispute"})]}/>
+          <NavigationBarItem selected={this.props.curPage === '/pledge'}
+                             label={'Pledge'}
+                             toUrl={'/pledge'}
+                             notifications={[_.find(menuNotifications, {"item": "Reconciled"})]}/>
+          <NavigationBarItem selected={this.props.curPage === '/deployed'}
+                             label={'Deployed'}
+                             toUrl={'/deployed'}/>
+          <NavigationBarItem selected={this.props.curPage === '/agreements'}
+                             label={'Agreements'}
+                             toUrl={'/agreements'}/>
+
+          <NavigationBarItem selected={this.props.curPage === '/analytics'}
+                             label={'Analytics'}
+                             toUrl={'/analytics'}/>
         </div>
 
-        <div className={styles.menuIcon} id={styles.navSetting}>
-          <div className={styles.vertiCenter}>
-            <div className={styles.centerThis}>
-              <img
-                   src={'./images/dashboard/navbar/settings.png'}
-                   title="Feature Coming Soon!"
-                   alt=""/>
-            </div>
-          </div>
-        </div>
+        {/*<div className={styles.filler} />*/}
 
-        <div className={styles.userInfo}>
-          <text id={styles.userId}>user@acuo.com</text>
-          <br/>
-          <text>Last Updated at {this.getLastUpdatedTime()}</text>
+        <div className={styles.menuRight}>
+          <div className={styles.userInfo}>
+            <text id={styles.userId}>user@acuo.com</text>
+            <br/>
+            <text>Last Updated at {this.getLastUpdatedTime()}</text>
+          </div>
+
+          <div className={styles.menuIcon}>
+            <img
+              src={'./images/dashboard/navbar/symphony.png'}
+              alt=""
+              onClick={onChatOpen} />
+          </div>
+
+          <div className={styles.menuIcon}>
+            <img
+              src={'./images/dashboard/navbar/settings.png'}
+              title="Feature Coming Soon!"
+              alt=""/>
+          </div>
+
+          <div className={styles.menuIcon}>
+            <img
+              src={'./images/dashboard/navbar/logout.png'}
+              alt=""
+              title="Logout"
+              onClick={ () => {
+                localStorage.clear();
+                hashHistory.push("/")
+              } }/>
+          </div>
         </div>
 
       </nav>

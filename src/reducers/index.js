@@ -12,6 +12,7 @@ import AssetsReducer from './AssetsReducer'
 import DeployedReducer from './DeployedReducer'
 import CommonReducer from './CommonReducer'
 import AnalyticsReducer from './AnalyticsReducer'
+import ChatReducer from './ChatReducer'
 
 const reducer = combineReducers({
   mainReducer,
@@ -25,7 +26,8 @@ const reducer = combineReducers({
   DeployedReducer,
   NotificationReducer,
   CommonReducer,
-  AnalyticsReducer
+  AnalyticsReducer,
+  ChatReducer
 })
 
 export default reducer
