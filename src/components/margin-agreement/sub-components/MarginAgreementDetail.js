@@ -77,6 +77,7 @@ export default class MarginAgreementDetail extends React.Component {
   }
 
   getCheckboxImageUrl(list, GUID, id, party) {
+    // console.log(list)
     if(list){
       if(_.find(list, {"GUID": GUID, "id": id, "parties": [party]}))
         return "./images/reconcile/checkboxwithtick.png"

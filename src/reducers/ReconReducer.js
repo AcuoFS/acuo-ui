@@ -93,11 +93,13 @@ const updateFirstlevelListFromSecondLevel = (secondLevelList, firstLevelList, it
 
   const test = secondLevelList
 
+  // console.log(Object.keys(test))
+
   const newFirstLevel = Object.keys(test).map((GUID) => {
 
-    // console.log(test[GUID])
+    // console.log(Object.keys(test[GUID]))
 
-    return Object.keys(test[GUID]).map(firstLevelID => {
+    const testing = _.keyBy(Object.keys(test[GUID]).map(firstLevelID => {
 
         const statement = items[GUID]
         // console.log(statement)
@@ -112,21 +114,25 @@ const updateFirstlevelListFromSecondLevel = (secondLevelList, firstLevelList, it
         const cptyAll = retrieveSecondLevel(counterpartyAssetList, firstLevelID)
         //
         let parties = []
-        console.log(presentInList)
-        console.log(clientAll)
-        parties = (_.remove(clientAll, (n) => _.some(presentInList, {
-          "id": n.id,
-          "parentIndex": n.parentIndex
-        })).length >= clientAll ? _.concat(parties, 'client') : parties)
-        // parties = (_.remove(cptyAll, (n) => _.some(presentInList, {
-        //   "id": n.id,
-        //   "parentIndex": n.parentIndex
-        // })).length >= cptyAll ? _.concat(parties, 'cpty') : parties)
-        //
-        // return {"GUID": x.GUID, "id": x.id, "parties": parties}
+        // console.log(Object.keys(presentInList).sort())
+        // console.log(Object.keys(clientAll).sort())
+        parties = (JSON.stringify(Object.keys(presentInList).sort()) === JSON.stringify(Object.keys(clientAll).sort()) ? _.concat(parties, 'client') : parties)
+        parties = (JSON.stringify(Object.keys(presentInList).sort()) === JSON.stringify(Object.keys(cptyAll).sort()) ? _.concat(parties, 'cpty') : parties)
+
+          // console.log({"GUID": GUID, "id": firstLevelID, "parties": parties})
+
+      console.log(typeof firstLevelID)
+
+        return {"GUID": GUID, "id": String(firstLevelID), "parties": parties}
       }
-    )
+    ), o => o.id)
+
+    // console.log(testing)
+
+    return testing
   })
+
+  // console.log(newFirstLevel)
 
   return newFirstLevel
 }
@@ -390,9 +396,9 @@ export default function reconReducer(state = initState, action) {
       const firstLevelList1 = updateFirstlevelListFromSecondLevel(secondLevelList1, {}, _.cloneDeep(newItems))
 
       // console.log(_.keyBy(items, (o) => o.GUID))
-      //return state.withMutations(state => state.set('items', fromJS(items)).set('newItems', fromJS(_.keyBy(items, (o) => o.GUID))).set('secondLevelList', fromJS(secondLevelList1)).set('firstLevelList', fromJS(_.concat(firstLevelList1, autoCheckFirstLevelOnly(_.cloneDeep(items))))))
+      return state.withMutations(state => state.set('items', fromJS(items)).set('newItems', fromJS(newItems)).set('secondLevelList', fromJS(secondLevelList1)).set('firstLevelList', fromJS(_.merge(firstLevelList1, autoCheckFirstLevelOnly(_.cloneDeep(newItems))))))
 
-      return state.withMutations(state => state.set('items', fromJS(items)).set('newItems', fromJS(newItems)))
+      // return state.withMutations(state => state.set('items', fromJS(items)).set('newItems', fromJS(newItems)))
 
     case ActionTypes.INIT_CURRENCY_INFO:
       return state.set('currencyInfo', fromJS(action.currencyInfo))
