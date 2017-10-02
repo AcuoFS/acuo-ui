@@ -2,7 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import styles from './FilterBar.css'
 
-
+/******************************************
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *  DEPRECATED?! check!!
+ *  Rui 210917
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
 export default class FilterDropdown extends React.Component {
 
   constructor(props) {
@@ -28,9 +48,10 @@ export default class FilterDropdown extends React.Component {
     })
   }
 
-  handleOnOptionChange(e) {
+  handleOnOptionChange(e, text) {
+    console.log('here')
     this.setState({
-      selectedOption: e.currentTarget.textContent,
+      selectedOption: text,
       isOpen: false
     })
     this.props.handleOnSelectedItemChange(e)
@@ -46,13 +67,13 @@ export default class FilterDropdown extends React.Component {
           {options.map(option => (
             <li key={option}
                 data-ref={option}
-                onClick={this.handleOnOptionChange}>
+                onClick={(e) => this.handleOnOptionChange(e, String(option).toUpperCase())}>
               {String(option).toUpperCase()}
             </li>
           ))}
         </ul>)
     }
-
+    console.log(this.state.selectedOption)
     return (
       <div className={styles.filterItem}>
         <label className={styles.filterLabel}>{this.props.title}</label>

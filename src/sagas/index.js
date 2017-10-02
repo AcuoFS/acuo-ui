@@ -37,7 +37,8 @@ import {
   updateCollateral,
   fetchCollaterals,
   fetchSelection,
-  clearPendingAllocation
+  clearPendingAllocation,
+  allocatingCollaterals
 } from './../actions'
 import { initDepartures } from './../actions/DeployedActions'
 import {
@@ -266,9 +267,11 @@ function* watchAllocateCollaterals() {
   while (true) {
     try {
       const { obj } = yield take(ON_ALLOCATE_COLLATERALS)
+      yield put(allocatingCollaterals(true))
       const payload = yield call(AllocateCollateralsSaga, obj)
       yield put(initSelection(payload.items))
       yield put(fetchCollaterals())
+      yield put(allocatingCollaterals(false))
     } catch (error) {
       console.log(error)
       return false

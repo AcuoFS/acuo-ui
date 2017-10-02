@@ -91,6 +91,7 @@ class TradingEntities extends React.Component {
       </div>
       <div className={styles.rowGroup}>
         <div className={styles.line + ' ' + styles.calenderGroup}>
+          <span>Active Date</span>
           <span className={styles.datepickerWrapper}>
             <DatePicker className={styles.datepicker}
                         selected={this.state.activeDate}
@@ -98,7 +99,6 @@ class TradingEntities extends React.Component {
                         onChange={this.changeDate}
                         ref="datepicker"/>
           </span>
-          <span>Active Date</span>
         </div>
         <div className={styles.line}>
           <input type="text"

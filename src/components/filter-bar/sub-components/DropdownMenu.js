@@ -13,7 +13,7 @@ export default class DropdownMenu extends React.Component{
         {optionList.map(option => (
           <li key={option}
               data-ref={option}
-              onClick={ e => handleOnOptionChange(e, option)}>
+              onClick={ e => handleOnOptionChange(e, derivTypeMapping(String(option)).toUpperCase())}>
             {derivTypeMapping(String(option)).toUpperCase()}
           </li>
         ))}
