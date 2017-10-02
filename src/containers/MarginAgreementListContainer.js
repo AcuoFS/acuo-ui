@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { fromJS, List } from 'immutable'
+import { fromJS, List, Map } from 'immutable'
 import { MarginAgreementsComponent } from '../components'
 import {
   selectedItems,
@@ -14,6 +14,7 @@ import filterItems from '../utils/filterItems'
 import { sagaNavbarAlerts } from './../actions/CommonActions'
 
 const defaultList = List()
+const defaultMap = Map()
 
 const mapStateToProps = state => {
   const items = state.ReconReducer.get('newItems').toJS()
@@ -28,8 +29,8 @@ const mapStateToProps = state => {
 
   return {
     recon : fromJS(filteredItems),
-    firstLevelList : state.ReconReducer.get('firstLevelList') || defaultList,
-    secondLevelList : state.ReconReducer.get('secondLevelList') || defaultList,
+    firstLevelList : state.ReconReducer.get('firstLevelList') || defaultMap,
+    secondLevelList : state.ReconReducer.get('secondLevelList') || defaultMap,
     currencyInfo: state.ReconReducer.get('currencyInfo') || defaultList
   }
 }
