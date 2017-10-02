@@ -100,7 +100,8 @@ export default class OptimisationWidget extends React.Component {
       optimisation, selection, onUpdateOptimisationSettings,
       pendingAllocation, sliderCheckbox, onToggleCheckall, onAllocate,
       onPledge,
-      scenarioAnalysis
+      scenarioAnalysis,
+      allocating
     } = this.props
 
     return <div className={styles.optimisationWidgetHolder}>
@@ -147,7 +148,7 @@ export default class OptimisationWidget extends React.Component {
                        tickClick={onToggleCheckall}/>
 
           <div className={styles.optButton + ' ' +
-          (this.checkIfExist(pendingAllocation).size > 0 ? '' : styles.btnDisabled )}
+          ((this.checkIfExist(pendingAllocation).size > 0) && !allocating ? '' : styles.btnDisabled )}
                onClick={() => {
                  onAllocate(pendingAllocation.toJS(), optimisation.toJS())
                  this.setState({isAllocateButtonClicked: true})

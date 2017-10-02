@@ -137,6 +137,11 @@ export const allocateCollaterals = (obj) => ({
   obj
 })
 
+export const allocatingCollaterals = (flag) => ({
+  type: ActionTypes.ALLOCATING_COLLATERALS,
+  flag
+})
+
 //recon
 export const firstLeveSelect = (GUID, firstLevelID) => ({
   type: ActionTypes.FIRSTLEVEL_SELECT,
