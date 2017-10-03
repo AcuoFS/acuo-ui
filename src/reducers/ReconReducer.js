@@ -91,48 +91,68 @@ const updateFirstlevelListFromSecondLevel = (secondLevelList, firstLevelList, it
   //   _.unionWith(set, [{"GUID": item.GUID, "id": item.parentIndex}], _.isEqual)
   // ), [])
 
-  const test = secondLevelList
+  // const test = secondLevelList
 
-  // console.log(Object.keys(test))
+  // console.log(newFirstLevel)
 
-  const newFirstLevel = Object.keys(test).map((GUID) => {
+  const newFirstLevel = _.keyBy(Object.keys(secondLevelList).map((GUID) => {
 
-    // console.log(Object.keys(test[GUID]))
+    // console.log(testing)
+    // if(GUID === "970129e4")
+    //
+    // if(GUID === "ee5f01e5")
+    //   console.log(test[GUID])
+    //
+    //   console.log('*********')
+    // console.log('GUID: ')
+    //   console.log(GUID)
 
-    const testing = _.keyBy(Object.keys(test[GUID]).map(firstLevelID => {
+    const testing = _.keyBy(Object.keys(secondLevelList[GUID]).map(firstLevelID => {
+      // console.log('first level: ')
+      //   console.log(firstLevelID)
+      // console.log('**********')
 
-        const statement = items[GUID]
+      const statement = items[GUID]
         // console.log(statement)
         const clientAssetFirstLevelList = statement.clientAssets || []
         const counterpartyAssetList = statement.counterpartyAssets || []
 
         //number of second level items in this first lvl obj in the list
-        const presentInList = test[GUID][firstLevelID]
+        const presentInList = secondLevelList[GUID][firstLevelID]
         // console.log(presentInList)
         //
         const clientAll = retrieveSecondLevel(clientAssetFirstLevelList, firstLevelID)
         const cptyAll = retrieveSecondLevel(counterpartyAssetList, firstLevelID)
         //
         let parties = []
-        // console.log(Object.keys(presentInList).sort())
-        // console.log(Object.keys(clientAll).sort())
+        // console.log(presentInList)
+        // console.log(clientAssetFirstLevelList)
+        // console.log(counterpartyAssetList)
+
+
+      // if(GUID==="ee5f01e5")
+      //     console.log('here')
+
         parties = (JSON.stringify(Object.keys(presentInList).sort()) === JSON.stringify(Object.keys(clientAll).sort()) ? _.concat(parties, 'client') : parties)
         parties = (JSON.stringify(Object.keys(presentInList).sort()) === JSON.stringify(Object.keys(cptyAll).sort()) ? _.concat(parties, 'cpty') : parties)
 
           // console.log({"GUID": GUID, "id": firstLevelID, "parties": parties})
+      // if(GUID === "970129e4")
+      //   console.log({"GUID": GUID, "id": firstLevelID, "parties": parties})
 
-      console.log(typeof firstLevelID)
-
-        return {"GUID": GUID, "id": String(firstLevelID), "parties": parties}
+        return {"GUID": GUID, "id": firstLevelID, "parties": parties}
       }
-    ), o => o.id)
+    ), o => String(o.id))
 
     // console.log(testing)
 
     return testing
+  }), o => {
+    // console.log(o)
+    return String(o[Object.keys(o)[0]].GUID)
   })
 
-  // console.log(newFirstLevel)
+  // console.log(_.cloneDeep(newFirstLevel12))
 
   return newFirstLevel
 }
@@ -297,7 +317,7 @@ const secondLevelChecks = (items) => {
 // )
 
 
-// review functionality
+// autocheck those with only first level and no second level
 const autoCheckFirstLevelOnly = (items) => {
 
   const dataSet = _.filter(items,
@@ -310,12 +330,15 @@ const autoCheckFirstLevelOnly = (items) => {
         _.assign(sum, _.reduce(group.data, (sum, firstLevel) => {
 
           if(!firstLevel.firstLevel.secondLevelCount && !firstLevel.firstLevel.tolerance){
-            let composite = {}
-            composite[convertToString(item.GUID, firstLevel.firstLevel.id)] = {
+            let second = {}, composite = {}
+
+            second[firstLevel.firstLevel.id] = {
               "GUID": item.GUID,
               "id": firstLevel.firstLevel.id,
               'parties': ['cpty', 'client']
             }
+
+            composite[item.GUID] = second
 
             return _.assign(sum, composite)
           }
@@ -394,6 +417,8 @@ export default function reconReducer(state = initState, action) {
       // console.log(secondLevelList1)
 
       const firstLevelList1 = updateFirstlevelListFromSecondLevel(secondLevelList1, {}, _.cloneDeep(newItems))
+
+      // console.log(_.merge(firstLevelList1, autoCheckFirstLevelOnly(_.cloneDeep(newItems))))
 
       // console.log(_.keyBy(items, (o) => o.GUID))
       return state.withMutations(state => state.set('items', fromJS(items)).set('newItems', fromJS(newItems)).set('secondLevelList', fromJS(secondLevelList1)).set('firstLevelList', fromJS(_.merge(firstLevelList1, autoCheckFirstLevelOnly(_.cloneDeep(newItems))))))
