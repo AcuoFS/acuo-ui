@@ -56,7 +56,7 @@ export default class MarginAgreementDetail extends React.Component {
                   <div className={styles.packageCheckBox} onClick={(e) => {
                     this.secondLevelSelect(GUID, parentID, x.get('id'), onSelectSecondLevelItem)
                   }}>
-                    <img src={this.getSecondLevelCheckboxImageUrl(secondLevelList, GUID, parentID, x.get('id'))}/>
+                    <img src={this.getSecondLevelCheckboxImageUrl(secondLevelList, parentID, x.get('id'))}/>
                   </div>
                   <div className={styles.secondLevelText}>{ x.get('name') }</div>
                 </div>
@@ -76,7 +76,7 @@ export default class MarginAgreementDetail extends React.Component {
     onSelectSecondLevelItem(GUID, parentID, id)
   }
 
-  getCheckboxImageUrl(list, GUID, id, party) {
+  getCheckboxImageUrl(list, id, party) {
 
     if(!_.isEmpty(list[id])){
       // console.log(list)
@@ -93,7 +93,7 @@ export default class MarginAgreementDetail extends React.Component {
     return "./images/reconcile/checkbox.png"
   }
 
-  getSecondLevelCheckboxImageUrl(list, GUID, parentID, id) {
+  getSecondLevelCheckboxImageUrl(list, parentID, id) {
     // console.log(list)
 
     if (!_.isEmpty(list[parentID])) {
@@ -138,7 +138,7 @@ export default class MarginAgreementDetail extends React.Component {
           <div className={styles.packageLeft}>
             <div className={styles.packageCheckBox + ' ' + this.state.cbLvl1}
                  onClick={() => this.firstLevelSelect(GUID, firstLevelID, handlerSelectedItem)}>
-              <img src={this.getCheckboxImageUrl(firstLevelList, GUID, id, party)}/>
+              <img src={this.getCheckboxImageUrl(firstLevelList, id, party)}/>
             </div>
             <div className={styles.packageText}>{topLevel}</div>
 
