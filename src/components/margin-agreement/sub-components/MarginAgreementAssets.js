@@ -77,8 +77,8 @@ export default class MarginAgreementPortfolio extends React.Component {
           return (<div key={x.get('groupName')}>{x.get('data').sort((a, b) => a.getIn(['firstLevel', 'name']) > b.getIn(['firstLevel', 'name'])).map((groupData) => {
             const secondLevel = groupData.getIn(['firstLevel', 'secondLevel'])
 
-            const newFirstLevelList = firstLevelList.has(marginData.get('GUID')) ? firstLevelList.get(marginData.get('GUID')).toJS() : {}
-            const newSecondLevelList = secondLevelList.has(marginData.get('GUID')) ? secondLevelList.get(marginData.get('GUID')).toJS() : {}
+            const newFirstLevelList = firstLevelList ? firstLevelList.toJS() : {}
+            const newSecondLevelList = secondLevelList ? secondLevelList.toJS() : {}
 
             return <MarginAgreementDetail
               GUID={marginData.get('GUID')}

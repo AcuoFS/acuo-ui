@@ -52,20 +52,26 @@ export default class MarginAgreementPortfolio extends React.Component {
 
   isDisableReconButton(actionItem, cptyTotal, clientTotal, firstLevelList) {
 
-    const firstLevelLength = Math.max.apply(Math,
-      [
-        actionItem.get('clientAssets').reduce((sum, group) => sum + group.get('data').size, 0),
-        actionItem.get('counterpartyAssets').reduce((sum, group) => sum + group.get('data').size, 0)
-      ]
-    )
+    //check if first level check length is mismatched
+    if(firstLevelList) {
+      const firstLevelLength = Math.max.apply(Math,
+        [
+          actionItem.get('clientAssets').reduce((sum, group) => sum + group.get('data').size, 0),
+          actionItem.get('counterpartyAssets').reduce((sum, group) => sum + group.get('data').size, 0)
+        ]
+      )
 
-    // console.log(clientTotal + parseFloat(this.state.adjAmount))
-    // console.log(cptyTotal)
+      // console.log(clientTotal + parseFloat(this.state.adjAmount))
+      // console.log(cptyTotal)
 
-    const checkedFirstLevelLength = firstLevelList.filter((x) => x.get('GUID') == actionItem.get('GUID')).size
+      // console.log(firstLevelList.size)
+      // console.log(firstLevelLength)
 
-    if (firstLevelLength > checkedFirstLevelLength)
-      return true
+      // const checkedFirstLevelLength = firstLevelList.filter((x) => x.get('GUID') == actionItem.get('GUID')).size
+
+      if (firstLevelLength > firstLevelList.size)
+        return true
+    }
 
     // Need adjustment
     if (clientTotal + parseFloat(this.state.adjAmount) !== cptyTotal) {
@@ -76,6 +82,7 @@ export default class MarginAgreementPortfolio extends React.Component {
     if (!cptyTotal || !clientTotal) {
       return true
     }
+
 
     return false
   }
