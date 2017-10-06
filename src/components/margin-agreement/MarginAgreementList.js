@@ -26,12 +26,12 @@ export default class MarginAgreementList extends React.Component {
     return (recon.map((x , id) => {
       return (
         <MarginAgreementPortfolio
-          key={x}
+          key={id}
           onSelectFirstLevelItem={onSelectFirstLevelItem}
           portfolioData={x}
           onReconItem={onReconItem}
-          firstLevelList={firstLevelList}
-          secondLevelList={secondLevelList}
+          firstLevelList={firstLevelList.get(x.get('GUID'))}
+          secondLevelList={secondLevelList.get(x.get('GUID'))}
           onSelectSecondLevelItem={onSelectSecondLevelItem}
           currencyInfo={currencyInfo}/>
       )

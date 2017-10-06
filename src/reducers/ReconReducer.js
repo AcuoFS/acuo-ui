@@ -44,113 +44,275 @@ const plusMinusThreeDays = (json) => {
 
 }
 
-const updateFirstLevelList = (list, guid, id) => (
-  (_.some(list, {"GUID": guid, "id": id}) ?
-    _.filter(list, (x) => !_.isMatch(x, {"GUID": guid, "id": id})) :
-    _.concat([], list, {"GUID": guid, "id": id, 'parties': ['cpty', 'client']}))
-)
+const updateFirstLevelList = (list, guid, id) => {
+  // console.log(_.cloneDeep(list))
+  if(!_.isEmpty(list) && !_.isEmpty(list[guid]) && !_.isEmpty(list[guid][id])){
+    // console.log(_.cloneDeep(list[guid]))
+    _.unset(list, `${guid}.${id}`)
+    // console.log(_.cloneDeep(list[guid]))
+    return list
+  }else {
+    let baseLevel = {}, firstLevel = {}
+    firstLevel[id] = {
+      "GUID": guid,
+      "id": id,
+      "parties": ["cpty", "client"]
+    }
 
-const updateSecondLevelListFromFirstLevel = (firstLevelList, list, listOfItems) => (
-  _.reduce(
-    _.filter(listOfItems, (x) => _.some(firstLevelList, {"GUID": x.GUID})), (list, item) =>
-      _.unionWith(
-        _.concat(list, _.reduce(item.clientAssets, (list, group) =>
-            _.concat(list, _.reduce(group.data, (list, first) =>
-                _.concat(list, _.reduce(first.firstLevel.secondLevel, (list, second) =>
-                    (_.some(firstLevelList, {"GUID": item.GUID, "id": second.parentIndex}) ?
-                      _.concat(list, {"GUID": item.GUID, "parentIndex": second.parentIndex, "id": second.id}) :
-                      [])
-                  , []))
-              , []))
-          , [])),
-        _.concat(list, _.reduce(item.counterpartyAssets, (list, group) =>
-            _.concat(list, _.reduce(group.data, (list, first) =>
-                _.concat(list, _.reduce(first.firstLevel.secondLevel, (list, second) =>
-                    (_.some(firstLevelList, {"GUID": item.GUID, "id": second.parentIndex}) ?
-                      _.concat(list, {"GUID": item.GUID, "parentIndex": second.parentIndex, "id": second.id}) :
-                      [])
-                  , []))
-              , []))
-          , []))
-        , _.isEqual)
-    , [])
-)
+    baseLevel[guid] = firstLevel
 
-const updateSecondLevelList = (list, guid, parentID, id) => (
-  (_.some(list, {"GUID": guid, "id": id, "parentIndex": parentID}) ?
-    _.filter(list, (x) => !_.isMatch(x, {"GUID": guid, "id": id, "parentIndex": parentID})) :
-    _.concat([], list, {"GUID": guid, "id": id, "parentIndex": parentID}))
-)
+    list = _.merge(list, baseLevel)
+    // console.log(_.cloneDeep(list))
+    return list
+  }
+}
 
-const retrieveSecondLevel = (list, id) => (
-  list.reduce((sum, group) => sum = (_.has(group.data, id) ? group.data[id].firstLevel.secondLevel : sum), {})
-)
+//backup
+// const updateFirstLevelList = (list, guid, id) => (
+//   (_.some(list, {"GUID": guid, "id": id}) ?
+//     _.filter(list, (x) => !_.isMatch(x, {"GUID": guid, "id": id})) :
+//     _.concat([], list, {"GUID": guid, "id": id, 'parties': ['cpty', 'client']}))
+// )
 
-const updateFirstlevelListFromSecondLevel = (secondLevelList, firstLevelList, items) => {
+const updateSecondLevelListFromFirstLevel = (firstLevelList, list, listOfItems, guid, id) => {
+  // console.log(!_.isEmpty(firstLevelList[guid][id]))
+  if(!_.isEmpty(firstLevelList[guid][id])){
+    // console.log('here')
+    const statement = listOfItems[guid]
+
+    const clientAssetFirstLevelList = statement.clientAssets || []
+    const counterpartyAssetList = statement.counterpartyAssets || []
+
+    const clientAll = retrieveSecondLevel(clientAssetFirstLevelList, id)
+    const cptyAll = retrieveSecondLevel(counterpartyAssetList, id)
+
+    // console.log(clientAll)
+    // console.log(cptyAll)
+    //
+    // console.log(list)
+
+    let newAdditions = {}
+
+    newAdditions = _.merge(newAdditions, _.reduce(Object.keys(clientAll), (sum, key) => {
+      let baseLevel = {}, firstLevel = {}, secondLevel = {}
+
+      secondLevel[key] = {"GUID": guid, "id": key, "parentIndex": id}
+      firstLevel[id] = secondLevel
+      baseLevel[guid] = firstLevel
+
+      // console.log(baseLevel)
+      return _.merge(sum, baseLevel)
+    }, {}))
+
+    newAdditions = _.merge(newAdditions, _.reduce(Object.keys(cptyAll), (sum, key) => {
+      let baseLevel = {}, firstLevel = {}, secondLevel = {}
+
+      secondLevel[key] = {"GUID": guid, "id": key, "parentIndex": id}
+      firstLevel[id] = secondLevel
+      baseLevel[guid] = firstLevel
+
+      // console.log(baseLevel)
+      return _.merge(sum, baseLevel)
+    }, {}))
+
+    return _.merge(list, newAdditions)
+  }else{
+    _.unset(list, `${guid}.${id}`)
+
+    return list
+  }
+}
+
+//back up
+// const updateSecondLevelListFromFirstLevel = (firstLevelList, list, listOfItems) => (
+//   _.reduce(
+//     _.filter(listOfItems, (x) => _.some(firstLevelList, {"GUID": x.GUID})), (list, item) =>
+//       _.unionWith(
+//         _.concat(list, _.reduce(item.clientAssets, (list, group) =>
+//             _.concat(list, _.reduce(group.data, (list, first) =>
+//                 _.concat(list, _.reduce(first.firstLevel.secondLevel, (list, second) =>
+//                     (_.some(firstLevelList, {"GUID": item.GUID, "id": second.parentIndex}) ?
+//                       _.concat(list, {"GUID": item.GUID, "parentIndex": second.parentIndex, "id": second.id}) :
+//                       [])
+//                   , []))
+//               , []))
+//           , [])),
+//         _.concat(list, _.reduce(item.counterpartyAssets, (list, group) =>
+//             _.concat(list, _.reduce(group.data, (list, first) =>
+//                 _.concat(list, _.reduce(first.firstLevel.secondLevel, (list, second) =>
+//                     (_.some(firstLevelList, {"GUID": item.GUID, "id": second.parentIndex}) ?
+//                       _.concat(list, {"GUID": item.GUID, "parentIndex": second.parentIndex, "id": second.id}) :
+//                       [])
+//                   , []))
+//               , []))
+//           , []))
+//         , _.isEqual)
+//     , [])
+// )
+
+
+const updateSecondLevelList = (list, guid, parentID, id) => {
+
+  // console.log(list)
+  // console.log(guid)
+  // console.log(parentID)
+  // console.log(id)
+
+  if(!_.isEmpty(list) && !_.isEmpty(list[guid]) && !_.isEmpty(list[guid][parentID]) && !_.isEmpty(list[guid][parentID][id])){
+    // console.log(_.cloneDeep(list))
+
+    _.unset(list, `${guid}.${parentID}.${id}`)
+
+    // console.log(`${guid}.${parentID}.${id}`)
+    //
+    // console.log(_.cloneDeep(list))
+
+    return list
+  }else {
+
+    // console.log('rechecking')
+    let guidLevel = {}, firstLevel = {}, secondLevel = {}
+
+    secondLevel[id] = {"GUID": guid, "id": id, "parentIndex": parentID}
+    firstLevel[parentID] = secondLevel
+    guidLevel[guid] = firstLevel
+
+    // console.log(guidLevel)
+    // console.log(list)
+    // console.log(_.merge(list, guidLevel))
+
+    return _.merge(list, guidLevel)
+  }
+
+
+
+  // return (_.some(list, {"GUID": guid, "id": id, "parentIndex": parentID}) ?
+  //   _.filter(list, (x) => !_.isMatch(x, {"GUID": guid, "id": id, "parentIndex": parentID})) :
+  //   _.concat([], list, {"GUID": guid, "id": id, "parentIndex": parentID}))
+}
+
+// backup
+// const updateSecondLevelList = (list, guid, parentID, id) => (
+//   (_.some(list, {"GUID": guid, "id": id, "parentIndex": parentID}) ?
+//     _.filter(list, (x) => !_.isMatch(x, {"GUID": guid, "id": id, "parentIndex": parentID})) :
+//     _.concat([], list, {"GUID": guid, "id": id, "parentIndex": parentID}))
+// )
+
+const retrieveSecondLevel = (list, id) => {
+
+  // console.log(list)
+
+  return list.reduce((sum, group) => {
+    // console.log(group.data)
+    // console.log(id)
+    sum = (_.has(group.data, id) ? group.data[id].firstLevel.secondLevel : sum)
+
+    return sum
+  }, {})
+}
+
+const updateFirstlevelListFromSecondLevel = (secondLevelList, firstLevelList, items, sourceGUID, sourceParentID) => { // GUID and parentID is only used if it's an update
   // const test = _.reduce(secondLevelList, (set, item) => (
   //   _.unionWith(set, [{"GUID": item.GUID, "id": item.parentIndex}], _.isEqual)
   // ), [])
 
   // const test = secondLevelList
 
-  // console.log(newFirstLevel)
+  // console.log(secondLevelList)
 
-  const newFirstLevel = _.keyBy(Object.keys(secondLevelList).map((GUID) => {
+  let newFirstLevel = {}
 
-    // console.log(testing)
-    // if(GUID === "970129e4")
-    //
-    // if(GUID === "ee5f01e5")
-    //   console.log(test[GUID])
-    //
-    //   console.log('*********')
-    // console.log('GUID: ')
-    //   console.log(GUID)
+  // if firstLevelList is empty AKA on initial load
+  if(_.isEmpty(firstLevelList)) {
 
-    const testing = _.keyBy(Object.keys(secondLevelList[GUID]).map(firstLevelID => {
-      // console.log('first level: ')
-      //   console.log(firstLevelID)
-      // console.log('**********')
+    newFirstLevel = _.keyBy(Object.keys(secondLevelList).map((GUID) => {
 
-      const statement = items[GUID]
-        // console.log(statement)
-        const clientAssetFirstLevelList = statement.clientAssets || []
-        const counterpartyAssetList = statement.counterpartyAssets || []
+      // console.log(testing)
+      // if(GUID === "970129e4")
+      //
+      // if(GUID === "ee5f01e5")
+      //   console.log(test[GUID])
+      //
+      //   console.log('*********')
+      // console.log('GUID: ')
+      //   console.log(GUID)
 
-        //number of second level items in this first lvl obj in the list
-        const presentInList = secondLevelList[GUID][firstLevelID]
-        // console.log(presentInList)
-        //
-        const clientAll = retrieveSecondLevel(clientAssetFirstLevelList, firstLevelID)
-        const cptyAll = retrieveSecondLevel(counterpartyAssetList, firstLevelID)
-        //
-        let parties = []
-        // console.log(presentInList)
-        // console.log(clientAssetFirstLevelList)
-        // console.log(counterpartyAssetList)
+      // console.log(secondLevelList[GUID])
+
+      const testing = _.keyBy(Object.keys(secondLevelList[GUID]).map(firstLevelID => {
+          // console.log('first level: ')
+          //   console.log(firstLevelID)
+          // console.log('**********')
+
+          const statement = items[GUID]
+          // console.log(statement)
+          const clientAssetFirstLevelList = statement.clientAssets || []
+          const counterpartyAssetList = statement.counterpartyAssets || []
+
+          //number of second level items in this first lvl obj in the list
+          const presentInList = secondLevelList[GUID][firstLevelID]
+          // console.log(presentInList)
+          //
+          const clientAll = retrieveSecondLevel(clientAssetFirstLevelList, firstLevelID)
+          const cptyAll = retrieveSecondLevel(counterpartyAssetList, firstLevelID)
+          //
+          let parties = []
+          // console.log(presentInList)
+          // console.log(clientAll)
+          // console.log(cptyAll)
 
 
-      // if(GUID==="ee5f01e5")
-      //     console.log('here')
+          // if(GUID==="ee5f01e5")
+          //     console.log('here')
 
-        parties = (JSON.stringify(Object.keys(presentInList).sort()) === JSON.stringify(Object.keys(clientAll).sort()) ? _.concat(parties, 'client') : parties)
-        parties = (JSON.stringify(Object.keys(presentInList).sort()) === JSON.stringify(Object.keys(cptyAll).sort()) ? _.concat(parties, 'cpty') : parties)
+          parties = (JSON.stringify(Object.keys(presentInList).sort()) === JSON.stringify(Object.keys(clientAll).sort()) ? _.concat(parties, 'client') : parties)
+          parties = (JSON.stringify(Object.keys(presentInList).sort()) === JSON.stringify(Object.keys(cptyAll).sort()) ? _.concat(parties, 'cpty') : parties)
 
           // console.log({"GUID": GUID, "id": firstLevelID, "parties": parties})
-      // if(GUID === "970129e4")
-      //   console.log({"GUID": GUID, "id": firstLevelID, "parties": parties})
+          // if(GUID === "970129e4")
+          //   console.log({"GUID": GUID, "id": firstLevelID, "parties": parties})
 
-        return {"GUID": GUID, "id": firstLevelID, "parties": parties}
-      }
-    ), o => String(o.id))
+          return {"GUID": GUID, "id": firstLevelID, "parties": parties}
+        }
+      ), o => String(o.id))
 
-    // console.log(testing)
+      // console.log(testing)
 
-    return testing
-  }), o => {
-    // console.log(o)
-    return String(o[Object.keys(o)[0]].GUID)
-  })
+      return testing
+    }), o => {
+      // console.log(o)
+      return String(o[Object.keys(o)[0]].GUID)
+    })
+
+  }// end if firstLevelList is empty AKA on initial load
+
+    //if it's not empty
+  else {
+    const statement = items[sourceGUID]
+    // console.log(statement)
+    const clientAssetFirstLevelList = statement.clientAssets || []
+    const counterpartyAssetList = statement.counterpartyAssets || []
+
+    const presentInList = secondLevelList[sourceGUID][sourceParentID]
+    // console.log(presentInList)
+    //
+    const clientAll = retrieveSecondLevel(clientAssetFirstLevelList, sourceParentID)
+    const cptyAll = retrieveSecondLevel(counterpartyAssetList, sourceParentID)
+    //
+    let parties = []
+
+    parties = (JSON.stringify(Object.keys(presentInList).sort()) === JSON.stringify(Object.keys(clientAll).sort()) ? _.concat(parties, 'client') : parties)
+    parties = (JSON.stringify(Object.keys(presentInList).sort()) === JSON.stringify(Object.keys(cptyAll).sort()) ? _.concat(parties, 'cpty') : parties)
+
+    // let baseLevel = {}, firstLevel = {}
+    // firstLevel[sourceParentID] = {"GUID": sourceGUID, "id": sourceParentID, "parties": parties}
+    // baseLevel[sourceGUID] = firstLevel
+
+    _.set(firstLevelList, `${sourceGUID}.${sourceParentID}`, {"GUID": sourceGUID, "id": sourceParentID, "parties": parties})
+
+    newFirstLevel = _.cloneDeep(firstLevelList)
+    // console.log(_.cloneDeep(newFirstLevel))
+  }
 
   // console.log(_.cloneDeep(newFirstLevel12))
 
@@ -439,9 +601,11 @@ export default function reconReducer(state = initState, action) {
       const updatedFirstLevelList = updateFirstLevelList(selectedFirstLevelList.toJS(), action.GUID, action.firstLevelID)
 
       const selectedSecondLevel = state.get('secondLevelList') || List()
-      const updatedSecondLevelList = updateSecondLevelListFromFirstLevel(updatedFirstLevelList, selectedSecondLevel.toJS(), state.get('items').toJS())
+      const updatedSecondLevelList = updateSecondLevelListFromFirstLevel(updatedFirstLevelList, selectedSecondLevel.toJS(), state.get('newItems').toJS(), action.GUID, action.firstLevelID)
+      //
+      // return state.set('firstLevelList', fromJS(updatedFirstLevelList)).set('secondLevelList', fromJS(updatedSecondLevelList))
 
-      return state.set('firstLevelList', fromJS(updatedFirstLevelList)).set('secondLevelList', fromJS(updatedSecondLevelList))
+      return state.withMutations(state => state.set('firstLevelList', fromJS(updatedFirstLevelList)).set('secondLevelList', fromJS(updatedSecondLevelList)))
 
     case ActionTypes.SECONDLEVEL_SELECT:
 
@@ -455,7 +619,12 @@ export default function reconReducer(state = initState, action) {
       // console.log(test)
 
       const firstLevelList = state.get('firstLevelList') || List()
-      const updatedFirstLevelList2 = updateFirstlevelListFromSecondLevel(updatedSecondLevelList2, firstLevelList.toJS(), state.get('items').toJS())
+
+      // console.log(firstLevelList.toJS())
+
+      const updatedFirstLevelList2 = updateFirstlevelListFromSecondLevel(updatedSecondLevelList2, firstLevelList.toJS(), state.get('newItems').toJS(), action.GUID, action.parentID)
+
+      // console.log(updatedFirstLevelList2)
 
       return state.set('secondLevelList', fromJS(updatedSecondLevelList2)).set('firstLevelList', fromJS(updatedFirstLevelList2))
 
