@@ -3,15 +3,12 @@ import { fromJS, List, Map } from 'immutable'
 import { MarginAgreementsComponent } from '../components'
 import {
   selectedItems,
-  reconInitState,
   firstLeveSelect,
   secondLevelSelect,
   updateReconFilter,
   reconItem
 } from '../actions'
-import { RECON_DATA_URL, RECON_URL, DASHBOARD_URL } from '../constants/APIcalls'
 import filterItems from '../utils/filterItems'
-import { sagaNavbarAlerts } from './../actions/CommonActions'
 
 const defaultList = List()
 const defaultMap = Map()

@@ -22,7 +22,7 @@ const mapStateToProps = state => {
   const items   = state.ReconReducer.get('items').toJS()
 
   const filteredItems = filterItems(items, filters)
-  const outItems = _.filter(filteredItems, ['direction', 'OUT'])
+  // const outItems = _.filter(filteredItems, ['direction', 'OUT'])
   // console.log("Filtered Items :::", filteredItems);
   return {
     outItems: filteredItems,
