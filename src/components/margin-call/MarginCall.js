@@ -135,7 +135,7 @@ export default class MarginCall extends React.Component {
                onClick={() => generateMarginCalls(this.state.selectedRows)}>
             Generate Margin Calls
           </div>
-          <div className={styles.button + ' ' + (true ? styles.disabled : '')}
+          <div className={styles.button + ' ' + (this.state.selectedRows.length <= 0 ? styles.disabled : '')}
                //disabled={this.state.selectedRows.length <= 0}
                disabled={true}
                onClick={() => this.onSendButton(this.state.selectedRows, onPostMarginCallIDs)}>
