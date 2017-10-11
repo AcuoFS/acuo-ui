@@ -27,6 +27,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        include: [/src/, /node_modules\/react-datepicker\/dist\/react-datepicker-cssmodules\.css/],
         use: [
           {loader: 'style-loader'},
           {
@@ -72,6 +73,7 @@ module.exports = {
       {from: './src/static/react-dropzone', to: './css/react-dropzone'},
       {from: './src/static/react-select', to: './css/react-select'},
       {from: './src/static/reset.css', to: './css/reset.css'},
+      {from: './src/static/react-datepicker', to: './css/react-datepicker'},
       {from: './images', to: './images'}
     ]),
     new webpack.DefinePlugin({
@@ -84,6 +86,12 @@ module.exports = {
     })
   ],
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: {
+      '/proxy/**/**/**/**/**': {
+        target: 'http://dev.acuo.com',
+        changeOrigin: true
+      }
+    }
   }
 };

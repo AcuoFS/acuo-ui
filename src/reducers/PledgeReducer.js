@@ -1,12 +1,23 @@
 import * as ActionTypes from '../constants/ActionTypes'
 import { Map, fromJS, List, toJS } from 'immutable'
+import _ from 'lodash'
+
+const initFilters = [
+  {order: 1, attr: "legalEntity", label: "Legal Entity"},
+  {order: 2, attr: "type",        label: "Deriv Type"},
+  {order: 3, attr: "notificationTime",        label: "Time Window", type: "time"},
+  {order: 4, attr: "direction",   label:  "Direction",  hide: true}
+]
 
 const initialState = Map({
+  allocating: false,
   pledgeData: Map({
     optimisation: List(),
     selection: List(),
-    collateral: Map()
-  })
+    collateral: Map(),
+    filters: fromJS(initFilters)
+  }),
+  collateralWidget: Map({ sortBy: "assetName", sortAscending: true })
 })
 
 const initOptimisationSettings = (state, settings) => {
@@ -34,21 +45,21 @@ export const initSelection = (state, selection) => {
     return state
 }
 
-export const togglePendingAllocation = (state, GUID) => {
+ export const togglePendingAllocation = (state, GUID) => {
   if(!state.getIn(['pledgeData', 'pendingAllocation']) || state.getIn(['pledgeData', 'pendingAllocation']).isEmpty())
     return state.setIn(['pledgeData', 'pendingAllocation'], List().push(GUID))
   else if(state.getIn(['pledgeData', 'pendingAllocation']).includes(GUID))
     return state.setIn(['pledgeData', 'pendingAllocation'], state.getIn(['pledgeData', 'pendingAllocation']).filter(x => x != GUID))
   else
     return state.setIn(['pledgeData', 'pendingAllocation'], state.getIn(['pledgeData', 'pendingAllocation']).push(GUID))
-}
+ }
 
-export const toggleCheckall = (state) => {
+ export const toggleCheckall = (state) => {
   if(state.getIn(['pledgeData', 'pendingAllocation']) && !state.getIn(['pledgeData', 'pendingAllocation']).isEmpty())
     return state.setIn(['pledgeData', 'pendingAllocation'], List())
   else
     return state.setIn(['pledgeData', 'pendingAllocation'], state.getIn(['pledgeData', 'selection']).map(x => x.get('GUID')))
-}
+ }
 
 export const removeAssetFromEarmark = (state, removingAsset) => {
 
@@ -65,7 +76,17 @@ export const removeAssetFromEarmark = (state, removingAsset) => {
   }
 }
 
+const updateFilters = (filters, newFilter) => (
+  _.map(filters, filter => (
+    (filter.attr === newFilter.attr)
+      ? _.set(filter, 'selected', newFilter.selected)
+      : filter
+  ))
+)
+
 const PledgeReducer = (state = initialState, action) => {
+  let filters, newFilter, updatedFilters
+
   switch (action.type) {
     case ActionTypes.INIT_OPTIMISATION_SETTINGS:
       return initOptimisationSettings(state, action.settings)
@@ -74,7 +95,7 @@ const PledgeReducer = (state = initialState, action) => {
       return updateOptimisationSettings(state, action.newSettings)
 
     case ActionTypes.UPDATE_COLLATERAL:
-      return updateCollateral(state, action.collateralData)
+      return updateCollateral(state, fromJS(action.collateralData))
 
     case ActionTypes.INIT_SELECTION:
       return initSelection(state, action.selection)
@@ -91,8 +112,26 @@ const PledgeReducer = (state = initialState, action) => {
     case ActionTypes.REMOVE_ASSET_FROM_EARMARK:
       return removeAssetFromEarmark(state, action.asset)
 
-  }
+    case ActionTypes.PLEDGE_FILTER_SET:
+      newFilter = action.value
+      filters = state.getIn(['pledgeData', 'filters']).toJS()
+      updatedFilters = updateFilters(filters, newFilter)
+      return state.setIn(['pledgeData', 'filters'], fromJS(updatedFilters))
 
+    case ActionTypes.SELECTION_WIDGET__COLUMN_SORT:
+      const { sortBy , sortAscending } = action.payload
+      const currentSortBy = state.getIn(['collateralWidget' , 'sortBy'])
+      if( sortBy != currentSortBy ){
+        return state.setIn(['collateralWidget'], Map({ sortBy:sortBy, sortAscending: true }))
+      }
+      else{
+        return state.setIn(['collateralWidget' , 'sortAscending'], !sortAscending )
+      }
+
+    case ActionTypes.ALLOCATING_COLLATERALS:
+      return state.set('allocating', fromJS(action.flag))
+
+  }
   return state
 }
 

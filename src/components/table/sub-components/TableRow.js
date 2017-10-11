@@ -75,7 +75,7 @@ class TableRow extends React.Component {
   }
 
   getHoverbility(statusCode){
-    if ((statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_EXPECTED || statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_UNRECON || statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_PLEDGE))
+    if ((statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_EXPECTED || statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_UNRECON || statusCode === DASHBOARD_CONSTANTS.STATUS_CODE_PLEDGE || DASHBOARD_CONSTANTS.STATUS_CODE_RECON))
       return true
     else return false
   }
@@ -84,15 +84,15 @@ class TableRow extends React.Component {
     if(hoverbility){
       switch (statusCode) {
         case DASHBOARD_CONSTANTS.STATUS_CODE_RECON:
-          onLineItemClick(type, status, notificationTime, cptyEntity, legalEntity, cptyOrg, direction)
-          hashHistory.push('recon')
+          // onLineItemClick(type, status, notificationTime, cptyEntity, legalEntity, cptyOrg, direction)
+          hashHistory.push('pledge')
           break
         case DASHBOARD_CONSTANTS.STATUS_CODE_UNRECON:
           onLineItemClick(type, status, notificationTime, cptyEntity, legalEntity, cptyOrg, direction)
           hashHistory.push('recon')
           break
         case DASHBOARD_CONSTANTS.STATUS_CODE_PLEDGE:
-          hashHistory.push('pledge')
+          hashHistory.push('deployed')
           break
         case DASHBOARD_CONSTANTS.STATUS_CODE_EXPECTED:
           hashHistory.push('recon')
@@ -110,13 +110,13 @@ class TableRow extends React.Component {
     const { rowItems, onLineItemClick } = this.props
     const excess =
       (
-        parseInt(rowItems.collateralBalance ? rowItems.collateralBalance : 0) +
-        parseInt(rowItems.pendingCollateral ? rowItems.pendingCollateral : 0)
+        parseInt(rowItems.collateralBalance ? Math.round(parseFloat(rowItems.collateralBalance).toFixed(2)) : 0) +
+        parseInt(rowItems.pendingCollateral ? Math.round(parseFloat(rowItems.pendingCollateral).toFixed(2)) : 0)
       )
       -
       (
-        parseInt(rowItems.variableMargin ? rowItems.variableMargin : 0) +
-        parseInt(rowItems.initialMargin ? rowItems.initialMargin : 0)
+        parseInt(rowItems.variableMargin ? Math.round(parseFloat(rowItems.variableMargin).toFixed(2)) : 0) +
+        parseInt(rowItems.initialMargin ? Math.round(parseFloat(rowItems.initialMargin).toFixed(2)) : 0)
       )
 
     const directionText = rowItems.direction
@@ -130,13 +130,16 @@ class TableRow extends React.Component {
     return (
       <div className={styles.tableRow + ' ' + (hoverbility ? selfStyles.hoverable : '')}
            onClick={ ()=>{
-            console.log(statusCode)
+            {/*console.log(statusCode)*/}
             this.lineItemClick(hoverbility, onLineItemClick, hashHistory, statusCode , rowItems.cptyEntity, rowItems.status, rowItems.notificationTime, rowItems.type, rowItems.legalEntity, rowItems.cptyOrg, rowItems.direction)
            }}>
         <TableCell cellValue={rowItems.legalEntity}/>
         <TableCell cellValue={rowItems.cptyOrg}/>
         <TableCell cellValue={rowItems.cptyEntity}/>
         <TableCell cellValue={rowItems.ccy}/>
+        <TableCell cellValue={this.checkNegative(0, numberWithCommas)}/>
+        <TableCell cellValue={this.checkNegative(0, numberWithCommas)}/>
+        <TableCell cellValue={this.checkNegative(0, numberWithCommas)}/>
         <TableCell cellValue={this.checkNegative(rowItems.initialMargin, numberWithCommas)}/>
         <TableCell cellValue={this.checkNegative(rowItems.variableMargin, numberWithCommas)}/>
         <TableCell cellValue={this.checkNegative(excess, numberWithCommas)}/>

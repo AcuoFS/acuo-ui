@@ -170,7 +170,7 @@ export default class ReferenceSubCommon extends React.Component {
 
         <ReferenceCallType
           contClass={styles.agreementsSectionLeft} splitByRoleState={this.state[STATE_PROPERTY_SPLIT_VARIATION]}
-          baseGroup={VARIATION_GROUP} baseDisplay={'Variable Reference'} baseDom={VARIATION_DOM}
+          baseGroup={VARIATION_GROUP} baseDisplay={'Variation Reference'} baseDom={VARIATION_DOM}
           pledgorGroup={VARIATION_PLEDGOR_GROUP} pledgorDisplay={'Variation Pledgor Reference'}
           pledgorDom={VARIATION_PLEDGOR_DOM}
           securedGroup={VARIATION_SECURED_GROUP} securedDisplay={'Variation Secured Reference'}
@@ -221,7 +221,7 @@ export default class ReferenceSubCommon extends React.Component {
 
         <div>
           <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === INITIAL_GROUP)}
-                                 propLabel={' - CSA Initial'}/>
+                                 propLabel={' - Regulatory CSA Initial'} propShowMarginTypeDropdown={true}/>
           <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === INITIAL_PLEDGOR_GROUP)}
                                  propLabel={' - Regulatory CSA Initial Pledgor'}/>
           <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === INITIAL_SECURED_GROUP)}
@@ -230,9 +230,9 @@ export default class ReferenceSubCommon extends React.Component {
 
         <div>
           <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === NETTED_GROUP)}
-                                 propLabel={' - CSA Netted'}/>
+                                 propLabel={' - Regulatory CSA Netted'}/>
           <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === NETTED_PLEDGOR_GROUP)}
-                                 propLabel={' - CSA Netted Pledgor'}
+                                 propLabel={' - Regulatory CSA Netted Pledgor'}
                                  propCallDriverLabel={' - Regulatory CSA Netted Pledgor'}/>
           <ReferenceSectionGroup propIsActiveGroup={(this.state.currentActiveType === NETTED_SECURED_GROUP)}
                                  propLabel={' - Regulatory CSA Netted Secured'}

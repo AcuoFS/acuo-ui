@@ -169,69 +169,87 @@
   width: 12%;
 }
 .table >div:nth-child(2){
-  width: 14%;
+  width: 12%;
 }
 .table >div:nth-child(3){
-  width: 14%;
+  width: 12%;
 }
 .table >div:nth-child(4){
-  width: 14%;
+  width: 12%;
 }
 .table >div:nth-child(5){
-  width: 14%;
+  width: 12%;
 }
 .table >div:nth-child(6){
-  width: 14%;
+  width: 12%;
 }
 .table >div:nth-child(7){
-  width: 16%;
+  width: 10%;
 }
 .table >div:nth-child(8){
+  width: 16%;
+}
+.table >div:nth-child(9){
   width: 2%;
 }
 
 .tableBody >div:nth-child(1),
 .tableRow >div:nth-child(1){
-  width: 12.5%;
+  width: 12%;
 }
 .tableBody >div:nth-child(2),
 .tableRow >div:nth-child(2){
-  width: 13.7%;
+  width: 10%;
 }
 .tableBody >div:nth-child(3),
 .tableRow >div:nth-child(3){
-  width: 14.7%;
+  width: 10%;
 }
 .tableBody >div:nth-child(4),
 .tableRow >div:nth-child(4){
-  width: 9.0%;
+  width: 4%;
 }
 
 /* IM */
 .tableBody >div:nth-child(5),
 .tableRow >div:nth-child(5){
-  width: 11.7%;
+  width: 10%;
 }
 
 /* VM */
 .tableBody >div:nth-child(6),
 .tableRow >div:nth-child(6){
-  width: 11.7%;
+  width: 10%;
 }
 
 /* Excess */
 .tableBody >div:nth-child(7),
 .tableRow >div:nth-child(7){
-  width: 15.7%
+  width: 9%
 }
 
 .tableBody >div:nth-child(8),
 .tableRow >div:nth-child(8){
-  width: 7%;
+  width: 9%;
 }
 
 .tableBody >div:nth-child(9),
 .tableRow >div:nth-child(9){
+  width: 9%;
+}
+
+.tableBody >div:nth-child(10),
+.tableRow >div:nth-child(10){
+  width: 9%;
+}
+
+.tableBody >div:nth-child(11),
+.tableRow >div:nth-child(11){
+  width: 4%;
+}
+
+.tableBody >div:nth-child(12),
+.tableRow >div:nth-child(12){
   width: 4%;
 }
 

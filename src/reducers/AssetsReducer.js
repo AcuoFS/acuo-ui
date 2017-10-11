@@ -1,6 +1,17 @@
-import {Map, List, fromJS} from 'immutable'
+import {Map, List, fromJS, toJS} from 'immutable'
 import _ from 'lodash'
-import { HomePledgedContent , HomePrincipalContent, ApiInitMargResponse, ApiVarMargResponse } from '../components/assets/mockData/mockData.js'
+import { HomePledgedContentNew , HomePrincipalContentNew, ApiInitMargResponse, ApiVarMargResponse } from '../components/assets/mockData/mockData.js'
+
+/* thread() Caveats!!!!
+- Argument:action is the dispatched action object. Its key-names must be identical with the keyname in the state!!!
+*/
+
+let thread = (state, action)=> _.reduce( action ,
+                                         (newState , pathObj , path)=> _.reduce( pathObj ,
+                                                                                 (pathState, fieldValue, field) => _.update(pathState, `${path}.${field}` , ()=>fieldValue) ,
+                                                                                 state ) ,
+                                         state )
+
 
 const INITIAL_STATE = fromJS({
   ui: {  'DeployedPanel_ExpandedSideways': false,
@@ -13,11 +24,15 @@ const INITIAL_STATE = fromJS({
                              'showPopup' : false,
                           'Popup_Amount' : undefined
        },
-  data: { 'Popup_DraggingHomeAssetID': null,
-          'Popup_DroppedHomeAssetDetails': null,
-          'Popup_DeployedAssetToBeReplaced': null,
-          'Home_PledgedContent': HomePledgedContent,
-          'Home_PrincipalContent': HomePrincipalContent,
+  data: {
+          'Popup_DragDirectionTo': null,
+          'Popup_DraggingHomeAssetID': null,
+          'Popup_DraggingDeployedAssetID': null,
+          'Popup_OriginAgreement': null,
+          'Popup_DroppedAsset': null,
+          'Popup_AssetToBeReplaced': null,
+          'Home_PledgedContent': HomePledgedContentNew,
+          'Home_PrincipalContent': HomePrincipalContentNew,
           'Deployed_InitMarginContent': ApiInitMargResponse,
           'Deployed_VarMarginContent': ApiVarMargResponse,
          }
@@ -25,6 +40,9 @@ const INITIAL_STATE = fromJS({
 
 const AssetsReducer = (state = INITIAL_STATE , action)=>{
   let newState = {}
+  let actionFoo = { data: { showPopup: true } }
+  thread( state , actionFoo )
+
   switch (action.type){
    //For Deployed Panel
     case "@DEPLOYED__TOGGLE_SIDE_EXPAND":
@@ -40,7 +58,6 @@ const AssetsReducer = (state = INITIAL_STATE , action)=>{
       return state.setIn(['ui','IsRegionSelected'], fromJS(action.payload))
 
     case "@DEPLOYED__SEARCHTEXT":
-      // console.log("DEPLOYED__SEARCHTEXT |-> ", action.payload);
       return state.setIn(['ui','DeployedPanel_SearchText'], fromJS(action.payload))
 
    //For Home Panel
@@ -57,14 +74,27 @@ const AssetsReducer = (state = INITIAL_STATE , action)=>{
     case "@POPUP_AMOUNT":
       return state.setIn(['ui','Popup_Amount'], fromJS(action.payload))
 
-    case "@HOME__DRAGGING_HOME_ASSET_ID":
-      return state.setIn(['data','Popup_DraggingHomeAssetID'], fromJS(action.payload))
+    case "@POPUP__DROPPED_ASSET":
+      return state.setIn(['data','Popup_DroppedAsset'], fromJS(action.payload))
 
-    case "@DEPLOYED__DROPPED_HOME_ASSET_DETAILS":
-      return state.setIn(['data','Popup_DroppedHomeAssetDetails'], fromJS(action.payload))
+    case "@POPUP__ASSET_TO_BE_REPLACED":
+      return state.setIn(['data','Popup_AssetToBeReplaced'], fromJS(action.payload))
 
-    case "@DEPLOYED__ASSET_TO_BE_REPLACED":
-      return state.setIn(['data','Popup_DeployedAssetToBeReplaced'], fromJS(action.payload))
+    case "@POPUP_ON_DRAG_START":
+      newState = thread( state.toJS() , action.payload )
+      return fromJS(newState)
+
+    case "@POPUP_ON_DRAG_END":
+      newState = thread( state.toJS() , action.payload )
+      return fromJS(newState)
+
+    case "@POPUP_ON_DROP":
+      newState = thread( state.toJS() , action.payload )
+      return fromJS(newState)
+
+    case "@POPUP_ON_CLICK_CANCEL":
+      newState = thread( state.toJS() , action.payload )
+      return fromJS(newState)
 
     default:
       return state

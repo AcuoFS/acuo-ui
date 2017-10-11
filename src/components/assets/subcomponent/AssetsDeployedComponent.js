@@ -8,7 +8,8 @@ import AssetsDeployedTableView from './deployedViews/TableView/AssetsDeployedTab
 /*Actions*/
 import {AssetsPanel} from './../../../actions/AssetsActions.js'
 //Mock Data
-import { categoryHeader, dataHeader_minView, dataHeader_expandedView, ApiInitMargResponse, ApiVarMargResponse, VarMarginTableStyle, VarMarginTableStyleExpanded, InitMarginTableStyle, InitMarginTableStyleExpanded } from "./../mockData/mockData.js"
+import { categoryHeader, dataHeader_minView, dataHeader_expandedView, ApiInitMargResponse, ApiVarMargResponse } from "./../mockData/mockData.js"
+import TableStyles from './TableStyles.js'
 
 /* Search Functions */
 let SearchContent =(rawAPI, searchedText) => {
@@ -89,27 +90,32 @@ const AssetsDeployedComponent = (props)=>{
    let SearchText = (state.ui.DeployedPanel_SearchText.length >= 2 ? state.ui.DeployedPanel_SearchText : "") ;
 
    let dataHeader = (ExpandedSideways?  dataHeader_expandedView :  dataHeader_minView)
-   let tableStyle = (IsVarMarginSelected? (ExpandedSideways? VarMarginTableStyleExpanded : VarMarginTableStyle) :  (ExpandedSideways? InitMarginTableStyleExpanded: InitMarginTableStyle))
+   let tableStyle = (IsVarMarginSelected? (ExpandedSideways? TableStyles.VarMarginTableStyleExpanded : TableStyles.VarMarginTableStyle) :  (ExpandedSideways? TableStyles.InitMarginTableStyleExpanded: TableStyles.InitMarginTableStyle))
    let cellWidth = (ExpandedSideways? { category: [26, 37, 37], data: [ 17, 10, 18, 18, 7, 7, 10, 13] } : { category: [26, 37, 37], data: [ 20, 16, 27, 27, 10] } )
 
    let rightContent = (IsVarMarginSelected? ApiVarMargResponse : ApiInitMargResponse)
    let sortedContent = (IsRegionSelected?  _.sortBy(rightContent, ["region"]) :  _.sortBy(rightContent, ["counterparty"]))
    let filteredContent = SearchContent(sortedContent, SearchText)
 
-   let tableContent = (rightContent)=>{
+   let tableContent = (filteredContent)=>{
         if(ExpandedSideways){
-          return _.map(rightContent, (row)=>{ return{ CategoryContent: [ row.region, row.agreement, row.counterparty ],
-                                                      RowContent:  _.map( row.data , (block)=>{ return { assetID: block.id , assetInfo: [ block.asset, block.quantity, block.adjValue, block.value, block.rating, block.haircut, block.maturityDate, block.isin ]}}),
-                                                      PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " ", " ", " ", " "],
-                                                      ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " ", " ", " ", " "]  }})
+          return _.map(filteredContent, (row)=>{
+                                                 return{ CategoryContent: [ row.region, row.agreement, row.counterparty ],
+                                                         RowContent:  _.map( row.data , (block)=>{ return { assetID: block.id , assetInfo: [ block.asset, block.quantity, block.adjValue, block.value, block.rating, block.haircut, block.maturityDate, block.isin ]}}),
+                                                         PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " ", " ", " ", " "],
+                                                         ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " ", " ", " ", " "],
+                                                         RawAgreementObject: row  }})
           }
          else {
-           return _.map(rightContent, (row)=>{ return{ CategoryContent: [ row.region, row.agreement, row.counterparty ],
-                                                       RowContent:  _.map( row.data , (block)=>{ return { assetID: block.id , assetInfo: [ block.asset, block.quantity, block.adjValue, block.value, block.haircut ]}}),
-                                                       PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " "],
-                                                       ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " "] }})
+           return _.map(filteredContent, (row)=>{
+                                                 return{ CategoryContent: [ row.region, row.agreement, row.counterparty ],
+                                                         RowContent:  _.map( row.data , (block)=>{ return { assetID: block.id , assetInfo: [ block.asset, block.quantity, block.adjValue, block.value, block.haircut ]}}),
+                                                         PledgeContent: ["Pledge", " ", row.pledge.adjValue, row.pledge.value, " "],
+                                                         ExcessContent: ["Excess", " ", row.excess.adjValue, row.excess.value, " "],
+                                                         RawAgreementObject: row }})
          }
      }
+     // console.log(tableContent(filteredContent));
 
    return(
      <div className={ ExpandedVertically? (styles.assetsPanelFrameExpandedVertically) : (styles.assetsPanelFrame) } >

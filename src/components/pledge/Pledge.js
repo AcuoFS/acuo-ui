@@ -32,19 +32,26 @@ class Pledge extends React.Component {
     this.changeSideways = this.changeSideways.bind(this)
     this.onPledgeButtonClick = this.onPledgeButtonClick.bind(this)
 
-    fetch(OPTIMISATION_URL).then(response => {
-      return response.json()
-    }).then(obj => {
-      this.props.onInitOptimisationSettings(obj.items)
-    })
+
+
+    // fetch(OPTIMISATION_URL).then(response => {
+    //   return response.json()
+    // }).then(obj => {
+    //   this.props.onInitOptimisationSettings(obj.items)
+    // })
 
     // #OW-324
-    fetch(MARGIN_SELECTION_URL).then(response => {
-      return response.json()
-    }).then(obj => {
-      // console.log("Selection Response Received", obj);
-      this.props.initSelection(obj)
-    })
+    // fetch(MARGIN_SELECTION_URL).then(response => {
+    //   return response.json()
+    // }).then(obj => {
+    //   // console.log("Selection Response Received", obj);
+    //   this.props.initSelection(obj)
+    // })
+  }
+
+  componentDidMount() {
+    this.props.onInitOptimisationSettings()
+    this.props.initSelection()
   }
 
   changeSideways() {
@@ -71,6 +78,10 @@ class Pledge extends React.Component {
         selectionSideway: "./images/pledge/sideways-max.png",
       })
     }
+  }
+
+  componentWillUnmount = () => {
+    this.props.resetFilters()
   }
 
   // #OW-324

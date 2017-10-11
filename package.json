@@ -1,12 +1,13 @@
 {
   "name": "acuo",
-  "version": "0.28.0",
+  "version": "0.38.0",
   "description": "Acuo test bed",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --hot",
     "fromDist": "webpack-dev-server --content-base dist/",
-    "test": "mocha --compilers js:babel-core/register --require mock-css-modules --harmony-proxies ./test/test_helper.js 'test/**/*.@(js)'",
+    "test": "mocha -R landing --compilers js:babel-core/register --require mock-css-modules ./test/*.js || true",
+    "test-js": "mocha || true",
     "test:watch": "npm run test -- --watch",
     "json-server": "node mock-api/server.js",
     "server": "nodemon mock-api/server.js"
@@ -60,11 +61,14 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
+    "d3": "^4.10.0",
     "immutable": "^3.8.1",
+    "json-configurator": "^1.0.1",
     "lodash": "^4.17.2",
     "prop-types": "^15.5.10",
     "react": "^15.3.2",
     "react-addons-css-transition-group": "^15.4.1",
+    "react-datepicker": "^0.54.0",
     "react-dom": "^15.3.2",
     "react-dropzone-component": "^1.2.1",
     "react-notification-system": "^0.2.14",
@@ -74,7 +78,6 @@
     "react-select": "^1.0.0-rc.3",
     "redux": "^3.6.0",
     "redux-saga": "^0.14.4",
-    "whatwg-fetch": "^1.0.0",
-    "json-configurator": "^1.0.1"
+    "whatwg-fetch": "^1.0.0"
   }
 }

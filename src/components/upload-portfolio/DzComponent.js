@@ -16,6 +16,8 @@ export default class DzComponent extends React.Component {
     const {propNoOfFiles, propTemplate, propPostUrl} = props
 
     this.djsConfig = {
+      uploadMultiple: true,
+      paramName: 'portfolios',
       autoProcessQueue: false
       , maxFiles: propNoOfFiles
       , parallelUploads: propNoOfFiles
@@ -43,9 +45,9 @@ export default class DzComponent extends React.Component {
   }
 
   success(file, response) {
-
-    this.props.updateUploadStatus(response.statuses)
-    this.props.onUpdateTxnID(response.txnID)
+    //console.log(response)
+    //this.props.updateUploadStatus(response.statuses)
+    this.props.onUpdateTxnID(response.uploadMarginCallDetails)
     // Wait for animation to complete before removing file from the widget
     setTimeout((() => {
       this.dropzone.removeFile(file)

@@ -257,25 +257,49 @@ td{
   width:17px;
 }
 
-.earmarkAssetButton .tooltip{
-  padding: 8px;
+.hoverCtrl {
+  position: relative;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+
+.hoverCtrl .tooltip{
+  font-size: 80%;
+  padding: 5px;
+  border-radius: 5px;
   position: absolute;
-  left: 150%;
-  border: 1px solid acuoGrey;
-  top: -45%;
+  left: 0%;
+  border: 1px solid #6389ad;
+  top: 90%;
   background: #fff;
-  width: 124px;
+  /*width: 124px;*/
   z-index: 50;
   display: none;
   pointer-events: none;
 }
 
-.earmarkAssetButton:hover .tooltip {
+.hoverCtrl .tooltip div {
+  white-space: nowrap;
+}
+
+.hoverCtrl:hover .tooltip {
   display: block;
 }
 
-.earmarkAssetButton .tooltip::before{
-  content: '';
+.hoverCtrl .tooltip::before{
+  /*content: '';*/
   border-right: 12px solid acuoGrey;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
@@ -284,8 +308,8 @@ td{
   top: 8px;
 }
 
-.earmarkAssetButton .tooltip::after{
-  content: '';
+.hoverCtrl .tooltip::after{
+  /*content: '';*/
   border-right: 12px solid #fff;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;

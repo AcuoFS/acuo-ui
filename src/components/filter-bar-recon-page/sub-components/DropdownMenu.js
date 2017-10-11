@@ -22,7 +22,7 @@ const DropdownMenu = (props) => {
 
         {options.map(option => (
           <li key={option}
-              onClick={e => handleLocalOptionChange(e, option.toUpperCase(), option)}>
+              onClick={e => handleLocalOptionChange(e, derivTypeMapping(option).toUpperCase(), option)}>
             {derivTypeMapping(option).toUpperCase()}
           </li>
         ))}

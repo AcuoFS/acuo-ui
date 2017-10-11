@@ -8,7 +8,7 @@ const INITIAL_STATE = Map({"data": Map({"derivatives": List(), "menu": Map({"ale
 
 export function initState(state = Map(), newJSON){
 
-  let json = plusMinusThreeDays(newJSON.toJS()) || []
+  let json = plusMinusThreeDays(newJSON) || []
   let lol = json
   if(state.getIn(['inputs', 'filters']) && !state.getIn(['inputs', 'filters']).isEmpty())
     lol = state.getIn(['inputs', 'filters']).reduce((json, x) => {
@@ -393,8 +393,8 @@ export default function mainReducer(state = INITIAL_STATE, action, store = 'data
     case 'SELECT_ITEM':
       return selectItem(state, action)
 
-    case 'RECON_ITEM':
-      return reconItem(state, action)
+    // case 'RECON_ITEM':
+    //   return reconItem(state, action)
   }
 
   return state

@@ -5,9 +5,17 @@ export const initState = (state) => ({
   state: state
 })
 
+export const onInitDashboard = () => ({
+  type: ActionTypes.ON_INIT_DASHBOARD
+})
+
 export const reconInitState = (items) => ({
   type: ActionTypes.RECON_INIT_STATE,
   items,
+})
+
+export const onInitReconState = () => ({
+  type: ActionTypes.ON_INIT_RECON
 })
 
 export const initCurrencyInfo = (currencyInfo) => ({
@@ -64,15 +72,28 @@ export const reconItem = (id) => ({
   GUID: id
 })
 
+export const reconDispute = (disputeObj) => ({
+  type: ActionTypes.RECON_DISPUTE_SUBMIT,
+  disputeObj
+})
+
 //pledgeReducer stuffs, to be split later
 export const initOptimisationSettings = (settings) => ({
   type: ActionTypes.INIT_OPTIMISATION_SETTINGS,
   settings: settings
 })
 
+export const fetchOptimisationSettings = () => ({
+  type: ActionTypes.ON_FETCH_OPTIMISATION_SETTINGS
+})
+
 export const updateOptimisationSettings = (newSettings) => ({
   type: ActionTypes.UPDATE_OPTIMISATION_SETTINGS,
   newSettings: newSettings
+})
+
+export const fetchSelection = () => ({
+  type: ActionTypes.ON_FETCH_SELECTION
 })
 
 export const initSelection = (selection) => ({
@@ -102,6 +123,25 @@ export const removeAssetFromEarmark = (e, assetType, assetId, assetIdType) => ({
   }
 })
 
+export const updatePledgeFilter = (value) =>({
+  type: ActionTypes.PLEDGE_FILTER_SET,
+  value: value
+})
+
+export const fetchCollaterals = () => ({
+  type: ActionTypes.ON_FETCH_COLLATERALS
+})
+
+export const allocateCollaterals = (obj) => ({
+  type: ActionTypes.ON_ALLOCATE_COLLATERALS,
+  obj
+})
+
+export const allocatingCollaterals = (flag) => ({
+  type: ActionTypes.ALLOCATING_COLLATERALS,
+  flag
+})
+
 //recon
 export const firstLeveSelect = (GUID, firstLevelID) => ({
   type: ActionTypes.FIRSTLEVEL_SELECT,
@@ -116,9 +156,19 @@ export const secondLevelSelect = (GUID, parentID, secondLevelID) => ({
   secondLevelID: secondLevelID
 })
 
-export const updateReconFilter = (value) =>({
+export const updateReconFilter = (value) => ({
   type: ActionTypes.RECON_FILTER_SET,
-  value: value
+  value
+})
+
+export const onRemoveAllocatedAsset = (obj) => ({
+  type: ActionTypes.ON_REMOVE_ALLOCATED_ASSET,
+  obj
+})
+
+export const onPledge = (pledgeToSend) => ({
+  type: ActionTypes.ON_PLEDGE ,
+  pledgeToSend
 })
 
 //submit margin calls

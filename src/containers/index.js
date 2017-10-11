@@ -18,6 +18,9 @@ import ReconDisputeContainer from'./ReconDisputeContainer'
 import LoginContainer from './LoginContainer'
 import TwoFA_Container from './TwoFA_Container.js'
 import NotificationContainer from './NotificationContainer'
+import AppWrapperContainer from './AppWrapperContainer'
+import AnalyticsGraphContainer from './AnalyticsGraphContainer'
+import ChatContainer from './ChatContainer'
 
 export {
   FilterContainer,
@@ -39,5 +42,8 @@ export {
   ReconDisputeContainer,
   LoginContainer,
   TwoFA_Container,
-  NotificationContainer
+  NotificationContainer,
+  AppWrapperContainer,
+  AnalyticsGraphContainer,
+  ChatContainer
 }

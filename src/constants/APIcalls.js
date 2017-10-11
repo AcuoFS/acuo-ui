@@ -25,6 +25,8 @@ export const RECON_URL                      = CONFIG.RECON_URL
 // export const COLLATERAL_URL           = 'http://52.74.186.112:8081/init-collateral'
 // export const ALLOCATE_COLLATERALS_URL = 'http://52.74.186.112:8081/allocate-selection'
 
+export const LOGIN_URL                      = CONFIG.LOGIN_URL
+
 export const OPTIMISATION_URL               = CONFIG.OPTIMISATION_URL
 export const COLLATERAL_URL                 = CONFIG.COLLATERAL_URL
 export const MARGIN_SELECTION_URL           = CONFIG.MARGIN_SELECTION_URL
@@ -42,11 +44,16 @@ export const POST_MARGIN_CALL_IDS           = CONFIG.POST_MARGIN_CALL_IDS
 
 // UNMATCHED PORTFOLIO
 export const UNMATCHED_PORTFOLIO_URL        = CONFIG.UNMATCHED_PORTFOLIO_URL
-
 export const SEND_RECON_DISPUTE_URL         = CONFIG.SEND_RECON_DISPUTE_URL
 
 //fetch generated portfolio
 export const FETCH_GENERATED_PORTFOLIO      = CONFIG.FETCH_GENERATED_PORTFOLIO
+
+//request valuation
+export const REQUEST_VALUATION_URL          = CONFIG.REQUEST_VALUATION_URL
+
+//generate margin calls
+export const REQUEST_GENERATE_MARGIN_CALLS      = CONFIG.REQUEST_GENERATE_MARGIN_CALLS
 
 //fetch departures
 export const FETCH_DEPLOYED_DEPARTURES      = CONFIG.FETCH_DEPLOYED_DEPARTURES

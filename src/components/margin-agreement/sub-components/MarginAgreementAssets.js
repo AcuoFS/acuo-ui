@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import {Map, List} from 'immutable'
+import { Map } from 'immutable'
+import _ from 'lodash'
+
 import MarginAgreementDetail from './MarginAgreementDetail'
-import {checkNegative, isEmptyCounterparty} from '../../../utils'
+import {
+  checkNegative,
+  isEmptyCounterparty
+} from '../../../utils'
 import styles from '../MarginAgreementList.css'
 import CounterPartyUpload from './CounterPartyUpload'
 import selfStyles from './MarginAgreementAssets.css'
@@ -54,7 +59,10 @@ export default class MarginAgreementPortfolio extends React.Component {
     const differencePortfolio = this.getDifferencePortfolio(assetsName, marginData)
 
     handlerUpdateAdj(differencePortfolio)
-    this.adjInput.value = Math.round(differencePortfolio)
+    // this.adjInput.value = Math.round(differencePortfolio)
+
+    this.adjInput.value = differencePortfolio
+
   }
 
   onChangeAdjInput(){
@@ -90,6 +98,18 @@ export default class MarginAgreementPortfolio extends React.Component {
         }
       })
   }
+
+  // shouldComponentUpdate(nextProps){
+  //   return !_.isEqual(this.props.marginData.toJS(), nextProps.marginData.toJS()) ||
+  //     !_.isEqual(this.props.orgName, nextProps.orgName) ||
+  //     !_.isEqual(this.props.assetsName, nextProps.assetsName) ||
+  //     !_.isEqual(this.props.adjAmt, nextProps.adjAmt) ||
+  //     !_.isEqual(this.props.isHidePanel, nextProps.isHidePanel) ||
+  //     !_.isEqual(this.props.firstLevelList, nextProps.firstLevelList) ||
+  //     !_.isEqual(this.props.secondLevelList, nextProps.secondLevelList) ||
+  //     !_.isEqual(this.props.isUploading, nextProps.isUploading) ||
+  //     !_.isEqual(this.props.party, nextProps.party)
+  // }
 
   render() {
     // console.log( "MarginAgrmtAsset props:::" , this.props);

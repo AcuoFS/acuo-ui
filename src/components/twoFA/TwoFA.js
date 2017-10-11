@@ -17,9 +17,21 @@ export default class TwoFA_Component extends React.Component{
    delete localStorage.authenticating
   }
 
+  componentDidMount() {
+    this.refs.focus.focus()
+  }
+
   render(){
    return(
-    <div className={styles.container}>
+    <form className={styles.container} onSubmit={(e)=>{
+      e.preventDefault()
+      this.setState( {securekeyError: ""} )
+      if( this.state.inputSecurekey != this.state.securekey ) {this.setState({securekeyError:"Invalid Key!"})}
+      else{
+        localStorage.loginAt = Date.now() + 86400000
+        hashHistory.push("dashboard")
+      }
+    }}>
       <div className={styles.box}>
         <img className={styles.logo} src={'./images/login/login_logo.png'} alt=""/>
 
@@ -38,19 +50,13 @@ export default class TwoFA_Component extends React.Component{
             <input type={ (this.state.showPassword ? "text" : "password") }
                    onChange={ (e)=>{this.setState({inputSecurekey: e.currentTarget.value})} }
                    value={this.state.inputSecurekey}
+                   ref="focus"
               />
           </div>
         </div>
 
         <div className={styles.buttonHolder}>
-          <button onClick={ ()=>{
-            this.setState( {securekeyError: ""} )
-            if( this.state.inputSecurekey != this.state.securekey ) {this.setState({securekeyError:"Invalid Key!"})}
-            else{
-             localStorage.loginAt = Date.now() + 86400000
-             hashHistory.push("dashboard")
-            }
-           }} >
+          <button type="submit" >
             CONTINUE
           </button>
           <div onClick={ ()=>{hashHistory.push("/")} } >GO BACK</div>
@@ -58,7 +64,7 @@ export default class TwoFA_Component extends React.Component{
 
 
       </div>
-    </div>
+    </form>
    )
   }
 }

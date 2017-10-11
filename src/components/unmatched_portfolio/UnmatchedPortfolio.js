@@ -35,6 +35,7 @@ export default class UnmatchedPortfolio extends React.Component {
   }
 
   render() {
+    // { propOnTogglePortfolioPopup } = this.props
     return (
       <div className={styles.compContainer}>
         <div className={styles.flexCont}>
@@ -44,15 +45,20 @@ export default class UnmatchedPortfolio extends React.Component {
             <input className={styles.searchInput} type="text"
                    onChange={(e) => this.onSearch(e.target.value)}/>
           </div>
+          <div className={styles.closeBtn} onClick={() => this.props.propOnTogglePortfolioPopup()}>x</div>
         </div>
         <UnmatchedTableContainer onTableRow={this.onTableRow}
                                  filterText={this.state.filterText}
-                                 selectedList={this.state.selectedList}/>
-        <div className={
-          (this.state.selectedList.length > 0)
-            ? styles.buttonContainer : styles.hide}>
-          <button onClick={this.onGenerate}>OK</button>
-        </div>
+                                 selectedList={this.state.selectedList}
+         />
+
+        <div className={ styles.buttonContainer }>
+         {
+          (this.state.selectedList.length > 0 ?
+           <button className={styles.okButton} onClick={this.onGenerate}>OK</button>  :
+           <button className={styles.okButtonDisabled} disabled="true">OK</button> )
+          }
+       </div>
 
       </div>
     )

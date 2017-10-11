@@ -1,11 +1,18 @@
 .compContainer {
-    /*width: 1372px;*/
-    height: 300px;
+    margin-top: 20px;
+    height: 430px;
+    /* As flex child of .popupContainer*/
+    flex: 5 0 auto;
+
     background-color: #FAFAFA;
     border: 1px solid #D5DADF;
     border-radius: 8px;
-    margin: 10px 0px;
-    padding: 10px 0px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
 }
 
 .compHeader {
@@ -24,7 +31,17 @@
 }
 
 .flexCont {
-    display: flex;
+  width: 100%;
+  margin: 10px 0;
+  height: 50px;
+  /*As flex child of .compContainer*/
+
+  /*As flex parent*/
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
 }
 
 .searchInput {
@@ -38,19 +55,40 @@
 }
 
 .buttonContainer {
-    margin: 10px;
-    text-align: right;
+  width: 100%;
+  text-align: right;
+  margin: 5px 0;
 }
 
-.buttonContainer button {
+.okButton, .okButtonDisabled  {
     width: 82px;
-    height: 32px;
+    height: 30px;
+    margin: 5px 5px 5px 0 ;
     background-color: #008B04;
     border-radius: 20px;
     color: #FFFFFF;
     cursor: pointer;
 }
 
-.hide {
-    display: none;
+.okButtonDisabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
+.closeBtn {
+  color: #4A4A4A;
+  font-size: 1.5em;
+  cursor: pointer;
+
+  /*as flex parent*/
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+
+  /*as flex child of .popupContainer*/
+  flex: 1 0 auto;
+  padding-right: 15px;
+  align-self: self-end;
 }

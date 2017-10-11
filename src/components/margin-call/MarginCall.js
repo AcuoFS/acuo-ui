@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './MarginCall.css'
-import ContentRows from './MarginCallRows'
+import MarginCallRow from './MarginCallRow'
 import {checkBox, checkBoxWithTick} from '../../../images/common'
 import ChangeCallAmountPopup from './sub-components/ChangeCallAmountPopup'
 import LoadingBarSpinner from './../common/LoadingBarSpinner/LoadingBarSpinner'
@@ -14,6 +14,8 @@ export default class MarginCall extends React.Component {
       isChecked: false,
       isShowPopup: false,
       marginCallUploadId: '',
+      popUpX: 0,
+      popUpY: 0,
       totalCallAmount: '',
       selectedRows: []
     }
@@ -35,7 +37,7 @@ export default class MarginCall extends React.Component {
     // check all
     if (!this.state.isChecked) {
       this.setState({
-        selectedRows: [...this.props.uploadData]
+        selectedRows: [...this.props.uploadData.map(x => x.portfolioId)]
       })
     }
     // uncheck all
@@ -54,7 +56,7 @@ export default class MarginCall extends React.Component {
   }
 
   toggleRow(arr, index) {
-    console.log(arr.length)
+    //console.log(arr.length)
     if (arr.length) {
       if (arr.indexOf(index) > -1)
         console.log(arr.splice(arr.indexOf(index), 1))
@@ -65,11 +67,14 @@ export default class MarginCall extends React.Component {
     }
   }
 
-  onTotalCallAmt(totalCallAmount, marginCallUploadId) {
+  onTotalCallAmt(totalCallAmount, marginCallUploadId, pageX, pageY, rowExpansionState) {
     this.setState({
       isShowPopup: true,
       marginCallUploadId: marginCallUploadId,
-      totalCallAmount: totalCallAmount
+      totalCallAmount: totalCallAmount,
+      popUpX: pageX,
+      popUpY: pageY,
+      isCurrentRowExpanded: rowExpansionState
     })
   }
 
@@ -83,27 +88,28 @@ export default class MarginCall extends React.Component {
 
   onSingleRow(rowObj, actionIsChecked) {
     // check action coming from row
-    if (actionIsChecked) {
+    //console.log(rowObj)
+    if (!actionIsChecked) {
       this.setState({
-        selectedRows: [...this.state.selectedRows, rowObj]
+        selectedRows: [...this.state.selectedRows, rowObj.portfolioId]
       })
     }
     // uncheck action from row
     else {
       this.setState({
         selectedRows: this.state.selectedRows.filter(row =>
-        row.mgnCallUploadId != rowObj.mgnCallUploadId)
+        row !== rowObj.portfolioId)
       })
     }
   }
 
   onSendButton(selectedRows, onPostMarginCallIDs) {
-    onPostMarginCallIDs(selectedRows.map(row => row.referenceIdentifier))
+    onPostMarginCallIDs(selectedRows.map(row => row.portfolioId))
   }
 
   render() {
 
-    const { uploadDataFlag, requestingValuation, onPostMarginCallIDs } = this.props
+    const { uploadDataFlag, requestingValuation, onPostMarginCallIDs, onRequestValuation, requestValuation, generateMarginCalls, requestingMCGenerationOrValuation } = this.props
 
     return (
       <div className={styles.container + ' ' + (requestingValuation || uploadDataFlag ? '' : styles.hidden)}>
@@ -112,15 +118,31 @@ export default class MarginCall extends React.Component {
                                  {Number.parseInt(this.state.totalCallAmount ? this.state.totalCallAmount : 0)}
                                propCurrentId={this.state.marginCallUploadId}
                                propHandlerClearPopup={this.clearPopup}
-                               propHandlerSave={this.props.onUpdateMarginCallUpload}/>
+                               propHandlerSave={this.props.onUpdateMarginCallUpload}
+                               popUpX={this.state.popUpX}
+                               popUpY={this.state.popUpY}
+                               isCurrentRowExpanded={this.state.isCurrentRowExpanded}/>
 
         <div className={styles.header}>
           <div className={styles.title}>Margin Call</div>
-          <div className={styles.button + ' ' + (this.state.selectedRows.length <= 0 ? styles.disabled : '')} disabled={this.state.selectedRows.length <= 0} onClick={() => this.onSendButton(this.state.selectedRows, onPostMarginCallIDs)}>
-            Send selected Margin Calls
+          <div className={styles.button + ' ' + (this.state.selectedRows.length <= 0 ? styles.disabled : '')}
+               disabled={this.state.selectedRows.length <= 0}
+               onClick={() => requestValuation(this.state.selectedRows)}>
+            Request Valuation
+          </div>
+          <div className={styles.button + ' ' + (this.state.selectedRows.length <= 0 ? styles.disabled : '')}
+               disabled={this.state.selectedRows.length <= 0}
+               onClick={() => generateMarginCalls(this.state.selectedRows)}>
+            Generate Margin Calls
+          </div>
+          <div className={styles.button + ' ' + (true ? styles.disabled : '')}
+               //disabled={this.state.selectedRows.length <= 0}
+               disabled={true}
+               onClick={() => this.onSendButton(this.state.selectedRows, onPostMarginCallIDs)}>
+            Send Margin Calls
           </div>
         </div>
-        <div className={styles.content}>
+        <div className={styles.content + ' ' + (requestingMCGenerationOrValuation ? styles.requesting : '')}>
           <div className={styles.masterRow}>
             <div className={styles.cell}>
               {/*<input type="checkbox" checked={this.state.isChecked} onChange={this.toggleIsChecked} />*/}
@@ -144,11 +166,16 @@ export default class MarginCall extends React.Component {
           </div>
 
           { uploadDataFlag ?
-              <ContentRows spillContents={this.openRow} isChecked={this.state.isChecked}
-                           isOpen={this.state.openedRows.indexOf(1) > -1}
-                           propHandlerOnTotalMargin={this.onTotalCallAmt}
-                           propMarginCallUploadData={this.props.uploadData}
-                           propHandlerSingleRow={this.onSingleRow}/>
+            this.props.uploadData.map((item, i) => {
+            //console.log(this.state.selectedRows.filter(x => x === item.portfolioId))
+              return <MarginCallRow spillContents={this.openRow} isChecked={this.state.isChecked}
+                             isOpen={this.state.openedRows.indexOf(1) > -1}
+                             propHandlerOnTotalMargin={this.onTotalCallAmt}
+                             propMarginCallUploadData={this.props.uploadData} row={item}
+                             propHandlerSingleRow={this.onSingleRow}
+                             key={i}
+                             selected={!!this.state.selectedRows.filter(x => x === item.portfolioId).length}/>}
+            )
             :
             <div className={styles.loadingContainer}>
               <LoadingBarSpinner text={'Valuation in progress'} />

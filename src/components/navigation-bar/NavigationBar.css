@@ -5,10 +5,16 @@
   background-color: #fff;
   padding: 10px 20px;
   color: #5c5b5c;
-  /*display: flex;*/
+  display: flex;
   position: relative;
   border-bottom: 1px solid #d9d9d9;
   min-width: 1200px;
+  justify-content: space-between;
+}
+
+.menuLeft, .menuRight {
+  flex-wrap: nowrap;
+  display: flex;
 }
 
 .flex1 {
@@ -54,6 +60,11 @@
 .menuIcon {
   composes: menuItem;
   padding: 0px 1%;
+  cursor: pointer;
+}
+
+.menuIcon img {
+  width: 20px;
 }
 
 .menuIcon p {
@@ -61,13 +72,13 @@
 }
 
 .nav .menuIcon#navSetting {
-  float: right;
+  /*float: right;*/
   margin-top: 20px;
   cursor: pointer;
 }
 
 .nav .menuIcon#navLogout {
-  float: right;
+  /*float: right;*/
   margin-top: 20px;
   cursor: pointer;
 }
@@ -76,6 +87,21 @@
 .nav .menuItem,
 .nav .menuIcon {
   display: inline-block;
+  flex: 1;
+  align-self: center;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.nav .pageTitle {
+  flex: 1 1 auto;
+  align-self: flex-end;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+.nav .pageTitle a {
+  white-space: nowrap;
 }
 
 .close {
@@ -93,20 +119,21 @@
 }
 
 .nav .userInfo {
-  float: right;
+  /*float: right;*/
   /*compose: flex1;*/
   flex: 1;
   text-transform: none;
   width: 200px;
   padding: 0 15px;
   text-align: right;
-  margin-top: -6px;
-
+  /*margin-top: -6px;*/
+  flex: 6;
 }
 
 .userInfo #userId {
   /*display: block;*/
   line-height: 1.8em;
+
 }
 
 /*.logout_btn, .settings_btn {

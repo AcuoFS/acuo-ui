@@ -49,6 +49,13 @@ export default class OptimisationWidget extends React.Component {
     return (styles.invisible);
   }
 
+  contentClassTransition(isShow) {
+    if(isShow) {
+      return (styles.showtransition);
+    }
+    return (styles.invisibletransition);
+  }
+
   arrowClass(arrow) {
     if(arrow) {
       return (styles.down);
@@ -93,10 +100,11 @@ export default class OptimisationWidget extends React.Component {
       optimisation, selection, onUpdateOptimisationSettings,
       pendingAllocation, sliderCheckbox, onToggleCheckall, onAllocate,
       onPledge,
-      scenarioAnalysis
+      scenarioAnalysis,
+      allocating
     } = this.props
 
-    return <div>
+    return <div className={styles.optimisationWidgetHolder}>
     <div className={sharedStyles.panel} id={styles.optSetting}>
       <div className={sharedStyles.panelTitle}>Optimization Setting <img src={'./images/pledge/locked.png'}/></div>
       <div className={styles.tabHolder}>
@@ -140,7 +148,7 @@ export default class OptimisationWidget extends React.Component {
                        tickClick={onToggleCheckall}/>
 
           <div className={styles.optButton + ' ' +
-          (this.checkIfExist(pendingAllocation).size > 0 ? '' : styles.btnDisabled )}
+          ((this.checkIfExist(pendingAllocation).size > 0) && !allocating ? '' : styles.btnDisabled )}
                onClick={() => {
                  onAllocate(pendingAllocation.toJS(), optimisation.toJS())
                  this.setState({isAllocateButtonClicked: true})
@@ -194,7 +202,7 @@ export default class OptimisationWidget extends React.Component {
           Cost Savings (USD)
         </div>
         <div className={styles.cell}>
-          Reserved Liq. Ratio(%)
+          Reserved <span>Liq. Ratio(%)</span>
         </div>
         <div className={styles.cell}>
           <div className={styles.arrowContainer} onClick={this.handleToggle}>
@@ -209,20 +217,22 @@ export default class OptimisationWidget extends React.Component {
       </div>
 
       <div className={this.contentClass(this.state.isShow)} id={styles.innerContent}>
-        <form action="">
-          {scenarioAnalysis
-            .map((x,index) =>
-            <AnalysisWidget
-              key={index}
-              name={x.name}
-              cost={x.cost}
-              savings={x.savings}
-              ratio={x.ratio}
-              isActive={x.name === this.state.activeRow}
-              toggle={this.selectActiveRow}
-            />)
-          }
-        </form>
+        <div className={this.contentClassTransition(this.state.isShow)}>
+          <form action="">
+            {scenarioAnalysis
+              .map((x,index) =>
+              <AnalysisWidget
+                key={index}
+                name={x.name}
+                cost={x.cost}
+                savings={x.savings}
+                ratio={x.ratio}
+                isActive={x.name === this.state.activeRow}
+                toggle={this.selectActiveRow}
+              />)
+            }
+          </form>
+        </div>
       </div>
     </div>
   </div>

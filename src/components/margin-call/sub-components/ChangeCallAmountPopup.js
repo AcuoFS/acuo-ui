@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import {checkNegative} from '../../../utils'
 import styles from './ChangeCallAmountPopup.css'
+import _ from 'lodash'
 
 
 export default class ChangeCallAmountPopup extends React.Component {
@@ -55,13 +56,25 @@ export default class ChangeCallAmountPopup extends React.Component {
   //   })
   // }
 
+  shouldComponentUpdate(nextProps, nextState){
+    return !_.isEqual(this.props, nextProps) || !_.isEqual(this.state, nextState)
+  }
+
   render() {
     const {
-      propIsShow
+      propIsShow,
+      popUpX,
+      popUpY,
+      isCurrentRowExpanded
     } = this.props
 
+    const xy = {
+      'left': popUpX,
+      'top': isCurrentRowExpanded ? popUpY + 100 : popUpY + 30
+    }
+
     return (
-      <div className={styles.popupPanel + ' ' + (propIsShow ? styles.showPopup : '')}>
+      <div className={styles.popupPanel + ' ' + (propIsShow ? styles.showPopup : '')} style={xy}>
         <div className={styles.closeButton} onClick={this.onCancel}>
           x
         </div>
@@ -85,9 +98,9 @@ export default class ChangeCallAmountPopup extends React.Component {
           <div className={styles.flexRow}>
             <div className={styles.formLabel}>Total Call Amount</div>
             <div className={styles.formInput}>
-              <input disabled type="text" className={styles.inputStyle}
+              <input type="text" disabled className={styles.inputStyle}
                      value={checkNegative((Number(this.state.returnAmt)
-                     + Number(this.state.deliverAmt)))}/>
+                     + Number(this.state.deliverAmt)).toFixed(0))}/>
             </div>
           </div>
         </div>

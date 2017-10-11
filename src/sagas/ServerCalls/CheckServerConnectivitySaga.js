@@ -3,7 +3,7 @@ import {
   MARGIN_HEALTH_CHECK,
   VALUATION_HEALTH_CHECK,
   COLLATERAL_HEALTH_CHECK
-} from './../constants/APIcalls'
+} from '../../constants/APIcalls'
 
 import { call, put } from 'redux-saga/effects'
 
@@ -18,32 +18,65 @@ let serverStatus = {
 
 const checkProxyServerConnectivity = () => {
   return fetch(PROXY_HEALTH_CHECK).then(response => {
-    return 'passed'
+    if(response.status === 200){
+     console.log("checkProxyServerConnectivity ::: Response Evaluation:" , true , "@", new Date());
+     return 'passed'
+    }
+    else {
+     console.log("checkProxyServerConnectivity ::: Response Evaluation:" , false , "@", new Date());
+     return 'failed'
+    }
   }, error => {
+    console.error("checkProxyServerConnectivity ::: Response Error!" , new Date() , error);
     return 'failed'
   })
 }
 
 const checkMarginServerConnectivity = () => {
   return fetch(MARGIN_HEALTH_CHECK).then(response => {
+
+   if(response.status === 200){
+    console.log("checkMarginServerConnectivity ::: Response Evaluation:" , true , "@", new Date());
     return 'passed'
+   }
+   else {
+    console.log("checkMarginServerConnectivity ::: Response Evaluation:" , false , "@", new Date());
+    return 'failed'
+   }
   }, error => {
+    console.error("checkMarginServerConnectivity ::: Response Error!" , new Date());
     return 'failed'
   })
 }
 
 const checkValuationServerConnectivity = () => {
   return fetch(VALUATION_HEALTH_CHECK).then(response => {
+   if(response.status === 200){
+    console.log("checkValuationServerConnectivity ::: Response Evaluation:" , true , "@", new Date());
     return 'passed'
+   }
+   else {
+    console.log("checkValuationServerConnectivity ::: Response Evaluation:" , false , "@", new Date());
+    return 'failed'
+   }
   }, error => {
+    console.error("checkValuationServerConnectivity ::: Response Error!" , new Date());
     return 'failed'
   })
 }
 
 const checkCollateralServerConnectivity = () => {
   return fetch(COLLATERAL_HEALTH_CHECK).then(response => {
+   if(response.status === 200){
+    console.log("checkCollateralServerConnectivity ::: Response Evaluation:" , true , "@", new Date());
     return 'passed'
+   }
+   else {
+    console.log("checkCollateralServerConnectivity ::: Response Evaluation:" , false , "@", new Date());
+    return 'failed'
+   }
   }, error => {
+    console.error("checkCollateralServerConnectivity ::: Response Error!" , new Date());
     return 'failed'
   })
 }
