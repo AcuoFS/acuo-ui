@@ -17,7 +17,8 @@ export default class MarginCall extends React.Component {
       popUpX: 0,
       popUpY: 0,
       totalCallAmount: '',
-      selectedRows: []
+      selectedRows: [],
+      marginCallRows: []
     }
 
     this.openRow = this.openRow.bind(this)
@@ -91,20 +92,35 @@ export default class MarginCall extends React.Component {
     //console.log(rowObj)
     if (!actionIsChecked) {
       this.setState({
-        selectedRows: [...this.state.selectedRows, rowObj.portfolioId]
+        selectedRows: [...this.state.selectedRows, rowObj.portfolioId],
       })
+      if(rowObj.referenceIdentifier){
+        this.setState({
+          marginCallRows: [...this.state.marginCallRows, rowObj.referenceIdentifier],
+        })
+      }
     }
     // uncheck action from row
     else {
+      let marginCallRows = []
+
+      let selectedRows = this.state.selectedRows.filter(row =>
+      row !== rowObj.portfolioId)
+
+      if(rowObj.referenceIdentifier){
+        marginCallRows =  this.state.marginCallRows.filter(row =>
+        row !== rowObj.referenceIdentifier)
+      }
       this.setState({
-        selectedRows: this.state.selectedRows.filter(row =>
-        row !== rowObj.portfolioId)
+        marginCallRows: marginCallRows,
+        selectedRows: selectedRows
       })
     }
   }
 
   onSendButton(selectedRows, onPostMarginCallIDs) {
-    onPostMarginCallIDs(selectedRows.map(row => row.portfolioId))
+    console.log(selectedRows)
+    onPostMarginCallIDs(selectedRows)
   }
 
   render() {
@@ -135,10 +151,10 @@ export default class MarginCall extends React.Component {
                onClick={() => generateMarginCalls(this.state.selectedRows)}>
             Generate Margin Calls
           </div>
-          <div className={styles.button + ' ' + (this.state.selectedRows.length <= 0 ? styles.disabled : '')}
+          <div className={styles.button + ' ' + (this.state.marginCallRows.length <= 0 ? styles.disabled : '')}
                //disabled={this.state.selectedRows.length <= 0}
                disabled={true}
-               onClick={() => this.onSendButton(this.state.selectedRows, onPostMarginCallIDs)}>
+               onClick={() => this.onSendButton(this.state.marginCallRows, onPostMarginCallIDs)}>
             Send Margin Calls
           </div>
         </div>
