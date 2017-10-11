@@ -21,7 +21,42 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
   onToggleOpen: () => dispatch(toggleChatOpen()),
-  onToggleMinimise: () => dispatch(toggleChatMinimise())
+  onToggleMinimise: () => dispatch(toggleChatMinimise()),
+  getStreamList: () => {
+
+    fetch('https://my-api.symphony.com/sessionauth/v1/authenticate', {
+      method: 'POST',
+      headers: {'cache-control': 'no-cache'}
+    }).then(response => {
+      console.log(response)
+    })
+
+    // fetch('https://develop.symphony.com/pod/v1/streams/list', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     "skip": 0,
+    //     "limit": 50,
+    //     "streamTypes": [
+    //       {"type": "IM"},
+    //       {"type": "MIM"},
+    //       {"type": "ROOM"},
+    //       {"type": "POST"}
+    //     ],
+    //     "includeInactiveStreams": true
+    //   }),
+    //   headers: {'content-type': 'application/json'},
+    //
+    // }).then(response => {
+    //   console.log(response)
+    //   // alert('send success :' + JSON.stringify(idArr))
+    //   // return response.json()
+    // })
+    //   .then(obj => {
+    //   return 1
+    // }).catch(error => {
+    //   console.log('Error: ' + error)
+    // })
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatComponent)

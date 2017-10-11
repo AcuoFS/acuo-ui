@@ -4,12 +4,12 @@
 import React from 'react'
 import styles from './Chat.css'
 
-export default ({minimised, opened, onToggleMinimise, onToggleOpen}) => (
+export default ({minimised, opened, onToggleMinimise, onToggleOpen, getStreamList}) => (
   <div className={styles.container + ' ' + (!opened ? styles.closed : '')}>
     <div className={styles.chatWindow + ' ' + (minimised ? styles.minimised : '')} >
       <div className={styles.controlBar} onClick={onToggleMinimise}>
         <div>
-          <img className={styles.logo} src={'./images/dashboard/navbar/symphony.png'} alt=""/>
+          <img className={styles.logo} src={'./images/dashboard/navbar/symphony.png'} alt="" onClick={getStreamList}/>
         </div>
         <div className={styles.controls}>
           <div>_</div>
