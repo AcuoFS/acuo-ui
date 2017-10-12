@@ -89,7 +89,7 @@ export default class DeselectionPopup extends React.Component {
                        this.validateForm(this.radioCurDom, propHandlerSetFormValidity)
                      }}/>
             </div>
-            <div className={styles.rowText}>This margin call only</div>
+            <div className={styles.rowText}>This margin statement only</div>
           </label>
           <label className={styles.popupRow}>
             <div className={styles.rowRadio}>

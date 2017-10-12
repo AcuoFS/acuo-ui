@@ -3,3 +3,7 @@
   font-size: 15px;
   height: 100%;
 }
+
+::-ms-clear {
+  display: none;
+}
