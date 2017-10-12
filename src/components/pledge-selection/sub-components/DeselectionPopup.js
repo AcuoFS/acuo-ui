@@ -50,7 +50,7 @@ export default class DeselectionPopup extends React.Component {
   // Before change of props
   componentWillReceiveProps(nextProps) {
     // reset values of radio buttons
-    if (nextProps.propOpenedDeselectionPopup == '') {
+    if (nextProps.propOpenedDeselectionPopup === '') {
       if (this.radioCurDom) {
         this.radioCurDom.checked = false
       }
@@ -100,6 +100,10 @@ export default class DeselectionPopup extends React.Component {
                      }}/>
             </div>
             <div className={styles.rowText}>All margin statements</div>
+          </label>
+
+          <label className={styles.popupRow}>
+
           </label>
 
           <div>
