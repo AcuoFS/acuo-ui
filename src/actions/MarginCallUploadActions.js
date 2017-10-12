@@ -8,7 +8,8 @@ import {
   MARGIN_CALL_GENERATED,
   UPDATE_REQUESTING_STATE,
   ON_REQUEST_VALUATION,
-  ON_REQUEST_GENERATE_MARGINCALL
+  ON_REQUEST_GENERATE_MARGINCALL,
+  ON_REQUEST_SEND_MARGINCALL
 } from '../constants/ActionTypes'
 
 export const getMarginCallUpload = (uploadData) => ({
@@ -57,5 +58,10 @@ export const onRequestValuationAction = referenceIDs => ({
 
 export const onRequestGenerateMarginCall = referenceIDs => ({
   type: ON_REQUEST_GENERATE_MARGINCALL,
+  referenceIDs
+})
+
+export const onRequestSendMarginCalls = referenceIDs => ({
+  type: ON_REQUEST_SEND_MARGINCALL,
   referenceIDs
 })
