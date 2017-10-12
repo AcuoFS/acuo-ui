@@ -5,26 +5,21 @@ import styles from './NavigationBar.css'
 
 const NavigationBarItem = (props) => (
   <div className={styles.pageTitle}>
-    <div className={styles.vertiCenter}>
-      <div className={styles.centerThis}>
-        <Link to={props.toUrl}>
-          <div className={styles.menuItem}>
-            <div className={styles.vertiCenter}>
-              <p className={styles.centerThis
-              + (props.selected ? ' ' + styles.boldThis : '')}>
-                {props.label}
-              </p>
-              { props.notifications &&
-                props.notifications.reduce((sum, item) => item ? sum + item.alerts : sum , 0) > 0 &&
-                <div className={styles.notificationBadge}>
-                  {props.notifications.reduce((sum, item) => sum + item.alerts, 0)}
-                </div>
-              }
+
+    <Link to={props.toUrl}>
+      <div className={styles.menuItem}>
+          <div className={(props.selected ? styles.boldThis : '')}>
+            {props.label}
+            { props.notifications &&
+            props.notifications.reduce((sum, item) => item ? sum + item.alerts : sum , 0) > 0 &&
+            <div className={styles.notificationBadge}>
+              {props.notifications.reduce((sum, item) => sum + item.alerts, 0)}
             </div>
+            }
           </div>
-        </Link>
       </div>
-    </div>
+    </Link>
+
   </div>
 )
 

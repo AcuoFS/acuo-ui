@@ -20,6 +20,7 @@ import TwoFA_Container from './TwoFA_Container.js'
 import NotificationContainer from './NotificationContainer'
 import AppWrapperContainer from './AppWrapperContainer'
 import AnalyticsGraphContainer from './AnalyticsGraphContainer'
+import ChatContainer from './ChatContainer'
 
 export {
   FilterContainer,
@@ -43,5 +44,6 @@ export {
   TwoFA_Container,
   NotificationContainer,
   AppWrapperContainer,
-  AnalyticsGraphContainer
+  AnalyticsGraphContainer,
+  ChatContainer
 }

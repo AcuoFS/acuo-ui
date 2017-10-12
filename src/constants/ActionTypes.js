@@ -94,3 +94,8 @@ export const SCREEN_RESIZE = 'SCREEN_RESIZE'
 
 //analytics
 export const FLIP_AXES = 'FLIP_AXES'
+
+//chat window
+export const TOGGLE_CHAT_OPEN = 'TOGGLE_CHAT_OPEN'
+export const TOGGLE_CHAT_MINIMISE = 'TOGGLE_CHAT_MINIMISE'
+export const OPEN_CHAT = 'OPEN_CHAT'
