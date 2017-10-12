@@ -123,6 +123,17 @@ export default class MarginCall extends React.Component {
     onPostMarginCallIDs(selectedRows)
   }
 
+  componentDidUpdate() {
+    if(this.state.selectedRows.length){
+      let marginCallRows = this.props.uploadData.filter(x => _.has(x, 'referenceIdentifier')).map(x => x.referenceIdentifier)
+      console.log(marginCallRows)
+    }
+
+    //   this.setState({
+    //     marginCallRows:
+    //   })
+  }
+
   render() {
 
     const { uploadDataFlag, requestingValuation, onPostMarginCallIDs, onRequestValuation, requestValuation, generateMarginCalls, requestingMCGenerationOrValuation } = this.props
