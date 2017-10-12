@@ -1,18 +1,28 @@
 import React from 'react'
 import {REMOVE_ASSET_ALLOCATION_URL} from '../../../constants/APIcalls'
 import styles from './DeselectionPopup.css'
-
+import {checkBox, checkBoxWithTick} from '../../../../images/common'
 
 export default class DeselectionPopup extends React.Component {
   constructor() {
     super()
     this.radioCurDom = null
     this.radioAllDom = null
+    this.state = {
+      imFlag: false,
+      vmFlag: false
+    }
   }
 
   validateForm(radioDom, propHandlerSetFormValidity) {
     if (radioDom && radioDom.checked) {
-      propHandlerSetFormValidity(true)
+      // if(radioDom === this.radioAllDom){
+      //   if(this.state.imFlag || this.state.vmFlag)
+          propHandlerSetFormValidity(true)
+      // }else{
+      //   propHandlerSetFormValidity(true)
+      // }
+
     }
   }
 
@@ -27,16 +37,21 @@ export default class DeselectionPopup extends React.Component {
     if (radioAllDom) {
       radioAllDom.checked = false
     }
+
+    this.setState({
+      imFlag: false,
+      vmFlag: false
+    })
   }
 
-  onConfirm(radioAllDom, radioCurDom, propOpenedDeselectionPopup, propDeselectAsset, onRemoveAssetFromAllocate, GUID, closePopup) {
+  onConfirm(radioAllDom, radioCurDom, propOpenedDeselectionPopup, propDeselectAsset, onRemoveAssetFromAllocate, GUID, closePopup, imFlag, vmFlag) {
     let checkMsg = ''
     if (radioAllDom.checked) {
-      onRemoveAssetFromAllocate(propDeselectAsset)
+      onRemoveAssetFromAllocate(propDeselectAsset, imFlag, vmFlag)
       closePopup()
     }
     if (radioCurDom.checked) {
-      onRemoveAssetFromAllocate(propDeselectAsset, [GUID])
+      onRemoveAssetFromAllocate(propDeselectAsset, imFlag, vmFlag, [GUID])
       closePopup()
     }
 
@@ -57,6 +72,18 @@ export default class DeselectionPopup extends React.Component {
       if (this.radioAllDom) {
         this.radioAllDom.checked = false
       }
+    }
+  }
+
+  vmimFlagCheck(value){
+    if(value === 'vm'){
+      this.setState({
+        vmFlag: !this.state.vmFlag
+      })
+    }else{
+      this.setState({
+        imFlag: !this.state.imFlag
+      })
     }
   }
 
@@ -103,7 +130,13 @@ export default class DeselectionPopup extends React.Component {
           </label>
 
           <label className={styles.popupRow}>
-
+            {
+              this.radioAllDom && this.radioAllDom.checked &&
+                <div className={styles.checkboxHolder}>
+                  <span><img onClick={() => this.vmimFlagCheck('vm')} src={this.state.vmFlag ? checkBoxWithTick : checkBox}/> VM</span>
+                  <span><img onClick={() => this.vmimFlagCheck('im')} src={this.state.imFlag ? checkBoxWithTick : checkBox}/> IM</span>
+                </div>
+            }
           </label>
 
           <div>
@@ -111,7 +144,7 @@ export default class DeselectionPopup extends React.Component {
             (propIsValidFlag ? styles.buttonEnabled : '')}
                     disabled={!propIsValidFlag}
                     onClick={() => {
-                      this.onConfirm(this.radioAllDom, this.radioCurDom, propOpenedDeselectionPopup, propDeselectAsset, onRemoveAssetFromAllocate, GUID, propHandlerClearPopup)
+                      this.onConfirm(this.radioAllDom, this.radioCurDom, propOpenedDeselectionPopup, propDeselectAsset, onRemoveAssetFromAllocate, GUID, propHandlerClearPopup, this.state.imFlag, this.state.vmFlag)
                     }}>
               Confirm
             </button>
