@@ -4,6 +4,7 @@ import MarginCallRow from './MarginCallRow'
 import {checkBox, checkBoxWithTick} from '../../../images/common'
 import ChangeCallAmountPopup from './sub-components/ChangeCallAmountPopup'
 import LoadingBarSpinner from './../common/LoadingBarSpinner/LoadingBarSpinner'
+import _ from 'lodash'
 
 export default class MarginCall extends React.Component {
   constructor(props) {
@@ -108,8 +109,12 @@ export default class MarginCall extends React.Component {
       row !== rowObj.portfolioId)
 
       if(rowObj.referenceIdentifier){
+        console.log(rowObj.referenceIdentifier)
+        console.log(this.state.marginCallRows)
         marginCallRows =  this.state.marginCallRows.filter(row =>
         row !== rowObj.referenceIdentifier)
+
+        console.log(marginCallRows)
       }
       this.setState({
         marginCallRows: marginCallRows,
@@ -125,8 +130,11 @@ export default class MarginCall extends React.Component {
 
   componentDidUpdate() {
     if(this.state.selectedRows.length){
-      let marginCallRows = this.props.uploadData.filter(x => _.has(x, 'referenceIdentifier')).map(x => x.referenceIdentifier)
-      console.log(marginCallRows)
+      let marginCallRows = this.props.uploadData.filter(x => _.has(x, 'referenceIdentifier') && (_.indexOf(this.state.selectedRows, x.portfolioId) >= 0 ) ).map(x => x.referenceIdentifier)
+      if(!_.isEqual(this.state.marginCallRows, marginCallRows))
+        this.setState({
+          marginCallRows: marginCallRows
+        })
     }
 
     //   this.setState({

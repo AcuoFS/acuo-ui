@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import {MarginCallComponent} from '../components'
 import *  as MarginCallUploadActions from  '../actions/MarginCallUploadActions'
-import { POST_MARGIN_CALL_IDS } from './../constants/APIcalls'
+// import { POST_MARGIN_CALL_IDS } from './../constants/APIcalls'
 
 const _default = ''
 const _defaultArray = []
@@ -25,17 +25,20 @@ const mapDispatchToProps = dispatch => ({
   onPostMarginCallIDs: (idArr) => {
     // TODO: migrate to saga
     // console.log(idArr)
-    fetch(POST_MARGIN_CALL_IDS, {
-      method: 'POST',
-      body: JSON.stringify(idArr)
-    }).then(response => {
-      alert('send success :' + JSON.stringify(idArr))
-      return response.json()
-    }).then(obj => {
-      return 1
-    }).catch(error => {
-      console.log('Error: ' + error)
-    })
+    // fetch(POST_MARGIN_CALL_IDS, {
+    //   method: 'POST',
+    //   body: JSON.stringify({"marginCallIds": idArr})
+    // }).then(response => {
+    //   alert('send success :' + JSON.stringify(idArr))
+    //   return response.json()
+    // }).then(obj => {
+    //   return 1
+    // }).catch(error => {
+    //   console.log('Error: ' + error)
+    // })
+    dispatch(MarginCallUploadActions.updateRequestState(true))
+    dispatch(MarginCallUploadActions.onRequestSendMarginCalls(idArr))
+
   },
   requestValuation: (referenceIDs) =>{
     dispatch(MarginCallUploadActions.updateRequestState(true))
