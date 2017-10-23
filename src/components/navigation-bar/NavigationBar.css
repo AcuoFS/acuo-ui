@@ -48,7 +48,7 @@
   composes: uppercase;
   font-size: 0.9em;
   line-height: 1.4em;
-  padding: 0px 1.2%;
+  padding: 0px 0.5em;
   position: relative;
 }
 
@@ -91,6 +91,7 @@
   align-self: center;
   text-align: center;
   margin: 0 5px;
+  border: 0;
 }
 
 .nav .pageTitle {
