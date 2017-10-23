@@ -54,9 +54,11 @@ export default class MarginAgreementPortfolio extends React.Component {
 
     // console.log(cptyTotal, Math.round(parseFloat(clientTotal + parseFloat(this.state.adjAmount)) * 100) / 100)
 
-    //check if first level check length is mismatched
+    /*** check if first level check length is mismatched */
+    let firstLevelLength = -1
+
     if(firstLevelList) {
-      const firstLevelLength = Math.max.apply(Math,
+      firstLevelLength = Math.max.apply(Math,
         [
           actionItem.get('clientAssets').reduce((sum, group) => sum + group.get('data').size, 0),
           actionItem.get('counterpartyAssets').reduce((sum, group) => sum + group.get('data').size, 0)
@@ -69,18 +71,32 @@ export default class MarginAgreementPortfolio extends React.Component {
       // console.log(firstLevelList.size)
       // console.log(firstLevelLength)
 
-      // const checkedFirstLevelLength = firstLevelList.filter((x) => x.get('GUID') == actionItem.get('GUID')).size
+      // console.log(actionItem.get('GUID'))
 
-      if (firstLevelLength > firstLevelList.size)
+      // const checkedFirstLevelLength = firstLevelList[actionItem.get('GUID')].size
+
+      // console.log(firstLevelList.toJS())
+      // console.log('checked: ', firstLevelList.size)
+      // console.log('exist: ', firstLevelLength)
+      // console.log((firstLevelLength > firstLevelList.size))
+
+      // if(!_.isEmpty(firstLevelList[actionItem.get('GUID')])){
+      //   console.log(firstLevelLength, firstLevelList[actionItem.get('GUID')].size)
+      // }
+
+      if(firstLevelLength > firstLevelList.size)
         return true
+    }else{
+      /*** if first level list for this GUID doesnt exist at all, means nothing has been checked */
+      return true
     }
     // Math.round(parseFloat(clientTotal + parseFloat(this.state.adjAmount)).toFixed(2))
-    // Need adjustment
+    /***  Need adjustment */
     if (Math.round(parseFloat(clientTotal + parseFloat(this.state.adjAmount)) * 100) / 100 !== cptyTotal) {
       return true
     }
 
-    // Either client and cpty has no recon details
+    /*** Either client and cpty has no recon details */
     if (!cptyTotal || !clientTotal) {
       return true
     }
