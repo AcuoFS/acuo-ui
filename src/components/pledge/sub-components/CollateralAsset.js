@@ -49,7 +49,7 @@ class CollateralAsset extends React.Component {
   }
 
   standardizeDate(date) {
-    console.log(date)
+    // console.log(date)
     if(date !== '-')
       return moment(date, "DD-MM-YY").format('YYYY-MM-DD')
 
@@ -106,7 +106,7 @@ class CollateralAsset extends React.Component {
                                               rawPrice={rawPrice}
                                               checkAmountExceeding={this.checkAmountExceeding}/>)
     }
-    console.log(this.standardizeDate(propMaturityDate))
+    // console.log(this.standardizeDate(propMaturityDate))
     if (propIsDisplayAll) {
       return (
         <div className={styles.collateralRow} >

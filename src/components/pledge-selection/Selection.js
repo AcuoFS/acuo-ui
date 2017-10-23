@@ -78,8 +78,8 @@ export default class Selection extends React.Component {
         <td className={styles.hoverCtrl}>
           {asset.get(ASSET.A_HAIRCUT_PCT)}%
           <div className={styles.tooltip}>
-            <div>H<sub>c</sub>&nbsp;: 00.0%</div>
-            <div>H<sub>fx</sub>: 00.0%</div>
+            <div>H<sub>c</sub>&nbsp;: {parseFloat(asset.get('haircutCollateral')).toFixed(2)}%</div>
+            <div>H<sub>fx</sub>: {parseFloat(asset.get('haircutFx')).toFixed(2)}%</div>
           </div>
         </td>
         <td>{checkNegative(asset.get(ASSET.A_AMT))}</td>
