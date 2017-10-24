@@ -53,7 +53,7 @@ export default class MarginAgreementPortfolio extends React.Component {
   isDisableReconButton(actionItem, cptyTotal, clientTotal, firstLevelList) {
 
     // console.log(cptyTotal, Math.round(parseFloat(clientTotal + parseFloat(this.state.adjAmount)) * 100) / 100)
-
+    // console.log(actionItem.get('GUID'))
     /*** check if first level check length is mismatched */
     let firstLevelLength = -1
 
@@ -83,25 +83,30 @@ export default class MarginAgreementPortfolio extends React.Component {
       // if(!_.isEmpty(firstLevelList[actionItem.get('GUID')])){
       //   console.log(firstLevelLength, firstLevelList[actionItem.get('GUID')].size)
       // }
-
+      // console.log('first level list exist')
       if(firstLevelLength > firstLevelList.size)
         return true
     }else{
+      // console.log('first level list dont exist')
       /*** if first level list for this GUID doesnt exist at all, means nothing has been checked */
       return true
     }
     // Math.round(parseFloat(clientTotal + parseFloat(this.state.adjAmount)).toFixed(2))
     /***  Need adjustment */
-    if (Math.round(parseFloat(clientTotal + parseFloat(this.state.adjAmount)) * 100) / 100 !== cptyTotal) {
+    if (Math.round(parseFloat(clientTotal + parseFloat(this.state.adjAmount)) * 100) / 100 !== (Math.round(cptyTotal * 100) / 100)) {
+      // console.log(Math.round(parseFloat(clientTotal + parseFloat(this.state.adjAmount)) * 100) / 100)
+      // console.log((Math.round(cptyTotal * 100) / 100))
+      // console.log('need adjustment')
       return true
     }
 
     /*** Either client and cpty has no recon details */
     if (!cptyTotal || !clientTotal) {
+      // console.log('client ir cpty details missing')
       return true
     }
 
-
+    // console.log('all pass')
     return false
   }
 
