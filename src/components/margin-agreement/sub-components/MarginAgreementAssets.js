@@ -125,7 +125,6 @@ export default class MarginAgreementPortfolio extends React.Component {
       party
     } = this.props
 
-
     let diff = this.getDifferencePortfolio(assetsName, marginData)
 
     let diffCal, adjCal
@@ -152,6 +151,7 @@ export default class MarginAgreementPortfolio extends React.Component {
         <div className={styles.packageRight}>
           <input className={selfStyles.adjAmtTextbox}
                  type="text"
+                 name={marginData.get('GUID')}
                  ref={dom => this.adjInput = dom}
                  onChange={this.onChangeAdjInput}/>
         </div>
