@@ -1,3 +1,6 @@
+import {List, Map, fromJS} from 'immutable'
+import _ from 'lodash'
+
 import {
   GET_MARGIN_CALL_UPLOAD,
   UPDATE_MARGIN_CALL_UPLOAD,
@@ -6,7 +9,6 @@ import {
   MARGIN_CALL_GENERATED,
   UPDATE_REQUESTING_STATE
 } from '../constants/ActionTypes'
-import {List, Map, fromJS} from 'immutable'
 
 const initialState = Map({
   uploadData: List(),
@@ -14,8 +16,43 @@ const initialState = Map({
   requestingValuation: false,
   uploading: false,
   requestingMCGenerationOrValuation: false,
-
+  selectedRows: List()
 })
+
+/*** if (!actionIsChecked) {
+  this.setState({
+    selectedRows: [...this.state.selectedRows, rowObj.portfolioId],
+  })
+  if(rowObj.referenceIdentifier){
+    this.setState({
+      marginCallRows: [...this.state.marginCallRows, rowObj.referenceIdentifier],
+    })
+  }
+}
+// uncheck action from row
+else {
+  let marginCallRows = []
+
+  let selectedRows = this.state.selectedRows.filter(row =>
+  row !== rowObj.portfolioId)
+
+  if(rowObj.referenceIdentifier){
+    console.log(rowObj.referenceIdentifier)
+    console.log(this.state.marginCallRows)
+    marginCallRows =  this.state.marginCallRows.filter(row =>
+    row !== rowObj.referenceIdentifier)
+
+    console.log(marginCallRows)
+  }
+  this.setState({
+    marginCallRows: marginCallRows,
+    selectedRows: selectedRows
+  })
+}*/
+
+const toggleSelectedRow = (selectedRows, rowObj) => {
+  if(_.includes(selectedRows))
+}
 
 const MarginUploadReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -56,6 +93,9 @@ const MarginUploadReducer = (state = initialState, action) => {
         else
           return x
       })).set('requestingMCGenerationOrValuation', false))
+
+    // case TOGGLE_SELECTED_ROW:
+    //   return state
 
     default:
       return state
