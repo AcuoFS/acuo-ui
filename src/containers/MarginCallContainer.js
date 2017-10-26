@@ -10,7 +10,9 @@ const mapStateToProps = state => ({
   uploadData: state.MarginUploadReducer.get('uploadData')
     ? state.MarginUploadReducer.get('uploadData').toJS() : _defaultArray,
   requestingValuation: state.MarginUploadReducer.get('requestingValuation') || _default,
-  requestingMCGenerationOrValuation: state.MarginUploadReducer.get('requestingMCGenerationOrValuation') || _default
+  requestingMCGenerationOrValuation: state.MarginUploadReducer.get('requestingMCGenerationOrValuation') || _default,
+  selectedRows: state.MarginUploadReducer.get('selectedRows').toJS(),
+  marginCallRows: state.MarginUploadReducer.get('marginCallRows').toJS()
 })
 
 const checkUploadData = (data) => (data.length)
@@ -81,6 +83,12 @@ const mapDispatchToProps = dispatch => ({
   //       alert('generate margin call failed, try again')
   //       dispatch(MarginCallUploadActions.updateRequestState(false))
   //     })
+  },
+  onToggleRow: rowObj => {
+    dispatch(MarginCallUploadActions.onToggleMarginCallRow(rowObj))
+  },
+  onToggleAllRows: () => {
+    dispatch(MarginCallUploadActions.onToggleAllMarginCallRows())
   }
 })
 
