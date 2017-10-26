@@ -25,7 +25,7 @@ var configJson = {
   REQUEST_VALUATION_URL: '/proxy/upload/request-valuation',
   REQUEST_GENERATE_MARGIN_CALLS: '/proxy/upload/request-margincalls',
   //FETCH_GENERATED_PORTFOLIO: '<%= baseUrl %>/valuation/acuo/api/calls/async/generate/',
-  //POST_MARGIN_CALL_IDS: '<%= baseUrl %>/margin/acuo/api/margin/send/calls',
+  POST_MARGIN_CALL_IDS: '/proxy/upload/send-margin-calls',
   LOGIN_URL: '/proxy/common/auth/login'
 }
 

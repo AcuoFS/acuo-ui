@@ -70,11 +70,15 @@ export default class MarginAgreementPortfolio extends React.Component {
   }
 
   renderItem(marginData, assetsName, handlerSelectedItem, firstLevelList, secondLevelList, onSelectSecondLevelItem, party) {
+
     if (marginData.get(assetsName))
       return marginData.get(assetsName).sort().map((x) => {
         if (x.get('data') && !x.get('data').isEmpty()) {
           return (<div key={x.get('groupName')}>{x.get('data').sort((a, b) => a.getIn(['firstLevel', 'name']) > b.getIn(['firstLevel', 'name'])).map((groupData) => {
             const secondLevel = groupData.getIn(['firstLevel', 'secondLevel'])
+
+            const newFirstLevelList = firstLevelList ? firstLevelList.toJS() : {}
+            const newSecondLevelList = secondLevelList ? secondLevelList.toJS() : {}
 
             return <MarginAgreementDetail
               GUID={marginData.get('GUID')}
@@ -85,8 +89,8 @@ export default class MarginAgreementPortfolio extends React.Component {
               secondLevel={secondLevel}
               handlerSelectedItem={handlerSelectedItem}
               firstLevelID={groupData.getIn(['firstLevel', 'id'])}
-              firstLevelList={firstLevelList}
-              secondLevelList={secondLevelList}
+              firstLevelList={newFirstLevelList}
+              secondLevelList={newSecondLevelList}
               id={groupData.getIn(['firstLevel', 'id'])}
               onSelectSecondLevelItem={onSelectSecondLevelItem}
               party={party}
@@ -121,7 +125,6 @@ export default class MarginAgreementPortfolio extends React.Component {
       party
     } = this.props
 
-
     let diff = this.getDifferencePortfolio(assetsName, marginData)
 
     let diffCal, adjCal
@@ -148,6 +151,7 @@ export default class MarginAgreementPortfolio extends React.Component {
         <div className={styles.packageRight}>
           <input className={selfStyles.adjAmtTextbox}
                  type="text"
+                 name={marginData.get('GUID')}
                  ref={dom => this.adjInput = dom}
                  onChange={this.onChangeAdjInput}/>
         </div>

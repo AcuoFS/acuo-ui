@@ -11,6 +11,6 @@ export const AllocateCollateralsSaga = (reqObj) =>
     }).then((response) => {
     return response.json()
   }).then((obj) => {
-    console.log(obj)
+    // console.log(obj)
     return obj
   })

@@ -52,31 +52,61 @@ export default class MarginAgreementPortfolio extends React.Component {
 
   isDisableReconButton(actionItem, cptyTotal, clientTotal, firstLevelList) {
 
-    const firstLevelLength = Math.max.apply(Math,
-      [
-        actionItem.get('clientAssets').reduce((sum, group) => sum + group.get('data').size, 0),
-        actionItem.get('counterpartyAssets').reduce((sum, group) => sum + group.get('data').size, 0)
-      ]
-    )
+    // console.log(cptyTotal, Math.round(parseFloat(clientTotal + parseFloat(this.state.adjAmount)) * 100) / 100)
+    // console.log(actionItem.get('GUID'))
+    /*** check if first level check length is mismatched */
+    let firstLevelLength = -1
 
-    console.log(clientTotal + parseFloat(this.state.adjAmount))
-    console.log(cptyTotal)
+    if(firstLevelList) {
+      firstLevelLength = Math.max.apply(Math,
+        [
+          actionItem.get('clientAssets').reduce((sum, group) => sum + group.get('data').size, 0),
+          actionItem.get('counterpartyAssets').reduce((sum, group) => sum + group.get('data').size, 0)
+        ]
+      )
 
-    const checkedFirstLevelLength = firstLevelList.filter((x) => x.get('GUID') == actionItem.get('GUID')).size
+      // console.log(clientTotal + parseFloat(this.state.adjAmount))
+      // console.log(cptyTotal)
 
-    if (firstLevelLength > checkedFirstLevelLength)
+      // console.log(firstLevelList.size)
+      // console.log(firstLevelLength)
+
+      // console.log(actionItem.get('GUID'))
+
+      // const checkedFirstLevelLength = firstLevelList[actionItem.get('GUID')].size
+
+      // console.log(firstLevelList.toJS())
+      // console.log('checked: ', firstLevelList.size)
+      // console.log('exist: ', firstLevelLength)
+      // console.log((firstLevelLength > firstLevelList.size))
+
+      // if(!_.isEmpty(firstLevelList[actionItem.get('GUID')])){
+      //   console.log(firstLevelLength, firstLevelList[actionItem.get('GUID')].size)
+      // }
+      // console.log('first level list exist')
+      if(firstLevelLength > firstLevelList.size)
+        return true
+    }else{
+      // console.log('first level list dont exist')
+      /*** if first level list for this GUID doesnt exist at all, means nothing has been checked */
       return true
-
-    // Need adjustment
-    if (clientTotal + parseFloat(this.state.adjAmount) !== cptyTotal) {
+    }
+    // Math.round(parseFloat(clientTotal + parseFloat(this.state.adjAmount)).toFixed(2))
+    /***  Need adjustment */
+    if (Math.round(parseFloat(clientTotal + parseFloat(this.state.adjAmount)) * 100) / 100 !== (Math.round(cptyTotal * 100) / 100)) {
+      // console.log(Math.round(parseFloat(clientTotal + parseFloat(this.state.adjAmount)) * 100) / 100)
+      // console.log((Math.round(cptyTotal * 100) / 100))
+      // console.log('need adjustment')
       return true
     }
 
-    // Either client and cpty has no recon details
+    /*** Either client and cpty has no recon details */
     if (!cptyTotal || !clientTotal) {
+      // console.log('client ir cpty details missing')
       return true
     }
 
+    // console.log('all pass')
     return false
   }
 
@@ -176,7 +206,7 @@ export default class MarginAgreementPortfolio extends React.Component {
             <div className={styles.actFig + ' ' + this.getTextColour(percentage)}>
               {percentage}%
             </div>
-            <div className={styles.actBtn + ' ' + (this.isDisableReconButton(portfolioData, this.displayTotalMargin(portfolioData, 'counterpartyAssets'), this.displayTotalMargin(portfolioData, 'clientAssets'), firstLevelList) ? styles.actBtnDisable : this.getBtnColour(percentage))}
+            <div className={styles.actBtn + ' ' + (this.isDisableReconButton(portfolioData, this.displayTotalMargin(portfolioData, 'counterpartyAssets'), this.displayTotalMargin(portfolioData, 'clientAssets'), firstLevelList, this.state.adjAmount) ? styles.actBtnDisable : this.getBtnColour(percentage))}
                  onClick={ (e)=>{
                    onReconItem(e)
                   }}

@@ -1,4 +1,5 @@
 import React from 'react'
+import { cloneDeep } from 'lodash'
 
 import styles from './Graph.css'
 import { getDate } from '../../utils'
@@ -67,7 +68,10 @@ export default class Graph extends React.Component {
   }
 
   scrollEvent = (event) => {
+    console.log('scroll event')
+    console.log(cloneDeep(this.state.scrollLeft))
     this.setState({scrollLeft: event.currentTarget.scrollLeft})
+    console.log(cloneDeep(this.state.scrollLeft))
   }
 
   componentDidMount() {

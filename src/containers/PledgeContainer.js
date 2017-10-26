@@ -154,14 +154,17 @@ const constructToBeRemovedFrom = (pending, selection) => (
 )
 
 const mergeProps = (stateProps, dispatchProps) => ({
-  onRemoveAssetFromAllocate: (toBeExcluded, toBeRemovedFrom = checkAllocated(stateProps.selection).map((item) => item.GUID)) => (
+  onRemoveAssetFromAllocate: (toBeExcluded, imFlag = true, vmFlag = true, toBeRemovedFrom = checkAllocated(stateProps.selection).map((item) => item.GUID)) => {
+    // console.log(imFlag, vmFlag)
     dispatchProps.onDispatchRemoveAssetFromAllocate({
       currentItems: checkAllocated(stateProps.selection),
       toBeRemoved: toBeExcluded,
       toBeRemovedFrom: constructToBeRemovedFrom(toBeRemovedFrom, stateProps.selection.toJS()),
-      optimisationSettings: stateProps.optimisation.toJS()
+      optimisationSettings: stateProps.optimisation.toJS(),
+      im: imFlag,
+      vm: vmFlag
     })
-  ), ...stateProps, ...dispatchProps
+  }, ...stateProps, ...dispatchProps
 })
 
 
