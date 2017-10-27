@@ -24,7 +24,7 @@ const mapDispatchToProps = dispatch => ({
   onToggleMinimise: () => dispatch(toggleChatMinimise()),
   getStreamList: () => {
 
-    fetch('https://my-api.symphony.com/sessionauth/v1/authenticate', {
+    fetch('https://develop-api.symphony.com:8444/sessionauth/v1/authenticate', {
       method: 'POST',
       headers: {'cache-control': 'no-cache'}
     }).then(response => {
