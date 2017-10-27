@@ -188,13 +188,13 @@ export default class MarginCall extends React.Component {
             <div className={styles.cell}>Cpty Organisation</div>
             <div className={styles.cell}>Cpty Entity</div>
             <div className={styles.cell}>Margin Agreement</div>
+            <div className={styles.cell + ' ' + styles.callTypeCell}>Portfolio</div>
             <div className={styles.cell + ' ' + styles.dateCell}>Valuation Date</div>
-            <div className={styles.cell + ' ' + styles.dateCell}>Call Date</div>
+            <div className={styles.cell + ' ' + styles.largeCell}>Exposure</div>
             <div className={styles.cell + ' ' + styles.callTypeCell}>Call Type</div>
+            <div className={styles.cell + ' ' + styles.dateCell}>Call Date</div>
             <div className={styles.cell + ' ' + styles.ccyCell}>CCY</div>
             <div className={styles.cell + ' ' + styles.largeCell}>Total Call Amount</div>
-            <div className={styles.cell}>Reference Identifier</div>
-            <div className={styles.cell + ' ' + styles.largeCell}>Exposure</div>
             <div className={styles.cell + ' ' + styles.largeCell}>Collateral Value</div>
             <div className={styles.cell + ' ' + styles.largeCell}>Pending Collateral</div>
             <div className={styles.cell}></div>
