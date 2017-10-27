@@ -1,14 +1,14 @@
 .agreeRow {
   color: #272727;
-  background-color: #FFFFFF;
+  background-color: #dceeff;
   display: flex;
   font-size: 14px;
   line-height: 17px;
 }
 
 .agreeHeaderRow {
-  color: #FFFFFF;
-  background-color: #4E83B5;
+  color: #272727;
+  background-color: #eee;
 }
 
 .agreeRow div {

@@ -69,7 +69,7 @@
   flex-grow: 1;
   flex-basis: 0;
   align-self: center;
-  padding: 5px;
+  padding: 10px 5px;
   position: relative;
 }
 
@@ -109,12 +109,17 @@
   display: flex;
 }
 
-.groupContainer:nth-child(odd) {
-  background-color: #DCEEFF;
-}
+/*.groupContainer:nth-child(odd) {*/
+  /*background-color: #DCEEFF;*/
+/*}*/
 
-.groupContainer:nth-child(even) {
-  background-color: #EEEEEE;
+/*.groupContainer:nth-child(even) {*/
+  /*background-color: #EEEEEE;*/
+/*}*/
+
+.groupContainer {
+  background-color: #fff;
+  border-bottom: 1px #e5e5e5 solid;
 }
 
 .headerRow{
@@ -135,7 +140,7 @@
 
 .subrowContent{
   display: flex;
-  background-color: #FFFFFF;
+  background-color: #dceeff;
 }
 
 .subrowCell{
@@ -172,11 +177,11 @@
 }
 
 .groupContainer:nth-child(odd) .contentRow .cell:last-child::after{
-  border-top: 12px solid #DCEEFF;
+  border-top: 12px solid #fff;
 }
 
 .groupContainer:nth-child(even) .contentRow .cell:last-child::after{
-  border-top: 12px solid #EEEEEE;
+  border-top: 12px solid #fff;
 }
 
 /************* Up triangle after expansion *************/
@@ -201,11 +206,11 @@
 }
 
 .groupContainer:nth-child(odd) .contentRowExpand .cell:last-child::after{
-  border-bottom: 12px solid #DCEEFF;
+  border-bottom: 12px solid #fff;
 }
 
 .groupContainer:nth-child(even) .contentRowExpand .cell:last-child::after{
-  border-bottom: 12px solid #EEEEEE;
+  border-bottom: 12px solid #fff;
 }
 
 /************* Up triangle after expansion *************/

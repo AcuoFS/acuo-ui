@@ -66,13 +66,15 @@ export default class MarginCallRow extends React.Component {
           <div className={styles.cell}>{item.cptyOrg || '-'}</div>
           <div className={styles.cell}>{item.cptyEntity || '-'}</div>
           <div className={styles.cell}>{item.marginAgreement || '-'}</div>
+          <div className={styles.cell + ' ' + styles.callTypeCell}>{item.portfolioId || '-'}</div>
           <div className={styles.cell + ' ' + styles.dateCell + ' ' + styles.boldCellText}>
             {item.valuationDate || '-'}
           </div>
+          <div className={styles.cell + ' ' + styles.largeCell}>{checkNegative(item.exposure || 0)}</div>
+          <div className={styles.cell + ' ' + styles.callTypeCell}>{item.callType || '-'}</div>
           <div className={styles.cell + ' ' + styles.dateCell + ' ' + styles.boldCellText}>
             {item.callDate || '-'}
           </div>
-          <div className={styles.cell + ' ' + styles.callTypeCell}>{item.callType || '-'}</div>
           <div className={styles.cell + ' ' + styles.ccyCell}>{item.currency || '-'}</div>
           <div className={styles.cell + ' ' + styles.largeCell + ' ' + styles.boldCellText
           + ' ' + styles.clickableCell}
@@ -82,8 +84,6 @@ export default class MarginCallRow extends React.Component {
               Click to edit
             </div>
           </div>
-          <div className={styles.cell}>{item.referenceIdentifier || '-'}</div>
-          <div className={styles.cell + ' ' + styles.largeCell}>{checkNegative(item.exposure || 0)}</div>
           <div className={styles.cell + ' ' + styles.largeCell}>{checkNegative(item.collateralValue || 0)}</div>
           <div className={styles.cell + ' ' + styles.largeCell}>{item.pendingCollateral || '-'}</div>
           <div className={styles.cell} onClick={(e) => this.onArrowClick(e)} data-ref={id}></div>
