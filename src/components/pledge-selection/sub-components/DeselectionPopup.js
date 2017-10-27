@@ -10,19 +10,31 @@ export default class DeselectionPopup extends React.Component {
     this.radioAllDom = null
     this.state = {
       imFlag: false,
-      vmFlag: false
+      vmFlag: false,
+      checked: ''
     }
+
+    this.vmimFlagCheck = this.vmimFlagCheck.bind(this)
+    this.validateForm = this.validateForm.bind(this)
   }
 
-  validateForm(radioDom, propHandlerSetFormValidity) {
-    if (radioDom && radioDom.checked) {
-      // if(radioDom === this.radioAllDom){
-      //   if(this.state.imFlag || this.state.vmFlag)
+  validateForm(propHandlerSetFormValidity) {
+    // console.log(radioDom)
+    // console.log(this.radioAllDom)
+    // console.log(radioDom === this.radioAllDom)
+    this.setState({checked: (this.radioAllDom.checked ? this.radioAllDom : this.radioCurDom)})
+    if (this.radioCurDom.checked || this.radioAllDom.checked) {
+      if(this.radioAllDom.checked){
+        // console.log('all checked')
+        // console.log(this.state.imFlag)
+        // console.log(this.state.vmFlag)
+        if(this.state.imFlag || this.state.vmFlag)
           propHandlerSetFormValidity(true)
-      // }else{
-      //   propHandlerSetFormValidity(true)
-      // }
-
+        else
+          propHandlerSetFormValidity(false)
+      }else{
+        propHandlerSetFormValidity(true)
+      }
     }
   }
 
@@ -75,15 +87,15 @@ export default class DeselectionPopup extends React.Component {
     }
   }
 
-  vmimFlagCheck(value){
+  vmimFlagCheck(value, validateForm, propValidate){
     if(value === 'vm'){
       this.setState({
         vmFlag: !this.state.vmFlag
-      })
+      }, () => validateForm(propValidate))
     }else{
       this.setState({
         imFlag: !this.state.imFlag
-      })
+      }, () => validateForm(propValidate))
     }
   }
 
@@ -113,28 +125,32 @@ export default class DeselectionPopup extends React.Component {
               <input type="radio" name="excludeOption" value="current"
                      ref={dom => this.radioCurDom = dom}
                      onChange={() => {
-                       this.validateForm(this.radioCurDom, propHandlerSetFormValidity)
+                       this.validateForm(propHandlerSetFormValidity)
                      }}/>
             </div>
-            <div className={styles.rowText}>This margin statement only</div>
+            <div className={styles.rowText}>This call</div>
           </label>
           <label className={styles.popupRow}>
             <div className={styles.rowRadio}>
               <input type="radio" name="excludeOption" value="all"
                      ref={dom => this.radioAllDom = dom}
                      onChange={() => {
-                       this.validateForm(this.radioAllDom, propHandlerSetFormValidity)
+                       this.validateForm(propHandlerSetFormValidity)
                      }}/>
             </div>
-            <div className={styles.rowText}>All margin statements</div>
+            <div className={styles.rowText}>All statements</div>
           </label>
 
           <label className={styles.popupRow}>
             {
               this.radioAllDom && this.radioAllDom.checked &&
                 <div className={styles.checkboxHolder}>
-                  <span><img onClick={() => this.vmimFlagCheck('vm')} src={this.state.vmFlag ? checkBoxWithTick : checkBox}/> VM</span>
-                  <span><img onClick={() => this.vmimFlagCheck('im')} src={this.state.imFlag ? checkBoxWithTick : checkBox}/> IM</span>
+                  <span><img onClick={() => {
+                    this.vmimFlagCheck('vm', this.validateForm, propHandlerSetFormValidity)
+                  }} src={this.state.vmFlag ? checkBoxWithTick : checkBox}/> VM</span>
+                  <span><img onClick={() => {
+                    this.vmimFlagCheck('im', this.validateForm, propHandlerSetFormValidity)
+                  }} src={this.state.imFlag ? checkBoxWithTick : checkBox}/> IM</span>
                 </div>
             }
           </label>
