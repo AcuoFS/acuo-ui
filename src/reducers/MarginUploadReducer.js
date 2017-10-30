@@ -24,7 +24,7 @@ const initialState = Map({
 
 const toggleMarginCallRow = (marginCalldRows, rowObj) => {
   if(_.includes(marginCalldRows, rowObj.referenceIdentifier)){
-    return _.remove(marginCalldRows, x => x === rowObj.referenceIdentifier)
+    return _.remove(marginCalldRows, x => x !== rowObj.referenceIdentifier)
   }else{
     return [...marginCalldRows, rowObj.referenceIdentifier]
   }
@@ -99,7 +99,7 @@ const MarginUploadReducer = (state = initialState, action) => {
       if(rowObj.referenceIdentifier){
         const marginCallRows = toggleMarginCallRow(state.get('marginCallRows').toJS(), rowObj)
 
-        newState = state.withMutations(state => state.set('selectedRows', fromJS(selectedRows)).set('marginCallRows', marginCallRows))
+        newState = state.withMutations(state => state.set('selectedRows', fromJS(selectedRows)).set('marginCallRows',fromJS(marginCallRows)))
       }else{
         newState = state.set('selectedRows', fromJS(selectedRows))
       }
