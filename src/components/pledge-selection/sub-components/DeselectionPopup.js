@@ -1,18 +1,28 @@
 import React from 'react'
 import {REMOVE_ASSET_ALLOCATION_URL} from '../../../constants/APIcalls'
 import styles from './DeselectionPopup.css'
-
+import {checkBox, checkBoxWithTick} from '../../../../images/common'
 
 export default class DeselectionPopup extends React.Component {
   constructor() {
     super()
     this.radioCurDom = null
     this.radioAllDom = null
+    this.state = {
+      imFlag: false,
+      vmFlag: false
+    }
   }
 
   validateForm(radioDom, propHandlerSetFormValidity) {
     if (radioDom && radioDom.checked) {
-      propHandlerSetFormValidity(true)
+      // if(radioDom === this.radioAllDom){
+      //   if(this.state.imFlag || this.state.vmFlag)
+          propHandlerSetFormValidity(true)
+      // }else{
+      //   propHandlerSetFormValidity(true)
+      // }
+
     }
   }
 
@@ -27,16 +37,21 @@ export default class DeselectionPopup extends React.Component {
     if (radioAllDom) {
       radioAllDom.checked = false
     }
+
+    this.setState({
+      imFlag: false,
+      vmFlag: false
+    })
   }
 
-  onConfirm(radioAllDom, radioCurDom, propOpenedDeselectionPopup, propDeselectAsset, onRemoveAssetFromAllocate, GUID, closePopup) {
+  onConfirm(radioAllDom, radioCurDom, propOpenedDeselectionPopup, propDeselectAsset, onRemoveAssetFromAllocate, GUID, closePopup, imFlag, vmFlag) {
     let checkMsg = ''
     if (radioAllDom.checked) {
-      onRemoveAssetFromAllocate(propDeselectAsset)
+      onRemoveAssetFromAllocate(propDeselectAsset, imFlag, vmFlag)
       closePopup()
     }
     if (radioCurDom.checked) {
-      onRemoveAssetFromAllocate(propDeselectAsset, [GUID])
+      onRemoveAssetFromAllocate(propDeselectAsset, imFlag, vmFlag, [GUID])
       closePopup()
     }
 
@@ -50,13 +65,25 @@ export default class DeselectionPopup extends React.Component {
   // Before change of props
   componentWillReceiveProps(nextProps) {
     // reset values of radio buttons
-    if (nextProps.propOpenedDeselectionPopup == '') {
+    if (nextProps.propOpenedDeselectionPopup === '') {
       if (this.radioCurDom) {
         this.radioCurDom.checked = false
       }
       if (this.radioAllDom) {
         this.radioAllDom.checked = false
       }
+    }
+  }
+
+  vmimFlagCheck(value){
+    if(value === 'vm'){
+      this.setState({
+        vmFlag: !this.state.vmFlag
+      })
+    }else{
+      this.setState({
+        imFlag: !this.state.imFlag
+      })
     }
   }
 
@@ -89,7 +116,7 @@ export default class DeselectionPopup extends React.Component {
                        this.validateForm(this.radioCurDom, propHandlerSetFormValidity)
                      }}/>
             </div>
-            <div className={styles.rowText}>This margin call only</div>
+            <div className={styles.rowText}>This margin statement only</div>
           </label>
           <label className={styles.popupRow}>
             <div className={styles.rowRadio}>
@@ -102,12 +129,22 @@ export default class DeselectionPopup extends React.Component {
             <div className={styles.rowText}>All margin statements</div>
           </label>
 
+          <label className={styles.popupRow}>
+            {
+              this.radioAllDom && this.radioAllDom.checked &&
+                <div className={styles.checkboxHolder}>
+                  <span><img onClick={() => this.vmimFlagCheck('vm')} src={this.state.vmFlag ? checkBoxWithTick : checkBox}/> VM</span>
+                  <span><img onClick={() => this.vmimFlagCheck('im')} src={this.state.imFlag ? checkBoxWithTick : checkBox}/> IM</span>
+                </div>
+            }
+          </label>
+
           <div>
             <button type="submit" className={styles.buttonStyle + ' ' +
             (propIsValidFlag ? styles.buttonEnabled : '')}
                     disabled={!propIsValidFlag}
                     onClick={() => {
-                      this.onConfirm(this.radioAllDom, this.radioCurDom, propOpenedDeselectionPopup, propDeselectAsset, onRemoveAssetFromAllocate, GUID, propHandlerClearPopup)
+                      this.onConfirm(this.radioAllDom, this.radioCurDom, propOpenedDeselectionPopup, propDeselectAsset, onRemoveAssetFromAllocate, GUID, propHandlerClearPopup, this.state.imFlag, this.state.vmFlag)
                     }}>
               Confirm
             </button>

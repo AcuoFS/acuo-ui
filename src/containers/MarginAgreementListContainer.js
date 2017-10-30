@@ -1,29 +1,33 @@
 import { connect } from 'react-redux'
-import { fromJS, List } from 'immutable'
+import { fromJS, List, Map } from 'immutable'
 import { MarginAgreementsComponent } from '../components'
 import {
   selectedItems,
-  reconInitState,
   firstLeveSelect,
   secondLevelSelect,
   updateReconFilter,
   reconItem
 } from '../actions'
-import { RECON_DATA_URL, RECON_URL, DASHBOARD_URL } from '../constants/APIcalls'
 import filterItems from '../utils/filterItems'
-import { sagaNavbarAlerts } from './../actions/CommonActions'
 
 const defaultList = List()
+const defaultMap = Map()
 
 const mapStateToProps = state => {
-  const items = state.ReconReducer.get('items').toJS()
+  const items = state.ReconReducer.get('newItems').toJS()
   const filters = state.ReconReducer.get('filters').toJS()
   const filteredItems = filterItems(items, filters)
 
+  // if(state.ReconReducer.get('newItems')){
+  //   console.log(state.ReconReducer.get('newItems').toJS())
+  //   console.log(state.ReconReducer.get('firstLevelList').toJS())
+  //   console.log(state.ReconReducer.get('secondLevelList').toJS())
+  // }
+
   return {
     recon : fromJS(filteredItems),
-    firstLevelList : state.ReconReducer.get('firstLevelList') || defaultList,
-    secondLevelList : state.ReconReducer.get('secondLevelList') || defaultList,
+    firstLevelList : state.ReconReducer.get('firstLevelList') || defaultMap,
+    secondLevelList : state.ReconReducer.get('secondLevelList') || defaultMap,
     currencyInfo: state.ReconReducer.get('currencyInfo') || defaultList
   }
 }
@@ -35,7 +39,7 @@ const mapDispatchToProps = dispatch => ({
   onReconItem : (e) => {
     // console.log('GET URL: ' + RECON_DATA_URL + e.currentTarget.dataset.ref)
     //new recon entire margin call with one get api
-    console.log(e.currentTarget.dataset.ref)
+    //console.log(e.currentTarget.dataset.ref)
     dispatch(reconItem(e.currentTarget.dataset.ref))
     // fetch(RECON_DATA_URL + e.currentTarget.dataset.ref, {
     //   method: 'GET'

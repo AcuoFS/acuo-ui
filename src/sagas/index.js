@@ -20,7 +20,8 @@ import {
   FetchCollateralsSaga,
   PostPledgeSaga,
   RemoveAllocatedAssetsSaga,
-  DoLoginSaga
+  DoLoginSaga,
+  PostMarginCallsSaga
 } from './ServerCalls'
 
 //actions
@@ -66,7 +67,8 @@ import {
   ON_ALLOCATE_COLLATERALS,
   ON_FETCH_COLLATERALS,
   ON_PLEDGE,
-  ON_REMOVE_ALLOCATED_ASSET
+  ON_REMOVE_ALLOCATED_ASSET,
+  ON_REQUEST_SEND_MARGINCALL
 } from '../constants/ActionTypes'
 
 function* serverHealthChecks() {
@@ -200,8 +202,23 @@ function* watchGenerateMarginCalls() {
     try{
       const action = yield take(ON_REQUEST_GENERATE_MARGINCALL)
       const obj = yield call(GenerateMarginCallSaga, action.referenceIDs)
-      console.log(obj)
+      // console.log(obj)
       yield put(marginCallGenerated(obj))
+      yield put(updateRequestState(false))
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchSendMarginCalls() {
+  while(true){
+    try{
+      const action = yield take(ON_REQUEST_SEND_MARGINCALL)
+      const obj = yield call(PostMarginCallsSaga, action.referenceIDs)
+      // console.log(obj)
+      // yield put(marginCallGenerated(obj))
       yield put(updateRequestState(false))
     } catch(error){
       console.log(error)
@@ -333,6 +350,7 @@ export default function* root() {
     fork(watchFetchDepatures),
     fork(watchRequestValuation),
     fork(watchGenerateMarginCalls),
+    fork(watchSendMarginCalls),
     fork(watchFetchDashboardData),
     fork(watchFetchReconSaga),
     fork(watchFetchOptimisationSettings),

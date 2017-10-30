@@ -4,6 +4,7 @@ import MarginCallRow from './MarginCallRow'
 import {checkBox, checkBoxWithTick} from '../../../images/common'
 import ChangeCallAmountPopup from './sub-components/ChangeCallAmountPopup'
 import LoadingBarSpinner from './../common/LoadingBarSpinner/LoadingBarSpinner'
+import _ from 'lodash'
 
 export default class MarginCall extends React.Component {
   constructor(props) {
@@ -17,7 +18,8 @@ export default class MarginCall extends React.Component {
       popUpX: 0,
       popUpY: 0,
       totalCallAmount: '',
-      selectedRows: []
+      selectedRows: [],
+      marginCallRows: []
     }
 
     this.openRow = this.openRow.bind(this)
@@ -91,20 +93,53 @@ export default class MarginCall extends React.Component {
     //console.log(rowObj)
     if (!actionIsChecked) {
       this.setState({
-        selectedRows: [...this.state.selectedRows, rowObj.portfolioId]
+        selectedRows: [...this.state.selectedRows, rowObj.portfolioId],
       })
+      if(rowObj.referenceIdentifier){
+        this.setState({
+          marginCallRows: [...this.state.marginCallRows, rowObj.referenceIdentifier],
+        })
+      }
     }
     // uncheck action from row
     else {
+      let marginCallRows = []
+
+      let selectedRows = this.state.selectedRows.filter(row =>
+      row !== rowObj.portfolioId)
+
+      if(rowObj.referenceIdentifier){
+        console.log(rowObj.referenceIdentifier)
+        console.log(this.state.marginCallRows)
+        marginCallRows =  this.state.marginCallRows.filter(row =>
+        row !== rowObj.referenceIdentifier)
+
+        console.log(marginCallRows)
+      }
       this.setState({
-        selectedRows: this.state.selectedRows.filter(row =>
-        row !== rowObj.portfolioId)
+        marginCallRows: marginCallRows,
+        selectedRows: selectedRows
       })
     }
   }
 
   onSendButton(selectedRows, onPostMarginCallIDs) {
-    onPostMarginCallIDs(selectedRows.map(row => row.portfolioId))
+    console.log(selectedRows)
+    onPostMarginCallIDs(selectedRows)
+  }
+
+  componentDidUpdate() {
+    if(this.state.selectedRows.length){
+      let marginCallRows = this.props.uploadData.filter(x => _.has(x, 'referenceIdentifier') && (_.indexOf(this.state.selectedRows, x.portfolioId) >= 0 ) ).map(x => x.referenceIdentifier)
+      if(!_.isEqual(this.state.marginCallRows, marginCallRows))
+        this.setState({
+          marginCallRows: marginCallRows
+        })
+    }
+
+    //   this.setState({
+    //     marginCallRows:
+    //   })
   }
 
   render() {
@@ -135,10 +170,10 @@ export default class MarginCall extends React.Component {
                onClick={() => generateMarginCalls(this.state.selectedRows)}>
             Generate Margin Calls
           </div>
-          <div className={styles.button + ' ' + (true ? styles.disabled : '')}
+          <div className={styles.button + ' ' + (this.state.marginCallRows.length <= 0 ? styles.disabled : '')}
                //disabled={this.state.selectedRows.length <= 0}
                disabled={true}
-               onClick={() => this.onSendButton(this.state.selectedRows, onPostMarginCallIDs)}>
+               onClick={() => this.onSendButton(this.state.marginCallRows, onPostMarginCallIDs)}>
             Send Margin Calls
           </div>
         </div>
