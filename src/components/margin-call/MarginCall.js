@@ -4,7 +4,8 @@ import MarginCallRow from './MarginCallRow'
 import {checkBox, checkBoxWithTick} from '../../../images/common'
 import ChangeCallAmountPopup from './sub-components/ChangeCallAmountPopup'
 import LoadingBarSpinner from './../common/LoadingBarSpinner/LoadingBarSpinner'
-import _ from 'lodash'
+import VariableCheckbox from './sub-components/VariableCheckbox'
+// import _ from 'lodash'
 
 export default class MarginCall extends React.Component {
   constructor(props) {
@@ -128,8 +129,9 @@ export default class MarginCall extends React.Component {
           <div className={styles.masterRow}>
             <div className={styles.cell}>
               {/*<input type="checkbox" checked={this.state.isChecked} onChange={this.toggleIsChecked} />*/}
-              <img onClick={onToggleAllRows}
-                   src={selectedRows.length === this.props.uploadData.length ? checkBoxWithTick : checkBox}/>
+              {/*<img onClick={onToggleAllRows}*/}
+                   {/*src={selectedRows.length === this.props.uploadData.length ? checkBoxWithTick : checkBox}/>*/}
+              <VariableCheckbox />
             </div>
             <div className={styles.cell}>Legal Entity</div>
             <div className={styles.cell}>Cpty Organisation</div>
