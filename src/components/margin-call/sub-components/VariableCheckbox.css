@@ -1,6 +1,6 @@
 .variableCheckboxContainer {
   border: 1px solid rgba(0,0,0,0.1);
-  background-color: #f5f5f5;
+  background-color: #2C3B4A;
   border-radius: 2px;
   padding: 0 8px 0 3px;
   display: inline-block;
@@ -37,7 +37,7 @@
 
 .arrow::before{
   content: '';
-  border-top: 5px solid rgba(0,0,0,0.6);
+  border-top: 5px solid #fff;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   position: absolute;

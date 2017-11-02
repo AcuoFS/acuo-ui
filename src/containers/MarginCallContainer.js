@@ -12,7 +12,8 @@ const mapStateToProps = state => ({
   requestingValuation: state.MarginUploadReducer.get('requestingValuation') || _default,
   requestingMCGenerationOrValuation: state.MarginUploadReducer.get('requestingMCGenerationOrValuation') || _default,
   selectedRows: state.MarginUploadReducer.get('selectedRows').toJS(),
-  marginCallRows: state.MarginUploadReducer.get('marginCallRows').toJS()
+  marginCallRows: state.MarginUploadReducer.get('marginCallRows').toJS(),
+  variableOptions: state.MarginUploadReducer.get('variableOptions').toJS()
 })
 
 const checkUploadData = (data) => (data.length)
@@ -89,6 +90,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onToggleAllRows: () => {
     dispatch(MarginCallUploadActions.onToggleAllMarginCallRows())
+  },
+  onToggleVariableFilter: (hasArr, dontHaveArr) => {
+    dispatch(MarginCallUploadActions.onToggleVariablOptions(hasArr, dontHaveArr))
   }
 })
 

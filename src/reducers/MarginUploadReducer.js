@@ -9,7 +9,8 @@ import {
   MARGIN_CALL_GENERATED,
   UPDATE_REQUESTING_STATE,
   TOGGLE_SELECTED_MARGINCALL_ROW,
-  TOGGLE_SELECT_ALL_MARGINCALLS
+  TOGGLE_SELECT_ALL_MARGINCALLS,
+  TOGGLE_VARIABLE_OPTIONS
 } from '../constants/ActionTypes'
 
 const initialState = Map({
@@ -19,7 +20,39 @@ const initialState = Map({
   uploading: false,
   requestingMCGenerationOrValuation: false,
   selectedRows: List(),
-  marginCallRows: List()
+  marginCallRows: List(),
+  variableOptions: fromJS([
+    {
+      label: "All",
+      has: ["portfolioId"],
+      dontHave: ["afagdfhrthtyhtrshwefg34y56uewrgsfaw3caw!@$#"]
+    },
+    {
+      label: "None",
+      has: ["afagdfhrthtyhtrshwefg34y56uewrgsfaw3caw!@$#"],
+      dontHave: ["portfolioId"]
+    },
+    {
+      label: "Incomplete Val", //have exposure, dont have agreement details
+      has: ["exposure"],
+      dontHave: ["agreementDetails", "tradeValue"]
+    },
+    {
+      label: "No Calls generated", // ave agreement deails, dont have erference id
+      has: ["agreementDetails", "tradeValue"],
+      dontHave: ["referenceIdentifier"]
+    },
+    {
+      label: "Calls generated", //have reference id
+      has: ["referenceIdentifier"],
+      dontHave: ["afagdfhrthtyhtrshwefg34y56uewrgsfaw3caw!@$#"]
+    }
+  ]),
+  selectedVariableOption: Map({
+    label: "None",
+    has: ["portfolioId"],
+    dontHave: ["afagdfhrthtyhtrshwefg34y56uewrgsfaw3caw!@$#"]
+  })
 })
 
 const toggleMarginCallRow = (marginCalldRows, rowObj) => {
@@ -118,6 +151,16 @@ const MarginUploadReducer = (state = initialState, action) => {
       }
 
       return state.withMutations(state => state.set('selectedRows', selectedRows1).set('marginCallRows', marginCallRows))
+
+    case TOGGLE_VARIABLE_OPTIONS:
+      console.log(action.hasArr, action.dontHaveArr)
+      console.log(state.get('uploadData').filter(x => {
+        console.log(x.getIn(action.dontHaveArr))
+        console.log(!x.getIn(action.dontHaveArr))
+        // console.log(if(!parseInt(x.getIn(action.dontHaveArr))))
+        return (x.getIn(action.hasArr) && !parseInt(x.getIn(action.dontHaveArr)))
+      }).toJS())
+      return state
 
     default:
       return state

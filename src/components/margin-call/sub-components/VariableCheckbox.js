@@ -2,6 +2,7 @@
  * Created by Rui on 31/10/17.
  */
 import React from 'react'
+import _ from 'lodash'
 
 import styles from './VariableCheckbox.css'
 import {
@@ -34,29 +35,23 @@ class VariableCheckbox extends React.Component {
   }
 
   render() {
+    const { options,
+      onVariableClick } = this.props
+
     return <div>
       <div className={styles.variableCheckboxContainer} onClick={this.toggle} onMouseLeave={this.leaveToggle}>
         <div className={styles.checkboxArrowContainer}>
           <img className={styles.checkboxImg} src={checkBox} />
           <div className={styles.arrow}></div>
         </div>
-        { this.state.open && <div className={styles.list}>
-          <div className={styles.listItem}>
-            All
-          </div>
-          <div className={styles.listItem}>
-            None
-          </div>
-          <div className={styles.listItem}>
-            Incomplete Val
-          </div>
-          <div className={styles.listItem}>
-            No Calls generated
-          </div>
-          <div className={styles.listItem}>
-            Calls generated
-          </div>
-        </div> }
+        <div className={styles.list}>
+        { this.state.open && _.map(options,
+          (x, i) => <div key={i} className={styles.listItem} onClick={() => onVariableClick(x.has, x.dontHave)}>
+              {x.label}
+            </div>
+          )
+        }
+        </div>
       </div>
     </div>
   }
