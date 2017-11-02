@@ -153,14 +153,23 @@ const MarginUploadReducer = (state = initialState, action) => {
       return state.withMutations(state => state.set('selectedRows', selectedRows1).set('marginCallRows', marginCallRows))
 
     case TOGGLE_VARIABLE_OPTIONS:
-      console.log(action.hasArr, action.dontHaveArr)
-      console.log(state.get('uploadData').filter(x => {
-        console.log(x.getIn(action.dontHaveArr))
-        console.log(!x.getIn(action.dontHaveArr))
-        // console.log(if(!parseInt(x.getIn(action.dontHaveArr))))
-        return (x.getIn(action.hasArr) && !parseInt(x.getIn(action.dontHaveArr)))
-      }).toJS())
-      return state
+      // console.log(action.hasArr, action.dontHaveArr)
+      // console.log(state.get('uploadData').filter(x => {
+      //   console.log(x.getIn(action.dontHaveArr))
+      //   console.log(!x.getIn(action.dontHaveArr))
+      //   // console.log(if(!parseInt(x.getIn(action.dontHaveArr))))
+      //   return (x.getIn(action.hasArr) && !x.getIn(action.dontHaveArr))
+      // }).toJS())
+
+      const newUploadData = state.get('uploadData').filter(x => x.getIn(action.hasArr) && !x.getIn(action.dontHaveArr)).toJS()
+
+      const newSelectedRows = _.map(newUploadData, x => x.portfolioId)
+
+      let newMarginCallRows = []
+      if(_.has(action.hasArr))
+        newMarginCallRows = _.map(newUploadData, x => x.referenceIdentifier)
+
+      return state.withMutations(state => state.set('selectedRows', fromJS(newSelectedRows)).set('marginCallRows', fromJS(newMarginCallRows)))
 
     default:
       return state
