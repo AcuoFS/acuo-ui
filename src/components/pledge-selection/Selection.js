@@ -248,11 +248,13 @@ export default class Selection extends React.Component {
                           {/*}, 0)*/}
                       {/*}, 0)*/}
                   {/*}, 0))}*/}
-                  {checkNegative(this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {
+                  {checkNegative(
+                    this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {
                     return sum + x.get('data').reduce((sum, y) => {
-                        return sum + parseFloat(y.getIn(['firstLevel','amount']))
+                        return ((parseFloat(sum + parseFloat(y.getIn(['firstLevel','amount']))) * 100).toFixed(0) / 100)
                       }, 0)
-                  }, 0))}
+                  }, 0)
+                  )}
                 </div>
               </div>
             </div>
