@@ -91,8 +91,8 @@ export default class MarginCall extends React.Component {
 
   render() {
 
-    const { uploadDataFlag, requestingValuation, requestingMCGenerationOrValuation, selectedRows, marginCallRows,
-      onPostMarginCallIDs, onRequestValuation, requestValuation, generateMarginCalls, onToggleRow, onToggleAllRows } = this.props
+    const { uploadDataFlag, requestingValuation, requestingMCGenerationOrValuation, selectedRows, marginCallRows, variableOptions, //state
+      onPostMarginCallIDs, onRequestValuation, requestValuation, generateMarginCalls, onToggleRow, onToggleAllRows, onToggleVariableFilter } = this.props //dispatch
 
     return (
       <div className={styles.container + ' ' + (requestingValuation || uploadDataFlag ? '' : styles.hidden)}>
@@ -131,7 +131,7 @@ export default class MarginCall extends React.Component {
               {/*<input type="checkbox" checked={this.state.isChecked} onChange={this.toggleIsChecked} />*/}
               {/*<img onClick={onToggleAllRows}*/}
                    {/*src={selectedRows.length === this.props.uploadData.length ? checkBoxWithTick : checkBox}/>*/}
-              <VariableCheckbox />
+              <VariableCheckbox options={variableOptions} onVariableClick={onToggleVariableFilter} />
             </div>
             <div className={styles.cell}>Legal Entity</div>
             <div className={styles.cell}>Cpty Organisation</div>
