@@ -55,7 +55,7 @@ export default class MarginCallRow extends React.Component {
     }
 
     return (
-      <div className={styles.groupContainer}>
+      <div className={styles.groupContainer + ' ' + (this.props.selected ? styles.highlightedGroup : '')}>
         <div className={styles.flexContainer + ' ' +
         (this.state.isExpanded ? styles.contentRowExpand : styles.contentRow)}>
           <div className={styles.cell}>

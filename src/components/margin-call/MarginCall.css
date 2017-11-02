@@ -122,6 +122,10 @@
   border-bottom: 1px #e5e5e5 solid;
 }
 
+.groupContainer.highlightedGroup{
+  background-color: #ffc;
+}
+
 .headerRow{
   background-color: #4E83B5;
   color: #fff;

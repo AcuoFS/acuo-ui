@@ -36,12 +36,12 @@ class VariableCheckbox extends React.Component {
 
   render() {
     const { options,
-      onVariableClick } = this.props
+      onVariableClick, onToggleAll } = this.props
 
     return <div>
       <div className={styles.variableCheckboxContainer} onClick={this.toggle} onMouseLeave={this.leaveToggle}>
         <div className={styles.checkboxArrowContainer}>
-          <img className={styles.checkboxImg} src={checkBox} />
+          <img className={styles.checkboxImg} src={checkBox} onClick={(e) => {e.stopPropagation(); onToggleAll()}}/>
           <div className={styles.arrow}></div>
         </div>
         <div className={styles.list}>
