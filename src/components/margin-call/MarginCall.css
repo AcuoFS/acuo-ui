@@ -181,19 +181,23 @@
 .contentRow .cell:last-child::after{
   content: '';
   position: absolute;
-  border-top: 12px solid #2C3B4A;
+  border-top: 12px solid #fff;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   top: -3px;
   left: 7px;
 }
 
-.groupContainer:nth-child(odd) .contentRow .cell:last-child::after{
-  border-top: 12px solid #fff;
-}
+/*.groupContainer:nth-child(odd) .contentRow .cell:last-child::after{*/
+  /*border-top: 12px solid #fff;*/
+/*}*/
 
-.groupContainer:nth-child(even) .contentRow .cell:last-child::after{
-  border-top: 12px solid #fff;
+/*.groupContainer:nth-child(even) .contentRow .cell:last-child::after{*/
+  /*border-top: 12px solid #fff;*/
+/*}*/
+
+.highlightedGroup .contentRow .cell:last-child::after{
+  border-top: 12px solid #ffc;
 }
 
 /************* Up triangle after expansion *************/

@@ -53,7 +53,7 @@ class VariableCheckbox extends React.Component {
           <img className={styles.checkboxImg} src={this.imageGen(totalRowSize, selectedRowSize)} onClick={(e) => {e.stopPropagation(); onToggleAll()}}/>
           <div className={styles.arrow}></div>
         </div>
-        <div className={styles.list}>
+        <div className={styles.list + ' ' + (this.state.open ? styles.show : '')}>
         { this.state.open && _.map(options,
           (x, i) => <div key={i} className={styles.listItem} onClick={() => onVariableClick(x.has, x.dontHave)}>
               {x.label}

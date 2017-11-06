@@ -46,7 +46,7 @@
 }
 
 .list {
-  display: inline-block;
+  display: none;
   -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   -webkit-transition: opacity .218s;
@@ -61,6 +61,10 @@
   top: 27px;
   left: 0px;
   z-index: 100;
+}
+
+.list.show{
+  display: inline-block;
 }
 
 .listItem {
