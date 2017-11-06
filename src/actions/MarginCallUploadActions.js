@@ -9,7 +9,9 @@ import {
   UPDATE_REQUESTING_STATE,
   ON_REQUEST_VALUATION,
   ON_REQUEST_GENERATE_MARGINCALL,
-  ON_REQUEST_SEND_MARGINCALL
+  ON_REQUEST_SEND_MARGINCALL,
+  TOGGLE_SELECTED_MARGINCALL_ROW,
+  TOGGLE_SELECT_ALL_MARGINCALLS
 } from '../constants/ActionTypes'
 
 export const getMarginCallUpload = (uploadData) => ({
@@ -64,4 +66,13 @@ export const onRequestGenerateMarginCall = referenceIDs => ({
 export const onRequestSendMarginCalls = referenceIDs => ({
   type: ON_REQUEST_SEND_MARGINCALL,
   referenceIDs
+})
+
+export const onToggleMarginCallRow = payload => ({
+  type: TOGGLE_SELECTED_MARGINCALL_ROW,
+  payload
+})
+
+export const onToggleAllMarginCallRows = () => ({
+  type: TOGGLE_SELECT_ALL_MARGINCALLS
 })

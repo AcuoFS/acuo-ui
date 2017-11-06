@@ -78,8 +78,8 @@ export default class Selection extends React.Component {
         <td className={styles.hoverCtrl}>
           {asset.get(ASSET.A_HAIRCUT_PCT)}%
           <div className={styles.tooltip}>
-            <div>H<sub>c</sub>&nbsp;: 00.0%</div>
-            <div>H<sub>fx</sub>: 00.0%</div>
+            <div>H<sub>c</sub>&nbsp;: {parseFloat(asset.get('haircutCollateral')).toFixed(2)}%</div>
+            <div>H<sub>fx</sub>: {parseFloat(asset.get('haircutFx')).toFixed(2)}%</div>
           </div>
         </td>
         <td>{checkNegative(asset.get(ASSET.A_AMT))}</td>
@@ -248,11 +248,13 @@ export default class Selection extends React.Component {
                           {/*}, 0)*/}
                       {/*}, 0)*/}
                   {/*}, 0))}*/}
-                  {checkNegative(this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {
+                  {checkNegative(
+                    this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {
                     return sum + x.get('data').reduce((sum, y) => {
-                        return sum + parseFloat(y.getIn(['firstLevel','amount']))
+                        return ((parseFloat(sum + parseFloat(y.getIn(['firstLevel','amount']))) * 100).toFixed(0) / 100)
                       }, 0)
-                  }, 0))}
+                  }, 0)
+                  )}
                 </div>
               </div>
             </div>

@@ -53,10 +53,12 @@ export default class MarginAgreementPortfolio extends React.Component {
   isDisableReconButton(actionItem, cptyTotal, clientTotal, firstLevelList) {
 
     // console.log(cptyTotal, Math.round(parseFloat(clientTotal + parseFloat(this.state.adjAmount)) * 100) / 100)
+    // console.log(actionItem.get('GUID'))
+    /*** check if first level check length is mismatched */
+    let firstLevelLength = -1
 
-    //check if first level check length is mismatched
     if(firstLevelList) {
-      const firstLevelLength = Math.max.apply(Math,
+      firstLevelLength = Math.max.apply(Math,
         [
           actionItem.get('clientAssets').reduce((sum, group) => sum + group.get('data').size, 0),
           actionItem.get('counterpartyAssets').reduce((sum, group) => sum + group.get('data').size, 0)
@@ -69,23 +71,42 @@ export default class MarginAgreementPortfolio extends React.Component {
       // console.log(firstLevelList.size)
       // console.log(firstLevelLength)
 
-      // const checkedFirstLevelLength = firstLevelList.filter((x) => x.get('GUID') == actionItem.get('GUID')).size
+      // console.log(actionItem.get('GUID'))
 
-      if (firstLevelLength > firstLevelList.size)
+      // const checkedFirstLevelLength = firstLevelList[actionItem.get('GUID')].size
+
+      // console.log(firstLevelList.toJS())
+      // console.log('checked: ', firstLevelList.size)
+      // console.log('exist: ', firstLevelLength)
+      // console.log((firstLevelLength > firstLevelList.size))
+
+      // if(!_.isEmpty(firstLevelList[actionItem.get('GUID')])){
+      //   console.log(firstLevelLength, firstLevelList[actionItem.get('GUID')].size)
+      // }
+      // console.log('first level list exist')
+      if(firstLevelLength > firstLevelList.size)
         return true
+    }else{
+      // console.log('first level list dont exist')
+      /*** if first level list for this GUID doesnt exist at all, means nothing has been checked */
+      return true
     }
     // Math.round(parseFloat(clientTotal + parseFloat(this.state.adjAmount)).toFixed(2))
-    // Need adjustment
-    if (Math.round(parseFloat(clientTotal + parseFloat(this.state.adjAmount)) * 100) / 100 !== cptyTotal) {
+    /***  Need adjustment */
+    if (Math.round(parseFloat(clientTotal + parseFloat(this.state.adjAmount)) * 100) / 100 !== (Math.round(cptyTotal * 100) / 100)) {
+      // console.log(Math.round(parseFloat(clientTotal + parseFloat(this.state.adjAmount)) * 100) / 100)
+      // console.log((Math.round(cptyTotal * 100) / 100))
+      // console.log('need adjustment')
       return true
     }
 
-    // Either client and cpty has no recon details
+    /*** Either client and cpty has no recon details */
     if (!cptyTotal || !clientTotal) {
+      // console.log('client ir cpty details missing')
       return true
     }
 
-
+    // console.log('all pass')
     return false
   }
 
