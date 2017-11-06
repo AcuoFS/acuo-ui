@@ -4,6 +4,7 @@ import {
   MarginCallContainer,
   UploadWidgetContainer
 } from '../../containers'
+
 import { hashHistory } from 'react-router'
 
 class UploadPortfolioPage extends React.Component {

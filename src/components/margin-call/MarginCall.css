@@ -73,12 +73,20 @@
   position: relative;
 }
 
-.cell:first-child, .cell:last-child{
+.cell:last-child{
   flex: 0 0 1.5%;
   text-align: center;
 }
 
-/* overriding css*/
+.cell:first-child {
+  flex: 0 0 2.5%;
+}
+
+.cell:first-child .rowCheckbox {
+  margin: 0 11px;
+}
+
+  /* overriding css*/
 .ccyCell{
   flex: 0 0 3%;
 }
@@ -88,7 +96,7 @@
 }
 
 .dateCell{
-  flex: 0 0 6%;
+  flex: 0 0 4.5%;
 }
 
 .callTypeCell{
@@ -120,6 +128,10 @@
 .groupContainer {
   background-color: #fff;
   border-bottom: 1px #e5e5e5 solid;
+}
+
+.groupContainer.highlightedGroup{
+  background-color: #ffc;
 }
 
 .headerRow{
