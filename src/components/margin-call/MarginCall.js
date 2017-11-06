@@ -131,13 +131,18 @@ export default class MarginCall extends React.Component {
               {/*<input type="checkbox" checked={this.state.isChecked} onChange={this.toggleIsChecked} />*/}
               {/*<img onClick={onToggleAllRows}*/}
                    {/*src={selectedRows.length === this.props.uploadData.length ? checkBoxWithTick : checkBox}/>*/}
-              <VariableCheckbox options={variableOptions} onVariableClick={onToggleVariableFilter} onToggleAll={onToggleAllRows}/>
+              <VariableCheckbox
+                options={variableOptions}
+                onVariableClick={onToggleVariableFilter}
+                onToggleAll={onToggleAllRows}
+                selectedRowSize={selectedRows.length}
+                totalRowSize={this.props.uploadData.length} />
             </div>
             <div className={styles.cell}>Legal Entity</div>
             <div className={styles.cell}>Cpty Organisation</div>
             <div className={styles.cell}>Cpty Entity</div>
             <div className={styles.cell}>Margin Agreement</div>
-            <div className={styles.cell + ' ' + styles.callTypeCell}>Portfolio</div>
+            <div className={styles.cell + ' ' + styles.ccyCell}>Portfolio</div>
             <div className={styles.cell + ' ' + styles.dateCell}>Valuation Date</div>
             <div className={styles.cell + ' ' + styles.largeCell}>Exposure</div>
             <div className={styles.cell + ' ' + styles.callTypeCell}>Call Type</div>
