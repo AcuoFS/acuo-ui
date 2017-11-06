@@ -48,7 +48,7 @@ const initialState = Map({
       dontHave: ["afagdfhrthtyhtrshwefg34y56uewrgsfaw3caw!@$#"]
     }
   ]),
-  selectedVariableOption: Map({
+  selectedVariableOption: Map({ /*** unsed at the moment ***/
     label: "None",
     has: ["portfolioId"],
     dontHave: ["afagdfhrthtyhtrshwefg34y56uewrgsfaw3caw!@$#"]
