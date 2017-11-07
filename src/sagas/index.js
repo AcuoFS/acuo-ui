@@ -44,7 +44,8 @@ import {
 import { initDepartures } from './../actions/DeployedActions'
 import {
   updateRequestState,
-  marginCallGenerated
+  marginCallGenerated,
+  onMarginCallSendSuccess
 } from './../actions/MarginCallUploadActions'
 import {
   updateLoginProcess,
@@ -218,7 +219,7 @@ function* watchSendMarginCalls() {
       const action = yield take(ON_REQUEST_SEND_MARGINCALL)
       const obj = yield call(PostMarginCallsSaga, action.referenceIDs)
       // console.log(obj)
-      // yield put(marginCallGenerated(obj))
+      yield put(onMarginCallSendSuccess(obj))
       yield put(updateRequestState(false))
     } catch(error){
       console.log(error)
