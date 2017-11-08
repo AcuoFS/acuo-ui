@@ -73,12 +73,20 @@
   position: relative;
 }
 
-.cell:first-child, .cell:last-child{
+.cell:last-child{
   flex: 0 0 1.5%;
   text-align: center;
 }
 
-/* overriding css*/
+.cell:first-child {
+  flex: 0 0 2.5%;
+}
+
+.cell:first-child .rowCheckbox {
+  margin: 0 11px;
+}
+
+  /* overriding css*/
 .ccyCell{
   flex: 0 0 3%;
 }
@@ -88,7 +96,7 @@
 }
 
 .dateCell{
-  flex: 0 0 6%;
+  flex: 0 0 4.5%;
 }
 
 .callTypeCell{
@@ -120,6 +128,10 @@
 .groupContainer {
   background-color: #fff;
   border-bottom: 1px #e5e5e5 solid;
+}
+
+.groupContainer.highlightedGroup{
+  background-color: #ffc;
 }
 
 .headerRow{
@@ -169,19 +181,23 @@
 .contentRow .cell:last-child::after{
   content: '';
   position: absolute;
-  border-top: 12px solid #2C3B4A;
+  border-top: 12px solid #fff;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   top: -3px;
   left: 7px;
 }
 
-.groupContainer:nth-child(odd) .contentRow .cell:last-child::after{
-  border-top: 12px solid #fff;
-}
+/*.groupContainer:nth-child(odd) .contentRow .cell:last-child::after{*/
+  /*border-top: 12px solid #fff;*/
+/*}*/
 
-.groupContainer:nth-child(even) .contentRow .cell:last-child::after{
-  border-top: 12px solid #fff;
+/*.groupContainer:nth-child(even) .contentRow .cell:last-child::after{*/
+  /*border-top: 12px solid #fff;*/
+/*}*/
+
+.highlightedGroup .contentRow .cell:last-child::after{
+  border-top: 12px solid #ffc;
 }
 
 /************* Up triangle after expansion *************/

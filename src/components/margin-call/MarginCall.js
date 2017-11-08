@@ -4,7 +4,8 @@ import MarginCallRow from './MarginCallRow'
 import {checkBox, checkBoxWithTick} from '../../../images/common'
 import ChangeCallAmountPopup from './sub-components/ChangeCallAmountPopup'
 import LoadingBarSpinner from './../common/LoadingBarSpinner/LoadingBarSpinner'
-import _ from 'lodash'
+import VariableCheckbox from './sub-components/VariableCheckbox'
+// import _ from 'lodash'
 
 export default class MarginCall extends React.Component {
   constructor(props) {
@@ -90,8 +91,8 @@ export default class MarginCall extends React.Component {
 
   render() {
 
-    const { uploadDataFlag, requestingValuation, requestingMCGenerationOrValuation, selectedRows, marginCallRows,
-      onPostMarginCallIDs, onRequestValuation, requestValuation, generateMarginCalls, onToggleRow, onToggleAllRows } = this.props
+    const { uploadDataFlag, requestingValuation, requestingMCGenerationOrValuation, selectedRows, marginCallRows, variableOptions, //state
+      onPostMarginCallIDs, onRequestValuation, requestValuation, generateMarginCalls, onToggleRow, onToggleAllRows, onToggleVariableFilter } = this.props //dispatch
 
     return (
       <div className={styles.container + ' ' + (requestingValuation || uploadDataFlag ? '' : styles.hidden)}>
@@ -128,14 +129,20 @@ export default class MarginCall extends React.Component {
           <div className={styles.masterRow}>
             <div className={styles.cell}>
               {/*<input type="checkbox" checked={this.state.isChecked} onChange={this.toggleIsChecked} />*/}
-              <img onClick={onToggleAllRows}
-                   src={selectedRows.length === this.props.uploadData.length ? checkBoxWithTick : checkBox}/>
+              {/*<img onClick={onToggleAllRows}*/}
+                   {/*src={selectedRows.length === this.props.uploadData.length ? checkBoxWithTick : checkBox}/>*/}
+              <VariableCheckbox
+                options={variableOptions}
+                onVariableClick={onToggleVariableFilter}
+                onToggleAll={onToggleAllRows}
+                selectedRowSize={selectedRows.length}
+                totalRowSize={this.props.uploadData.length} />
             </div>
             <div className={styles.cell}>Legal Entity</div>
             <div className={styles.cell}>Cpty Organisation</div>
             <div className={styles.cell}>Cpty Entity</div>
             <div className={styles.cell}>Margin Agreement</div>
-            <div className={styles.cell + ' ' + styles.callTypeCell}>Portfolio</div>
+            <div className={styles.cell + ' ' + styles.ccyCell}>Portfolio</div>
             <div className={styles.cell + ' ' + styles.dateCell}>Valuation Date</div>
             <div className={styles.cell + ' ' + styles.largeCell}>Exposure</div>
             <div className={styles.cell + ' ' + styles.callTypeCell}>Call Type</div>
