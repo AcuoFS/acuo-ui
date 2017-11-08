@@ -283,7 +283,7 @@ export default class Selection extends React.Component {
             </div>
 
             <div className={toggleL ? styles.showL : styles.hideL}>
-              { ((evlEmptyForIntMargin && evlEmptyForVariMargin) || (!evlEmptyForIntMargin) ) &&
+              { ((evlEmptyForIntMargin && evlEmptyForVariMargin) || (!evlEmptyForIntMargin) ) && /** check for presence of data **/
                 <div className={styles.rightColSubSection}>
                   <div className={styles.subSectionHeader}>Initial Margin</div>
                   <table className={styles.selTable + ( evlEmptyForIntMargin ? ' ' + styles.notAllocated : '')}>
@@ -299,8 +299,8 @@ export default class Selection extends React.Component {
                       <th></th>
                     </tr>
                     </thead>
-                    <tbody>
-                    { evlEmptyForIntMargin && evlEmptyForVariMargin ?
+                    <tbody>r
+                    { evlEmptyForIntMargin && evlEmptyForVariMargin ? /** check for presence of data **/
                       <tr>
                         <td colSpan="8"
                             className={styles.notAlcText}
@@ -335,7 +335,7 @@ export default class Selection extends React.Component {
                   </table>
                 </div>
               }
-              { ((evlEmptyForVariMargin && evlEmptyForIntMargin) || (!evlEmptyForVariMargin)) &&
+              { ((evlEmptyForVariMargin && evlEmptyForIntMargin) || (!evlEmptyForVariMargin)) && /** check for presence of data **/
                 <div className={styles.rightColSubSection}>
                   <div className={styles.subSectionHeader}>Variation Margin</div>
                   <table className={styles.selTable + ( evlEmptyForVariMargin ? ' ' + styles.notAllocated : '')}>
@@ -353,7 +353,7 @@ export default class Selection extends React.Component {
                     </thead>
                     <tbody>
 
-                    { evlEmptyForVariMargin && evlEmptyForIntMargin ?
+                    { evlEmptyForVariMargin && evlEmptyForIntMargin ? /** check for presence of data **/
                       <tr>
                         <td colSpan="8"
                             className={styles.notAlcText}
