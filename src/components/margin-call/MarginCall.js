@@ -70,7 +70,7 @@ export default class MarginCall extends React.Component {
   }
 
   onSendButton(selectedRows, onPostMarginCallIDs) {
-    console.log(selectedRows)
+    // console.log(selectedRows)
     onPostMarginCallIDs(selectedRows)
   }
 
