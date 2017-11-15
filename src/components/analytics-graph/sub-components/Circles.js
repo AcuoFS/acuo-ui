@@ -14,6 +14,8 @@ const renderCircles = (x, props, i) => {
 
   const { xAxis, yAxis } = props
 
+  // console.log('cx, cy ', props.xScale(x[xAxis.key]), props.yScale(x[yAxis.key]))
+
   const circleProps = {
     cx: props.xScale(x[xAxis.key]),
     cy: props.yScale(x[yAxis.key]),

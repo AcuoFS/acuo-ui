@@ -62,7 +62,7 @@ const AnalyticsGraphComponent = (props) => {
     fontSize: 16
   }
 
-  console.log(props.dataSet)
+  // console.log(props.dataSet)
 
   return (
     <div>
