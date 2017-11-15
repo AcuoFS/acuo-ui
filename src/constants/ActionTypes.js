@@ -99,6 +99,8 @@ export const SCREEN_RESIZE = 'SCREEN_RESIZE'
 
 //analytics
 export const FLIP_AXES = 'FLIP_AXES'
+export const SAGA_ANALYTICS_DATA = 'SAGA_ANALYTICS_DATA'
+export const UPDATE_ANALYTICS_DATA = 'UPDATE_ANALYTICS_DATA'
 
 //chat window
 export const TOGGLE_CHAT_OPEN = 'TOGGLE_CHAT_OPEN'

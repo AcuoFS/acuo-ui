@@ -62,6 +62,8 @@ const AnalyticsGraphComponent = (props) => {
     fontSize: 16
   }
 
+  console.log(props.dataSet)
+
   return (
     <div>
       <svg height={h} width={w + cheat}>

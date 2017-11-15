@@ -15,6 +15,7 @@ import { PostPledgeSaga } from './PostPledgeSaga'
 import { RemoveAllocatedAssetsSaga } from './RemoveAllocatedAssetsSaga'
 import { DoLoginSaga } from './DoLoginSaga'
 import { PostMarginCallsSaga } from './PostMarginCallsSaga'
+import { FetchAnalyticsDataSaga } from './FetchAnalyticsDataSaga'
 
 export {
   checkSpecificServer,
@@ -33,5 +34,6 @@ export {
   PostPledgeSaga,
   RemoveAllocatedAssetsSaga,
   DoLoginSaga,
-  PostMarginCallsSaga
+  PostMarginCallsSaga,
+  FetchAnalyticsDataSaga
 }
