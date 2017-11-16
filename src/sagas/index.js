@@ -21,7 +21,8 @@ import {
   PostPledgeSaga,
   RemoveAllocatedAssetsSaga,
   DoLoginSaga,
-  PostMarginCallsSaga
+  PostMarginCallsSaga,
+  FetchCurrencyInfoSaga
 } from './ServerCalls'
 
 //actions
@@ -51,6 +52,9 @@ import {
   updateLoginProcess,
   updateWrongCredentialsFlag
 } from './../actions/LoginActions'
+import{
+  updateCurrencyInfo
+} from './../actions/CommonActions'
 
 //action types
 import {
@@ -233,7 +237,9 @@ function* watchFetchDashboardData() {
     try{
       yield take(ON_INIT_DASHBOARD)
       const obj = yield call(FetchDashboardSaga)
+      const currencyObj = yield call(FetchCurrencyInfoSaga)
       yield put(initState(obj))
+      yield put(updateCurrencyInfo(currencyObj))
     } catch(error) {
       console.log(error)
       return false

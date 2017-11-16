@@ -3,7 +3,9 @@ import { GraphComponent } from '../components'
 import { updateReconFilter, updatePledgeFilter } from '../actions'
 
 const mapStateToProps = state => ({
-  derivatives: state.mainReducer.getIn(['display', 'derivatives'])
+  derivatives: state.mainReducer.getIn(['display', 'derivatives']),
+  currency: state.CommonReducer.get('currencyInfo').toJS(),
+  selectedCurrency: state.mainReducer.get('selectedCurrency')
 })
 
 const mapDispatchToProps = dispatch => ({

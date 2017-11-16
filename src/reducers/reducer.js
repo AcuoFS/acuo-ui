@@ -4,7 +4,21 @@ import _ from 'lodash'
 import { clearTime, getDate } from '../utils'
 import * as ActionTypes from '../constants/ActionTypes'
 
-const INITIAL_STATE = Map({"data": Map({"derivatives": List(), "menu": Map({"alerts": List()})}), "display": Map({"derivatives": List(), "menu": Map({"alerts": List()})})})
+const INITIAL_STATE = Map({
+  "data": Map({
+    "derivatives": List(),
+    "menu": Map({
+      "alerts": List()
+    })
+  }),
+  "display": Map({
+    "derivatives": List(),
+    "menu": Map({
+      "alerts": List()
+    })
+  }),
+  "selectedCurrency": "USD"
+})
 
 export function initState(state = Map(), newJSON){
 

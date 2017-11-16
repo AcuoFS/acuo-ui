@@ -78,6 +78,7 @@ export default class Graph extends React.Component {
   }
 
   render() {
+    console.log(this.props.currency)
     return (
       <div className={styles.graphWrapper}>
         <div className={styles.moneyIcon + ' ' + styles.moneyOut}>OUT</div>
