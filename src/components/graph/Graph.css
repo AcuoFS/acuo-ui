@@ -9,6 +9,7 @@
 
 .graphWrapper{
   padding-bottom: 10px;
+  position: relative;
 }
 
 .graphCont {
@@ -41,23 +42,52 @@
  margin-bottom: 10px;
 }
 
-/*@media screen\0 and (min-width: 768px) {*/
-  /*.svgGraph {*/
-    /*max-height: 245px;*/
-    /*max-width: 768px;*/
-  /*}*/
-/*}*/
+/* for currency sslector **/
+.currencySelector {
+  color: #4A90e2;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 50px;
+  text-align: left;
+  cursor: pointer;
+}
 
-/*@media screen\0 and (min-width: 1024px) {*/
-  /*.svgGraph {*/
-    /*max-height: 328px;*/
-    /*max-width: 1024px*/
-  /*}*/
-/*}*/
+.currencySelector:hover {
+  text-decoration: underline;
+}
 
-/*@media screen\0 and (min-width: 1440px) {*/
-  /*.svgGraph {*/
-    /*max-height: 460px;*/
-    /*max-width: 1440px*/
-  /*}*/
-/*}*/
+.list {
+  display: none;
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  -webkit-transition: opacity .218s;
+  transition: opacity .218s;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.2);
+  cursor: default;
+  margin: 0;
+  outline: none;
+  padding: 3px 0;
+  position: absolute;
+  top: 15px;
+  left: 0px;
+  z-index: 100;
+}
+
+.list.show{
+  display: inline-block;
+}
+
+.listItem {
+  margin: 0;
+  padding: 3px 2em 3px 20px;
+  white-space: nowrap;
+  text-align: left;
+  cursor: pointer;
+  color: #494949;
+}
+
+.listItem:hover {
+  background-color: #eee;
+}

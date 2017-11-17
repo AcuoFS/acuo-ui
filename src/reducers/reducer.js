@@ -380,32 +380,35 @@ export const reconItem = (state, action) => {
 export default function mainReducer(state = INITIAL_STATE, action, store = 'data') {
 
   switch(action.type) {
-    case 'INIT_STATE':
+    case ActionTypes.INIT_STATE:
       return initState(state, action.state)
 
-    case 'FILTER_STATE_DERIV':
+    case ActionTypes.FILTER_STATE_DERIV:
       return multifilters(state, action, store)
 
-    case 'FILTER_STATE_LEGAL':
+    case ActionTypes.FILTER_STATE_LEGAL:
       return multifilters(state, action, store)
 
-    case 'FILTER_STATE_TIMEWINDOW':
+    case ActionTypes.FILTER_STATE_TIMEWINDOW:
       return multifilters(state, action, store)
 
-    case 'FILTER_STATE_STATUS':
+    case ActionTypes.FILTER_STATE_STATUS:
       return multifilters(state, action, store)
 
-    case 'FILTER_STATE_CPTYORG':
+    case ActionTypes.FILTER_STATE_CPTYORG:
       return multifilters(state, action, store)
 
-    case 'FILTER_STATE_CPTYENTITY':
+    case ActionTypes.FILTER_STATE_CPTYENTITY:
       return multifilters(state, action, store)
 
-    case 'LINE_ITEM_INSERTION':
+    case ActionTypes.LINE_ITEM_INSERTION:
       return appendList(state, action)
 
-    case 'SELECT_ITEM':
+    case ActionTypes.SELECT_ITEM:
       return selectItem(state, action)
+
+    case ActionTypes.UPDATE_SELECTED_CURRENCY:
+      return state.set('selectedCurrency', action.currency)
 
     // case 'RECON_ITEM':
     //   return reconItem(state, action)

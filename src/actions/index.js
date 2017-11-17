@@ -9,6 +9,11 @@ export const onInitDashboard = () => ({
   type: ActionTypes.ON_INIT_DASHBOARD
 })
 
+export const updateSelectedCurrency = (currency) => ({
+  type: ActionTypes.UPDATE_SELECTED_CURRENCY,
+  currency
+})
+
 export const reconInitState = (items) => ({
   type: ActionTypes.RECON_INIT_STATE,
   items,
