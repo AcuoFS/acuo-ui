@@ -10,7 +10,7 @@ import _ from 'lodash'
 
 class SVGWrapper extends React.Component{
   shouldComponentUpdate(nextProps){
-    return !_.isEqual(this.props.derivatives.toJS(), nextProps.derivatives.toJS()) || !_.isEqual(this.props.currency, nextProps.currency)
+    return !_.isEqual(this.props.derivatives.toJS(), nextProps.derivatives.toJS()) || !_.isEqual(this.props.currency, nextProps.currency) || !_.isEqual(this.props.selectedCurrency, nextProps.selectedCurrency)
   }
 
   render() {

@@ -77,7 +77,7 @@ export default class GraphBody extends React.Component {
       // console.log(actionItem.get('ccy'))
       // console.log(actionItem.get('totalAmount'))
       // console.log(parseFloat(actionItem.get('totalAmount')) * parseFloat(currencyList[actionItem.get('ccy').toUpperCase()].exchangeRate))
-      return parseFloat(actionItem.get('totalAmount')) * parseFloat(currencyList[actionItem.get('ccy').toUpperCase()].exchangeRate)
+      return (parseFloat(actionItem.get('totalAmount')) * parseFloat(currencyList[actionItem.get('ccy').toUpperCase()].exchangeRate)) / parseFloat(currencyList[selectedCurrency].exchangeRate)
     } else{
       // console.log(actionItem.get('ccy'))
       return parseFloat(actionItem.get('totalAmount'))
