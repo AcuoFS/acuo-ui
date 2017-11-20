@@ -112,7 +112,10 @@ export default class Graph extends React.Component {
         <div className={styles.currencySelector} onClick={this.toggle} onMouseLeave={this.leaveToggle}>
           {this.props.selectedCurrency}
           <div className={styles.list + ' ' + (this.state.open ? styles.show : '')}>
-            { this.state.open && map(this.props.currency,
+            { this.state.open &&
+              map(this.props.currency.filter(
+                x => this.props.selectedCurrency !== x.ccy)
+                  .sort((a, b) => (a.ccy < b.ccy) ? -1 : (a.ccy > b.ccy) ? 1 : 0),
               (x, i) => <div key={i} className={styles.listItem} onClick={() => this.props.onUpdateSelectedCurrency(x.ccy)}>
                 {x.ccy}
               </div>
