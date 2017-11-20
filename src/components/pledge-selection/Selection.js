@@ -299,7 +299,7 @@ export default class Selection extends React.Component {
                       <th></th>
                     </tr>
                     </thead>
-                    <tbody>r
+                    <tbody>
                     { evlEmptyForIntMargin && evlEmptyForVariMargin ? /** check for presence of data **/
                       <tr>
                         <td colSpan="8"
