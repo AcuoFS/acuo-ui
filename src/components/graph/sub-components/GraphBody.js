@@ -297,7 +297,7 @@ export default class GraphBody extends React.Component {
 
     return(
       <svg>
-        {this.getCircle(time, onUnreconBubbleClick, onReconBubbleClick, currencyList, selectedCurrency).map(x => x)}
+        {this.getCircle(time, onUnreconBubbleClick, onReconBubbleClick, currencyList.toJS(), selectedCurrency).map(x => x)}
       </svg>
     )
   }

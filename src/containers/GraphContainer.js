@@ -8,7 +8,7 @@ import {
 
 const mapStateToProps = state => ({
   derivatives: state.mainReducer.getIn(['display', 'derivatives']),
-  currency: state.CommonReducer.get('currencyInfo').toList().toJS(),
+  currency: state.CommonReducer.get('currencyInfo'),
   selectedCurrency: state.mainReducer.get('selectedCurrency')
 })
 

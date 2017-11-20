@@ -113,7 +113,7 @@ export default class Graph extends React.Component {
           {this.props.selectedCurrency}
           <div className={styles.list + ' ' + (this.state.open ? styles.show : '')}>
             { this.state.open &&
-              map(this.props.currency.filter(
+              map(this.props.currency.toList().toJS().filter(
                 x => this.props.selectedCurrency !== x.ccy)
                   .sort((a, b) => (a.ccy < b.ccy) ? -1 : (a.ccy > b.ccy) ? 1 : 0),
               (x, i) => <div key={i} className={styles.listItem} onClick={() => this.props.onUpdateSelectedCurrency(x.ccy)}>
