@@ -10,7 +10,7 @@ import _ from 'lodash'
 
 class SVGWrapper extends React.Component{
   shouldComponentUpdate(nextProps){
-    return !_.isEqual(this.props.derivatives.toJS(), nextProps.derivatives.toJS())
+    return !_.isEqual(this.props.derivatives.toJS(), nextProps.derivatives.toJS()) || !_.isEqual(this.props.currency, nextProps.currency) || !_.isEqual(this.props.selectedCurrency, nextProps.selectedCurrency)
   }
 
   render() {
@@ -52,6 +52,8 @@ class SVGWrapper extends React.Component{
           data={this.props.derivatives}
           onUnreconBubbleClick={this.props.onUnreconBubbleClick}
           onReconBubbleClick={this.props.onReconBubbleClick}
+          currencyList={this.props.currency}
+          selectedCurrency={this.props.selectedCurrency}
         />
         <Pointer
           xrec={this.props.width * 0.5 -50} //670

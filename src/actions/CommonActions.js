@@ -4,7 +4,8 @@ import {
   SCREEN_RESIZE,
   TOGGLE_CHAT_MINIMISE,
   TOGGLE_CHAT_OPEN,
-  OPEN_CHAT
+  OPEN_CHAT,
+  UPDATE_CURRENCY_INFO
 } from './../constants/ActionTypes'
 
 export const updateNavbarAlerts = alerts => ({
@@ -31,4 +32,9 @@ export const toggleChatOpen = () => ({
 
 export const defaultChatOpen = () => ({
   type: OPEN_CHAT
+})
+
+export const updateCurrencyInfo = (currencyObj) => ({
+  type: UPDATE_CURRENCY_INFO,
+  currencyObj
 })
