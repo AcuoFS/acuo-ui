@@ -21,7 +21,8 @@ import {
   PostPledgeSaga,
   RemoveAllocatedAssetsSaga,
   DoLoginSaga,
-  PostMarginCallsSaga
+  PostMarginCallsSaga,
+  FetchAnalyticsDataSaga
 } from './ServerCalls'
 
 //actions
@@ -51,6 +52,9 @@ import {
   updateLoginProcess,
   updateWrongCredentialsFlag
 } from './../actions/LoginActions'
+import {
+  updateAnalyticsData
+} from './../actions/AnalyticsActions'
 
 //action types
 import {
@@ -69,7 +73,8 @@ import {
   ON_FETCH_COLLATERALS,
   ON_PLEDGE,
   ON_REMOVE_ALLOCATED_ASSET,
-  ON_REQUEST_SEND_MARGINCALL
+  ON_REQUEST_SEND_MARGINCALL,
+  SAGA_ANALYTICS_DATA
 } from '../constants/ActionTypes'
 
 function* serverHealthChecks() {
@@ -340,6 +345,20 @@ function* watchRemoveAllocatedAsset() {
   }
 }
 
+function* watchFetchAnalyticsData() {
+  while(true){
+    try{
+      yield take(SAGA_ANALYTICS_DATA)
+      const json = yield call(FetchAnalyticsDataSaga)
+      // console.log(json)
+      yield put(updateAnalyticsData(json))
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
 export default function* root() {
   yield [
     fork(serverHealthChecks),
@@ -359,6 +378,7 @@ export default function* root() {
     fork(watchAllocateCollaterals),
     fork(watchFetchCollaterals),
     fork(watchPledge),
-    fork(watchRemoveAllocatedAsset)
+    fork(watchRemoveAllocatedAsset),
+    fork(watchFetchAnalyticsData)
   ]
 }

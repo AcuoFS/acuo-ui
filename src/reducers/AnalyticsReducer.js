@@ -14,13 +14,17 @@ const INITIAL_STATE_JS = {
   yAxis: {
     key: 'clientAllegation',
     label: 'ACUO estimation'
-  }
+  },
+  data: []
 }
 
 const INITIAL_STATE = fromJS(INITIAL_STATE_JS)
 
 const AnalyticsReducer = (state = INITIAL_STATE, action) => {
   switch(action.type){
+    case ActionTypes.UPDATE_ANALYTICS_DATA:
+      return state.set('data', fromJS({data: fromJS(action.data.data).toList().toJS()}))
+
     case ActionTypes.FLIP_AXES:
       const x = state.get('xAxis')
 
