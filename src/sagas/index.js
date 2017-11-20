@@ -237,8 +237,8 @@ function* watchFetchDashboardData() {
     try{
       yield take(ON_INIT_DASHBOARD)
       const obj = yield call(FetchDashboardSaga)
-      const currencyObj = yield call(FetchCurrencyInfoSaga)
       yield put(initState(obj))
+      const currencyObj = yield call(FetchCurrencyInfoSaga)
       yield put(updateCurrencyInfo(currencyObj))
     } catch(error) {
       console.log(error)

@@ -119,6 +119,7 @@ export default class Graph extends React.Component {
               )
             }
           </div>
+          <div className={styles.arrow}></div>
         </div>
       </div>
     )
