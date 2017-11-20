@@ -26,12 +26,12 @@ const AnalyticsGraphComponent = (props) => {
   const
     margin = {top: 20, right: 20, bottom: 20, left: 20},
     leftPan = 0,
-    w = 600 + leftPan - margin.left - margin.right,
+    w = 700 + leftPan - margin.left - margin.right,
     cheat = 200,
-    h = 600 - margin.top - margin.bottom;
+    h = 700 - margin.top - margin.bottom;
 
-  const xPadding = 50;
-  const yPadding = 50;
+  const xPadding = 100;
+  const yPadding = 100;
 
   const scales = {xScale: xScale(xPadding, leftPan, w, props.dataSet), yScale: yScale(yPadding, h, props.dataSet)}
 

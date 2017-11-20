@@ -3,14 +3,18 @@
  */
 
 import React from 'react'
-import styles from './analyticsGraph.css'
 
-const xRectPadding = 10
-const yRectPadding = 20
-const xTextPadding = 20
-const yTextPadding = 50
+import styles from './analyticsGraph.css'
+import {
+  numberWithCommas
+} from './../../../utils'
 
 const renderCircles = (x, props, i) => {
+
+  const xRectPadding = 10
+  const yRectPadding = 20
+  const xTextPadding = 15
+  const yTextPadding = 20
 
   const { xAxis, yAxis } = props
 
@@ -26,8 +30,8 @@ const renderCircles = (x, props, i) => {
   };
 
   const rectProps = {
-    x: props.xScale(x[xAxis.key] + xRectPadding),
-    y: props.yScale(x[yAxis.key] - yRectPadding),
+    x: props.xScale(x[xAxis.key]) + xRectPadding,
+    y: props.yScale(x[yAxis.key]) - yRectPadding,
     width: 190,
     height: (x.disputeCode.length !== 0 ? 40 : 30),
     fill: 'white',
@@ -35,8 +39,8 @@ const renderCircles = (x, props, i) => {
   }
 
   const textProps = (rank) => ({
-    x: props.xScale(x[xAxis.key] + xTextPadding),
-    y: props.yScale(x[yAxis.key] - yTextPadding),
+    x: props.xScale(x[xAxis.key]) + xTextPadding,
+    y: props.yScale(x[yAxis.key]) - yTextPadding,
     dy: rank + 'em',
     fontSize: '11px'
   })
@@ -45,10 +49,10 @@ const renderCircles = (x, props, i) => {
     <circle {...circleProps} />
     <g className={styles.tooltip}>
       <rect {...rectProps}></rect>
-      <text {...textProps(0)}>{yAxis.label} {x[yAxis.key]}</text>
-      <text {...textProps(1)}>{xAxis.label} {x[xAxis.key]}</text>
+      <text {...textProps(1)}>{yAxis.label} {numberWithCommas(x[yAxis.key])}</text>
+      <text {...textProps(2)}>{xAxis.label} {numberWithCommas(x[xAxis.key])}</text>
       {x.disputeCode.length &&
-      <text {...textProps(2)}>Dispute codes: {x.disputeCode.reduce((str, x) => str += (x + '; '), '')}</text>
+      <text {...textProps(3)}>Dispute codes: {x.disputeCode.reduce((str, x) => str += (x + '; '), '')}</text>
       }
     </g>
   </g>
