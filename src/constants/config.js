@@ -28,7 +28,7 @@ var configJson = {
   POST_MARGIN_CALL_IDS: '/proxy/upload/send-margin-calls',
   LOGIN_URL: '/proxy/common/auth/login',
 
-  TEST_FETCH_ANALYTICS_DATA: 'http://localhost:8081/analytics'
+  TEST_FETCH_ANALYTICS_DATA: '/proxy/analytics'
 }
 
 exports.get = (env) => {
