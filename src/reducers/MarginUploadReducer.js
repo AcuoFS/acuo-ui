@@ -10,7 +10,8 @@ import {
   UPDATE_REQUESTING_STATE,
   TOGGLE_SELECTED_MARGINCALL_ROW,
   TOGGLE_SELECT_ALL_MARGINCALLS,
-  TOGGLE_VARIABLE_OPTIONS
+  TOGGLE_VARIABLE_OPTIONS,
+  ON_SEND_MARGINCALL_SUCCESS
 } from '../constants/ActionTypes'
 
 const initialState = Map({
@@ -170,6 +171,18 @@ const MarginUploadReducer = (state = initialState, action) => {
         newMarginCallRows = _.map(newUploadData, x => x.referenceIdentifier)
 
       return state.withMutations(state => state.set('selectedRows', fromJS(newSelectedRows)).set('marginCallRows', fromJS(newMarginCallRows)))
+
+    case ON_SEND_MARGINCALL_SUCCESS:
+
+      const successesArr =_.map(action.successObj, x => x.call.id)
+      // console.log(successesArr)
+      const successUploadData = state.get('uploadData').filter(x => !(x.get('referenceIdentifier') && _.includes(successesArr, x.get('referenceIdentifier'))))
+
+      const failedRowsPID = successUploadData.filter(x => x.referenceIdentifier).map(x => x.portfolioId)
+      const failedMarginCallRows = successUploadData.filter(x => x.referenceIdentifier).map(x => x.referenceIdentifier)
+
+      return state.withMutations(state => state.set('uploadData', successUploadData).set('selectedRows', failedRowsPID).set('marginCallRows', failedMarginCallRows))
+      // return state
 
     default:
       return state
