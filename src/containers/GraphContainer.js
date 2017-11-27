@@ -1,9 +1,15 @@
 import { connect } from 'react-redux'
 import { GraphComponent } from '../components'
-import { updateReconFilter, updatePledgeFilter } from '../actions'
+import {
+  updateReconFilter,
+  updatePledgeFilter,
+  updateSelectedCurrency
+} from '../actions'
 
 const mapStateToProps = state => ({
-  derivatives: state.mainReducer.getIn(['display', 'derivatives'])
+  derivatives: state.mainReducer.getIn(['display', 'derivatives']),
+  currency: state.CommonReducer.get('currencyInfo'),
+  selectedCurrency: state.mainReducer.get('selectedCurrency')
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -37,7 +43,8 @@ const mapDispatchToProps = dispatch => ({
       label: new Date(minTime).getTime(),
       value: new Date(minTime).getTime()
     }
-  }))
+  })),
+  onUpdateSelectedCurrency: (currency) => dispatch(updateSelectedCurrency(currency))
 })
 
 const GraphContainer = connect(

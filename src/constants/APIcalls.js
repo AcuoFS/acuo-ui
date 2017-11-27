@@ -14,6 +14,7 @@
 // Dashboard
 // export const DASHBOARD_URL = 'http://margin.acuo.com/acuo/api/margin/dashboard'
 export const DASHBOARD_URL                  = CONFIG.DASHBOARD_URL
+export const FETCH_CURRENCY_INFO            = CONFIG.FETCH_CURRENCY_INFO
 
 // Recon
 // export const RECON_URL = 'http://margin.acuo.com/acuo/api/margin/items/all/999'
@@ -66,5 +67,8 @@ export const COLLATERAL_HEALTH_CHECK        = CONFIG.COLLATERAL_HEALTH_CHECK
 
 //fetch navbar alerts
 export const FETCH_NAVBAR_ALERTS            = CONFIG.FETCH_NAVBAR_ALERTS
+
+//analytics
+export const TEST_FETCH_ANALYTICS_DATA      = CONFIG.TEST_FETCH_ANALYTICS_DATA
 
 

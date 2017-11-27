@@ -45,11 +45,11 @@ export default class Axes extends React.Component {
     const
       margin = {top: 20, right: 20, bottom: 20, left: 20},
       leftPan = 0,
-      w = 600 + leftPan - margin.left - margin.right,
-      h = 600 - margin.top - margin.bottom;
+      w = 700 + leftPan - margin.left - margin.right,
+      h = 700 - margin.top - margin.bottom;
 
-    const xPadding = 50;
-    const yPadding = 50;
+    const xPadding = 100;
+    const yPadding = 100;
 
     const xAx  = this.refs.xaxis
     const yAx = this.refs.yaxis
@@ -61,15 +61,15 @@ export default class Axes extends React.Component {
     const
       margin = {top: 20, right: 20, bottom: 20, left: 20},
       leftPan = 0,
-      w = 600 + leftPan - margin.left - margin.right,
-      h = 600 - margin.top - margin.bottom;
-    const xPadding = 50
-    const yPadding = 50
+      w = 700 + leftPan - margin.left - margin.right,
+      h = 700 - margin.top - margin.bottom;
+    const xPadding = 100
+    const yPadding = 100
 
     return (
       <g>
         <g ref="xaxis" transform={"translate(0, " + (h - xPadding) + ")"}></g>
-        <g ref="yaxis" transform={"translate(50, " + (leftPan + yPadding - 50) + ")"}></g>
+        <g ref="yaxis" transform={"translate(100, " + (leftPan + yPadding - 100) + ")"}></g>
       </g>
     )
   }

@@ -70,7 +70,22 @@ export default class GraphBody extends React.Component {
     }
   }
 
-  getCircle(lastUpdatedTime, onUnreconBubbleClick, onReconBubbleClick){
+  standardCurrency(actionItem, currencyList, selectedCurrency){
+    // console.log(currencyList)
+    //all to USD for now
+    if(currencyList[actionItem.get('ccy').toUpperCase()]) {
+      // console.log(actionItem.get('ccy'))
+      // console.log(actionItem.get('totalAmount'))
+      // console.log(parseFloat(actionItem.get('totalAmount')) * parseFloat(currencyList[actionItem.get('ccy').toUpperCase()].exchangeRate))
+      return (parseFloat(actionItem.get('totalAmount')) * parseFloat(currencyList[actionItem.get('ccy').toUpperCase()].exchangeRate)) / parseFloat(currencyList[selectedCurrency].exchangeRate)
+    } else{
+      // console.log(actionItem.get('ccy'))
+      return parseFloat(actionItem.get('totalAmount'))
+    }
+
+  }
+
+  getCircle(lastUpdatedTime, onUnreconBubbleClick, onReconBubbleClick, currencyList, selectedCurrency){
     let status = this.getDeriv().reduce((setX, x) => {
       return setX.union(x.get('marginStatus').map(y => y.get('status')))
     }, Set()).toList()
@@ -105,8 +120,8 @@ export default class GraphBody extends React.Component {
         return Map({'timeFrame': y.get('timeFrame'),
             "inAmount": y.get('actionsList').reduce((a, z) => {
             return a + z.get('actionsList').reduce((a2, xx) => {
-
-              const amount = Math.abs((parseFloat(xx.get('totalAmount'))  || 0.00))
+              // console.log(xx.toJS())
+              const amount = Math.abs((this.standardCurrency(xx, currencyList, selectedCurrency) || 0.00))
 
               return (xx.get('direction') == 'IN' ? parseFloat(a2) + parseFloat(amount) : a2)
             }, 0)
@@ -115,7 +130,7 @@ export default class GraphBody extends React.Component {
             return a + z.get('actionsList').reduce((a2, xx) => {
 
               // console.log(xx.toJS())
-              const amount = Math.abs((parseFloat(xx.get('totalAmount'))  || 0.00))
+              const amount = Math.abs((this.standardCurrency(xx, currencyList, selectedCurrency) || 0.00))
 
               return (xx.get('direction') == 'OUT' ? parseFloat(a2) + parseFloat(amount) : a2)
             }, 0)
@@ -278,11 +293,11 @@ export default class GraphBody extends React.Component {
   }
   render() {
 
-    const { time, onUnreconBubbleClick, onReconBubbleClick } = this.props
+    const { time, onUnreconBubbleClick, onReconBubbleClick, currencyList, selectedCurrency } = this.props
 
     return(
       <svg>
-        {this.getCircle(time, onUnreconBubbleClick, onReconBubbleClick).map(x => x)}
+        {this.getCircle(time, onUnreconBubbleClick, onReconBubbleClick, currencyList.toJS(), selectedCurrency).map(x => x)}
       </svg>
     )
   }
