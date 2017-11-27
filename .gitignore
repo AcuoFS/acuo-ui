@@ -1,7 +1,18 @@
-node_modules/
-npm-debug.log
-.idea/*.*
-.idea/*/*.*
-.idea/*/*/*.*
+#IDE related
+/.idea
+
+#node_modules
+/node_modules
+
+#.env
+/.env
+
+# log file
+/*.log
+
+# build files
 dist/
+build/
+
+# misc files
 confluence/
