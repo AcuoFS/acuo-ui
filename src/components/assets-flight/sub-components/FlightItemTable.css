@@ -107,8 +107,9 @@
 
 .flightItemTableCell {
   display: table-cell;
-  padding: 4px 4px;
-  border-top: 1px solid #FFFFFF;
+  padding: 4px;
+  vertical-align: middle;
+  /*border-top: 1px solid #FFFFFF;*/
 }
 
 .flightItemTableRow:last-child .flightItemTableCell {
@@ -117,7 +118,7 @@
 
 /* border for cells on the expand row*/
 .flightItemTableExpandRow .flightItemTableCell {
-  border-top: 2px solid #FFFFFF;
+  /*border-top: 2px solid #FFFFFF;*/
 }
 
 .flightStatus {
@@ -147,11 +148,17 @@
 
 .imageCursor {
   cursor: pointer;
+  vertical-align: bottom;
 }
 
 .secondRow {
   color: #7b7b7b;
   font-style: italic;
+}
+
+/* spacer to replace irregular border */
+.spacer {
+  height: 2px;
 }
 
 /* animations */

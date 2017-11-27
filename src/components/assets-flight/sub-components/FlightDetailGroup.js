@@ -64,6 +64,9 @@ export default class FlightDetailGroup extends React.Component {
         transitionAppearTimeout={500}
         transitionEnterTimeout={500}
         transitionLeaveTimeout={300}>
+
+        <div className={styles.spacer}></div>
+
         <FlightDetailRow
           propIsGroupHeader
           propIsGroupExpanded={this.state.isExpanded}
