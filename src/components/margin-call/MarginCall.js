@@ -108,17 +108,17 @@ export default class MarginCall extends React.Component {
 
         <div className={styles.header}>
           <div className={styles.title}>Margin Call</div>
-          <div className={styles.button + ' ' + (selectedRows.length <= 0 ? styles.disabled : '')}
+          <div className={styles.button + ' ' + (selectedRows.length <= 0 || requestingMCGenerationOrValuation ? styles.disabled : '')}
                disabled={selectedRows.length <= 0}
                onClick={() => requestValuation(selectedRows)}>
             Request Valuation
           </div>
-          <div className={styles.button + ' ' + (selectedRows.length <= 0 ? styles.disabled : '')}
+          <div className={styles.button + ' ' + (selectedRows.length <= 0 || requestingMCGenerationOrValuation ? styles.disabled : '')}
                disabled={selectedRows.length <= 0}
                onClick={() => generateMarginCalls(selectedRows)}>
             Generate Margin Calls
           </div>
-          <div className={styles.button + ' ' + (marginCallRows.length <= 0 ? styles.disabled : '')}
+          <div className={styles.button + ' ' + (marginCallRows.length <= 0 || requestingMCGenerationOrValuation ? styles.disabled : '')}
                //disabled={selectedRows.length <= 0}
                disabled={true}
                onClick={() => this.onSendButton(marginCallRows, onPostMarginCallIDs)}>
