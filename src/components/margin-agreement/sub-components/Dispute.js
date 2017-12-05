@@ -14,8 +14,8 @@ export default class Dispute extends React.Component {
     super(props)
 
     this.state = {
-      formDisputeAmt: '',
-      formAgreedAmt: '',
+      formDisputeAmt: this.getDifferencePortfolio(this.props.marginData),
+      formAgreedAmt: this.getTotalAmount(this.props.marginData.get('clientAssets')),
       formReasonCodes: [],
       formComments: _.reduce(this.disputeComments(this.props.marginData), (sum, x) => (x + '; ' + sum), ''),
       formMtm: '',
@@ -131,6 +131,28 @@ export default class Dispute extends React.Component {
               (y.firstLevel.tolerance ? y.firstLevel.name : []))), [])), [])
       , _.isEqual)
 
+  }
+
+  getTotalAmount(asset) {
+    if (asset) {
+      return asset.reduce((sum, x) => {
+        return parseFloat(sum) + parseFloat(x.get('data').reduce((sum, y) => {
+            return parseFloat(sum) + parseFloat(y.getIn(['firstLevel', 'amount']))
+          }, 0))
+      }, 0).toFixed(2)
+    } else {
+      return 0
+    }
+  }
+
+  getDifferencePortfolio(marginData, assetsName = 'clientAssets') {
+    let diff = 0
+    if ('clientAssets' === assetsName) {
+      diff = this.getTotalAmount(marginData.get('counterpartyAssets')) -
+        this.getTotalAmount(marginData.get(assetsName))
+
+    }
+    return Math.abs(diff).toFixed(2)
   }
 
   render() {

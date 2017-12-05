@@ -2,6 +2,7 @@ import React from 'react'
 import DzComponent from './DzComponent'
 import {UPLOAD_FILE_URL} from '../../constants/APIcalls'
 import styles from './UploadWidget.css'
+import Dropdown from './../Dropdown/Dropdown'
 
 export default class UploadWidget extends React.Component {
   constructor(props) {
@@ -104,18 +105,19 @@ export default class UploadWidget extends React.Component {
             {this.state.status.map((x, i) => <p key={i}>{x.remarks}</p>)}
           </div>
 
-          {/*{(txnID ?*/}
-            {/*<button className={styles.textBold + ' ' + (!requestingValuation ? styles.enabled : '')} type="button" onClick={onRequestValuation} disabled={requestingValuation}>*/}
-              {/*Request Valuation*/}
-            {/*</button>*/}
-            {/*:*/}
-            <button className={styles.textBold + ' ' + (this.state.isWidgetValidForSubmission && !uploading ?
-              styles.enabled : '')} type="button" onClick={() => this.onGenerate(flagUploading)}
-                    disabled={!this.state.isWidgetValidForSubmission && uploading}>
-              Upload
-            </button>
-
-          {/*)}*/}
+          <div className={styles.typeDropdown}>
+            <Dropdown selectedOption="Select"
+                      options={['LCH', 'CME', 'CCS'].sort()}
+                      handleOnSelectedItemChange={this.props.onChangeType}
+                      handlerOnClick={this.props.onChangeType}
+                      activateMouseLeaveEvent={true}
+                      isFixedOptionsHeight={true} />
+          </div>
+          <button className={styles.textBold + ' ' + (this.state.isWidgetValidForSubmission && !uploading ?
+            styles.enabled : '')} type="button" onClick={() => this.onGenerate(flagUploading)}
+                  disabled={!this.state.isWidgetValidForSubmission && uploading}>
+            Upload
+          </button>
         </div>
       </div>
     )
