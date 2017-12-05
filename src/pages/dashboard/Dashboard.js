@@ -1,15 +1,17 @@
 import React from 'react'
-import {UploadPortfolioButton} from '../../components'
+import { connect } from 'react-redux'
+import { hashHistory } from 'react-router'
+import io from 'socket.io-client'
+
+import { UploadPortfolioButton } from '../../components'
 import {
   FilterContainer,
   TableContainer,
   GraphContainer,
   NavigationBarContainer
 } from '../../containers'
-import { connect } from 'react-redux'
 import styles from './Dashboard.css'
 import { onInitDashboard } from '../../actions'
-import { hashHistory } from 'react-router'
 
 export class Dashboard extends React.Component {
   constructor(props){
@@ -19,6 +21,28 @@ export class Dashboard extends React.Component {
   componentWillMount(){
     if(localStorage.loginAt == undefined || localStorage.loginAt < Date.now()){ hashHistory.push('/') }
     this.props.fetchDashboardData()
+
+    const socket = io('http://localhost:8082/uploadStream');
+
+    const userName = 'user@acuocpty.com'
+
+    socket.on('connect', function(){
+      console.log('connected')
+    });
+    socket.on('event', function(data){
+      console.log('event', data)
+    });
+    socket.on('disconnect', function(){
+      console.log('dc')
+    });
+
+    socket.on(userName, data => {
+      console.log(data)
+    })
+
+    // setTimeout(() => {
+    //   socket.emit('test', {data: "hi from the UI"})
+    // }, 500)
   }
 
 
