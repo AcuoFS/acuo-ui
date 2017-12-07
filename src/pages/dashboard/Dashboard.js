@@ -22,7 +22,7 @@ export class Dashboard extends React.Component {
     if(localStorage.loginAt == undefined || localStorage.loginAt < Date.now()){ hashHistory.push('/') }
     this.props.fetchDashboardData()
 
-    const socket = io('http://localhost:8082/uploadStream');
+    const socket = io('http://localhost:8081/uploadStream');
 
     const userName = 'user@acuocpty.com'
 
