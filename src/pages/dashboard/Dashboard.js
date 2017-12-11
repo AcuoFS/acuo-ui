@@ -13,6 +13,8 @@ import {
 import styles from './Dashboard.css'
 import { onInitDashboard } from '../../actions'
 
+const socket = io('http://localhost:8081/uploadStream');
+
 export class Dashboard extends React.Component {
   constructor(props){
     super(props)
@@ -21,8 +23,6 @@ export class Dashboard extends React.Component {
   componentWillMount(){
     if(localStorage.loginAt == undefined || localStorage.loginAt < Date.now()){ hashHistory.push('/') }
     this.props.fetchDashboardData()
-
-    const socket = io('http://localhost:8081/uploadStream');
 
     const userName = 'user@acuocpty.com'
 
@@ -51,7 +51,9 @@ export class Dashboard extends React.Component {
     if(localStorage.loginAt < Date.now()){ hashHistory.push("/") }
   }
 
-
+  componentWillUnmount() {
+    socket.disconnect()
+  }
 
   render() {
     return (
