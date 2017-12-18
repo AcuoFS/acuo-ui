@@ -25,21 +25,36 @@ export class Dashboard extends React.Component {
     this.props.fetchDashboardData()
 
     const userName = 'user@acuocpty.com'
+    // socket.on('connection', toServer => {
+    //   console.log(socket.io.engine.id)
+    //
+    //   toServer.join(socket.io.engine.id)
+    // })
 
     socket.on('connect', function(){
       console.log('connected')
-    });
-    socket.on('event', function(data){
-      console.log('event', data)
-    });
+      // console.log(socket.io.engine.id)
+      // socket.on(socket.io.engine.id, data => {
+      //   console.log(socket.io.engine.id)
+      //   console.log('event', data)
+      // })
+      //
+      // socket.on('test', () => {
+      //   console.log('test event')
+      // })
+      // socket.join(socket.io.engine.id)
+      // socket.emit('room', userName)
+    })
+
     socket.on('disconnect', function(){
       console.log('dc')
     });
 
-    socket.on(userName, data => {
+    socket.on('message', data => {
       console.log(data)
     })
 
+    // console.log(socket)
     // setTimeout(() => {
     //   socket.emit('test', {data: "hi from the UI"})
     // }, 500)
