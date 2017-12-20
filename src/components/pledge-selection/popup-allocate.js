@@ -75,16 +75,18 @@ export default class AllocatePopup extends React.Component {
 
           <div className={styles.row}>
             <div className={styles.label}>Amount</div>
-            <input type="text"
+            <input type="number"
                    placeholder="Enter Amount"
                    className={styles.userInput}
                    value={this.state.amount} onChange={(e) => this.updateAmount(e.target.value)}/>
           </div>
 
           <div className={styles.row}>
-            <div className={styles.label}>Post-Haircut</div>
-            <div>
+            <div className={styles.label}>
               <img src={this.state.postHaircut ? Checkedbox : Uncheckbox} onClick={this.togglePostHaircut}/>
+            </div>
+            <div>
+              Post-Haircut
             </div>
           </div>
 
