@@ -19,7 +19,8 @@ import {
   fetchSelection,
   allocateCollaterals,
   onPledge,
-  onRemoveAllocatedAsset
+  onRemoveAllocatedAsset,
+  replaceAllocatedAsset
 } from '../actions'
 
 const mapStateToProps = (state, ownProps) => ({
@@ -37,6 +38,9 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch => ({
   onRemoveEarmarked: (assetName, GUID) => {
     console.log('running', assetName, GUID)
+  },
+  onReplaceAllocatedAsset: (obj) => {
+    dispatch(replaceAllocatedAsset(obj))
   }
 })
 
