@@ -22,14 +22,15 @@ const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 const DeployedReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case INIT_DEPARTURES:
+
       return state.withMutations((state) =>
         state
           .set('departures', fromJS(action.departures))
           .set('departureDatesList', fromJS(
               _.reduce(action.departures, (sum, x) => _.unionWith(sum, [{
-                "label": (new Date(x.header.time).getDate()) + ' ' + monthNames[(new Date(x.header.time).getMonth())],
-                "min": clearTime(new Date(x.header.time)).getTime(),
-                "max": clearTime(new Date(x.header.time)).setHours(23, 59, 59, 99)
+                "label": (new Date(x.header.time * 1000).getDate()) + ' ' + monthNames[(new Date(x.header.time * 1000).getMonth())],
+                "min": clearTime(new Date(x.header.time * 1000)).getTime(),
+                "max": clearTime(new Date(x.header.time * 1000)).setHours(23, 59, 59, 99)
               }], _.isEqual), []).sort((a, b) => a.min > b.min))))
     case "DEPARTURES_SEARCHTEXT":
       return state.set('departures_searchText', fromJS(action.payload))
