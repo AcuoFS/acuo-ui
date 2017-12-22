@@ -21,7 +21,7 @@ const Popup_DeployedHome = (props)=>{
                                                                            }})(show, selectedDeployedAgreement)
 
 
-
+            console.log(droppedLoad)
 
            return { fromWho: ( droppedLoad.asset ? droppedLoad.asset.counterparty : droppedLoad.asset.legalEntity),
                     fromAsset: droppedLoad.asset.asset,
@@ -29,6 +29,7 @@ const Popup_DeployedHome = (props)=>{
                     toAgreement: selectedDeployedAgreement.SelectedDeployedAgreement.agreement,
                     toAsset: selectedDeployedAsset.asset,
                     haircut: selectedDeployedAsset.haircut,
+                    amount: droppedLoad.value,
                    }}, //end-HomeToDeployed()
         DeployedToHome: (state, droppedLoad)=>{
            let { agreement , asset } = droppedLoad
@@ -41,6 +42,7 @@ const Popup_DeployedHome = (props)=>{
                     fromHaircut: asset.haircut,
                     toCounterparty: ( assetCategory==="pledged" ? SelectedHomeAsset.counterparty : SelectedHomeAsset.legalEntity ),
                     toAsset: SelectedHomeAsset.asset,
+                    amount: droppedLoad.value,
                    }
          }, //end-DeployedToHome()
        }//{ buildFor }
