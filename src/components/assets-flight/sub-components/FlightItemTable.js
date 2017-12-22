@@ -32,7 +32,7 @@ export default class FlightItemTable extends React.Component {
 
           {
             (flightGroup.sort((a, b) =>
-              Date.parse(a.header.time) - Date.parse(b.header.time)
+              Date.parse(a.header.time * 1000) - Date.parse(b.header.time * 1000)
             )).map((x, i) => <FlightDetailGroup key={i}
                                                 propListOfFlightDetail={x.flightDetailList}
                                                 propHeaderDetail={x.header} />)
