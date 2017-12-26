@@ -21,7 +21,7 @@ const Popup_DeployedHome = (props)=>{
                                                                            }})(show, selectedDeployedAgreement)
 
 
-            console.log(droppedLoad)
+            // console.log(droppedLoad.asset)
 
            return { fromWho: ( droppedLoad.asset ? droppedLoad.asset.counterparty : droppedLoad.asset.legalEntity),
                     fromAsset: droppedLoad.asset.asset,
@@ -29,11 +29,13 @@ const Popup_DeployedHome = (props)=>{
                     toAgreement: selectedDeployedAgreement.SelectedDeployedAgreement.agreement,
                     toAsset: selectedDeployedAsset.asset,
                     haircut: selectedDeployedAsset.haircut,
-                    amount: droppedLoad.value,
+                    amount: droppedLoad.asset.value,
                    }}, //end-HomeToDeployed()
         DeployedToHome: (state, droppedLoad)=>{
            let { agreement , asset } = droppedLoad
            let { assetCategory, SelectedHomeAsset } = state.data.Popup_AssetToBeReplaced
+
+          console.log(asset)
 
            return { fromAgreement: agreement.agreement,
                     fromCounterparty: agreement.counterparty,
@@ -42,7 +44,9 @@ const Popup_DeployedHome = (props)=>{
                     fromHaircut: asset.haircut,
                     toCounterparty: ( assetCategory==="pledged" ? SelectedHomeAsset.counterparty : SelectedHomeAsset.legalEntity ),
                     toAsset: SelectedHomeAsset.asset,
-                    amount: droppedLoad.value,
+                    amount: asset.value,
+                    adjAmount: asset.adjValue
+
                    }
          }, //end-DeployedToHome()
        }//{ buildFor }
@@ -93,14 +97,14 @@ const Popup_DeployedHome = (props)=>{
        <div><div>FX:</div></div>
        <div><div>1.00</div></div>
       </div>
-
+       {console.log(PopupObject.amount)}
       <div className={styles.row + ' ' + styles.topRow}>
        <div>Amount (USD):</div>
        <input className={styles.amtInput}
         type="number"
         placeholder="Enter Amount"
         onChange={  (e)=>{Values.actions.Popup_Amount(e.currentTarget.value)} }
-        value={ (typeof Values.state.ui.Popup_Amount=="number")? parseFloat(Values.state.ui.Popup_Amount) : undefined }
+        value={ (typeof Values.state.ui.Popup_Amount=="number")? parseFloat(Values.state.ui.Popup_Amount) : parseFloat(PopupObject.amount) }
         />
       </div>
       <div className={styles.row}>
@@ -162,14 +166,16 @@ const Popup_DeployedHome = (props)=>{
         type="number"
         placeholder="Enter Amount"
         onChange={  (e)=>{Values.actions.Popup_Amount(e.currentTarget.value)} }
-        value={ (typeof Values.state.ui.Popup_Amount=="number")? parseFloat(Values.state.ui.Popup_Amount) : undefined }
+        value={ (typeof Values.state.ui.Popup_Amount=="number")? parseFloat(Values.state.ui.Popup_Amount) : PopupObject.amount }
         />
       </div>
+
       <div className={styles.row}>
        <div>Adj. Amount (USD):</div>
        <input className={styles.amtInput}
         type="number"
         placeholder="Enter Adj. Amount"
+        value={PopupObject.adjAmount}
         />
       </div>
       <div className={ styles.buttonHolder }>
