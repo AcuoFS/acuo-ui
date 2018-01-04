@@ -19,7 +19,7 @@ let serverStatus = {
 const checkProxyServerConnectivity = () => {
   return fetch(PROXY_HEALTH_CHECK).then(response => {
     if(response.status === 200){
-     console.log("checkProxyServerConnectivity ::: Response Evaluation:" , true , "@", new Date());
+     // console.log("checkProxyServerConnectivity ::: Response Evaluation:" , true , "@", new Date());
      return 'passed'
     }
     else {
@@ -36,7 +36,7 @@ const checkMarginServerConnectivity = () => {
   return fetch(MARGIN_HEALTH_CHECK).then(response => {
 
    if(response.status === 200){
-    console.log("checkMarginServerConnectivity ::: Response Evaluation:" , true , "@", new Date());
+    // console.log("checkMarginServerConnectivity ::: Response Evaluation:" , true , "@", new Date());
     return 'passed'
    }
    else {
@@ -52,7 +52,7 @@ const checkMarginServerConnectivity = () => {
 const checkValuationServerConnectivity = () => {
   return fetch(VALUATION_HEALTH_CHECK).then(response => {
    if(response.status === 200){
-    console.log("checkValuationServerConnectivity ::: Response Evaluation:" , true , "@", new Date());
+    // console.log("checkValuationServerConnectivity ::: Response Evaluation:" , true , "@", new Date());
     return 'passed'
    }
    else {
@@ -68,7 +68,7 @@ const checkValuationServerConnectivity = () => {
 const checkCollateralServerConnectivity = () => {
   return fetch(COLLATERAL_HEALTH_CHECK).then(response => {
    if(response.status === 200){
-    console.log("checkCollateralServerConnectivity ::: Response Evaluation:" , true , "@", new Date());
+    // console.log("checkCollateralServerConnectivity ::: Response Evaluation:" , true , "@", new Date());
     return 'passed'
    }
    else {

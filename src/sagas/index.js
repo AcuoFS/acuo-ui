@@ -1,5 +1,5 @@
 import { fork, call, put, take, race, takeLatest } from 'redux-saga/effects'
-import { delay, takeEvery } from 'redux-saga'
+import { delay, throttle } from 'redux-saga'
 import { hashHistory } from 'react-router'
 import Notifications from 'react-notification-system-redux'
 
@@ -23,6 +23,7 @@ import {
   DoLoginSaga,
   PostMarginCallsSaga,
   FetchCurrencyInfoSaga,
+  DeployedCalcAdjAmountSaga,
 
   FetchAnalyticsDataSaga
 } from './ServerCalls'
@@ -63,6 +64,10 @@ import{
   updateCurrencyInfo
 } from './../actions/CommonActions'
 
+import {
+  AssetsPanel
+} from './../actions/AssetsActions'
+
 //action types
 import {
   DO_LOGIN,
@@ -81,7 +86,8 @@ import {
   ON_PLEDGE,
   ON_REMOVE_ALLOCATED_ASSET,
   ON_REQUEST_SEND_MARGINCALL,
-  SAGA_ANALYTICS_DATA
+  SAGA_ANALYTICS_DATA,
+  ON_CAL_ADJ_AMOUNT
 } from '../constants/ActionTypes'
 
 function* serverHealthChecks() {
@@ -368,6 +374,22 @@ function* watchFetchAnalyticsData() {
   }
 }
 
+function* runCalc(action){
+  const json = yield call(DeployedCalcAdjAmountSaga)
+  console.log(json)
+}
+
+function* watchDeployedPopupChangeAmount(){
+  // while(true){
+  //   try{
+      yield throttle(1000, ON_CAL_ADJ_AMOUNT, runCalc)
+  //   } catch(error) {
+  //     console.log(error)
+  //     return false
+  //   }
+  // }
+}
+
 export default function* root() {
   yield [
     fork(serverHealthChecks),
@@ -388,6 +410,7 @@ export default function* root() {
     fork(watchFetchCollaterals),
     fork(watchPledge),
     fork(watchRemoveAllocatedAsset),
-    fork(watchFetchAnalyticsData)
+    fork(watchFetchAnalyticsData),
+    fork(watchDeployedPopupChangeAmount)
   ]
 }
