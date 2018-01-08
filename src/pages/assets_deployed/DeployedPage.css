@@ -1,8 +1,14 @@
-.page{
- display: flex;
- flex-direction: column;
+.page {
+  display: flex;
+  flex-direction: column;
 }
 
-.footer{
- align-self: flex-start;
+.footer {
+  align-self: flex-start;
+}
+
+.optContainer {
+  width: 60%;
+  max-width: 930px;
+  align-self: center;
 }

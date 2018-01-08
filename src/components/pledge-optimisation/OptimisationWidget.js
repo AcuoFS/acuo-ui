@@ -35,6 +35,10 @@ export default class OptimisationWidget extends React.Component {
     this.handleToggle = this.handleToggle.bind(this);
   }
 
+  componentDidMount() {
+    this.props.onInitOptimisationSettings()
+  }
+
   selectActiveRow(name) {
     this.setState({
         activeRow: name

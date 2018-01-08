@@ -1,11 +1,13 @@
 import {
   INIT_DEPARTURES,
-  UPDATE_SELECTED_DEPARTURE_DATE
+  UPDATE_SELECTED_DEPARTURE_DATE,
+  UPDATE_DEPLOYED_OPTIMISATION_SETTINGS
 } from '../constants/ActionTypes'
 import {List, Map, fromJS} from 'immutable'
 import _ from 'lodash'
 
 import { clearTime } from './../utils'
+import * as ActionTypes from "../constants/ActionTypes";
 
 const INITIAL_STATE = Map({
   departures: List(),
@@ -13,11 +15,16 @@ const INITIAL_STATE = Map({
   arrivals_searchText: "",
   departures_searchText: "",
   departureDatesList: List(),
-  selectedDepartureDate: Map({'label': ''})
+  selectedDepartureDate: Map({'label': ''}),
+  optimisation: List(),
 })
 
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+const updateOptimisationSettings = (state, settings) => {
+  return state.set('optimisation', fromJS(settings))
+}
 
 const DeployedReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -38,6 +45,8 @@ const DeployedReducer = (state = INITIAL_STATE, action) => {
       return state.set('arrivals_searchText', fromJS(action.payload))
     case UPDATE_SELECTED_DEPARTURE_DATE:
       return state.set('selectedDepartureDate', fromJS(action.date))
+    case UPDATE_DEPLOYED_OPTIMISATION_SETTINGS:
+      return updateOptimisationSettings(state, action.settings)
     default:
       return state
   }
