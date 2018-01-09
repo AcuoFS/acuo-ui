@@ -25,8 +25,11 @@ var configJson = {
   REQUEST_VALUATION_URL: '/proxy/upload/request-valuation',
   REQUEST_GENERATE_MARGIN_CALLS: '/proxy/upload/request-margincalls',
   //FETCH_GENERATED_PORTFOLIO: '<%= baseUrl %>/valuation/acuo/api/calls/async/generate/',
-  //POST_MARGIN_CALL_IDS: '<%= baseUrl %>/margin/acuo/api/margin/send/calls',
-  LOGIN_URL: '/proxy/common/auth/login'
+  POST_MARGIN_CALL_IDS: '/proxy/upload/send-margin-calls',
+  LOGIN_URL: '/proxy/common/auth/login',
+  FETCH_CURRENCY_INFO: '/proxy/common/get-currency',
+
+  TEST_FETCH_ANALYTICS_DATA: '/proxy/analytics',
 }
 
 exports.get = (env) => {

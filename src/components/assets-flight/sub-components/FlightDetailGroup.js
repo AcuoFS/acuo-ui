@@ -27,7 +27,7 @@ export default class FlightDetailGroup extends React.Component {
     const padTime = foo => foo < 10 ? '0' + foo : foo
 
     if(time.length > 5)
-      return padTime(new Date(time).getHours()) + ':' + padTime(new Date(time).getMinutes())
+      return padTime(new Date(time * 1000).getHours()) + ':' + padTime(new Date(time * 1000).getMinutes())
     else
       return time
   }
@@ -64,6 +64,9 @@ export default class FlightDetailGroup extends React.Component {
         transitionAppearTimeout={500}
         transitionEnterTimeout={500}
         transitionLeaveTimeout={300}>
+
+        <div className={styles.spacer}></div>
+
         <FlightDetailRow
           propIsGroupHeader
           propIsGroupExpanded={this.state.isExpanded}

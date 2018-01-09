@@ -1,4 +1,5 @@
 import React from 'react'
+import { cloneDeep, map } from 'lodash'
 
 import styles from './Graph.css'
 import { getDate } from '../../utils'
@@ -22,10 +23,25 @@ export default class Graph extends React.Component {
     super(props)
     this.state = {
       isScrolling: false,
-      scrollLeft: false
+      scrollLeft: false,
+      open: false
     }
 
+    this.toggle = this.toggle.bind(this)
+    this.leaveToggle = this.leaveToggle.bind(this)
 
+  }
+
+  leaveToggle() {
+    this.setState({
+      open: false
+    })
+  }
+
+  toggle(){
+    this.setState({
+      open: !this.state.open
+    })
   }
 
   componentWillUpdate = (nextProps, nextState) =>{
@@ -67,13 +83,17 @@ export default class Graph extends React.Component {
   }
 
   scrollEvent = (event) => {
+    console.log('scroll event')
+    console.log(cloneDeep(this.state.scrollLeft))
     this.setState({scrollLeft: event.currentTarget.scrollLeft})
+    console.log(cloneDeep(this.state.scrollLeft))
   }
 
   componentDidMount() {
   }
 
   render() {
+    // console.log(this.props.currency)
     return (
       <div className={styles.graphWrapper}>
         <div className={styles.moneyIcon + ' ' + styles.moneyOut}>OUT</div>
@@ -89,6 +109,21 @@ export default class Graph extends React.Component {
           <SVGWrapper {...this.props}/>
         </div>
         <div className={styles.moneyIcon}>IN</div>
+        <div className={styles.currencySelector} onClick={this.toggle} onMouseLeave={this.leaveToggle}>
+          {this.props.selectedCurrency}
+          <div className={styles.list + ' ' + (this.state.open ? styles.show : '')}>
+            { this.state.open &&
+              map(this.props.currency.toList().toJS().filter(
+                x => this.props.selectedCurrency !== x.ccy)
+                  .sort((a, b) => (a.ccy < b.ccy) ? -1 : (a.ccy > b.ccy) ? 1 : 0),
+              (x, i) => <div key={i} className={styles.listItem} onClick={() => this.props.onUpdateSelectedCurrency(x.ccy)}>
+                {x.ccy}
+              </div>
+              )
+            }
+          </div>
+          <div className={styles.arrow}></div>
+        </div>
       </div>
     )
   }

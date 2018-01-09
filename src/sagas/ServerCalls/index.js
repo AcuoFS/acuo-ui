@@ -14,6 +14,10 @@ import { FetchCollateralsSaga } from './FetchCollateralsSaga'
 import { PostPledgeSaga } from './PostPledgeSaga'
 import { RemoveAllocatedAssetsSaga } from './RemoveAllocatedAssetsSaga'
 import { DoLoginSaga } from './DoLoginSaga'
+import { PostMarginCallsSaga } from './PostMarginCallsSaga'
+import { FetchCurrencyInfoSaga } from './FetchCurrencyInfoSaga'
+
+import { FetchAnalyticsDataSaga } from './FetchAnalyticsDataSaga'
 
 export {
   checkSpecificServer,
@@ -31,5 +35,9 @@ export {
   FetchCollateralsSaga,
   PostPledgeSaga,
   RemoveAllocatedAssetsSaga,
-  DoLoginSaga
+  DoLoginSaga,
+  PostMarginCallsSaga,
+  FetchCurrencyInfoSaga,
+
+  FetchAnalyticsDataSaga
 }

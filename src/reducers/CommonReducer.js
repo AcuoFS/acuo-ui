@@ -9,7 +9,9 @@ import * as ActionTypes from './../constants/ActionTypes'
 const INITIAL_STATE = Map({
   'alerts': List(),
   'noPrompt': true,
-  'wrongCredentials': false})
+  'wrongCredentials': false,
+  'currencyInfo': Map()
+})
 
 const CommonReducer = (state = INITIAL_STATE, action) => {
   switch(action.type){
@@ -24,6 +26,9 @@ const CommonReducer = (state = INITIAL_STATE, action) => {
 
     case ActionTypes.UPDATE_WRONG_CREDENTIALS_FLAG:
       return state.set('wrongCredentials', fromJS(action.flag))
+
+    case ActionTypes.UPDATE_CURRENCY_INFO:
+      return state.set('currencyInfo', fromJS(_.keyBy(action.currencyObj, 'ccy')))
 
     default:
       return state

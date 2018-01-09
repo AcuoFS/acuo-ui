@@ -10,7 +10,8 @@
     "test-js": "mocha || true",
     "test:watch": "npm run test -- --watch",
     "json-server": "node mock-api/server.js",
-    "server": "nodemon mock-api/server.js"
+    "server": "nodemon mock-api/server.js",
+    "start": "webpack-dev-server --hot"
   },
   "babel": {
     "presets": [
@@ -62,6 +63,7 @@
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "d3": "^4.10.0",
+    "es6-promise": "^4.2.2",
     "immutable": "^3.8.1",
     "json-configurator": "^1.0.1",
     "lodash": "^4.17.2",

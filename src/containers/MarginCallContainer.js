@@ -1,7 +1,9 @@
-import {connect} from 'react-redux'
-import {MarginCallComponent} from '../components'
+import { connect } from 'react-redux'
+import { MarginCallComponent } from '../components'
+import _ from 'lodash'
+
 import *  as MarginCallUploadActions from  '../actions/MarginCallUploadActions'
-import { POST_MARGIN_CALL_IDS } from './../constants/APIcalls'
+// import { POST_MARGIN_CALL_IDS } from './../constants/APIcalls'
 
 const _default = ''
 const _defaultArray = []
@@ -10,7 +12,10 @@ const mapStateToProps = state => ({
   uploadData: state.MarginUploadReducer.get('uploadData')
     ? state.MarginUploadReducer.get('uploadData').toJS() : _defaultArray,
   requestingValuation: state.MarginUploadReducer.get('requestingValuation') || _default,
-  requestingMCGenerationOrValuation: state.MarginUploadReducer.get('requestingMCGenerationOrValuation') || _default
+  requestingMCGenerationOrValuation: state.MarginUploadReducer.get('requestingMCGenerationOrValuation') || _default,
+  selectedRows: state.MarginUploadReducer.get('selectedRows').toJS(),
+  marginCallRows: state.MarginUploadReducer.get('marginCallRows').toJS(),
+  variableOptions: state.MarginUploadReducer.get('variableOptions').toJS()
 })
 
 const checkUploadData = (data) => (data.length)
@@ -23,60 +28,26 @@ const mapDispatchToProps = dispatch => ({
     dispatch(MarginCallUploadActions.updateMarginCallUpload(newTotalCallAmt, uploadId))
   },
   onPostMarginCallIDs: (idArr) => {
-    // TODO: migrate to saga
-    fetch(POST_MARGIN_CALL_IDS, {
-      method: 'POST',
-      body: JSON.stringify(idArr)
-    }).then(response => {
-      alert('send success :' + JSON.stringify(idArr))
-      return response.json()
-    }).then(obj => {
-      return 1
-    }).catch(error => {
-      console.log('Error: ' + error)
-    })
+    dispatch(MarginCallUploadActions.updateRequestState(true))
+    dispatch(MarginCallUploadActions.onRequestSendMarginCalls(idArr))
+
   },
   requestValuation: (referenceIDs) =>{
     dispatch(MarginCallUploadActions.updateRequestState(true))
     dispatch(MarginCallUploadActions.onRequestValuationAction(referenceIDs))
-    // fetch('http://dev.acuo.com/valuation/acuo/api/calls/split/portfolios', {
-    //   method: 'POST',
-    //   body: JSON.stringify({"ids": referenceIDs}),
-    //   headers: {'content-type': 'application/json'},
-    //   json: true,
-    //   resolveWithFullResponse: true
-    // }).then(response => {
-    //   if(response.ok)
-    //     return response.json()
-    //   alert('request valuation failed, try again')
-    //   dispatch(MarginCallUploadActions.updateRequestState(false))
-    // }).then(json => dispatch(MarginCallUploadActions.marginCallGenerated(json)))
-    //   .catch(error => {
-    //     console.log(error)
-    //     alert('request valuation failed, try again')
-    //     dispatch(MarginCallUploadActions.updateRequestState(false))
-    //   })
   },
-  generateMarginCalls: (referenceIDs) => {
+  mergedGenerateMarginCalls: (referenceIDs) => {
     dispatch(MarginCallUploadActions.updateRequestState(true))
     dispatch(MarginCallUploadActions.onRequestGenerateMarginCall(referenceIDs))
-  //   fetch('http://dev.acuo.com/valuation/acuo/api/calls/generate/portfolios', {
-  //     method: 'POST',
-  //     body: JSON.stringify({"ids": referenceIDs}),
-  //     headers: {'content-type': 'application/json'},
-  //     json: true,
-  //     resolveWithFullResponse: true
-  //   }).then(response => {
-  //     if(response.ok)
-  //       return response.json()
-  //     alert('generate margin call failed, try again')
-  //     dispatch(MarginCallUploadActions.updateRequestState(false))
-  //   }).then(json => dispatch(MarginCallUploadActions.marginCallGenerated(json)))
-  //     .catch(error => {
-  //       console.log(error)
-  //       alert('generate margin call failed, try again')
-  //       dispatch(MarginCallUploadActions.updateRequestState(false))
-  //     })
+  },
+  onToggleRow: rowObj => {
+    dispatch(MarginCallUploadActions.onToggleMarginCallRow(rowObj))
+  },
+  onToggleAllRows: () => {
+    dispatch(MarginCallUploadActions.onToggleAllMarginCallRows())
+  },
+  onToggleVariableFilter: (hasArr, dontHaveArr) => {
+    dispatch(MarginCallUploadActions.onToggleVariablOptions(hasArr, dontHaveArr))
   }
 })
 
@@ -86,6 +57,13 @@ const mergeProps = (stateProps, dispatchProps) => ({
     // dispatchProps.requestValuation(stateProps.txnID)
 
    },
+  generateMarginCalls: (referenceIDs) => {
+    const valuedStatements = stateProps.uploadData.filter(x => x.agreementDetails.tradeCount === x.agreementDetails.tradeValue)
+    const keys = Object.keys(_.keyBy(valuedStatements, x => x.portfolioId))
+    const newRefIDs = referenceIDs.filter(x => _.includes(keys, x))
+
+    dispatchProps.mergedGenerateMarginCalls(newRefIDs)
+  },
   ...stateProps, ...dispatchProps
 })
 

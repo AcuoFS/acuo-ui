@@ -55,24 +55,26 @@ export default class MarginCallRow extends React.Component {
     }
 
     return (
-      <div className={styles.groupContainer}>
+      <div className={styles.groupContainer + ' ' + (this.props.selected ? styles.highlightedGroup : '')}>
         <div className={styles.flexContainer + ' ' +
         (this.state.isExpanded ? styles.contentRowExpand : styles.contentRow)}>
           <div className={styles.cell}>
             {/*<input type="checkbox" checked={this.state.isChecked} onChange={this.toggleIsChecked} />*/}
-            <img onClick={this.toggleIsChecked} src={this.props.selected ? checkBoxWithTick : checkBox}/>
+            <img className={styles.rowCheckbox} onClick={this.toggleIsChecked} src={this.props.selected ? checkBoxWithTick : checkBox}/>
           </div>
           <div className={styles.cell}>{item.legalEntity || '-'}</div>
           <div className={styles.cell}>{item.cptyOrg || '-'}</div>
           <div className={styles.cell}>{item.cptyEntity || '-'}</div>
           <div className={styles.cell}>{item.marginAgreement || '-'}</div>
+          <div className={styles.cell + ' ' + styles.ccyCell}>{item.portfolioId || '-'}</div>
           <div className={styles.cell + ' ' + styles.dateCell + ' ' + styles.boldCellText}>
             {item.valuationDate || '-'}
           </div>
+          <div className={styles.cell + ' ' + styles.largeCell}>{checkNegative(item.exposure || 0)}</div>
+          <div className={styles.cell + ' ' + styles.callTypeCell}>{item.callType || '-'}</div>
           <div className={styles.cell + ' ' + styles.dateCell + ' ' + styles.boldCellText}>
             {item.callDate || '-'}
           </div>
-          <div className={styles.cell + ' ' + styles.callTypeCell}>{item.callType || '-'}</div>
           <div className={styles.cell + ' ' + styles.ccyCell}>{item.currency || '-'}</div>
           <div className={styles.cell + ' ' + styles.largeCell + ' ' + styles.boldCellText
           + ' ' + styles.clickableCell}
@@ -82,8 +84,6 @@ export default class MarginCallRow extends React.Component {
               Click to edit
             </div>
           </div>
-          <div className={styles.cell}>{item.portfolioId || '-'}</div>
-          <div className={styles.cell + ' ' + styles.largeCell}>{checkNegative(item.exposure || 0)}</div>
           <div className={styles.cell + ' ' + styles.largeCell}>{checkNegative(item.collateralValue || 0)}</div>
           <div className={styles.cell + ' ' + styles.largeCell}>{item.pendingCollateral || '-'}</div>
           <div className={styles.cell} onClick={(e) => this.onArrowClick(e)} data-ref={id}></div>

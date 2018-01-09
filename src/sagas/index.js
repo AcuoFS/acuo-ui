@@ -20,7 +20,11 @@ import {
   FetchCollateralsSaga,
   PostPledgeSaga,
   RemoveAllocatedAssetsSaga,
-  DoLoginSaga
+  DoLoginSaga,
+  PostMarginCallsSaga,
+  FetchCurrencyInfoSaga,
+
+  FetchAnalyticsDataSaga
 } from './ServerCalls'
 
 //actions
@@ -43,12 +47,21 @@ import {
 import { initDepartures } from './../actions/DeployedActions'
 import {
   updateRequestState,
-  marginCallGenerated
+  marginCallGenerated,
+  onMarginCallSendSuccess
 } from './../actions/MarginCallUploadActions'
 import {
   updateLoginProcess,
   updateWrongCredentialsFlag
 } from './../actions/LoginActions'
+
+import {
+  updateAnalyticsData
+} from './../actions/AnalyticsActions'
+
+import{
+  updateCurrencyInfo
+} from './../actions/CommonActions'
 
 //action types
 import {
@@ -66,7 +79,9 @@ import {
   ON_ALLOCATE_COLLATERALS,
   ON_FETCH_COLLATERALS,
   ON_PLEDGE,
-  ON_REMOVE_ALLOCATED_ASSET
+  ON_REMOVE_ALLOCATED_ASSET,
+  ON_REQUEST_SEND_MARGINCALL,
+  SAGA_ANALYTICS_DATA
 } from '../constants/ActionTypes'
 
 function* serverHealthChecks() {
@@ -200,8 +215,23 @@ function* watchGenerateMarginCalls() {
     try{
       const action = yield take(ON_REQUEST_GENERATE_MARGINCALL)
       const obj = yield call(GenerateMarginCallSaga, action.referenceIDs)
-      console.log(obj)
+      // console.log(obj)
       yield put(marginCallGenerated(obj))
+      yield put(updateRequestState(false))
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchSendMarginCalls() {
+  while(true){
+    try{
+      const action = yield take(ON_REQUEST_SEND_MARGINCALL)
+      const obj = yield call(PostMarginCallsSaga, action.referenceIDs)
+      // console.log(obj)
+      yield put(onMarginCallSendSuccess(obj))
       yield put(updateRequestState(false))
     } catch(error){
       console.log(error)
@@ -216,6 +246,8 @@ function* watchFetchDashboardData() {
       yield take(ON_INIT_DASHBOARD)
       const obj = yield call(FetchDashboardSaga)
       yield put(initState(obj))
+      const currencyObj = yield call(FetchCurrencyInfoSaga)
+      yield put(updateCurrencyInfo(currencyObj))
     } catch(error) {
       console.log(error)
       return false
@@ -322,6 +354,20 @@ function* watchRemoveAllocatedAsset() {
   }
 }
 
+function* watchFetchAnalyticsData() {
+  while(true){
+    try{
+      yield take(SAGA_ANALYTICS_DATA)
+      const json = yield call(FetchAnalyticsDataSaga)
+      // console.log(json)
+      yield put(updateAnalyticsData(json))
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
 export default function* root() {
   yield [
     fork(serverHealthChecks),
@@ -333,6 +379,7 @@ export default function* root() {
     fork(watchFetchDepatures),
     fork(watchRequestValuation),
     fork(watchGenerateMarginCalls),
+    fork(watchSendMarginCalls),
     fork(watchFetchDashboardData),
     fork(watchFetchReconSaga),
     fork(watchFetchOptimisationSettings),
@@ -340,6 +387,7 @@ export default function* root() {
     fork(watchAllocateCollaterals),
     fork(watchFetchCollaterals),
     fork(watchPledge),
-    fork(watchRemoveAllocatedAsset)
+    fork(watchRemoveAllocatedAsset),
+    fork(watchFetchAnalyticsData)
   ]
 }

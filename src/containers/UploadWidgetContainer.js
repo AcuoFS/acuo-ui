@@ -24,7 +24,8 @@ const mapDispatchToProps = dispatch => ({
   //   dispatch(requestingValuationFlag())
   // },
   flagUploading: () =>
-    dispatch(uploadingPortfolioFlag())
+    dispatch(uploadingPortfolioFlag()),
+  onChangeType: type => console.log(type)
 })
 
 const mergeProps = (stateProps, dispatchProps) => ({

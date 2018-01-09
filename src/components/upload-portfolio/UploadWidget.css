@@ -27,6 +27,13 @@ div.componentStyle {
   padding-top: 20px;
 }
 
+.typeDropdown {
+  flex: 1;
+  align-self: center;
+  text-align: left;
+  padding-right: 15px;
+}
+
 .buttonContainer button {
   color: #d7dce0;
   background-color: #FAFAFA;

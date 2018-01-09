@@ -69,16 +69,24 @@
   flex-grow: 1;
   flex-basis: 0;
   align-self: center;
-  padding: 5px;
+  padding: 10px 5px;
   position: relative;
 }
 
-.cell:first-child, .cell:last-child{
+.cell:last-child{
   flex: 0 0 1.5%;
   text-align: center;
 }
 
-/* overriding css*/
+.cell:first-child {
+  flex: 0 0 2.5%;
+}
+
+.cell:first-child .rowCheckbox {
+  margin: 0 11px;
+}
+
+  /* overriding css*/
 .ccyCell{
   flex: 0 0 3%;
 }
@@ -88,7 +96,7 @@
 }
 
 .dateCell{
-  flex: 0 0 6%;
+  flex: 0 0 4.5%;
 }
 
 .callTypeCell{
@@ -109,12 +117,21 @@
   display: flex;
 }
 
-.groupContainer:nth-child(odd) {
-  background-color: #DCEEFF;
+/*.groupContainer:nth-child(odd) {*/
+  /*background-color: #DCEEFF;*/
+/*}*/
+
+/*.groupContainer:nth-child(even) {*/
+  /*background-color: #EEEEEE;*/
+/*}*/
+
+.groupContainer {
+  background-color: #fff;
+  border-bottom: 1px #e5e5e5 solid;
 }
 
-.groupContainer:nth-child(even) {
-  background-color: #EEEEEE;
+.groupContainer.highlightedGroup{
+  background-color: #ffc;
 }
 
 .headerRow{
@@ -135,7 +152,7 @@
 
 .subrowContent{
   display: flex;
-  background-color: #FFFFFF;
+  background-color: #dceeff;
 }
 
 .subrowCell{
@@ -164,19 +181,23 @@
 .contentRow .cell:last-child::after{
   content: '';
   position: absolute;
-  border-top: 12px solid #2C3B4A;
+  border-top: 12px solid #fff;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   top: -3px;
   left: 7px;
 }
 
-.groupContainer:nth-child(odd) .contentRow .cell:last-child::after{
-  border-top: 12px solid #DCEEFF;
-}
+/*.groupContainer:nth-child(odd) .contentRow .cell:last-child::after{*/
+  /*border-top: 12px solid #fff;*/
+/*}*/
 
-.groupContainer:nth-child(even) .contentRow .cell:last-child::after{
-  border-top: 12px solid #EEEEEE;
+/*.groupContainer:nth-child(even) .contentRow .cell:last-child::after{*/
+  /*border-top: 12px solid #fff;*/
+/*}*/
+
+.highlightedGroup .contentRow .cell:last-child::after{
+  border-top: 12px solid #ffc;
 }
 
 /************* Up triangle after expansion *************/
@@ -201,11 +222,11 @@
 }
 
 .groupContainer:nth-child(odd) .contentRowExpand .cell:last-child::after{
-  border-bottom: 12px solid #DCEEFF;
+  border-bottom: 12px solid #fff;
 }
 
 .groupContainer:nth-child(even) .contentRowExpand .cell:last-child::after{
-  border-bottom: 12px solid #EEEEEE;
+  border-bottom: 12px solid #fff;
 }
 
 /************* Up triangle after expansion *************/

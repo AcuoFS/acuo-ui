@@ -128,7 +128,7 @@ export default class FlightDetailRow extends React.Component {
           {this.renderSecondRow(propCcy.secondary)}
         </div>
         <div className={styles.flightItemTableCell}>
-          <div>0.00%</div>
+          <div>{!propRowStyle && !propIsGroupHeader ? '0.00%' : ''}</div>
         </div>
         <div className={styles.flightItemTableCell}>
           <div>{statusCell}</div>

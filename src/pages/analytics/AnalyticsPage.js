@@ -2,15 +2,15 @@
  * Created by Rui on 16/8/17.
  */
 import React from 'react'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import {
   AnalyticsGraphContainer,
   NavigationBarContainer
 } from './../../containers'
-// import styles from './LoginPage.css'
+import { sagaAnalyticsData } from '../../actions/AnalyticsActions'
 import {hashHistory} from 'react-router'
 
-class AnalyticsPage extends React.Component{
+class AnalyticsComp extends React.Component{
   constructor(props){
     super(props)
   }
@@ -18,6 +18,10 @@ class AnalyticsPage extends React.Component{
   componentWillMount(){
     if(localStorage.loginAt > Date.now()) {
       hashHistory.push('analytics') }
+  }
+
+  componentDidMount(){
+    this.props.fetchAnalyticsData()
   }
 
   render(){
@@ -30,8 +34,20 @@ class AnalyticsPage extends React.Component{
   }
 }
 
+const mapStateToProps = state => {
+  return { test: 0 }
+}
 
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchAnalyticsData: () => dispatch(sagaAnalyticsData())
+  }
+}
 
-// const AnalyticsPage = connect()(Analytics)
+const AnalyticsPage = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AnalyticsComp)
+
 
 export { AnalyticsPage }

@@ -2,6 +2,7 @@
 @value acuoActionRed from '../../static/css-components/colors.css';
 @value acuoActionOrange from '../../static/css-components/colors.css';
 @value acuoActionGreen from '../../static/css-components/colors.css';
+@value baseFont from './../../static/css-components/fonts.css';
 
 .vertiCenter {
   display: table;
@@ -428,6 +429,7 @@ textarea.inputBox {
   text-indent: 0px;
   padding-left: 5px;
   width: 295px;
+  font-family: 'Helvetica', 'Arial';
 }
 
 .dropdownCont {

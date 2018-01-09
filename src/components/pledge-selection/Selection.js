@@ -78,8 +78,8 @@ export default class Selection extends React.Component {
         <td className={styles.hoverCtrl}>
           {asset.get(ASSET.A_HAIRCUT_PCT)}%
           <div className={styles.tooltip}>
-            <div>H<sub>c</sub>&nbsp;: 00.0%</div>
-            <div>H<sub>fx</sub>: 00.0%</div>
+            <div>H<sub>c</sub>&nbsp;: {parseFloat(asset.get('haircutCollateral')).toFixed(2)}%</div>
+            <div>H<sub>fx</sub>: {parseFloat(asset.get('haircutFx')).toFixed(2)}%</div>
           </div>
         </td>
         <td>{checkNegative(asset.get(ASSET.A_AMT))}</td>
@@ -248,11 +248,13 @@ export default class Selection extends React.Component {
                           {/*}, 0)*/}
                       {/*}, 0)*/}
                   {/*}, 0))}*/}
-                  {checkNegative(this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {
+                  {checkNegative(
+                    this.checkIfExist(marginCall.get('clientAssets')).reduce((sum, x) => {
                     return sum + x.get('data').reduce((sum, y) => {
-                        return sum + parseFloat(y.getIn(['firstLevel','amount']))
+                        return ((parseFloat(sum + parseFloat(y.getIn(['firstLevel','amount']))) * 100).toFixed(0) / 100)
                       }, 0)
-                  }, 0))}
+                  }, 0)
+                  )}
                 </div>
               </div>
             </div>
@@ -281,126 +283,131 @@ export default class Selection extends React.Component {
             </div>
 
             <div className={toggleL ? styles.showL : styles.hideL}>
-
-              <div className={styles.rightColSubSection}>
-                <div className={styles.subSectionHeader}>Initial Margin</div>
-                <table className={styles.selTable + ( evlEmptyForIntMargin ? ' ' + styles.notAllocated : '')}>
-                  <thead>
-                  <tr className={styles.bold}>
-                    <th></th>
-                    <th>Adj. value</th>
-                    <th>CCY</th>
-                    <th>Haircut</th>
-                    <th>Value</th>
-                    <th>FX</th>
-                    <th>Venue</th>
-                    <th></th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  { evlEmptyForIntMargin ?
-                    <tr>
-                      <td colSpan="8"
-                          className={styles.notAlcText}
-                          onDrop={ e=>this.dragNdrop.ondrop_handler(e, this.state, false , ASSET.A_LIST_IM) }
-                          onDragOver={ e=>this.dragNdrop.onDragOver_handler(e) }
-                          onDragLeave={ e=>this.dragNdrop.onDragLeave_handler(e) }
+              { ((evlEmptyForIntMargin && evlEmptyForVariMargin) || (!evlEmptyForIntMargin) ) && /** check for presence of data **/
+                <div className={styles.rightColSubSection}>
+                  <div className={styles.subSectionHeader}>Initial Margin</div>
+                  <table className={styles.selTable + ( evlEmptyForIntMargin ? ' ' + styles.notAllocated : '')}>
+                    <thead>
+                    <tr className={styles.bold}>
+                      <th></th>
+                      <th>Adj. value</th>
+                      <th>CCY</th>
+                      <th>Haircut</th>
+                      <th>Value</th>
+                      <th>FX</th>
+                      <th>Venue</th>
+                      <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    { evlEmptyForIntMargin && evlEmptyForVariMargin ? /** check for presence of data **/
+                      <tr>
+                        <td colSpan="8"
+                            className={styles.notAlcText}
+                            onDrop={ e => this.dragNdrop.ondrop_handler(e, this.state, false, ASSET.A_LIST_IM) }
+                            onDragOver={ e => this.dragNdrop.onDragOver_handler(e) }
+                            onDragLeave={ e => this.dragNdrop.onDragLeave_handler(e) }
                         >
-                       Collateral has not been allocated
-                      </td>
-                    </tr> :
-                    this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).map( (x, id)=>{
-                       return this.renderMargin(x,
-                                                id,
-                                                marginCall.toJS().agreementName,
-                                                ASSET.A_LIST_IM,
-                                                marginCall.get('GUID'))
-                    })
-                  }
-                  <tr className={styles.bold}>
-                    <td>Sub-Total</td>
-                    <td>
-                      {checkNegative(parseFloat(marginCall.getIn(['allocated', ALLOCATED.IM_TOTAL]) || 0).toFixed(2))}
-                    </td>
-                    <td>USD</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div className={styles.rightColSubSection}>
-                <div className={styles.subSectionHeader}>Variation Margin</div>
-                <table className={styles.selTable + ( evlEmptyForVariMargin ? ' ' + styles.notAllocated : '')}>
-                  <thead>
-                  <tr className={styles.bold}>
-                    <th></th>
-                    <th>Adj. value</th>
-                    <th>CCY</th>
-                    <th>Haircut</th>
-                    <th>Value</th>
-                    <th>FX</th>
-                    <th>Venue</th>
-                    <th></th>
-                  </tr>
-                  </thead>
-                  <tbody>
-
-                  { evlEmptyForVariMargin ?
-                    <tr>
-                      <td colSpan="8"
-                          className={styles.notAlcText}
-                          onDrop={ (e)=>{this.dragNdrop.ondrop_handler(e, this.state, false, ASSET.A_LIST_VM)} }
-                          onDragOver={ e=>this.dragNdrop.onDragOver_handler(e) }
-                          onDragLeave={ e=>this.dragNdrop.onDragLeave_handler(e) }
-                          >
                           Collateral has not been allocated
+                        </td>
+                      </tr> :
+                      this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_IM])).map((x, id) => {
+                        return this.renderMargin(x,
+                          id,
+                          marginCall.toJS().agreementName,
+                          ASSET.A_LIST_IM,
+                          marginCall.get('GUID'))
+                      })
+                    }
+                    <tr className={styles.bold}>
+                      <td>Sub-Total</td>
+                      <td>
+                        {checkNegative(parseFloat(marginCall.getIn(['allocated', ALLOCATED.IM_TOTAL]) || 0).toFixed(2))}
                       </td>
-                    </tr> :
-                    this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).map( (x, id)=>{
-                      return this.renderMargin(x,
-                                               id ,
-                                               marginCall.toJS().agreementName,
-                                               ASSET.A_LIST_VM,
-                                               marginCall.get('GUID'))
-                    })
-                  }
+                      <td>USD</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              }
+              { ((evlEmptyForVariMargin && evlEmptyForIntMargin) || (!evlEmptyForVariMargin)) && /** check for presence of data **/
+                <div className={styles.rightColSubSection}>
+                  <div className={styles.subSectionHeader}>Variation Margin</div>
+                  <table className={styles.selTable + ( evlEmptyForVariMargin ? ' ' + styles.notAllocated : '')}>
+                    <thead>
+                    <tr className={styles.bold}>
+                      <th></th>
+                      <th>Adj. value</th>
+                      <th>CCY</th>
+                      <th>Haircut</th>
+                      <th>Value</th>
+                      <th>FX</th>
+                      <th>Venue</th>
+                      <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    { evlEmptyForVariMargin && evlEmptyForIntMargin ? /** check for presence of data **/
+                      <tr>
+                        <td colSpan="8"
+                            className={styles.notAlcText}
+                            onDrop={ (e) => {
+                              this.dragNdrop.ondrop_handler(e, this.state, false, ASSET.A_LIST_VM)
+                            } }
+                            onDragOver={ e => this.dragNdrop.onDragOver_handler(e) }
+                            onDragLeave={ e => this.dragNdrop.onDragLeave_handler(e) }
+                        >
+                          Collateral has not been allocated
+                        </td>
+                      </tr> :
+                      this.checkIfExist(marginCall.getIn(['allocated', ASSET.A_LIST_VM])).map((x, id) => {
+                        return this.renderMargin(x,
+                          id,
+                          marginCall.toJS().agreementName,
+                          ASSET.A_LIST_VM,
+                          marginCall.get('GUID'))
+                      })
+                    }
 
 
-                  <tr className={styles.bold}>
-                    <td>Sub-Total</td>
-                    <td>
-                      {checkNegative(parseFloat(marginCall.getIn(['allocated', ALLOCATED.VM_TOTAL]) || 0).toFixed(2))}
-                    </td>
-                    <td>USD</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  </tbody>
-                </table>
-                <table className={styles.selTable}>
-                  <tbody>
-                  <tr className={styles.bold}>
-                    <td>Total</td>
-                    <td
-                      className={styles.totalTable1 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>{checkNegative(parseFloat(marginCall.getIn(['allocated', ALLOCATED.MGN_TOTAL]) || 0).toFixed(2))}</td>
-                    <td className={styles.totalTable2 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>USD</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
+                    <tr className={styles.bold}>
+                      <td>Sub-Total</td>
+                      <td>
+                        {checkNegative(parseFloat(marginCall.getIn(['allocated', ALLOCATED.VM_TOTAL]) || 0).toFixed(2))}
+                      </td>
+                      <td>USD</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              }
+              <table className={styles.selTable}>
+                <tbody>
+                <tr className={styles.bold}>
+                  <td>Total</td>
+                  <td
+                    className={styles.totalTable1 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>{checkNegative(parseFloat(marginCall.getIn(['allocated', ALLOCATED.MGN_TOTAL]) || 0).toFixed(2))}</td>
+                  <td className={styles.totalTable2 + ( evlEmptyForMargin ? ' ' + styles.notAll : '' )}>USD</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                </tbody>
+              </table>
+
 
             </div>
 
