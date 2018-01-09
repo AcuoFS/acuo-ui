@@ -179,7 +179,7 @@ class Popup_DeployedHome extends React.Component{
               <div className={styles.row + ' ' + styles.topRow}>
                 <div>Amount (USD):</div>
                 {Values.state.ui.substituted ?
-                  <div>{this.state.adjAmount == this.state.defaultAdjAmount ? this.state.amount : ''}</div>
+                  <div className={styles.fixedAmt}>{this.state.adjAmount == this.state.defaultAdjAmount ? this.state.amount : ''}</div>
                   :
                   <input className={styles.amtInput}
                          type="number"
@@ -194,15 +194,10 @@ class Popup_DeployedHome extends React.Component{
                 }
               </div>
 
-              { console.log(this.state.amount) }
-              { console.log(this.state.defaultAmount) }
-              { console.log(this.state.adjAmount) }
-              { console.log(this.state.defaultAdjAmount) }
-
               <div className={styles.row}>
                 <div>Adj. Amount (USD):</div>
                 { Values.state.ui.substituted ?
-                  <div>{this.state.amount == this.state.defaultAmount ? this.state.adjAmount : ''}</div>
+                  <div className={styles.fixedAmt}>{this.state.amount == this.state.defaultAmount ? this.state.adjAmount : ''}</div>
                   :
                 <input className={styles.amtInput}
                        type="number"
@@ -301,7 +296,7 @@ class Popup_DeployedHome extends React.Component{
               <div className={styles.row + ' ' + styles.topRow}>
                 <div>Amount (USD):</div>
                 {Values.state.ui.substituted ?
-                  <div>{this.state.adjAmount == this.state.defaultAdjAmount ? this.state.amount : ''}</div>
+                  <div className={styles.fixedAmt}>{this.state.adjAmount == this.state.defaultAdjAmount ? this.state.amount : ''}</div>
                   :
                   <input className={styles.amtInput}
                          type="number"
@@ -320,7 +315,7 @@ class Popup_DeployedHome extends React.Component{
               <div className={styles.row}>
                 <div>Adj. Amount (USD):</div>
                 {Values.state.ui.substituted ?
-                  <div>{this.state.amount == this.state.defaultAmount ? this.state.adjAmount : ''}</div>
+                  <div className={styles.fixedAmt}>{this.state.amount == this.state.defaultAmount ? this.state.adjAmount : ''}</div>
                   :
                   <input className={styles.amtInput}
                        type="number"
