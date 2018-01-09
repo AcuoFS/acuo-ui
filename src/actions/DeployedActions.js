@@ -3,7 +3,8 @@ import {
   UPDATE_SELECTED_DEPARTURE_DATE,
   FETCH_DEPARTURES,
   UPDATE_DEPLOYED_OPTIMISATION_SETTINGS,
-  ON_INIT_DEPLOYED_OPTIMISATION_SETTINGS
+  ON_INIT_DEPLOYED_OPTIMISATION_SETTINGS,
+  INIT_DEPLOYED_OPTIMISATION_SETTINGS
 } from '../constants/ActionTypes'
 
 export const initDepartures = (departures) => ({
@@ -27,6 +28,11 @@ export const fetchDepartures = () => ({
 
 export const updateDeployedOptimisationSettings = (settings) => ({
   type: UPDATE_DEPLOYED_OPTIMISATION_SETTINGS,
+  settings
+})
+
+export const initDeployedOptimisationSettings = (settings) => ({
+  type: INIT_DEPLOYED_OPTIMISATION_SETTINGS,
   settings
 })
 

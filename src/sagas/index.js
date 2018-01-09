@@ -47,7 +47,7 @@ import {
 } from './../actions'
 import {
   initDepartures,
-  updateDeployedOptimisationSettings
+  initDeployedOptimisationSettings
 } from './../actions/DeployedActions'
 import {
   updateRequestState,
@@ -205,7 +205,7 @@ function* watchFetchDeployedOptimisationSettings() {
     try{
       yield take(ON_INIT_DEPLOYED_OPTIMISATION_SETTINGS)
       const obj = yield call(FetchDeployedOptimisationSettingsSaga)
-      yield put(updateDeployedOptimisationSettings(obj.items))
+      yield put(initDeployedOptimisationSettings(obj.items))
     } catch(error){
       console.log(error)
       return false

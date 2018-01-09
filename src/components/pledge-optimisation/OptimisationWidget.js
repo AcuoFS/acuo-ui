@@ -148,8 +148,10 @@ export default class OptimisationWidget extends React.Component {
         </div>
 
         <div className={styles.buttonHolder}>
+          {!this.props.hideCheckboxes &&
           <ChooseCalls tickImg={sliderCheckbox[0]} tickState={sliderCheckbox[1]}
                        tickClick={onToggleCheckall}/>
+          }
 
           <div className={styles.optButton + ' ' +
           ((this.checkIfExist(pendingAllocation).size > 0) && !allocating ? '' : styles.btnDisabled )}

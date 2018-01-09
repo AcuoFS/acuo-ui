@@ -65,7 +65,8 @@ const mapStateToProps = state => ({
   //     state.PledgeReducer.getIn(['pledgeData', 'filters']).toJS())),
   pendingAllocation: state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation']),
   sliderCheckbox: determineCheckboxStatus(checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'selection'])).size, checkIfExist(state.PledgeReducer.getIn(['pledgeData', 'pendingAllocation'])).size),
-  scenarioAnalysis: fetchAnalysisData()
+  scenarioAnalysis: fetchAnalysisData(),
+  hideCheckboxes: true
 })
 
 const mapDispatchToProps = dispatch => {
