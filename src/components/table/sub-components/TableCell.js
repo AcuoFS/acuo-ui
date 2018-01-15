@@ -6,9 +6,9 @@ class TableCell extends React.Component {
   render() {
     const {cellValue} = this.props
     return (
-      <div>
-        <div className={styles.vertiCenter}>
-          <div className={styles.centerThis}>{cellValue}</div>
+      <div className={styles.cellHolder}>
+        <div className={styles.cell}>
+          {cellValue}
         </div>
       </div>
     )
