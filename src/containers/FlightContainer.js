@@ -10,6 +10,7 @@ import { updateSelectedDepartureDate, fetchDepartures } from './../actions/Deplo
 const mapStateToProps = state => {
   // console.log(state.DeployedReducer.getIn(['selectedDepartureDate', 'label']))
   // console.log(state.DeployedReducer.get('departures').toJS())
+  // console.log(state.DeployedReducer.get('departureDatesList'))
  return {
           departures: state.DeployedReducer.get('departures').toJS(),
           arrivals_searchText: state.DeployedReducer.get('arrivals_searchText'),
@@ -30,7 +31,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mergeProps = (stateProps, dispatchProps) => ({
-  filteredDepartures: stateProps.departures.filter(x => _.inRange(new Date(x.header.time).getTime(), stateProps.selectedDepartureDate.min, stateProps.selectedDepartureDate.max)),
+  filteredDepartures: stateProps.departures.filter(x => _.inRange(new Date(x.header.time * 1000).getTime(), stateProps.selectedDepartureDate.min, stateProps.selectedDepartureDate.max)),
   ...stateProps, ...dispatchProps
 })
 
