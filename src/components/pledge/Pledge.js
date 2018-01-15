@@ -50,7 +50,7 @@ class Pledge extends React.Component {
   }
 
   componentDidMount() {
-    this.props.onInitOptimisationSettings()
+    // this.props.onInitOptimisationSettings()
     this.props.initSelection()
   }
 

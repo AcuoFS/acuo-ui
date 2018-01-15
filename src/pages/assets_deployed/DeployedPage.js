@@ -1,33 +1,45 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import {
   NavigationBarContainer,
   FlightContainer,
   AssetsContainer
 } from '../../containers'
-import { fetchDepartures } from './../../actions/DeployedActions'
+import {DeployedOptimisationContainer} from './../../containers'
+
+// import { fetchDepartures } from './../../actions/DeployedActions'
 // import Copyright from '../../components/copyright/Copyright.js'
 // import { AssetsPanel } from '../../actions/AssetsActions.js'
 import Styles from "./DeployedPage.css"
 // import { initDepartures } from '../../actions/DeployedActions'
 // import { FETCH_DEPLOYED_DEPARTURES } from './../../constants/APIcalls'
-import { hashHistory } from 'react-router'
+import {hashHistory} from 'react-router'
 
 class DeployedPage extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
   }
-  componentWillMount(){
-    if(localStorage.loginAt == undefined || localStorage.loginAt < Date.now()){ hashHistory.push('/') }
+
+  componentWillMount() {
+    if (localStorage.loginAt == undefined || localStorage.loginAt < Date.now()) {
+      hashHistory.push('/')
+    }
   }
-  componentDidMount () {
+
+  componentDidMount() {
     window.scrollTo(0, 0)
-    if(localStorage.loginAt < Date.now()){  hashHistory.push("/")  }
+    if (localStorage.loginAt < Date.now()) {
+      hashHistory.push("/")
+    }
   }
+
   render() {
     return (
-     <div className={Styles.page}>
+      <div className={Styles.page}>
         <NavigationBarContainer curPage={this.props.location.pathname}/>
+        <div className={Styles.optContainer}>
+          <DeployedOptimisationContainer/>
+        </div>
         <FlightContainer/>
         <AssetsContainer/>
       </div>
@@ -36,7 +48,7 @@ class DeployedPage extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { test: 0 }
+  return {test: 0}
 }
 
 const mapDispatchToProps = dispatch => {
@@ -49,7 +61,6 @@ const DeployedPageContainer = connect(
 )(DeployedPage)
 
 export {DeployedPageContainer}
-
 
 
 // class DeployedPageComponent extends React.Component {

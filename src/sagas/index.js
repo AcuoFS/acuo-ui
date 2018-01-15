@@ -23,6 +23,7 @@ import {
   DoLoginSaga,
   PostMarginCallsSaga,
   FetchCurrencyInfoSaga,
+  FetchDeployedOptimisationSettingsSaga,
 
   FetchAnalyticsDataSaga
 } from './ServerCalls'
@@ -44,7 +45,10 @@ import {
   clearPendingAllocation,
   allocatingCollaterals
 } from './../actions'
-import { initDepartures } from './../actions/DeployedActions'
+import {
+  initDepartures,
+  initDeployedOptimisationSettings
+} from './../actions/DeployedActions'
 import {
   updateRequestState,
   marginCallGenerated,
@@ -81,7 +85,8 @@ import {
   ON_PLEDGE,
   ON_REMOVE_ALLOCATED_ASSET,
   ON_REQUEST_SEND_MARGINCALL,
-  SAGA_ANALYTICS_DATA
+  SAGA_ANALYTICS_DATA,
+  ON_INIT_DEPLOYED_OPTIMISATION_SETTINGS
 } from '../constants/ActionTypes'
 
 function* serverHealthChecks() {
@@ -188,6 +193,19 @@ function* watchFetchDepatures() {
       const obj = yield call(FetchDeparturesSaga)
       if(obj.length)
         yield put(initDepartures(obj))
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchFetchDeployedOptimisationSettings() {
+  while(true){
+    try{
+      yield take(ON_INIT_DEPLOYED_OPTIMISATION_SETTINGS)
+      const obj = yield call(FetchDeployedOptimisationSettingsSaga)
+      yield put(initDeployedOptimisationSettings(obj.items))
     } catch(error){
       console.log(error)
       return false
@@ -388,6 +406,7 @@ export default function* root() {
     fork(watchFetchCollaterals),
     fork(watchPledge),
     fork(watchRemoveAllocatedAsset),
+    fork(watchFetchDeployedOptimisationSettings),
     fork(watchFetchAnalyticsData)
   ]
 }

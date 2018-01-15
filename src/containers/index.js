@@ -21,6 +21,7 @@ import NotificationContainer from './NotificationContainer'
 import AppWrapperContainer from './AppWrapperContainer'
 import AnalyticsGraphContainer from './AnalyticsGraphContainer'
 import ChatContainer from './ChatContainer'
+import DeployedOptimisationContainer from './DeployedOptimisationContainer'
 
 export {
   FilterContainer,
@@ -45,5 +46,6 @@ export {
   NotificationContainer,
   AppWrapperContainer,
   AnalyticsGraphContainer,
-  ChatContainer
+  ChatContainer,
+  DeployedOptimisationContainer
 }
