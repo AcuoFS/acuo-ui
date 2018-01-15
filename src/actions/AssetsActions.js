@@ -1,3 +1,8 @@
+import {
+  ON_CAL_ADJ_AMOUNT,
+  UPDATE_SUBSTITUTED_FLAG
+} from './../constants/ActionTypes'
+
 export const AssetsPanel = {
   DeployedPanel_ToggleSideExpand: (isExpanded) => {
     return {
@@ -86,5 +91,14 @@ export const AssetsPanel = {
     }
   },
 
+  onCalculateAdjAmount: (amount) => ({
+    type: ON_CAL_ADJ_AMOUNT,
+    amount
+  }),
+
+  onUpdateSubstitutedState: (flag) => ({
+    type: UPDATE_SUBSTITUTED_FLAG,
+    flag
+  })
 
 }

@@ -18,6 +18,7 @@ import { PostMarginCallsSaga } from './PostMarginCallsSaga'
 import { FetchCurrencyInfoSaga } from './FetchCurrencyInfoSaga'
 import { FetchDeployedOptimisationSettingsSaga } from './FetchDeployedOptimisationSettingsSaga'
 import { PostReplaceAllocatedAssetSaga } from './PostReplaceAllocatedAssetSaga'
+import { DeployedCalcAdjAmountSaga } from './DeployedCalcAdjAmountSaga'
 
 import { FetchAnalyticsDataSaga } from './FetchAnalyticsDataSaga'
 
@@ -40,9 +41,9 @@ export {
   DoLoginSaga,
   PostMarginCallsSaga,
   FetchCurrencyInfoSaga,
-  FetchCurrencyInfoSaga,
   FetchDeployedOptimisationSettingsSaga,
   PostReplaceAllocatedAssetSaga,
+  DeployedCalcAdjAmountSaga,
 
   FetchAnalyticsDataSaga
 }
