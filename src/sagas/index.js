@@ -24,6 +24,7 @@ import {
   PostMarginCallsSaga,
   FetchCurrencyInfoSaga,
   FetchDeployedOptimisationSettingsSaga,
+  PostReplaceAllocatedAssetSaga,
 
   FetchAnalyticsDataSaga
 } from './ServerCalls'
@@ -86,7 +87,8 @@ import {
   ON_REMOVE_ALLOCATED_ASSET,
   ON_REQUEST_SEND_MARGINCALL,
   SAGA_ANALYTICS_DATA,
-  ON_INIT_DEPLOYED_OPTIMISATION_SETTINGS
+  ON_INIT_DEPLOYED_OPTIMISATION_SETTINGS,
+  ON_REPLACE_ALLOCATED_ASSET,
 } from '../constants/ActionTypes'
 
 function* serverHealthChecks() {
@@ -372,6 +374,19 @@ function* watchRemoveAllocatedAsset() {
   }
 }
 
+function* watchReplaceAllocatedAsset() {
+  while(true){
+    try{
+      const action = yield take(ON_REPLACE_ALLOCATED_ASSET)
+      console.log('fired')
+      // yield call(PostReplaceAllocatedAssetSaga, action.obj)
+    }catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
 function* watchFetchAnalyticsData() {
   while(true){
     try{
@@ -407,6 +422,8 @@ export default function* root() {
     fork(watchPledge),
     fork(watchRemoveAllocatedAsset),
     fork(watchFetchDeployedOptimisationSettings),
+    fork(watchReplaceAllocatedAsset),
+
     fork(watchFetchAnalyticsData)
   ]
 }

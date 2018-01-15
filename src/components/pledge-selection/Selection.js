@@ -215,7 +215,8 @@ export default class Selection extends React.Component {
                          agreementName={marginCall.get('agreementName')}
                          allocatedAsset={this.state.assetAllocated}
                          existingAsset={this.state.existingAsset}
-                         marginType={this.state.marginType}  /> }
+                         marginType={this.state.marginType}
+                         onReplaceAllocatedAsset={this.props.onReplaceAllocatedAsset} /> }
 
         <div className={styles.columnContainer}>
           <div className={styles.leftColumn + ' ' + (!toggleL ? styles.bigger : '')}>
