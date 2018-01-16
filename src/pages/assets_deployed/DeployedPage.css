@@ -21,13 +21,18 @@
   /*width: 80px;*/
   padding: 6px 6px;
   /*margin-bottom: 10px;*/
-  font-size: 1.4em;
-  color: acuoGrey;
+  /*font-size: 1.4em;*/
+  color: #6389ad;
   cursor: pointer;
   width: 49%;
   max-width: 930px;
   align-self: center;
   margin-top: 20px;
+  font-size: 20px;
+  line-height: 24px;
+  text-transform: uppercase;
+  composes: baseFontBold from './../../static/css-components/fonts.css';
+  margin-bottom: -20px;
 }
 
 .filterBarName span {

@@ -110,7 +110,9 @@ export default class OptimisationWidget extends React.Component {
 
     return <div className={styles.optimisationWidgetHolder}>
     <div className={sharedStyles.panel} id={styles.optSetting}>
-      <div className={sharedStyles.panelTitle}>Optimization Setting <img src={'./images/pledge/locked.png'}/></div>
+      {!this.props.hideCheckboxes &&
+        <div className={sharedStyles.panelTitle}>Optimization Setting <img src={'./images/pledge/locked.png'}/></div>
+      }
       <div className={styles.tabHolder}>
         <div className={styles.tab + ' ' + (this.isObjectiveTab(this.state.currentTab) && styles.selectedTab)}
              onClick={() => this.setState({currentTab: TAB_OBJECTIVE})}>
