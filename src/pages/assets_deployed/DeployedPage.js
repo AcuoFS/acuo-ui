@@ -18,6 +18,14 @@ import {hashHistory} from 'react-router'
 class DeployedPage extends React.Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      filterBarShow: true,
+      filterBar: Styles.open,
+      filterItems: Styles.show,
+    }
+
+    this.toggleFilter = this.toggleFilter.bind(this)
   }
 
   componentWillMount() {
@@ -33,11 +41,34 @@ class DeployedPage extends React.Component {
     }
   }
 
+  toggleFilter() {
+    if (!this.state.filterBarShow) {
+      this.setState({
+        filterBarShow: !this.state.filterBarShow,
+        filterBar: Styles.open,
+        filterItems: Styles.show
+      })
+    } else {
+      this.setState({
+        filterBarShow: !this.state.filterBarShow,
+        filterBar: Styles.close,
+        filterItems: Styles.hide
+      })
+    }
+  }
+
   render() {
     return (
       <div className={Styles.page}>
         <NavigationBarContainer curPage={this.props.location.pathname}/>
-        <div className={Styles.optContainer}>
+        <div className={Styles.filterBarName + ' ' + this.state.filterBar} onClick={this.toggleFilter}>
+          <span>Optimisation Setting</span>
+          <div className={Styles.switchArrow}>
+            <div className={Styles.arrowLine} id={Styles.line1}></div>
+            <div className={Styles.arrowLine} id={Styles.line2}></div>
+          </div>
+        </div>
+        <div className={Styles.optContainer + ' ' + this.state.filterItems}>
           <DeployedOptimisationContainer/>
         </div>
         <FlightContainer/>
