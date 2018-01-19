@@ -5,7 +5,7 @@
 import { COLLATERAL_URL } from '../../constants/APIcalls'
 
 export const FetchCollateralsSaga = () => (
-  fetch(COLLATERAL_URL).then((response) => {
+  fetch(`${COLLATERAL_URL}/${window.localStorage.clientID}`).then((response) => {
     return response.json()
   }).then((obj) => {
     return obj

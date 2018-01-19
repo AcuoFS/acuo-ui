@@ -4,7 +4,8 @@
 import {
   DO_LOGIN,
   UPDATE_LOGIN_PROCESS,
-  UPDATE_WRONG_CREDENTIALS_FLAG
+  UPDATE_WRONG_CREDENTIALS_FLAG,
+  // UPDATE_CLIENT_ID
 } from '../constants/ActionTypes'
 
 export const doLogin = (user, pass) => ({
@@ -22,3 +23,8 @@ export const updateWrongCredentialsFlag = flag => ({
   type: UPDATE_WRONG_CREDENTIALS_FLAG,
   flag
 })
+
+// export const updateCLientID = (clientID) => ({
+//   type: UPDATE_CLIENT_ID,
+//   clientID
+// })

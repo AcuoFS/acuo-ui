@@ -7,7 +7,7 @@ export const ReconDisputeSaga = (disputeObjToSend) => {
   return fetch(SEND_RECON_DISPUTE_URL, {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),
-    body: JSON.stringify(disputeObjToSend)
+    body: JSON.stringify(Object.assign(disputeObjToSend, {clientID: window.localStorage.clientID}))
   }).then(response => {
     //console.log(response)
     if (response.status === 200 || response.status === 201) {

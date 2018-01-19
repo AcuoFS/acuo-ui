@@ -7,7 +7,7 @@ import { ALLOCATE_COLLATERALS_URL_NEW } from '../../constants/APIcalls'
 export const AllocateCollateralsSaga = (reqObj) =>
   fetch(ALLOCATE_COLLATERALS_URL_NEW,{
       method: 'POST',
-      body: JSON.stringify(reqObj)
+      body: JSON.stringify(Object.assign(reqObj, {clientID: window.localStorage.clientID}))
     }).then((response) => {
     return response.json()
   }).then((obj) => {
