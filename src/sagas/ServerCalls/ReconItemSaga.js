@@ -16,7 +16,7 @@ export const ReconItemSaga = (params) =>{
     return response
   }).then(obj => {
     // console.log('refreshing recon data...')
-    return fetch(RECON_URL).then((response) => {
+    return fetch(`${RECON_URL}/${window.localStorage.clientID}`).then((response) => {
       // console.log(response)
       return response.json()
     }).then((obj) => {

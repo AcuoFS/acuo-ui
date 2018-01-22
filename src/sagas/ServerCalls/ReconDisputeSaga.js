@@ -16,7 +16,7 @@ export const ReconDisputeSaga = (disputeObjToSend) => {
       //alert('Unknown status code received: ' + response.status)
     }
 
-    return fetch(RECON_URL).then((response) => {
+    return fetch(`${RECON_URL}/${window.localStorage.clientID}`).then((response) => {
       return response.json()
     }).then((obj) => {
       const { items } = obj
