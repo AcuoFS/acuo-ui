@@ -5,7 +5,7 @@
 import { FETCH_CURRENCY_INFO } from '../../constants/APIcalls'
 
 export const FetchCurrencyInfoSaga = () => (
-  fetch(`${FETCH_CURRENCY_INFO}/${window.localStorage.clientID}`).then((response) => {
+  fetch(`${FETCH_CURRENCY_INFO}/${window.localStorage.clientId}`).then((response) => {
     return response.json()
   }).then((obj) => {
     return obj

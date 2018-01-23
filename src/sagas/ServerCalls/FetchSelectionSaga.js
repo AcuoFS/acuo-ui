@@ -5,7 +5,7 @@
 import { MARGIN_SELECTION_URL } from '../../constants/APIcalls'
 
 export const FetchSelectionSaga = () => (
-  fetch(`${MARGIN_SELECTION_URL}/${window.localStorage.clientID}`).then((response) => {
+  fetch(`${MARGIN_SELECTION_URL}/${window.localStorage.clientId}`).then((response) => {
     return response.json()
   }).then((obj) => {
     return obj

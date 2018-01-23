@@ -7,7 +7,7 @@ import { REQUEST_VALUATION_URL } from '../../constants/APIcalls'
 export const RequestValuationSaga = (referenceIDs) =>
   fetch(REQUEST_VALUATION_URL, {
     method: 'POST',
-    body: JSON.stringify({"ids": referenceIDs, clientID: window.localStorage.clientID}),
+    body: JSON.stringify({"ids": referenceIDs, clientId: window.localStorage.clientID}),
     headers: {'content-type': 'application/json'},
     json: true,
     resolveWithFullResponse: true

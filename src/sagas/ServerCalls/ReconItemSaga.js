@@ -9,7 +9,7 @@ export const ReconItemSaga = (params) =>{
 
   return fetch(RECON_DATA_URL, {
     method: 'post',
-    body: JSON.stringify({params, clientID: window.localStorage.clientID})
+    body: JSON.stringify({params, clientId: window.localStorage.clientID})
   }).then(response => {
     // console.log('response ' + JSON.stringify(response))
     // console.log(response)

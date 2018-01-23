@@ -98,7 +98,7 @@ import {
   ON_CAL_ADJ_AMOUNT,
 } from '../constants/ActionTypes'
 
-const getClientIDSelector = state => state.CommonReducer.get('clientID')
+const getClientIDSelector = state => state.CommonReducer.get('clientId')
 
 function* serverHealthChecks() {
   while(true){
@@ -141,11 +141,11 @@ function* watchLogin() {
       if (user && pass) {
         yield put(updateLoginProcess(true))
         yield put(updateWrongCredentialsFlag(false))
-        const { clientID } = yield call(DoLoginSaga, user, pass)
-        if(clientID) {
+        const { clientId } = yield call(DoLoginSaga, user, pass)
+        if(clientId) {
           localStorage.authenticating = true
           hashHistory.push('/2fa')
-          window.localStorage.clientID = clientID
+          window.localStorage.clientId = clientId
         }else{
           yield put(updateWrongCredentialsFlag(true))
           // yield put(Notifications.error({
@@ -274,8 +274,8 @@ function* watchFetchDashboardData() {
   while(true){
     try{
       yield take(ON_INIT_DASHBOARD)
-      const clientID = yield select(getClientIDSelector)
-      console.log(clientID)
+      const clientId = yield select(getClientIDSelector)
+      console.log(clientId)
       const obj = yield call(FetchDashboardSaga)
       yield put(initState(obj))
       const currencyObj = yield call(FetchCurrencyInfoSaga)
