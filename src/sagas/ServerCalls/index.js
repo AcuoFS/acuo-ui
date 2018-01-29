@@ -16,6 +16,9 @@ import { RemoveAllocatedAssetsSaga } from './RemoveAllocatedAssetsSaga'
 import { DoLoginSaga } from './DoLoginSaga'
 import { PostMarginCallsSaga } from './PostMarginCallsSaga'
 import { FetchCurrencyInfoSaga } from './FetchCurrencyInfoSaga'
+import { FetchDeployedOptimisationSettingsSaga } from './FetchDeployedOptimisationSettingsSaga'
+import { PostReplaceAllocatedAssetSaga } from './PostReplaceAllocatedAssetSaga'
+import { DeployedCalcAdjAmountSaga } from './DeployedCalcAdjAmountSaga'
 
 import { FetchAnalyticsDataSaga } from './FetchAnalyticsDataSaga'
 
@@ -38,6 +41,9 @@ export {
   DoLoginSaga,
   PostMarginCallsSaga,
   FetchCurrencyInfoSaga,
+  FetchDeployedOptimisationSettingsSaga,
+  PostReplaceAllocatedAssetSaga,
+  DeployedCalcAdjAmountSaga,
 
   FetchAnalyticsDataSaga
 }

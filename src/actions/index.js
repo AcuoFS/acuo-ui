@@ -147,6 +147,11 @@ export const allocatingCollaterals = (flag) => ({
   flag
 })
 
+export const replaceAllocatedAsset = (obj) => ({
+  type: ActionTypes.ON_REPLACE_ALLOCATED_ASSET,
+  obj
+})
+
 //recon
 export const firstLeveSelect = (GUID, firstLevelID) => ({
   type: ActionTypes.FIRSTLEVEL_SELECT,

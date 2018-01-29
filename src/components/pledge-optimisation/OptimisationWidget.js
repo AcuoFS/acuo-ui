@@ -35,6 +35,10 @@ export default class OptimisationWidget extends React.Component {
     this.handleToggle = this.handleToggle.bind(this);
   }
 
+  componentDidMount() {
+    this.props.onInitOptimisationSettings()
+  }
+
   selectActiveRow(name) {
     this.setState({
         activeRow: name
@@ -106,7 +110,9 @@ export default class OptimisationWidget extends React.Component {
 
     return <div className={styles.optimisationWidgetHolder}>
     <div className={sharedStyles.panel} id={styles.optSetting}>
-      <div className={sharedStyles.panelTitle}>Optimization Setting <img src={'./images/pledge/locked.png'}/></div>
+      {!this.props.hideCheckboxes &&
+        <div className={sharedStyles.panelTitle}>Optimization Setting <img src={'./images/pledge/locked.png'}/></div>
+      }
       <div className={styles.tabHolder}>
         <div className={styles.tab + ' ' + (this.isObjectiveTab(this.state.currentTab) && styles.selectedTab)}
              onClick={() => this.setState({currentTab: TAB_OBJECTIVE})}>
@@ -144,8 +150,10 @@ export default class OptimisationWidget extends React.Component {
         </div>
 
         <div className={styles.buttonHolder}>
+          {!this.props.hideCheckboxes &&
           <ChooseCalls tickImg={sliderCheckbox[0]} tickState={sliderCheckbox[1]}
                        tickClick={onToggleCheckall}/>
+          }
 
           <div className={styles.optButton + ' ' +
           ((this.checkIfExist(pendingAllocation).size > 0) && !allocating ? '' : styles.btnDisabled )}

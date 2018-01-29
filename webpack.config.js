@@ -89,7 +89,7 @@ module.exports = {
     historyApiFallback: true,
     proxy: {
       '/proxy/**/**/**/**/**': {
-        target: 'http://dev.acuo.com',
+        target: 'https://dev.acuo.com',
         changeOrigin: true
       }
     }

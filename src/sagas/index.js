@@ -1,5 +1,5 @@
 import { fork, call, put, take, race, takeLatest } from 'redux-saga/effects'
-import { delay, takeEvery } from 'redux-saga'
+import { delay, throttle } from 'redux-saga'
 import { hashHistory } from 'react-router'
 import Notifications from 'react-notification-system-redux'
 
@@ -23,6 +23,9 @@ import {
   DoLoginSaga,
   PostMarginCallsSaga,
   FetchCurrencyInfoSaga,
+  FetchDeployedOptimisationSettingsSaga,
+  PostReplaceAllocatedAssetSaga,
+  DeployedCalcAdjAmountSaga,
 
   FetchAnalyticsDataSaga
 } from './ServerCalls'
@@ -44,7 +47,10 @@ import {
   clearPendingAllocation,
   allocatingCollaterals
 } from './../actions'
-import { initDepartures } from './../actions/DeployedActions'
+import {
+  initDepartures,
+  initDeployedOptimisationSettings
+} from './../actions/DeployedActions'
 import {
   updateRequestState,
   marginCallGenerated,
@@ -62,6 +68,10 @@ import {
 import{
   updateCurrencyInfo
 } from './../actions/CommonActions'
+
+import {
+  AssetsPanel
+} from './../actions/AssetsActions'
 
 //action types
 import {
@@ -81,7 +91,10 @@ import {
   ON_PLEDGE,
   ON_REMOVE_ALLOCATED_ASSET,
   ON_REQUEST_SEND_MARGINCALL,
-  SAGA_ANALYTICS_DATA
+  SAGA_ANALYTICS_DATA,
+  ON_INIT_DEPLOYED_OPTIMISATION_SETTINGS,
+  ON_REPLACE_ALLOCATED_ASSET,
+  ON_CAL_ADJ_AMOUNT,
 } from '../constants/ActionTypes'
 
 function* serverHealthChecks() {
@@ -188,6 +201,19 @@ function* watchFetchDepatures() {
       const obj = yield call(FetchDeparturesSaga)
       if(obj.length)
         yield put(initDepartures(obj))
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchFetchDeployedOptimisationSettings() {
+  while(true){
+    try{
+      yield take(ON_INIT_DEPLOYED_OPTIMISATION_SETTINGS)
+      const obj = yield call(FetchDeployedOptimisationSettingsSaga)
+      yield put(initDeployedOptimisationSettings(obj.items))
     } catch(error){
       console.log(error)
       return false
@@ -354,6 +380,19 @@ function* watchRemoveAllocatedAsset() {
   }
 }
 
+function* watchReplaceAllocatedAsset() {
+  while(true){
+    try{
+      const action = yield take(ON_REPLACE_ALLOCATED_ASSET)
+      console.log('fired')
+      // yield call(PostReplaceAllocatedAssetSaga, action.obj)
+    }catch(error){
+      console.log(error)
+      return false
+    }
+  }
+}
+
 function* watchFetchAnalyticsData() {
   while(true){
     try{
@@ -366,6 +405,22 @@ function* watchFetchAnalyticsData() {
       return false
     }
   }
+}
+
+function* runCalc(action){
+  const json = yield call(DeployedCalcAdjAmountSaga)
+  console.log(json)
+}
+
+function* watchDeployedPopupChangeAmount(){
+  // while(true){
+  //   try{
+      yield throttle(1000, ON_CAL_ADJ_AMOUNT, runCalc)
+  //   } catch(error) {
+  //     console.log(error)
+  //     return false
+  //   }
+  // }
 }
 
 export default function* root() {
@@ -388,6 +443,10 @@ export default function* root() {
     fork(watchFetchCollaterals),
     fork(watchPledge),
     fork(watchRemoveAllocatedAsset),
-    fork(watchFetchAnalyticsData)
+    fork(watchFetchDeployedOptimisationSettings),
+    fork(watchReplaceAllocatedAsset),
+
+    fork(watchFetchAnalyticsData),
+    fork(watchDeployedPopupChangeAmount)
   ]
 }

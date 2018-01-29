@@ -1,33 +1,76 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import {
   NavigationBarContainer,
   FlightContainer,
   AssetsContainer
 } from '../../containers'
-import { fetchDepartures } from './../../actions/DeployedActions'
+import {DeployedOptimisationContainer} from './../../containers'
+
+// import { fetchDepartures } from './../../actions/DeployedActions'
 // import Copyright from '../../components/copyright/Copyright.js'
 // import { AssetsPanel } from '../../actions/AssetsActions.js'
 import Styles from "./DeployedPage.css"
 // import { initDepartures } from '../../actions/DeployedActions'
 // import { FETCH_DEPLOYED_DEPARTURES } from './../../constants/APIcalls'
-import { hashHistory } from 'react-router'
+import {hashHistory} from 'react-router'
 
 class DeployedPage extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
+
+    this.state = {
+      filterBarShow: true,
+      filterBar: Styles.open,
+      filterItems: Styles.show,
+    }
+
+    this.toggleFilter = this.toggleFilter.bind(this)
   }
-  componentWillMount(){
-    if(localStorage.loginAt == undefined || localStorage.loginAt < Date.now()){ hashHistory.push('/') }
+
+  componentWillMount() {
+    if (localStorage.loginAt == undefined || localStorage.loginAt < Date.now()) {
+      hashHistory.push('/')
+    }
   }
-  componentDidMount () {
+
+  componentDidMount() {
     window.scrollTo(0, 0)
-    if(localStorage.loginAt < Date.now()){  hashHistory.push("/")  }
+    if (localStorage.loginAt < Date.now()) {
+      hashHistory.push("/")
+    }
   }
+
+  toggleFilter() {
+    if (!this.state.filterBarShow) {
+      this.setState({
+        filterBarShow: !this.state.filterBarShow,
+        filterBar: Styles.open,
+        filterItems: Styles.show
+      })
+    } else {
+      this.setState({
+        filterBarShow: !this.state.filterBarShow,
+        filterBar: Styles.close,
+        filterItems: Styles.hide
+      })
+    }
+  }
+
   render() {
     return (
-     <div className={Styles.page}>
+      <div className={Styles.page}>
         <NavigationBarContainer curPage={this.props.location.pathname}/>
+        <div className={Styles.filterBarName + ' ' + this.state.filterBar} onClick={this.toggleFilter}>
+          <span>Optimisation Setting</span>
+          <div className={Styles.switchArrow}>
+            <div className={Styles.arrowLine} id={Styles.line1}></div>
+            <div className={Styles.arrowLine} id={Styles.line2}></div>
+          </div>
+        </div>
+        <div className={Styles.optContainer + ' ' + this.state.filterItems}>
+          <DeployedOptimisationContainer/>
+        </div>
         <FlightContainer/>
         <AssetsContainer/>
       </div>
@@ -36,7 +79,7 @@ class DeployedPage extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { test: 0 }
+  return {test: 0}
 }
 
 const mapDispatchToProps = dispatch => {
@@ -49,7 +92,6 @@ const DeployedPageContainer = connect(
 )(DeployedPage)
 
 export {DeployedPageContainer}
-
 
 
 // class DeployedPageComponent extends React.Component {

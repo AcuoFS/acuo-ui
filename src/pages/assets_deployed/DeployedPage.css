@@ -1,8 +1,105 @@
-.page{
- display: flex;
- flex-direction: column;
+@value acuoGrey from '../../static/css-components/colors.css';
+
+.page {
+  display: flex;
+  flex-direction: column;
 }
 
-.footer{
- align-self: flex-start;
+.footer {
+  align-self: flex-start;
+}
+
+.optContainer {
+  width: 60%;
+  max-width: 930px;
+  align-self: center;
+}
+
+.filterBarName {
+  display: block;
+  position: relative;
+  /*width: 80px;*/
+  padding: 6px 6px;
+  /*margin-bottom: 10px;*/
+  /*font-size: 1.4em;*/
+  color: #6389ad;
+  cursor: pointer;
+  width: 49%;
+  max-width: 930px;
+  align-self: center;
+  margin-top: 20px;
+  font-size: 20px;
+  line-height: 24px;
+  text-transform: uppercase;
+  composes: baseFontBold from './../../static/css-components/fonts.css';
+  margin-bottom: -20px;
+}
+
+.filterBarName span {
+  display: inline-block;
+  position: relative;
+  margin-right: 6px;
+}
+
+.filterBarName .switchArrow {
+  display: inline-block;
+  position: relative;
+  width: 16px;
+  height: 12px;
+  top: 0px;
+}
+
+.filterBarName.open .switchArrow {
+  -moz-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+  top: 0px;
+}
+
+.filterBarName.close .switchArrow {
+  -moz-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+  top: -2px;
+}
+
+.filterBarName .switchArrow .arrowLine#line1,
+.filterBarName .switchArrow .arrowLine#line2 {
+  display: inline-block;
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  background-color: acuoGrey;
+  top: 4px;
+}
+
+.filterBarName .switchArrow .arrowLine#line1 {
+  -moz-transform: rotate(-40deg);
+  -webkit-transform: rotate(-40deg);
+  -o-transform: rotate(-40deg);
+  -ms-transform: rotate(-40deg);
+  transform: rotate(-40deg);
+}
+
+.filterBarName .switchArrow .arrowLine#line2 {
+  -moz-transform: rotate(40deg);
+  -webkit-transform: rotate(40deg);
+  -o-transform: rotate(40deg);
+  -ms-transform: rotate(40deg);
+  transform: rotate(40deg);
+  left: 6px;
+}
+
+.optContainer.show {
+  height: auto;
+  display: block;
+}
+
+.optContainer.hide {
+  height: 0px;
+  display: none;
 }

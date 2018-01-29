@@ -3,6 +3,7 @@
  */
 import React from 'react'
 import Selection from '../pledge-selection/Selection'
+import PledgeSelectionContainer from './../../containers/SelectionContainer'
 import CollateralWidgetContainer from '../../containers/CollateralWidgetContainer'
 import {OPTIMISATION_URL, MARGIN_SELECTION_URL} from '../../constants/APIcalls'
 import OptimisationWidget from '../pledge-optimisation/OptimisationWidget'
@@ -50,7 +51,7 @@ class Pledge extends React.Component {
   }
 
   componentDidMount() {
-    this.props.onInitOptimisationSettings()
+    // this.props.onInitOptimisationSettings()
     this.props.initSelection()
   }
 
@@ -87,7 +88,7 @@ class Pledge extends React.Component {
   // #OW-324
   renderSelection(x, onTogglePendingAllocation, pendingAllocation, index, onRemoveAssetFromAllocate) {
     // console.log(x.toJS());
-    return (<Selection sideways={this.state.selectionSideway}
+    return (<PledgeSelectionContainer sideways={this.state.selectionSideway}
                        clicked={this.changeSideways}
                        chkTick={this.chkTick}
                        toggleL={this.state.toggleShowHideL}
