@@ -70,9 +70,9 @@ export default class MarginCallRow extends React.Component {
           <div className={styles.cell + ' ' + styles.dateCell + ' ' + styles.boldCellText}>
             {item.valuationDate || '-'}
           </div>
-          <div className={styles.cell + ' ' + styles.largeCell}>{checkNegative(item.exposure || 0)}</div>
-          <div className={styles.cell + ' ' + styles.callTypeCell}>{item.callType || '-'}</div>
-          <div className={styles.cell + ' ' + styles.dateCell + ' ' + styles.boldCellText}>
+          <div className={styles.cell + ' ' + styles.largeCell + ' exposure'}>{checkNegative(item.exposure || 0)}</div>
+          <div className={styles.cell + ' ' + styles.callTypeCell + ' callType'}>{item.callType || '-'}</div>
+          <div className={styles.cell + ' ' + styles.dateCell + ' ' + styles.boldCellText + ' callDate'}>
             {item.callDate || '-'}
           </div>
           <div className={styles.cell + ' ' + styles.ccyCell}>{item.currency || '-'}</div>

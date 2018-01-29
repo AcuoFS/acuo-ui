@@ -25,7 +25,7 @@ const MarginCallAgreementDetailRow = ({propAgreementDetailObj}) => (
       <div>{propAgreementDetailObj.netRequired || '-'}</div>
       <div>{propAgreementDetailObj.rate || '-'}</div>
       <div className={styles.boldText}>{propAgreementDetailObj.tradeCount || '-'}</div>
-      <div>{propAgreementDetailObj.tradeValue || '-'}</div>
+      <div className="tradesValued">{propAgreementDetailObj.tradeValue || '-'}</div>
       <div>{propAgreementDetailObj.pricingSource || '-'}</div>
       <div></div>
     </div>
