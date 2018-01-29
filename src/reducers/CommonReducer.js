@@ -10,7 +10,8 @@ const INITIAL_STATE = Map({
   'alerts': List(),
   'noPrompt': true,
   'wrongCredentials': false,
-  'currencyInfo': Map()
+  'currencyInfo': Map(),
+  // 'clientID': null
 })
 
 const CommonReducer = (state = INITIAL_STATE, action) => {
@@ -29,6 +30,9 @@ const CommonReducer = (state = INITIAL_STATE, action) => {
 
     case ActionTypes.UPDATE_CURRENCY_INFO:
       return state.set('currencyInfo', fromJS(_.keyBy(action.currencyObj, 'ccy')))
+
+    // case ActionTypes.UPDATE_CLIENT_ID:
+    //   return state.set('clientID', action.clientID)
 
     default:
       return state

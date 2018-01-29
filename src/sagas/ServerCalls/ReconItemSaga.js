@@ -9,14 +9,14 @@ export const ReconItemSaga = (params) =>{
 
   return fetch(RECON_DATA_URL, {
     method: 'post',
-    body: JSON.stringify({params})
+    body: JSON.stringify({params, clientId: window.localStorage.clientID})
   }).then(response => {
     // console.log('response ' + JSON.stringify(response))
     // console.log(response)
     return response
   }).then(obj => {
     // console.log('refreshing recon data...')
-    return fetch(RECON_URL).then((response) => {
+    return fetch(`${RECON_URL}/${window.localStorage.clientID}`).then((response) => {
       // console.log(response)
       return response.json()
     }).then((obj) => {

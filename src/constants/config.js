@@ -8,7 +8,7 @@ var configJson = {
   ALLOCATE_COLLATERALS_URL: '/proxy/pledge/allocate-selection',
   ALLOCATE_COLLATERALS_URL_NEW: '/proxy/pledge/allocate-selection-new',
   PLEDGE_ALLOCATIONS: '/proxy/pledge/pledge-allocation',
-  UPLOAD_FILE_URL: '/proxy/upload',
+  UPLOAD_FILE_URL: '/proxy/upload/uploadPortfolio',
   // Please add the trailing / for recon single item (ok button)
   // RECON_DATA_URL: '<%= baseUrl %>/margin/acuo/api/margin/reconcile/',
   RECON_DATA_URL: '/proxy/recon/reconcile',

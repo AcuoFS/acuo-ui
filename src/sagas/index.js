@@ -1,4 +1,4 @@
-import { fork, call, put, take, race, takeLatest } from 'redux-saga/effects'
+import { fork, call, put, take, race, takeLatest, select } from 'redux-saga/effects'
 import { delay, throttle } from 'redux-saga'
 import { hashHistory } from 'react-router'
 import Notifications from 'react-notification-system-redux'
@@ -58,7 +58,8 @@ import {
 } from './../actions/MarginCallUploadActions'
 import {
   updateLoginProcess,
-  updateWrongCredentialsFlag
+  updateWrongCredentialsFlag,
+  updateCLientID
 } from './../actions/LoginActions'
 
 import {
@@ -96,6 +97,8 @@ import {
   ON_REPLACE_ALLOCATED_ASSET,
   ON_CAL_ADJ_AMOUNT,
 } from '../constants/ActionTypes'
+
+const getClientIDSelector = state => state.CommonReducer.get('clientId')
 
 function* serverHealthChecks() {
   while(true){
@@ -138,10 +141,11 @@ function* watchLogin() {
       if (user && pass) {
         yield put(updateLoginProcess(true))
         yield put(updateWrongCredentialsFlag(false))
-        const { clientID } = yield call(DoLoginSaga, user, pass)
-        if(clientID) {
+        const { clientId } = yield call(DoLoginSaga, user, pass)
+        if(clientId) {
           localStorage.authenticating = true
           hashHistory.push('/2fa')
+          window.localStorage.clientId = clientId
         }else{
           yield put(updateWrongCredentialsFlag(true))
           // yield put(Notifications.error({
@@ -270,6 +274,8 @@ function* watchFetchDashboardData() {
   while(true){
     try{
       yield take(ON_INIT_DASHBOARD)
+      const clientId = yield select(getClientIDSelector)
+      console.log(clientId)
       const obj = yield call(FetchDashboardSaga)
       yield put(initState(obj))
       const currencyObj = yield call(FetchCurrencyInfoSaga)
