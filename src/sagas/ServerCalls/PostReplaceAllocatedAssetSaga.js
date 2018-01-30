@@ -7,7 +7,7 @@ import { PLEDGE_ALLOCATIONS } from '../../constants/APIcalls'
 export const PostReplaceAllocatedAssetSaga = (obj) =>
   fetch('', {
     method: 'POST',
-    body: JSON.stringify(Object.assign(obj, {clientId: window.localStorage.clientID})),
+    body: JSON.stringify(Object.assign(obj, {clientId: window.localStorage.clientId})),
     headers: {'content-type': 'application/json'},
     json: true,
     resolveWithFullResponse: true
