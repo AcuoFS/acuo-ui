@@ -21,7 +21,8 @@ export default class DzComponent extends React.Component {
       autoProcessQueue: false
       , maxFiles: propNoOfFiles
       , parallelUploads: propNoOfFiles
-      , acceptedFiles: FILE_XLSX + "," + FILE_CSV
+      , acceptedFiles: FILE_XLSX + "," + FILE_CSV,
+      headers: {'authorization': window.localStorage.getItem('__JWT_TOKEN__')}
       // Overriding the default HTML tags by DZ
       , previewTemplate: ReactDOMServer.renderToStaticMarkup(propTemplate)
       // Using css selector to define clickable element
