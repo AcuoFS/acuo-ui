@@ -14,5 +14,5 @@ export const DoLoginSaga = (user, pass) => (
   }).then(response => {
     // console.log(response)
     return response.data
-  })
+  }).catch(err => false)
 )
