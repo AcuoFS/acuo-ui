@@ -56,7 +56,25 @@ axios.interceptors.response.use(function (response) {
   // console.log(response)
   // Do something with response data
 
-  if(response.status === 401){
+  // if(response.status === 401){
+  //   window.localStorage.clear()
+  //   hashHistory.push('/')
+  //   store.dispatch(Notifications.error({
+  //     title: 'Warning',
+  //     message: `Login session expired, please log in again`,
+  //     position: 'tr',
+  //     uid: 9999999999,
+  //     autoDismiss: 0
+  //   }))
+  // }else{
+    if(response.headers.authorization)
+      window.localStorage.setItem('__JWT_TOKEN__', response.headers.authorization)
+
+    return response;
+  // }
+}, function (error) {
+  // Do something with response error
+  if(error.response.status === 401){
     window.localStorage.clear()
     hashHistory.push('/')
     store.dispatch(Notifications.error({
@@ -66,15 +84,9 @@ axios.interceptors.response.use(function (response) {
       uid: 9999999999,
       autoDismiss: 0
     }))
-  }else{
-    if(response.headers.authorization)
-      window.localStorage.setItem('__JWT_TOKEN__', response.headers.authorization)
-
-    return response;
+  } else {
+    return Promise.reject(error);
   }
-}, function (error) {
-  // Do something with response error
-  return Promise.reject(error);
 })
 
 class App extends React.Component {
