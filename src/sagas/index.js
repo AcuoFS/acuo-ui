@@ -59,7 +59,6 @@ import {
 import {
   updateLoginProcess,
   updateWrongCredentialsFlag,
-  updateCLientID
 } from './../actions/LoginActions'
 
 import {
@@ -67,7 +66,8 @@ import {
 } from './../actions/AnalyticsActions'
 
 import{
-  updateCurrencyInfo
+  updateCurrencyInfo,
+  setEmailAdd
 } from './../actions/CommonActions'
 
 import {
@@ -142,11 +142,12 @@ function* watchLogin() {
       if (user && pass) {
         yield put(updateLoginProcess(true))
         yield put(updateWrongCredentialsFlag(false))
-        const { clientId } = yield call(DoLoginSaga, user, pass)
+        const { clientId, email } = yield call(DoLoginSaga, user, pass)
         if(clientId) {
           localStorage.authenticating = true
           hashHistory.push('/2fa')
           window.localStorage.clientId = clientId
+          yield put(setEmailAdd(email))
         }else{
           yield put(updateWrongCredentialsFlag(true))
           // yield put(Notifications.error({
