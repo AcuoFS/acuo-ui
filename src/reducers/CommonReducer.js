@@ -12,6 +12,7 @@ const INITIAL_STATE = Map({
   'wrongCredentials': false,
   'currencyInfo': Map(),
   // 'clientID': null
+  'email': ''
 })
 
 const CommonReducer = (state = INITIAL_STATE, action) => {
@@ -30,6 +31,9 @@ const CommonReducer = (state = INITIAL_STATE, action) => {
 
     case ActionTypes.UPDATE_CURRENCY_INFO:
       return state.set('currencyInfo', fromJS(_.keyBy(action.currencyObj, 'ccy')))
+
+    case ActionTypes.UPDATE_EMAIL_ADD:
+      return state.set('email', fromJS(action.email))
 
     // case ActionTypes.UPDATE_CLIENT_ID:
     //   return state.set('clientID', action.clientID)

@@ -59,7 +59,6 @@ import {
 import {
   updateLoginProcess,
   updateWrongCredentialsFlag,
-  updateCLientID
 } from './../actions/LoginActions'
 
 import {
@@ -67,7 +66,8 @@ import {
 } from './../actions/AnalyticsActions'
 
 import{
-  updateCurrencyInfo
+  updateCurrencyInfo,
+  setEmailAdd
 } from './../actions/CommonActions'
 
 import {
@@ -122,7 +122,8 @@ function* navbarAlerts() {
   while(true){
     try{
       yield take(SAGA_NAVBAR_ALERTS)
-      const alerts = yield call(FetchNavbarAlerts)
+      const { alerts } = yield call(FetchNavbarAlerts)
+      // console.log(alerts)
       yield put(updateNavbarAlerts(alerts))
     } catch(error){
       console.log(error)
@@ -142,10 +143,11 @@ function* watchLogin() {
         yield put(updateLoginProcess(true))
         yield put(updateWrongCredentialsFlag(false))
         const { clientId } = yield call(DoLoginSaga, user, pass)
-        if(clientId) {
+        if(clientId.clientId) {
           localStorage.authenticating = true
           hashHistory.push('/2fa')
-          window.localStorage.clientId = clientId
+          window.localStorage.clientId = clientId.clientId
+          yield put(setEmailAdd(clientId.email))
         }else{
           yield put(updateWrongCredentialsFlag(true))
           // yield put(Notifications.error({
@@ -274,9 +276,10 @@ function* watchFetchDashboardData() {
   while(true){
     try{
       yield take(ON_INIT_DASHBOARD)
-      const clientId = yield select(getClientIDSelector)
-      console.log(clientId)
+      // const clientId = yield select(getClientIDSelector)
+      // console.log(clientId)
       const obj = yield call(FetchDashboardSaga)
+      // console.log(obj)
       yield put(initState(obj))
       const currencyObj = yield call(FetchCurrencyInfoSaga)
       yield put(updateCurrencyInfo(currencyObj))
@@ -305,8 +308,9 @@ function* watchFetchOptimisationSettings() {
   while(true){
     try{
       yield take(ON_FETCH_OPTIMISATION_SETTINGS)
-      const payload = yield call(FetchOptimisationSettingsSaga)
-      yield put(initOptimisationSettings(payload.items))
+      const { items } = yield call(FetchOptimisationSettingsSaga)
+      console.log(items)
+      yield put(initOptimisationSettings(items))
     }catch(error) {
       console.log(error)
       return false
@@ -318,8 +322,8 @@ function* watchFetchSelection() {
   while (true) {
     try {
       yield take(ON_FETCH_SELECTION)
-      const payload = yield call(FetchSelectionSaga)
-      yield put(initSelection(payload.items))
+      const { items } = yield call(FetchSelectionSaga)
+      yield put(initSelection(items))
     } catch (error) {
       console.log(error)
       return false

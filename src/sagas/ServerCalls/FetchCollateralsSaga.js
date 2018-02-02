@@ -1,13 +1,12 @@
 /**
  * Created by Rui on 8/8/17.
  */
+import axios from 'axios'
 
 import { COLLATERAL_URL } from '../../constants/APIcalls'
 
 export const FetchCollateralsSaga = () => (
-  fetch(`${COLLATERAL_URL}/${window.localStorage.clientId}`).then((response) => {
-    return response.json()
-  }).then((obj) => {
-    return obj
+  axios.get(`${COLLATERAL_URL}/${window.localStorage.clientId}`).then((response) => {
+    return response.data
   })
 )

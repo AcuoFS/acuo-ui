@@ -1,23 +1,20 @@
 /**
  * Created by Rui on 28/7/17.
  */
+import axios from 'axios'
 
 import { REQUEST_VALUATION_URL } from '../../constants/APIcalls'
 
 export const RequestValuationSaga = (referenceIDs) =>
-  fetch(REQUEST_VALUATION_URL, {
-    method: 'POST',
-    body: JSON.stringify({"ids": referenceIDs, clientId: window.localStorage.clientId}),
-    headers: {'content-type': 'application/json'},
-    json: true,
-    resolveWithFullResponse: true
-  }).then(response => {
-    if(response.ok)
-      return response.json()
-    alert('request valuation failed, try again')
+  axios.post(REQUEST_VALUATION_URL, {"ids": referenceIDs, clientId: window.localStorage.clientId},
+    {'content-type': 'application/json'}
+  ).then(response => {
+    // console.log(response)
+    // if(response.ok)
+    return response.data
+    // alert('request valuation failed, try again')
     //dispatch(MarginCallUploadActions.updateRequestState(false))
-  }).then(json => json)
-    .catch(error => {
+  }).catch(error => {
       console.log(error)
       alert('request valuation failed, try again')
     })
