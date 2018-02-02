@@ -11,7 +11,8 @@ import {
   TOGGLE_SELECTED_MARGINCALL_ROW,
   TOGGLE_SELECT_ALL_MARGINCALLS,
   TOGGLE_VARIABLE_OPTIONS,
-  ON_SEND_MARGINCALL_SUCCESS
+  ON_SEND_MARGINCALL_SUCCESS,
+  ON_UPLOAD_ERROR
 } from '../constants/ActionTypes'
 
 const initialState = Map({
@@ -22,6 +23,7 @@ const initialState = Map({
   requestingMCGenerationOrValuation: false,
   selectedRows: List(),
   marginCallRows: List(),
+  uploadError: '',
   variableOptions: fromJS([
     {
       label: "All",
@@ -103,7 +105,7 @@ const MarginUploadReducer = (state = initialState, action) => {
       return state.set('requestingValuation', true)
 
     case UPLOADING_PORTFOLIO:
-      return state.withMutations((state) => state.set('uploading', true).set('uploadData', List()))
+      return state.withMutations((state) => state.set('uploading', true).set('uploadData', List()).set('uploadError', ""))
 
     case UPDATE_REQUESTING_STATE:
       return state.set('requestingMCGenerationOrValuation', action.flag)
@@ -183,6 +185,9 @@ const MarginUploadReducer = (state = initialState, action) => {
 
       return state.withMutations(state => state.set('uploadData', successUploadData).set('selectedRows', failedRowsPID).set('marginCallRows', failedMarginCallRows))
       // return state
+
+    case ON_UPLOAD_ERROR:
+      return state.withMutations(state => state.set('uploadError', action.message).set('uploading', false))
 
     default:
       return state

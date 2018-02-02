@@ -13,7 +13,8 @@ import {
   TOGGLE_SELECTED_MARGINCALL_ROW,
   TOGGLE_SELECT_ALL_MARGINCALLS,
   TOGGLE_VARIABLE_OPTIONS,
-  ON_SEND_MARGINCALL_SUCCESS
+  ON_SEND_MARGINCALL_SUCCESS,
+  ON_UPLOAD_ERROR
 } from '../constants/ActionTypes'
 
 export const getMarginCallUpload = (uploadData) => ({
@@ -88,4 +89,9 @@ export const onToggleVariablOptions = (hasArr, dontHaveArr) => ({
 export const onMarginCallSendSuccess = successObj => ({
   type: ON_SEND_MARGINCALL_SUCCESS,
   successObj
+})
+
+export const onUploadError = (message) => ({
+  type: ON_UPLOAD_ERROR,
+  message
 })

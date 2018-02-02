@@ -79,7 +79,8 @@ export default class UploadWidget extends React.Component {
 
   render() {
 
-    const { onUpdateTxnID, txnID, onRequestValuation, uploading, flagUploading, requestingValuation } = this.props
+    const { txnID, uploading, flagUploading, requestingValuation,
+      onUploadError, onUpdateTxnID, onRequestValuation } = this.props
 
     return (
       /*<form id="uploadbanner" enctype="multipart/form-data" method="post" action="http://localhost:3000/">
@@ -98,11 +99,13 @@ export default class UploadWidget extends React.Component {
                      propPostUrl={UPLOAD_FILE_URL}
                      updateUploadStatus={this.updateUploadStatus}
                      onUpdateTxnID={onUpdateTxnID}
-                     uploading={uploading}/>
+                     uploading={uploading}
+                     onUploadError={onUploadError} />
 
         <div className={styles.buttonContainer}>
           <div className={styles.uploadStatus}>
             {this.state.status.map((x, i) => <p key={i}>{x.remarks}</p>)}
+            {this.props.uploadError && <p className={styles.uploadError}>{this.props.uploadError}</p>}
           </div>
 
           <div className={styles.typeDropdown}>

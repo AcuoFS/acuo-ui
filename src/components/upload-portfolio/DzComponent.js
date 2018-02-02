@@ -18,14 +18,15 @@ export default class DzComponent extends React.Component {
     this.djsConfig = {
       uploadMultiple: true,
       paramName: 'portfolios',
-      autoProcessQueue: false
-      , maxFiles: propNoOfFiles
-      , parallelUploads: propNoOfFiles
-      , acceptedFiles: FILE_XLSX + "," + FILE_CSV
+      autoProcessQueue: false,
+      maxFiles: propNoOfFiles,
+      parallelUploads: propNoOfFiles,
+      acceptedFiles: FILE_XLSX + "," + FILE_CSV,
+      headers: {'authorization': window.localStorage.getItem('__JWT_TOKEN__')},
       // Overriding the default HTML tags by DZ
-      , previewTemplate: ReactDOMServer.renderToStaticMarkup(propTemplate)
+      previewTemplate: ReactDOMServer.renderToStaticMarkup(propTemplate),
       // Using css selector to define clickable element
-      , clickable: ".triggerFileSelection"
+      clickable: ".triggerFileSelection"
     }
 
     this.componentConfig = {
@@ -52,6 +53,8 @@ export default class DzComponent extends React.Component {
     setTimeout((() => {
       this.dropzone.removeFile(file)
     }).bind(this), 1500)
+
+    // console.log(response)
   }
 
   onGenerate() {
@@ -73,6 +76,10 @@ export default class DzComponent extends React.Component {
       // Remove the accepted file
       this.dropzone.removeFile(file)
     }
+    this.props.onUploadError()
+    setTimeout((() => {
+      this.dropzone.removeFile(file)
+    }).bind(this), 1000)
   }
 
   handleRemove() {

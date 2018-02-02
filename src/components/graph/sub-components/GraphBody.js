@@ -75,7 +75,9 @@ export default class GraphBody extends React.Component {
     //all to USD for now
     if(currencyList[actionItem.get('ccy').toUpperCase()]) {
       // console.log(actionItem.get('ccy'))
-      // console.log(actionItem.get('totalAmount'))
+      console.log(actionItem.get('totalAmount'))
+      console.log(parseFloat(currencyList[actionItem.get('ccy').toUpperCase()].exchangeRate))
+      console.log(currencyList[selectedCurrency].exchangeRate)
       // console.log(parseFloat(actionItem.get('totalAmount')) * parseFloat(currencyList[actionItem.get('ccy').toUpperCase()].exchangeRate))
       return (parseFloat(actionItem.get('totalAmount')) * parseFloat(currencyList[actionItem.get('ccy').toUpperCase()].exchangeRate)) / parseFloat(currencyList[selectedCurrency].exchangeRate)
     } else{
@@ -123,7 +125,7 @@ export default class GraphBody extends React.Component {
               // console.log(xx.toJS())
               const amount = Math.abs((this.standardCurrency(xx, currencyList, selectedCurrency) || 0.00))
 
-              return (xx.get('direction') == 'IN' ? parseFloat(a2) + parseFloat(amount) : a2)
+              return (xx.get('direction') == 'IN' ? parseFloat(a2) + parseFloat(amount) : parseFloat(a2))
             }, 0)
           }, 0)
           , "outAmount": y.get('actionsList').reduce((a, z) => {
@@ -132,7 +134,7 @@ export default class GraphBody extends React.Component {
               // console.log(xx.toJS())
               const amount = Math.abs((this.standardCurrency(xx, currencyList, selectedCurrency) || 0.00))
 
-              return (xx.get('direction') == 'OUT' ? parseFloat(a2) + parseFloat(amount) : a2)
+              return (xx.get('direction') == 'OUT' ? parseFloat(a2) + parseFloat(amount) : parseFloat(a2))
             }, 0)
           }, 0)
           , "inNo":  y.get('actionsList').reduce((a, z) => {
