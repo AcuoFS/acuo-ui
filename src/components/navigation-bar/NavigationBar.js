@@ -1,7 +1,6 @@
 import React from 'react'
 import NavigationBarItem from './NavigationBarItem'
 import styles from './NavigationBar.css'
-import { hashHistory } from 'react-router'
 import _ from 'lodash'
 
 export default class NavigationBar extends React.Component {
@@ -20,7 +19,8 @@ export default class NavigationBar extends React.Component {
 
   render() {
 
-    const { menuNotifications, onChatOpen, email } = this.props
+    const { menuNotifications, email,
+      doLogout, onChatOpen } = this.props
 
     return (
       <nav className={styles.nav}>
@@ -88,10 +88,7 @@ export default class NavigationBar extends React.Component {
               src={'./images/dashboard/navbar/logout.png'}
               alt=""
               title="Logout"
-              onClick={ () => {
-                localStorage.clear();
-                hashHistory.push("/")
-              } }/>
+              onClick={doLogout}/>
           </div>
         </div>
 

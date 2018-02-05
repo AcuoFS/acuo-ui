@@ -3,7 +3,7 @@ import { delay, throttle } from 'redux-saga'
 import { hashHistory } from 'react-router'
 import Notifications from 'react-notification-system-redux'
 
-//fetches
+//Sagas
 import {
   checkSpecificServer,
   FetchNavbarAlerts,
@@ -26,6 +26,7 @@ import {
   FetchDeployedOptimisationSettingsSaga,
   PostReplaceAllocatedAssetSaga,
   DeployedCalcAdjAmountSaga,
+  DoLogoutSaga,
 
   FetchAnalyticsDataSaga
 } from './ServerCalls'
@@ -59,6 +60,7 @@ import {
 import {
   updateLoginProcess,
   updateWrongCredentialsFlag,
+  doLogout
 } from './../actions/LoginActions'
 
 import {
@@ -77,6 +79,7 @@ import {
 //action types
 import {
   DO_LOGIN,
+  DO_LOGOUT,
   SAGA_NAVBAR_ALERTS,
   RECON_ITEM,
   RECON_DISPUTE_SUBMIT,
@@ -161,8 +164,24 @@ function* watchLogin() {
         yield put(updateLoginProcess(false))
       }
     }
-    catch
-      (error) {
+    catch (error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchLogout() {
+  while(true){
+    try {
+      yield take(DO_LOGOUT)
+      const { status } = yield call(DoLogoutSaga)
+      window.localStorage.clear()
+      hashHistory.push("/")
+      // if(status){
+      //   console.log('logged out')
+      // }
+    } catch(error) {
       console.log(error)
       return false
     }
@@ -438,6 +457,7 @@ export default function* root() {
     fork(serverHealthChecks),
     fork(sagaNavbarAlerts),
     fork(watchLogin),
+    fork(watchLogout),
     fork(navbarAlerts),
     fork(watchReconcile),
     fork(watchReconDispute),

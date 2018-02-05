@@ -1,9 +1,14 @@
 import {connect} from 'react-redux'
+import { hashHistory } from 'react-router'
+
 import {NavigationBarComponent} from '../components'
 import {
   sagaNavbarAlerts,
   defaultChatOpen
 } from './../actions/CommonActions'
+import {
+  doLogout
+} from './../actions/LoginActions'
 
 const _default = []
 
@@ -17,7 +22,8 @@ const mapStateToProp = state => {
 
 const mapDispatchToProps = dispatch => ({
   onUpdateNavbarAlert: () => dispatch(sagaNavbarAlerts()),
-  onChatOpen: () => dispatch(defaultChatOpen())
+  onChatOpen: () => dispatch(defaultChatOpen()),
+  doLogout: () => dispatch(doLogout())
 })
 
 const NavigationBarContainer = connect(

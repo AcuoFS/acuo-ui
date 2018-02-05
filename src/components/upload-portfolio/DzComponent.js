@@ -71,7 +71,7 @@ export default class DzComponent extends React.Component {
     }
   }
 
-  handleError(file) {
+  handleError(file, response) {
     if (!file.accepted) {
       // Remove the accepted file
       this.dropzone.removeFile(file)
@@ -80,6 +80,8 @@ export default class DzComponent extends React.Component {
     setTimeout((() => {
       this.dropzone.removeFile(file)
     }).bind(this), 1000)
+
+    console.log(response)
   }
 
   handleRemove() {

@@ -27,6 +27,7 @@ export const RECON_URL                      = CONFIG.RECON_URL
 // export const ALLOCATE_COLLATERALS_URL = 'http://52.74.186.112:8081/allocate-selection'
 
 export const LOGIN_URL                      = CONFIG.LOGIN_URL
+export const LOGOUT_URL                     = CONFIG.LOGOUT_URL
 
 export const OPTIMISATION_URL               = CONFIG.OPTIMISATION_URL
 export const COLLATERAL_URL                 = CONFIG.COLLATERAL_URL
