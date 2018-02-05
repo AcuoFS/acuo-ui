@@ -7,7 +7,7 @@ import { REQUEST_GENERATE_MARGIN_CALLS } from '../../constants/APIcalls'
 export const GenerateMarginCallSaga = (referenceIDs) =>
   fetch(REQUEST_GENERATE_MARGIN_CALLS, {
     method: 'POST',
-    body: JSON.stringify({"ids": referenceIDs}),
+    body: JSON.stringify({"ids": referenceIDs, clientId: window.localStorage.clientId}),
     headers: {'content-type': 'application/json'},
     json: true,
     resolveWithFullResponse: true

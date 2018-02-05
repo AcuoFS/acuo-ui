@@ -32,7 +32,7 @@ export default class DzComponent extends React.Component {
       // iconFiletypes: ['.xlsx'],
       // showFiletypeIcon: false,
       // Change this param to the server's URL
-      postUrl: propPostUrl
+      postUrl: `${propPostUrl}/${window.localStorage.clientId}`
     }
 
     this.dropzone = null

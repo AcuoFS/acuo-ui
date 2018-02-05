@@ -89,6 +89,13 @@ export default class MarginCall extends React.Component {
     //   })
   }
 
+  checkExposure = (selectedRows, uploadData) => {
+    // console.log(uploadData)
+    const filteredData = _.filter(uploadData, (row) => _.includes(selectedRows, row.portfolioId))
+
+    return _.some(filteredData, (data) => parseFloat(data.exposure) !== 0)
+  }
+
   render() {
 
     const { uploadDataFlag, requestingValuation, requestingMCGenerationOrValuation, selectedRows, marginCallRows, variableOptions, //state
@@ -113,7 +120,7 @@ export default class MarginCall extends React.Component {
                onClick={() => requestValuation(selectedRows)}>
             Request Valuation
           </div>
-          <div className={styles.button + ' ' + (selectedRows.length <= 0 || requestingMCGenerationOrValuation ? styles.disabled : '')}
+          <div className={styles.button + ' ' + (selectedRows.length <= 0 || requestingMCGenerationOrValuation || !this.checkExposure(selectedRows, this.props.uploadData) ? styles.disabled : '')}
                disabled={selectedRows.length <= 0}
                onClick={() => generateMarginCalls(selectedRows)}>
             Generate Margin Calls

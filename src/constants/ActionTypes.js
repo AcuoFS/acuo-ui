@@ -105,6 +105,7 @@ export const UPDATE_CURRENCY_INFO = 'UPDATE_CURRENCY_INFO'
 //login
 export const DO_LOGIN = 'DO_LOGIN'
 export const UPDATE_LOGIN_PROCESS = 'UPDATE_LOGIN_PROCESS'
+// export const UPDATE_CLIENT_ID = 'UPDATE_CLIENT_ID'
 
 //analytics
 export const FLIP_AXES = 'FLIP_AXES'
