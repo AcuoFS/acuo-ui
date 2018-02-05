@@ -87,7 +87,12 @@ const toggleSelectedRow = (selectedRows, rowObj) => {
 const MarginUploadReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_MARGIN_CALL_UPLOAD:
-      return state.withMutations((state) => state.set('uploadData', fromJS(action.uploadData).toList()).set('txnID', '').set('requestingValuation', false).set('uploading', false))
+      let errorMsg = ''
+
+      if(_.isEmpty(action.uploadData))
+        errorMsg = 'File could not be uploaded, please try again (one hundred)'
+
+      return state.withMutations((state) => state.set('uploadData', fromJS(action.uploadData).toList()).set('txnID', '').set('requestingValuation', false).set('uploading', false).set('uploadError', fromJS(errorMsg)))
 
     case UPDATE_MARGIN_CALL_UPLOAD:
       return state.set('uploadData',
