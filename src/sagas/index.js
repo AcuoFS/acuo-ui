@@ -151,6 +151,7 @@ function* watchLogin() {
           hashHistory.push('/2fa')
           window.localStorage.clientId = clientId.clientId
           yield put(setEmailAdd(clientId.email))
+          yield put(Notifications.hide(9999999999))
         }else{
           yield put(updateWrongCredentialsFlag(true))
           // yield put(Notifications.error({
