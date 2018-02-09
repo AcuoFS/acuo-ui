@@ -113,6 +113,19 @@ export default class MarginAgreementDetail extends React.Component {
     return _.some(secondLevel, {tolerance: true})
   }
 
+  /**
+   * for checking if it checkbox is chcked or not for functional testing purposes
+   */
+  functionalTestClasses(list, id, party) {
+    if(!_.isEmpty(list[id])){
+
+      if(_.includes(list[id].parties, party))
+        return true
+    }
+
+    return false
+  }
+
   render() {
 
     const {
@@ -120,7 +133,8 @@ export default class MarginAgreementDetail extends React.Component {
       totalAmount, firstLevelID, handlerSelectedItem,
       firstLevelList, secondLevelList, id,
       onSelectSecondLevelItem, party,
-      firstLevelTolerance
+      firstLevelTolerance,
+      leftSideFunctionalityTest
     } = this.props
 
     const expand = <MarginAgreementDetailExpand
@@ -136,7 +150,8 @@ export default class MarginAgreementDetail extends React.Component {
 
         <div className={ styles.packageRow + ' ' + ((this.checkChildrenTolerance(secondLevel.toJS()) && !this.state.open) || (secondLevel.isEmpty() && firstLevelTolerance) ? styles.packageRowHighLight : '')}> {/* one row div*/}
           <div className={styles.packageLeft}>
-            <div className={styles.packageCheckBox + ' ' + this.state.cbLvl1}
+            <div className={styles.packageCheckBox + ' ' + this.state.cbLvl1 + ' ' +
+            (leftSideFunctionalityTest ? 'left' : 'right') + (this.functionalTestClasses(firstLevelList, id, party) ? '_checked' : '_unchecked')}
                  onClick={() => this.firstLevelSelect(GUID, firstLevelID, handlerSelectedItem)}>
               <img src={this.getCheckboxImageUrl(firstLevelList, id, party)}/>
             </div>

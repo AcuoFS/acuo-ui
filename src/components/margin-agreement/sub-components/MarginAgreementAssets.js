@@ -69,7 +69,7 @@ export default class MarginAgreementPortfolio extends React.Component {
     this.props.handlerUpdateAdj(this.adjInput.value != '' ? this.adjInput.value : 0.0)
   }
 
-  renderItem(marginData, assetsName, handlerSelectedItem, firstLevelList, secondLevelList, onSelectSecondLevelItem, party) {
+  renderItem(marginData, assetsName, handlerSelectedItem, firstLevelList, secondLevelList, onSelectSecondLevelItem, party, leftSideFunctionalityTest) {
 
     if (marginData.get(assetsName))
       return marginData.get(assetsName).sort().map((x) => {
@@ -95,6 +95,7 @@ export default class MarginAgreementPortfolio extends React.Component {
               onSelectSecondLevelItem={onSelectSecondLevelItem}
               party={party}
               firstLevelTolerance={groupData.getIn(['firstLevel', 'tolerance'])}
+              leftSideFunctionalityTest={leftSideFunctionalityTest}
             />
           })}
             <hr/>
@@ -120,7 +121,7 @@ export default class MarginAgreementPortfolio extends React.Component {
     const {
       marginData, orgName, assetsName,
       handlerTotalMargin, handlerSelectedItem, isHidePanel, adjAmt,
-      firstLevelList, secondLevelList,
+      firstLevelList, secondLevelList, leftSideFunctionalityTest,
       onSelectSecondLevelItem, isUploading, onTogglePortfolioPopup,
       party
     } = this.props
@@ -217,7 +218,7 @@ export default class MarginAgreementPortfolio extends React.Component {
             </div>
           </div>
           <div className={styles.package}> {/* table outer div*/}
-            { this.renderItem(marginData, assetsName, handlerSelectedItem, firstLevelList, secondLevelList, onSelectSecondLevelItem, party) }
+            { this.renderItem(marginData, assetsName, handlerSelectedItem, firstLevelList, secondLevelList, onSelectSecondLevelItem, party, leftSideFunctionalityTest) }
           </div>
 
           <div className={styles.sectionText}> {/* two row div for bold*/}

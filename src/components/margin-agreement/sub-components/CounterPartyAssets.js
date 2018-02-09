@@ -45,6 +45,10 @@ export default class CounterPartyAssets extends React.Component {
       isDisputed, currencyInfo
     } = this.props
 
+    /**
+     * leftSideFunctionalityTest is to know if it's left of right side, for functionality testing
+     */
+
     return (
       <div className={styles.actPanel + ' ' + styles[actStyle] + ' ' + styles.counterPartyCont}>
         <ul className={styles.tabs14}>
@@ -69,7 +73,9 @@ export default class CounterPartyAssets extends React.Component {
                                onTogglePortfolioPopup={onTogglePortfolioPopup}
                                isUploading={isUploading}
                                party={'cpty'}
-                               currencyInfo={currencyInfo}/>
+                               currencyInfo={currencyInfo}
+                               leftSideFunctionalityTest={false}/>
+
         <ReconDisputeContainer marginData={marginData}
                                actStyle={actStyle}
                                orgName={orgName}

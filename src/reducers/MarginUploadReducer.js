@@ -67,10 +67,11 @@ const toggleMarginCallRow = (marginCalldRows, rowObj) => {
 }
 
 const toggleSelectedRow = (selectedRows, rowObj) => {
-  if(_.includes(selectedRows, rowObj.portfolioId)){
-    return _.remove(selectedRows, x => x !== rowObj.portfolioId)
+  // console.log(rowObj)
+  if(_.some(selectedRows, {portfolioId: rowObj.portfolioId, callType: rowObj.callType})){
+    return _.reject(selectedRows, {portfolioId: rowObj.portfolioId, callType: rowObj.callType})
   }else{
-    return [...selectedRows, rowObj.portfolioId]
+    return [...selectedRows, {portfolioId: rowObj.portfolioId, callType: rowObj.callType}]
   }
 }
 
@@ -152,7 +153,7 @@ const MarginUploadReducer = (state = initialState, action) => {
       let marginCallRows = List()
 
       if(!state.get('selectedRows').size){
-        selectedRows1 = state.get('uploadData').map(x => x.get('portfolioId'))
+        selectedRows1 = state.get('uploadData').map(x => ({portfolioId: x.get('portfolioId'), callType: x.get('callType')}))
         marginCallRows = state.get('uploadData').reduce((sum, x) =>
           (x.get('referenceIdentifier') ? sum.push(x.get('referenceIdentifier')) : sum)
           , List())
@@ -170,8 +171,8 @@ const MarginUploadReducer = (state = initialState, action) => {
       // }).toJS())
 
       const newUploadData = state.get('uploadData').filter(x => x.getIn(action.hasArr) && !x.getIn(action.dontHaveArr)).toJS()
-
-      const newSelectedRows = _.map(newUploadData, x => x.portfolioId)
+      // console.log(newUploadData)
+      const newSelectedRows = _.map(newUploadData, x => ({portfolioId: x.portfolioId, callType: x.callType}))
 
       let newMarginCallRows = []
       if(_.has(action.hasArr))
