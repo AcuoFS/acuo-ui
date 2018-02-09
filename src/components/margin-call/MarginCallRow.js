@@ -65,8 +65,8 @@ export default class MarginCallRow extends React.Component {
           <div className={styles.cell}>{item.legalEntity || '-'}</div>
           <div className={styles.cell}>{item.cptyOrg || '-'}</div>
           <div className={styles.cell}>{item.cptyEntity || '-'}</div>
-          <div className={styles.cell}>{item.marginAgreement || '-'}</div>
-          <div className={styles.cell + ' ' + styles.ccyCell}>{item.portfolioId || '-'}</div>
+          <div className={styles.cell + ' marginAgreement'}>{item.marginAgreement || '-'}</div>
+          <div className={styles.cell + ' ' + styles.ccyCell + ' portfolioId'}>{item.portfolioId || '-'}</div>
           <div className={styles.cell + ' ' + styles.dateCell + ' ' + styles.boldCellText}>
             {item.valuationDate || '-'}
           </div>

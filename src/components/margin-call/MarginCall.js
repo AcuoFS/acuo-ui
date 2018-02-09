@@ -91,7 +91,7 @@ export default class MarginCall extends React.Component {
 
   checkExposure = (selectedRows, uploadData) => {
     // console.log(uploadData)
-    const filteredData = _.filter(uploadData, (row) => _.includes(selectedRows, row.portfolioId))
+    const filteredData = _.filter(uploadData, (row) => _.some(selectedRows, {portfolioId: row.portfolioId}))
 
     return _.some(filteredData, (data) => parseFloat(data.exposure) !== 0)
   }
@@ -163,14 +163,14 @@ export default class MarginCall extends React.Component {
 
           { uploadDataFlag ?
             this.props.uploadData.map((item, i) => {
-            //console.log(selectedRows.filter(x => x === item.portfolioId))
+              // selectedRows.filter(x => console.log(x))
               return <MarginCallRow spillContents={this.openRow} isChecked={this.state.isChecked}
                              isOpen={this.state.openedRows.indexOf(1) > -1}
                              propHandlerOnTotalMargin={this.onTotalCallAmt}
                              propMarginCallUploadData={this.props.uploadData} row={item}
                              propHandlerSingleRow={onToggleRow}
                              key={i}
-                             selected={!!selectedRows.filter(x => x === item.portfolioId).length}/>}
+                             selected={_.some(selectedRows, {portfolioId: item.portfolioId, callType: item.callType})}/>}
             )
             :
             <div className={styles.loadingContainer}>
