@@ -7,8 +7,8 @@ export default class LoginComponent extends React.Component {
     super(props)
     this.state = {
       showPassword: false,
-      username: 'user@acuocpty.com',
-      password: "@Password1"
+      username: '',
+      password: ""
     }
   }
 

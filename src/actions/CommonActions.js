@@ -5,7 +5,8 @@ import {
   TOGGLE_CHAT_MINIMISE,
   TOGGLE_CHAT_OPEN,
   OPEN_CHAT,
-  UPDATE_CURRENCY_INFO
+  UPDATE_CURRENCY_INFO,
+  UPDATE_EMAIL_ADD
 } from './../constants/ActionTypes'
 
 export const updateNavbarAlerts = alerts => ({
@@ -37,4 +38,9 @@ export const defaultChatOpen = () => ({
 export const updateCurrencyInfo = (currencyObj) => ({
   type: UPDATE_CURRENCY_INFO,
   currencyObj
+})
+
+export const setEmailAdd = (email) => ({
+  type: UPDATE_EMAIL_ADD,
+  email
 })

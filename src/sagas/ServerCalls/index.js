@@ -19,6 +19,7 @@ import { FetchCurrencyInfoSaga } from './FetchCurrencyInfoSaga'
 import { FetchDeployedOptimisationSettingsSaga } from './FetchDeployedOptimisationSettingsSaga'
 import { PostReplaceAllocatedAssetSaga } from './PostReplaceAllocatedAssetSaga'
 import { DeployedCalcAdjAmountSaga } from './DeployedCalcAdjAmountSaga'
+import { DoLogoutSaga } from './DoLogoutSaga'
 
 import { FetchAnalyticsDataSaga } from './FetchAnalyticsDataSaga'
 
@@ -44,6 +45,7 @@ export {
   FetchDeployedOptimisationSettingsSaga,
   PostReplaceAllocatedAssetSaga,
   DeployedCalcAdjAmountSaga,
+  DoLogoutSaga,
 
   FetchAnalyticsDataSaga
 }

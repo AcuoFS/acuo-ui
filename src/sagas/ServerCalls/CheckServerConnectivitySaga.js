@@ -107,13 +107,14 @@ export function* checkSpecificServer(uid) {
     serverStatus[uid] = 'down'
   } else if (result === 'passed') {
     if (serverStatus[uid] === 'down') {
-      yield put(Notifications.success({
-        title: 'Reconnected',
-        message: `Reestablished connectivity to ${uid} server.`,
-        position: 'tr',
-        uid: uid + 'Success',
-        autoDismiss: 0
-      }))
+      // yield put(Notifications.success({
+      //   title: 'Reconnected',
+      //   message: `Reestablished connectivity to ${uid} server.`,
+      //   position: 'tr',
+      //   uid: uid + 'Success',
+      //   autoDismiss: 0
+      // }))
+      yield put(Notifications.hide(uid))
       serverStatus[uid] = 'up'
     }
   }

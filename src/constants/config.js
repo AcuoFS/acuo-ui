@@ -27,6 +27,7 @@ var configJson = {
   //FETCH_GENERATED_PORTFOLIO: '<%= baseUrl %>/valuation/acuo/api/calls/async/generate/',
   POST_MARGIN_CALL_IDS: '/proxy/upload/send-margin-calls',
   LOGIN_URL: '/proxy/common/auth/login',
+  LOGOUT_URL: '/proxy/common/auth/logout',
   FETCH_CURRENCY_INFO: '/proxy/common/get-currency',
 
   TEST_FETCH_ANALYTICS_DATA: '/proxy/analytics',

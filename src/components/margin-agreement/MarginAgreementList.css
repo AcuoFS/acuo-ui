@@ -283,12 +283,13 @@
   color: #9b9b9b;
   float: right;
   position: absolute;
-  width: 100px;
+  /*width: 100px;*/
   -webkit-border-radius: 10px 0 10px 10px;
   border-radius: 10px 0 10px 10px;
   border: 1px solid #c9c9c9;
   background-color: #ffffff;
   top: 20px;
+  right: 0;
 }
 
 .viewFxRate:hover .viewFxRateImage {

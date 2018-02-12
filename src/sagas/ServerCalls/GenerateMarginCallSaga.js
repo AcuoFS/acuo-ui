@@ -1,23 +1,20 @@
 /**
  * Created by Rui on 31/7/17.
  */
+import axios from 'axios'
 
 import { REQUEST_GENERATE_MARGIN_CALLS } from '../../constants/APIcalls'
 
 export const GenerateMarginCallSaga = (referenceIDs) =>
-  fetch(REQUEST_GENERATE_MARGIN_CALLS, {
-    method: 'POST',
-    body: JSON.stringify({"ids": referenceIDs, clientId: window.localStorage.clientId}),
-    headers: {'content-type': 'application/json'},
-    json: true,
-    resolveWithFullResponse: true
-  }).then(response => {
-    if(response.ok)
-      return response.json()
-    alert('request generate margin call failed, try again')
+  axios.post(REQUEST_GENERATE_MARGIN_CALLS,
+    {"ids": referenceIDs, clientId: window.localStorage.clientId},
+    {"content-type": 'application/json'}
+  ).then(response => {
+    // if(response.data.ok)
+    return response.data
+    // alert('request generate margin call failed, try again')
     //dispatch(MarginCallUploadActions.updateRequestState(false))
-  }).then(json => json)
-    .catch(error => {
+  }).catch(error => {
       console.log(error)
       alert('request generate margin call failed, try again')
     })

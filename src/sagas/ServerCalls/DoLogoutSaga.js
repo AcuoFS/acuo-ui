@@ -1,14 +1,10 @@
-/**
- * Created by Rui on 11/8/17.
- */
 import axios from 'axios'
 
-import { LOGIN_URL } from '../../constants/APIcalls'
+import { LOGOUT_URL } from '../../constants/APIcalls'
 
-export const DoLoginSaga = (user, pass) => (
-  axios.post(LOGIN_URL, {
-    user,
-    pass
+export const DoLogoutSaga = () => (
+  axios.post(LOGOUT_URL, {
+    clientId: window.localStorage.getItem('clientId')
   }, {
     headers: {'content-type': 'application/json'},
   }).then(response => {

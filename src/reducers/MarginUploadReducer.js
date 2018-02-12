@@ -11,7 +11,8 @@ import {
   TOGGLE_SELECTED_MARGINCALL_ROW,
   TOGGLE_SELECT_ALL_MARGINCALLS,
   TOGGLE_VARIABLE_OPTIONS,
-  ON_SEND_MARGINCALL_SUCCESS
+  ON_SEND_MARGINCALL_SUCCESS,
+  ON_UPLOAD_ERROR
 } from '../constants/ActionTypes'
 
 const initialState = Map({
@@ -22,6 +23,7 @@ const initialState = Map({
   requestingMCGenerationOrValuation: false,
   selectedRows: List(),
   marginCallRows: List(),
+  uploadError: '',
   variableOptions: fromJS([
     {
       label: "All",
@@ -85,7 +87,12 @@ const toggleSelectedRow = (selectedRows, rowObj) => {
 const MarginUploadReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_MARGIN_CALL_UPLOAD:
-      return state.withMutations((state) => state.set('uploadData', fromJS(action.uploadData).toList()).set('txnID', '').set('requestingValuation', false).set('uploading', false))
+      let errorMsg = ''
+
+      if(_.isEmpty(action.uploadData))
+        errorMsg = 'File could not be uploaded, please try again (one hundred)'
+
+      return state.withMutations((state) => state.set('uploadData', fromJS(action.uploadData).toList()).set('txnID', '').set('requestingValuation', false).set('uploading', false).set('uploadError', fromJS(errorMsg)))
 
     case UPDATE_MARGIN_CALL_UPLOAD:
       return state.set('uploadData',
@@ -103,7 +110,7 @@ const MarginUploadReducer = (state = initialState, action) => {
       return state.set('requestingValuation', true)
 
     case UPLOADING_PORTFOLIO:
-      return state.withMutations((state) => state.set('uploading', true).set('uploadData', List()))
+      return state.withMutations((state) => state.set('uploading', true).set('uploadData', List()).set('uploadError', ""))
 
     case UPDATE_REQUESTING_STATE:
       return state.set('requestingMCGenerationOrValuation', action.flag)
@@ -183,6 +190,9 @@ const MarginUploadReducer = (state = initialState, action) => {
 
       return state.withMutations(state => state.set('uploadData', successUploadData).set('selectedRows', failedRowsPID).set('marginCallRows', failedMarginCallRows))
       // return state
+
+    case ON_UPLOAD_ERROR:
+      return state.withMutations(state => state.set('uploadError', action.message).set('uploading', false))
 
     default:
       return state

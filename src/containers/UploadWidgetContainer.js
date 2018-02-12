@@ -2,8 +2,9 @@ import { connect } from 'react-redux'
 import { UploadWidgetComponent } from '../components'
 import {
   getMarginCallUpload,
-  pollMarginCall,
-  requestingValuationFlag,
+  // pollMarginCall,
+  // requestingValuationFlag,
+  onUploadError,
   uploadingPortfolioFlag
 } from '../actions/MarginCallUploadActions'
 
@@ -13,6 +14,7 @@ const mapStateToProps = state => ({
   txnID: state.MarginUploadReducer.get('txnID') || _default,
   uploading: state.MarginUploadReducer.get('uploading'),
   requestingValuation: state.MarginUploadReducer.get('requestingValuation'),
+  uploadError: state.MarginUploadReducer.get('uploadError')
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -25,7 +27,11 @@ const mapDispatchToProps = dispatch => ({
   // },
   flagUploading: () =>
     dispatch(uploadingPortfolioFlag()),
-  onChangeType: type => console.log(type)
+  onChangeType: type => console.log(type),
+  onUploadError: () => {
+    dispatch(onUploadError('File could not be uploaded, please try again'))
+
+  }
 })
 
 const mergeProps = (stateProps, dispatchProps) => ({

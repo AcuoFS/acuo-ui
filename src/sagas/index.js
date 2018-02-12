@@ -3,7 +3,7 @@ import { delay, throttle } from 'redux-saga'
 import { hashHistory } from 'react-router'
 import Notifications from 'react-notification-system-redux'
 
-//fetches
+//Sagas
 import {
   checkSpecificServer,
   FetchNavbarAlerts,
@@ -26,6 +26,7 @@ import {
   FetchDeployedOptimisationSettingsSaga,
   PostReplaceAllocatedAssetSaga,
   DeployedCalcAdjAmountSaga,
+  DoLogoutSaga,
 
   FetchAnalyticsDataSaga
 } from './ServerCalls'
@@ -59,7 +60,7 @@ import {
 import {
   updateLoginProcess,
   updateWrongCredentialsFlag,
-  updateCLientID
+  doLogout
 } from './../actions/LoginActions'
 
 import {
@@ -67,7 +68,8 @@ import {
 } from './../actions/AnalyticsActions'
 
 import{
-  updateCurrencyInfo
+  updateCurrencyInfo,
+  setEmailAdd
 } from './../actions/CommonActions'
 
 import {
@@ -77,6 +79,7 @@ import {
 //action types
 import {
   DO_LOGIN,
+  DO_LOGOUT,
   SAGA_NAVBAR_ALERTS,
   RECON_ITEM,
   RECON_DISPUTE_SUBMIT,
@@ -122,7 +125,8 @@ function* navbarAlerts() {
   while(true){
     try{
       yield take(SAGA_NAVBAR_ALERTS)
-      const alerts = yield call(FetchNavbarAlerts)
+      const { alerts } = yield call(FetchNavbarAlerts)
+      // console.log(alerts)
       yield put(updateNavbarAlerts(alerts))
     } catch(error){
       console.log(error)
@@ -142,10 +146,13 @@ function* watchLogin() {
         yield put(updateLoginProcess(true))
         yield put(updateWrongCredentialsFlag(false))
         const { clientId } = yield call(DoLoginSaga, user, pass)
-        if(clientId) {
+        if(clientId.clientId) {
           localStorage.authenticating = true
           hashHistory.push('/2fa')
-          window.localStorage.clientId = clientId
+          window.localStorage.clientId = clientId.clientId
+          // yield put(setEmailAdd(clientId.email))
+          window.localStorage.acuoEmail = clientId.email
+          yield put(Notifications.hide(9999999999))
         }else{
           yield put(updateWrongCredentialsFlag(true))
           // yield put(Notifications.error({
@@ -159,8 +166,24 @@ function* watchLogin() {
         yield put(updateLoginProcess(false))
       }
     }
-    catch
-      (error) {
+    catch (error) {
+      console.log(error)
+      return false
+    }
+  }
+}
+
+function* watchLogout() {
+  while(true){
+    try {
+      yield take(DO_LOGOUT)
+      const { status } = yield call(DoLogoutSaga)
+      window.localStorage.clear()
+      hashHistory.push("/")
+      // if(status){
+      //   console.log('logged out')
+      // }
+    } catch(error) {
       console.log(error)
       return false
     }
@@ -274,9 +297,10 @@ function* watchFetchDashboardData() {
   while(true){
     try{
       yield take(ON_INIT_DASHBOARD)
-      const clientId = yield select(getClientIDSelector)
-      console.log(clientId)
+      // const clientId = yield select(getClientIDSelector)
+      // console.log(clientId)
       const obj = yield call(FetchDashboardSaga)
+      // console.log(obj)
       yield put(initState(obj))
       const currencyObj = yield call(FetchCurrencyInfoSaga)
       yield put(updateCurrencyInfo(currencyObj))
@@ -305,8 +329,9 @@ function* watchFetchOptimisationSettings() {
   while(true){
     try{
       yield take(ON_FETCH_OPTIMISATION_SETTINGS)
-      const payload = yield call(FetchOptimisationSettingsSaga)
-      yield put(initOptimisationSettings(payload.items))
+      const { items } = yield call(FetchOptimisationSettingsSaga)
+      console.log(items)
+      yield put(initOptimisationSettings(items))
     }catch(error) {
       console.log(error)
       return false
@@ -318,8 +343,8 @@ function* watchFetchSelection() {
   while (true) {
     try {
       yield take(ON_FETCH_SELECTION)
-      const payload = yield call(FetchSelectionSaga)
-      yield put(initSelection(payload.items))
+      const { items } = yield call(FetchSelectionSaga)
+      yield put(initSelection(items))
     } catch (error) {
       console.log(error)
       return false
@@ -434,6 +459,7 @@ export default function* root() {
     fork(serverHealthChecks),
     fork(sagaNavbarAlerts),
     fork(watchLogin),
+    fork(watchLogout),
     fork(navbarAlerts),
     fork(watchReconcile),
     fork(watchReconDispute),

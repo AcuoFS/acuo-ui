@@ -93,3 +93,10 @@ div.componentStyle {
 .displayHide {
   display: none;
 }
+
+.uploadError {
+  color: red;
+  font-style: italic;
+  text-align: left;
+  line-height: 1.2;
+}

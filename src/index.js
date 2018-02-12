@@ -4,6 +4,8 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import { hashHistory, Router, Route } from 'react-router'
 import createSagaMiddleware from 'redux-saga'
+import axios from 'axios'
+import Notifications from 'react-notification-system-redux'
 
 import root from './sagas'
 import reducer from './reducers'
@@ -36,8 +38,56 @@ const store = createStore(
   reducer,
   composeEnhancers(applyMiddleware(sagaMiddleware)))
 
-
 sagaMiddleware.run(root)
+
+axios.interceptors.request.use(function (config) {
+  // Do something before request is sent
+  // console.log(config)
+  if(localStorage.getItem('__JWT_TOKEN__'))
+    config.headers.authorization = localStorage.getItem('__JWT_TOKEN__')
+
+  return config;
+}, function (error) {
+  // Do something with request error
+  return Promise.reject(error);
+})
+
+axios.interceptors.response.use(function (response) {
+  // console.log(response)
+  // Do something with response data
+
+  // if(response.status === 401){
+  //   window.localStorage.clear()
+  //   hashHistory.push('/')
+  //   store.dispatch(Notifications.error({
+  //     title: 'Warning',
+  //     message: `Login session expired, please log in again`,
+  //     position: 'tr',
+  //     uid: 9999999999,
+  //     autoDismiss: 0
+  //   }))
+  // }else{
+    if(response.headers.authorization)
+      window.localStorage.setItem('__JWT_TOKEN__', response.headers.authorization)
+
+    return response;
+  // }
+}, function (error) {
+  // Do something with response error
+  if(error.response.status === 401){
+    window.localStorage.clear()
+    hashHistory.push('/')
+    store.dispatch(Notifications.error({
+      title: 'Warning',
+      message: `Login session expired, please log in again`,
+      position: 'tr',
+      uid: 9999999999,
+      autoDismiss: 0
+    }))
+  } else {
+    return Promise.reject(error);
+  }
+})
 
 class App extends React.Component {
   constructor(props) {
