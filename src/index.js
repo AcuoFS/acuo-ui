@@ -16,7 +16,7 @@ import {
   AppWrapperContainer,
   ChatContainer
 } from './containers'
-import { updateScreensize } from './actions/CommonActions'
+import { updateScreensize, refreshAccessToken } from './actions/CommonActions'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -53,10 +53,64 @@ axios.interceptors.request.use(function (config) {
 })
 
 axios.interceptors.response.use(function (response) {
-  // console.log(response)
-  // Do something with response data
 
-  // if(response.status === 401){
+    if(response.headers.authorization)
+      window.localStorage.setItem('__JWT_TOKEN__', response.headers.authorization)
+
+    if(response.headers['set-cookie'])
+      document.cookie = response.headers['set-cookie']
+
+    return response;
+  // }
+}, function (error) {
+  // Do something with response error
+  const { config, response: { status } } = error
+
+  console.log(config)
+  console.log(status)
+
+  switch(error.response.status) {
+    case 401:
+      window.localStorage.clear()
+      hashHistory.push('/')
+      store.dispatch(Notifications.error({
+        title: 'Warning',
+        message: `Login session expired, please log in again`,
+        position: 'tr',
+        uid: 9999999999,
+        autoDismiss: 0
+      }))
+      break;
+
+    case 498:
+      console.log('switch 498')
+      // console.log(window.localStorage.getItem('isRefreshing'))
+      if (!window.localStorage.getItem('isRefreshing')) {
+        window.localStorage.setItem('isRefreshing', '1')
+        console.log('current token')
+        console.log(window.localStorage.getItem('__JWT_TOKEN__'))
+        return store.dispatch(refreshAccessToken()).then(res => {
+
+          const retryOrigReq = new Promise((resolve, reject) => {
+            console.log('new token')
+            console.log(window.localStorage.getItem('__JWT_TOKEN__'))
+            config.headers['Authorization'] = 'Bearer ' + window.localStorage.getItem('__JWT_TOKEN__')
+            resolve(axios(config));
+            // });
+          });
+
+          window.localStorage.setItem('isRefreshing', '1')
+          return retryOrigReq
+        })
+      }
+
+      break;
+    default:
+      return Promise.reject(error);
+
+  }
+
+  // if(error.response.status === 401){
   //   window.localStorage.clear()
   //   hashHistory.push('/')
   //   store.dispatch(Notifications.error({
@@ -66,27 +120,9 @@ axios.interceptors.response.use(function (response) {
   //     uid: 9999999999,
   //     autoDismiss: 0
   //   }))
-  // }else{
-    if(response.headers.authorization)
-      window.localStorage.setItem('__JWT_TOKEN__', response.headers.authorization)
-
-    return response;
+  // } else {
+  //   return Promise.reject(error);
   // }
-}, function (error) {
-  // Do something with response error
-  if(error.response.status === 401){
-    window.localStorage.clear()
-    hashHistory.push('/')
-    store.dispatch(Notifications.error({
-      title: 'Warning',
-      message: `Login session expired, please log in again`,
-      position: 'tr',
-      uid: 9999999999,
-      autoDismiss: 0
-    }))
-  } else {
-    return Promise.reject(error);
-  }
 })
 
 class App extends React.Component {

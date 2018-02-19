@@ -28,7 +28,7 @@ import {
   DeployedCalcAdjAmountSaga,
   DoLogoutSaga,
 
-  FetchAnalyticsDataSaga
+  FetchAnalyticsDataSaga, FetchAccessWithRefresh
 } from './ServerCalls'
 
 //actions
@@ -99,6 +99,7 @@ import {
   ON_INIT_DEPLOYED_OPTIMISATION_SETTINGS,
   ON_REPLACE_ALLOCATED_ASSET,
   ON_CAL_ADJ_AMOUNT,
+  REFRESH_ACCESS_TOKEN,
 } from '../constants/ActionTypes'
 
 const getClientIDSelector = state => state.CommonReducer.get('clientId')
@@ -454,6 +455,18 @@ function* watchDeployedPopupChangeAmount(){
   // }
 }
 
+function* watchRefreshAccessToken(){
+  while(true){
+    try{
+      yield take(REFRESH_ACCESS_TOKEN)
+      yield call(FetchAccessWithRefresh)
+
+    } catch(error){
+
+    }
+  }
+}
+
 export default function* root() {
   yield [
     fork(serverHealthChecks),
@@ -477,6 +490,7 @@ export default function* root() {
     fork(watchRemoveAllocatedAsset),
     fork(watchFetchDeployedOptimisationSettings),
     fork(watchReplaceAllocatedAsset),
+    fork(watchRefreshAccessToken),
 
     fork(watchFetchAnalyticsData),
     fork(watchDeployedPopupChangeAmount)

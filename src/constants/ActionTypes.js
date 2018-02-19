@@ -124,3 +124,6 @@ export const OPEN_CHAT = 'OPEN_CHAT'
 //assets deployed
 export const ON_CAL_ADJ_AMOUNT = 'ON_CAL_ADJ_AMOUNT'
 export const UPDATE_SUBSTITUTED_FLAG = 'UPDATE_SUBSTITUTED_FLAG'
+
+//access token
+export const REFRESH_ACCESS_TOKEN = 'REFRESH_ACCESS_TOKEN'
