@@ -88,30 +88,32 @@ axios.interceptors.response.use(function (response) {
     case 498:
       console.log('switch 498')
       // console.log(window.localStorage.getItem('isRefreshing'))
-      // if (!window.localStorage.getItem('isRefreshing')) {
-      //   window.localStorage.setItem('isRefreshing', '1')
-      console.log('current token')
-      console.log(window.localStorage.getItem('__JWT_TOKEN__'))
-      // store.dispatch(refreshAccessToken(config))
-      //   .then(res => {
-      //
-      //
-      //
-      //   // window.localStorage.setItem('isRefreshing', '1')
-      //   // return retryOrigReq
-      // })
-      // }
+      if (!window.localStorage.isRefreshing) {
+        window.localStorage.setItem('isRefreshing', '1')
+        console.log('current token')
+        console.log(window.localStorage.getItem('__JWT_TOKEN__'))
+        // store.dispatch(refreshAccessToken(config))
+        //   .then(res => {
+        //
+        //
+        //
+        //   // window.localStorage.setItem('isRefreshing', '1')
+        //   // return retryOrigReq
+        // })
+        // }
 
-      axios.get(FETCH_ACCESS_WITH_REFRESH, { withCredentials: true }).then((response) => {
-        new Promise((resolve, reject) => {
-          console.log('new token')
-          console.log(window.localStorage.getItem('__JWT_TOKEN__'))
-          config.headers['Authorization'] = 'Bearer ' + window.localStorage.getItem('__JWT_TOKEN__')
-          resolve(axios(config));
-          // });
-        });
+        axios.get(FETCH_ACCESS_WITH_REFRESH, { withCredentials: true }).then((response) => {
+          new Promise((resolve, reject) => {
+            console.log('new token')
+            console.log(window.localStorage.getItem('__JWT_TOKEN__'))
+            config.headers['Authorization'] = 'Bearer ' + window.localStorage.getItem('__JWT_TOKEN__')
+            resolve(axios(config));
+            // });
+          });
+        })
         // return response.data
-      })
+      }
+      // })
 
       break;
     default:
