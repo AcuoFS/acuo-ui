@@ -89,9 +89,9 @@ axios.interceptors.response.use(function (response) {
       //   window.localStorage.setItem('isRefreshing', '1')
       console.log('current token')
       console.log(window.localStorage.getItem('__JWT_TOKEN__'))
-      return store.dispatch(refreshAccessToken()).then(res => {
+      store.dispatch(refreshAccessToken()).then(res => {
 
-        const retryOrigReq = new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
           console.log('new token')
           console.log(window.localStorage.getItem('__JWT_TOKEN__'))
           config.headers['Authorization'] = 'Bearer ' + window.localStorage.getItem('__JWT_TOKEN__')
@@ -100,7 +100,7 @@ axios.interceptors.response.use(function (response) {
         });
 
         // window.localStorage.setItem('isRefreshing', '1')
-        return retryOrigReq
+        // return retryOrigReq
       })
       // }
 
