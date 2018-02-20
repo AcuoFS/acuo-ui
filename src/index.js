@@ -85,24 +85,24 @@ axios.interceptors.response.use(function (response) {
     case 498:
       console.log('switch 498')
       // console.log(window.localStorage.getItem('isRefreshing'))
-      if (!window.localStorage.getItem('isRefreshing')) {
-        window.localStorage.setItem('isRefreshing', '1')
-        console.log('current token')
-        console.log(window.localStorage.getItem('__JWT_TOKEN__'))
-        return store.dispatch(refreshAccessToken()).then(res => {
+      // if (!window.localStorage.getItem('isRefreshing')) {
+      //   window.localStorage.setItem('isRefreshing', '1')
+      console.log('current token')
+      console.log(window.localStorage.getItem('__JWT_TOKEN__'))
+      return store.dispatch(refreshAccessToken()).then(res => {
 
-          const retryOrigReq = new Promise((resolve, reject) => {
-            console.log('new token')
-            console.log(window.localStorage.getItem('__JWT_TOKEN__'))
-            config.headers['Authorization'] = 'Bearer ' + window.localStorage.getItem('__JWT_TOKEN__')
-            resolve(axios(config));
-            // });
-          });
+        const retryOrigReq = new Promise((resolve, reject) => {
+          console.log('new token')
+          console.log(window.localStorage.getItem('__JWT_TOKEN__'))
+          config.headers['Authorization'] = 'Bearer ' + window.localStorage.getItem('__JWT_TOKEN__')
+          resolve(axios(config));
+          // });
+        });
 
-          window.localStorage.setItem('isRefreshing', '1')
-          return retryOrigReq
-        })
-      }
+        // window.localStorage.setItem('isRefreshing', '1')
+        return retryOrigReq
+      })
+      // }
 
       break;
     default:
