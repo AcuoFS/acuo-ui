@@ -106,7 +106,8 @@ axios.interceptors.response.use(function (response) {
           return new Promise((resolve, reject) => {
             console.log('new token')
             console.log(window.localStorage.getItem('__JWT_TOKEN__'))
-            config.headers['Authorization'] = 'Bearer ' + window.localStorage.getItem('__JWT_TOKEN__')
+            config.headers['authorization'] = 'Bearer ' + window.localStorage.getItem('__JWT_TOKEN__')
+            console.log()
             return resolve(axios(config)).then(response => response)
             // });
           });
