@@ -459,7 +459,7 @@ function* watchRefreshAccessToken(){
   while(true){
     try{
       yield take(REFRESH_ACCESS_TOKEN)
-      yield call(FetchAccessWithRefresh)
+      yield call(FetchAccessWithRefresh, action.config)
 
     } catch(error){
 

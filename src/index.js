@@ -89,19 +89,14 @@ axios.interceptors.response.use(function (response) {
       //   window.localStorage.setItem('isRefreshing', '1')
       console.log('current token')
       console.log(window.localStorage.getItem('__JWT_TOKEN__'))
-      store.dispatch(refreshAccessToken()).then(res => {
-
-        return new Promise((resolve, reject) => {
-          console.log('new token')
-          console.log(window.localStorage.getItem('__JWT_TOKEN__'))
-          config.headers['Authorization'] = 'Bearer ' + window.localStorage.getItem('__JWT_TOKEN__')
-          resolve(axios(config));
-          // });
-        });
-
-        // window.localStorage.setItem('isRefreshing', '1')
-        // return retryOrigReq
-      })
+      store.dispatch(refreshAccessToken(config))
+      //   .then(res => {
+      //
+      //
+      //
+      //   // window.localStorage.setItem('isRefreshing', '1')
+      //   // return retryOrigReq
+      // })
       // }
 
       break;

@@ -46,6 +46,7 @@ export const setEmailAdd = (email) => ({
   email
 })
 
-export const refreshAccessToken = () => ({
-  type: REFRESH_ACCESS_TOKEN
+export const refreshAccessToken = (config) => ({
+  type: REFRESH_ACCESS_TOKEN,
+  config
 })
