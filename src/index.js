@@ -102,12 +102,12 @@ axios.interceptors.response.use(function (response) {
         // })
         // }
 
-        axios.get(FETCH_ACCESS_WITH_REFRESH, { withCredentials: true }).then((response) => {
-          new Promise((resolve, reject) => {
+        return axios.get(FETCH_ACCESS_WITH_REFRESH, { withCredentials: true }).then((response) => {
+          return new Promise((resolve, reject) => {
             console.log('new token')
             console.log(window.localStorage.getItem('__JWT_TOKEN__'))
             config.headers['Authorization'] = 'Bearer ' + window.localStorage.getItem('__JWT_TOKEN__')
-            resolve(axios(config));
+            return resolve(axios(config)).then(response => response)
             // });
           });
         })
