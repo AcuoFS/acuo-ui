@@ -43,6 +43,18 @@ const store = createStore(
 
 sagaMiddleware.run(root)
 
+
+/***
+ * INTERCEPTORS
+ * REQ:
+ * these take a req and injects an authorization header if it exists
+ * RES:
+ * these take a response and sets an auth token into the localStorage if the authorization header exists
+ * they take a cookie and set it into the document object
+ * if server responses with a 498(access token expiry), attempt to send the cookie along to refresh access token
+ * if successful, resend the original request with the new access token
+ * if not, that means login session has expired and force the user to log out
+ */
 axios.interceptors.request.use(function (config) {
   // Do something before request is sent
   // console.log(config)
@@ -92,29 +104,17 @@ axios.interceptors.response.use(function (response) {
         window.localStorage.setItem('isRefreshing', '1')
         console.log('current token')
         console.log(window.localStorage.getItem('__JWT_TOKEN__'))
-        // store.dispatch(refreshAccessToken(config))
-        //   .then(res => {
-        //
-        //
-        //
-        //   // window.localStorage.setItem('isRefreshing', '1')
-        //   // return retryOrigReq
-        // })
-        // }
 
         return axios.get(FETCH_ACCESS_WITH_REFRESH, { withCredentials: true }).then((response) => {
           return new Promise((resolve, reject) => {
             console.log('new token')
             console.log(window.localStorage.getItem('__JWT_TOKEN__'))
             config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
-            console.log()
+            window.localStorage.removeItem('isRefreshing')
             return resolve(axios(config)).then(response => response)
-            // });
           });
         })
-        // return response.data
       }
-      // })
 
       break;
     default:
