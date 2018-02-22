@@ -100,27 +100,72 @@ axios.interceptors.response.use(function (response) {
     case 498:
       console.log('switch 498')
       // console.log(window.localStorage.getItem('isRefreshing'))
-      if (!window.localStorage.isRefreshing) {
-        window.localStorage.setItem('isRefreshing', '1')
+
+      if (!window.localStorage.refreshingPromise) {
+        const prom = axios.get(FETCH_ACCESS_WITH_REFRESH, { withCredentials: true }).then((response) => {
+          console.log('new token')
+          console.log(window.localStorage.getItem('__JWT_TOKEN__'))
+          // config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
+        }, () => {
+          window.localStorage.clear()
+          hashHistory.push('/')
+          store.dispatch(Notifications.error({
+            title: 'Warning',
+            message: `Login session expired, please log in again`,
+            position: 'tr',
+            uid: 9999999999,
+            autoDismiss: 0
+          }))
+        }).finally(() => {
+          // mark that we're done refreshing the token, so we can start a new request if needed
+          window.localStorage.removeItem('refreshingPromise')
+        })
+
+        window.localStorage.setItem('refreshingPromise', prom)
         console.log('current token')
         console.log(window.localStorage.getItem('__JWT_TOKEN__'))
 
-        return axios.get(FETCH_ACCESS_WITH_REFRESH, { withCredentials: true }).then((response) => {
+        console.log(window.localStorage.getItem('refreshingPromise'))
+
+        window.localStorage.getItem('refreshingPromise').then(res =>
           return new Promise((resolve, reject) => {
-            console.log('new token')
-            console.log(window.localStorage.getItem('__JWT_TOKEN__'))
+              config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
+              resolve(axios(config)).then(response => response)
+            }
+          )
+        )
+
+      }else{
+        window.localStorage.getItem('refreshingPromise').then(res =>
+          return new Promise((resolve, reject) => {
             config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
-            window.localStorage.removeItem('isRefreshing')
-            return resolve(axios(config)).then(response => response)
-          });
-        })
+            resolve(axios(config)).then(response => response)
+          }
+        )
       }
+
+      // if (!window.localStorage.refreshingPromise) {
+      //   console.log('current token')
+      //   console.log(window.localStorage.getItem('__JWT_TOKEN__'))
+      //
+      //   return axios.get(FETCH_ACCESS_WITH_REFRESH, { withCredentials: true }).then((response) => {
+      //     return new Promise((resolve, reject) => {
+      //       console.log('new token')
+      //       console.log(window.localStorage.getItem('__JWT_TOKEN__'))
+      //       config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
+      //       window.localStorage.removeItem('refreshing')
+      //       return resolve(axios(config)).then(response => response)
+      //     });
+      //   })
+      // }
+
 
       break;
     default:
       return Promise.reject(error);
 
   }
+
 
   // if(error.response.status === 401){
   //   window.localStorage.clear()
