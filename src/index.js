@@ -119,6 +119,8 @@ axios.interceptors.response.use(function (response) {
           }))
         }).finally(() => {
           // mark that we're done refreshing the token, so we can start a new request if needed
+          console.log('token refreshed')
+          console.log(window.localStorage.getItem('__JWT_TOKEN__'))
           window.localStorage.removeItem('refreshingPromise')
         })
 
@@ -136,22 +138,39 @@ axios.interceptors.response.use(function (response) {
         })
 
       }else {
-        const checkIfRefreshing = () => {
-          if(window.localStorage.getItem('refreshingPromise')){
-            setTimeout(checkIfRefreshing, 100)
-          }else{
-            return new Promise((resolve, reject) => {
+        // const checkIfRefreshing = () => {
+        //   if(window.localStorage.getItem('refreshingPromise')){
+        //     console.log('another req is refreshing token')
+        //     return setTimeout(checkIfRefreshing, 100)
+        //   }else{
+        //     console.log('the new token has been set')
+        //     return new Promise((resolve, reject) => {
+        //       config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
+        //       return resolve(axios(config)).then(response => response)
+        //     })
+        //   }
+        // }
+
+        return new Promise((resolve, reject) => {
+          const checkIfRefreshing = () => {
+            if(window.localStorage.getItem('refreshingPromise')){
+              console.log('another req is refreshing token')
+              setTimeout(checkIfRefreshing, 100)
+            }else{
+              console.log('the new token has been set')
+              // return new Promise((resolve, reject) => {
               config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
               return resolve(axios(config)).then(response => response)
-            })
+              // })
+            }
           }
-        }
+        })
 
-        async function watcher(){
-          return await checkIfRefreshing()
-        }
+        // async function watcher(){
+        //   return await checkIfRefreshing()
+        // }
 
-        return watcher()
+        // return test()
 
       }
 
