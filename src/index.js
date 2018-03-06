@@ -122,13 +122,13 @@ axios.interceptors.response.use(function (response) {
           window.localStorage.removeItem('refreshingPromise')
         })
 
-        window.localStorage.setItem('refreshingPromise', prom)
+        window.localStorage.setItem('refreshingPromise', 'true')
         console.log('current token')
         console.log(window.localStorage.getItem('__JWT_TOKEN__'))
 
         console.log(window.localStorage.getItem('refreshingPromise'))
 
-        return window.localStorage.getItem('refreshingPromise').then(res => {
+        return prom.then(res => {
           return new Promise((resolve, reject) => {
             config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
             return resolve(axios(config)).then(response => response)
@@ -136,13 +136,23 @@ axios.interceptors.response.use(function (response) {
         })
 
       }else {
-        console.log('token is refreshing, promise is assigned')
-        return window.localStorage.getItem('refreshingPromise').then(res => {
-          return new Promise((resolve, reject) => {
-            config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
-            return resolve(axios(config)).then(response => response)
-          })
-        })
+        const checkIfRefreshing = () => {
+          if(window.localStorage.getItem('refreshingPromise')){
+            setTimeout(checkIfRefreshing, 100)
+          }else{
+            return new Promise((resolve, reject) => {
+              config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
+              return resolve(axios(config)).then(response => response)
+            })
+          }
+        }
+
+        async function watcher(){
+          return await checkIfRefreshing()
+        }
+
+        return watcher()
+
       }
 
       // if (!window.localStorage.refreshingPromise) {
