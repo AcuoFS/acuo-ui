@@ -6,7 +6,7 @@ import axios from 'axios'
 import { RECON_URL } from '../../constants/APIcalls'
 
 export const FetchReconSaga = () => (
-  axios.get(`${RECON_URL}/${window.localStorage.clientId}`).then((response) => {
+  axios.get(`${RECON_URL}/${window.localStorage.clientId}`, {withCredentials: false}).then((response) => {
     return response.data
   })
 )

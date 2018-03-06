@@ -6,6 +6,7 @@ export const DoLogoutSaga = () => (
   axios.post(LOGOUT_URL, {
     clientId: window.localStorage.getItem('clientId')
   }, {
+    withCredentials: false,
     headers: {'content-type': 'application/json'},
   }).then(response => {
     // console.log(response)

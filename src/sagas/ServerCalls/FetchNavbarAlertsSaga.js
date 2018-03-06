@@ -6,7 +6,7 @@ import axios from 'axios'
 import { FETCH_NAVBAR_ALERTS } from '../../constants/APIcalls'
 
 export const FetchNavbarAlerts = () =>
-    axios.get(`${FETCH_NAVBAR_ALERTS}/${window.localStorage.clientId}`)
+    axios.get(`${FETCH_NAVBAR_ALERTS}/${window.localStorage.clientId}`, {withCredentials: false})
      .then( response => response.data )
 
 

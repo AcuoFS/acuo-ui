@@ -6,7 +6,7 @@ import axios from 'axios'
 import { MARGIN_SELECTION_URL } from '../../constants/APIcalls'
 
 export const FetchSelectionSaga = () => (
-  axios.get(`${MARGIN_SELECTION_URL}/${window.localStorage.clientId}`).then((response) => {
+  axios.get(`${MARGIN_SELECTION_URL}/${window.localStorage.clientId}`, {withCredentials: false}).then((response) => {
     return response.data
   })
 )

@@ -1,3 +1,8 @@
+/***** NOT USED
+ * ISSUES WITH RETURNING PROMISE BACK TO THE INTERCEPTOR IN INDEX JS
+ */
+
+
 import axios from "axios/index";
 import { FETCH_ACCESS_WITH_REFRESH } from "../../constants/APIcalls";
 
