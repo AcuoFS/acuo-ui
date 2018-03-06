@@ -164,7 +164,7 @@ axios.interceptors.response.use(function (response) {
               // })
             }
           }
-        })
+        }).then(res => console.log(res))
 
         // async function watcher(){
         //   return await checkIfRefreshing()
