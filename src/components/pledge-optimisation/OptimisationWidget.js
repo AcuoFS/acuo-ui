@@ -155,7 +155,7 @@ export default class OptimisationWidget extends React.Component {
                        tickClick={onToggleCheckall}/>
           }
 
-          <div className={styles.optButton + ' ' +
+          <div className={styles.optButton + ' ' + 'allocate' + ' ' +
           ((this.checkIfExist(pendingAllocation).size > 0) && !allocating ? '' : styles.btnDisabled )}
                onClick={() => {
                  onAllocate(pendingAllocation.toJS(), optimisation.toJS())
@@ -172,7 +172,7 @@ export default class OptimisationWidget extends React.Component {
           {/*Pledge*/}
           {/*</div>*/}
 
-          <div className={styles.optButton + ' ' +
+          <div className={styles.optButton + ' ' + 'pledge' + ' ' +
           (this.isShowPledgeBtn(selection)
             ? styles.optBtnPledge
             : styles.btnDisabled )}

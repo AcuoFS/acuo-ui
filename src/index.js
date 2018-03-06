@@ -16,7 +16,10 @@ import {
   AppWrapperContainer,
   ChatContainer
 } from './containers'
-import { updateScreensize } from './actions/CommonActions'
+import { updateScreensize, refreshAccessToken } from './actions/CommonActions'
+import {
+  FETCH_ACCESS_WITH_REFRESH
+} from "./constants/APIcalls";
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -40,6 +43,18 @@ const store = createStore(
 
 sagaMiddleware.run(root)
 
+
+/***
+ * INTERCEPTORS
+ * REQ:
+ * these take a req and injects an authorization header if it exists
+ * RES:
+ * these take a response and sets an auth token into the localStorage if the authorization header exists
+ * they take a cookie and set it into the document object
+ * if server responses with a 498(access token expiry), attempt to send the cookie along to refresh access token
+ * if successful, resend the original request with the new access token
+ * if not, that means login session has expired and force the user to log out
+ */
 axios.interceptors.request.use(function (config) {
   // Do something before request is sent
   // console.log(config)
@@ -53,10 +68,148 @@ axios.interceptors.request.use(function (config) {
 })
 
 axios.interceptors.response.use(function (response) {
-  // console.log(response)
-  // Do something with response data
 
-  // if(response.status === 401){
+    if(response.headers.authorization)
+      window.localStorage.setItem('__JWT_TOKEN__', response.headers.authorization)
+
+    if(response.headers['set-cookie'])
+      document.cookie = response.headers['set-cookie']
+
+    return response;
+  // }
+}, function (error) {
+  // Do something with response error
+  const { config, response: { status } } = error
+
+  // console.log(config)
+  // console.log(status)
+
+  switch(error.response.status) {
+    case 401:
+      window.localStorage.clear()
+      hashHistory.push('/')
+      store.dispatch(Notifications.error({
+        title: 'Warning',
+        message: `Login session expired, please log in again`,
+        position: 'tr',
+        uid: 9999999999,
+        autoDismiss: 0
+      }))
+      break;
+
+    case 498:
+      // console.log('switch 498')
+      // console.log(window.localStorage.getItem('isRefreshing'))
+
+      if (!window.localStorage.refreshingPromise) {
+        console.log('token not refreshing, refreshing token')
+        const prom = axios.get(FETCH_ACCESS_WITH_REFRESH, { withCredentials: true }).then((response) => {
+          // console.log('new token')
+          // console.log(window.localStorage.getItem('__JWT_TOKEN__'))
+          // config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
+        }, () => {
+          window.localStorage.clear()
+          hashHistory.push('/')
+          store.dispatch(Notifications.error({
+            title: 'Warning',
+            message: `Login session expired, please log in again`,
+            position: 'tr',
+            uid: 9999999999,
+            autoDismiss: 0
+          }))
+        }).finally(() => {
+          // mark that we're done refreshing the token, so we can start a new request if needed
+          // console.log('token refreshed')
+          // console.log(window.localStorage.getItem('__JWT_TOKEN__'))
+          window.localStorage.removeItem('refreshingPromise')
+        })
+
+        window.localStorage.setItem('refreshingPromise', 'true')
+        // console.log('current token')
+        // console.log(window.localStorage.getItem('__JWT_TOKEN__'))
+        //
+        // console.log(window.localStorage.getItem('refreshingPromise'))
+
+        return prom.then(res => {
+          return new Promise((resolve, reject) => {
+            config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
+            return resolve(axios(config)).then(response => response)
+          })
+        })
+
+      }else {
+        // const checkIfRefreshing = () => {
+        //   if(window.localStorage.getItem('refreshingPromise')){
+        //     console.log('another req is refreshing token')
+        //     return setTimeout(checkIfRefreshing, 100)
+        //   }else{
+        //     console.log('the new token has been set')
+        //     return new Promise((resolve, reject) => {
+        //       config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
+        //       return resolve(axios(config)).then(response => response)
+        //     })
+        //   }
+        // }
+
+
+        const test = new Promise((resolve, reject) => {
+          // console.log('test promise')
+          const checkIfRefreshing = () => { // check if current token is still refreshing
+            // console.log('loop')
+            if (window.localStorage.getItem('refreshingPromise')) {
+              // console.log('another req is refreshing token')
+              setTimeout(checkIfRefreshing, 100) //if still refreshing, wait 100ms and try again
+            } else {
+              // console.log('the new token has been set')
+              // return new Promise((resolve, reject) => {
+              resolve('done') // if not refreshing, resolve promise
+              // })
+            }
+          }
+
+          return checkIfRefreshing()
+        })
+
+        return test.then(res => { //after access token is set and flag is removed, fire the previous request again with new auth header
+          // console.log('last phase')
+          return new Promise((resolve, reject) => {
+            config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
+            return resolve(axios(config)).then(response => response)
+          })
+        })
+
+        // async function watcher(){
+        //   return await checkIfRefreshing()
+        // }
+
+        // return test()
+
+      }
+
+      // if (!window.localStorage.refreshingPromise) {
+      //   console.log('current token')
+      //   console.log(window.localStorage.getItem('__JWT_TOKEN__'))
+      //
+      //   return axios.get(FETCH_ACCESS_WITH_REFRESH, { withCredentials: true }).then((response) => {
+      //     return new Promise((resolve, reject) => {
+      //       console.log('new token')
+      //       console.log(window.localStorage.getItem('__JWT_TOKEN__'))
+      //       config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
+      //       window.localStorage.removeItem('refreshing')
+      //       return resolve(axios(config)).then(response => response)
+      //     });
+      //   })
+      // }
+
+
+      break;
+    default:
+      return Promise.reject(error);
+
+  }
+
+
+  // if(error.response.status === 401){
   //   window.localStorage.clear()
   //   hashHistory.push('/')
   //   store.dispatch(Notifications.error({
@@ -66,27 +219,9 @@ axios.interceptors.response.use(function (response) {
   //     uid: 9999999999,
   //     autoDismiss: 0
   //   }))
-  // }else{
-    if(response.headers.authorization)
-      window.localStorage.setItem('__JWT_TOKEN__', response.headers.authorization)
-
-    return response;
+  // } else {
+  //   return Promise.reject(error);
   // }
-}, function (error) {
-  // Do something with response error
-  if(error.response.status === 401){
-    window.localStorage.clear()
-    hashHistory.push('/')
-    store.dispatch(Notifications.error({
-      title: 'Warning',
-      message: `Login session expired, please log in again`,
-      position: 'tr',
-      uid: 9999999999,
-      autoDismiss: 0
-    }))
-  } else {
-    return Promise.reject(error);
-  }
 })
 
 class App extends React.Component {

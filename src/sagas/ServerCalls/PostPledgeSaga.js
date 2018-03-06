@@ -8,7 +8,10 @@ import { PLEDGE_ALLOCATIONS } from '../../constants/APIcalls'
 export const PostPledgeSaga = (pledgeToSend) =>
   axios.post(PLEDGE_ALLOCATIONS, Object.assign(pledgeToSend,
     {clientId: window.localStorage.clientId}),
-    {'content-type': 'application/json'},
+    {
+      withCredentials: false,
+      headers: {'content-type': 'application/json'}
+    },
   ).then(response => {
     return response.data
   }).catch(error => {

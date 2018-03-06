@@ -20,6 +20,7 @@ import { FetchDeployedOptimisationSettingsSaga } from './FetchDeployedOptimisati
 import { PostReplaceAllocatedAssetSaga } from './PostReplaceAllocatedAssetSaga'
 import { DeployedCalcAdjAmountSaga } from './DeployedCalcAdjAmountSaga'
 import { DoLogoutSaga } from './DoLogoutSaga'
+import { FetchAccessWithRefresh } from "./FetchAccessWIthRefresh";
 
 import { FetchAnalyticsDataSaga } from './FetchAnalyticsDataSaga'
 
@@ -46,6 +47,7 @@ export {
   PostReplaceAllocatedAssetSaga,
   DeployedCalcAdjAmountSaga,
   DoLogoutSaga,
+  FetchAccessWithRefresh,
 
   FetchAnalyticsDataSaga
 }

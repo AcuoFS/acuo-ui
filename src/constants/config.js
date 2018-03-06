@@ -29,6 +29,7 @@ var configJson = {
   LOGIN_URL: '/proxy/common/auth/login',
   LOGOUT_URL: '/proxy/common/auth/logout',
   FETCH_CURRENCY_INFO: '/proxy/common/get-currency',
+  FETCH_ACCESS_WITH_REFRESH: 'proxy/common/refresh-access-token',
 
   TEST_FETCH_ANALYTICS_DATA: '/proxy/analytics',
 }

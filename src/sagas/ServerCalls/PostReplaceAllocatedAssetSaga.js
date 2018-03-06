@@ -8,6 +8,7 @@ export const PostReplaceAllocatedAssetSaga = (obj) =>
   fetch('', {
     method: 'POST',
     body: JSON.stringify(Object.assign(obj, {clientId: window.localStorage.clientId})),
+    withCredentials: false,
     headers: {'content-type': 'application/json'},
     json: true,
     resolveWithFullResponse: true

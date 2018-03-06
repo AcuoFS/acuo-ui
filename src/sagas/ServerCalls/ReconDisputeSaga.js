@@ -8,7 +8,10 @@ import {RECON_URL, SEND_RECON_DISPUTE_URL} from '../../constants/APIcalls'
 export const ReconDisputeSaga = (disputeObjToSend) =>
   axios.post(SEND_RECON_DISPUTE_URL,
     Object.assign(disputeObjToSend, {clientId: window.localStorage.clientId}),
-    {'Content-Type': 'application/json'}
+    {
+      withCredentials: false,
+      headers: {'content-type': 'application/json'}
+    }
   ).then(response => {
     //console.log(response)
     if (response.status === 200 || response.status === 201) {

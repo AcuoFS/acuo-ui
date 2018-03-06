@@ -42,7 +42,7 @@ export default class OptItem extends React.Component {
         <div className={sharedStyles.flexContainer}>
           <div className={styles.optItemName}>{this.props.sldName}</div>
           <div className={styles.optItemSlider}>
-            <input type="range" step="1" max="100" min="0" onMouseUp={this.updateState}
+            <input className={this.props.sldName} type="range" step="1" max="100" min="0" onMouseUp={this.updateState}
                    onChange={this.updateDisplay} value={this.state.allocation * 10}/>
             {/*<div className={styles.markings}>*/}
               {/*<div className={styles.marking}>|</div>*/}

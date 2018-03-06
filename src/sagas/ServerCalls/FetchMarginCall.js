@@ -1,3 +1,7 @@
+/***
+ * UNUSED
+ */
+
 import has from 'lodash/has'
 import { FETCH_GENERATED_PORTFOLIO } from '../../constants/APIcalls'
 
