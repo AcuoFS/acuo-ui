@@ -151,20 +151,29 @@ axios.interceptors.response.use(function (response) {
         //   }
         // }
 
-        return new Promise((resolve, reject) => {
-          const checkIfRefreshing = () => {
-            if(window.localStorage.getItem('refreshingPromise')){
-              console.log('another req is refreshing token')
-              setTimeout(checkIfRefreshing, 100)
-            }else{
-              console.log('the new token has been set')
-              // return new Promise((resolve, reject) => {
-              config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
-              return resolve(axios(config)).then(response => response)
-              // })
+        const test = () => {
+          const promise = new Promise((resolve, reject) => {
+            const checkIfRefreshing = () => {
+              if (window.localStorage.getItem('refreshingPromise')) {
+                console.log('another req is refreshing token')
+                setTimeout(checkIfRefreshing, 100)
+              } else {
+                console.log('the new token has been set')
+                // return new Promise((resolve, reject) => {
+                resolve('done')
+                // })
+              }
             }
-          }
-        }).then(res => console.log(res))
+          })
+          return promise
+        }
+
+        return test.then(res => {
+          return new Promise((resolve, reject) => {
+            config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
+            return resolve(axios(config)).then(response => response)
+          })
+        })
 
         // async function watcher(){
         //   return await checkIfRefreshing()
