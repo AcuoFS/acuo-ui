@@ -151,9 +151,12 @@ axios.interceptors.response.use(function (response) {
         //   }
         // }
 
+
         const test = () => {
           const promise = new Promise((resolve, reject) => {
+            console.log('test promise')
             const checkIfRefreshing = () => {
+              console.log('loop')
               if (window.localStorage.getItem('refreshingPromise')) {
                 console.log('another req is refreshing token')
                 setTimeout(checkIfRefreshing, 100)
@@ -169,6 +172,7 @@ axios.interceptors.response.use(function (response) {
         }
 
         return test.then(res => {
+          console.log('last phase')
           return new Promise((resolve, reject) => {
             config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
             return resolve(axios(config)).then(response => response)
