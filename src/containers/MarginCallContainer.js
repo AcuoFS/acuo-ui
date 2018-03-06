@@ -32,13 +32,16 @@ const mapDispatchToProps = dispatch => ({
     dispatch(MarginCallUploadActions.onRequestSendMarginCalls(idArr))
 
   },
-  requestValuation: (referenceIDs) =>{
+  requestValuation: (rowObjs) =>{
+    // console.log(referenceIDs)
+    const portfolioIds = rowObjs.map(x => x.portfolioId)
     dispatch(MarginCallUploadActions.updateRequestState(true))
-    dispatch(MarginCallUploadActions.onRequestValuationAction(referenceIDs))
+    dispatch(MarginCallUploadActions.onRequestValuationAction(portfolioIds))
   },
-  mergedGenerateMarginCalls: (referenceIDs) => {
+  mergedGenerateMarginCalls: (newRefIDs) => {
+    // const portfolioIds = rowObjs.map(x => x.portfolioId)
     dispatch(MarginCallUploadActions.updateRequestState(true))
-    dispatch(MarginCallUploadActions.onRequestGenerateMarginCall(referenceIDs))
+    dispatch(MarginCallUploadActions.onRequestGenerateMarginCall(newRefIDs))
   },
   onToggleRow: rowObj => {
     dispatch(MarginCallUploadActions.onToggleMarginCallRow(rowObj))
@@ -57,10 +60,11 @@ const mergeProps = (stateProps, dispatchProps) => ({
     // dispatchProps.requestValuation(stateProps.txnID)
 
    },
-  generateMarginCalls: (referenceIDs) => {
+  generateMarginCalls: (rowObjs) => {
+    const portfolioIds = rowObjs.map(x => x.portfolioId)
     const valuedStatements = stateProps.uploadData.filter(x => x.agreementDetails.tradeCount === x.agreementDetails.tradeValue)
     const keys = Object.keys(_.keyBy(valuedStatements, x => x.portfolioId))
-    const newRefIDs = referenceIDs.filter(x => _.includes(keys, x))
+    const newRefIDs = portfolioIds.filter(x => _.includes(keys, x))
 
     dispatchProps.mergedGenerateMarginCalls(newRefIDs)
   },

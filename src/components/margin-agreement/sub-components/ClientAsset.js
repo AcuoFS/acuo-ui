@@ -13,6 +13,10 @@ export default class ClientAsset extends React.Component {
       onSelectSecondLevelItem, currencyInfo
     } = this.props
 
+    /**
+     * leftSideFunctionalityTest is to know if it's left of right side, for functionality testing
+     */
+
     return (
       <div className={styles.actPanel + ' ' + styles[actStyle]}>
         <MarginAgreementAssets marginData={marginData}
@@ -26,7 +30,8 @@ export default class ClientAsset extends React.Component {
                                secondLevelList={secondLevelList}
                                onSelectSecondLevelItem={onSelectSecondLevelItem}
                                party={'client'}
-                               currencyInfo={currencyInfo}/>
+                               currencyInfo={currencyInfo}
+                               leftSideFunctionalityTest={true}/>
 
       </div>
     )
