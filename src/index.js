@@ -152,24 +152,21 @@ axios.interceptors.response.use(function (response) {
         // }
 
 
-        const test = () => {
-          const promise = new Promise((resolve, reject) => {
-            console.log('test promise')
-            const checkIfRefreshing = () => {
-              console.log('loop')
-              if (window.localStorage.getItem('refreshingPromise')) {
-                console.log('another req is refreshing token')
-                setTimeout(checkIfRefreshing, 100)
-              } else {
-                console.log('the new token has been set')
-                // return new Promise((resolve, reject) => {
-                resolve('done')
-                // })
-              }
+        const test = new Promise((resolve, reject) => {
+          console.log('test promise')
+          const checkIfRefreshing = () => {
+            console.log('loop')
+            if (window.localStorage.getItem('refreshingPromise')) {
+              console.log('another req is refreshing token')
+              setTimeout(checkIfRefreshing, 100)
+            } else {
+              console.log('the new token has been set')
+              // return new Promise((resolve, reject) => {
+              resolve('done')
+              // })
             }
-          })
-          return promise
-        }
+          }
+        })
 
         return test.then(res => {
           console.log('last phase')
