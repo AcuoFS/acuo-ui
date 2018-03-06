@@ -166,6 +166,8 @@ axios.interceptors.response.use(function (response) {
               // })
             }
           }
+
+          return checkIfRefreshing()
         })
 
         return test.then(res => {
