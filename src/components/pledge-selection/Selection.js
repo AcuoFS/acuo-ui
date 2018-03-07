@@ -72,8 +72,8 @@ export default class Selection extends React.Component {
           onDragOver={ e=>this.dragNdrop.onDragOver_handler(e) }
           onDragLeave={ e=>this.dragNdrop.onDragLeave_handler(e) }
           >
-        <td>{asset.get(ASSET.A_NAME)}</td>
-        <td>{checkNegative(asset.get(ASSET.A_NET_AMT))}</td>
+        <td className={'asset_name'}>{asset.get(ASSET.A_NAME)}</td>
+        <td className={'adjusted_value'}>{checkNegative(asset.get(ASSET.A_NET_AMT))}</td>
         <td>{asset.get(ASSET.A_CCY)}</td>
         <td className={styles.hoverCtrl}>
           {asset.get(ASSET.A_HAIRCUT_PCT)}%
@@ -83,7 +83,7 @@ export default class Selection extends React.Component {
           </div>
         </td>
         <td>{checkNegative(asset.get(ASSET.A_AMT))}</td>
-        <td>{checkNegative(asset.get(ASSET.A_FX))}</td>
+        <td className={'fx'}>{checkNegative(asset.get(ASSET.A_FX))}</td>
         <td>{asset.get(ASSET.A_VENUE)}</td>
         <td>
           <div className={styles.earmarkAssetButton}
