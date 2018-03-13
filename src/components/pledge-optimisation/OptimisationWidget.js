@@ -114,11 +114,11 @@ export default class OptimisationWidget extends React.Component {
         <div className={sharedStyles.panelTitle}>Optimization Setting <img src={'./images/pledge/locked.png'}/></div>
       }
       <div className={styles.tabHolder}>
-        <div className={styles.tab + ' ' + (this.isObjectiveTab(this.state.currentTab) && styles.selectedTab)}
+        <div className={styles.tab + ' ' + (this.isObjectiveTab(this.state.currentTab) && styles.selectedTab) + ' ' + 'objective'}
              onClick={() => this.setState({currentTab: TAB_OBJECTIVE})}>
           Objective
         </div>
-        <div className={styles.tab + ' ' + (this.isConstraintsTab(this.state.currentTab) && styles.selectedTab)}
+        <div className={styles.tab + ' ' + (this.isConstraintsTab(this.state.currentTab) && styles.selectedTab) + ' ' + 'constraints'}
              onClick={() => this.setState({currentTab: TAB_CONSTRAINTS})}>
           Constraints
         </div>

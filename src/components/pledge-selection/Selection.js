@@ -74,7 +74,7 @@ export default class Selection extends React.Component {
           >
         <td className={'asset_name'}>{asset.get(ASSET.A_NAME)}</td>
         <td className={'adjusted_value'}>{checkNegative(asset.get(ASSET.A_NET_AMT))}</td>
-        <td>{asset.get(ASSET.A_CCY)}</td>
+        <td className={'ccy'}>{asset.get(ASSET.A_CCY)}</td>
         <td className={styles.hoverCtrl}>
           {asset.get(ASSET.A_HAIRCUT_PCT)}%
           <div className={styles.tooltip}>
@@ -83,7 +83,7 @@ export default class Selection extends React.Component {
           </div>
         </td>
         <td>{checkNegative(asset.get(ASSET.A_AMT))}</td>
-        <td className={'fx'}>{checkNegative(asset.get(ASSET.A_FX))}</td>
+        <td className={'fx'} title={asset.get(ASSET.A_FX)}>{checkNegative(asset.get(ASSET.A_FX))}</td>
         <td>{asset.get(ASSET.A_VENUE)}</td>
         <td>
           <div className={styles.earmarkAssetButton}
@@ -379,7 +379,7 @@ export default class Selection extends React.Component {
 
                     <tr className={styles.bold}>
                       <td>Sub-Total</td>
-                      <td>
+                      <td title={parseFloat(marginCall.getIn(['allocated', ALLOCATED.VM_TOTAL])) || 0}>
                         {checkNegative(parseFloat(marginCall.getIn(['allocated', ALLOCATED.VM_TOTAL]) || 0).toFixed(2))}
                       </td>
                       <td>USD</td>
