@@ -83,7 +83,7 @@ export default class Selection extends React.Component {
           </div>
         </td>
         <td>{checkNegative(asset.get(ASSET.A_AMT))}</td>
-        <td className={'fx'} title={asset.get(ASSET.A_FX)}>{checkNegative(asset.get(ASSET.A_FX).toFixed(2))}</td>
+        <td className={'fx'} title={asset.get(ASSET.A_FX)}>{checkNegative(parseFloat(asset.get(ASSET.A_FX)).toFixed(2))}</td>
         <td>{asset.get(ASSET.A_VENUE)}</td>
         <td>
           <div className={styles.earmarkAssetButton}
