@@ -56,8 +56,7 @@ sagaMiddleware.run(root)
  * if not, that means login session has expired and force the user to log out
  */
 axios.interceptors.request.use(function (config) {
-  // Do something before request is sent
-  // console.log(config)
+
   if(localStorage.getItem('__JWT_TOKEN__'))
     config.headers.authorization = localStorage.getItem('__JWT_TOKEN__')
 
@@ -81,11 +80,11 @@ axios.interceptors.response.use(function (response) {
   // Do something with response error
   const { config, response: { status } } = error
 
-  // console.log(config)
-  // console.log(status)
+  console.log(`error response code: ${error.response.status}`)
 
   switch(error.response.status) {
     case 401:
+      console.log('error 401, should get kicked out')
       window.localStorage.clear()
       hashHistory.push('/')
       store.dispatch(Notifications.error({
@@ -98,15 +97,13 @@ axios.interceptors.response.use(function (response) {
       break;
 
     case 498:
-      // console.log('switch 498')
-      // console.log(window.localStorage.getItem('isRefreshing'))
+      console.log('error 498, should be refreshing access token')
 
       if (!window.localStorage.refreshingPromise) {
-        console.log('token not refreshing, refreshing token')
+        console.log('token not currently refreshing, refreshing token')
         const prom = axios.get(FETCH_ACCESS_WITH_REFRESH, { withCredentials: true }).then((response) => {
-          // console.log('new token')
-          // console.log(window.localStorage.getItem('__JWT_TOKEN__'))
-          // config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
+          console.log('new token returned')
+
         }, () => {
           window.localStorage.clear()
           hashHistory.push('/')
@@ -118,17 +115,13 @@ axios.interceptors.response.use(function (response) {
             autoDismiss: 0
           }))
         }).finally(() => {
-          // mark that we're done refreshing the token, so we can start a new request if needed
-          // console.log('token refreshed')
-          // console.log(window.localStorage.getItem('__JWT_TOKEN__'))
+
           window.localStorage.removeItem('refreshingPromise')
+          console.log('removing refreshing flag')
         })
 
         window.localStorage.setItem('refreshingPromise', 'true')
-        // console.log('current token')
-        // console.log(window.localStorage.getItem('__JWT_TOKEN__'))
-        //
-        // console.log(window.localStorage.getItem('refreshingPromise'))
+        console.log('set refreshing token flag')
 
         return prom.then(res => {
           return new Promise((resolve, reject) => {
@@ -138,29 +131,16 @@ axios.interceptors.response.use(function (response) {
         })
 
       }else {
-        // const checkIfRefreshing = () => {
-        //   if(window.localStorage.getItem('refreshingPromise')){
-        //     console.log('another req is refreshing token')
-        //     return setTimeout(checkIfRefreshing, 100)
-        //   }else{
-        //     console.log('the new token has been set')
-        //     return new Promise((resolve, reject) => {
-        //       config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
-        //       return resolve(axios(config)).then(response => response)
-        //     })
-        //   }
-        // }
-
 
         const test = new Promise((resolve, reject) => {
           // console.log('test promise')
           const checkIfRefreshing = () => { // check if current token is still refreshing
             // console.log('loop')
             if (window.localStorage.getItem('refreshingPromise')) {
-              // console.log('another req is refreshing token')
+              console.log('another req is refreshing token')
               setTimeout(checkIfRefreshing, 100) //if still refreshing, wait 100ms and try again
             } else {
-              // console.log('the new token has been set')
+              console.log('the new token has been set')
               // return new Promise((resolve, reject) => {
               resolve('done') // if not refreshing, resolve promise
               // })
@@ -171,38 +151,17 @@ axios.interceptors.response.use(function (response) {
         })
 
         return test.then(res => { //after access token is set and flag is removed, fire the previous request again with new auth header
-          // console.log('last phase')
+          console.log('last phase, sending queued requests')
           return new Promise((resolve, reject) => {
             config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
             return resolve(axios(config)).then(response => response)
           })
         })
 
-        // async function watcher(){
-        //   return await checkIfRefreshing()
-        // }
-
-        // return test()
-
       }
 
-      // if (!window.localStorage.refreshingPromise) {
-      //   console.log('current token')
-      //   console.log(window.localStorage.getItem('__JWT_TOKEN__'))
-      //
-      //   return axios.get(FETCH_ACCESS_WITH_REFRESH, { withCredentials: true }).then((response) => {
-      //     return new Promise((resolve, reject) => {
-      //       console.log('new token')
-      //       console.log(window.localStorage.getItem('__JWT_TOKEN__'))
-      //       config.headers['authorization'] = window.localStorage.getItem('__JWT_TOKEN__')
-      //       window.localStorage.removeItem('refreshing')
-      //       return resolve(axios(config)).then(response => response)
-      //     });
-      //   })
-      // }
-
-
       break;
+
     default:
       return Promise.reject(error);
 

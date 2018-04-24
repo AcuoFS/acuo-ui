@@ -29,7 +29,7 @@
   animation:         scroll-animation 1.2s ease-in-out 0s infinite; /* IE 10+, Fx 29+ */
   position: absolute;
   left: -33px;
-}a
+}
 
 @-webkit-keyframes scroll-animation {
   0%   { left: -33px; }
