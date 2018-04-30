@@ -19,7 +19,7 @@ export const ReconDisputeSaga = (disputeObjToSend) =>
     } else {
       //alert('Unknown status code received: ' + response.status)
     }
-    return axios.get(`${RECON_URL}/${window.localStorage.clientID}`).then((response) => {
+    return axios.get(`${RECON_URL}/${window.localStorage.clientId}`).then((response) => {
       const { items } = response.data
       return items
     })
