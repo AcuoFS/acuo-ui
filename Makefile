@@ -18,8 +18,6 @@ docker-build:
 
 docker-tag:
 	docker tag ${IMAGE_NAME}:latest ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest
-	docker tag ${IMAGE_NAME}:latest ${DOCKER_REGISTRY}/${IMAGE_NAME}:${APP_VERSION}
-	docker tag ${IMAGE_NAME}:latest ${DOCKER_REGISTRY}/${IMAGE_NAME}:${GIT_COMMIT}
 	docker tag ${IMAGE_NAME}:latest ${DOCKER_REGISTRY}/${IMAGE_NAME}:build_${BUILD_NUMBER}
 
 docker-login:
@@ -27,8 +25,6 @@ docker-login:
 
 docker-push:
 	docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest
-	docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:${APP_VERSION}
-	docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:${GIT_COMMIT}
 	docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:build_${BUILD_NUMBER}
 
 k8-nodes:
