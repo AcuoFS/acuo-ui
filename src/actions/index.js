@@ -185,3 +185,8 @@ export const onPledge = (pledgeToSend) => ({
 export const submitMarginCalls = (idArr) => ({
 
 })
+
+// refresh all relevant data on site
+export const refreshAllData = () => ({
+  type: ActionTypes.REFRESH_ALL_DATA
+})

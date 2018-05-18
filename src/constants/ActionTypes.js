@@ -127,3 +127,6 @@ export const UPDATE_SUBSTITUTED_FLAG = 'UPDATE_SUBSTITUTED_FLAG'
 
 //access token
 export const REFRESH_ACCESS_TOKEN = 'REFRESH_ACCESS_TOKEN'
+
+//refresh all data
+export const REFRESH_ALL_DATA = 'REFRESH_ALL_DATA'

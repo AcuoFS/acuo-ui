@@ -14,15 +14,16 @@ export const ReconDisputeSaga = (disputeObjToSend) =>
     }
   ).then(response => {
     //console.log(response)
-    if (response.status === 200 || response.status === 201) {
-      //alert('Sent dispute to backend successfully!')
-    } else {
-      //alert('Unknown status code received: ' + response.status)
-    }
-    return axios.get(`${RECON_URL}/${window.localStorage.clientId}`).then((response) => {
-      const { items } = response.data
-      return items
-    })
+    // if (response.status === 200 || response.status === 201) {
+    //   //alert('Sent dispute to backend successfully!')
+    // } else {
+    //   //alert('Unknown status code received: ' + response.status)
+    // }
+    // return axios.get(`${RECON_URL}/${window.localStorage.clientId}`).then((response) => {
+    //   const { items } = response.data
+    //   return items
+    // })
+    return response
   }).catch(error => {
     console.log('Error: ' + error)
   })

@@ -46,9 +46,13 @@ import {
   fetchCollaterals,
   fetchSelection,
   clearPendingAllocation,
-  allocatingCollaterals
+  allocatingCollaterals,
+  onInitDashboard,
+  onInitReconState,
+  refreshAllData
 } from './../actions'
 import {
+  fetchDepartures,
   initDepartures,
   initDeployedOptimisationSettings
 } from './../actions/DeployedActions'
@@ -100,6 +104,7 @@ import {
   ON_REPLACE_ALLOCATED_ASSET,
   ON_CAL_ADJ_AMOUNT,
   REFRESH_ACCESS_TOKEN,
+  REFRESH_ALL_DATA
 } from '../constants/ActionTypes'
 
 const getClientIDSelector = state => state.CommonReducer.get('clientId')
@@ -156,13 +161,6 @@ function* watchLogin() {
           yield put(Notifications.hide(9999999999))
         }else{
           yield put(updateWrongCredentialsFlag(true))
-          // yield put(Notifications.error({
-          //   title: 'Warning',
-          //   message: `Login failed, please check your credentials`,
-          //   position: 'tr',
-          //   autoDismiss: 3
-          // }))
-          // no toastr for failed login
         }
         yield put(updateLoginProcess(false))
       }
@@ -181,9 +179,7 @@ function* watchLogout() {
       const { status } = yield call(DoLogoutSaga)
       window.localStorage.clear()
       hashHistory.push("/")
-      // if(status){
-      //   console.log('logged out')
-      // }
+
     } catch(error) {
       console.log(error)
       return false
@@ -197,8 +193,8 @@ function* watchReconcile() {
     try{
       const action = yield take(RECON_ITEM)
       const result = yield call(ReconItemSaga, action.GUID)
-      yield put(reconInitState(result.items))
-      yield put(sagaNavbarAlerts())
+      // yield put(reconInitState(result.items))
+      yield put(refreshAllData())
     } catch(error){
       console.log(error)
       return false
@@ -213,8 +209,8 @@ function* watchReconDispute() {
       // console.log(action)
       const items = yield call(ReconDisputeSaga, action.disputeObj)
       // console.log(result)
-      yield put(reconInitState(items))
-      yield put(sagaNavbarAlerts())
+      // yield put(reconInitState(items))
+      yield put(refreshAllData())
     } catch(error){
       console.log(error)
       return false
@@ -254,9 +250,10 @@ function* watchRequestValuation() {
     try{
       const action = yield take(ON_REQUEST_VALUATION)
       const obj = yield call(RequestValuationSaga, action.referenceIDs)
-      console.log(obj)
+      // console.log(obj)
       yield put(marginCallGenerated(obj))
       yield put(updateRequestState(false))
+      yield put(refreshAllData())
     } catch(error){
       console.log(error)
       return false
@@ -272,6 +269,7 @@ function* watchGenerateMarginCalls() {
       // console.log(obj)
       yield put(marginCallGenerated(obj))
       yield put(updateRequestState(false))
+      yield put(refreshAllData())
     } catch(error){
       console.log(error)
       return false
@@ -287,6 +285,7 @@ function* watchSendMarginCalls() {
       // console.log(obj)
       yield put(onMarginCallSendSuccess(obj))
       yield put(updateRequestState(false))
+      yield put(refreshAllData())
     } catch(error){
       console.log(error)
       return false
@@ -359,8 +358,8 @@ function* watchAllocateCollaterals() {
       const { obj } = yield take(ON_ALLOCATE_COLLATERALS)
       yield put(allocatingCollaterals(true))
       const payload = yield call(AllocateCollateralsSaga, obj)
-      yield put(initSelection(payload.items))
-      yield put(fetchCollaterals())
+      // yield put(initSelection(payload.items))
+      yield put(refreshAllData())
       yield put(allocatingCollaterals(false))
     } catch (error) {
       console.log(error)
@@ -387,10 +386,7 @@ function* watchPledge() {
     try{
       const action = yield take(ON_PLEDGE)
       yield call(PostPledgeSaga, action.pledgeToSend)
-      yield put(fetchSelection())
-      yield put(clearPendingAllocation())
-      yield put(sagaNavbarAlerts())
-      yield put(fetchCollaterals())
+      yield put(refreshAllData())
     } catch(error){
       console.log(error)
       return false
@@ -403,8 +399,9 @@ function* watchRemoveAllocatedAsset() {
     try{
       const action = yield take(ON_REMOVE_ALLOCATED_ASSET)
       const json = yield call(RemoveAllocatedAssetsSaga, action.obj)
-      yield put(initSelection(json.items))
-      yield put(fetchCollaterals())
+      // yield put(initSelection(json.items))
+      // yield put(fetchCollaterals())
+      yield put(refreshAllData())
     } catch(error){
       console.log(error)
       return false
@@ -467,6 +464,22 @@ function* watchRefreshAccessToken(){
   }
 }
 
+function* watchRefreshAllData(){
+  while(true){
+    try{
+      yield take(REFRESH_ALL_DATA)
+      yield put(fetchSelection())   // just selection
+      yield put(sagaNavbarAlerts()) // just navbar alerts
+      yield put(fetchCollaterals()) // just collaterals
+      yield put(onInitDashboard())  // has both dashboard and dashboard currency
+      yield put(onInitReconState()) // has recon, recon currency
+      yield put(fetchDepartures())  // just departures
+    } catch(error){
+
+    }
+  }
+}
+
 export default function* root() {
   yield [
     fork(serverHealthChecks),
@@ -491,6 +504,7 @@ export default function* root() {
     fork(watchFetchDeployedOptimisationSettings),
     fork(watchReplaceAllocatedAsset),
     fork(watchRefreshAccessToken),
+    fork(watchRefreshAllData),
 
     fork(watchFetchAnalyticsData),
     fork(watchDeployedPopupChangeAmount)
