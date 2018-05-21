@@ -360,8 +360,10 @@ function* watchAllocateCollaterals() {
       const { obj } = yield take(ON_ALLOCATE_COLLATERALS)
       yield put(allocatingCollaterals(true))
       const payload = yield call(AllocateCollateralsSaga, obj)
+      yield put(initSelection(payload.items))
+      yield put(fetchCollaterals())
       // yield put(initSelection(payload.items))
-      yield put(refreshAllData())
+      // yield put(refreshAllData())
       yield put(allocatingCollaterals(false))
     } catch (error) {
       console.log(error)
