@@ -23,11 +23,11 @@ const checkProxyServerConnectivity = () => {
      return 'passed'
     }
     else {
-     console.log("checkProxyServerConnectivity ::: Response Evaluation:" , false , "@", new Date());
+     // console.log("checkProxyServerConnectivity ::: Response Evaluation:" , false , "@", new Date());
      return 'failed'
     }
   }, error => {
-    console.error("checkProxyServerConnectivity ::: Response Error!" , new Date() , error);
+    // console.error("checkProxyServerConnectivity ::: Response Error!" , new Date() , error);
     return 'failed'
   })
 }
@@ -40,11 +40,11 @@ const checkMarginServerConnectivity = () => {
     return 'passed'
    }
    else {
-    console.log("checkMarginServerConnectivity ::: Response Evaluation:" , false , "@", new Date());
+    // console.log("checkMarginServerConnectivity ::: Response Evaluation:" , false , "@", new Date());
     return 'failed'
    }
   }, error => {
-    console.error("checkMarginServerConnectivity ::: Response Error!" , new Date());
+    // console.error("checkMarginServerConnectivity ::: Response Error!" , new Date());
     return 'failed'
   })
 }
@@ -56,11 +56,11 @@ const checkValuationServerConnectivity = () => {
     return 'passed'
    }
    else {
-    console.log("checkValuationServerConnectivity ::: Response Evaluation:" , false , "@", new Date());
+    // console.log("checkValuationServerConnectivity ::: Response Evaluation:" , false , "@", new Date());
     return 'failed'
    }
   }, error => {
-    console.error("checkValuationServerConnectivity ::: Response Error!" , new Date());
+    // console.error("checkValuationServerConnectivity ::: Response Error!" , new Date());
     return 'failed'
   })
 }
@@ -72,11 +72,11 @@ const checkCollateralServerConnectivity = () => {
     return 'passed'
    }
    else {
-    console.log("checkCollateralServerConnectivity ::: Response Evaluation:" , false , "@", new Date());
+    // console.log("checkCollateralServerConnectivity ::: Response Evaluation:" , false , "@", new Date());
     return 'failed'
    }
   }, error => {
-    console.error("checkCollateralServerConnectivity ::: Response Error!" , new Date());
+    // console.error("checkCollateralServerConnectivity ::: Response Error!" , new Date());
     return 'failed'
   })
 }
