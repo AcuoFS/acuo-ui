@@ -472,7 +472,7 @@ function* watchRefreshAllData(){
   while(true){
     try{
       yield take(REFRESH_ALL_DATA)
-      yield put(fetchSelection())   // just selection
+      // yield put(fetchSelection())   // just selection
       yield put(sagaNavbarAlerts()) // just navbar alerts
       yield put(fetchCollaterals()) // just collaterals
       yield put(onInitDashboard())  // has both dashboard and dashboard currency
