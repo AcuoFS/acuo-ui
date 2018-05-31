@@ -390,7 +390,9 @@ function* watchPledge() {
     try{
       const action = yield take(ON_PLEDGE)
       yield call(PostPledgeSaga, action.pledgeToSend)
+      yield put(fetchSelection())
       yield put(refreshAllData())
+      yield put(allocatingCollaterals(true))
     } catch(error){
       console.log(error)
       return false
@@ -403,7 +405,7 @@ function* watchRemoveAllocatedAsset() {
     try{
       const action = yield take(ON_REMOVE_ALLOCATED_ASSET)
       const json = yield call(RemoveAllocatedAssetsSaga, action.obj)
-      // yield put(initSelection(json.items))
+      yield put(initSelection(json.items))
       // yield put(fetchCollaterals())
       yield put(refreshAllData())
     } catch(error){
