@@ -24,7 +24,7 @@ pipeline {
                 }
             }
         }
-        stage("Kubernetes Deploy 'acuo'") {
+        /* stage("Kubernetes Deploy 'acuo'") {
             when {
                 expression {
                     return env.BRANCH_NAME == "develop"
@@ -43,7 +43,7 @@ pipeline {
                     }
                 }
             }
-        }
+        } */
         stage("Kubernetes Deploy 'qa'") {
             when {
                 expression {
