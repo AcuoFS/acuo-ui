@@ -176,7 +176,7 @@ export default class OptimisationWidget extends React.Component {
           (this.isShowPledgeBtn(selection)
             ? styles.optBtnPledge
             : styles.btnDisabled )}
-               onClick={() => onPledge(selection.toJS())}>
+               onClick={() => onPledge(selection.toJS(), pendingAllocation.toJS())}>
             Pledge
           </div>
 

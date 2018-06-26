@@ -94,10 +94,12 @@ const mapDispatchToProps = dispatch => {
 
       dispatch(allocateCollaterals(reqObj))
     },
-    onPledge: (selectionList) => {
-      // console.log(selectionList);
+    onPledge: (selectionList, pendingAllocation) => {
       let pledgeToSend = []
-      selectionList.map((statement) => {
+
+      const filteredSelectionList = selectionList.filter(x => _.includes(pendingAllocation, x.GUID))
+
+      filteredSelectionList.map((statement) => {
         // Check statement w allocations
         if (statement.allocated && statement.allocated[ASSET.A_LIST_IM]) {
           pledgeToSend =
